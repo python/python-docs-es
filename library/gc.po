@@ -1,0 +1,342 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2001-2019, Python Software Foundation
+# This file is distributed under the same license as the Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Python 3.7\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-06 11:59-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../Doc/library/gc.rst:2
+msgid ":mod:`gc` --- Garbage Collector interface"
+msgstr ""
+
+#: ../Doc/library/gc.rst:12
+msgid ""
+"This module provides an interface to the optional garbage collector.  It "
+"provides the ability to disable the collector, tune the collection "
+"frequency, and set debugging options.  It also provides access to "
+"unreachable objects that the collector found but cannot free.  Since the "
+"collector supplements the reference counting already used in Python, you can "
+"disable the collector if you are sure your program does not create reference "
+"cycles.  Automatic collection can be disabled by calling ``gc.disable()``.  "
+"To debug a leaking program call ``gc.set_debug(gc.DEBUG_LEAK)``. Notice that "
+"this includes ``gc.DEBUG_SAVEALL``, causing garbage-collected objects to be "
+"saved in gc.garbage for inspection."
+msgstr ""
+
+#: ../Doc/library/gc.rst:23
+msgid "The :mod:`gc` module provides the following functions:"
+msgstr ""
+
+#: ../Doc/library/gc.rst:28
+msgid "Enable automatic garbage collection."
+msgstr ""
+
+#: ../Doc/library/gc.rst:33
+msgid "Disable automatic garbage collection."
+msgstr ""
+
+#: ../Doc/library/gc.rst:38
+msgid "Returns true if automatic collection is enabled."
+msgstr ""
+
+#: ../Doc/library/gc.rst:43
+msgid ""
+"With no arguments, run a full collection.  The optional argument "
+"*generation* may be an integer specifying which generation to collect (from "
+"0 to 2).  A :exc:`ValueError` is raised if the generation number  is "
+"invalid. The number of unreachable objects found is returned."
+msgstr ""
+
+#: ../Doc/library/gc.rst:48
+msgid ""
+"The free lists maintained for a number of built-in types are cleared "
+"whenever a full collection or collection of the highest generation (2) is "
+"run.  Not all items in some free lists may be freed due to the particular "
+"implementation, in particular :class:`float`."
+msgstr ""
+
+#: ../Doc/library/gc.rst:56
+msgid ""
+"Set the garbage collection debugging flags. Debugging information will be "
+"written to ``sys.stderr``.  See below for a list of debugging flags which "
+"can be combined using bit operations to control debugging."
+msgstr ""
+
+#: ../Doc/library/gc.rst:63
+msgid "Return the debugging flags currently set."
+msgstr ""
+
+#: ../Doc/library/gc.rst:68
+msgid ""
+"Returns a list of all objects tracked by the collector, excluding the list "
+"returned."
+msgstr ""
+
+#: ../Doc/library/gc.rst:74
+msgid ""
+"Return a list of three per-generation dictionaries containing collection "
+"statistics since interpreter start.  The number of keys may change in the "
+"future, but currently each dictionary will contain the following items:"
+msgstr ""
+
+#: ../Doc/library/gc.rst:79
+msgid "``collections`` is the number of times this generation was collected;"
+msgstr ""
+
+#: ../Doc/library/gc.rst:81
+msgid ""
+"``collected`` is the total number of objects collected inside this "
+"generation;"
+msgstr ""
+
+#: ../Doc/library/gc.rst:84
+msgid ""
+"``uncollectable`` is the total number of objects which were found to be "
+"uncollectable (and were therefore moved to the :data:`garbage` list) inside "
+"this generation."
+msgstr ""
+
+#: ../Doc/library/gc.rst:93
+msgid ""
+"Set the garbage collection thresholds (the collection frequency). Setting "
+"*threshold0* to zero disables collection."
+msgstr ""
+
+#: ../Doc/library/gc.rst:96
+msgid ""
+"The GC classifies objects into three generations depending on how many "
+"collection sweeps they have survived.  New objects are placed in the "
+"youngest generation (generation ``0``).  If an object survives a collection "
+"it is moved into the next older generation.  Since generation ``2`` is the "
+"oldest generation, objects in that generation remain there after a "
+"collection.  In order to decide when to run, the collector keeps track of "
+"the number object allocations and deallocations since the last collection.  "
+"When the number of allocations minus the number of deallocations exceeds "
+"*threshold0*, collection starts.  Initially only generation ``0`` is "
+"examined.  If generation ``0`` has been examined more than *threshold1* "
+"times since generation ``1`` has been examined, then generation ``1`` is "
+"examined as well.  Similarly, *threshold2* controls the number of "
+"collections of generation ``1`` before collecting generation ``2``."
+msgstr ""
+
+#: ../Doc/library/gc.rst:113
+msgid ""
+"Return the current collection  counts as a tuple of ``(count0, count1, "
+"count2)``."
+msgstr ""
+
+#: ../Doc/library/gc.rst:119
+msgid ""
+"Return the current collection thresholds as a tuple of ``(threshold0, "
+"threshold1, threshold2)``."
+msgstr ""
+
+#: ../Doc/library/gc.rst:125
+msgid ""
+"Return the list of objects that directly refer to any of objs. This function "
+"will only locate those containers which support garbage collection; "
+"extension types which do refer to other objects but do not support garbage "
+"collection will not be found."
+msgstr ""
+
+#: ../Doc/library/gc.rst:130
+msgid ""
+"Note that objects which have already been dereferenced, but which live in "
+"cycles and have not yet been collected by the garbage collector can be "
+"listed among the resulting referrers.  To get only currently live objects, "
+"call :func:`collect` before calling :func:`get_referrers`."
+msgstr ""
+
+#: ../Doc/library/gc.rst:135
+msgid ""
+"Care must be taken when using objects returned by :func:`get_referrers` "
+"because some of them could still be under construction and hence in a "
+"temporarily invalid state. Avoid using :func:`get_referrers` for any purpose "
+"other than debugging."
+msgstr ""
+
+#: ../Doc/library/gc.rst:143
+msgid ""
+"Return a list of objects directly referred to by any of the arguments. The "
+"referents returned are those objects visited by the arguments' C-level :c:"
+"member:`~PyTypeObject.tp_traverse` methods (if any), and may not be all "
+"objects actually directly reachable.  :c:member:`~PyTypeObject.tp_traverse` "
+"methods are supported only by objects that support garbage collection, and "
+"are only required to visit objects that may be involved in a cycle.  So, for "
+"example, if an integer is directly reachable from an argument, that integer "
+"object may or may not appear in the result list."
+msgstr ""
+
+#: ../Doc/library/gc.rst:154
+msgid ""
+"Returns ``True`` if the object is currently tracked by the garbage "
+"collector, ``False`` otherwise.  As a general rule, instances of atomic "
+"types aren't tracked and instances of non-atomic types (containers, user-"
+"defined objects...) are.  However, some type-specific optimizations can be "
+"present in order to suppress the garbage collector footprint of simple "
+"instances (e.g. dicts containing only atomic keys and values)::"
+msgstr ""
+
+#: ../Doc/library/gc.rst:179
+msgid ""
+"Freeze all the objects tracked by gc - move them to a permanent generation "
+"and ignore all the future collections. This can be used before a POSIX "
+"fork() call to make the gc copy-on-write friendly or to speed up collection. "
+"Also collection before a POSIX fork() call may free pages for future "
+"allocation which can cause copy-on-write too so it's advised to disable gc "
+"in master process and freeze before fork and enable gc in child process."
+msgstr ""
+
+#: ../Doc/library/gc.rst:191
+msgid ""
+"Unfreeze the objects in the permanent generation, put them back into the "
+"oldest generation."
+msgstr ""
+
+#: ../Doc/library/gc.rst:199
+msgid "Return the number of objects in the permanent generation."
+msgstr ""
+
+#: ../Doc/library/gc.rst:204
+msgid ""
+"The following variables are provided for read-only access (you can mutate "
+"the values but should not rebind them):"
+msgstr ""
+
+#: ../Doc/library/gc.rst:209
+msgid ""
+"A list of objects which the collector found to be unreachable but could not "
+"be freed (uncollectable objects).  Starting with Python 3.4, this list "
+"should be empty most of the time, except when using instances of C extension "
+"types with a non-NULL ``tp_del`` slot."
+msgstr ""
+
+#: ../Doc/library/gc.rst:214
+msgid ""
+"If :const:`DEBUG_SAVEALL` is set, then all unreachable objects will be added "
+"to this list rather than freed."
+msgstr ""
+
+#: ../Doc/library/gc.rst:217
+msgid ""
+"If this list is non-empty at :term:`interpreter shutdown`, a :exc:"
+"`ResourceWarning` is emitted, which is silent by default.  If :const:"
+"`DEBUG_UNCOLLECTABLE` is set, in addition all uncollectable objects are "
+"printed."
+msgstr ""
+
+#: ../Doc/library/gc.rst:223
+msgid ""
+"Following :pep:`442`, objects with a :meth:`__del__` method don't end up in :"
+"attr:`gc.garbage` anymore."
+msgstr ""
+
+#: ../Doc/library/gc.rst:229
+msgid ""
+"A list of callbacks that will be invoked by the garbage collector before and "
+"after collection.  The callbacks will be called with two arguments, *phase* "
+"and *info*."
+msgstr ""
+
+#: ../Doc/library/gc.rst:233
+msgid "*phase* can be one of two values:"
+msgstr ""
+
+#: ../Doc/library/gc.rst:235
+msgid "\"start\": The garbage collection is about to start."
+msgstr ""
+
+#: ../Doc/library/gc.rst:237
+msgid "\"stop\": The garbage collection has finished."
+msgstr ""
+
+#: ../Doc/library/gc.rst:239
+msgid ""
+"*info* is a dict providing more information for the callback.  The following "
+"keys are currently defined:"
+msgstr ""
+
+#: ../Doc/library/gc.rst:242
+msgid "\"generation\": The oldest generation being collected."
+msgstr ""
+
+#: ../Doc/library/gc.rst:244
+msgid ""
+"\"collected\": When *phase* is \"stop\", the number of objects successfully "
+"collected."
+msgstr ""
+
+#: ../Doc/library/gc.rst:247
+msgid ""
+"\"uncollectable\": When *phase* is \"stop\", the number of objects that "
+"could not be collected and were put in :data:`garbage`."
+msgstr ""
+
+#: ../Doc/library/gc.rst:250
+msgid ""
+"Applications can add their own callbacks to this list.  The primary use "
+"cases are:"
+msgstr ""
+
+#: ../Doc/library/gc.rst:253
+msgid ""
+"Gathering statistics about garbage collection, such as how often various "
+"generations are collected, and how long the collection takes."
+msgstr ""
+
+#: ../Doc/library/gc.rst:257
+msgid ""
+"Allowing applications to identify and clear their own uncollectable types "
+"when they appear in :data:`garbage`."
+msgstr ""
+
+#: ../Doc/library/gc.rst:263
+msgid "The following constants are provided for use with :func:`set_debug`:"
+msgstr ""
+
+#: ../Doc/library/gc.rst:268
+msgid ""
+"Print statistics during collection.  This information can be useful when "
+"tuning the collection frequency."
+msgstr ""
+
+#: ../Doc/library/gc.rst:274
+msgid "Print information on collectable objects found."
+msgstr ""
+
+#: ../Doc/library/gc.rst:279
+msgid ""
+"Print information of uncollectable objects found (objects which are not "
+"reachable but cannot be freed by the collector).  These objects will be "
+"added to the ``garbage`` list."
+msgstr ""
+
+#: ../Doc/library/gc.rst:283
+msgid ""
+"Also print the contents of the :data:`garbage` list at :term:`interpreter "
+"shutdown`, if it isn't empty."
+msgstr ""
+
+#: ../Doc/library/gc.rst:289
+msgid ""
+"When set, all unreachable objects found will be appended to *garbage* rather "
+"than being freed.  This can be useful for debugging a leaking program."
+msgstr ""
+
+#: ../Doc/library/gc.rst:295
+msgid ""
+"The debugging flags necessary for the collector to print information about a "
+"leaking program (equal to ``DEBUG_COLLECTABLE | DEBUG_UNCOLLECTABLE | "
+"DEBUG_SAVEALL``)."
+msgstr ""

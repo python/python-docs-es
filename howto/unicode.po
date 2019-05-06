@@ -1,0 +1,859 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2001-2019, Python Software Foundation
+# This file is distributed under the same license as the Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Python 3.7\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-06 11:59-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../Doc/howto/unicode.rst:5
+msgid "Unicode HOWTO"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:0
+msgid "Release"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:7
+msgid "1.12"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:9
+msgid ""
+"This HOWTO discusses Python's support for the Unicode specification for "
+"representing textual data, and explains various problems that people "
+"commonly encounter when trying to work with Unicode."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:15
+msgid "Introduction to Unicode"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:18
+msgid "Definitions"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:20
+msgid ""
+"Today's programs need to be able to handle a wide variety of characters.  "
+"Applications are often internationalized to display messages and output in a "
+"variety of user-selectable languages; the same program might need to output "
+"an error message in English, French, Japanese, Hebrew, or Russian.  Web "
+"content can be written in any of these languages and can also include a "
+"variety of emoji symbols. Python's string type uses the Unicode Standard for "
+"representing characters, which lets Python programs work with all these "
+"different possible characters."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:30
+msgid ""
+"Unicode (https://www.unicode.org/) is a specification that aims to list "
+"every character used by human languages and give each character its own "
+"unique code.  The Unicode specifications are continually revised and updated "
+"to add new languages and symbols."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:35
+msgid ""
+"A **character** is the smallest possible component of a text.  'A', 'B', "
+"'C', etc., are all different characters.  So are 'È' and 'Í'.  Characters "
+"vary depending on the language or context you're talking about.  For "
+"example, there's a character for \"Roman Numeral One\", 'Ⅰ', that's separate "
+"from the uppercase letter 'I'.  They'll usually look the same, but these are "
+"two different characters that have different meanings."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:42
+msgid ""
+"The Unicode standard describes how characters are represented by **code "
+"points**.  A code point value is an integer in the range 0 to 0x10FFFF "
+"(about 1.1 million values, with some 110 thousand assigned so far).  In the "
+"standard and in this document, a code point is written using the notation ``U"
+"+265E`` to mean the character with value ``0x265e`` (9,822 in decimal)."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:49
+msgid ""
+"The Unicode standard contains a lot of tables listing characters and their "
+"corresponding code points:"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:70
+msgid ""
+"Strictly, these definitions imply that it's meaningless to say 'this is "
+"character ``U+265E``'.  ``U+265E`` is a code point, which represents some "
+"particular character; in this case, it represents the character 'BLACK CHESS "
+"KNIGHT', '♞'.  In informal contexts, this distinction between code points "
+"and characters will sometimes be forgotten."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:77
+msgid ""
+"A character is represented on a screen or on paper by a set of graphical "
+"elements that's called a **glyph**.  The glyph for an uppercase A, for "
+"example, is two diagonal strokes and a horizontal stroke, though the exact "
+"details will depend on the font being used.  Most Python code doesn't need "
+"to worry about glyphs; figuring out the correct glyph to display is "
+"generally the job of a GUI toolkit or a terminal's font renderer."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:86
+msgid "Encodings"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:88
+msgid ""
+"To summarize the previous section: a Unicode string is a sequence of code "
+"points, which are numbers from 0 through ``0x10FFFF`` (1,114,111 decimal).  "
+"This sequence of code points needs to be represented in memory as a set of "
+"**code units**, and **code units** are then mapped to 8-bit bytes.  The "
+"rules for translating a Unicode string into a sequence of bytes are called a "
+"**character encoding**, or just an **encoding**."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:96
+msgid ""
+"The first encoding you might think of is using 32-bit integers as the code "
+"unit, and then using the CPU's representation of 32-bit integers. In this "
+"representation, the string \"Python\" might look like this:"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:106
+msgid ""
+"This representation is straightforward but using it presents a number of "
+"problems."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:109
+msgid "It's not portable; different processors order the bytes differently."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:111
+msgid ""
+"It's very wasteful of space.  In most texts, the majority of the code points "
+"are less than 127, or less than 255, so a lot of space is occupied by "
+"``0x00`` bytes.  The above string takes 24 bytes compared to the 6 bytes "
+"needed for an ASCII representation.  Increased RAM usage doesn't matter too "
+"much (desktop computers have gigabytes of RAM, and strings aren't usually "
+"that large), but expanding our usage of disk and network bandwidth by a "
+"factor of 4 is intolerable."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:119
+msgid ""
+"It's not compatible with existing C functions such as ``strlen()``, so a new "
+"family of wide string functions would need to be used."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:122
+msgid ""
+"Therefore this encoding isn't used very much, and people instead choose "
+"other encodings that are more efficient and convenient, such as UTF-8."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:125
+msgid ""
+"UTF-8 is one of the most commonly used encodings, and Python often defaults "
+"to using it.  UTF stands for \"Unicode Transformation Format\", and the '8' "
+"means that 8-bit values are used in the encoding.  (There are also UTF-16 "
+"and UTF-32 encodings, but they are less frequently used than UTF-8.)  UTF-8 "
+"uses the following rules:"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:131
+msgid ""
+"If the code point is < 128, it's represented by the corresponding byte value."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:132
+msgid ""
+"If the code point is >= 128, it's turned into a sequence of two, three, or "
+"four bytes, where each byte of the sequence is between 128 and 255."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:135
+msgid "UTF-8 has several convenient properties:"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:137
+msgid "It can handle any Unicode code point."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:138
+msgid ""
+"A Unicode string is turned into a sequence of bytes containing no embedded "
+"zero bytes.  This avoids byte-ordering issues, and means UTF-8 strings can "
+"be processed by C functions such as ``strcpy()`` and sent through protocols "
+"that can't handle zero bytes."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:142
+msgid "A string of ASCII text is also valid UTF-8 text."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:143
+msgid ""
+"UTF-8 is fairly compact; the majority of commonly used characters can be "
+"represented with one or two bytes."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:145
+msgid ""
+"If bytes are corrupted or lost, it's possible to determine the start of the "
+"next UTF-8-encoded code point and resynchronize.  It's also unlikely that "
+"random 8-bit data will look like valid UTF-8."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:152 ../Doc/howto/unicode.rst:508
+#: ../Doc/howto/unicode.rst:729
+msgid "References"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:154
+msgid ""
+"The `Unicode Consortium site <http://www.unicode.org>`_ has character "
+"charts, a glossary, and PDF versions of the Unicode specification.  Be "
+"prepared for some difficult reading.  `A chronology <http://www.unicode.org/"
+"history/>`_ of the origin and development of Unicode is also available on "
+"the site."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:159
+msgid ""
+"On the Computerphile Youtube channel, Tom Scott briefly `discusses the "
+"history of Unicode and UTF-8 <https://www.youtube.com/watch?v=MijmeoH9LT4>` "
+"(9 minutes 36 seconds)."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:163
+msgid ""
+"To help understand the standard, Jukka Korpela has written `an introductory "
+"guide <http://jkorpela.fi/unicode/guide.html>`_ to reading the Unicode "
+"character tables."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:167
+msgid ""
+"Another `good introductory article <https://www.joelonsoftware."
+"com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-"
+"positively-must-know-about-unicode-and-character-sets-no-excuses/>`_ was "
+"written by Joel Spolsky. If this introduction didn't make things clear to "
+"you, you should try reading this alternate article before continuing."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:172
+msgid ""
+"Wikipedia entries are often helpful; see the entries for \"`character "
+"encoding <https://en.wikipedia.org/wiki/Character_encoding>`_\" and `UTF-8 "
+"<https://en.wikipedia.org/wiki/UTF-8>`_, for example."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:178
+msgid "Python's Unicode Support"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:180
+msgid ""
+"Now that you've learned the rudiments of Unicode, we can look at Python's "
+"Unicode features."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:184
+msgid "The String Type"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:186
+msgid ""
+"Since Python 3.0, the language's :class:`str` type contains Unicode "
+"characters, meaning any string created using ``\"unicode rocks!\"``, "
+"``'unicode rocks!'``, or the triple-quoted string syntax is stored as "
+"Unicode."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:190
+msgid ""
+"The default encoding for Python source code is UTF-8, so you can simply "
+"include a Unicode character in a string literal::"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:200
+msgid ""
+"Side note: Python 3 also supports using Unicode characters in identifiers::"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:206
+msgid ""
+"If you can't enter a particular character in your editor or want to keep the "
+"source code ASCII-only for some reason, you can also use escape sequences in "
+"string literals. (Depending on your system, you may see the actual capital-"
+"delta glyph instead of a \\u escape.) ::"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:218
+msgid ""
+"In addition, one can create a string using the :func:`~bytes.decode` method "
+"of :class:`bytes`.  This method takes an *encoding* argument, such as "
+"``UTF-8``, and optionally an *errors* argument."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:222
+msgid ""
+"The *errors* argument specifies the response when the input string can't be "
+"converted according to the encoding's rules.  Legal values for this argument "
+"are ``'strict'`` (raise a :exc:`UnicodeDecodeError` exception), "
+"``'replace'`` (use ``U+FFFD``, ``REPLACEMENT CHARACTER``), ``'ignore'`` "
+"(just leave the character out of the Unicode result), or "
+"``'backslashreplace'`` (inserts a ``\\xNN`` escape sequence). The following "
+"examples show the differences::"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:242
+msgid ""
+"Encodings are specified as strings containing the encoding's name.  Python "
+"comes with roughly 100 different encodings; see the Python Library Reference "
+"at :ref:`standard-encodings` for a list.  Some encodings have multiple "
+"names; for example, ``'latin-1'``, ``'iso_8859_1'`` and ``'8859``' are all "
+"synonyms for the same encoding."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:248
+msgid ""
+"One-character Unicode strings can also be created with the :func:`chr` built-"
+"in function, which takes integers and returns a Unicode string of length 1 "
+"that contains the corresponding code point.  The reverse operation is the "
+"built-in :func:`ord` function that takes a one-character Unicode string and "
+"returns the code point value::"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:260
+msgid "Converting to Bytes"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:262
+msgid ""
+"The opposite method of :meth:`bytes.decode` is :meth:`str.encode`, which "
+"returns a :class:`bytes` representation of the Unicode string, encoded in "
+"the requested *encoding*."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:266
+msgid ""
+"The *errors* parameter is the same as the parameter of the :meth:`~bytes."
+"decode` method but supports a few more possible handlers. As well as "
+"``'strict'``, ``'ignore'``, and ``'replace'`` (which in this case inserts a "
+"question mark instead of the unencodable character), there is also "
+"``'xmlcharrefreplace'`` (inserts an XML character reference), "
+"``backslashreplace`` (inserts a ``\\uNNNN`` escape sequence) and "
+"``namereplace`` (inserts a ``\\N{...}`` escape sequence)."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:274
+msgid "The following example shows the different results::"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:295
+msgid ""
+"The low-level routines for registering and accessing the available encodings "
+"are found in the :mod:`codecs` module.  Implementing new encodings also "
+"requires understanding the :mod:`codecs` module. However, the encoding and "
+"decoding functions returned by this module are usually more low-level than "
+"is comfortable, and writing new encodings is a specialized task, so the "
+"module won't be covered in this HOWTO."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:304
+msgid "Unicode Literals in Python Source Code"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:306
+msgid ""
+"In Python source code, specific Unicode code points can be written using the "
+"``\\u`` escape sequence, which is followed by four hex digits giving the "
+"code point.  The ``\\U`` escape sequence is similar, but expects eight hex "
+"digits, not four::"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:318
+msgid ""
+"Using escape sequences for code points greater than 127 is fine in small "
+"doses, but becomes an annoyance if you're using many accented characters, as "
+"you would in a program with messages in French or some other accent-using "
+"language.  You can also assemble strings using the :func:`chr` built-in "
+"function, but this is even more tedious."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:324
+msgid ""
+"Ideally, you'd want to be able to write literals in your language's natural "
+"encoding.  You could then edit Python source code with your favorite editor "
+"which would display the accented characters naturally, and have the right "
+"characters used at runtime."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:329
+msgid ""
+"Python supports writing source code in UTF-8 by default, but you can use "
+"almost any encoding if you declare the encoding being used.  This is done by "
+"including a special comment as either the first or second line of the source "
+"file::"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:339
+msgid ""
+"The syntax is inspired by Emacs's notation for specifying variables local to "
+"a file.  Emacs supports many different variables, but Python only supports "
+"'coding'.  The ``-*-`` symbols indicate to Emacs that the comment is "
+"special; they have no significance to Python but are a convention.  Python "
+"looks for ``coding: name`` or ``coding=name`` in the comment."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:345
+msgid ""
+"If you don't include such a comment, the default encoding used will be UTF-8 "
+"as already mentioned.  See also :pep:`263` for more information."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:350
+msgid "Unicode Properties"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:352
+msgid ""
+"The Unicode specification includes a database of information about code "
+"points.  For each defined code point, the information includes the "
+"character's name, its category, the numeric value if applicable (for "
+"characters representing numeric concepts such as the Roman numerals, "
+"fractions such as one-third and four-fifths, etc.).  There are also display-"
+"related properties, such as how to use the code point in bidirectional text."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:360
+msgid ""
+"The following program displays some information about several characters, "
+"and prints the numeric value of one particular character::"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:374
+msgid "When run, this prints:"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:385
+msgid ""
+"The category codes are abbreviations describing the nature of the character. "
+"These are grouped into categories such as \"Letter\", \"Number\", "
+"\"Punctuation\", or \"Symbol\", which in turn are broken up into "
+"subcategories.  To take the codes from the above output, ``'Ll'`` means "
+"'Letter, lowercase', ``'No'`` means \"Number, other\", ``'Mn'`` is \"Mark, "
+"nonspacing\", and ``'So'`` is \"Symbol, other\".  See `the General Category "
+"Values section of the Unicode Character Database documentation <http://www."
+"unicode.org/reports/tr44/#General_Category_Values>`_ for a list of category "
+"codes."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:396
+msgid "Comparing Strings"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:398
+msgid ""
+"Unicode adds some complication to comparing strings, because the same set of "
+"characters can be represented by different sequences of code points.  For "
+"example, a letter like 'ê' can be represented as a single code point U+00EA, "
+"or as U+0065 U+0302, which is the code point for 'e' followed by a code "
+"point for 'COMBINING CIRCUMFLEX ACCENT'.  These will produce the same output "
+"when printed, but one is a string of length 1 and the other is of length 2."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:406
+msgid ""
+"One tool for a case-insensitive comparison is the :meth:`~str.casefold` "
+"string method that converts a string to a case-insensitive form following an "
+"algorithm described by the Unicode Standard.  This algorithm has special "
+"handling for characters such as the German letter 'ß' (code point U+00DF), "
+"which becomes the pair of lowercase letters 'ss'."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:419
+msgid ""
+"A second tool is the :mod:`unicodedata` module's :func:`~unicodedata."
+"normalize` function that converts strings to one of several normal forms, "
+"where letters followed by a combining character are replaced with single "
+"characters.  :func:`normalize` can be used to perform string comparisons "
+"that won't falsely report inequality if two strings use combining characters "
+"differently:"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:442
+msgid "When run, this outputs:"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:451
+msgid ""
+"The first argument to the :func:`~unicodedata.normalize` function is a "
+"string giving the desired normalization form, which can be one of 'NFC', "
+"'NFKC', 'NFD', and 'NFKD'."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:455
+msgid "The Unicode Standard also specifies how to do caseless comparisons::"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:471
+msgid ""
+"This will print ``True``.  (Why is :func:`NFD` invoked twice?  Because there "
+"are a few characters that make :meth:`casefold` return a non-normalized "
+"string, so the result needs to be normalized again. See section 3.13 of the "
+"Unicode Standard for a discussion and an example.)"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:478
+msgid "Unicode Regular Expressions"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:480
+msgid ""
+"The regular expressions supported by the :mod:`re` module can be provided "
+"either as bytes or strings.  Some of the special character sequences such as "
+"``\\d`` and ``\\w`` have different meanings depending on whether the pattern "
+"is supplied as bytes or a string.  For example, ``\\d`` will match the "
+"characters ``[0-9]`` in bytes but in strings will match any character that's "
+"in the ``'Nd'`` category."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:487
+msgid ""
+"The string in this example has the number 57 written in both Thai and Arabic "
+"numerals::"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:497
+msgid ""
+"When executed, ``\\d+`` will match the Thai numerals and print them out.  If "
+"you supply the :const:`re.ASCII` flag to :func:`~re.compile`, ``\\d+`` will "
+"match the substring \"57\" instead."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:501
+msgid ""
+"Similarly, ``\\w`` matches a wide variety of Unicode characters but only "
+"``[a-zA-Z0-9_]`` in bytes or if :const:`re.ASCII` is supplied, and ``\\s`` "
+"will match either Unicode whitespace characters or ``[ \\t\\n\\r\\f\\v]``."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:512
+msgid "Some good alternative discussions of Python's Unicode support are:"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:514
+msgid ""
+"`Processing Text Files in Python 3 <http://python-notes.curiousefficiency."
+"org/en/latest/python3/text_file_processing.html>`_, by Nick Coghlan."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:515
+msgid ""
+"`Pragmatic Unicode <https://nedbatchelder.com/text/unipain.html>`_, a PyCon "
+"2012 presentation by Ned Batchelder."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:517
+msgid ""
+"The :class:`str` type is described in the Python library reference at :ref:"
+"`textseq`."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:520
+msgid "The documentation for the :mod:`unicodedata` module."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:522
+msgid "The documentation for the :mod:`codecs` module."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:524
+msgid ""
+"Marc-André Lemburg gave `a presentation titled \"Python and Unicode\" (PDF "
+"slides) <https://downloads.egenix.com/python/Unicode-EPC2002-Talk.pdf>`_ at "
+"EuroPython 2002.  The slides are an excellent overview of the design of "
+"Python 2's Unicode features (where the Unicode string type is called "
+"``unicode`` and literals start with ``u``)."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:532
+msgid "Reading and Writing Unicode Data"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:534
+msgid ""
+"Once you've written some code that works with Unicode data, the next problem "
+"is input/output.  How do you get Unicode strings into your program, and how "
+"do you convert Unicode into a form suitable for storage or transmission?"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:538
+msgid ""
+"It's possible that you may not need to do anything depending on your input "
+"sources and output destinations; you should check whether the libraries used "
+"in your application support Unicode natively.  XML parsers often return "
+"Unicode data, for example.  Many relational databases also support Unicode-"
+"valued columns and can return Unicode values from an SQL query."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:544
+msgid ""
+"Unicode data is usually converted to a particular encoding before it gets "
+"written to disk or sent over a socket.  It's possible to do all the work "
+"yourself: open a file, read an 8-bit bytes object from it, and convert the "
+"bytes with ``bytes.decode(encoding)``.  However, the manual approach is not "
+"recommended."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:549
+msgid ""
+"One problem is the multi-byte nature of encodings; one Unicode character can "
+"be represented by several bytes.  If you want to read the file in arbitrary-"
+"sized chunks (say, 1024 or 4096 bytes), you need to write error-handling "
+"code to catch the case where only part of the bytes encoding a single "
+"Unicode character are read at the end of a chunk.  One solution would be to "
+"read the entire file into memory and then perform the decoding, but that "
+"prevents you from working with files that are extremely large; if you need "
+"to read a 2 GiB file, you need 2 GiB of RAM. (More, really, since for at "
+"least a moment you'd need to have both the encoded string and its Unicode "
+"version in memory.)"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:559
+msgid ""
+"The solution would be to use the low-level decoding interface to catch the "
+"case of partial coding sequences.  The work of implementing this has already "
+"been done for you: the built-in :func:`open` function can return a file-like "
+"object that assumes the file's contents are in a specified encoding and "
+"accepts Unicode parameters for methods such as :meth:`~io.TextIOBase.read` "
+"and :meth:`~io.TextIOBase.write`.  This works through :func:`open`\\'s "
+"*encoding* and *errors* parameters which are interpreted just like those in :"
+"meth:`str.encode` and :meth:`bytes.decode`."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:568
+msgid "Reading Unicode from a file is therefore simple::"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:574
+msgid ""
+"It's also possible to open files in update mode, allowing both reading and "
+"writing::"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:582
+msgid ""
+"The Unicode character ``U+FEFF`` is used as a byte-order mark (BOM), and is "
+"often written as the first character of a file in order to assist with "
+"autodetection of the file's byte ordering.  Some encodings, such as UTF-16, "
+"expect a BOM to be present at the start of a file; when such an encoding is "
+"used, the BOM will be automatically written as the first character and will "
+"be silently dropped when the file is read.  There are variants of these "
+"encodings, such as 'utf-16-le' and 'utf-16-be' for little-endian and big-"
+"endian encodings, that specify one particular byte ordering and don't skip "
+"the BOM."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:591
+msgid ""
+"In some areas, it is also convention to use a \"BOM\" at the start of UTF-8 "
+"encoded files; the name is misleading since UTF-8 is not byte-order "
+"dependent. The mark simply announces that the file is encoded in UTF-8.  For "
+"reading such files, use the 'utf-8-sig' codec to automatically skip the mark "
+"if present."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:598
+msgid "Unicode filenames"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:600
+msgid ""
+"Most of the operating systems in common use today support filenames that "
+"contain arbitrary Unicode characters.  Usually this is implemented by "
+"converting the Unicode string into some encoding that varies depending on "
+"the system.  Today Python is converging on using UTF-8: Python on MacOS has "
+"used UTF-8 for several versions, and Python 3.6 switched to using UTF-8 on "
+"Windows as well.  On Unix systems, there will only be a filesystem encoding "
+"if you've set the ``LANG`` or ``LC_CTYPE`` environment variables; if you "
+"haven't, the default encoding is again UTF-8."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:610
+msgid ""
+"The :func:`sys.getfilesystemencoding` function returns the encoding to use "
+"on your current system, in case you want to do the encoding manually, but "
+"there's not much reason to bother.  When opening a file for reading or "
+"writing, you can usually just provide the Unicode string as the filename, "
+"and it will be automatically converted to the right encoding for you::"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:620
+msgid ""
+"Functions in the :mod:`os` module such as :func:`os.stat` will also accept "
+"Unicode filenames."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:623
+msgid ""
+"The :func:`os.listdir` function returns filenames, which raises an issue: "
+"should it return the Unicode version of filenames, or should it return bytes "
+"containing the encoded versions?  :func:`os.listdir` can do both, depending "
+"on whether you provided the directory path as bytes or a Unicode string.  If "
+"you pass a Unicode string as the path, filenames will be decoded using the "
+"filesystem's encoding and a list of Unicode strings will be returned, while "
+"passing a byte path will return the filenames as bytes.  For example, "
+"assuming the default filesystem encoding is UTF-8, running the following "
+"program::"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:641
+msgid "will produce the following output:"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:649
+msgid ""
+"The first list contains UTF-8-encoded filenames, and the second list "
+"contains the Unicode versions."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:652
+msgid ""
+"Note that on most occasions, you should can just stick with using Unicode "
+"with these APIs.  The bytes APIs should only be used on systems where "
+"undecodable file names can be present; that's pretty much only Unix systems "
+"now."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:659
+msgid "Tips for Writing Unicode-aware Programs"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:661
+msgid ""
+"This section provides some suggestions on writing software that deals with "
+"Unicode."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:664
+msgid "The most important tip is:"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:666
+msgid ""
+"Software should only work with Unicode strings internally, decoding the "
+"input data as soon as possible and encoding the output only at the end."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:669
+msgid ""
+"If you attempt to write processing functions that accept both Unicode and "
+"byte strings, you will find your program vulnerable to bugs wherever you "
+"combine the two different kinds of strings.  There is no automatic encoding "
+"or decoding: if you do e.g. ``str + bytes``, a :exc:`TypeError` will be "
+"raised."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:674
+msgid ""
+"When using data coming from a web browser or some other untrusted source, a "
+"common technique is to check for illegal characters in a string before using "
+"the string in a generated command line or storing it in a database.  If "
+"you're doing this, be careful to check the decoded string, not the encoded "
+"bytes data; some encodings may have interesting properties, such as not "
+"being bijective or not being fully ASCII-compatible.  This is especially "
+"true if the input data also specifies the encoding, since the attacker can "
+"then choose a clever way to hide malicious text in the encoded bytestream."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:685
+msgid "Converting Between File Encodings"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:687
+msgid ""
+"The :class:`~codecs.StreamRecoder` class can transparently convert between "
+"encodings, taking a stream that returns data in encoding #1 and behaving "
+"like a stream returning data in encoding #2."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:691
+msgid ""
+"For example, if you have an input file *f* that's in Latin-1, you can wrap "
+"it with a :class:`~codecs.StreamRecoder` to return bytes encoded in UTF-8::"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:705
+msgid "Files in an Unknown Encoding"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:707
+msgid ""
+"What can you do if you need to make a change to a file, but don't know the "
+"file's encoding?  If you know the encoding is ASCII-compatible and only want "
+"to examine or modify the ASCII parts, you can open the file with the "
+"``surrogateescape`` error handler::"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:721
+msgid ""
+"The ``surrogateescape`` error handler will decode any non-ASCII bytes as "
+"code points in a special range running from U+DC80 to U+DCFF.  These code "
+"points will then turn back into the same bytes when the ``surrogateescape`` "
+"error handler is used to encode the data and write it back out."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:731
+msgid ""
+"One section of `Mastering Python 3 Input/Output <http://pyvideo.org/"
+"video/289/pycon-2010--mastering-python-3-i-o>`_, a PyCon 2010 talk by David "
+"Beazley, discusses text processing and binary data handling."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:735
+msgid ""
+"The `PDF slides for Marc-André Lemburg's presentation \"Writing Unicode-"
+"aware Applications in Python\" <https://downloads.egenix.com/python/LSM2005-"
+"Developing-Unicode-aware-applications-in-Python.pdf>`_ discuss questions of "
+"character encodings as well as how to internationalize and localize an "
+"application.  These slides cover Python 2.x only."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:741
+msgid ""
+"`The Guts of Unicode in Python <http://pyvideo.org/video/1768/the-guts-of-"
+"unicode-in-python>`_ is a PyCon 2013 talk by Benjamin Peterson that "
+"discusses the internal Unicode representation in Python 3.3."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:748
+msgid "Acknowledgements"
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:750
+msgid ""
+"The initial draft of this document was written by Andrew Kuchling. It has "
+"since been revised further by Alexander Belopolsky, Georg Brandl, Andrew "
+"Kuchling, and Ezio Melotti."
+msgstr ""
+
+#: ../Doc/howto/unicode.rst:754
+msgid ""
+"Thanks to the following people who have noted errors or offered suggestions "
+"on this article: Éric Araujo, Nicholas Bastin, Nick Coghlan, Marius "
+"Gedminas, Kent Johnson, Ken Krugler, Marc-André Lemburg, Martin von Löwis, "
+"Terry J. Reedy, Serhiy Storchaka, Eryk Sun, Chad Whitacre, Graham Wideman."
+msgstr ""
