@@ -1,8 +1,8 @@
 Translation of the Python Documentation — es
 ============================================
 
-.. image:: https://travis-ci.org/python/python-docs-es.svg?branch=3.7
-  :target: https://travis-ci.org/python/python-docs-es
+.. image:: https://travis-ci.org/raulcd/python-docs-es.svg?branch=master
+  :target: https://travis-ci.org/raulcd/python-docs-es
 
 
 Documentation Contribution Agreement
