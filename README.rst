@@ -37,8 +37,7 @@ How to Contribute
 You can contribute using:
 
 - Github
-- `transifex <https://www.transifex.com/python-doc/public/>`_
-- Or just by opening `an issue on github <https://github.com/python/python-docs-esfr/issues>`_
+- Or just by opening `an issue on github <https://github.com/raulcd/python-docs-es/issues>`_
 
 
 Contributing using Github
@@ -56,7 +55,7 @@ Prerequisites:
 Let's start:
 
 You'll need to fork the `python-docs-es
-<https://github.com/python/python-docs-es>`_ clicking its ``Fork``
+<https://github.com/raulcd/python-docs-es>`_ clicking its ``Fork``
 button. This creates a copy of the whole project on your github
 account: a place where you have the rights to do modifications.
 
@@ -64,14 +63,14 @@ Step by step:
 
 .. code-block:: bash
 
-    # Git clone your github fork using ssh (replace JulienPalard):
-    git clone git@github.com:JulienPalard/python-docs-es.git
+    # Git clone your github fork using ssh (replace raulcd):
+    git clone git@github.com:raulcd/python-docs-es.git
 
     # Go to the cloned directory:
     cd python-docs-es/
 
     # Add the upstream (the public repository) using HTTPS (won't ask for password):
-    git remote add upstream https://github.com/python/python-docs-es.git
+    git remote add upstream https://github.com/raulcd/python-docs-es.git
 
 All the translations must be made on the latest release.
 We never translate on an oldest version, by example, the latest python release
@@ -106,7 +105,7 @@ Now you're ready to start a work session, each time you'll start a new task, sta
 
     # The previous command will print you a link to open a PR on github.
     # If you missed it, just go to
-    # https://github.com/python/python-docs-es/ and a nice "Compare & pull request"
+    # https://github.com/raulcd/python-docs-es/ and a nice "Compare & pull request"
     # button should appear after a few seconds telling you can ask for a pull request.
 
     # Now someone is reviewing your modifications, and you'll want to fix their
