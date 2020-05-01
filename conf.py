@@ -28,7 +28,7 @@ extensions = ['sphinx.ext.coverage', 'sphinx.ext.doctest',
 project = 'Python en Español'
 copyright = '2001-%s, Python Software Foundation' % time.strftime('%Y')
 
-release = version = '3.7'
+release = version = '3.7.7'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
