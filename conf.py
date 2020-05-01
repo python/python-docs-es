@@ -82,7 +82,7 @@ htmlhelp_basename = 'python' + release.replace('.', '')
 html_split_index = True
 
 # Relative filename of the reference count data file.
-refcount_file = 'data/refcounts.dat'
+refcount_file = 'cpython/Doc/data/refcounts.dat'
 
 
 os.system('mkdir -p cpython/locales/es/')
