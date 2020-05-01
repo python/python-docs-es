@@ -101,7 +101,7 @@ os.system('mkdir -p cpython/locales/es/')
 os.system('ln -nfs `pwd` cpython/locales/es/LC_MESSAGES')
 
 gettext_compact = False
-locale_dirs = ['../locales']  # relative to the sourcedir
+locale_dirs = ['../locales', 'cpython/locales']  # relative to the sourcedir
 
 
 def setup(app):
