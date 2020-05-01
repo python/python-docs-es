@@ -1,3 +1,7 @@
+# Git Submodule
+# https://stackoverflow.com/a/27445058
+
+
 import sys, os, time
 sys.path.append(os.path.abspath('cpython/Doc/tools/extensions'))
 sys.path.append(os.path.abspath('cpython/Doc/includes'))
