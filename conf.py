@@ -1,6 +1,14 @@
-# Git Submodule
+# Sphinx configuration file.
+#
+# Most of the content of this file comes from cpython/Doc/conf.py
+# It's modified to:
+#  - append the path considering the cpython submodule is at ./cpython
+#  - create the symbolic links under ./cpython/locale/es/LC_MESSAGES
+#  - make the build to work under Read the Docs
+#
+# The git submodule was created using this Stack Overflow answer
+# to fetch only the commit that I needed and avoid clonning the whole history
 # https://stackoverflow.com/a/27445058
-
 
 import sys, os, time
 sys.path.append(os.path.abspath('cpython/Doc/tools/extensions'))
