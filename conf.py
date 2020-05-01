@@ -81,4 +81,5 @@ html_split_index = True
 refcount_file = 'data/refcounts.dat'
 
 
+os.system('mkdir -p cpython/locales/es/')
 os.system('ln -nfs `pwd` cpython/locales/es/LC_MESSAGES')
