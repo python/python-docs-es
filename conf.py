@@ -1,7 +1,6 @@
 # Sphinx configuration file.
 #
-# Most of the content of this file comes from cpython/Doc/conf.py
-# It's modified to:
+#  - import original configurations from cpython/Doc/conf.py
 #  - append the path considering the cpython submodule is at ./cpython
 #  - create the symbolic links under ./cpython/locale/es/LC_MESSAGES
 #  - make the build to work under Read the Docs
