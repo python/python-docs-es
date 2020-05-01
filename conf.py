@@ -95,3 +95,7 @@ refcount_file = 'cpython/Doc/data/refcounts.dat'
 
 os.system('mkdir -p cpython/locales/es/')
 os.system('ln -nfs `pwd` cpython/locales/es/LC_MESSAGES')
+
+
+gettext_compact = False
+locale_dirs = ['cpython/locales']
