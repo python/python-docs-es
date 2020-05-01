@@ -90,7 +90,7 @@ htmlhelp_basename = 'python' + release.replace('.', '')
 html_split_index = True
 
 # Relative filename of the reference count data file.
-refcount_file = 'cpython/Doc/data/refcounts.dat'
+refcount_file = 'data/refcounts.dat'
 
 
 os.system('mkdir -p cpython/locales/es/')
@@ -99,3 +99,8 @@ os.system('ln -nfs `pwd` cpython/locales/es/LC_MESSAGES')
 
 gettext_compact = False
 locale_dirs = ['cpython/locales']
+
+
+def setup(app):
+    # Change the sourcedir programmatically because Read the Docs always call it with `.`
+    app.srcdir = 'cpython/Doc'
