@@ -9,6 +9,10 @@
 # The git submodule was created using this Stack Overflow answer
 # to fetch only the commit that I needed and avoid clonning the whole history
 # https://stackoverflow.com/a/27445058
+#
+# This can be built locally using `sphinx-build` by running
+#
+#   $ sphinx-build -b html -n -d _build/doctrees -D language=es . _build/html
 
 import sys, os, time
 sys.path.append(os.path.abspath('cpython/Doc/tools/extensions'))
