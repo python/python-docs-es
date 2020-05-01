@@ -21,7 +21,8 @@ sys.path.append(os.path.abspath('cpython/Doc/includes'))
 sys.path.append(os.path.abspath('cpython/Doc'))
 from conf import *
 
-release = version = '3.7.7'
+version = '3.7'
+release = '3.7.7'
 
 project = 'Python en Español'
 copyright = '2001-%s, Python Software Foundation' % time.strftime('%Y')
