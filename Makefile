@@ -34,6 +34,7 @@ help:
 	@echo " pot          Create/Update POT files from source files"
 	@echo " serve        Serve a built documentation on http://localhost:8000"
 	@echo " spell        Check spelling, storing output in $(POSPELL_TMP_DIR)"
+	@echo " progress     To compute current progression on the tutorial" 
 	@echo ""
 
 
@@ -202,3 +203,7 @@ clean:
 	rm -fr $(VENV)
 	rm -rf $(POSPELL_TMP_DIR)
 	find -name '*.mo' -delete
+
+.PHONY: progress
+progress: venv
+	$(VENV)/bin/python scripts/print_percentage.py
