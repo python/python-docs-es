@@ -96,7 +96,7 @@ def create_english_spanish_sentences(rstfilename):
 def get_rst_translation_text(rstfilename, english_spanish, text):
     """Given an rstfilename an a text returns the corresponding translated text if exists"""
     for en, es in english_spanish:
-        if en == text:
+        if en.replace("!", "") == text.replace("!", ""):
             return es
 
 
