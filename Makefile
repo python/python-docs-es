@@ -7,14 +7,12 @@
 
 # Configuration
 
-CPYTHON_PATH        := cpython   # TODO: replace with a git submodule
+CPYTHON_PATH        := cpython   #Current commit for this upstream repo is setted by the submodule
 BRANCH              := 3.7
 LANGUAGE_TEAM       := python-docs-es
 LANGUAGE            := es
 
 # Internal variables
-
-UPSTREAM            := https://github.com/python/cpython
 VENV                := $(shell realpath ./venv)
 PYTHON              := $(shell which python3)
 WORKDIRS            := $(VENV)/workdirs
@@ -134,12 +132,8 @@ pot: setup
 .PHONY: setup
 setup: venv
 	# Setup the main clone
-	if ! [ -d $(CPYTHON_PATH) ]; then                                       \
-		git clone --depth 1 --branch $(BRANCH) $(UPSTREAM) $(CPYTHON_PATH); \
-	else                                                                    \
-		git -C $(CPYTHON_PATH) pull --rebase;                               \
-	fi
-	
+	git submodule sync
+	git submodule update --init --force $(CPYTHON_PATH)
 	# Setup the current work directory
 	if ! [ -d $(CPYTHON_WORKDIR) ]; then                                    \
 		rm -fr $(WORKDIRS);                                                 \
