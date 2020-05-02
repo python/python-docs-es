@@ -106,6 +106,7 @@ def update_po_translation(pofilename, english, spanish):
 
 
 for pofilename in glob.glob(PO_DIR + '**/*/*.po'):
+    translated = False
     rstfilename = get_rst_file(pofilename)
     if rstfilename is None:
         continue
@@ -124,6 +125,10 @@ for pofilename in glob.glob(PO_DIR + '**/*/*.po'):
         if translated_text is None:
             continue
 
+        translated = True
+
         entry.msgstr = translated_text
         # update_po_translation(po, english_text, translated_text)
-    po.save(pofilename)
+
+    if translated:
+        po.save(pofilename)
