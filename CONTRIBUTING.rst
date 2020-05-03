@@ -38,11 +38,6 @@ Desde GitHub
 
    git remote add upstream https://github.com/pycampes/python-docs-es.git
 
-#. Instala las herramientas de `pre-commit` (opcional)::
-
-   pip install pre-commit
-   pre-commit install
-
 #. Mira que archivo necesita ser traducido. El siguiente comando te mostrará una lista de archivos y los porcentajes traducidos.
    Elige uno que no esté completo::
 
