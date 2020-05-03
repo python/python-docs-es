@@ -83,8 +83,11 @@ Desde el mismo directorio `python-docs-es/` que se creó cuando hiciste `git clo
   make build
 
 Este comando demorará unos minutos y generará toda la documentación en formato HTML en tu computadora.
-Puedes ver el resultado abriendo el archivo `venv/workdirs/cpython/Doc/build/html/index.html`
-con tu navegador de internet (Firefox, Chrome, etc).
+Puedes ver el con tu navegador de internet (Firefox, Chrome, etc) ejecutando::
+
+  make serve
+
+Y luego accediendo a http://localhost:8000/
 
 
 Utilizando Transifex
