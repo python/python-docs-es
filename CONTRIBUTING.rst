@@ -38,6 +38,10 @@ Desde GitHub
 
     git remote add upstream https://github.com/pycampes/python-docs-es.git
 
+#. Crea una branch nueva en base al artículo en el que vayas a trabajar.
+  
+    git checkout -b traduccion_glosario
+
 #. Mira que archivo necesita ser traducido. El siguiente comando te mostrará una lista de archivos y los porcentajes traducidos.
    Elige uno que no esté completo::
 
@@ -48,7 +52,7 @@ Desde GitHub
 #. Cuando hayas terminado tu sesión, debes guardar tus cambios y enviarlos a GitHub de nuevo::
 
     git commit -am 'Traducido archivo {nombre de archivo}'
-    git push origin update-translation
+    git push origin traduccion_glosario
 
 #. Luego ve a tu página de GitHub y propone hacer un Pull Request
 
