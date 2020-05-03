@@ -28,15 +28,15 @@ Desde GitHub
 
 #. Clona el repositorio::
 
-   git clone git@github.com:<TU-USUARIO>/python-docs-es.git
+    git clone git@github.com:<TU-USUARIO>/python-docs-es.git
 
 #. Ingresa en la carpeta que `git clone` creó en tu computadora::
 
-   cd python-docs-es/
+    cd python-docs-es/
 
 #. Agrega el repositorio original como "upstream"::
 
-   git remote add upstream https://github.com/pycampes/python-docs-es.git
+    git remote add upstream https://github.com/pycampes/python-docs-es.git
 
 #. Mira que archivo necesita ser traducido. El siguiente comando te mostrará una lista de archivos y los porcentajes traducidos.
    Elige uno que no esté completo::
@@ -47,8 +47,8 @@ Desde GitHub
 
 #. Cuando hayas terminado tu sesión, debes guardar tus cambios y enviarlos a GitHub de nuevo::
 
-   git commit -am 'Traducido archivo {nombre de archivo}'
-   git push origin update-translation
+    git commit -am 'Traducido archivo {nombre de archivo}'
+    git push origin update-translation
 
 #. Luego ve a tu página de GitHub y propone hacer un Pull Request
 
