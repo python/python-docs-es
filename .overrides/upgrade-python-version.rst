@@ -13,24 +13,27 @@ We are currently in branch 3.7, and we want to update the strings from 3.8.
 
    git checkout 70fe95cdc9ac1b00d4f86b7525dca80caf7003e1
 
+#. Clean possible garbage (form previous builds)::
+
+     rm -rf ../python-docs-es-pot cpython/Doc/CONTRIBUTING.rst cpython/Doc/upgrade-python-version.rst
+
 #. Create the .po files from the new source code. This will generate all the .po files for version 3.8::
 
-   SPHINX_GETTEXT=True sphinx-build -j auto -b gettext -d _build/doctrees . ../pot
-
-#. Now we have to merge our current translation .po files with the new .po files that come from upstream::
-
-   pomerge --from-files **/*.po --to-files ../pot/**/*.pot
+   SPHINX_GETTEXT=True sphinx-build -j auto -b gettext -d _build/doctrees . ../python-docs-es-pot
 
    .. note::
 
-      In ../pot, we will have the new .pot files with new strings from 3.8 branch,
-      with all the translations from our current 3.7 branch.
-      If there wasn't a translation found, it is left unstranlated.
+      In `../python-docs-es-pot` directory, we will have the new .pot files with new strings from 3.8 branch.
+      All these strings will be *unstranslated* at this point.
 
-#. Remove `python-docs-cpython/` prefix::
+#. Now, we update our translated files form the source language (English) with new strings::
 
-   sed -i **/*.pot -e "s|python-docs-es/cpython/||g"
+   sphinx-intl update --language es --pot-dir ../python-docs-es-pot --locale-dir cpython/locales/
 
-#. Rename all the .pot files to .po files::
+#. Remove `python-docs-cpython/` prefix added by `sphinx-build` to avoid clazy diffs::
 
-#. Move all the newly pot files created to our repository::
+   sed -i **/*.po -e "s|python-docs-es/cpython/||g"
+
+#. Pass `powrap` to make the column with consistent::
+
+   powrap --modified
