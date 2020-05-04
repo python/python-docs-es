@@ -50,8 +50,8 @@ def setup(app):
         from docutils import nodes, core
 
         message = '¡Ayúdanos a traducir la documentación oficial de Python al Español! ' \
-        f'Puedes encontrar más información en `Como contribuir </es/{version}/CONTRIBUTING.html>`_  ' \
-        'y así ayudarnos a acercar Python a más personas de habla hispana.'
+        f'Puedes encontrar más información en `Como contribuir </es/{version}/CONTRIBUTING.html>`_.  ' \
+        'Ayuda a acercar Python a más personas de habla hispana.'
 
         paragraph = core.publish_doctree(message)[0]
         banner = nodes.warning(ids=['contributing-banner'])
