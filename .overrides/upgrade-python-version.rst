@@ -7,6 +7,7 @@ We are currently in branch 3.7, and we want to update the strings from 3.8.
 
 #. Fetch the `lastet commit of 3.8 branch <https://github.com/python/cpython/commit/70fe95cdc9ac1b00d4f86b7525dca80caf7003e1>`_::
 
+     cd cpython/
      git fetch --depth 1 origin 70fe95cdc9ac1b00d4f86b7525dca80caf7003e1
 
 #. Checkout that commit locally::
@@ -34,6 +35,6 @@ We are currently in branch 3.7, and we want to update the strings from 3.8.
 
      sed -i **/*.po -e "s|python-docs-es/cpython/||g"
 
-#. Pass `powrap` to make the column with consistent::
+#. Pass `powrap` to make the column widths consistent::
 
      powrap --modified
