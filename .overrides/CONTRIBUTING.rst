@@ -20,13 +20,13 @@ Desde GitHub
 
 #. Crea un fork del repositorio_.
 
-.. _repositorio: https://github.com/PyCampES/python-docs-es
-
    .. note::
 
       Puedes consular la `ayuda oficial de GitHub`_, si lo deseas.
 
       .. _ayuda oficial de GitHub: https://help.github.com/es/github/getting-started-with-github/fork-a-repo
+
+.. _repositorio: https://github.com/PyCampES/python-docs-es
 
 #. Clona el repositorio::
 
@@ -41,7 +41,7 @@ Desde GitHub
     git remote add upstream https://github.com/pycampes/python-docs-es.git
 
 #. Crea una branch nueva en base al artículo en el que vayas a trabajar.
-  
+
     git checkout -b traduccion_glosario
 
 #. Mira que archivo necesita ser traducido. El siguiente comando te mostrará una lista de archivos y los porcentajes traducidos.
