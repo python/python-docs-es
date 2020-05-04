@@ -18,7 +18,9 @@ Actualmente se puede colaborar utilizando una de las dos siguientes formas que:
 Desde GitHub
 ------------
 
-#. Crea un fork del repositorio.
+#. Crea un fork del repositorio_.
+
+.. _repositorio: https://github.com/PyCampES/python-docs-es
 
    .. note::
 
