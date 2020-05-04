@@ -34,9 +34,48 @@ html_static_path = ['cpython/Doc/tools/static']
 os.system('mkdir -p cpython/locales/es/')
 os.system('ln -nfs `pwd` cpython/locales/es/LC_MESSAGES')
 
+
+# Override all the files from ``.overrides`` directory
+import glob
+for root, dirs, files in os.walk('.overrides'):
+    for fname in files:
+        if fname == 'README.rst' and root == '.overrides':
+            continue
+        destroot = root.replace('.overrides', '').lstrip('/')
+        outputdir = os.path.join(
+            'cpython',
+            'Doc',
+            destroot,
+            fname,
+        )
+        os.system(f'ln -nfs `pwd`/{root}/{fname} {outputdir}')
+
 gettext_compact = False
 locale_dirs = ['../locales', 'cpython/locales']  # relative to the sourcedir
 
 def setup(app):
+
+    def add_contributing_banner(app, doctree):
+        """
+        Insert a banner at the top of the index.
+
+        This way, we can easily communicate people to help with the translation,
+        pointing them to different resources.
+        """
+        from docutils import nodes, core
+
+        message = '¡Ayúdanos a traducir la documentación oficial de Python al Español! ' \
+        f'Puedes encontrar más información en `Como contribuir </es/{version}/CONTRIBUTING.html>`_.  ' \
+        'Ayuda a acercar Python a más personas de habla hispana.'
+
+        paragraph = core.publish_doctree(message)[0]
+        banner = nodes.warning(ids=['contributing-banner'])
+        banner.append(paragraph)
+
+        for document in doctree.traverse(nodes.document):
+            document.insert(0, banner)
+
     # Change the sourcedir programmatically because Read the Docs always call it with `.`
     app.srcdir = 'cpython/Doc'
+
+    app.connect('doctree-read', add_contributing_banner)
