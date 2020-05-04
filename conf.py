@@ -24,7 +24,7 @@ from conf import *
 # Call patchlevel with the proper path to get the version from
 # instead of hardcoding it
 import patchlevel
-version, release = patchlevel.get_header_version_info('cpython/Doc')
+version, release = patchlevel.get_header_version_info(os.path.abspath('cpython/Doc'))
 
 project = 'Python en Español'
 copyright = '2001-%s, Python Software Foundation' % time.strftime('%Y')
