@@ -21,8 +21,10 @@ sys.path.append(os.path.abspath('cpython/Doc/includes'))
 sys.path.append(os.path.abspath('cpython/Doc'))
 from conf import *
 
-version = '3.7'
-release = '3.7.7'
+# Call patchlevel with the proper path to get the version from
+# instead of hardcoding it
+import patchlevel
+version, release = patchlevel.get_header_version_info('cpython/Doc')
 
 project = 'Python en Español'
 copyright = '2001-%s, Python Software Foundation' % time.strftime('%Y')
