@@ -33,7 +33,16 @@ html_static_path = ['cpython/Doc/tools/static']
 
 os.system('mkdir -p cpython/locales/es/')
 os.system('ln -nfs `pwd` cpython/locales/es/LC_MESSAGES')
-os.system('ln -nfs `pwd`/CONTRIBUTING.rst cpython/Doc/CONTRIBUTING.rst')
+
+
+# Override all the files from ``.overrides`` directory
+import glob
+for root, dirs, files in os.walk('.overrides'):
+    for fname in files:
+        if fname == 'README.rst' and root == '.overrides':
+            continue
+        destroot = root.replace('.overrides/', '')
+        os.system(f'ln -nfs `pwd`/{root}/{fname} cpython/Doc/{destroot}/{fname}')
 
 gettext_compact = False
 locale_dirs = ['../locales', 'cpython/locales']  # relative to the sourcedir
