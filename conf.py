@@ -41,8 +41,14 @@ for root, dirs, files in os.walk('.overrides'):
     for fname in files:
         if fname == 'README.rst' and root == '.overrides':
             continue
-        destroot = root.replace('.overrides/', '')
-        os.system(f'ln -nfs `pwd`/{root}/{fname} cpython/Doc/{destroot}/{fname}')
+        destroot = root.replace('.overrides', '').lstrip('/')
+        outputdir = os.path.join(
+            'cpython',
+            'Doc',
+            destroot,
+            fname,
+        )
+        os.system(f'ln -nfs `pwd`/{root}/{fname} {outputdir}')
 
 gettext_compact = False
 locale_dirs = ['../locales', 'cpython/locales']  # relative to the sourcedir
