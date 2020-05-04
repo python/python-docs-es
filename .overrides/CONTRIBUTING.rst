@@ -9,7 +9,6 @@ Actualmente se puede colaborar utilizando una de las dos siguientes formas que:
 #. Utilizando el repositorio de GitHub y el editor poedit_
 #. Realizando traducciones directamente en Transifex
 
-
 .. note::
 
    Si tienes cualquier duda, puedes enviarnos un email a docs-es@python.org.
@@ -23,10 +22,6 @@ Desde GitHub
    .. note::
 
       Puedes consular la `ayuda oficial de GitHub`_, si lo deseas.
-
-      .. _ayuda oficial de GitHub: https://help.github.com/es/github/getting-started-with-github/fork-a-repo
-
-.. _repositorio: https://github.com/PyCampES/python-docs-es
 
 #. Clona el repositorio::
 
@@ -62,12 +57,6 @@ Desde GitHub
 
       Puedes consultar la `ayuda oficial de GitHub para crear un Pull Request`_ si lo deseas.
 
-      .. _ayuda oficial de GitHub para crear un Pull Request: https://help.github.com/es/github/collaborating-with-issues-and-pull-requests/about-pull-requests
-
-
-.. _poedit: https://poedit.net/
-
-
 
 Previsualizar los cambios
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -100,3 +89,9 @@ Utilizando Transifex
 --------------------
 
 ToDo.
+
+
+.. _repositorio: https://github.com/PyCampES/python-docs-es
+.. _ayuda oficial de GitHub: https://help.github.com/es/github/getting-started-with-github/fork-a-repo
+.. _ayuda oficial de GitHub para crear un Pull Request: https://help.github.com/es/github/collaborating-with-issues-and-pull-requests/about-pull-requests
+.. _poedit: https://poedit.net/
