@@ -9,7 +9,6 @@ Actualmente se puede colaborar utilizando una de las dos siguientes formas que:
 #. Utilizando el repositorio de GitHub y el editor poedit_
 #. Realizando traducciones directamente en Transifex
 
-
 .. note::
 
    Si tienes cualquier duda, puedes enviarnos un email a docs-es@python.org.
@@ -20,13 +19,9 @@ Desde GitHub
 
 #. Crea un fork del repositorio_.
 
-.. _repositorio: https://github.com/PyCampES/python-docs-es
-
    .. note::
 
       Puedes consular la `ayuda oficial de GitHub`_, si lo deseas.
-
-      .. _ayuda oficial de GitHub: https://help.github.com/es/github/getting-started-with-github/fork-a-repo
 
 #. Clona el repositorio::
 
@@ -41,7 +36,7 @@ Desde GitHub
     git remote add upstream https://github.com/pycampes/python-docs-es.git
 
 #. Crea una branch nueva en base al artículo en el que vayas a trabajar.
-  
+
     git checkout -b traduccion_glosario
 
 #. Mira que archivo necesita ser traducido. El siguiente comando te mostrará una lista de archivos y los porcentajes traducidos.
@@ -56,17 +51,14 @@ Desde GitHub
     git commit -am 'Traducido archivo {nombre de archivo}'
     git push origin traduccion_glosario
 
+#. No olvides añadir tu nombre al archivo TRANSLATORS si no lo has hecho todavía.
+   Los nombres se encuentran ordenados alfabéticamente por apellido.
+
 #. Luego ve a tu página de GitHub y propone hacer un Pull Request
 
    .. note::
 
       Puedes consultar la `ayuda oficial de GitHub para crear un Pull Request`_ si lo deseas.
-
-      .. _ayuda oficial de GitHub para crear un Pull Request: https://help.github.com/es/github/collaborating-with-issues-and-pull-requests/about-pull-requests
-
-
-.. _poedit: https://poedit.net/
-
 
 
 Previsualizar los cambios
@@ -100,3 +92,9 @@ Utilizando Transifex
 --------------------
 
 ToDo.
+
+
+.. _repositorio: https://github.com/PyCampES/python-docs-es
+.. _ayuda oficial de GitHub: https://help.github.com/es/github/getting-started-with-github/fork-a-repo
+.. _ayuda oficial de GitHub para crear un Pull Request: https://help.github.com/es/github/collaborating-with-issues-and-pull-requests/about-pull-requests
+.. _poedit: https://poedit.net/
