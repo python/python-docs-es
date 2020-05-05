@@ -26,11 +26,14 @@ Si quieres ver cómo se ha utilizado un término anteriormente, puedes utilizar 
    ├────────────────────────────────────────────────────────────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────┤
 
 
-:loop:
-   Bucle. ``tutorial/controlflow.po``
+Éstos son las palabras que hemos coordinado hasta el momento:
 
-:handle exception:
-   Gestionar excepción. ``tutorial/inputoutput.po``
 
-:docstring:
-   docstring. ``library/idle.po``
+   loop
+      Bucle. ``tutorial/controlflow.po``
+
+   handle exception
+      Gestionar excepción. ``tutorial/inputoutput.po``
+
+   docstring
+      docstring. ``library/idle.po``
