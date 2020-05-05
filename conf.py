@@ -33,7 +33,22 @@ html_static_path = ['cpython/Doc/tools/static']
 
 os.system('mkdir -p cpython/locales/es/')
 os.system('ln -nfs `pwd` cpython/locales/es/LC_MESSAGES')
-os.system('ln -nfs `pwd`/CONTRIBUTING.rst cpython/Doc/CONTRIBUTING.rst')
+
+
+# Override all the files from ``.overrides`` directory
+import glob
+for root, dirs, files in os.walk('.overrides'):
+    for fname in files:
+        if fname == 'README.rst' and root == '.overrides':
+            continue
+        destroot = root.replace('.overrides', '').lstrip('/')
+        outputdir = os.path.join(
+            'cpython',
+            'Doc',
+            destroot,
+            fname,
+        )
+        os.system(f'ln -nfs `pwd`/{root}/{fname} {outputdir}')
 
 gettext_compact = False
 locale_dirs = ['../locales', 'cpython/locales']  # relative to the sourcedir
@@ -50,8 +65,8 @@ def setup(app):
         from docutils import nodes, core
 
         message = '¡Ayúdanos a traducir la documentación oficial de Python al Español! ' \
-        f'Puedes encontrar más información en `Como contribuir </es/{version}/CONTRIBUTING.html>`_  ' \
-        'y así ayudarnos a acercar Python a más personas de habla hispana.'
+        f'Puedes encontrar más información en `Como contribuir </es/{version}/CONTRIBUTING.html>`_.  ' \
+        'Ayuda a acercar Python a más personas de habla hispana.'
 
         paragraph = core.publish_doctree(message)[0]
         banner = nodes.warning(ids=['contributing-banner'])
