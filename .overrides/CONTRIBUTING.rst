@@ -51,6 +51,9 @@ Desde GitHub
     git commit -am 'Traducido archivo {nombre de archivo}'
     git push origin traduccion_glosario
 
+#. No olvides añadir tu nombre al archivo TRANSLATORS si no lo has hecho todavía.
+   Los nombres se encuentran ordenados alfabéticamente por apellido.
+
 #. Luego ve a tu página de GitHub y propone hacer un Pull Request
 
    .. note::
