@@ -16,7 +16,7 @@ We are currently in branch 3.7, and we want to update the strings from 3.8.
 
 #. Clean possible garbage (form previous builds)::
 
-     rm -rf ../python-docs-es-pot cpython/Doc/CONTRIBUTING.rst cpython/Doc/upgrade-python-version.rst
+     rm -rf _build ../python-docs-es-pot cpython/Doc/CONTRIBUTING.rst cpython/Doc/upgrade-python-version.rst
 
 #. Create the .po files from the new source code. This will generate all the .po files for version 3.8::
 
