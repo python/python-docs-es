@@ -189,7 +189,7 @@ spell: venv $(DESTS) $(POSPELL_TMP_DIR)/typos.txt
 $(POSPELL_TMP_DIR)/out/%.txt: %.po dict
 	@echo "Checking $< ..."
 	@mkdir -p $(@D)
-	@$(VENV)/bin/pospell -l $(LANGUAGE) -p dict $< > $@ || true
+	@$(VENV)/bin/pospell -l $(LANGUAGE)_ANY -p dict $< > $@ || true
 
 $(POSPELL_TMP_DIR)/typos.txt:
 	@echo "Gathering all typos in $(POSPELL_TMP_DIR)/typos.txt ..."
