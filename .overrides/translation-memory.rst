@@ -9,7 +9,7 @@ y coordinamos cuál era la mejor traducción dado el contexto.
 Si quieres ver cómo se ha utilizado un término anteriormente, puedes utilizar la herramienta
 ``find_in_po.py`` que muestra dónde se usó ese término: original y traducción lado a lado:
 
-.. code-block:: bash
+.. code-block:: text
 
    $ python scripts/find_in_po.py docstring
    ╒════════════════════════════════════════════════════════════════════════════════════════════════╤═══════════════════════════════════════════════════════════════════════════════════════════════╕
