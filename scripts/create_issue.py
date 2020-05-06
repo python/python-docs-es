@@ -22,6 +22,6 @@ issue = repo.create_issue(
 
 Please, comment here if you want this file to be assigned to you and an member will assign it to you as soon as possible, so you can start working on it.
 
-Remember to follow the steps in our [Contributing Guide](https://python-docs-es.readthedocs.io/es/3.7/CONTRIBUTING.html)''',
+Remember to follow the steps in our [Contributing Guide](https://python-docs-es.readthedocs.io/page/CONTRIBUTING.html)''',
 )
 print(f'Issue created at {issue.html_url}')
