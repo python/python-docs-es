@@ -1,12 +1,12 @@
 Spanish Translation of the Python Documentation
 ===============================================
 
-.. image:: https://travis-ci.org/raulcd/python-docs-es.svg?branch=3.7
-  :target: https://travis-ci.org/raulcd/python-docs-es
+.. image:: https://travis-ci.org/PyCampES/python-docs-es.svg?branch=3.8 
+  :target: https://travis-ci.org/PyCampES/python-docs-es
   :alt: Build Status
 
-.. image:: https://readthedocs.org/projects/python-docs-es/badge/?version=3.7
-   :target: https://python-docs-es.readthedocs.io/es/3.7/?badge=3.7
+.. image:: https://readthedocs.org/projects/python-docs-es/badge/?version=3.8
+   :target: https://python-docs-es.readthedocs.io/es/3.8/?badge=3.8
    :alt: Documentation Status
 
 
