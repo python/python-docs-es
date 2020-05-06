@@ -56,6 +56,14 @@ if not os.environ.get('SPHINX_GETTEXT') == 'True':
 gettext_compact = False
 locale_dirs = ['../locales', 'cpython/locales']  # relative to the sourcedir
 
+
+# NOTE: Read the Docs does not support "multi document output".
+# So, we put all the documentation as a single file for now.
+latex_documents = [
+    ('index', 'python-docs-es.tex', u'Documentación de Python en Español',
+     _stdauthor, 'manual'),
+]
+
 def setup(app):
 
     def add_contributing_banner(app, doctree):
