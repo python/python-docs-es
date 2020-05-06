@@ -37,3 +37,30 @@ Si quieres ver cómo se ha utilizado un término anteriormente, puedes utilizar 
 
    docstring
       docstring. ``library/idle.po``
+
+   path
+      Ruta. ``glossary.po``
+
+   named tuple.
+      tupla nombrada ``glossary.po``
+
+   bytecodes
+      queda igual ``glossary.po``
+      
+   deallocated
+      desalojable ``glossary.po``
+
+   callable
+      invocable ``glossary.po``
+
+   built-in 
+      incorporada ``glossary.po``
+
+  mapping
+      mapeo ``glossary.po``
+
+  underscore
+      guión bajo ``glossary.po``
+
+  awaitable
+      aguardable ``glossary``
