@@ -63,12 +63,7 @@ venv:
 		$(PYTHON) -m venv --prompt $(LANGUAGE_TEAM) $(VENV);             \
 	fi
 
-	$(VENV)/bin/python -m pip install -q -r requirements.txt 2> $(VENV)/pip-install.log
-
-	if grep -q 'pip install --upgrade pip' $(VENV)/pip-install.log;    \
-	then                                                               \
-		$(VENV)/bin/pip install -q --upgrade pip;                        \
-	fi
+	$(VENV)/bin/python -m pip install -q -r requirements.txt
 
 
 # serve: serve the documentation in a simple local web server, using cpython
