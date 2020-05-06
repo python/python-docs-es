@@ -1,8 +1,7 @@
 import os
 import sys
-import subprocess
-import print_percentage
 
+import polib
 from github import Github
 
 
@@ -11,7 +10,7 @@ if len(sys.argv) != 2:
     sys.exit(1)
 
 pofilename = sys.argv[1]
-percentage = print_percentage.get_percent_translated(pofilename)
+percentage = polib.pofile(pofilename).percent_translated()
 
 g = Github(os.environ.get('GITHUB_TOKEN'))
 
