@@ -34,7 +34,7 @@ help:
 	@echo " pot          Create/Update POT files from source files"
 	@echo " serve        Serve a built documentation on http://localhost:8000"
 	@echo " spell        Check spelling, storing output in $(POSPELL_TMP_DIR)"
-	@echo " progress     To compute current progression on the tutorial" 
+	@echo " progress     To compute current progression on the tutorial"
 	@echo ""
 
 
@@ -56,9 +56,9 @@ build: setup
 			-D latex_elements.inputenc=             \
 			-D latex_elements.fontenc='             \
 		html;
-		
+
 		@echo "Success! Open file://$(CPYTHON_WORKDIR)/Doc/build/html/index.html, " \
-		      "or run 'make serve' to see them in http://localhost:8000";
+					"or run 'make serve' to see them in http://localhost:8000";
 
 
 # push: push new translation files and Transifex config files to repository,
@@ -99,17 +99,17 @@ tx-config: pot
 	rm -rf .tx;                                         \
 	$(VENV)/bin/sphinx-intl create-txconfig;            \
 	$(VENV)/bin/sphinx-intl update-txconfig-resources   \
-	    --transifex-project-name=$(TRANSIFEX_PROJECT)   \
-	    --locale-dir .                                  \
-	    --pot-dir pot;
-	
+			--transifex-project-name=$(TRANSIFEX_PROJECT)   \
+			--locale-dir .                                  \
+			--pot-dir pot;
+
 	cd $(OLDPWD)
 	mv $(CPYTHON_WORKDIR)/Doc/locales/.tx/config .tx/config
-	
+
 	sed -i .tx/config                                 \
-	    -e '/^source_file/d'                          \
-	    -e 's|<lang>/LC_MESSAGES/||'                  \
-	    -e "s|^file_filter|trans.$(LANGUAGE)|"
+			-e '/^source_file/d'                          \
+			-e 's|<lang>/LC_MESSAGES/||'                  \
+			-e "s|^file_filter|trans.$(LANGUAGE)|"
 
 
 # pot: After running "setup" target, run a cpython Makefile's target
@@ -144,7 +144,7 @@ setup: venv
 			VENVDIR=$(CPYTHON_WORKDIR)/Doc/venv                             \
 			PYTHON=$(PYTHON) venv;                                          \
 	fi
-	
+
 	# Setup translation files
 	if ! [ -d $(LOCALE_DIR)/$(LANGUAGE)/LC_MESSAGES/ ]; then                \
 		mkdir -p $(LOCALE_DIR)/$(LANGUAGE)/LC_MESSAGES/;                    \
@@ -159,9 +159,9 @@ venv:
 	if [ ! -d $(VENV) ]; then                                            \
 		$(PYTHON) -m venv --prompt $(LANGUAGE_TEAM) $(VENV);             \
 	fi
-	
+
 	$(VENV)/bin/python -m pip install -q -r requirements.txt 2> $(VENV)/pip-install.log
-	
+
 	if grep -q 'pip install --upgrade pip' $(VENV)/pip-install.log; then \
 		$(VENV)/bin/pip install -q --upgrade pip;                        \
 	fi
