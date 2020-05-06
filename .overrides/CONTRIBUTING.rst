@@ -1,3 +1,5 @@
+:orphan:
+
 Guía para contribuir en la traducción
 =====================================
 
