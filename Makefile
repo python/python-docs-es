@@ -206,4 +206,4 @@ clean:
 
 .PHONY: progress
 progress: venv
-	$(VENV)/bin/python scripts/print_percentage.py
+	$(VENV)/bin/potodo --offline --path tutorial/
