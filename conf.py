@@ -59,6 +59,7 @@ locale_dirs = ['../locales', 'cpython/locales']  # relative to the sourcedir
 
 # NOTE: Read the Docs does not support "multi document output".
 # So, we put all the documentation as a single file for now.
+_stdauthor = r'Guido van Rossum\\and the Python development team'
 latex_documents = [
     ('index', 'python-docs-es.tex', u'Documentación de Python en Español',
      _stdauthor, 'manual'),
