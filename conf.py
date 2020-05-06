@@ -33,6 +33,8 @@ html_theme_path = ['cpython/Doc/tools']
 templates_path = ['cpython/Doc/tools/templates']
 html_static_path = ['cpython/Doc/tools/static']
 
+extensions.append('sphinx_autorun')
+
 os.system('mkdir -p cpython/locales/es/')
 os.system('ln -nfs `pwd` cpython/locales/es/LC_MESSAGES')
 
