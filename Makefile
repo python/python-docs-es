@@ -40,7 +40,7 @@ help:
 #        treated as errors, which is good to skip simple Sphinx syntax mistakes.
 .PHONY: build
 build: setup
-		sphinx-build -j auto -b html -d $(OUTPUT_DOCTREE) -D language=$(LANGUAGE) . $(OUTPUT_HTML)
+		sphinx-build -j auto -W -b html -d $(OUTPUT_DOCTREE) -D language=$(LANGUAGE) . $(OUTPUT_HTML)
 		@echo "Success! Open file://`pwd`/$(OUTPUT_HTML)/index.html, " \
 					"or run 'make serve' to see them in http://localhost:8000";
 
