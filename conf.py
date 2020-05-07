@@ -37,6 +37,7 @@ os.system('mkdir -p cpython/locales/es/')
 os.system('ln -nfs `pwd` cpython/locales/es/LC_MESSAGES')
 
 html_short_title = f'Documentación {release}'
+html_title = f'Documentación de Python en Español -- {version}'
 
 if not os.environ.get('SPHINX_GETTEXT') == 'True':
     # Override all the files from ``.overrides`` directory
