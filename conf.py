@@ -38,6 +38,8 @@ extensions.append('sphinx_autorun')
 os.system('mkdir -p cpython/locales/es/')
 os.system('ln -nfs `pwd` cpython/locales/es/LC_MESSAGES')
 
+html_short_title = f'Documentación {release}'
+html_title = f'Documentación de Python en Español -- {release}'
 
 exclude_patterns = [
     # This file is not included and it not marked as :orphan:
