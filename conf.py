@@ -11,7 +11,7 @@
 #
 # This can be built locally using `sphinx-build` by running
 #
-#   $ sphinx-build -b html -n -d _build/doctrees -D language=es . _build/html
+#   $ sphinx-build -b html -d _build/doctrees -D language=es . _build/html
 
 import sys, os, time
 sys.path.append(os.path.abspath('cpython/Doc/tools/extensions'))
@@ -38,6 +38,12 @@ extensions.append('sphinx_autorun')
 os.system('mkdir -p cpython/locales/es/')
 os.system('ln -nfs `pwd` cpython/locales/es/LC_MESSAGES')
 
+
+exclude_patterns = [
+    # This file is not included and it not marked as :orphan:
+    'distutils/_setuptools_disclaimer.rst',
+    'README.rst',
+]
 
 if not os.environ.get('SPHINX_GETTEXT') == 'True':
     # Override all the files from ``.overrides`` directory
