@@ -10,8 +10,7 @@ y otras estadísticas.
 
 .. note::
 
-   Esta lista se actualiza automáticamente cada vez que una Pull Request se *mergea*
-   a la rama ``3.8``.
+   Esta lista se actualiza automáticamente cuando Pull Requests se *mergean* a la rama ``3.8``.
 
 .. runblock:: console
 
