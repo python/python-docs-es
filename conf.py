@@ -36,6 +36,7 @@ html_static_path = ['cpython/Doc/tools/static']
 os.system('mkdir -p cpython/locales/es/')
 os.system('ln -nfs `pwd` cpython/locales/es/LC_MESSAGES')
 
+html_short_title = f'Documentación {release}'
 
 if not os.environ.get('SPHINX_GETTEXT') == 'True':
     # Override all the files from ``.overrides`` directory
