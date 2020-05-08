@@ -13,7 +13,7 @@ Spanish Translation of the Python Documentation
 How to Contribute
 -----------------
 
-We have a guide that will help you to contribute at: https://python-docs-es.readthedocs.io/es/3.7/CONTRIBUTING.html.
+We have a guide that will help you to contribute at: https://python-docs-es.readthedocs.io/page/CONTRIBUTING.html.
 Please, check the details there.
 
 
