@@ -115,5 +115,5 @@ Y luego accediendo a http://localhost:8000/
 .. _poedit: https://poedit.net/
 
 .. _nuestro canal de Telegram: https://t.me/python_docs_es
-.. _Memoria de traducción: https://python-docs-es.readthedocs.io/es/3.7/translation-memory.html
+.. _Memoria de traducción: https://python-docs-es.readthedocs.io/page/translation-memory.html
 .. _lista de issues en GitHub: https://github.com/PyCampES/python-docs-es/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc
