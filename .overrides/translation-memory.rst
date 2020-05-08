@@ -91,16 +91,16 @@ en contraste con el inglés, que lo hace en todas las palabras principales (cone
   Referencia: https://www.rae.es/dpd/may%C3%BAsculas 4.17
 
   Ejemplo: ``tutorial/errors.po``
-    `en`: Predefined Clean-up Actions
-    `es`: Acciones de limpieza predefinidas
+  `en`: Predefined Clean-up Actions
+  `es`: Acciones de limpieza predefinidas
 
 * Se priorizará la segunda persona del singular no formal (tu/vos) frente al formal (usted).
   Sin embargo, allí donde sea posible, se usarán formas impersonales, ya que son comunes a
   todas las variantes del español.
 
   Ejemplo: ``tutorial/errors.po``
-    `en`: Look at the following example, [...]
-    `es`: Véase el siguiente ejemplo, [...]
+  `en`: Look at the following example, [...]
+  `es`: Véase el siguiente ejemplo, [...]
 
 * En general se evitará la traducción literal de la voz pasiva del original en inglés y se usará
   el impersonal en la traducción al español.
