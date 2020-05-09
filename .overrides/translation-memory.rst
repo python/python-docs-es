@@ -31,38 +31,41 @@ Si quieres ver cómo se ha utilizado un término anteriormente, puedes utilizar 
 Éstos son las palabras que hemos coordinado hasta el momento:
 
 
-   loop
-      Bucle. ``tutorial/controlflow.po``
+     awaitable
+      aguardable ``glossary``
 
-   handle exception
-      Gestionar excepción. ``tutorial/inputoutput.po``
-
-   docstring
-      docstring. ``library/idle.po``
-
-   path
-      Ruta. ``glossary.po``
-
-   named tuple.
-      tupla nombrada ``glossary.po``
-
-   bytecodes
-      queda igual ``glossary.po``
-      
-   deallocated
-      desalojable ``glossary.po``
-
-   callable
-      invocable ``glossary.po``
-
-   built-in 
+     built-in 
       incorporada ``glossary.po``
 
-  mapping
+     bytecodes
+      queda igual ``glossary.po``
+
+     callable
+      invocable ``glossary.po``
+
+     deallocated
+      desalojable ``glossary.po``
+
+     docstring
+      docstring. ``library/idle.po``
+
+     handle exception
+      Gestionar excepción. ``tutorial/inputoutput.po``
+
+     loop
+      Bucle. ``tutorial/controlflow.po``
+
+     mapping
       mapeo ``glossary.po``
 
-  underscore
-      guión bajo ``glossary.po``
+     named tuple.
+      tupla nombrada ``glossary.po``
 
-  awaitable
-      aguardable ``glossary``
+     path
+      Ruta. ``glossary.po``
+
+     realease
+      version ``HOWTO``  
+   
+     underscore
+      guión bajo ``glossary.po``
