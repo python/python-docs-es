@@ -74,8 +74,25 @@ Términos y bigramas
       Ruta. ``glossary.po``
 
      realease
-      version ``HOWTO``  
-   
+      version ``HOWTO``
+
+     runtime
+       tiempo de ejecución  ``tutorial/classes.po``
+
+     static type checker
+       Validador estático de tipos
+       Notas: mantener la mayúscula, usar validación cuando se refiera a la acción y no al agente.
+
+     third-party
+      de terceros ``library/typing.po``
+
+     type hint
+       indicador de tipo  ``library/typing.po``
+
+     type annotation  ``library/typing.po``
+       anotación de tipo
+       Nota: úsese como sinónimo de *type hint*
+
      underscore
       guión bajo ``glossary.po``
 
