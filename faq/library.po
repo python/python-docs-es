@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-06 11:59-0400\n"
-"PO-Revision-Date: 2020-05-10 11:01+0100\n"
+"PO-Revision-Date: 2020-05-10 12:31+0100\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -361,14 +361,16 @@ msgid ""
 "For Unix variants there are several solutions.  It's straightforward to do "
 "this using curses, but curses is a fairly large module to learn."
 msgstr ""
+"Para variantes Unix hay varias soluciones. Lo más directo es hacerlo usando "
+"cursores, pero curses es un módulo bastante amplio para aprenderlo."
 
 #: ../Doc/faq/library.rst:237
 msgid "Threads"
-msgstr ""
+msgstr "Hilos"
 
 #: ../Doc/faq/library.rst:240
 msgid "How do I program using threads?"
-msgstr ""
+msgstr "¿Cómo programo usando hilos?"
 
 #: ../Doc/faq/library.rst:242
 msgid ""
@@ -376,28 +378,38 @@ msgid ""
 "module. The :mod:`threading` module builds convenient abstractions on top of "
 "the low-level primitives provided by the :mod:`_thread` module."
 msgstr ""
+"Asegúrese de usar el módulo :mod:`threading` y no el módulo :mod:`_thread`. "
+"El módulo :mod:`threading` construye abstracciones convenientes sobre las "
+"primitivas de bajo nivel proporcionadas por el módulo :mod:`_thread`."
 
 #: ../Doc/faq/library.rst:246
 msgid ""
 "Aahz has a set of slides from his threading tutorial that are helpful; see "
 "http://www.pythoncraft.com/OSCON2001/."
 msgstr ""
+"Aahz tiene un conjunto de transparencias sobre su tutoría de hilos que es "
+"útil: vea http://www.pythoncraft.com/OSCON2001/."
 
 #: ../Doc/faq/library.rst:251
 msgid "None of my threads seem to run: why?"
-msgstr ""
+msgstr "Ninguno de mis hilos parece funcionar: ¿por qué?"
 
 #: ../Doc/faq/library.rst:253
 msgid ""
 "As soon as the main thread exits, all threads are killed.  Your main thread "
 "is running too quickly, giving the threads no time to do any work."
 msgstr ""
+"Tan pronto como el hilo principal termine, se matan todos los hilos. Su hilo "
+"principal está corriendo demasiado rápido, sin dar tiempo a los hilos para "
+"hacer algún trabajo."
 
 #: ../Doc/faq/library.rst:256
 msgid ""
 "A simple fix is to add a sleep to the end of the program that's long enough "
 "for all the threads to finish::"
 msgstr ""
+"Una solución sencilla es añadir un *sleep* al final del programa que sea "
+"suficientemente largo para que todos los hilos terminen::"
 
 #: ../Doc/faq/library.rst:271
 msgid ""
@@ -405,10 +417,16 @@ msgid ""
 "run sequentially, one at a time!  The reason is that the OS thread scheduler "
 "doesn't start a new thread until the previous thread is blocked."
 msgstr ""
+"Por ahora (en muchas plataformas) los hilos no corren en paralelo, pero "
+"parece que corren secuencialmente, ¡uno a la vez! La razón es que el "
+"planificador de hilos del sistema operativo no inicia un nuevo hilo hasta "
+"que el hilo anterior está bloqueado."
 
 #: ../Doc/faq/library.rst:275
 msgid "A simple fix is to add a tiny sleep to the start of the run function::"
 msgstr ""
+"Una solución sencilla es añadir un pequeño *sleep* al comienzo de la función "
+"run::"
 
 #: ../Doc/faq/library.rst:288
 msgid ""
@@ -418,16 +436,23 @@ msgid ""
 "the queue when it finishes, and let the main thread read as many tokens from "
 "the queue as there are threads."
 msgstr ""
+"En vez de intentar adivinar un valor de retardo adecuado para :func:`time."
+"sleep`, es mejor usar algún tipo de mecanismo de semáforo. Una idea es usar "
+"el módulo :mod:`queue` para crear un objeto cola, permitiendo que cada hilo "
+"añada un *token* a la cola cuando termine, y permitiendo al hilo principal "
+"leer tantos tokens de la cola como hilos haya."
 
 #: ../Doc/faq/library.rst:296
 msgid "How do I parcel out work among a bunch of worker threads?"
-msgstr ""
+msgstr "¿Cómo puedo dividir trabajo entre un grupo de hilos?"
 
 #: ../Doc/faq/library.rst:298
 msgid ""
 "The easiest way is to use the new :mod:`concurrent.futures` module, "
 "especially the :mod:`~concurrent.futures.ThreadPoolExecutor` class."
 msgstr ""
+"La manera más fácil es usar el nuevo módulo :mod:`concurrent.futures`, "
+"especialmente la clase :mod:`~concurrent.futures.ThreadPoolExecutor`."
 
 #: ../Doc/faq/library.rst:301
 msgid ""
@@ -438,24 +463,33 @@ msgid ""
 "``.get()`` method to return them.  The class will take care of the locking "
 "necessary to ensure that each job is handed out exactly once."
 msgstr ""
+"O, si quiere tener un control más preciso sobre el algoritmo de despacho, "
+"puede escribir su propia lógica manualmente. Use el módulo :mod:`queue` para "
+"crear una cola que contenga una lista de trabajos. La clase :class:`~queue."
+"Queue` mantiene una lista de objetos y tiene un método ``.put(obj)`` que "
+"añade elementos a la cola y un método ``.get()`` que los devuelve. Esta "
+"clase se encargará de los bloqueos necesarios para asegurar que cada trabajo "
+"se reparte exactamente una vez."
 
 #: ../Doc/faq/library.rst:308
 msgid "Here's a trivial example::"
-msgstr ""
+msgstr "Aquí hay un ejemplo trivial::"
 
 #: ../Doc/faq/library.rst:346
 msgid "When run, this will produce the following output:"
-msgstr ""
+msgstr "Cuando se ejecute, esto producirá la siguiente salida:"
 
 #: ../Doc/faq/library.rst:364
 msgid ""
 "Consult the module's documentation for more details; the :class:`~queue."
 "Queue` class provides a featureful interface."
 msgstr ""
+"Consulte la documentación del módulo para más detalles; la clase :class:"
+"`~queue.Queue` proporciona una interfaz llena de características."
 
 #: ../Doc/faq/library.rst:369
 msgid "What kinds of global value mutation are thread-safe?"
-msgstr ""
+msgstr "¿Qué tipos de mutación de valores globales son *thread-safe*?"
 
 #: ../Doc/faq/library.rst:371
 msgid ""
@@ -466,6 +500,13 @@ msgid ""
 "instruction and therefore all the C implementation code reached from each "
 "instruction is therefore atomic from the point of view of a Python program."
 msgstr ""
+"Un :term:`global interpreter lock` (GIL) se usa internamente para asegurar "
+"que sólo un hilo correo a la vez en la VM de Python. En general, Python "
+"ofrece cambiar entre hilos sólo en instrucciones bytecode; la frecuencia con "
+"la que cambia se puede fijar vía :func:`sys.setswitchinterval`. Cada "
+"instrucción bytecode y por lo tanto toda la implementación de código C "
+"alcanzada por cada instrucción es atómica desde el punto de vista de un "
+"programa Python."
 
 #: ../Doc/faq/library.rst:378
 msgid ""
@@ -474,16 +515,23 @@ msgid ""
 "shared variables of built-in data types (ints, lists, dicts, etc) that "
 "\"look atomic\" really are."
 msgstr ""
+"En teoría, esto significa que una cuenta exacta requiere de un conocimiento "
+"exacto de la implementación en bytecode de la PVM. En la práctica, esto "
+"significa que las operaciones entre variables compartidas de tipos de datos "
+"*built-in* (enteros, listas, diccionarios, etc.) que “parecen atómicas” "
+"realmente lo son."
 
 #: ../Doc/faq/library.rst:383
 msgid ""
 "For example, the following operations are all atomic (L, L1, L2 are lists, "
 "D, D1, D2 are dicts, x, y are objects, i, j are ints)::"
 msgstr ""
+"Por ejemplo, las siguientes operaciones son todas atómicas (L, L1, L2 son "
+"listas, D, D1, D2 son diccionarios, x, y son objetos, i, j son enteros)::"
 
 #: ../Doc/faq/library.rst:398
 msgid "These aren't::"
-msgstr ""
+msgstr "Estas no lo son::"
 
 #: ../Doc/faq/library.rst:405
 msgid ""
@@ -492,10 +540,15 @@ msgid ""
 "affect things.  This is especially true for the mass updates to dictionaries "
 "and lists.  When in doubt, use a mutex!"
 msgstr ""
+"Las operaciones que reemplazan otros objetos pueden invocar el método :meth:"
+"`__del__` de esos otros objetos cuando su número de referencias alcance "
+"cero, y eso puede afectar a otras cosas. Esto es especialmente cierto para "
+"las actualizaciones en masa de diccionarios y listas. Cuando se esté en "
+"duda, ¡use un mutex!"
 
 #: ../Doc/faq/library.rst:412
 msgid "Can't we get rid of the Global Interpreter Lock?"
-msgstr ""
+msgstr "¿Podemos deshacernos del *Global Interpreter Lock*?"
 
 #: ../Doc/faq/library.rst:416
 msgid ""
@@ -504,6 +557,11 @@ msgid ""
 "multi-threaded Python program effectively only uses one CPU, due to the "
 "insistence that (almost) all Python code can only run while the GIL is held."
 msgstr ""
+"El :term:`global interpreter lock` (GIL) se percibe a menudo como un "
+"obstáculo en el desarrollo de Python sobre máquinas servidoras finales de "
+"múltiples procesadores, porque un programa Python multihilo efectivamente "
+"sólo usa una CPU, debido a la exigencia de que (casi) todo el código Python "
+"sólo puede correr mientras el GIL esté activado."
 
 #: ../Doc/faq/library.rst:421
 msgid ""
@@ -516,6 +574,14 @@ msgid ""
 "due to the amount of fine-grained locking necessary to compensate for the "
 "removal of the GIL."
 msgstr ""
+"En los días de Python 1.5, Greg Stein implementó de hecho un conjunto amplio "
+"de parches (los parches “libres de hilo”) que eliminaba el GIL y lo "
+"reemplazaba con un bloqueo de grano fino. Adam Olsen hizo recientemente un "
+"experimento similar con su proyecto `python-safethread <https://code.google."
+"com/archive/p/python-safethread>`_. Desafortunadamente, ambos experimentos "
+"exhibieron una aguda caída en el rendimiento (al menos del 30% o más baja), "
+"debido a la cantidad de bloqueos de grano fino necesarios para compensar la "
+"eliminación del GIL."
 
 #: ../Doc/faq/library.rst:429
 msgid ""
@@ -527,6 +593,13 @@ msgid ""
 "module provides a lower-level API in case you want more control over "
 "dispatching of tasks."
 msgstr ""
+"¡Esto no significa que no pueda hacer buen uso de Python en máquinas de "
+"múltiples CPU! Usted sólo tiene que ser creativo a la hora de dividir el "
+"trabajo entre múltiples *procesos* en vez de entre múltiples *hilos*. La "
+"clase :class:`~concurrent.futures.ProcessPoolExecutor` del nuevo módulo :mod:"
+"`concurrent.futures` proporciona una manera sencilla de hacer esto; el "
+"módulo :mod:`multiprocessing` proporciona una API de bajo nivel en caso de "
+"que se quiera tener un mayor control sobre el despacho de las tareas."
 
 #: ../Doc/faq/library.rst:437
 msgid ""
@@ -536,6 +609,11 @@ msgid ""
 "work done.  Some standard library modules such as :mod:`zlib` and :mod:"
 "`hashlib` already do this."
 msgstr ""
+"El uso sensato de extensiones C también ayudará; si usa una extensión C para "
+"ejecutar una tarea que consume mucho tiempo, la extensión puede liberar al "
+"GIL mientras el hilo de ejecución esté en el código C y permite a otros "
+"hilos hacer algún trabajo. Algunos módulos de la librería estándar tales "
+"como :mod:`zlib` y :mod:`hashlib` ya lo hacen."
 
 #: ../Doc/faq/library.rst:443
 msgid ""
