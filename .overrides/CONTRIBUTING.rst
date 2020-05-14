@@ -50,6 +50,9 @@ Necesitamos *mucho* de tu ayuda para poder seguir adelante con este proyecto.
 
       Puedes consultar la `ayuda oficial de GitHub para crear un Pull Request`_ si lo deseas.
 
+#. En la descripción de la *Pull Request* escribe ``Closes #<número de issue>``
+   (así se cierra automáticamente cuando se hace *merge*)
+
 
 ¿Qué archivo traducir?
 ----------------------
@@ -69,11 +72,16 @@ A tener en cuenta
 -----------------
 
 * No debes traducir el contenido de ``:ref:...`` y ``:term:...``.
-* Si tienes que palabras en inglés debes ponerlas en *italics* (rodeadas por asteriscos)
+* Si tienes que usar palabras en inglés debes ponerlas en *italics* (rodeadas por asteriscos)
 * Si traduces un título que es un link, por favor traduce el link también (por ejemplo un artículo a Wikipedia).
   En caso de que no haya una traducción del artículo en Wikipedia deja el título sin traducir.
 * Tenemos una `Memoria de Traducción`_, que usamos para tener consistencia con algunos términos.
-
+* Si tienes una duda sobre una palabra o término, escríbelo como mejor suene para vos y
+  marca ese párrafo como "Need work" / "Necesita trabajo" en *poedit*.
+  Además, escribe un comentario explicando cuál es el termino en ese párrafo con el que no estabas segura.
+* Puedes usar `la traducción al Portugués`_ para ver cómo ellos hicieron la traducción de alguna palabra.
+* Wikipedia puede ser útil también. Busca la palabra en Inglés, y luego mira si tiene una traducción
+  al Español en la barra de la izquierda. Suelen estar bastante bien explicados.
 
 
 .. note::
@@ -116,4 +124,5 @@ Y luego accediendo a http://localhost:8000/
 
 .. _nuestro canal de Telegram: https://t.me/python_docs_es
 .. _Memoria de traducción: https://python-docs-es.readthedocs.io/page/translation-memory.html
+.. _la traducción al Portugués: https://docs.python.org/pt-br/3/
 .. _lista de issues en GitHub: https://github.com/PyCampES/python-docs-es/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc
