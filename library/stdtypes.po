@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-05-13 21:34+0100\n"
+"PO-Revision-Date: 2020-05-16 16:54+0100\n"
 "Last-Translator: Juan Ignacio Rodríguez de León <euribates@gmail.com>\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
@@ -1558,6 +1558,7 @@ msgstr "``s.count(x)``"
 msgid "total number of occurrences of *x* in *s*"
 msgstr "Número total de ocurrencias de *x* en *s*."
 
+# Existe `comparaciones`?
 #: ../Doc/library/stdtypes.rst:898
 msgid ""
 "Sequences of the same type also support comparisons.  In particular, tuples "
@@ -1569,17 +1570,22 @@ msgstr ""
 "También se pueden comparar secuencias del mismo tipo. En particular, las "
 "tuplas y las listas se comparan léxicográficamente, comparando los elementos "
 "en la misma posición. Esto significa que, para que se consideren iguales, "
-"todos los elementos correspondientes deben ser iguales y las dos secuencias "
-"deben ser del mismo tipo y de la misma longitud (Para más detalles véase :"
-"ref:`comparaciones` en la referencia del lenguaje)."
+"todos los elementos correspondientes deben ser iguales entre si, y las dos "
+"secuencias deben ser del mismo tipo y de la misma longitud (Para más "
+"detalles, véase :ref:`comparaciones` en la referencia del lenguaje)."
 
 #: ../Doc/library/stdtypes.rst:907
+#, fuzzy
 msgid ""
 "While the ``in`` and ``not in`` operations are used only for simple "
 "containment testing in the general case, some specialised sequences (such "
 "as :class:`str`, :class:`bytes` and :class:`bytearray`) also use them for "
 "subsequence testing::"
 msgstr ""
+"Aunque las operaciones ``in`` y ``not in`` se usan generalmente para "
+"comprobar si un elemento está dentro de un contenedor, en algunas secuencias "
+"especializadas (Como :class:`str`, :class:`bytes` y :class:`bytearray`) "
+"también se pueden usar para comprobar si está incluida una subsecuencia."
 
 #: ../Doc/library/stdtypes.rst:916
 msgid ""
@@ -1588,6 +1594,10 @@ msgid ""
 "not copied; they are referenced multiple times.  This often haunts new "
 "Python programmers; consider::"
 msgstr ""
+"Valores de *n* menores que ``0`` se consideran como ``0`` (Que produce una "
+"secuencia vacía del mismo tipo que *s*). Nótese que los elementos de la "
+"secuencia *s* no se copian, sino que se referencian múltiples veces. Esto a "
+"menudo confunde a programadores noveles de Python; considérese::"
 
 #: ../Doc/library/stdtypes.rst:928
 msgid ""
@@ -1596,12 +1606,20 @@ msgid ""
 "empty list.  Modifying any of the elements of ``lists`` modifies this single "
 "list. You can create a list of different lists this way::"
 msgstr ""
+"Lo que ha pasado es que ``[[]]`` es una lista de un elemento, siendo este "
+"elemento una lista vacía, así que los tres elementos de ``[[]] * 3`` son "
+"referencias a la misma lista vacía. Modificar cualquiera de los elementos de "
+"``lists`` modifica la lista inicial. Para crear una lista de listas "
+"independientes entre si, se puede hacer::"
 
 #: ../Doc/library/stdtypes.rst:940
+#, fuzzy
 msgid ""
 "Further explanation is available in the FAQ entry :ref:`faq-multidimensional-"
 "list`."
 msgstr ""
+"Se puede consultar una explicación más completa en esta entrada de la lista "
+"de preguntas más frecuentes :ref:`faq-multidimensional-list`."
 
 #: ../Doc/library/stdtypes.rst:944
 msgid ""
@@ -1609,6 +1627,9 @@ msgid ""
 "``len(s) + i`` or ``len(s) + j`` is substituted.  But note that ``-0`` is "
 "still ``0``."
 msgstr ""
+"Si *i* o *j* es negativo, el índice es relativo al final de la secuencia "
+"*s*: Se realiza la sustitución ``len(s) + i`` o ``len(s) + j``. Nótese que "
+"``-0`` sigue siendo ``0``."
 
 #: ../Doc/library/stdtypes.rst:949
 msgid ""
@@ -1618,6 +1639,11 @@ msgid ""
 "*j* is omitted or ``None``, use ``len(s)``.  If *i* is greater than or equal "
 "to *j*, the slice is empty."
 msgstr ""
+"La rebanada de *s* desde *i* a *j* se define como la secuencia de elementos "
+"con índice *k*, de forma que ``i <= k < j``. Si *i* o *j* es mayor que "
+"``len(s)`` se usa ``len(s)``. Si *i* se omite o es ``None``, se usa ``0``. "
+"Si *j* se omite o es ``None``, se usa ``len(s)``. Si *i* es mayor o igual a "
+"*j*, la rebanada estaría vacía."
 
 #: ../Doc/library/stdtypes.rst:956
 msgid ""
@@ -1631,6 +1657,16 @@ msgid ""
 "(which end depends on the sign of *k*).  Note, *k* cannot be zero. If *k* is "
 "``None``, it is treated like ``1``."
 msgstr ""
+"La rebanada de *s*, desde *i* hasta *j* con paso *k*, se define como la "
+"secuencia de elementos con índice ``x = i + n*k`` tal que ``0 <= n < (j-i)/"
+"k``. En otras palabras, los índices son ``i``, ``i+k``, ``i+2*k``, ``i+3*k`` "
+"y así consecutivamente, hasta que se alcance el valor de *j* (Pero sin "
+"incluir nunca *j*). Cuando *k* es positivo, *i* y *j* se limitan al valor de "
+"``len(s)``, si fueran mayores. Si *k* es negativo, *i* y *j* se reducen de "
+"``len(s) - 1``. Si *i* o *j* se omiten o su valor es ``None``, se convierten "
+"es valores \"finales\" (Donde el sentido de final depende del signo de *k*). "
+"Nótese que *k* no puede valer ``0``. Si *k* vale ``None``, se considera como "
+"``1``."
 
 #: ../Doc/library/stdtypes.rst:967
 msgid ""
@@ -1639,6 +1675,11 @@ msgid ""
 "quadratic runtime cost in the total sequence length.  To get a linear "
 "runtime cost, you must switch to one of the alternatives below:"
 msgstr ""
+"La concatenación de secuencias inmutables siempre produce un nuevo objeto. "
+"Esto significa que construir una secuencia usando la concatenación tiene un "
+"coste en ejecución cuadrático respecto al tamaño de la secuencia final. Para "
+"obtener un rendimiento lineal, se puede optar por una de las alternativas "
+"siguientes:"
 
 #: ../Doc/library/stdtypes.rst:972
 msgid ""
@@ -1646,7 +1687,11 @@ msgid ""
 "`str.join` at the end or else write to an :class:`io.StringIO` instance and "
 "retrieve its value when complete"
 msgstr ""
+"En vez de concatenar cadenas de texto, se puede construir una lista y usar "
+"al final el método :meth:`str.join`, o bien utilizar una instancia de la "
+"clase :class:`io.StringIO`y recuperar el valor final completo."
 
+# Duda sobre como traducir *in place*
 #: ../Doc/library/stdtypes.rst:976
 msgid ""
 "if concatenating :class:`bytes` objects, you can similarly use :meth:`bytes."
@@ -1654,14 +1699,21 @@ msgid ""
 "class:`bytearray` object.  :class:`bytearray` objects are mutable and have "
 "an efficient overallocation mechanism"
 msgstr ""
+"De forma similar, en vez de concatenar objetos de tipo :class:`bytes` se "
+"puede usar el método :meth:`bytes.join`, la clase :class:`io.BytesIO`, o se "
+"puede realizar una modificación interna usando un objeto de la clase :class:"
+"`bytearray`. Los objetos de tipo :class:`bytearray` son mutables y tienen un "
+"mecanismo interno de reubicación muy eficiente."
 
 #: ../Doc/library/stdtypes.rst:981
 msgid "if concatenating :class:`tuple` objects, extend a :class:`list` instead"
 msgstr ""
+"En vez de concatenar tuplas (Instancias de :class:`tuple`), usar una lista y "
+"expandirla."
 
 #: ../Doc/library/stdtypes.rst:983
 msgid "for other types, investigate the relevant class documentation"
-msgstr ""
+msgstr "Para otros tipos, investiga la documentación relevante de la clase."
 
 #: ../Doc/library/stdtypes.rst:987
 msgid ""
@@ -1669,6 +1721,9 @@ msgid ""
 "that follow specific patterns, and hence don't support sequence "
 "concatenation or repetition."
 msgstr ""
+"Algunos tipos de secuencia (como la clase :class:`range`) solo soportan "
+"elementos que siguen un patrón específico, y por tanto no soportan la "
+"concatenación ni la repetición."
 
 #: ../Doc/library/stdtypes.rst:992
 msgid ""
@@ -1679,17 +1734,28 @@ msgid ""
 "without copying any data and with the returned index being relative to the "
 "start of the sequence rather than the start of the slice."
 msgstr ""
+"El método ``index`` eleva la excepción :exc:`ValueError` si *x* no se "
+"encuentra en *s*. No todas las implementaciones soportan los parámetros "
+"opcionales *i* y *j*. Estos parámetros permiten una búsqueda eficiente de "
+"las subsecciones de la secuencia. Usar estos parámetros es más o menos "
+"equivalente a usar ``s[i:j].index(x)``, pero sin copiar ningún dato y con el "
+"valor de índice devuelto como valor relativo al inicio de la secuencia, en "
+"vez de al inicio de la rebanada."
 
 #: ../Doc/library/stdtypes.rst:1003
 msgid "Immutable Sequence Types"
-msgstr ""
+msgstr "Tipos de secuencia inmutables"
 
 #: ../Doc/library/stdtypes.rst:1010
+#, fuzzy
 msgid ""
 "The only operation that immutable sequence types generally implement that is "
 "not also implemented by mutable sequence types is support for the :func:"
 "`hash` built-in."
 msgstr ""
+"La única operación que las secuencias inmutables implementan generalmente, y "
+"que no esta definida también en las secuencias mutables, es el soporte para "
+"el cálculo de la función predefinida :func:`hash`."
 
 #: ../Doc/library/stdtypes.rst:1014
 msgid ""
@@ -1697,16 +1763,22 @@ msgid ""
 "to be used as :class:`dict` keys and stored in :class:`set` and :class:"
 "`frozenset` instances."
 msgstr ""
+"Este soporte permite usar secuencias inmutables, como por ejemplo las "
+"instancias de la clase :class:`tuple`, como claves para diccionarios (:class:"
+"`dict`), así como ser almacenadas en conjuntos (class:`set`) o conjuntos "
+"congelados (:class:`frozenset`)."
 
 #: ../Doc/library/stdtypes.rst:1018
 msgid ""
 "Attempting to hash an immutable sequence that contains unhashable values "
 "will result in :exc:`TypeError`."
 msgstr ""
+"Intentar calcular el *hash* de una secuencia inmutable que contenga objetos "
+"mutables producirá una excepción de tipo :exc:`TypeError`."
 
 #: ../Doc/library/stdtypes.rst:1025
 msgid "Mutable Sequence Types"
-msgstr ""
+msgstr "Tipos de secuencia mutables"
 
 #: ../Doc/library/stdtypes.rst:1032
 msgid ""
@@ -1714,6 +1786,10 @@ msgid ""
 "The :class:`collections.abc.MutableSequence` ABC is provided to make it "
 "easier to correctly implement these operations on custom sequence types."
 msgstr ""
+"Las operaciones de la siguiente tabla están definidas para todas los tipos "
+"de secuencia mutables. La clase ABC :class:`collections.abc.MutableSequence` "
+"se incluye para facilitar la implementación correcta de un tipo de secuencia "
+"propio."
 
 #: ../Doc/library/stdtypes.rst:1036
 msgid ""
@@ -1722,144 +1798,175 @@ msgid ""
 "restrictions imposed by *s* (for example, :class:`bytearray` only accepts "
 "integers that meet the value restriction ``0 <= x <= 255``)."
 msgstr ""
+"En la tabla, *s* es una instancia de una secuencia de tipo mutable, *t* es "
+"cualquier objeto iterable y *x* es un objeto arbitrario que cumple las "
+"restricciones de tipo y valor que vengan impuestas por *s* (Como ejemplo, la "
+"clase :class:`bytearray` solo acepta enteros que cumplan la condición ``0 <= "
+"x <= 255``)."
 
 #: ../Doc/library/stdtypes.rst:1060
 msgid "``s[i] = x``"
-msgstr ""
+msgstr "``s[i] = x``"
 
 #: ../Doc/library/stdtypes.rst:1060
 msgid "item *i* of *s* is replaced by *x*"
-msgstr ""
+msgstr "El elemento *i* de *s* es reemplazado por *x*"
 
 #: ../Doc/library/stdtypes.rst:1063
 msgid "``s[i:j] = t``"
-msgstr ""
+msgstr "``s[i:j] = t``"
 
 #: ../Doc/library/stdtypes.rst:1063
 msgid ""
 "slice of *s* from *i* to *j* is replaced by the contents of the iterable *t*"
 msgstr ""
+"La rebanada de valores de *s* que van de *i* a *j* es reemplazada por el "
+"contenido del iterador *t*."
 
 #: ../Doc/library/stdtypes.rst:1067
 msgid "``del s[i:j]``"
-msgstr ""
+msgstr "``del s[i:j]``"
 
 #: ../Doc/library/stdtypes.rst:1067
 msgid "same as ``s[i:j] = []``"
-msgstr ""
+msgstr "Equivalente a ``s[i:j] = []``"
 
 #: ../Doc/library/stdtypes.rst:1069
 msgid "``s[i:j:k] = t``"
-msgstr ""
+msgstr "``s[i:j:k] = t``"
 
 #: ../Doc/library/stdtypes.rst:1069
 msgid "the elements of ``s[i:j:k]`` are replaced by those of *t*"
 msgstr ""
+"Los elementos de ``s[i:j:k]`` son reemplazados por los elementos de *t*"
 
 #: ../Doc/library/stdtypes.rst:1072
 msgid "``del s[i:j:k]``"
-msgstr ""
+msgstr "``del s[i:j:k]``"
 
 #: ../Doc/library/stdtypes.rst:1072
 msgid "removes the elements of ``s[i:j:k]`` from the list"
-msgstr ""
+msgstr "Borra los elementos de ``s[i:j:k]`` de la lista"
 
 #: ../Doc/library/stdtypes.rst:1075
 msgid "``s.append(x)``"
-msgstr ""
+msgstr "``s.append(x)``"
 
 #: ../Doc/library/stdtypes.rst:1075
 msgid ""
 "appends *x* to the end of the sequence (same as ``s[len(s):len(s)] = [x]``)"
 msgstr ""
+"Añade *x* al final de la secuencia (Equivale a ``s[len(s):len(s)] = [x]``)"
 
 #: ../Doc/library/stdtypes.rst:1079
 msgid "``s.clear()``"
-msgstr ""
+msgstr "``s.clear()``"
 
 #: ../Doc/library/stdtypes.rst:1079
 msgid "removes all items from *s* (same as ``del s[:]``)"
-msgstr ""
+msgstr "Elimina todos los elementos de *s* (Equivale a ``del s[:]``)"
 
 #: ../Doc/library/stdtypes.rst:1082
 msgid "``s.copy()``"
-msgstr ""
+msgstr "``s.copy()``"
 
 #: ../Doc/library/stdtypes.rst:1082
 msgid "creates a shallow copy of *s* (same as ``s[:]``)"
-msgstr ""
+msgstr "Crea una copia superficial de *s* (Equivale a ``s[:]``)"
 
 #: ../Doc/library/stdtypes.rst:1085
 msgid "``s.extend(t)`` or ``s += t``"
-msgstr ""
+msgstr "``s.extend(t)`` o ``s += t``"
 
 #: ../Doc/library/stdtypes.rst:1085
+#, fuzzy
 msgid ""
 "extends *s* with the contents of *t* (for the most part the same as "
 "``s[len(s):len(s)] = t``)"
 msgstr ""
+"Extiende *s* con los contenidos de *t* (En la mayoría de los casos equivale "
+"a ``s[len(s):len(s)] = t``)"
 
 #: ../Doc/library/stdtypes.rst:1090
 msgid "``s *= n``"
-msgstr ""
+msgstr "``s *= n``"
 
 #: ../Doc/library/stdtypes.rst:1090
 msgid "updates *s* with its contents repeated *n* times"
-msgstr ""
+msgstr "Actualiza *s* con su contenido repetido *n* veces"
 
 #: ../Doc/library/stdtypes.rst:1093
 msgid "``s.insert(i, x)``"
-msgstr ""
+msgstr "``s.insert(i, x)``"
 
 #: ../Doc/library/stdtypes.rst:1093
 msgid ""
 "inserts *x* into *s* at the index given by *i* (same as ``s[i:i] = [x]``)"
 msgstr ""
+"Inserta *x* en *s* en la posición indicada por el índice *i* (Equivale a "
+"``s[i:i] = [x]``)"
 
 #: ../Doc/library/stdtypes.rst:1097
 msgid "``s.pop([i])``"
-msgstr ""
+msgstr "``s.pop([i])``"
 
 #: ../Doc/library/stdtypes.rst:1097
 msgid "retrieves the item at *i* and also removes it from *s*"
 msgstr ""
+"Devuelve el elemento en la posición indicada por *i*, y a la vez lo elimina "
+"de la secuencia *s*"
 
 #: ../Doc/library/stdtypes.rst:1100
 msgid "``s.remove(x)``"
-msgstr ""
+msgstr "``s.remove(x)``"
 
 #: ../Doc/library/stdtypes.rst:1100
 msgid "remove the first item from *s* where ``s[i]`` is equal to *x*"
-msgstr ""
+msgstr "Elimina el primer elemento de *s* tal que ``s[i]`` sea igual a *x*"
 
 #: ../Doc/library/stdtypes.rst:1103
 msgid "``s.reverse()``"
-msgstr ""
+msgstr "``s.reverse()``"
 
+# Duda sobre como traducir *in place*
 #: ../Doc/library/stdtypes.rst:1103
+#, fuzzy
 msgid "reverses the items of *s* in place"
-msgstr ""
+msgstr "Invierte el orden de los elementos de *s*, a nivel interno."
 
 #: ../Doc/library/stdtypes.rst:1111
 msgid "*t* must have the same length as the slice it is replacing."
 msgstr ""
+"La secuencia *t* debe tener la misma longitud que la rebanada a la que "
+"reemplaza"
 
 #: ../Doc/library/stdtypes.rst:1114
 msgid ""
 "The optional argument *i* defaults to ``-1``, so that by default the last "
 "item is removed and returned."
 msgstr ""
+"El parámetro opcional *i* tiene un valor por defecto de ``-1``, así que si "
+"no se especifica se devuelve el último valor y este se elimina de la "
+"secuencia."
 
 #: ../Doc/library/stdtypes.rst:1118
 msgid ":meth:`remove` raises :exc:`ValueError` when *x* is not found in *s*."
 msgstr ""
+"El método :meth:`remove` eleva la excepción :exc:`ValueError` cuando no se "
+"encuentra *x* en *s*."
 
+# side effect ' efecto secundario?
 #: ../Doc/library/stdtypes.rst:1121
+#, fuzzy
 msgid ""
 "The :meth:`reverse` method modifies the sequence in place for economy of "
 "space when reversing a large sequence.  To remind users that it operates by "
 "side effect, it does not return the reversed sequence."
 msgstr ""
+"El método :meth:`reverse` modifica la secuencia internamente, por motivos de "
+"eficiencia espacial para secuencias muy grandes. Como recordatorio al "
+"usuario de que el método produce un efecto secundario, no se devuelve la "
+"secuencia invertida."
 
 #: ../Doc/library/stdtypes.rst:1126
 msgid ""
@@ -1869,10 +1976,15 @@ msgid ""
 "`collections.abc.MutableSequence` ABC, but most concrete mutable sequence "
 "classes provide it."
 msgstr ""
+"Ambos métodos :meth:`clear` y :meth:`!copy` se incluyen por consistencia con "
+"las interfaces de clases que no soportan operaciones de rebanado (Como las "
+"clases :class:`dict` y :class:`set`). El método :meth:`!copy` no es parte de "
+"la clase ABC :class:`collections.abc.MutableSequence`, pero la mayoría de "
+"las clases finales de tipo secuencia mutable lo incluyen."
 
 #: ../Doc/library/stdtypes.rst:1132
 msgid ":meth:`clear` and :meth:`!copy` methods."
-msgstr ""
+msgstr "Los métodos :meth:`clear` y :meth:`!copy`."
 
 #: ../Doc/library/stdtypes.rst:1136
 msgid ""
@@ -1881,10 +1993,15 @@ msgid ""
 "the sequence are not copied; they are referenced multiple times, as "
 "explained for ``s * n`` under :ref:`typesseq-common`."
 msgstr ""
+"El valor de *n* es un entero, o un objeto que implemente el método :meth:"
+"`~object.__index__`. Los valores negativos, junto con el cero, producen una "
+"lista vacía. Los elementos de la secuencia no son copiados, sino que se "
+"referencian múltiples veces, tal y como se explicó para ``s * n`` en :ref:"
+"`typesseq-common`."
 
 #: ../Doc/library/stdtypes.rst:1145
 msgid "Lists"
-msgstr ""
+msgstr "Listas"
 
 #: ../Doc/library/stdtypes.rst:1149
 msgid ""
@@ -1892,27 +2009,33 @@ msgid ""
 "homogeneous items (where the precise degree of similarity will vary by "
 "application)."
 msgstr ""
+"Las listas son secuencia mutables, usadas normalmente para almacenar "
+"colecciones de elementos homogéneos (Donde el grado de similitud de los "
+"mismo depende de la aplicación)."
 
 #: ../Doc/library/stdtypes.rst:1155
 msgid "Lists may be constructed in several ways:"
-msgstr ""
+msgstr "Las listas se pueden construir de diferentes formas:"
 
 #: ../Doc/library/stdtypes.rst:1157
 msgid "Using a pair of square brackets to denote the empty list: ``[]``"
-msgstr ""
+msgstr "Usando un par de corchetes para definir una lista vacía: ``[]``"
 
 #: ../Doc/library/stdtypes.rst:1158
 msgid ""
 "Using square brackets, separating items with commas: ``[a]``, ``[a, b, c]``"
 msgstr ""
+"Usando corchetes, separando los elementos incluidos con comas: ``[a]``, "
+"``[a, b, c]``"
 
 #: ../Doc/library/stdtypes.rst:1159
 msgid "Using a list comprehension: ``[x for x in iterable]``"
 msgstr ""
+"Usando una lista intensiva o por comprensión: ``[x for x in iterable]``"
 
 #: ../Doc/library/stdtypes.rst:1160
 msgid "Using the type constructor: ``list()`` or ``list(iterable)``"
-msgstr ""
+msgstr "Usando el constructor de tipo: ``list()`` o ``list(iterable)``"
 
 #: ../Doc/library/stdtypes.rst:1162
 msgid ""
