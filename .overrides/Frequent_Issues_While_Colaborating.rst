@@ -20,7 +20,7 @@ pospell emplea la herramienta de diccionarios hunspell. Si pospell falla dando c
 
     brew install hunspell
     
-Este comando instala hunspell, pero puede que todavía necesites los diccionarios. Los diccionarios de Hunspell (\*.aff y \*.dic) en Mac deben estar en la carpeta ~/Library/Spelling/ o /Library/Spelling/. Puedes encontrar diccionarios de español en las webs de open office, mozilla y otros open source projects (ejemplo: https://wiki.openoffice.org/wiki/Dictionaries) .
+Este comando instala hunspell, pero puede que todavía necesites los diccionarios. Los diccionarios de Hunspell (``*.aff`` y ``*.dic``) en Mac deben estar en la carpeta ``~/Library/Spelling/`` o ``/Library/Spelling/``. Puedes encontrar diccionarios de español en las webs de Open Office, Mozilla y otros open source projects (ejemplo: https://wiki.openoffice.org/wiki/Dictionaries).
   
 
 Preguntas frecuentes en Windows
