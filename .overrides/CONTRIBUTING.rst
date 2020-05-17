@@ -50,6 +50,9 @@ Necesitamos *mucho* de tu ayuda para poder seguir adelante con este proyecto.
 
       Puedes consultar la `ayuda oficial de GitHub para crear un Pull Request`_ si lo deseas.
 
+#. En la descripción de la *Pull Request* escribe ``Closes #<número de issue>``
+   (así se cierra automáticamente cuando se hace *merge*)
+
 
 ¿Qué archivo traducir?
 ----------------------
