@@ -33,11 +33,11 @@ html_theme_path = ['cpython/Doc/tools']
 templates_path = ['cpython/Doc/tools/templates']
 html_static_path = ['cpython/Doc/tools/static']
 
-extensions.append('sphinx_autorun')
-
 os.system('mkdir -p cpython/locales/es/')
 os.system('ln -nfs `pwd` cpython/locales/es/LC_MESSAGES')
 
+html_short_title = f'Documentación {release}'
+html_title = f'Documentación de Python en Español -- {release}'
 
 exclude_patterns = [
     # This file is not included and it not marked as :orphan:
@@ -105,3 +105,22 @@ def setup(app):
     app.srcdir = 'cpython/Doc'
 
     app.connect('doctree-read', add_contributing_banner)
+
+    # Import the sphinx-autorun manually to avoid this warning
+    # TODO: Remove this code and use just ``extensions.append('sphinx_autorun')`` when
+    # that issue gets fixed
+    # See https://github.com/WhyNotHugo/sphinx-autorun/issues/17
+
+    # WARNING: the sphinx_autorun extension does not declare if it is safe for
+    # parallel reading, assuming it isn't - please ask the extension author to
+    # check and make it explicit
+    # WARNING: doing serial read
+    from sphinx_autorun import RunBlock, AutoRun
+    app.add_directive('runblock', RunBlock)
+    app.connect('builder-inited', AutoRun.builder_init)
+    app.add_config_value('autorun_languages', AutoRun.config, 'env')
+    return {
+        'version': '0.1',
+        'parallel_read_safe': True,
+        'parallel_write_safe': True,
+    }
