@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-05-10 20:35+0200\n"
+"PO-Revision-Date: 2020-05-20 20:06+0200\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -515,6 +515,7 @@ msgstr "Variable de tipo"
 msgid "Usage::"
 msgstr "Uso::"
 
+# parece que falta un link en Generic
 #: ../Doc/library/typing.rst:452
 msgid ""
 "Type variables exist primarily for the benefit of static type checkers.  "
@@ -522,6 +523,11 @@ msgid ""
 "function definitions.  See class Generic for more information on generic "
 "types.  Generic functions work as follows::"
 msgstr ""
+"Las variables de tipo son principalmente para ayudar a los validadores "
+"estáticos de tipos. Sirven tanto como de parámetros para tipos genéricos "
+"como para definición de funciones genéricas. Véase la clase *Generic* para "
+"más información sobre tipos genéricos. Las funciones genéricas funcionan "
+"como sigue::"
 
 #: ../Doc/library/typing.rst:465
 msgid ""
@@ -530,12 +536,19 @@ msgid ""
 "arguments are instances of some subclass of :class:`str`, the return type is "
 "still plain :class:`str`."
 msgstr ""
+"La interfaz de los ejemplos anteriores es esencialmente una sobrecarga de "
+"``(0str, str) -> str`` y ``(bytes, bytes) -> bytes``. Nótese también que "
+"aunque los argumentos sean instancias de alguna subclase de :class:`str`, el "
+"tipo retornado aún será una simple :class:`str`."
 
 #: ../Doc/library/typing.rst:470
 msgid ""
 "At runtime, ``isinstance(x, T)`` will raise :exc:`TypeError`.  In general, :"
 "func:`isinstance` and :func:`issubclass` should not be used with types."
 msgstr ""
+"En tiempo de ejecución, ``isinstance(x, T)`` lanzará una excepción  :exc:"
+"`TypeError`.  En general, :func:`isinstance` y :func:`issubclass` no se "
+"deben usar con tipos."
 
 #: ../Doc/library/typing.rst:473
 msgid ""
@@ -546,10 +559,17 @@ msgid ""
 "an actual type substituted (explicitly or implicitly) for the type variable "
 "must be a subclass of the boundary type, see :pep:`484`."
 msgstr ""
+"Las variables de tipo pueden ser marcadas como covariantes o contravariantes "
+"pasando ``covariant=True`` o ``contravariant=True``, respectivamente. Véase :"
+"pep:`484` para más detalles. Por defecto, las variables de tipo son "
+"invariantes. Opcionalmente, una variable de tipo puede especificar un límite "
+"superior usando  ``bound=<type>``. Esto significa que el tipo "
+"(explícitamente o implícitamente) tiene que ser una subclase del tipo "
+"limite, véase :pep:`484`."
 
 #: ../Doc/library/typing.rst:483
 msgid "Abstract base class for generic types."
-msgstr ""
+msgstr "Clase base abstracta para tipos genéricos."
 
 #: ../Doc/library/typing.rst:485
 msgid ""
@@ -557,33 +577,44 @@ msgid ""
 "this class with one or more type variables. For example, a generic mapping "
 "type might be defined as::"
 msgstr ""
+"Un tipo genérico se declara habitualmente  heredando de una instancia de "
+"esta clase con una o más variables de tipo. Por ejemplo, un tipo de mapeo "
+"genérico se podría definir como::"
 
 #: ../Doc/library/typing.rst:494
 msgid "This class can then be used as follows::"
-msgstr ""
+msgstr "Entonces, esta clase se puede usar como sigue::"
 
 #: ../Doc/library/typing.rst:507
 msgid ""
 "Base class for protocol classes. Protocol classes are defined like this::"
 msgstr ""
+"Clase base para clases protocolo. Las clases protocolo se definen así::"
 
 #: ../Doc/library/typing.rst:513
 msgid ""
 "Such classes are primarily used with static type checkers that recognize "
 "structural subtyping (static duck-typing), for example::"
 msgstr ""
+"Tales clases son usadas principalmente con validadores estáticos de tipos "
+"que detectan subtipado estructural (*duck-typing* estático), por ejemplo::"
 
 #: ../Doc/library/typing.rst:525
+#, fuzzy
 msgid ""
 "See :pep:`544` for details. Protocol classes decorated with :func:"
 "`runtime_checkable` (described later) act as simple-minded runtime protocols "
 "that check only the presence of given attributes, ignoring their type "
 "signatures."
 msgstr ""
+"Véase :pep:`544` para más detalles. Las clases protocolo decoradas con func:"
+"`runtime_checkable` (que se explica más adelante) se comportan como "
+"protocolos naif en tiempo de ejecución que solo comprueban la presencia de "
+"atributos dados, ignorando su firma de tipo."
 
 #: ../Doc/library/typing.rst:530
 msgid "Protocol classes can be generic, for example::"
-msgstr ""
+msgstr "Las clases protocolo pueden ser genéricas, por ejemplo::"
 
 #: ../Doc/library/typing.rst:540
 msgid ""
@@ -592,10 +623,14 @@ msgid ""
 "classes themselves -- specifically, it will accept the *class object* of "
 "``C``. For example::"
 msgstr ""
+"Una variable indicada como ``C`` puede aceptar valores de tipo ``C``. Sin "
+"embargo, un variable indicada como ``Type[C]`` puede aceptar valores que son "
+"clases en sí mismas -- específicamente, aceptará el *objecto clase* de "
+"``C``. Por ejemplo.::"
 
 #: ../Doc/library/typing.rst:549
 msgid "Note that ``Type[C]`` is covariant::"
-msgstr ""
+msgstr "Nótese que ``Type[C]`` es covariante::"
 
 #: ../Doc/library/typing.rst:561
 msgid ""
@@ -606,124 +641,148 @@ msgid ""
 "the indicated base class. How the type checker is required to handle this "
 "particular case may change in future revisions of :pep:`484`."
 msgstr ""
+"El hecho de que ``Type[C]`` sea covariante implica que todas las subclases "
+"de ``C`` deben implementar la misma interfaz del constructor y las mismas "
+"interfaces de los métodos de clase que ``C``. El validador de tipos marcará "
+"cualquier incumplimiente de esto, pero permitirá llamadas al constructor que "
+"coincida con la llamada al constructor de la clase base indicada. El modo en "
+"que el validador de tipos debe gestionar este caso particular podría cambiar "
+"en futuras revisiones de :pep:`484`."
 
 #: ../Doc/library/typing.rst:569
 msgid ""
 "The only legal parameters for :class:`Type` are classes, :data:`Any`, :ref:"
 "`type variables <generics>`, and unions of any of these types. For example::"
 msgstr ""
+"Lo únicos parámetros válidos de :class:`Type` son clases, :data:`Any`, :ref:"
+"`type variables <generics>`, y uniones de cualquiera de los tipos "
+"anteriores. Por ejemplo::"
 
 #: ../Doc/library/typing.rst:575
 msgid ""
 "``Type[Any]`` is equivalent to ``Type`` which in turn is equivalent to "
 "``type``, which is the root of Python's metaclass hierarchy."
 msgstr ""
+"``Type[Any]`` es equivalente a ``Type``, que a su vez es equivalente a "
+"``type``, que es la raíz de la jerarquía de metaclases de Python."
 
 #: ../Doc/library/typing.rst:582
 msgid "A generic version of :class:`collections.abc.Iterable`."
-msgstr ""
+msgstr "Un versión genérica de :class:`collections.abc.Iterable`."
 
 #: ../Doc/library/typing.rst:586
 msgid "A generic version of :class:`collections.abc.Iterator`."
-msgstr ""
+msgstr "Una versión genérica de :class:`collections.abc.Iterator`."
 
 #: ../Doc/library/typing.rst:590
 msgid "A generic version of :class:`collections.abc.Reversible`."
-msgstr ""
+msgstr "Una versión genérica de :class:`collections.abc.Reversible`."
 
 #: ../Doc/library/typing.rst:594
 msgid "An ABC with one abstract method ``__int__``."
-msgstr ""
+msgstr "Una ABC con un método abstracto ``__int__``."
 
 #: ../Doc/library/typing.rst:598
 msgid "An ABC with one abstract method ``__float__``."
-msgstr ""
+msgstr "Una ABC con un método abstracto ``__float__``."
 
 #: ../Doc/library/typing.rst:602
 msgid "An ABC with one abstract method ``__complex__``."
-msgstr ""
+msgstr "Una ABC con un método abstracto ``__complex__``."
 
 #: ../Doc/library/typing.rst:606
 msgid "An ABC with one abstract method ``__bytes__``."
-msgstr ""
+msgstr "Una ABC con un método abstracto ``__bytes__``."
 
 #: ../Doc/library/typing.rst:610
 msgid "An ABC with one abstract method ``__index__``."
-msgstr ""
+msgstr "Una ABC con un método abstracto ``__index__``."
 
 #: ../Doc/library/typing.rst:616
 msgid ""
 "An ABC with one abstract method ``__abs__`` that is covariant in its return "
 "type."
 msgstr ""
+"Una ABC con un método abstracto ``__abs__`` que es covariante en su tipo "
+"retornado."
 
 #: ../Doc/library/typing.rst:621
 msgid ""
 "An ABC with one abstract method ``__round__`` that is covariant in its "
 "return type."
 msgstr ""
+"Una ABC con un método abstracto ``__round__`` que es covariantes en su tipo "
+"retornado."
 
 #: ../Doc/library/typing.rst:626
 msgid "A generic version of :class:`collections.abc.Container`."
-msgstr ""
+msgstr "Un versión genérica de :class:`collections.abc.Container`."
 
 #: ../Doc/library/typing.rst:630
 msgid "An alias to :class:`collections.abc.Hashable`"
-msgstr ""
+msgstr "Un alias de :class:`collections.abc.Hashable`"
 
 #: ../Doc/library/typing.rst:634
 msgid "An alias to :class:`collections.abc.Sized`"
-msgstr ""
+msgstr "Un alias de :class:`collections.abc.Sized`"
 
 #: ../Doc/library/typing.rst:638
 msgid "A generic version of :class:`collections.abc.Collection`"
-msgstr ""
+msgstr "Un versión genérica de :class:`collections.abc.Collection`"
 
 #: ../Doc/library/typing.rst:644
 msgid "A generic version of :class:`collections.abc.Set`."
-msgstr ""
+msgstr "Un versión genérica de :class:`collections.abc.Set`."
 
 #: ../Doc/library/typing.rst:648
 msgid "A generic version of :class:`collections.abc.MutableSet`."
-msgstr ""
+msgstr "Un versión genérica de :class:`collections.abc.MutableSet`."
 
 #: ../Doc/library/typing.rst:652
 msgid ""
 "A generic version of :class:`collections.abc.Mapping`. This type can be used "
 "as follows::"
 msgstr ""
+"Un versión genérica de :class:`collections.abc.Mapping`. Este tipo se puede "
+"usar de la siguiente manera::"
 
 #: ../Doc/library/typing.rst:660
 msgid "A generic version of :class:`collections.abc.MutableMapping`."
-msgstr ""
+msgstr "Un versión genérica de :class:`collections.abc.MutableMapping`."
 
 #: ../Doc/library/typing.rst:664
 msgid "A generic version of :class:`collections.abc.Sequence`."
-msgstr ""
+msgstr "Un versión genérica de :class:`collections.abc.Sequence`."
 
 #: ../Doc/library/typing.rst:668
 msgid "A generic version of :class:`collections.abc.MutableSequence`."
-msgstr ""
+msgstr "Un versión genérica de :class:`collections.abc.MutableSequence`."
 
 #: ../Doc/library/typing.rst:672
 msgid "A generic version of :class:`collections.abc.ByteString`."
-msgstr ""
+msgstr "Un versión genérica de :class:`collections.abc.ByteString`."
 
 #: ../Doc/library/typing.rst:674
 msgid ""
 "This type represents the types :class:`bytes`, :class:`bytearray`, and :"
 "class:`memoryview`."
 msgstr ""
+"Este tipo representa a los tipos :class:`bytes`, :class:`bytearray`, y :"
+"class:`memoryview`."
 
+# shorthand
 #: ../Doc/library/typing.rst:677
+#, fuzzy
 msgid ""
 "As a shorthand for this type, :class:`bytes` can be used to annotate "
 "arguments of any of the types mentioned above."
 msgstr ""
+"Como abreviación para este tipo, :class:`bytes` se puede usar para anotar "
+"argumentos de cualquiera de los tipos mencionados arriba."
 
 #: ../Doc/library/typing.rst:682
 msgid "A generic version of :class:`collections.deque`."
-msgstr ""
+msgstr "Un versión genérica de :class:`collections.deque`."
 
 #: ../Doc/library/typing.rst:689
 msgid ""
@@ -731,10 +790,13 @@ msgid ""
 "annotate arguments it is preferred to use an abstract collection type such "
 "as :class:`Sequence` or :class:`Iterable`."
 msgstr ""
+"Versión genérica de :class:`list`. Útil para anotar tipos de retorno. Para "
+"anotar argumentos es preferible usar un tipo abstracto de colección como  :"
+"class:`Sequence` o :class:`Iterable`."
 
 #: ../Doc/library/typing.rst:694
 msgid "This type may be used as follows::"
-msgstr ""
+msgstr "Este tipo se puede usar del siguiente modo::"
 
 #: ../Doc/library/typing.rst:706
 msgid ""
@@ -742,30 +804,33 @@ msgid ""
 "return types. To annotate arguments it is preferred to use an abstract "
 "collection type such as :class:`AbstractSet`."
 msgstr ""
+"Un versión genérica de :class:`builtins.set <set>`. Útil para anotar tipos "
+"de retornos. Para anotar argumentos es preferible usar un tipo abstracto de "
+"colección como :class:`AbstractSet`."
 
 #: ../Doc/library/typing.rst:712
 msgid "A generic version of :class:`builtins.frozenset <frozenset>`."
-msgstr ""
+msgstr "Un versión genérica de :class:`builtins.frozenset <frozenset>`."
 
 #: ../Doc/library/typing.rst:716
 msgid "A generic version of :class:`collections.abc.MappingView`."
-msgstr ""
+msgstr "Un versión genérica de :class:`collections.abc.MappingView`."
 
 #: ../Doc/library/typing.rst:720
 msgid "A generic version of :class:`collections.abc.KeysView`."
-msgstr ""
+msgstr "Un versión genérica de :class:`collections.abc.KeysView`."
 
 #: ../Doc/library/typing.rst:724
 msgid "A generic version of :class:`collections.abc.ItemsView`."
-msgstr ""
+msgstr "Un versión genérica def:class:`collections.abc.ItemsView`."
 
 #: ../Doc/library/typing.rst:728
 msgid "A generic version of :class:`collections.abc.ValuesView`."
-msgstr ""
+msgstr "Un versión genérica de :class:`collections.abc.ValuesView`."
 
 #: ../Doc/library/typing.rst:732
 msgid "A generic version of :class:`collections.abc.Awaitable`."
-msgstr ""
+msgstr "Un versión genérica de :class:`collections.abc.Awaitable`."
 
 #: ../Doc/library/typing.rst:738
 msgid ""
@@ -773,22 +838,26 @@ msgid ""
 "order of type variables correspond to those of :class:`Generator`, for "
 "example::"
 msgstr ""
+"Un versión genérica de :class:`collections.abc.Coroutine.y orden de las "
+"variables de tipo se corresponde con aquellas de :class:`Generator`, por "
+"ejemplo::"
 
 #: ../Doc/library/typing.rst:753
 msgid "A generic version of :class:`collections.abc.AsyncIterable`."
-msgstr ""
+msgstr "Un versión genérica de :class:`collections.abc.AsyncIterable`."
 
 #: ../Doc/library/typing.rst:759
 msgid "A generic version of :class:`collections.abc.AsyncIterator`."
-msgstr ""
+msgstr "Un versión genérica de :class:`collections.abc.AsyncIterator`."
 
 #: ../Doc/library/typing.rst:765
 msgid "A generic version of :class:`contextlib.AbstractContextManager`."
-msgstr ""
+msgstr "Un versión genérica de :class:`contextlib.AbstractContextManager`."
 
 #: ../Doc/library/typing.rst:772
 msgid "A generic version of :class:`contextlib.AbstractAsyncContextManager`."
 msgstr ""
+"Un versión genérica de :class:`contextlib.AbstractAsyncContextManager`."
 
 #: ../Doc/library/typing.rst:779
 msgid ""
@@ -796,32 +865,37 @@ msgid ""
 "annotate arguments it is preferred to use an abstract collection type such "
 "as :class:`Mapping`."
 msgstr ""
+"Un versión genérica de :class:`dict`. Útil para anotar tipos de retorno. "
+"Para anotar argumentos es preferible usar un tipo abstracto de colección "
+"como :class:`Mapping`."
 
 #: ../Doc/library/typing.rst:783
 msgid "This type can be used as follows::"
-msgstr ""
+msgstr "Este tipo se puede usar de la siguiente manera::"
 
 #: ../Doc/library/typing.rst:790
 msgid "A generic version of :class:`collections.defaultdict`."
-msgstr ""
+msgstr "Un versión genérica de :class:`collections.defaultdict`."
 
 #: ../Doc/library/typing.rst:796
 msgid "A generic version of :class:`collections.OrderedDict`."
-msgstr ""
+msgstr "Un versión genérica de :class:`collections.OrderedDict`."
 
 #: ../Doc/library/typing.rst:802
 msgid "A generic version of :class:`collections.Counter`."
-msgstr ""
+msgstr "Un versión genérica de :class:`collections.Counter`."
 
 #: ../Doc/library/typing.rst:809
 msgid "A generic version of :class:`collections.ChainMap`."
-msgstr ""
+msgstr "Un versión genérica de :class:`collections.ChainMap`."
 
 #: ../Doc/library/typing.rst:816
 msgid ""
 "A generator can be annotated by the generic type ``Generator[YieldType, "
 "SendType, ReturnType]``. For example::"
 msgstr ""
+"Un generador puede ser anotado con un tipo genérico ``Generator[YieldType, "
+"SendType, ReturnType]``. Por ejemplo::"
 
 #: ../Doc/library/typing.rst:825
 msgid ""
@@ -829,24 +903,33 @@ msgid ""
 "of :class:`Generator` behaves contravariantly, not covariantly or "
 "invariantly."
 msgstr ""
+"Nótese que en contraste con muchos otros genéricos en el módulo *typing*, el "
+"``SendType`` de :class:`Generator` se comporta como contravariante, no "
+"covariante ni invariante."
 
 #: ../Doc/library/typing.rst:829
 msgid ""
 "If your generator will only yield values, set the ``SendType`` and "
 "``ReturnType`` to ``None``::"
 msgstr ""
+"Si tu generador solo devolverá valores con *yield*, establece ``SendType`` y "
+"``ReturnType`` como ``None``::"
 
 #: ../Doc/library/typing.rst:837
 msgid ""
 "Alternatively, annotate your generator as having a return type of either "
 "``Iterable[YieldType]`` or ``Iterator[YieldType]``::"
 msgstr ""
+"Opcionalmente, anota tu generador con un tipo de retorno de "
+"``Iterable[YieldType]`` o ``Iterator[YieldType]``::"
 
 #: ../Doc/library/typing.rst:847
 msgid ""
 "An async generator can be annotated by the generic type "
 "``AsyncGenerator[YieldType, SendType]``. For example::"
 msgstr ""
+"Un generador asíncrono se puede anotar con el tipo genérico "
+"``AsyncGenerator[YieldType, SendType]``. Por ejemplo::"
 
 #: ../Doc/library/typing.rst:856
 msgid ""
@@ -859,19 +942,24 @@ msgstr ""
 msgid ""
 "If your generator will only yield values, set the ``SendType`` to ``None``::"
 msgstr ""
+"Si tu generador solo devolverá valores con *yield*,  establece el "
+"``SendType`` como ``None``::"
 
 #: ../Doc/library/typing.rst:868
 msgid ""
 "Alternatively, annotate your generator as having a return type of either "
 "``AsyncIterable[YieldType]`` or ``AsyncIterator[YieldType]``::"
 msgstr ""
+"Opcionalmente, anota el generador  con un tipo de retorno "
+"``AsyncIterable[YieldType]`` o ``AsyncIterator[YieldType]``::"
 
 #: ../Doc/library/typing.rst:880
+#, fuzzy
 msgid ""
 "``Text`` is an alias for ``str``. It is provided to supply a forward "
 "compatible path for Python 2 code: in Python 2, ``Text`` is an alias for "
 "``unicode``."
-msgstr ""
+msgstr "``Text`` es un alias para ``str``. "
 
 #: ../Doc/library/typing.rst:884
 msgid ""
@@ -885,14 +973,22 @@ msgid ""
 "``BinaryIO(IO[bytes])`` represent the types of I/O streams such as returned "
 "by :func:`open`."
 msgstr ""
+"El tipo genérico ``IO[AnyStr]`` y sus subclases ``TextIO(IO[str])`` y "
+"``BinaryIO(IO[bytes])`` representan tipos de flujo de entrada/salida (*I/O "
+"streams*) como los usados por la función :func:`open`."
 
 #: ../Doc/library/typing.rst:904
+#, fuzzy
 msgid ""
 "These type aliases correspond to the return types from :func:`re.compile` "
 "and :func:`re.match`.  These types (and the corresponding functions) are "
 "generic in ``AnyStr`` and can be made specific by writing ``Pattern[str]``, "
 "``Pattern[bytes]``, ``Match[str]``, or ``Match[bytes]``."
 msgstr ""
+"Estos aliases de tipo se corresponden con los tipos de retorno de :func:`re."
+"compile` y :func:`re.match`. Estos tipos (y sus correspondientes funciones) "
+"son genéricos en ``AnyStr`` y se puede especificar escribiendo "
+"``Pattern[str]``, ``Pattern[bytes]``, ``Match[str]``, o ``Match[bytes]``."
 
 #: ../Doc/library/typing.rst:913
 msgid "Typed version of :func:`collections.namedtuple`."
@@ -900,7 +996,7 @@ msgstr ""
 
 #: ../Doc/library/typing.rst:921
 msgid "This is equivalent to::"
-msgstr ""
+msgstr "Esto es equivalente a:"
 
 #: ../Doc/library/typing.rst:925
 msgid ""
@@ -926,15 +1022,17 @@ msgstr ""
 
 #: ../Doc/library/typing.rst:952
 msgid "Backward-compatible usage::"
-msgstr ""
+msgstr "Uso compatible hacia atrás::"
 
 #: ../Doc/library/typing.rst:956
 msgid "Added support for :pep:`526` variable annotation syntax."
 msgstr ""
+"Soporte añadido para la sintaxis de anotación de variables propuesto en :pep:"
+"`526`."
 
 #: ../Doc/library/typing.rst:959
 msgid "Added support for default values, methods, and docstrings."
-msgstr ""
+msgstr "Soporte añadido para valores por defectos, métodos y *docstrings*"
 
 #: ../Doc/library/typing.rst:965
 msgid ""
@@ -947,13 +1045,18 @@ msgid ""
 "The ``_field_types`` and ``__annotations__`` attributes are now regular "
 "dictionaries instead of instances of ``OrderedDict``."
 msgstr ""
+"Los atributos ``_field_types`` y ``__annotations__`` son simples "
+"diccionarios en vez de instancias de ``OrderedDict``."
 
 #: ../Doc/library/typing.rst:972
 msgid ""
 "A simple typed namespace. At runtime it is equivalent to a plain :class:"
 "`dict`."
 msgstr ""
+"Un espacio de nombre con un tipado simple. En tiempo de ejecución es "
+"equivalente a un simple :class:`dict`."
 
+# sinonimo para imposicion/imponer
 #: ../Doc/library/typing.rst:975
 msgid ""
 "``TypedDict`` creates a dictionary type that expects all of its instances to "
@@ -961,6 +1064,10 @@ msgid ""
 "consistent type. This expectation is not checked at runtime but is only "
 "enforced by type checkers. Usage::"
 msgstr ""
+"``TypedDict`` crea un tipo de diccionario que espera que todas sus "
+"instancias tenga un cierto set de claves, donde cada clave está asociado con "
+"un valor de un tipo determinado. Esta exigencia no se comprueba en tiempo de "
+"ejecución y solo es impuesta por validadores de tipo. Uso::"
 
 #: ../Doc/library/typing.rst:991
 msgid ""
@@ -969,25 +1076,39 @@ msgid ""
 "with older versions of Python that do not support :pep:`526`, ``TypedDict`` "
 "supports two additional equivalent syntactic forms::"
 msgstr ""
+"Se puede acceder a la información de tipo para introspección via ``Point2D."
+"__annotations__`` y ``Point2D.__total__``. Para poder utilizar esta "
+"características con versiones antiguas de Python que no soporten :pep:`526`, "
+"``TypedDict`` proporciona adicionalmente dos formatos sintácticos "
+"equivalentes::"
 
 #: ../Doc/library/typing.rst:999
 msgid ""
 "By default, all keys must be present in a TypedDict. It is possible to "
 "override this by specifying totality. Usage::"
 msgstr ""
+"Por defecto, todas las claves deben estar presentes en un TypedDict. Es "
+"posible anularlo especificando el parámetro *total*. De esta manera::"
 
 #: ../Doc/library/typing.rst:1007
+#, fuzzy
 msgid ""
 "This means that a point2D TypedDict can have any of the keys omitted. A type "
 "checker is only expected to support a literal False or True as the value of "
 "the total argument. True is the default, and makes all items defined in the "
 "class body be required."
 msgstr ""
+"Esto significa que un TypedDict point2D puede omitir cualquiera de sus "
+"claves. Un validador de tipos solo esperará un valor literal *False* o "
+"*True* como valor del argumento *total. True es el valor por defecto, y hace "
+"que todos los ítems definidos en el cuerpo de la clases sean obligatorios."
 
 #: ../Doc/library/typing.rst:1012
 msgid ""
 "See :pep:`589` for more examples and detailed rules of using ``TypedDict``."
 msgstr ""
+"Véase :pep:`589` para más ejemplos y reglas detalladas del uso de "
+"``TypedDict``."
 
 #: ../Doc/library/typing.rst:1018
 msgid ""
@@ -996,32 +1117,50 @@ msgid ""
 "into ``List[ForwardRef(\"SomeClass\")]``.  This class should not be "
 "instantiated by a user, but may be used by introspection tools."
 msgstr ""
+"Una clase usada para la representación de tipado interno de referencias "
+"directas en forma de cadenas de texto. Por ejemplo, ``List[\"SomeClass\"]`` "
+"se transformado implícitamente en ``List[ForwardRef(\"SomeClass\")]``. Esta "
+"clase no debe ser instanciada por el usuario, pero puede ser usada por "
+"herramientas de introspección."
 
+# Aquí distinto (por distinct) no funciona, el tema es que esos tipos nuevos son personalizados por el usuario.
 #: ../Doc/library/typing.rst:1025
+#, fuzzy
 msgid ""
 "A helper function to indicate a distinct types to a typechecker, see :ref:"
 "`distinct`. At runtime it returns a function that returns its argument. "
 "Usage::"
 msgstr ""
+"Un función auxiliar para indicar un tipo personalizado a un validador de "
+"tipos, véase :ref:`distinct`. En tiempo de ejecución, devuelve una función "
+"que devuelve su argumento. Uso::"
 
 #: ../Doc/library/typing.rst:1036
 msgid "Cast a value to a type."
-msgstr ""
+msgstr "Convertir un valor a su tipo."
 
+# el "esto" del final queda muy colgado
 #: ../Doc/library/typing.rst:1038
 msgid ""
 "This returns the value unchanged.  To the type checker this signals that the "
 "return value has the designated type, but at runtime we intentionally don't "
 "check anything (we want this to be as fast as possible)."
 msgstr ""
+"Esto retorna el valor sin modificar. Esto indica al validador de tipos que "
+"el valor de retorno tiene el tipo señalado, pero, de manera intencionada, en "
+"tiempo de ejecución no se comprobará (se da preferencia a que esto sea lo "
+"más rápido posible)."
 
 #: ../Doc/library/typing.rst:1045
 msgid ""
 "Return a dictionary containing type hints for a function, method, module or "
 "class object."
 msgstr ""
+"Devuelve un diccionario que contiene indicaciones de tipo para una función, "
+"método, módulo o objeto clase."
 
 #: ../Doc/library/typing.rst:1048
+#, fuzzy
 msgid ""
 "This is often the same as ``obj.__annotations__``. In addition, forward "
 "references encoded as string literals are handled by evaluating them in "
@@ -1030,18 +1169,35 @@ msgid ""
 "``None`` is set. For a class ``C``, return a dictionary constructed by "
 "merging all the ``__annotations__`` along ``C.__mro__`` in reverse order."
 msgstr ""
+"Esto es habitualmente lo mismo que ``obj.__annotations__``. Además, las "
+"referencias directas codificadas como cadenas de texto se gestionan "
+"evaluándolas en los espacios de nombres``globals`` y ``locals``. Si es "
+"necesario, se añade``Optional[t]`` para anotar una función o método, si se "
+"establece ``None`` como valor por defecto. Para un clase ``C``, se devuelve "
+"un diccionario construído por la combinación de ``__annotations__`` y ``C."
+"__mro``  en orden inverso. "
 
+# ver el término typing en contexto
 #: ../Doc/library/typing.rst:1059
+#, fuzzy
 msgid "Provide basic introspection for generic types and special typing forms."
 msgstr ""
+"Provee introspección básica para tipos genéricos y formas especiales de "
+"tipado."
 
 #: ../Doc/library/typing.rst:1061
+#, fuzzy
 msgid ""
 "For a typing object of the form ``X[Y, Z, ...]`` these functions return "
 "``X`` and ``(Y, Z, ...)``. If ``X`` is a generic alias for a builtin or :mod:"
 "`collections` class, it gets normalized to the original class. For "
 "unsupported objects return ``None`` and ``()`` correspondingly. Examples::"
 msgstr ""
+"Para un objeto de tipado de la forma ``X[Y,Z, ...]``, esta funciones "
+"devuelven ``X`` y ``(Y, Z, ...)``. Si ``X`` es un alias genérico para un "
+"clase estándar o una clase de :mod:`collections`, se normaliza a su clase "
+"original. Lo objetos no soportados devuelven ``None`` y ``()`` "
+"respectivamente. Ejemplos::"
 
 #: ../Doc/library/typing.rst:1077
 msgid ""
@@ -1067,16 +1223,23 @@ msgid ""
 "A decorator to indicate to type checkers that the decorated method cannot be "
 "overridden, and the decorated class cannot be subclassed. For example::"
 msgstr ""
+"Un decorador que indica a los validadores de tipos que el método decorado no "
+"se puede sobreescribir, o que la clase decorada no se puede derivar "
+"(*subclassed*). Por ejemplo::"
 
 #: ../Doc/library/typing.rst:1123 ../Doc/library/typing.rst:1350
 msgid ""
 "There is no runtime checking of these properties. See :pep:`591` for more "
 "details."
 msgstr ""
+"No hay comprobación en tiempo de ejecución para estas propiedades. Véase :"
+"pep:`591` para más detalles."
 
+# annotations y type hints parecen sinónimos intercambiables, pero aquí no, se contraponen. Hay que entender el matiz
 #: ../Doc/library/typing.rst:1130
+#, fuzzy
 msgid "Decorator to indicate that annotations are not type hints."
-msgstr ""
+msgstr "Un decorador que indica que la anotaciones no son indicadores de tipo."
 
 #: ../Doc/library/typing.rst:1132
 msgid ""
@@ -1084,41 +1247,62 @@ msgid ""
 "recursively to all methods defined in that class (but not to methods defined "
 "in its superclasses or subclasses)."
 msgstr ""
+"Esto funciona como un :term:`decorador (decorador) de clase o función. Con "
+"una clase, se aplica recursivamente a todos los métodos definidos en dichas "
+"clase (pero no a lo métodos definidos en sus superclases y subclases)."
 
+# ver en contexto
 #: ../Doc/library/typing.rst:1136
 msgid "This mutates the function(s) in place."
-msgstr ""
+msgstr "Esto modifica la función o funciones presentes."
 
 #: ../Doc/library/typing.rst:1140
 msgid "Decorator to give another decorator the :func:`no_type_check` effect."
 msgstr ""
+"Un decorador que asigna a otro decorador el efecto de :func:`no_type_check` "
+"(no comprobar tipo)."
 
+# El original es algo vago y complejo, intentar traducir el significado intentando no ser literal.
 #: ../Doc/library/typing.rst:1142
+#, fuzzy
 msgid ""
 "This wraps the decorator with something that wraps the decorated function "
 "in :func:`no_type_check`."
 msgstr ""
+"Esto habilita al decorador para añadir el efecto de  `no_type_check`. a la "
+"función decorada."
 
 #: ../Doc/library/typing.rst:1147
 msgid "Decorator to mark a class or function to be unavailable at runtime."
 msgstr ""
+"Un decorador que marca un clase o función como no disponible en tiempo de "
+"ejecución."
 
+# como traducimos los archivos stub (pyi y similares)
 #: ../Doc/library/typing.rst:1149
+#, fuzzy
 msgid ""
 "This decorator is itself not available at runtime. It is mainly intended to "
 "mark classes that are defined in type stub files if an implementation "
 "returns an instance of a private class::"
 msgstr ""
+"Este decorador no está disponible en tiempo de ejecución. Existe "
+"principalmente para marcar clases que se definen en archivos *stub* para "
+"cuando una implementación devuelve una instancia de una clase privada::"
 
 #: ../Doc/library/typing.rst:1160
 msgid ""
 "Note that returning instances of private classes is not recommended. It is "
 "usually preferable to make such classes public."
 msgstr ""
+"Nótese que no se recomienda devolver instancias de clases privadas. "
+"Normalmente es preferible convertirlas en clases públicas."
 
+# que es un runtime protocol? ver contexto
 #: ../Doc/library/typing.rst:1165
+#, fuzzy
 msgid "Mark a protocol class as a runtime protocol."
-msgstr ""
+msgstr "Marca una clase protocolo como protocolo en tiempo de ejecución."
 
 #: ../Doc/library/typing.rst:1167
 msgid ""
@@ -1127,68 +1311,79 @@ msgid ""
 "allows a simple-minded structural check, very similar to \"one trick ponies"
 "\" in :mod:`collections.abc` such as :class:`Iterable`.  For example::"
 msgstr ""
+"Tal protocolo se puede usar con :func:`isinstance` y :func:`issubclass`. "
+"Esto lanzará una excepción :exc:`TypeError` cuando se aplique a una clase "
+"que no es un *protocolo*.  Esto permite una comprobación estructural simple, "
+"muy semejante a \"one trick ponies\" en mod:`collections.abc` como es :class:"
+"`Iterable`. Por ejemplo::"
 
 #: ../Doc/library/typing.rst:1178
 msgid ""
 "**Warning:** this will check only the presence of the required methods, not "
 "their type signatures!"
 msgstr ""
+"**Atención:*** esto solo comprobará la presencia de los métodos requeridos, "
+"no su interfaz."
 
 #: ../Doc/library/typing.rst:1185
 msgid "Special type indicating an unconstrained type."
-msgstr ""
+msgstr "Tipo especial que indica un tipo sin restricciones."
 
 #: ../Doc/library/typing.rst:1187
 msgid "Every type is compatible with :data:`Any`."
-msgstr ""
+msgstr "Todos los tipos son compatibles con :data:`Any`."
 
 #: ../Doc/library/typing.rst:1188
 msgid ":data:`Any` is compatible with every type."
-msgstr ""
+msgstr ":data:`Any` es compatible con todos los tipos."
 
+# returns significa que no acaba o que no devuelve nada? ver contexto
 #: ../Doc/library/typing.rst:1192
+#, fuzzy
 msgid "Special type indicating that a function never returns. For example::"
-msgstr ""
+msgstr "Tipo especial que indica que una funciona nunca retorna. Por ejemplo::"
 
 #: ../Doc/library/typing.rst:1205
 msgid "Union type; ``Union[X, Y]`` means either X or Y."
-msgstr ""
+msgstr "Tipo unión; ``Union[X, Y]`` significa que o bien X o bien Y."
 
 #: ../Doc/library/typing.rst:1207
 msgid "To define a union, use e.g. ``Union[int, str]``.  Details:"
-msgstr ""
+msgstr "Para definir una unión, úsese p.e. ``Union[int, str]. Más detalles:"
 
 #: ../Doc/library/typing.rst:1209
 msgid "The arguments must be types and there must be at least one."
-msgstr ""
+msgstr "Los argumentos deben ser tipo y haber al menos uno."
 
 #: ../Doc/library/typing.rst:1211
 msgid "Unions of unions are flattened, e.g.::"
-msgstr ""
+msgstr "Las uniones de uniones se simplifican (se aplanan), p.e.::"
 
 #: ../Doc/library/typing.rst:1215
 msgid "Unions of a single argument vanish, e.g.::"
-msgstr ""
+msgstr "Las uniones con un solo argumento se eliminan, p.e.::"
 
 #: ../Doc/library/typing.rst:1219
 msgid "Redundant arguments are skipped, e.g.::"
-msgstr ""
+msgstr "Argumentos repetidos se omiten, p.e.::"
 
 #: ../Doc/library/typing.rst:1223
 msgid "When comparing unions, the argument order is ignored, e.g.::"
 msgstr ""
+"Cuando se comparan uniones, el orden de los argumentos se ignoran, p.e.::"
 
 #: ../Doc/library/typing.rst:1227
 msgid "You cannot subclass or instantiate a union."
-msgstr ""
+msgstr "No se puede derivar (*subclass*) o instanciar una unión."
 
 #: ../Doc/library/typing.rst:1229
 msgid "You cannot write ``Union[X][Y]``."
-msgstr ""
+msgstr "No es posible escribir ``Union[X][Y]``."
 
 #: ../Doc/library/typing.rst:1231
 msgid "You can use ``Optional[X]`` as a shorthand for ``Union[X, None]``."
 msgstr ""
+"Se puede usar ``Optional[X]`` como una versión corta de ``Union[X, None]``."
 
 #: ../Doc/library/typing.rst:1233
 msgid "Don't remove explicit subclasses from unions at runtime."
@@ -1196,11 +1391,11 @@ msgstr ""
 
 #: ../Doc/library/typing.rst:1238
 msgid "Optional type."
-msgstr ""
+msgstr "Tipo Optional."
 
 #: ../Doc/library/typing.rst:1240
 msgid "``Optional[X]`` is equivalent to ``Union[X, None]``."
-msgstr ""
+msgstr "``Optional[X]`` es equivalente a ``Union[X, None]``."
 
 #: ../Doc/library/typing.rst:1242
 msgid ""
@@ -1209,6 +1404,10 @@ msgid ""
 "the ``Optional`` qualifier on its type annotation just because it is "
 "optional. For example::"
 msgstr ""
+"Nótese que no es lo mismo que un argumento opcional, que es aquel que tiene "
+"un valor por defecto. Un argumento opcional con un valor por defecto no "
+"necesita el indicador ``Optional``en su anotación de tipo simplemente por "
+"que sea opcional. Por ejemplo::"
 
 #: ../Doc/library/typing.rst:1250
 msgid ""
@@ -1216,6 +1415,8 @@ msgid ""
 "``Optional`` is appropriate, whether the argument is optional or not. For "
 "example::"
 msgstr ""
+"Por otro lado, si se permite un valor ``None``, es apropiado el uso de "
+"``Optional``, independientemente de que sea opcional o no. Por ejemplo::"
 
 #: ../Doc/library/typing.rst:1259
 msgid ""
@@ -1223,6 +1424,9 @@ msgid ""
 "first item of type X and the second of type Y. The type of the empty tuple "
 "can be written as ``Tuple[()]``."
 msgstr ""
+"El tipo Tuple, ``Tuple[X, Y]`` es el tipo de una tupla de dos ítems con el "
+"primer ítem de tipo X y el segundo de tipo Y. El tipo de una tupla vacía se "
+"puede escribir así: ``Tuple[()]``."
 
 #: ../Doc/library/typing.rst:1263
 msgid ""
@@ -1230,6 +1434,10 @@ msgid ""
 "variables T1 and T2.  ``Tuple[int, float, str]`` is a tuple of an int, a "
 "float and a string."
 msgstr ""
+"Ejemplo: ``Tuple[T1, T2]`` es una tupla de dos elementos con sus "
+"correspondientes variables de tipo T1 y T2. ``Tuple[int, float, str]`` es un "
+"tupla con un entero, un número de coma flotante, un float y una cadena de "
+"texto."
 
 #: ../Doc/library/typing.rst:1267
 msgid ""
@@ -1237,10 +1445,13 @@ msgid ""
 "ellipsis, e.g. ``Tuple[int, ...]``. A plain :data:`Tuple` is equivalent to "
 "``Tuple[Any, ...]``, and in turn to :class:`tuple`."
 msgstr ""
+"Para especificar una tupla de longitud variable y tipo homogéneo, se usan "
+"puntos suspensivos, p.e. ``Tuple[int, ...]``. Un simple :data:`Tuple` es "
+"equivalente a ``Tuple[Any, ...]`` y, a su vez, a :class:`tuple`."
 
 #: ../Doc/library/typing.rst:1273
 msgid "Callable type; ``Callable[[int], str]`` is a function of (int) -> str."
-msgstr ""
+msgstr "Tipo Callable; ``Callable[[int], str] es una función de (int) -> str."
 
 #: ../Doc/library/typing.rst:1275
 msgid ""
@@ -1248,6 +1459,10 @@ msgid ""
 "argument list and the return type.  The argument list must be a list of "
 "types or an ellipsis; the return type must be a single type."
 msgstr ""
+"La sintaxis de subscripción (con corchetes *[]*) debe usarse siempre con dos "
+"valores: la lista de argumentos y el tipo de retorno. La lista de argumentos "
+"debe ser una lista de tipos o unos puntos suspensivos; el tipo de retorno "
+"debe ser un único tipo."
 
 #: ../Doc/library/typing.rst:1280
 msgid ""
@@ -1258,13 +1473,23 @@ msgid ""
 "equivalent to ``Callable[..., Any]``, and in turn to :class:`collections.abc."
 "Callable`."
 msgstr ""
+"No existe una sintaxis para indicar argumentos opcionales o con clave "
+"(*keyword*); tales funciones rara vez se utilizan como tipos para llamadas. "
+"``Callable``[..., ReturnType]`` (puntos suspensivos) se puede usar para "
+"indicar que un *callable* admite un número indeterminado de argumentos y "
+"retorna ``ReturnType``. Un simple :data:`Callable` es equivalente a "
+"``Callable[..., Any]``y, a su vez, a :class:`collections.abc.Callable`."
 
 #: ../Doc/library/typing.rst:1290
+#, fuzzy
 msgid ""
 "A type that can be used to indicate to type checkers that the corresponding "
 "variable or function parameter has a value equivalent to the provided "
 "literal (or one of several literals). For example::"
 msgstr ""
+"Un tipo puede ser utilizado para indicar a los validadores de tipos que un "
+"variable o un parámetro de una función tiene un valor equivalente al valor "
+"proveído (o uno de los proveídos). Por ejemplo::"
 
 #: ../Doc/library/typing.rst:1304
 msgid ""
@@ -1272,21 +1497,34 @@ msgid ""
 "allowed as type argument to ``Literal[...]``, but type checkers may impose "
 "restrictions. See :pep:`586` for more details about literal types."
 msgstr ""
+"``Literal[...]`` no puede ser derivado. En tiempo de ejecución, se permite "
+"un valor arbitrario como argumento de tipo de ``Literal[...]``, pero los "
+"validadores de tipos pueden imponer sus restricciones. Véase :pep:`585`` "
+"para más detalles sobre tipos literales."
 
 #: ../Doc/library/typing.rst:1312
+#, fuzzy
 msgid "Special type construct to mark class variables."
-msgstr ""
+msgstr "Construcción de tipo especial para marcar variables de clase."
 
+# Puede haber una entrada mejor para "As introduced"
 #: ../Doc/library/typing.rst:1314
+#, fuzzy
 msgid ""
 "As introduced in :pep:`526`, a variable annotation wrapped in ClassVar "
 "indicates that a given attribute is intended to be used as a class variable "
 "and should not be set on instances of that class. Usage::"
 msgstr ""
+"Tal y como introduce :pep:`526`, una anotación de variable rodeado por "
+"ClassVar indica que la intención de un atributo dado es ser usado como "
+"variable de clase y que no debería ser modificado en las instancias de esa "
+"clase. Uso::"
 
+# buscar algo mejro para traducir subscribed sin ser literal, ver solucion para subscription syntax (p.e. subindice -> subindicado)
 #: ../Doc/library/typing.rst:1322
+#, fuzzy
 msgid ":data:`ClassVar` accepts only types and cannot be further subscribed."
-msgstr ""
+msgstr ":data:`ClassVar` solo acepta tipos y no puede ser detallarse más."
 
 #: ../Doc/library/typing.rst:1324
 msgid ""
@@ -1295,30 +1533,46 @@ msgid ""
 "runtime behavior, but it can be used by third-party type checkers. For "
 "example, a type checker might flag the following code as an error::"
 msgstr ""
+":data:`ClassVar` no es un clase en sí misma, y no debe ser usado con  :func:"
+"`isinstance` o :func:`issubclass`. :data:`ClassVar` no modifica el "
+"comportamiento do Python en tiempo de ejecución pero puede ser utilizado por "
+"validadores de terceros. Por ejemplo, un validador de tipos puede marcar el "
+"siguiente código como erróneo::"
 
 #: ../Doc/library/typing.rst:1338
 msgid ""
 "A special typing construct to indicate to type checkers that a name cannot "
 "be re-assigned or overridden in a subclass. For example::"
 msgstr ""
+"Un construcción especial para tipado que indica a los validadores de tipo "
+"que un nombre no puede ser reasignado o sobrescrito en una subclase. Por "
+"ejemplo::"
 
 #: ../Doc/library/typing.rst:1357
 msgid ""
 "``AnyStr`` is a type variable defined as ``AnyStr = TypeVar('AnyStr', str, "
 "bytes)``."
 msgstr ""
+"``AnyStr`` es una variable de tipo definida como ``AnyStr = "
+"TypeVar('AnyStr', str, bytes)``."
 
 #: ../Doc/library/typing.rst:1360
 msgid ""
 "It is meant to be used for functions that may accept any kind of string "
 "without allowing different kinds of strings to mix. For example::"
 msgstr ""
+"Su objetivo es ser usada por funciones que pueden aceptar cualquier tipo de "
+"cadena de texto sin permitir mezclar diferentes tipos al mismo tiempo. Por "
+"ejemplo::"
 
 #: ../Doc/library/typing.rst:1372
 msgid ""
 "A special constant that is assumed to be ``True`` by 3rd party static type "
 "checkers. It is ``False`` at runtime. Usage::"
 msgstr ""
+"Un constante especial que se asume como cierta (``True``) por validadores "
+"estáticos de tipos de terceros. Es falsa (``False``) en tiempo de ejecución. "
+"Uso::"
 
 #: ../Doc/library/typing.rst:1381
 msgid ""
@@ -1327,3 +1581,8 @@ msgid ""
 "interpreter runtime.  Type annotations for local variables are not "
 "evaluated, so the second annotation does not need to be enclosed in quotes."
 msgstr ""
+"Nótese que la primera anotación de tipo debe estar rodeada por comillas, "
+"convirtiéndola en una \"referencia directa\", para ocultar al intérprete la "
+"referencia ``expensive_mod`` en tiempo de ejecución. Las anotaciones de tipo "
+"para variables locales no se evalúan, así que la segunda anotación no "
+"necesita comillas."
