@@ -55,11 +55,17 @@ Términos y bigramas
      docstring
       docstring. ``library/idle.po``
 
+     key
+       clave
+
      handler
       gestor ``tutorial/errors.po``
 
      handle exception
       Gestionar excepción. ``tutorial/inputoutput.po``
+
+     helper function
+       función auxiliar  ``library/typing.po``
 
      loop
       Bucle. ``tutorial/controlflow.po``
