@@ -32,8 +32,8 @@ Los comportamientos que refuerzan estos valores contribuyen a un ambiente positi
   de los demás, teniendo en cuenta que muchas veces la labor se completó simplemente por el bien de
   la comunidad.
 * **Ser respetuoso de los diferentes puntos de vista y experiencias.** Somos personas receptivas a
-  los comentarios constructivos y las críticas, ya que las experiencias y habilidades de otros
-  miembros contribuyen a la totalidad de nuestros esfuerzos.
+  los comentarios constructivos y las críticas, ya que las experiencias y habilidades de otras
+  personas afiliadas contribuyen a la totalidad de nuestros esfuerzos.
 * **Mostrando empatía hacia otros miembros de la comunidad.** Estamos atentos en nuestras
   comunicaciones, ya sea en persona o en línea, y tenemos tacto cuando nos acercamos a diferentes
   puntos de vista.
@@ -64,7 +64,7 @@ Los ejemplos de comportamiento inaceptable de las personas participantes incluye
 * Acoso de cualquier participante en cualquier forma
 * Intimidación deliberada, acoso o seguimiento
 * Iniciar sesión o tomar capturas de pantalla de actividades en línea con fines de acoso
-* Publicar información privada de otros, como una dirección física o electrónica, sin permiso
+* Publicar información privada de otras personas, como una dirección física o electrónica, sin permiso
   explícito
 * Amenazas violentas o lenguaje dirigido contra otra persona
 * La incitación a la violencia o el acoso hacia cualquier persona, incluso alentar a una persona a
@@ -95,7 +95,7 @@ Política de armas
 No se permiten armas en los eventos de la *Python Software Foundation*.
 Las armas incluyen, entre otras, explosivos (incluidos fuegos artificiales), pistolas y cuchillos
 grandes, como los que se usan para cazar o exhibir, así como cualquier otro artículo que se use con
-el propósito de causar lesiones o daños a otros.
+el propósito de causar lesiones o daños a otras personas.
 A cualquiera que se vea en posesión de uno de estos artículos se le pedirá que se vaya de
 inmediato, y solo se le permitirá regresar sin el arma.
 
