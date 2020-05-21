@@ -34,11 +34,11 @@ Los comportamientos que refuerzan estos valores contribuyen a un ambiente positi
 * **Ser respetuoso de los diferentes puntos de vista y experiencias.** Somos personas receptivas a
   los comentarios constructivos y las críticas, ya que las experiencias y habilidades de otras
   personas afiliadas contribuyen a la totalidad de nuestros esfuerzos.
-* **Mostrando empatía hacia otros miembros de la comunidad.** Estamos atentos en nuestras
+* **Mostrando empatía hacia otras personas afiliads de la comunidad.** Estamos atentos en nuestras
   comunicaciones, ya sea en persona o en línea, y tenemos tacto cuando nos acercamos a diferentes
   puntos de vista.
-* **Ser considerado.** Las personas afiliadas a la comunidad son consideradas con sus pares, otros
-  usuarios de Python.
+* **Ser considerado.** Las personas afiliadas a la comunidad son consideradas con sus pares, otras personas
+  usuarias de Python.
 * **Ser respetuoso.** Somos personas respetuosas con los demás, sus posiciones, sus habilidades,
   sus compromisos y sus esfuerzos.
 * **Aceptando con gracia las críticas constructivas.** Cuando no estamos de acuerdo, somos corteses
@@ -73,14 +73,14 @@ Los ejemplos de comportamiento inaceptable de las personas participantes incluye
 * Lenguaje e imágenes sexuales en comunidades en línea o en cualquier lugar de conferencias,
   incluidas charlas
 * Insultos, humillaciones o chistes que se basan en estereotipos, que son exclusivos o que hacen
-  que otros ridiculicen
+  que otras personas ridiculicen
 * Maldecir excesivamente
 * Atención o avances sexuales no deseados
 * Contacto físico no deseado, incluido el contacto físico simulado (por ejemplo, Descripciones
   textuales como "abrazo" o "caricias en la espalda") sin consentimiento o después de una solicitud
   para detener
 * Patrón de contacto social inapropiado, como solicitar/asumir niveles inapropiados de intimidad
-  con otros
+  con otras ersonas
 * Interrupción sostenida de las discusiones de la comunidad en línea, presentaciones en persona u
   otros eventos en persona.
 * Comunicación continua uno a uno después de las solicitudes de cesar
