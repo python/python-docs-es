@@ -22,7 +22,7 @@ def find_in_po(pattern):
         pofile = polib.pofile(file)
         for entry in pofile:
             if entry.msgstr and regex.search(pattern, entry.msgid):
-                add_str = entry.msgstr + " ·filename: " + file + "·"
+                add_str = entry.msgid + " ·filename: " + file + "·"
                 table.append(
                     [
                         fill(add_str, width=available_width),
