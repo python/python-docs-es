@@ -10,7 +10,7 @@ Código de Conducta
    Complementariamente, recomendamos considerar el código de conducta
    de otras asociaciones, como `Python Argentina`_ y `Python España`_
 
-La comunidad de Python está compuesta por miembros de todo el mundo con un conjunto diverso de
+La comunidad de Python está compuesta por personas de todo el mundo con un conjunto diverso de
 habilidades, personalidades y experiencias.
 Es a través de estas diferencias que nuestra comunidad experimenta grandes éxitos y crecimiento
 continuo.
@@ -121,14 +121,14 @@ Software Foundation* y `eventos organizados por proyectos bajo el patrocinio fis
 
 * personal
 * Miembros de la junta de la *Python Software Foundation*
-* presentadores
+* presentadores y presentadoras
 * panelistas
 * líderes de tutoriales o talleres
-* presentadores de póster
+* presentadores y presentadoras de póster
 * personas invitadas a reuniones o cumbres
-* expositores
-* organizadores
-* voluntarios
+* expositores y expositoras
+* organizadores y organizadoras
+* voluntarios y voluntarias
 * todas las personas asistentes
 
 El Código de conducta se aplica en los espacios de eventos oficiales del lugar, que incluyen:
@@ -179,16 +179,16 @@ Este Código de conducta se aplica a los siguientes espacios en línea:
 Este Código de conducta se aplica a las siguientes personas en los espacios en línea oficiales
 de la *Python Software Foundation*:
 
-* administradores del espacio en línea
-* mantenedores
-* revisores
+* administradores y administradoras del espacio en línea
+* mantenedores y mantenedoras
+* revisores y revisoras
 * contribuyentes
 * todas las personas afiliadas a la comunidad
 
 Se requiere que cada espacio en línea mencionado anteriormente proporcione la siguiente información
 al grupo de trabajo del Código de Conducta de la *Python Software Foundation*:
 
-* información de contacto para cualquier administrador/moderador
+* información de contacto para cualquier administradora(or)/moderadora(or)
 
 Se recomienda que cada espacio en línea mencionado anteriormente proporcione la siguiente
 información a las personas afiliadas de la comunidad:
@@ -198,8 +198,7 @@ información a las personas afiliadas de la comunidad:
 
 El grupo de trabajo del Código de conducta de la *Python Software Foundation* recibirá y evaluará
 los informes de incidentes de las comunidades en línea mencionadas anteriormente.
-El grupo de trabajo del Código de conducta de la *Python Software Foundation* trabajará con los
-administradores/moderadores de la comunidad en línea para sugerir acciones a tomar en respuesta a
+El grupo de trabajo del Código de conducta de la *Python Software Foundation* trabajará con las personas responsables de la administración/moderación de la comunidad en línea para sugerir acciones a tomar en respuesta a
 un informe.
 En los casos en que las personas administradoras/moderadoras no estén de acuerdo con la resolución
 sugerida para un informe, el grupo de trabajo del Código de Conducta de la
