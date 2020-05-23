@@ -48,11 +48,13 @@ como error que no tiene hunspell instalado, lo puedes instalar así:
 
    .. tab:: Linux
 
-      # Arch Linux
-      yay -S hunspell-es_any
+      Utilizando el gestor de paquetes de tu distribución::
 
-      # Ubuntu Linux
-      apt install hunspell-es
+         # Arch Linux
+         yay -S hunspell-es_any
+
+         # Ubuntu Linux
+         apt install hunspell-es
 
 
 Estamos trabajando para unificar el uso de un mismo set de diccionarios de español,
