@@ -130,20 +130,19 @@ debes seguir estos pasos:
 
 #. Instalar ``pre-commit``::
 
-   pip install pre-commit
+     pip install pre-commit
 
 #. Configurar ``pre-commit`` en el repositorio de ``python-docs-es``::
 
-   cd python-docs-es/
-   pre-commit install
+     cd python-docs-es/
+     pre-commit install
 
 #. Instalar ``hunspell``::
 
-   # Arch Linux
-   yay -S hunspell-es_any
-
-   # Ubuntu Linux
-   apt install hunspell-es
+     # Arch Linux
+     yay -S hunspell-es_any
+     # Ubuntu Linux
+     apt install hunspell-es
 
 Luego, cada vez que realices un commit se ejecutará ``pre-commit`` y validará tus archivos.
 
