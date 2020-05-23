@@ -1,8 +1,8 @@
 Spanish Translation of the Python Documentation
 ===============================================
 
-.. image:: https://travis-ci.org/PyCampES/python-docs-es.svg?branch=3.8 
-  :target: https://travis-ci.org/PyCampES/python-docs-es
+.. image:: https://travis-ci.org/python/python-docs-es.svg?branch=3.8
+  :target: https://travis-ci.org/python/python-docs-es
   :alt: Build Status
 
 .. image:: https://readthedocs.org/projects/python-docs-es/badge/?version=3.8
