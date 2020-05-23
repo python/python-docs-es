@@ -28,26 +28,38 @@ Si quieres ver cómo se ha utilizado un término anteriormente, puedes utilizar 
    ├────────────────────────────────────────────────────────────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────┤
 
 
+Términos y bigramas
+===================
+
 Éstos son las palabras que hemos coordinado hasta el momento:
 
 
      awaitable
       aguardable ``glossary``
 
-     built-in 
+     built-in
       incorporada ``glossary.po``
+
+     built-in exceptions
+      excepciones predefinidas ``tutorial/errors.po``
 
      bytecodes
       queda igual ``glossary.po``
 
      callable
-      invocable ``glossary.po``
+      invocable ``glossary.po``, ``library/functions.po``
+
+     code object
+      objeto código ``c-api``, ``library/functions.po``
 
      deallocated
       desalojable ``glossary.po``
 
      docstring
       docstring. ``library/idle.po``
+
+     handler
+      gestor ``tutorial/errors.po``
 
      handle exception
       Gestionar excepción. ``tutorial/inputoutput.po``
@@ -64,8 +76,46 @@ Si quieres ver cómo se ha utilizado un término anteriormente, puedes utilizar 
      path
       Ruta. ``glossary.po``
 
-     realease
+     raise
+      Lanzar, lanza. (referido a excepciones)  ``library/functions.po``, ``c-api``
+
+     release
       version ``HOWTO``  
    
      underscore
       guión bajo ``glossary.po``
+
+
+Reglas de estilo
+================
+
+Estas son las reglas de estilo que hemos convenido hasta el momento:
+
+* En títulos [de sección] sólo se usará mayúscula en la primera palabra salvo nombre propios,
+  en contraste con el inglés, que lo hace en todas las palabras principales (conectores no).
+
+  Referencia: https://www.rae.es/dpd/may%C3%BAsculas 4.17
+
+  Ejemplo: ``tutorial/errors.po``
+  `en`: Predefined Clean-up Actions
+  `es`: Acciones de limpieza predefinidas
+
+* Se priorizará la segunda persona del singular no formal (tu/vos) frente al formal (usted).
+  Sin embargo, allí donde sea posible, se usarán formas impersonales (con se), ya que son comunes a
+  todas las variantes del español.
+
+  Referencia: https://www.rae.es/dpd/se punto 2
+
+  Ejemplo: ``tutorial/errors.po``
+  `en`: Look at the following example, [...]
+  `es`: Véase el siguiente ejemplo, [...]
+
+* En general se evitará la traducción literal de la voz pasiva del original en inglés y se usará
+  el impersonal (pasiva refleja) en la traducción al español.
+
+  Referencia: https://www.rae.es/dpd/se punto 2
+
+  Ejemplo: ``tutorial/errors.po``
+  `en`: [...] where the error was detected.
+  `es`: [...] donde se detectó el error.
+  Nota cf. "fue detectado"
