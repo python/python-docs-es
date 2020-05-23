@@ -4,8 +4,8 @@ Preguntas frecuentes
 ====================
 
 
-Estoy bloqueado y no puedo resolver un problema, ¿qué hago?
------------------------------------------------------------
+No puedo resolver un problema, ¿qué hago?
+-----------------------------------------
 
 Pregunta, |:smile:|.
 Tenemos un `grupo de Telegram`_ en el que hay mucha gente que te puede ayudar.
