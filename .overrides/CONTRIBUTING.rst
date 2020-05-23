@@ -73,6 +73,7 @@ A tener en cuenta
 
 * No debes traducir el contenido de ``:ref:...`` y ``:term:...``.
 * Si tienes que usar palabras en inglés debes ponerlas en *italics* (rodeadas por asteriscos)
+* Puedes revisar las :doc:`faq` para leer sobre problemas conocidos.
 * Si traduces un título que es un link, por favor traduce el link también (por ejemplo un artículo a Wikipedia).
   En caso de que no haya una traducción del artículo en Wikipedia deja el título sin traducir.
 * Tenemos una `Memoria de Traducción`_, que usamos para tener consistencia con algunos términos.
