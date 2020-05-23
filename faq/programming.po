@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-06 11:59-0400\n"
-"PO-Revision-Date: 2020-05-09 17:40+0200\n"
+"PO-Revision-Date: 2020-05-23 21:36+0200\n"
 "Last-Translator: Kiko Correoso\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
@@ -19,8 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Last-Translator: \n"
 "Language: es\n"
-"X-Generator: Poedit 1.8.11\n"
-
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../Doc/faq/programming.rst:5
 msgid "Programming FAQ"
@@ -221,10 +220,10 @@ msgid ""
 "the standard Python modules."
 msgstr ""
 "Una forma es usando la herramienta *freeze*, la cual viene incluida con el "
-"árbol de código Python como ``Tools/freeze``. Convierte el byte code Python a "
-"arrays C; un compilador C permite incrustar todos tus módulos en un "
-"nuevo programa que, posteriormente se puede enlazar con los módulos estándar "
-"de Python."
+"árbol de código Python como ``Tools/freeze``. Convierte el byte code Python "
+"a arrays C; un compilador C permite incrustar todos tus módulos en un nuevo "
+"programa que, posteriormente se puede enlazar con los módulos estándar de "
+"Python."
 
 #: ../Doc/faq/programming.rst:97
 msgid ""
@@ -247,7 +246,7 @@ msgstr ""
 "configuración a medida que sólo contiene aquellos módulos incorporados que "
 "se usan realmente en el programa.  A continuación, compila el código C "
 "generado y lo enlaza con el resto del intérprete de Python para formar un "
-"binario autónomo que actúa exactamente igual que su script.\n"
+"binario autónomo que actúa exactamente igual que su script."
 
 #: ../Doc/faq/programming.rst:106
 msgid ""
@@ -255,8 +254,8 @@ msgid ""
 "which don't. One is Thomas Heller's py2exe (Windows only) at"
 msgstr ""
 "Obviamente, freeze necesita un compilador C.  Existen otras utilidades que "
-"no necesitan un compilador C. Una de ellas es py2exe de Thomas Heller "
-"(solo disponible para Windows) en"
+"no necesitan un compilador C. Una de ellas es py2exe de Thomas Heller (solo "
+"disponible para Windows) en"
 
 #: ../Doc/faq/programming.rst:109
 msgid "http://www.py2exe.org/"
@@ -1681,16 +1680,24 @@ msgid ""
 "creates a new object.  In the general case, the total runtime cost is "
 "quadratic in the total string length."
 msgstr ""
+"Objetos :class:`str` y :class:`bytes` son inmutables, por tanto, concatenar "
+"muchas cadenas en una sola es ineficiente debido a que cada concatenación "
+"crea un nuevo objeto. En el caso más general, el coste total en tiempo de "
+"ejecución es cuadrático en relación a la longitud de la cadena final."
 
 #: ../Doc/faq/programming.rst:1081
 msgid ""
 "To accumulate many :class:`str` objects, the recommended idiom is to place "
 "them into a list and call :meth:`str.join` at the end::"
 msgstr ""
+"Para acumular muchos objetos :class:`str`, la forma recomendada sería "
+"colocarlos en una lista y llamar al método :meth:`str.join` al final::"
 
 #: ../Doc/faq/programming.rst:1089
 msgid "(another reasonably efficient idiom is to use :class:`io.StringIO`)"
 msgstr ""
+"(otra forma que sería razonable en términos de eficiencia sería usar :class:"
+"`io.StringIO`)"
 
 #: ../Doc/faq/programming.rst:1091
 msgid ""
@@ -1698,20 +1705,26 @@ msgid ""
 "extend a :class:`bytearray` object using in-place concatenation (the ``+=`` "
 "operator)::"
 msgstr ""
+"Para acumular muchos objetos :class:`bytes`, la forma recomendada sería "
+"extender un objeto :class:`bytearray` usando el operador de concatenación en "
+"el lugar, \"in-place\" (el operador ``+=``)::"
 
 #: ../Doc/faq/programming.rst:1100
 msgid "Sequences (Tuples/Lists)"
-msgstr ""
+msgstr "Secuencias (Tuplas/Listas)"
 
 #: ../Doc/faq/programming.rst:1103
 msgid "How do I convert between tuples and lists?"
-msgstr ""
+msgstr "¿Cómo convertir entre tuplas y listas?"
 
 #: ../Doc/faq/programming.rst:1105
 msgid ""
 "The type constructor ``tuple(seq)`` converts any sequence (actually, any "
 "iterable) into a tuple with the same items in the same order."
 msgstr ""
+"El constructor ``tuple(seq)`` convierte cualquier secuencia (en realidad, "
+"cualquier iterable) en una tupla con los mismos elementos y en el mismo "
+"orden."
 
 #: ../Doc/faq/programming.rst:1108
 msgid ""
@@ -1720,6 +1733,11 @@ msgid ""
 "copy but returns the same object, so it is cheap to call :func:`tuple` when "
 "you aren't sure that an object is already a tuple."
 msgstr ""
+"Por ejemplo, ``tuple([1, 2, 3])`` lo convierte en ``(1, 2, 3)`` y "
+"``tuple('abc')`` lo convierte en ``('a', 'b', 'c')``.  Si el argumento es "
+"una tupla no creará una nueva copia y devolverá el mismo objeto, por tanto, "
+"llamar a :func:`tuple` no tendrá mucho coste si no estás seguro si un objeto "
+"ya es una tupla."
 
 #: ../Doc/faq/programming.rst:1113
 msgid ""
@@ -1728,10 +1746,15 @@ msgid ""
 "3))`` yields ``[1, 2, 3]`` and ``list('abc')`` yields ``['a', 'b', 'c']``.  "
 "If the argument is a list, it makes a copy just like ``seq[:]`` would."
 msgstr ""
+"El constructor ``list(seq)`` convierte cualquier secuencia o iterable en una "
+"lista con los mismos elementos y en el mismo orden.  Por ejemplo, ``list((1, "
+"2, 3))`` lo convierte a ``[1, 2, 3]`` y ``list('abc')`` lo convierte a "
+"``['a', 'b', 'c']``.  Si el argumento es una lista, hará una copia como lo "
+"haría ``seq[:]``."
 
 #: ../Doc/faq/programming.rst:1120
 msgid "What's a negative index?"
-msgstr ""
+msgstr "¿Qué es un índice negativo?"
 
 #: ../Doc/faq/programming.rst:1122
 msgid ""
@@ -1741,6 +1764,10 @@ msgid ""
 "(next to last) index and so forth.  Think of ``seq[-n]`` as the same as "
 "``seq[len(seq)-n]``."
 msgstr ""
+"Las secuencias en Python están indexadas con números positivos y negativos.  "
+"Para los números positivos el  0 será el primer índice, el 1 el segundo y "
+"así en adelante.  Para los índices negativos el -1 el último índice, el -2 "
+"el penúltimo, etc.  Piensa en ``seq[-n]`` como si fuera ``seq[len(seq)-n]``."
 
 #: ../Doc/faq/programming.rst:1127
 msgid ""
@@ -1748,63 +1775,78 @@ msgid ""
 "all of the string except for its last character, which is useful for "
 "removing the trailing newline from a string."
 msgstr ""
+"El uso de índices negativos puede ser muy conveniente.  Por ejemplo "
+"``S[:-1]`` se usa para todo la cadena excepto para su último carácter, lo "
+"cual es útil para eliminar el salto de línea final de una cadena."
 
 #: ../Doc/faq/programming.rst:1133
 msgid "How do I iterate over a sequence in reverse order?"
-msgstr ""
+msgstr "¿Cómo puedo iterar sobre una secuencia en orden inverso?"
 
 #: ../Doc/faq/programming.rst:1135
 msgid ""
 "Use the :func:`reversed` built-in function, which is new in Python 2.4::"
 msgstr ""
+"Usa la función incorporada :func:`reversed`, la cual se introdujo en la "
+"versión de 2.4 de Python::"
 
 #: ../Doc/faq/programming.rst:1140
 msgid ""
 "This won't touch your original sequence, but build a new copy with reversed "
 "order to iterate over."
 msgstr ""
+"Esto no transformará la secuencia original sino que creará una nueva copia "
+"en orden inverso por la que se puede iterar."
 
 #: ../Doc/faq/programming.rst:1143
 msgid "With Python 2.3, you can use an extended slice syntax::"
-msgstr ""
+msgstr "Desde Python 2.3 puedes usar la sintaxis extendida de rebanado::"
 
 #: ../Doc/faq/programming.rst:1150
 msgid "How do you remove duplicates from a list?"
-msgstr ""
+msgstr "¿Cómo eliminar duplicados de una lista?"
 
 #: ../Doc/faq/programming.rst:1152
 msgid "See the Python Cookbook for a long discussion of many ways to do this:"
 msgstr ""
+"Puedes echar un vistazo al recetario de Python para ver una gran discusión "
+"mostrando muchas formas de hacer esto:"
 
 #: ../Doc/faq/programming.rst:1154
 msgid "https://code.activestate.com/recipes/52560/"
-msgstr ""
+msgstr "https://code.activestate.com/recipes/52560/"
 
 #: ../Doc/faq/programming.rst:1156
 msgid ""
 "If you don't mind reordering the list, sort it and then scan from the end of "
 "the list, deleting duplicates as you go::"
 msgstr ""
+"Si no te preocupa que la lista se reordene la puedes ordenar y, después, y "
+"después escanearla desde el final borrando duplicados a medida que avanzas::"
 
 #: ../Doc/faq/programming.rst:1168
 msgid ""
 "If all elements of the list may be used as set keys (i.e. they are all :term:"
 "`hashable`) this is often faster ::"
 msgstr ""
+"Si todos los elementos de la lista pueden ser usados como claves (i.e. son "
+"todos :term:`hashable`) esto será, en general, más rápido ::"
 
 #: ../Doc/faq/programming.rst:1173
 msgid ""
 "This converts the list into a set, thereby removing duplicates, and then "
 "back into a list."
 msgstr ""
+"Esto convierte la lista en un conjunto eliminando, por tanto, los duplicados "
+"y, posteriormente, puedes volver a una lista."
 
 #: ../Doc/faq/programming.rst:1178
 msgid "How do you make an array in Python?"
-msgstr ""
+msgstr "¿Cómo se puede hacer un array en Python?"
 
 #: ../Doc/faq/programming.rst:1180
 msgid "Use a list::"
-msgstr ""
+msgstr "Usa una lista::"
 
 #: ../Doc/faq/programming.rst:1184
 msgid ""
@@ -1812,6 +1854,9 @@ msgid ""
 "primary difference is that a Python list can contain objects of many "
 "different types."
 msgstr ""
+"Las listas son equivalentes en complejidad temporal a arrays en C o Pascal; "
+"La principal diferencia es que una lista en Python puede contener objetos de "
+"diferentes tipos."
 
 #: ../Doc/faq/programming.rst:1187
 msgid ""
@@ -1820,11 +1865,17 @@ msgid ""
 "lists.  Also note that the Numeric extensions and others define array-like "
 "structures with various characteristics as well."
 msgstr ""
+"El módulo ``array`` proporciona, también, métodos para crear arrays de tipo "
+"fijo con representaciones compactas pero son más lentos de indexar que las "
+"listas.  Además, debes tener en cuenta que las extensiones Numeric y otras "
+"permiten definen estructuras de tipo array con diversas características."
 
 #: ../Doc/faq/programming.rst:1192
 msgid ""
 "To get Lisp-style linked lists, you can emulate cons cells using tuples::"
 msgstr ""
+"Para obtener listas enlazadas al estilo de las de Lisp, puedes emular celdas "
+"cons usando tuplas::"
 
 #: ../Doc/faq/programming.rst:1196
 msgid ""
@@ -1833,22 +1884,29 @@ msgid ""
 "``lisp_list[1]``.  Only do this if you're sure you really need to, because "
 "it's usually a lot slower than using Python lists."
 msgstr ""
+"Se deseas que haya mutabilidad podrías usar listas en lugar de tuplas.  El "
+"análogo a un car de Lisp es ``lisp_list[0]`` y al análogo a cdr es "
+"``lisp_list[1]``.  Haz esto solo si estás seguro que es lo que necesitas "
+"debido a que, normalmente, será bastante más lento que el usar listas  "
+"Python."
 
 #: ../Doc/faq/programming.rst:1205
 msgid "How do I create a multidimensional list?"
-msgstr ""
+msgstr "¿Cómo puedo crear una lista multidimensional?"
 
 #: ../Doc/faq/programming.rst:1207
 msgid "You probably tried to make a multidimensional array like this::"
 msgstr ""
+"Seguramente hayas intentado crear un array multidimensional de la siguiente "
+"forma::"
 
 #: ../Doc/faq/programming.rst:1211
 msgid "This looks correct if you print it:"
-msgstr ""
+msgstr "Esto parece correcto si lo muestras en pantalla:"
 
 #: ../Doc/faq/programming.rst:1222
 msgid "But when you assign a value, it shows up in multiple places:"
-msgstr ""
+msgstr "Pero cuando asignas un valor, se muestra en múltiples sitios:"
 
 #: ../Doc/faq/programming.rst:1234
 msgid ""
@@ -1857,37 +1915,50 @@ msgid ""
 "containing 3 references to the same list of length two.  Changes to one row "
 "will show in all rows, which is almost certainly not what you want."
 msgstr ""
+"La razón es que replicar una lista con ``*`` no crea copias, solo crea "
+"referencias a los objetos existentes.  El ``*3`` crea una lista conteniendo "
+"3 referencias a la misma lista de longitud dos.  Cambios a una fila se "
+"mostrarán en todas las filas, lo cual, seguramente, no es lo que deseas."
 
 #: ../Doc/faq/programming.rst:1239
 msgid ""
 "The suggested approach is to create a list of the desired length first and "
 "then fill in each element with a newly created list::"
 msgstr ""
+"El enfoque recomendado sería crear, primero, una lista de la longitud "
+"deseada y, después, rellenar cada elemento con una lista creada en ese "
+"momento::"
 
 #: ../Doc/faq/programming.rst:1246
 msgid ""
 "This generates a list containing 3 different lists of length two.  You can "
 "also use a list comprehension::"
 msgstr ""
+"Esto genera una lista conteniendo 3 listas distintas de longitud dos.  "
+"También puedes usar una comprensión de lista::"
 
 #: ../Doc/faq/programming.rst:1252
 msgid ""
 "Or, you can use an extension that provides a matrix datatype; `NumPy <http://"
 "www.numpy.org/>`_ is the best known."
 msgstr ""
+"O puedes usar una extensión que proporcione un tipo de dato para matrices; "
+"`NumPy <http://www.numpy.org/>`_ es la más conocida."
 
 #: ../Doc/faq/programming.rst:1257
 msgid "How do I apply a method to a sequence of objects?"
-msgstr ""
+msgstr "¿Cómo puedo aplicar un método a una secuencia de objetos?"
 
 #: ../Doc/faq/programming.rst:1259
 msgid "Use a list comprehension::"
-msgstr ""
+msgstr "Usa una comprensión de listas::"
 
 #: ../Doc/faq/programming.rst:1266
 msgid ""
 "Why does a_tuple[i] += ['item'] raise an exception when the addition works?"
 msgstr ""
+"¿Por qué hacer lo siguiente, a_tuple[i] += ['item'], lanza una excepción "
+"cuando la suma funciona?"
 
 #: ../Doc/faq/programming.rst:1268
 msgid ""
@@ -1895,6 +1966,9 @@ msgid ""
 "operators are *assignment* operators, and the difference between mutable and "
 "immutable objects in Python."
 msgstr ""
+"Esto es debido a la combinación del hecho de que un operador de asignación "
+"aumentada es un operador de *asignación* y a la diferencia entre objetos "
+"mutables e inmutable en Python."
 
 #: ../Doc/faq/programming.rst:1272
 msgid ""
@@ -1902,10 +1976,13 @@ msgid ""
 "applied to elements of a tuple that point to mutable objects, but we'll use "
 "a ``list`` and ``+=`` as our exemplar."
 msgstr ""
+"Esta discusión aplica, en general, cuando los operadores de asignación "
+"aumentada se aplican a elementos de una tupla que apuntan a objetos "
+"mutables. Pero vamos a usar una ``lista`` y ``+=`` para el ejemplo."
 
 #: ../Doc/faq/programming.rst:1276
 msgid "If you wrote::"
-msgstr ""
+msgstr "Si escribes::"
 
 #: ../Doc/faq/programming.rst:1284
 msgid ""
@@ -1915,28 +1992,39 @@ msgid ""
 "to element ``0`` of the tuple, we get an error because we can't change what "
 "an element of a tuple points to."
 msgstr ""
+"La razón por la que se produce la excepción debería ser evidente: ``1`` se "
+"añade al objeto ``a_tuple[0]`` que apunta a (``1``), creando el objeto "
+"resultante, ``2``, pero cuando intentamos asignar el resultado del cálculo, "
+"``2``, al elemento ``0`` de la tupla, obtenemos un error debido a que no "
+"podemos cambiar el elemento al que apunta la tupla."
 
 #: ../Doc/faq/programming.rst:1290
 msgid ""
 "Under the covers, what this augmented assignment statement is doing is "
 "approximately this::"
 msgstr ""
+"En realidad, lo que esta declaración de asignación aumentada está haciendo "
+"es, aproximadamente, lo siguiente::"
 
 #: ../Doc/faq/programming.rst:1299
 msgid ""
 "It is the assignment part of the operation that produces the error, since a "
 "tuple is immutable."
 msgstr ""
+"Es la parte de asignación de la operación la que provoca el error, debido a "
+"que una tupla es inmutable."
 
 #: ../Doc/faq/programming.rst:1302
 msgid "When you write something like::"
-msgstr ""
+msgstr "Cuando escribes algo como lo siguiente::"
 
 #: ../Doc/faq/programming.rst:1310
 msgid ""
 "The exception is a bit more surprising, and even more surprising is the fact "
 "that even though there was an error, the append worked::"
 msgstr ""
+"La excepción es un poco más sorprendente e, incluso, más sorprendente es el "
+"hecho que aunque hubo un error, la agregación funcionó::"
 
 #: ../Doc/faq/programming.rst:1316
 msgid ""
@@ -1947,10 +2035,16 @@ msgid ""
 "calling ``extend`` on the list and returning the list.  That's why we say "
 "that for lists, ``+=`` is a \"shorthand\" for ``list.extend``::"
 msgstr ""
+"Para ver lo que sucede necesitas saber que (a) si un objeto implementa un "
+"método mágico ``__iadd__`` , se le llama cuando se ejecuta la asignación "
+"aumentada ``+=`` y el valor devuelto es lo que se usa en la declaración de "
+"asignación; y (b) para listas, ``__iadd__`` es equivalente a llamar a "
+"``extend`` en la lista y devolver la lista.  Es por esto que decimos que "
+"para listas, ``+=`` es un atajo para ``list.extend``::"
 
 #: ../Doc/faq/programming.rst:1328
 msgid "This is equivalent to::"
-msgstr ""
+msgstr "Esto es equivalente a ::"
 
 #: ../Doc/faq/programming.rst:1333
 msgid ""
@@ -1959,10 +2053,16 @@ msgid ""
 "assignment is a no-op, since it is a pointer to the same object that "
 "``a_list`` was previously pointing to, but the assignment still happens."
 msgstr ""
+"El objeto al que apunta a_list ha mutado y el puntero al objeto mutado es "
+"asignado de vuelta a ``a_list``.  El resultado final de la asignación no es "
+"opción debido a que es un puntero al mismo objeto al que estaba apuntando "
+"``a_list``  pero la asignación sí que ocurre."
 
 #: ../Doc/faq/programming.rst:1338
 msgid "Thus, in our tuple example what is happening is equivalent to::"
 msgstr ""
+"Por tanto, en nuestro ejemplo con tupla lo que está pasando es equivalente "
+"a::"
 
 #: ../Doc/faq/programming.rst:1346
 msgid ""
@@ -1971,12 +2071,18 @@ msgid ""
 "that final assignment still results in an error, because tuples are "
 "immutable."
 msgstr ""
+"El ``__iadd__`` se realiza con éxito y la lista se extiende pero, incluso "
+"aunque ``result`` apunta al mismo objeto al que ya está apuntando "
+"``a_tuple[0]`` la asignación final sigue resultando en un error, debido a "
+"que las tuplas son inmutables."
 
 #: ../Doc/faq/programming.rst:1352
 msgid ""
 "I want to do a complicated sort: can you do a Schwartzian Transform in "
 "Python?"
 msgstr ""
+"Quiero hacer una ordenación compleja: ¿Puedes hacer una transformada "
+"Schwartziana (Schwartzian Transform) en Python?"
 
 #: ../Doc/faq/programming.rst:1354
 msgid ""
@@ -1985,20 +2091,26 @@ msgid ""
 "value\". In Python, use the ``key`` argument for the :meth:`list.sort` "
 "method::"
 msgstr ""
+"La técnica, atribuida a Randal Schwartz, miembro de la comunidad Perl, "
+"ordena los elementos de una lista mediante una métrica que mapea cada "
+"elemento a su \"valor orden\". En Python, usa el argumento ``key`` par el "
+"método :meth:`list.sort`::"
 
 #: ../Doc/faq/programming.rst:1363
 msgid "How can I sort one list by values from another list?"
-msgstr ""
+msgstr "¿Cómo puedo ordenar una lista a partir de valores de otra lista?"
 
 #: ../Doc/faq/programming.rst:1365
 msgid ""
 "Merge them into an iterator of tuples, sort the resulting list, and then "
 "pick out the element you want. ::"
 msgstr ""
+"Las puedes unir en un iterador de tuplas, ordena la lista resultando y "
+"después extrae el elemento que deseas. ::"
 
 #: ../Doc/faq/programming.rst:1379
 msgid "An alternative for the last step is::"
-msgstr ""
+msgstr "Una alternativa para el último paso es::"
 
 #: ../Doc/faq/programming.rst:1384
 msgid ""
@@ -2010,14 +2122,22 @@ msgid ""
 "\"result.append\" requires an extra attribute lookup, and third, there's a "
 "speed reduction from having to make all those function calls."
 msgstr ""
+"Si encuentras esto más legible, podrías preferir usar esto en lugar de una "
+"comprensión de lista final.  Sin embargo, es casi el doble de lento para "
+"listas largas.  ¿Por qué? Primero, la operación ``append()`` necesita "
+"reasignar memoria y, aunque usa algunos trucos para evitar hacerlo en todo "
+"momento, sigue teniéndolo que hacer ocasionalmente y eso tiene un poco de "
+"coste.  Segundo, la expresión \"result.append\" requiere una búsqueda "
+"adicional de atributos y, tercero, hay una reducción de velocidad de tener "
+"que hacer todas esas llamadas a funciones."
 
 #: ../Doc/faq/programming.rst:1394
 msgid "Objects"
-msgstr ""
+msgstr "Objetos"
 
 #: ../Doc/faq/programming.rst:1397
 msgid "What is a class?"
-msgstr ""
+msgstr "¿Qué es una clase?"
 
 #: ../Doc/faq/programming.rst:1399
 msgid ""
@@ -2026,6 +2146,10 @@ msgid ""
 "which embody both the data (attributes) and code (methods) specific to a "
 "datatype."
 msgstr ""
+"Una clase es un tipo de objeto particular creado mediante la ejecución de la "
+"declaración class. Los objetos class se usan como plantillas para crear "
+"instancias de objetos que son tanto los datos (atributos) como el código "
+"(métodos) específicos para un tipo de dato."
 
 #: ../Doc/faq/programming.rst:1403
 msgid ""
@@ -2036,10 +2160,17 @@ msgid ""
 "for a mailbox, and subclasses such as ``MboxMailbox``, ``MaildirMailbox``, "
 "``OutlookMailbox`` that handle various specific mailbox formats."
 msgstr ""
+"Una clase puede estar basada en una o más clases diferentes, llamadas su(s) "
+"clase(s). Hereda los atributos y métodos de sus clases base. Esto permite "
+"que se pueda refinar un objeto modelo de forma sucesiva mediante herencia.  "
+"Puedes tener una clase genérica ``Mailbox``  que proporciona métodos de "
+"acceso básico para un buzón de correo y subclases como ``MboxMailbox``, "
+"``MaildirMailbox``, ``OutlookMailbox`` que gestionan distintos formatos "
+"específicos de buzón de correos."
 
 #: ../Doc/faq/programming.rst:1412
 msgid "What is a method?"
-msgstr ""
+msgstr "¿Qué es un método?"
 
 #: ../Doc/faq/programming.rst:1414
 msgid ""
@@ -2047,10 +2178,13 @@ msgid ""
 "name(arguments...)``.  Methods are defined as functions inside the class "
 "definition::"
 msgstr ""
+"Un método es una función de un objeto ``x`` que puedes llamar, normalmente, "
+"de la forma ``x.name(arguments...)``.  Los métodos  se definen como "
+"funciones dentro de la definición de la clase::"
 
 #: ../Doc/faq/programming.rst:1424
 msgid "What is self?"
-msgstr ""
+msgstr "¿Qué es self?"
 
 #: ../Doc/faq/programming.rst:1426
 msgid ""
@@ -2059,16 +2193,23 @@ msgid ""
 "c)`` for some instance ``x`` of the class in which the definition occurs; "
 "the called method will think it is called as ``meth(x, a, b, c)``."
 msgstr ""
+"Self es, básicamente, un nombre que se usa de forma convencional como primer "
+"argumento de un método.  Un método definido como ``meth(self, a, b, c)`` se "
+"le llama como ``x.meth(a, b, c)`` para una instancia ``x`` de la clase es "
+"que se definió; el método invocado pensará que se le ha invocado como "
+"``meth(x, a, b, c)``."
 
 #: ../Doc/faq/programming.rst:1431
 msgid "See also :ref:`why-self`."
-msgstr ""
+msgstr "Ver también :ref:`why-self`."
 
 #: ../Doc/faq/programming.rst:1435
 msgid ""
 "How do I check if an object is an instance of a given class or of a subclass "
 "of it?"
 msgstr ""
+"¿Cómo puedo comprobar si un objeto es una instancia de una clase dada o de "
+"una subclase de la misma?"
 
 #: ../Doc/faq/programming.rst:1437
 msgid ""
@@ -2078,6 +2219,12 @@ msgid ""
 "and can also check whether an object is one of Python's built-in types, e.g. "
 "``isinstance(obj, str)`` or ``isinstance(obj, (int, float, complex))``."
 msgstr ""
+"Usa la función incorporada ``isinstance(obj, cls)``.  Puedes comprobar si un "
+"objeto es una instancia de cualquier número de clases proporcionando una "
+"tupla en lugar de una sola clase, e.g. ``isinstance(obj, (class1, "
+"class2, ...))`` y, también, puedes comprobar si un objeto es uno de los "
+"tipos incorporados e.g. ``isinstance(obj, str)`` o ``isinstance(obj, (int, "
+"float, complex))``."
 
 #: ../Doc/faq/programming.rst:1443
 msgid ""
@@ -2088,16 +2235,24 @@ msgid ""
 "and doing a different thing based on what class it is.  For example, if you "
 "have a function that does something::"
 msgstr ""
+"Destacar que muchos programas no necesitan usar :func:`isinstance` de forma "
+"frecuente en clases definidas por el usuario.  Si estás desarrollando clases "
+"un mejor estilo orientado a objetos sería el de definir los métodos en las "
+"clases que encapsulan un comportamiento en particular en lugar de ir "
+"comprobando la clase del objeto e ir haciendo cosas en base a la clase que "
+"es.  Por ejemplo, si tienes una función que hace lo siguiente::"
 
 #: ../Doc/faq/programming.rst:1457
 msgid ""
 "A better approach is to define a ``search()`` method on all the classes and "
 "just call it::"
 msgstr ""
+"Un enfoque más adecuado sería definir un método ``search()`` en todas las "
+"clases e invocarlo::"
 
 #: ../Doc/faq/programming.rst:1472
 msgid "What is delegation?"
-msgstr ""
+msgstr "¿Qué es la delegación?"
 
 #: ../Doc/faq/programming.rst:1474
 msgid ""
@@ -2107,6 +2262,11 @@ msgid ""
 "implementation of the method you're interested in changing and delegates all "
 "other methods to the corresponding method of ``x``."
 msgstr ""
+"La delegación es una técnica orientada a objetos (también llamado un patrón "
+"de diseño). Digamos que tienes un objeto ``x`` y deseas cambiar el "
+"comportamiento de solo uno de sus métodos.  Puedes crear una nueva clase que "
+"proporciona una nueva implementación del método que te interesa cambiar y "
+"delega el resto de métodos al método correspondiente de ``x``."
 
 #: ../Doc/faq/programming.rst:1480
 msgid ""
@@ -2114,6 +2274,10 @@ msgid ""
 "following class implements a class that behaves like a file but converts all "
 "written data to uppercase::"
 msgstr ""
+"Los programadores Python pueden implementar la delegación de forma muy "
+"sencilla.  Por ejemplo, la siguiente clase implementa una clase que se "
+"comporta como un fichero pero convierte todos los datos escritos a "
+"mayúsculas::"
 
 #: ../Doc/faq/programming.rst:1495
 msgid ""
@@ -2124,6 +2288,12 @@ msgid ""
 "method; consult :ref:`the language reference <attribute-access>` for more "
 "information about controlling attribute access."
 msgstr ""
+"Aquí, la clase ``UpperOut``  redefine el método ``write()`` para convertir "
+"la cadena del argumento a mayúscula antes de invocar al método ``self."
+"_outfile.write()``.  El resto de métodos han sido delegados al objeto ``self."
+"_outfile``.  La delegación se consigue mediante el método ``__getattr__``; "
+"consulta :ref:`la referencia del lenguaje <attribute-access>` para obtener "
+"más información sobre cómo controlar el acceso a atributos."
 
 #: ../Doc/faq/programming.rst:1502
 msgid ""
@@ -2133,22 +2303,32 @@ msgid ""
 "implementation of :meth:`__setattr__` is roughly equivalent to the "
 "following::"
 msgstr ""
+"Ten en cuenta que para casos más generales la delegación puede ser algo más "
+"complicada. Cuando los atributos se deben colocar y recuperar la clase debe "
+"definir, también, un método :meth:`__setattr__`  y hay que hacerlo con "
+"cuidado.  La implementación básica de :meth:`__setattr__` es, "
+"aproximadamente, equivalente a lo siguiente::"
 
 #: ../Doc/faq/programming.rst:1513
 msgid ""
 "Most :meth:`__setattr__` implementations must modify ``self.__dict__`` to "
 "store local state for self without causing an infinite recursion."
 msgstr ""
+"Muchas implementaciones de :meth:`__setattr__` deben modificar ``self."
+"__dict__`` para almacenar el estado local para self sin provocar una "
+"recursión infinita."
 
 #: ../Doc/faq/programming.rst:1518
 msgid ""
 "How do I call a method defined in a base class from a derived class that "
 "overrides it?"
 msgstr ""
+"¿Cómo invoco a un método definido en una clase base desde una clase derivada "
+"que lo ha sobreescrito?"
 
 #: ../Doc/faq/programming.rst:1520
 msgid "Use the built-in :func:`super` function::"
-msgstr ""
+msgstr "Usa la función incorporada :func:`super`::"
 
 #: ../Doc/faq/programming.rst:1526
 msgid ""
@@ -2158,10 +2338,17 @@ msgid ""
 "meth(self, arguments...)``.  Here, ``Base.meth`` is an unbound method, so "
 "you need to provide the ``self`` argument."
 msgstr ""
+"Para versiones anteriores a la 3.0, puedes usar clases clásicas: Para la "
+"definición de una clase como ``class Derived(Base): ...`` puedes invocar el "
+"método ``meth()`` definido en ``Base`` (o una de las clases base de "
+"``Base``) como ``Base.meth(self, arguments...)``.  Aquí, ``Base.meth`` es un "
+"método no ligado y, por tanto, debes proporcionar el argumento ``self``."
 
 #: ../Doc/faq/programming.rst:1534
 msgid "How can I organize my code to make it easier to change the base class?"
 msgstr ""
+"¿Cómo puedo organizar mi código para hacer que sea más sencillo modificas la "
+"clase base?"
 
 #: ../Doc/faq/programming.rst:1536
 msgid ""
@@ -2172,22 +2359,34 @@ msgid ""
 "g. depending on availability of resources) which base class to use.  "
 "Example::"
 msgstr ""
+"Puedes definir un alias para la clase base, asignar la clase base real al "
+"alias antes de la definición de tu clase y usar el alias a lo largo de toda "
+"la clase.  Entonces, lo único que tienes que cambiar es el valor asignado al "
+"alias.  Sin pretenderlo, este truco también es útil si desear decidir de "
+"forma dinámica (e.g. dependiendo de la disponibilidad de recursos) qué clase "
+"base usar.  Ejemplo::"
 
 #: ../Doc/faq/programming.rst:1551
 msgid "How do I create static class data and static class methods?"
 msgstr ""
+"¿Cómo puedo crear datos estáticos de clase y métodos estáticos de clase?"
 
 #: ../Doc/faq/programming.rst:1553
 msgid ""
 "Both static data and static methods (in the sense of C++ or Java) are "
 "supported in Python."
 msgstr ""
+"Tanto los datos estáticos como los métodos estáticos (en el sentido de C++ o "
+"Java) están permitidos en Python."
 
 #: ../Doc/faq/programming.rst:1556
 msgid ""
 "For static data, simply define a class attribute.  To assign a new value to "
 "the attribute, you have to explicitly use the class name in the assignment::"
 msgstr ""
+"Para datos estáticos simplemente define un atributo de clase.  Para asignar "
+"un nuevo valor al atributo debes usar de forma explícita el nombre de la "
+"clase en la asignación::"
 
 #: ../Doc/faq/programming.rst:1568
 msgid ""
@@ -2195,6 +2394,10 @@ msgid ""
 "``isinstance(c, C)`` holds, unless overridden by ``c`` itself or by some "
 "class on the base-class search path from ``c.__class__`` back to ``C``."
 msgstr ""
+"``c.count`` también se refiere a ``C.count`` para cualquier ``c`` de tal "
+"forma que se cumpla ``isinstance(c, C)``, a no ser que ``c`` sea "
+"sobreescrita por si misma o por alguna clase contenida en la búsqueda de "
+"clases base desde``c.__class__`` hasta ``C``."
 
 #: ../Doc/faq/programming.rst:1572
 msgid ""
@@ -2203,58 +2406,76 @@ msgid ""
 "dict.  Rebinding of a class-static data name must always specify the class "
 "whether inside a method or not::"
 msgstr ""
+"Debes tener cuidado: dentro de un método de C, una asignación como ``self."
+"count = 42`` creará una nueva instancia sin relación con la original que se "
+"llamará \"count\" en el propio diccionario de ``self``.  El reunificar el "
+"nombre de datos estáticos de una clase debería llevar, siempre, a "
+"especificar la clase tanto si se produce desde dentro de un método como si "
+"no::"
 
 #: ../Doc/faq/programming.rst:1579
 msgid "Static methods are possible::"
-msgstr ""
+msgstr "Los métodos estáticos son posibles::"
 
 #: ../Doc/faq/programming.rst:1587
 msgid ""
 "However, a far more straightforward way to get the effect of a static method "
 "is via a simple module-level function::"
 msgstr ""
+"Sin embargo, una forma más directa de obtener el efecto de un método "
+"estático sería mediante una simple función a nivel de módulo::"
 
 #: ../Doc/faq/programming.rst:1593
 msgid ""
 "If your code is structured so as to define one class (or tightly related "
 "class hierarchy) per module, this supplies the desired encapsulation."
 msgstr ""
+"Si has estructurado tu código para definir una clase única (o una jerarquía "
+"de clases altamente relacionadas) por módulo, esto proporcionará la "
+"encapsulación deseada."
 
 #: ../Doc/faq/programming.rst:1598
 msgid "How can I overload constructors (or methods) in Python?"
-msgstr ""
+msgstr "¿Como puedo sobrecargar constructores (o métodos) en Python?"
 
 #: ../Doc/faq/programming.rst:1600
 msgid ""
 "This answer actually applies to all methods, but the question usually comes "
 "up first in the context of constructors."
 msgstr ""
+"Esta respuesta es aplicable, en realidad, a todos los métodos pero la "
+"pregunta suele surgir primero en el contexto de los constructores."
 
 #: ../Doc/faq/programming.rst:1603
 msgid "In C++ you'd write"
-msgstr ""
+msgstr "En C++ deberías escribir"
 
 #: ../Doc/faq/programming.rst:1612
 msgid ""
 "In Python you have to write a single constructor that catches all cases "
 "using default arguments.  For example::"
 msgstr ""
+"En Python solo debes escribir un único constructor que tenga en cuenta todos "
+"los casos usando los argumentos por defecto.  Por ejemplo::"
 
 #: ../Doc/faq/programming.rst:1622
 msgid "This is not entirely equivalent, but close enough in practice."
 msgstr ""
+"Esto no es totalmente equivalente pero, en la práctica, es muy similar."
 
 #: ../Doc/faq/programming.rst:1624
 msgid "You could also try a variable-length argument list, e.g. ::"
 msgstr ""
+"Podrías intentar, también una lista de argumentos de longitud variable, e."
+"g. ::"
 
 #: ../Doc/faq/programming.rst:1629
 msgid "The same approach works for all method definitions."
-msgstr ""
+msgstr "El mismo enfoque funciona para todas las definiciones de métodos."
 
 #: ../Doc/faq/programming.rst:1633
 msgid "I try to use __spam and I get an error about _SomeClassName__spam."
-msgstr ""
+msgstr "Intento usar __spam y obtengo un error sobre _SomeClassName__spam."
 
 #: ../Doc/faq/programming.rst:1635
 msgid ""
@@ -2265,6 +2486,12 @@ msgid ""
 "``classname`` is the current class name with any leading underscores "
 "stripped."
 msgstr ""
+"Nombres de variable con doble guión prefijado se convierten, "
+"'enmarañándolos', para proporcionar una forma simple pero efectiva de "
+"definir variables de clase privadas  Cualquier identificador de la forma "
+"``__spam`` (como mínimo dos guiones bajos como prefijo, como máximo un guión "
+"bajo como sufijo) se reemplaza con ``_classname__spam``, donde ``classname`` "
+"es el nombre de la clase eliminando cualquier guión bajo prefijado."
 
 #: ../Doc/faq/programming.rst:1641
 msgid ""
@@ -2273,14 +2500,19 @@ msgid ""
 "the object's ``__dict__``.  Many Python programmers never bother to use "
 "private variable names at all."
 msgstr ""
+"Esto no garantiza la privacidad: un usuario externo puede acceder, de forma "
+"deliberada y si así lo desea, al atributo \"_classname__spam\",  y los "
+"valores privados son visibles en el ``__dict__`` del objeto.  Muchos "
+"programadores Python no se suelen molestar en usar nombres privados de "
+"variables."
 
 #: ../Doc/faq/programming.rst:1648
 msgid "My class defines __del__ but it is not called when I delete the object."
-msgstr ""
+msgstr "Mi clase define __del__ pero no se le invoca cuando borro el objeto."
 
 #: ../Doc/faq/programming.rst:1650
 msgid "There are several possible reasons for this."
-msgstr ""
+msgstr "Existen varias razones posibles para que suceda así."
 
 #: ../Doc/faq/programming.rst:1652
 msgid ""
@@ -2288,6 +2520,9 @@ msgid ""
 "decrements the object's reference count, and if this reaches zero :meth:"
 "`__del__` is called."
 msgstr ""
+"La declaración del no invoca, necesariamente, al método :meth:`__del__` -- "
+"simplemente reduce el conteo de referencias del objeto y, si se reduce a "
+"cero entonces es cuando se invoca a :meth:`__del__`."
 
 #: ../Doc/faq/programming.rst:1656
 msgid ""
@@ -2302,6 +2537,18 @@ msgid ""
 "run :func:`gc.collect` to force a collection, but there *are* pathological "
 "cases where objects will never be collected."
 msgstr ""
+"Si tus estructuras de datos contienen enlaces circulares (e.g. un árbol en "
+"el cual cada hijo tiene una referencia al padre y cada padre tiene una lista "
+"de hijos) el conteo de referencias no alcanzará nunca el valor de cero.  De "
+"vez en cuando, Python ejecuta un algoritmo para detectar esos ciclos pero el "
+"recolector de basura debe ejecutarse un rato después de que se desvanezca la "
+"última referencia a tu estructura de datos, de tal forma que tu método :meth:"
+"`__del__` se pueda invocar en un momento aleatorio que no resulte "
+"inconveniente. Esto no es conveniente si estás intentando reproducir un "
+"problema. Peor, el orden en el que se ejecutan los métodos :meth:`__del__` "
+"del objeto. es arbitrario  Puedes ejecutar :func:`gc.collect` para forzar "
+"una recopilación pero *existen* casos patológicos en los cuales los objetos "
+"nunca serán recolectados."
 
 #: ../Doc/faq/programming.rst:1667
 msgid ""
@@ -2312,6 +2559,13 @@ msgid ""
 "``close()`` and ``close()`` should make sure that it can be called more than "
 "once for the same object."
 msgstr ""
+"A pesar del recolector de ciclos, siempre será buena idea definir un método "
+"``close()`` de forma explícita en objetos que debe ser llamado en el momento "
+"que has terminado con ellos.  El método ``close()`` puede, en ese momento, "
+"eliminar atributos que se refieren a subobjetos.  No invoques directamente "
+"a :meth:`__del__` -- :meth:`__del__` debe invocar a ``close()`` y "
+"``close()`` debe asegurarse que puede ser invocado más de una vez en el "
+"mismo objeto."
 
 #: ../Doc/faq/programming.rst:1674
 msgid ""
@@ -2320,16 +2574,24 @@ msgid ""
 "reference count. Tree data structures, for instance, should use weak "
 "references for their parent and sibling references (if they need them!)."
 msgstr ""
+"Otra forma de evitar referencias cíclicas sería usando el módulo :mod:"
+"`weakref`, que permite apuntar hacia objetos sin incrementar su conteo de "
+"referencias. Las estructuras de datos en árbol, por ejemplo, deberían usar "
+"referencias débiles para las referencias del padre y hermanos (¡si es que "
+"las necesitan!)."
 
 #: ../Doc/faq/programming.rst:1687
 msgid ""
 "Finally, if your :meth:`__del__` method raises an exception, a warning "
 "message is printed to :data:`sys.stderr`."
 msgstr ""
+"Finalmente, si tu método :meth:`__del__` lanza una excepción, se manda un "
+"mensaje de alerta a :data:`sys.stderr`."
 
 #: ../Doc/faq/programming.rst:1692
 msgid "How do I get a list of all instances of a given class?"
 msgstr ""
+"¿Cómo puedo obtener una lista de todas las instancias de una clase dada?"
 
 #: ../Doc/faq/programming.rst:1694
 msgid ""
@@ -2337,10 +2599,14 @@ msgid ""
 "type). You can program the class's constructor to keep track of all "
 "instances by keeping a list of weak references to each instance."
 msgstr ""
+"Python no hace seguimiento de todas las instancias de una clase (o de los "
+"tipos incorporados). Puedes programar el constructor de una clase para que "
+"haga seguimiento de todas sus instancias manteniendo una lista de "
+"referencias débiles a cada instancia."
 
 #: ../Doc/faq/programming.rst:1700
 msgid "Why does the result of ``id()`` appear to be not unique?"
-msgstr ""
+msgstr "¿Por qué el resultado de ``id()`` no parece ser único?"
 
 #: ../Doc/faq/programming.rst:1702
 msgid ""
@@ -2350,6 +2616,12 @@ msgid ""
 "memory, the next freshly created object is allocated at the same position in "
 "memory.  This is illustrated by this example:"
 msgstr ""
+"La función incorporada :func:`id` devuelve un entero que se garantiza que "
+"sea único durante la vida del objeto.  Debido a que en CPython esta es la "
+"dirección en memoria del objeto, sucede que, frecuentemente, después de que "
+"un objeto se elimina de la memoria el siguiente objeto recién creado se "
+"localiza en la misma posición en memoria.  Esto se puede ver ilustrado en "
+"este ejemplo:"
 
 #: ../Doc/faq/programming.rst:1713
 msgid ""
@@ -2358,14 +2630,18 @@ msgid ""
 "objects whose id you want to examine are still alive, create another "
 "reference to the object:"
 msgstr ""
+"Las dos ids pertenecen a dos objetos 'entero' diferentes que se crean antes "
+"y se eliminan inmediatamente después de la ejecución de la invocación a "
+"``id()``.  Para estar seguro que los objetos cuya id quieres examinar siguen "
+"vivos crea otra referencia al objeto:"
 
 #: ../Doc/faq/programming.rst:1726
 msgid "Modules"
-msgstr ""
+msgstr "Módulos"
 
 #: ../Doc/faq/programming.rst:1729
 msgid "How do I create a .pyc file?"
-msgstr ""
+msgstr "¿Cómo creo un fichero .pyc?"
 
 #: ../Doc/faq/programming.rst:1731
 msgid ""
@@ -2377,6 +2653,14 @@ msgid ""
 "file, and ends with ``.pyc``, with a middle component that depends on the "
 "particular ``python`` binary that created it.  (See :pep:`3147` for details.)"
 msgstr ""
+"Cuando se importa un módulo por primera vez (o cuando el código fuente ha "
+"cambiado desde que el fichero compilado se creó) un fichero ``.pyc`` que "
+"contiene el código compilado se debería crear en la subcarpeta "
+"``__pycache__`` del directorio que contiene al fichero``.py``.  El fichero "
+"``.pyc`` tendrá un nombre que empezará con el mismo nombre que el del "
+"fichero  ``.py`` y terminará con ``.pyc``, con un componente intermedio que "
+"dependerá del binario ``python`` en particular que lo creó.  (Ver :pep:"
+"`3147` para detalles.)"
 
 #: ../Doc/faq/programming.rst:1739
 msgid ""
@@ -2386,6 +2670,11 @@ msgid ""
 "example, if you develop as one user but run as another, such as if you are "
 "testing with a web server."
 msgstr ""
+"Una razón por la que no se cree un fichero ``.pyc`` podría ser debido a un "
+"problema de permisos del directorio que contiene al fichero fuente, lo que "
+"significa que el subdirectorio ``__pycache__`` no se puede crear. Esto puede "
+"suceder, por ejemplo, si desarrollas como un usuario pero lo ejecutas como "
+"otro, como si estuvieras probando en un servidor web."
 
 #: ../Doc/faq/programming.rst:1744
 msgid ""
@@ -2395,6 +2684,11 @@ msgid ""
 "``__pycache__`` subdirectory and write the compiled module to that "
 "subdirectory."
 msgstr ""
+"Hasta que no definas la variable de entorno :envvar:"
+"`PYTHONDONTWRITEBYTECODE`, la creación de un fichero .pyc se hará "
+"automáticamente si importas un módulo y Python dispone de la habilidad "
+"(permisos, espacio libre, etc...) para crear un subdirectorio "
+"``__pycache__`` y escribir un módulo compilado en ese subdirectorio."
 
 #: ../Doc/faq/programming.rst:1749
 msgid ""
@@ -2405,6 +2699,12 @@ msgid ""
 "``xyz`` because ``xyz`` is imported, but no ``.pyc`` file will be created "
 "for ``foo`` since ``foo.py`` isn't being imported."
 msgstr ""
+"La ejecución de un script principal Python no se considera una importación y "
+"no se crea el fichero ``.pyc``.  Por ejemplo, Si tienes un módulo principal "
+"``foo.py`` que importa a otro módulo ``xyz.py``, cuando ejecutas ``foo`` "
+"(mediante un comando de la shell ``python foo.py``), se creará un fichero ``."
+"pyc`` para ``xyz`` porque ``xyz`` ha sido importado, pero no se creará un "
+"fichero ``.pyc`` para ``foo`` ya que ``foo.py`` no ha sido importado."
 
 #: ../Doc/faq/programming.rst:1756
 msgid ""
@@ -2412,12 +2712,18 @@ msgid ""
 "pyc`` file for a module that is not imported -- you can, using the :mod:"
 "`py_compile` and :mod:`compileall` modules."
 msgstr ""
+"Si necesitas crear un fichero ``.pyc`` también para ``foo`` -- es decir, "
+"crear un fichero ``.pyc`` para un módulo que no ha sido importado -- puedes "
+"usar los módulos :mod:`py_compile` y :mod:`compileall`."
 
 #: ../Doc/faq/programming.rst:1760
 msgid ""
 "The :mod:`py_compile` module can manually compile any module.  One way is to "
 "use the ``compile()`` function in that module interactively::"
 msgstr ""
+"El módulo :mod:`py_compile` puede compilar manualmente cualquier módulo.  "
+"Una forma sería usando la función ``compile()`` de ese módulo de forma "
+"interactiva::"
 
 #: ../Doc/faq/programming.rst:1766
 msgid ""
@@ -2425,6 +2731,9 @@ msgid ""
 "location as ``foo.py`` (or you can override that with the optional parameter "
 "``cfile``)."
 msgstr ""
+"Esto escribirá ``.pyc`` en el subdirectorio ``__pycache__`` en la misma "
+"localización en la que se encuentre ``foo.py`` (o, puedes sobreescribir ese "
+"comportamiento con el parámetro opcional ``cfile``)."
 
 #: ../Doc/faq/programming.rst:1770
 msgid ""
@@ -2433,10 +2742,14 @@ msgid ""
 "running ``compileall.py`` and providing the path of a directory containing "
 "Python files to compile::"
 msgstr ""
+"Puedes compilar automáticamente todos los ficheros en un directorio o "
+"directorios usando el módulo :mod:`compileall`.  Lo puedes hacer desde la "
+"línea de comandos ejecutando ``compileall.py`` y proporcionando una ruta al "
+"directorio que contiene los ficheros Python a compilar::"
 
 #: ../Doc/faq/programming.rst:1779
 msgid "How do I find the current module name?"
-msgstr ""
+msgstr "¿Cómo puedo encontrar el nombre del módulo en uso?"
 
 #: ../Doc/faq/programming.rst:1781
 msgid ""
@@ -2446,75 +2759,88 @@ msgid ""
 "importing them also provide a command-line interface or a self-test, and "
 "only execute this code after checking ``__name__``::"
 msgstr ""
+"Un módulo puede encontrar su propio nombre mirando en la variable global "
+"predeterminada ``__name__``.  Si tiene el valor ``'__main__'``, el programa "
+"se está ejecutando como un script.  Muchos módulos que se usan, "
+"generalmente, importados en otro script proporcionan, además, una interfaz "
+"para la línea de comandos o para probarse a si mismos y solo ejecutan código "
+"después de comprobar ``__name__``::"
 
 #: ../Doc/faq/programming.rst:1796
 msgid "How can I have modules that mutually import each other?"
-msgstr ""
+msgstr "¿Cómo podría tener módulos que se importan mutuamente entre ellos?"
 
 #: ../Doc/faq/programming.rst:1798
 msgid "Suppose you have the following modules:"
-msgstr ""
+msgstr "Supón que tienes los siguientes módulos:"
 
 #: ../Doc/faq/programming.rst:1800
 msgid "foo.py::"
-msgstr ""
+msgstr "foo.py::"
 
 #: ../Doc/faq/programming.rst:1805
 msgid "bar.py::"
-msgstr ""
+msgstr "bar.py::"
 
 #: ../Doc/faq/programming.rst:1810
 msgid "The problem is that the interpreter will perform the following steps:"
-msgstr ""
+msgstr "El problema es que el intérprete realizará los siguientes pasos:"
 
 #: ../Doc/faq/programming.rst:1812
 msgid "main imports foo"
-msgstr ""
+msgstr "main importa a foo"
 
 #: ../Doc/faq/programming.rst:1813
 msgid "Empty globals for foo are created"
-msgstr ""
+msgstr "Se crea un *globals* vacío para foo"
 
 #: ../Doc/faq/programming.rst:1814
 msgid "foo is compiled and starts executing"
-msgstr ""
+msgstr "foo se compila y se comienza a ejecutar"
 
 #: ../Doc/faq/programming.rst:1815
 msgid "foo imports bar"
-msgstr ""
+msgstr "foo importa a bar"
 
 #: ../Doc/faq/programming.rst:1816
 msgid "Empty globals for bar are created"
-msgstr ""
+msgstr "Se crea un *globals* vacío para bar"
 
 #: ../Doc/faq/programming.rst:1817
 msgid "bar is compiled and starts executing"
-msgstr ""
+msgstr "bar se compila y se comienza a ejecutar"
 
 #: ../Doc/faq/programming.rst:1818
 msgid ""
 "bar imports foo (which is a no-op since there already is a module named foo)"
 msgstr ""
+"bar importa a foo (lo cual no es una opción ya que ya hay un módulo que se "
+"llama foo)"
 
 #: ../Doc/faq/programming.rst:1819
 msgid "bar.foo_var = foo.foo_var"
-msgstr ""
+msgstr "bar.foo_var = foo.foo_var"
 
 #: ../Doc/faq/programming.rst:1821
 msgid ""
 "The last step fails, because Python isn't done with interpreting ``foo`` yet "
 "and the global symbol dictionary for ``foo`` is still empty."
 msgstr ""
+"El último paso falla debido a que Python todavía no ha terminado de "
+"interpretar a ``foo`` y el diccionario de símbolos global para ``foo`` "
+"todavía se encuentra vacío."
 
 #: ../Doc/faq/programming.rst:1824
 msgid ""
 "The same thing happens when you use ``import foo``, and then try to access "
 "``foo.foo_var`` in global code."
 msgstr ""
+"Lo mismo ocurre cuando usas ``import foo`` y luego tratas de acceder a ``foo."
+"foo_var`` en un código global."
 
 #: ../Doc/faq/programming.rst:1827
 msgid "There are (at least) three possible workarounds for this problem."
-msgstr ""
+msgstr "Existen (al menos) tres posibles soluciones para este problema."
 
 #: ../Doc/faq/programming.rst:1829
 msgid ""
@@ -2524,58 +2850,77 @@ msgid ""
 "only.  This means everything from an imported module is referenced as "
 "``<module>.<name>``."
 msgstr ""
+"Guido van Rossum recomienda evitar todos los usos de ``from <module> "
+"import ...``, y colocar todo el código dentro de funciones.  La "
+"inicialización de variables globales y variables de clase debería usar "
+"únicamente constantes o funciones incorporadas .  Esto significa que todo se "
+"referenciará como ``<module>.<name>`` desde un módulo importado."
 
 #: ../Doc/faq/programming.rst:1834
 msgid ""
 "Jim Roskind suggests performing steps in the following order in each module:"
 msgstr ""
+"Jim Roskind sugiere realizar los siguientes pasos en el siguiente orden en "
+"cada módulo:"
 
 #: ../Doc/faq/programming.rst:1836
 msgid ""
 "exports (globals, functions, and classes that don't need imported base "
 "classes)"
 msgstr ""
+"exportar (*globals*, funciones y clases que no necesitan clases bases "
+"importadas)"
 
 #: ../Doc/faq/programming.rst:1838
 msgid "``import`` statements"
-msgstr ""
+msgstr "``import`` declaraciones"
 
 #: ../Doc/faq/programming.rst:1839
 msgid ""
 "active code (including globals that are initialized from imported values)."
 msgstr ""
+"código activo (incluyendo *globals* que han sido inicializados desde valores "
+"importados)."
 
 #: ../Doc/faq/programming.rst:1841
 msgid ""
 "van Rossum doesn't like this approach much because the imports appear in a "
 "strange place, but it does work."
 msgstr ""
+"este enfoque no le gusta mucho a van Rossum debido a que los import aparecen "
+"en lugares extraños, pero funciona."
 
 #: ../Doc/faq/programming.rst:1844
 msgid ""
 "Matthias Urlichs recommends restructuring your code so that the recursive "
 "import is not necessary in the first place."
 msgstr ""
+"Matthias Urlichs recomienda reestructurar tu código de tal forma que un "
+"import recursivo no sea necesario."
 
 #: ../Doc/faq/programming.rst:1847
 msgid "These solutions are not mutually exclusive."
-msgstr ""
+msgstr "Estas soluciones no son mutuamente excluyentes."
 
 #: ../Doc/faq/programming.rst:1851
 msgid "__import__('x.y.z') returns <module 'x'>; how do I get z?"
-msgstr ""
+msgstr "__import__('x.y.z') devuelve <module 'x'>; ¿cómo puedo obtener z?"
 
 #: ../Doc/faq/programming.rst:1853
 msgid ""
 "Consider using the convenience function :func:`~importlib.import_module` "
 "from :mod:`importlib` instead::"
 msgstr ""
+"Considera, en su lugar, usa la función de conveniencia :func:`~importlib."
+"import_module` de :mod:`importlib`::"
 
 #: ../Doc/faq/programming.rst:1860
 msgid ""
 "When I edit an imported module and reimport it, the changes don't show up.  "
 "Why does this happen?"
 msgstr ""
+"Cuando edito un módulo importado y lo reimporto los cambios no tienen "
+"efecto. ¿Por qué sucede esto?"
 
 #: ../Doc/faq/programming.rst:1862
 msgid ""
@@ -2585,6 +2930,12 @@ msgid ""
 "module, the basic module would be parsed and re-parsed many times.  To force "
 "re-reading of a changed module, do this::"
 msgstr ""
+"Por razones de consistencia además de por consistencia, Python solo lee el "
+"fichero del módulo la primera vez que el módulo se importa.  Si no lo "
+"hiciera así, un programa escrito en muchos módulos donde cada módulo importa "
+"al mismo módulo básico estaría analizando sintácticamente el mismo módulo "
+"básico muchas veces.  Para forzar una relectura de un módulo que ha sido "
+"modificado haz lo siguiente::"
 
 #: ../Doc/faq/programming.rst:1872
 #, python-format
@@ -2592,6 +2943,8 @@ msgid ""
 "Warning: this technique is not 100% fool-proof.  In particular, modules "
 "containing statements like ::"
 msgstr ""
+"Alerta: esta técnica no es 100% segura.  En particular, los módulos que "
+"contienen declaraciones como ::"
 
 #: ../Doc/faq/programming.rst:1877
 msgid ""
@@ -2600,9 +2953,15 @@ msgid ""
 "updated to use the new class definition.  This can result in the following "
 "paradoxical behaviour::"
 msgstr ""
+"continuarán funcionando con la versión antigua de los objetos importados.  "
+"Si el módulo contiene definiciones de clase, instancias de clase ya "
+"existentes *no* se actualizarán para usar la nueva definición de la clase.  "
+"Esto podría resultar en el comportamiento paradójico siguiente::"
 
 #: ../Doc/faq/programming.rst:1890
 msgid ""
 "The nature of the problem is made clear if you print out the \"identity\" of "
 "the class objects::"
 msgstr ""
+"La naturaleza del problema se hace evidente si muestras la \"identity\" de "
+"los objetos clase::"
