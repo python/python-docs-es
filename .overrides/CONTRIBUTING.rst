@@ -25,7 +25,7 @@ contribución queremos señalar algunos lineamientos generales.
   regionalismos muy propios de un único lugar) 
 
 - La documentación es ENORME, cualquier traba que encuentres siempre puedes 
-  marcar el texto como “fuzzi” o para revisar en el futuro. 
+  marcar el texto como “fuzzy” o para revisar en el futuro. 
   No pierdas horas buscando la palabra perfecta.  
 
 - En muchos casos el mejor criterio es pensar en el vocabulario que utilizamos
