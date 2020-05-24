@@ -5,8 +5,10 @@
 =======================
 
 
-Esta página contiene la Memoria de Traducción, con todos los términos que hemos ido teniendo dudas,
-y coordinamos cuál era la mejor traducción dado el contexto.
+Esta página contiene la Memoria de Traducción, con todos los términos dudosos que hemos ido
+resolviendo, coordinandonos en cuál era la mejor traducción dado el contexto.
+
+También incluye una serie de reglas de estilo extraídas de fuentes reconocidas.
 
 Si quieres ver cómo se ha utilizado un término anteriormente, puedes utilizar la herramienta
 ``find_in_po.py`` que muestra dónde se usó ese término: original y traducción lado a lado:
@@ -26,6 +28,37 @@ Si quieres ver cómo se ha utilizado un término anteriormente, puedes utilizar 
    ├────────────────────────────────────────────────────────────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────┤
    │ Use docstrings.                                                                                │ Usar ``docstrings``.                                                                          │
    ├────────────────────────────────────────────────────────────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────┤
+
+Para términos que aún no han sido resueltos, se lista a continuación las fuentes consultadas más
+habituales y con cierta referencialidad en el mundo hispanohablante o de la traducción:
+
+Fuentes recomendadas
+====================
+
+  Diccionario Panhispánico de dudas
+  https://www.rae.es/dpd/
+  Obra orientada a resolver dudas en diferentes áreas de la lengua española: ortografía, sintaxis,
+  gramática ...
+
+  Wordreference
+  https://www.wordreference.com/
+  Diccionario y traductor multilingue
+
+  Linguee.es
+  https://www.linguee.es/
+  Diccionario y traductor multilíngue con millones de traducciones indexadas. De los creadores
+  de DeepL
+
+  Fundéu BBVA - Fundación para el español urgente
+  https://www.fundeu.es/
+  Fundación dedicada a la resolución de dudas. Creada originalmente por la agencia estatal
+  española de noticias EFE, a partir de su departamento y libro de estilo.
+
+  IATE - European Union terminology
+  https://iate.europa.eu/home
+  Base de datos de las traducciones oficiales de la Unión Europea. Permite búsqueda por término
+  y sector.
+
 
 
 Términos y bigramas
@@ -75,7 +108,34 @@ Términos y bigramas
 
      realease
       version ``HOWTO``  
-   
+
+
+     return type
+       tipo de retorno ``library/typing.po``
+       tipo retornado
+       tipo devuelto
+         Nota: en algunos contextos es mejor usar el participio (retornado/devuelto), se prefiere
+         retornado por semejanza con el original inglés "return".
+
+     runtime
+       tiempo de ejecución  ``tutorial/classes.po``
+
+     static type checker
+       Validador estático de tipos
+         Notas: en general mantener la mayúscula aunque no es necesario,
+         usar validación cuando se refiera a la acción y no al agente.
+
+     third-party
+       de terceros ``library/typing.po``
+
+     type hint
+       indicador de tipo  ``library/typing.po``
+
+     type annotation  ``library/typing.po``
+       anotación de tipo
+         Nota: úsese como sinónimo de *type hint*, aunque en el texto se sobreentiende que anotación
+         es algo accesorio, un comentario, y type hint implica que el Validador hará comprobaciones
+
      underscore
       guión bajo ``glossary.po``
 
@@ -113,3 +173,9 @@ Estas son las reglas de estilo que hemos convenido hasta el momento:
   `en`: [...] where the error was detected.
   `es`: [...] donde se detectó el error.
   Nota cf. "fue detectado"
+
+* Al incluír voces latinas (in situ, a priori ...) se recomienda el uso de *cursiva* salvo en
+  aquellas expresiones más habituales como etcetera o viceversa, por ser considerados
+  extranjerismos.
+
+  Referencia: https://www.fundeu.es/recomendacion/locuciones-latinas-latinismos-errores-frecuentes-621/
