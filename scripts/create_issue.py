@@ -15,6 +15,16 @@ pofile = PoFileStats(Path(pofilename))
 g = Github(os.environ.get('GITHUB_TOKEN'))
 
 repo = g.get_repo('PyCampES/python-docs-es')
+
+
+issues = repo.get_issues(state='open')
+for issue in issues:
+    if pofilename in issue.title:
+        msg = f'There is a similar issue already created at {issue.html_url}.\nDo you want to create it anyways? [y/N] '
+        answer = input(msg)
+        if answer != 'y':
+            sys.exit(1)
+
 # https://pygithub.readthedocs.io/en/latest/github_objects/Repository.html#github.Repository.Repository.create_issue
 issue = repo.create_issue(
     title=f'Translate `{pofilename}`',
