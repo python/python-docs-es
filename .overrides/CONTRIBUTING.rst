@@ -126,4 +126,4 @@ Y luego accediendo a http://localhost:8000/
 .. _nuestro canal de Telegram: https://t.me/python_docs_es
 .. _Memoria de traducción: https://python-docs-es.readthedocs.io/page/translation-memory.html
 .. _la traducción al Portugués: https://docs.python.org/pt-br/3/
-.. _lista de issues en GitHub: https://github.com/python/python-docs-es/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+no%3Aassignee+translat
+.. _lista de issues en GitHub: https://github.com/python/python-docs-es/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+no%3Aassignee+translate
