@@ -64,51 +64,54 @@ Fuentes recomendadas
 Términos y bigramas
 ===================
 
-Éstos son las palabras que hemos coordinado hasta el momento:
-
+Dividimos esta sección en dos partes, los términos que se traducen y los que mantenemos el original.
+Éstas son las palabras que hemos coordinado hasta el momento:
 
      awaitable
-      aguardable ``glossary``
+       aguardable ``glossary``
 
      built-in
-      incorporada ``glossary.po``
+       incorporada ``glossary.po``
 
      built-in exceptions
-      excepciones predefinidas ``tutorial/errors.po``
-
-     bytecodes
-      queda igual ``glossary.po``
+       excepciones predefinidas ``tutorial/errors.po``
 
      callable
-      invocable ``glossary.po``
+       invocable ``glossary.po``
+       Nota: en ocasiones es mejora mantener callable, especialmente cuando se refiere directamente
+       a la anotación de typing Callable
 
      deallocated
-      desalojable ``glossary.po``
-
-     docstring
-      docstring. ``library/idle.po``
+       desalojable ``glossary.po``
 
      handler
-      gestor ``tutorial/errors.po``
+       gestor ``tutorial/errors.po``
 
      handle exception
-      Gestionar excepción. ``tutorial/inputoutput.po``
+       gestionar [una] excepción. ``tutorial/inputoutput.po``
+       gestionar excepciones
 
      loop
-      Bucle. ``tutorial/controlflow.po``
+       bucle ``tutorial/controlflow.po``
 
      mapping
-      mapeo ``glossary.po``
+       mapeo ``glossary.po``
 
      named tuple.
-      tupla nombrada ``glossary.po``
+       tupla nombrada ``glossary.po``
 
      path
-      Ruta. ``glossary.po``
+       ruta ``glossary.po``
 
-     realease
-      version ``HOWTO``  
+     pythonic
+       *pythónico*
+       idiomático
 
+       Estes dos términos son próximos en el contexto que se usan, utilizar complementariamente
+       según el contexto. Referencia: https://docs.python-guide.org/writing/style/
+
+     release
+       version ``HOWTO``
 
      return type
        tipo de retorno ``library/typing.po``
@@ -137,7 +140,19 @@ Términos y bigramas
          es algo accesorio, un comentario, y type hint implica que el Validador hará comprobaciones
 
      underscore
-      guión bajo ``glossary.po``
+       guión bajo ``glossary.po``
+
+
+Términos que no se traducen
+---------------------------
+
+En general, estos términos no se traducen, con las excepciones donde una traducción menos literal
+hace omitir o substituír el término.
+
+     bytes
+     bytecodes
+     docstring
+     unicode
 
 
 Reglas de estilo
