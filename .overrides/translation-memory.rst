@@ -147,13 +147,19 @@ Términos que no se traducen
 ---------------------------
 
 En general, estos términos no se traducen, con las excepciones donde una traducción menos literal
-hace omitir o substituír el término.
+hace omitir o substituír el término. Al ser extranjerismos deben estar en cursiva (rodeados con
+asterísticos).
 
      bytes
      bytecodes
      docstring
+     script
+     token
      unicode
 
+Puedes revisar los términos no traducidos usando la siguiente regex en tu IDE:
+
+    \*[^*]+\*
 
 Reglas de estilo
 ================
