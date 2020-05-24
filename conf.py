@@ -73,6 +73,12 @@ latex_documents = [
      _stdauthor, 'manual'),
 ]
 
+extensions.extend([
+    'sphinx_tabs.tabs',
+    'sphinxemoji.sphinxemoji',
+])
+
+
 def setup(app):
 
     def add_contributing_banner(app, doctree):
