@@ -169,3 +169,14 @@ Puedes ver el resultado con tu navegador de internet (Firefox, Chrome, etc) ejec
   make serve
 
 Y luego accediendo a http://localhost:8000/
+
+
+¿Tienen una lista de correo?
+----------------------------
+
+Sí.
+
+No tiene mucho tráfico aún ya que estamos usando más el canal de Telegram por el momento.
+Puedes suscribirte ingresando aquí_.
+
+.. _aquí: https://mail.python.org/mailman3/lists/docs-es.python.org/
