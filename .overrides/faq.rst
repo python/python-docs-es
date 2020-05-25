@@ -150,3 +150,22 @@ Luego, cada vez que realices un commit se ejecutará ``pre-commit`` y validará 
 
    Si por cualquier motivo no está funcionando ``pre-commit`` y no te deja hacer *push* de tus cambios,
    lo puedes desinstalar simplemente mediante: ``pre-commit uninstall``.
+
+
+¿Cómo puedo hacer un *build* local de la documentación?
+-------------------------------------------------------
+
+.. note::
+
+   Necesitas un poco de conocimiento para instalar ``make`` en tu sistema operativo.
+
+Desde el mismo directorio ``python-docs-es/`` que se creó cuando hiciste ``git clone`` puedes ejecutar::
+
+  make build
+
+Este comando demorará unos minutos y generará toda la documentación en formato HTML en tu computadora.
+Puedes ver el resultado con tu navegador de internet (Firefox, Chrome, etc) ejecutando::
+
+  make serve
+
+Y luego accediendo a http://localhost:8000/
