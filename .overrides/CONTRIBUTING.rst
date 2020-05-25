@@ -151,34 +151,15 @@ A tener en cuenta
 Previsualizar los cambios
 -------------------------
 
-Hay dos formas de visualizar, junto con el resultado final de la documentación,
-los cambios que has hecho.
+Una vez que hayas hecho un *Pull Request* en GitHub, este mostrará al final de página una sección de "check".
+Allí debería haber uno que diga ``docs/readthedocs.org:python-docs-es`` y al lado un link de "Details".
 
-Read the Docs
-`````````````
+.. figure:: readthedocs-preview.png
+   :width: 85%
+   :align: center
 
-Una vez que hayas hecho un Pull Request en GitHub, este mostrará al final de
-página una sección de "check".  Allí debería haber uno que diga
-``docs/readthedocs.org:python-docs-es`` y al lado un link de "Details".
-
-Haciendo click en ese link verás una versión de la documentación con tus
-cambios.
-
-Construcción local
-``````````````````
-
-Desde el mismo directorio ``python-docs-es/`` que se creó cuando hiciste ``git
-clone`` puedes ejecutar::
-
-  make build
-
-Este comando demorará unos minutos y generará toda la documentación en formato
-HTML en tu computadora.  Puedes ver el resultado con tu navegador de internet
-(Firefox, Chrome, etc) ejecutando::
-
-  make serve
-
-Y luego accediendo a http://localhost:8000/
+Haciendo click en ese link verás una versión de la documentación completa que incluirá todos tus cambios.
+Tendrás que navegar hasta el archivo que hayas cambiado para ver cómo se visualiza luego del build.
 
 
 .. _repositorio: https://github.com/python/python-docs-es
