@@ -89,6 +89,13 @@ y repetir el proceso para *Smart Dashes*.
    Desactivar "Smart Quotes" y "Smart Dashes"
 
 
+.. tip::
+
+   Este comando te puede ayudar a cambiar todas las comillas::
+
+     sed -i **/*.po -e "s|[“”]|\\\"|g"
+
+
 ¿Qué parte de ``:ref:`` debo traducir?
 --------------------------------------
 
