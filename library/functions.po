@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-07 14:37+0200\n"
-"PO-Revision-Date: 2020-05-27 01:33+0200\n"
+"PO-Revision-Date: 2020-05-28 01:40+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
 "Language-Team: python-doc-esMIME-Version: 1.0\n"
@@ -2233,6 +2233,8 @@ msgid ""
 "``'namereplace'`` (also only supported when writing) replaces unsupported "
 "characters with ``\\N{...}`` escape sequences."
 msgstr ""
+"``'namereplace'`` reemplaza caracteres no soportados con secuencias de "
+"escape  ``\\N{...}`` (y también está sólo soportado en escritura). "
 
 #: ../Doc/library/functions.rst:1160
 msgid ""
@@ -2240,6 +2242,9 @@ msgid ""
 "applies to text mode).  It can be ``None``, ``''``, ``'\\n'``, ``'\\r'``, "
 "and ``'\\r\\n'``.  It works as follows:"
 msgstr ""
+"*newline* controla cómo funciona el modo :term:`universal newlines` (solo "
+"aplica a modo texto).  Puede ser  ``None``, ``''``, ``'\\n'``, ``'\\r'``, y "
+"``'\\r\\n'``.  Funciona de la siguiente manera:"
 
 #: ../Doc/library/functions.rst:1164
 msgid ""
@@ -2251,6 +2256,15 @@ msgid ""
 "has any of the other legal values, input lines are only terminated by the "
 "given string, and the line ending is returned to the caller untranslated."
 msgstr ""
+"Cuando se está leyendo entrada desde el flujo, si *newline* es ``None``, el "
+"modo *universal newlines* es activado.  Las líneas en la entrada pueden "
+"terminar en  ``'\\n'``, ``'\\r'``, o ``'\\r\\n'``, y serán traducidas a  "
+"``'\\n'``  antes de ser retornadas a la entidad que llama. Si es ``''``, el "
+"modo *universal newlines* estará activado pero los finales de línea se "
+"retornan sin traducir a la entidad que llama. Si tiene cualquiera de los "
+"otros valoras válidos, las líneas de entrada estarán terminadas sólo por la "
+"cadena dada, y los finales de línea serán retornados sin traducir a la "
+"entidad que llama."
 
 #: ../Doc/library/functions.rst:1172
 msgid ""
@@ -2260,6 +2274,12 @@ msgid ""
 "takes place.  If *newline* is any of the other legal values, any ``'\\n'`` "
 "characters written are translated to the given string."
 msgstr ""
+"Cuando se escribe salida al flujo, si *newline* es  ``None``, cualquier "
+"carácter ``'\\n'`` escrito es traducido al separador de línea por defecto en "
+"el sistema, :data:`os.linesep`. Si *newline* es ``''`` o ``'\\n'``, entonces "
+"no se produce ninguna traducción.  Si *newline* toma cualquiera de los otros "
+"valores válidos, entonces cualquier carácter ``'\\n'``  escrito es traducido "
+"a la cadena indicada."
 
 #: ../Doc/library/functions.rst:1178
 msgid ""
@@ -2268,6 +2288,10 @@ msgid ""
 "closed.  If a filename is given *closefd* must be ``True`` (the default) "
 "otherwise an error will be raised."
 msgstr ""
+"Si *closefd* es ``False``  y se indica un descriptor de fichero en vez de un "
+"nombre de fichero, el descriptor se mantendrá abierto cuando se cierre el "
+"fichero. Si se indica un nombre de fichero, *closefd*  debe ser ``True`` (lo "
+"es por defecto), ya que de otra forma se lanzará un error."
 
 #: ../Doc/library/functions.rst:1183
 msgid ""
@@ -2277,16 +2301,24 @@ msgid ""
 "descriptor (passing :mod:`os.open` as *opener* results in functionality "
 "similar to passing ``None``)."
 msgstr ""
+"Un abridor personalizado puede emplearse pasando un invocable como *opener*. "
+"El descriptor de fichero del objeto se obtiene llamando a *opener* con "
+"(*file*, *flags*). *opener* debe retornar un descriptor de fichero abierto "
+"(pasando :mod:`os.open` como *opener* resulta en una funcionalidad similar a "
+"``None``)."
 
 #: ../Doc/library/functions.rst:1189
 msgid "The newly created file is :ref:`non-inheritable <fd_inheritance>`."
-msgstr ""
+msgstr "El nuevo fichero creado es :ref:`no-heredable <fd_inheritance>`."
 
 #: ../Doc/library/functions.rst:1191
 msgid ""
 "The following example uses the :ref:`dir_fd <dir_fd>` parameter of the :func:"
 "`os.open` function to open a file relative to a given directory::"
 msgstr ""
+"El siguiente ejemplo emplea el parámetro :ref:`dir_fd <dir_fd>`  de la "
+"función :func:`os.open`  para abrir un fichero relativo a un directorio "
+"dado::"
 
 #: ../Doc/library/functions.rst:1204
 msgid ""
@@ -2302,6 +2334,18 @@ msgid ""
 "disabled, the raw stream, a subclass of :class:`io.RawIOBase`, :class:`io."
 "FileIO`, is returned."
 msgstr ""
+"El tipo de :term:`file object` retornado por la función :func:`open`  "
+"depende del modo. Cuando se emplea  :func:`open` para abrir un fichero en "
+"modo texto (``'w'``, ``'r'``, ``'wt'``, ``'rt'``, etc.), retorna una "
+"subclase de :class:`io.TextIOBase` (específicamente :class:`io."
+"TextIOWrapper`).  Cuando se emplea para abrir un fichero en modo binario con "
+"buffering, la clase retornada es una subclase de :class:`io."
+"BufferedIOBase`.  La clase exacta varía: en modo binario de lectura, "
+"retorna :class:`io.BufferedReader`; en modo de escritura y adición en "
+"binario, retorna :class:`io.BufferedWriter`, y en modo de escritura/lectura, "
+"retorna :class:`io.BufferedRandom`.  Si el buffering está desactivado, el "
+"flujo en crudo, una subclase de :class:`io.RawIOBase`, :class:`io.FileIO`, "
+"es retornada."
 
 #: ../Doc/library/functions.rst:1225
 msgid ""
@@ -2309,13 +2353,16 @@ msgid ""
 "(where :func:`open` is declared), :mod:`os`, :mod:`os.path`, :mod:"
 "`tempfile`, and :mod:`shutil`."
 msgstr ""
+"Véase también los módulos para manejo de ficheros, como :mod:`fileinput`, :"
+"mod:`io` (donde es declarada :func:`open`), :mod:`os`, :mod:`os.path`, :mod:"
+"`tempfile`, y :mod:`shutil`."
 
 #: ../Doc/library/functions.rst:1230
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``open`` with arguments ``file``, "
 "``mode``, ``flags``."
 msgstr ""
-"Lanza un :ref:`auditing event <auditing>` ``open`` con los argumentos "
+"Lanza un :ref:`evento de auditoría <auditing>` ``open`` con los argumentos "
 "``file``, ``mode``, ``flags``."
 
 #: ../Doc/library/functions.rst:1231
@@ -2323,32 +2370,38 @@ msgid ""
 "The ``mode`` and ``flags`` arguments may have been modified or inferred from "
 "the original call."
 msgstr ""
+"Los argumentos ``mode`` y ``flags`` pueden haber sido modificados o "
+"inferidos de la llamada original. "
 
 #: ../Doc/library/functions.rst:1237
 msgid "The *opener* parameter was added."
-msgstr ""
+msgstr "El parámetro *opener* fue añadido."
 
 #: ../Doc/library/functions.rst:1238
 msgid "The ``'x'`` mode was added."
-msgstr ""
+msgstr "El modo  ``'x'`` fue añadido."
 
 #: ../Doc/library/functions.rst:1239
 msgid ":exc:`IOError` used to be raised, it is now an alias of :exc:`OSError`."
 msgstr ""
+":exc:`IOError`  era la excepción lanzada anteriormente, ahora es un alias "
+"de :exc:`OSError`."
 
 #: ../Doc/library/functions.rst:1240
 msgid ""
 ":exc:`FileExistsError` is now raised if the file opened in exclusive "
 "creation mode (``'x'``) already exists."
 msgstr ""
+"Se lanza :exc:`FileExistsError`  si ya existe el fichero abierto en modo de "
+"creación exclusiva  (``'x'``)."
 
 #: ../Doc/library/functions.rst:1246
 msgid "The file is now non-inheritable."
-msgstr ""
+msgstr "El fichero ahora es no-heredable."
 
 #: ../Doc/library/functions.rst:1250
 msgid "The ``'U'`` mode."
-msgstr ""
+msgstr "El modo ``'U'`` "
 
 #: ../Doc/library/functions.rst:1255
 msgid ""
@@ -2356,20 +2409,27 @@ msgid ""
 "exception, the function now retries the system call instead of raising an :"
 "exc:`InterruptedError` exception (see :pep:`475` for the rationale)."
 msgstr ""
+"Si la llamada al sistema es interrumpida y el gestor de señales no lanza una "
+"excepción, ahora la función reintenta la llamada de sistema en vez de lanzar "
+"una excepción :exc:`InterruptedError` (véase  :pep:`475` para la "
+"justificación)."
 
 #: ../Doc/library/functions.rst:1258
 msgid "The ``'namereplace'`` error handler was added."
-msgstr ""
+msgstr "El gestor de errores  ``'namereplace'`` fue añadido."
 
 #: ../Doc/library/functions.rst:1263
 msgid "Support added to accept objects implementing :class:`os.PathLike`."
 msgstr ""
+"Añadido el soporte para aceptar objetos que implementan :class:`os.PathLike`."
 
 #: ../Doc/library/functions.rst:1264
 msgid ""
 "On Windows, opening a console buffer may return a subclass of :class:`io."
 "RawIOBase` other than :class:`io.FileIO`."
 msgstr ""
+"En Windows, abrir un búfer en la consola puede retornar una subclase de :"
+"class:`io.RawIOBase`  en vez de :class:`io.FileIO`."
 
 #: ../Doc/library/functions.rst:1269
 msgid ""
