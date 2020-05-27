@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-05-25 17:56+0100\n"
+"PO-Revision-Date: 2020-05-28 00:28+0100\n"
 "Last-Translator: Juan Ignacio Rodríguez de León <euribates@gmail.com>\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
@@ -4177,28 +4177,44 @@ msgid ""
 "text processing algorithms to binary data formats that are not ASCII "
 "compatible will usually lead to data corruption)."
 msgstr ""
+"Aunque las secuencias de bytes y sus representaciones se basen en texto "
+"ASCII, los objetos *bytes* se comportan más como secuencias inmutables de "
+"números enteros, donde cada elemento de la secuencia está restringido a los "
+"valores de *x* tal que ``0 <= x < 256`` (Si se intenta violar esta "
+"restricción se elevará una excepción de tipo :exc:`ValueError`). Esto se ha "
+"hecho de forma intencionada para enfatizar que, aunque muchos formatos "
+"binarios incluyen elementos basados en caracteres ASCII y pueden ser "
+"manipulados mediante algunas técnicas de procesado de textos, este no es el "
+"caso general para los datos binarios (Aplicar algoritmos pensados para "
+"proceso de textos a datos binarios que no se compatibles con ASCII "
+"normalmente corromperán dichos datos."
 
 #: ../Doc/library/stdtypes.rst:2375
 msgid ""
 "In addition to the literal forms, bytes objects can be created in a number "
 "of other ways:"
 msgstr ""
+"Además de con literales, se pueden crear objetos de tipo *byte* de las "
+"siguientes maneras:"
 
 #: ../Doc/library/stdtypes.rst:2378
 msgid "A zero-filled bytes object of a specified length: ``bytes(10)``"
 msgstr ""
+"Un secuencia de una longitud especificada rellena con ceros: ``bytes(10)``"
 
 #: ../Doc/library/stdtypes.rst:2379
 msgid "From an iterable of integers: ``bytes(range(20))``"
-msgstr ""
+msgstr "A partir de un iterable de números enteros: ``bytes(range(20))``"
 
 #: ../Doc/library/stdtypes.rst:2380
 msgid "Copying existing binary data via the buffer protocol:  ``bytes(obj)``"
 msgstr ""
+"Copiando datos binarios ya existentes mediante el protocolo *buffer*: "
+"``bytes(obj)``"
 
 #: ../Doc/library/stdtypes.rst:2382
 msgid "Also see the :ref:`bytes <func-bytes>` built-in."
-msgstr ""
+msgstr "Véase además la función básica :ref:`bytes <func-bytes>`."
 
 #: ../Doc/library/stdtypes.rst:2384
 msgid ""
@@ -4207,6 +4223,10 @@ msgid ""
 "Accordingly, the bytes type has an additional class method to read data in "
 "that format:"
 msgstr ""
+"Como dos dígitos hexadecimales se corresponden exactamente con un byte, "
+"suelen usase números hexadecimales para describir datos binarios. Por ello, "
+"los objetos de tipo *byte* disponen de un método adicional para leer datos "
+"en ese formato:"
 
 #: ../Doc/library/stdtypes.rst:2390
 msgid ""
@@ -4214,24 +4234,34 @@ msgid ""
 "string object.  The string must contain two hexadecimal digits per byte, "
 "with ASCII whitespace being ignored."
 msgstr ""
+"Este método de clase de :class:`bytes` devuelve un objeto binario, "
+"decodificado a partir de la cadena suministrada como parámetro. La cadena de "
+"texto debe consistir en dos dígitos hexadecimales por cada byte, ignorándose "
+"los caracteres ASCII de espacio en blanco, si los hubiera."
 
 #: ../Doc/library/stdtypes.rst:2397
 msgid ""
 ":meth:`bytes.fromhex` now skips all ASCII whitespace in the string, not just "
 "spaces."
 msgstr ""
+"El método :meth:`bytes.fromhex` ignora ahora todos los caracteres ASCII de "
+"espacio en blanco, no solo el carácter espacio."
 
 #: ../Doc/library/stdtypes.rst:2401
 msgid ""
 "A reverse conversion function exists to transform a bytes object into its "
 "hexadecimal representation."
 msgstr ""
+"Existe una función que realiza la operación inversa, es decir, transforma un "
+"objeto binario en una representación textual usando hexadecimal."
 
 #: ../Doc/library/stdtypes.rst:2406 ../Doc/library/stdtypes.rst:2500
 msgid ""
 "Return a string object containing two hexadecimal digits for each byte in "
 "the instance."
 msgstr ""
+"Devuelve una cadena de texto que contiene dos dígitos hexadecimales por cada "
+"byte de la instancia."
 
 #: ../Doc/library/stdtypes.rst:2412
 msgid ""
@@ -4241,12 +4271,20 @@ msgid ""
 "spacing.  Positive values calculate the separator position from the right, "
 "negative values from the left."
 msgstr ""
+"Si quieres que la cadena en hexadecimal sea más fácil de leer, se puede "
+"especificar un único carácter separador con el parámetro *sep* para que se "
+"añada a la salida. Un segundo parámetro opcional, *bytes_per_sep*, controla "
+"los espacios. Valores positivos calculan la posición del separador desde la "
+"derecha, los negativos lo hacen desde la izquierda."
 
 #: ../Doc/library/stdtypes.rst:2428
 msgid ""
 ":meth:`bytes.hex` now supports optional *sep* and *bytes_per_sep* parameters "
 "to insert separators between bytes in the hex output."
 msgstr ""
+"El método :meth:`bytes.hex` ahora soporta los parámetros opcionales *sep* y "
+"*bytes_per_sep*, que permiten insertar separadores entre los bytes de la "
+"cadena de salida."
 
 #: ../Doc/library/stdtypes.rst:2432
 msgid ""
@@ -4255,6 +4293,12 @@ msgid ""
 "object of length 1.  (This contrasts with text strings, where both indexing "
 "and slicing will produce a string of length 1)"
 msgstr ""
+"Como los objetos de tipo *bytes* son secuencias de números enteros "
+"(Similares a tuplas), para un objeto binario *b*, ``b[0]`` devuelve un "
+"entero, mientras que ``b[0:1]`` devuelve un objeto de tipo *bytes* de "
+"longitud 1 (Mientras que las cadenas de texto siempre devuelven una cadena "
+"de longitud 1, ya sea accediendo por índice o mediante una operación de "
+"rebanada)."
 
 #: ../Doc/library/stdtypes.rst:2437
 msgid ""
@@ -4262,6 +4306,10 @@ msgid ""
 "since it is often more useful than e.g. ``bytes([46, 46, 46])``.  You can "
 "always convert a bytes object into a list of integers using ``list(b)``."
 msgstr ""
+"La representación de los objetos tipo *bytes* usan el formato literal "
+"(``b'...'``) ya que es, por lo general, más útil que, digamos, ``bytes([46, "
+"46, 46])``. Siempre se puede convertir un objeto binario en una lista de "
+"enteros usando ``list(b)``."
 
 #: ../Doc/library/stdtypes.rst:2442
 msgid ""
@@ -4274,39 +4322,57 @@ msgid ""
 "bit binary data and Unicode text must be explicit, and bytes and string "
 "objects will always compare unequal."
 msgstr ""
+"Para usuarios de Python 2.x: En la serie Python 2.x, se permitía una "
+"variedad de conversiones implícitas entre cadenas de caracteres de 8 bits "
+"(El tipo de datos más cercano que se podía usar en estas versiones) y "
+"cadenas de caracteres Unicode. Esto se implemento como una forma de "
+"compatibilidad hacia atrás para reflejar el hecho de que originalmente "
+"Python solo soportaba textos de 8 bits, siendo el texto Unicode un añadido "
+"posterior. En Python 3.x, estas conversiones implícitas se han eliminado: "
+"Todas las conversiones entre datos binarios y textos Unicode deben ser "
+"explícitas, y objetos de tipo *bytes* y objetos de tipo cadena de caracteres "
+"siempre serán considerados diferentes."
 
 #: ../Doc/library/stdtypes.rst:2455
 msgid "Bytearray Objects"
-msgstr ""
+msgstr "Objetos de tipo *Bytearray*"
 
 #: ../Doc/library/stdtypes.rst:2459
 msgid ""
 ":class:`bytearray` objects are a mutable counterpart to :class:`bytes` "
 "objects."
 msgstr ""
+"Los objetos de tipo :class:`bytearray` son versiones mutables de los objetos "
+"de tipo *bytes*"
 
 #: ../Doc/library/stdtypes.rst:2464
 msgid ""
 "There is no dedicated literal syntax for bytearray objects, instead they are "
 "always created by calling the constructor:"
 msgstr ""
+"No existe una sintaxis específica para crear objetos de tipo *bytearray*, "
+"hay que crearlos siempre llamando a su constructor:"
 
 #: ../Doc/library/stdtypes.rst:2467
 msgid "Creating an empty instance: ``bytearray()``"
-msgstr ""
+msgstr "Creando una secuencia vacía: ``bytearray()``"
 
 #: ../Doc/library/stdtypes.rst:2468
 msgid "Creating a zero-filled instance with a given length: ``bytearray(10)``"
 msgstr ""
+"Creando una instancia de una longitud determinada, rellena con ceros: "
+"``bytearray(10)``"
 
 #: ../Doc/library/stdtypes.rst:2469
 msgid "From an iterable of integers: ``bytearray(range(20))``"
-msgstr ""
+msgstr "A partir de un iterable de números enteros: ``bytearray(range(20))``"
 
 #: ../Doc/library/stdtypes.rst:2470
 msgid ""
 "Copying existing binary data via the buffer protocol:  ``bytearray(b'Hi!')``"
 msgstr ""
+"Copiando datos binarios ya existentes mediante el protocolo *buffer*: "
+"``bytearray(b'Hi!')``"
 
 #: ../Doc/library/stdtypes.rst:2472
 msgid ""
