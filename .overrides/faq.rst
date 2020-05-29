@@ -93,7 +93,7 @@ y repetir el proceso para *Smart Dashes*.
 
    Este comando te puede ayudar a cambiar todas las comillas::
 
-     sed -i **/*.po -e "s|[“”]|\\\"|g"
+     sed -i **/*.po -e 's|[“”]|\\"|g'
 
 
 ¿Qué parte de ``:ref:`` debo traducir?
