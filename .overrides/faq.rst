@@ -89,6 +89,13 @@ y repetir el proceso para *Smart Dashes*.
    Desactivar "Smart Quotes" y "Smart Dashes"
 
 
+.. tip::
+
+   Este comando te puede ayudar a cambiar todas las comillas::
+
+     sed -i **/*.po -e 's|[“”]|\\"|g'
+
+
 ¿Qué parte de ``:ref:`` debo traducir?
 --------------------------------------
 
@@ -150,3 +157,33 @@ Luego, cada vez que realices un commit se ejecutará ``pre-commit`` y validará 
 
    Si por cualquier motivo no está funcionando ``pre-commit`` y no te deja hacer *push* de tus cambios,
    lo puedes desinstalar simplemente mediante: ``pre-commit uninstall``.
+
+
+¿Cómo puedo hacer un *build* local de la documentación?
+-------------------------------------------------------
+
+.. note::
+
+   Necesitas un poco de conocimiento para instalar ``make`` en tu sistema operativo.
+
+Desde el mismo directorio ``python-docs-es/`` que se creó cuando hiciste ``git clone`` puedes ejecutar::
+
+  make build
+
+Este comando demorará unos minutos y generará toda la documentación en formato HTML en tu computadora.
+Puedes ver el resultado con tu navegador de internet (Firefox, Chrome, etc) ejecutando::
+
+  make serve
+
+Y luego accediendo a http://localhost:8000/
+
+
+¿Tienen una lista de correo?
+----------------------------
+
+Sí.
+
+No tiene mucho tráfico aún ya que estamos usando más el canal de Telegram por el momento.
+Puedes suscribirte ingresando aquí_.
+
+.. _aquí: https://mail.python.org/mailman3/lists/docs-es.python.org/
