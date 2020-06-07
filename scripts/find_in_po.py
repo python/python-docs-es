@@ -5,9 +5,9 @@ from glob import glob
 import os
 from textwrap import fill
 
-import regex
-import polib
-from tabulate import tabulate
+import regex  # fades
+import polib  # fades
+from tabulate import tabulate   # fades
 
 
 def find_in_po(pattern):
@@ -22,9 +22,10 @@ def find_in_po(pattern):
         pofile = polib.pofile(file)
         for entry in pofile:
             if entry.msgstr and regex.search(pattern, entry.msgid):
+                add_str = entry.msgid + " ·filename: " + file + "·"
                 table.append(
                     [
-                        fill(entry.msgid, width=available_width),
+                        fill(add_str, width=available_width),
                         fill(entry.msgstr, width=available_width),
                     ]
                 )

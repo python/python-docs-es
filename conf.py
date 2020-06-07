@@ -11,7 +11,7 @@
 #
 # This can be built locally using `sphinx-build` by running
 #
-#   $ sphinx-build -b html -n -d _build/doctrees -D language=es . _build/html
+#   $ sphinx-build -b html -d _build/doctrees -D language=es . _build/html
 
 import sys, os, time
 sys.path.append(os.path.abspath('cpython/Doc/tools/extensions'))
@@ -36,6 +36,14 @@ html_static_path = ['cpython/Doc/tools/static']
 os.system('mkdir -p cpython/locales/es/')
 os.system('ln -nfs `pwd` cpython/locales/es/LC_MESSAGES')
 
+html_short_title = f'Documentación {release}'
+html_title = f'Documentación de Python en Español -- {release}'
+
+exclude_patterns = [
+    # This file is not included and it not marked as :orphan:
+    'distutils/_setuptools_disclaimer.rst',
+    'README.rst',
+]
 
 if not os.environ.get('SPHINX_GETTEXT') == 'True':
     # Override all the files from ``.overrides`` directory
@@ -64,6 +72,12 @@ latex_documents = [
     ('contents', 'python-docs-es.tex', u'Documentación de Python en Español',
      _stdauthor, 'manual'),
 ]
+
+extensions.extend([
+    'sphinx_tabs.tabs',
+    'sphinxemoji.sphinxemoji',
+])
+
 
 def setup(app):
 
@@ -97,3 +111,22 @@ def setup(app):
     app.srcdir = 'cpython/Doc'
 
     app.connect('doctree-read', add_contributing_banner)
+
+    # Import the sphinx-autorun manually to avoid this warning
+    # TODO: Remove this code and use just ``extensions.append('sphinx_autorun')`` when
+    # that issue gets fixed
+    # See https://github.com/WhyNotHugo/sphinx-autorun/issues/17
+
+    # WARNING: the sphinx_autorun extension does not declare if it is safe for
+    # parallel reading, assuming it isn't - please ask the extension author to
+    # check and make it explicit
+    # WARNING: doing serial read
+    from sphinx_autorun import RunBlock, AutoRun
+    app.add_directive('runblock', RunBlock)
+    app.connect('builder-inited', AutoRun.builder_init)
+    app.add_config_value('autorun_languages', AutoRun.config, 'env')
+    return {
+        'version': '0.1',
+        'parallel_read_safe': True,
+        'parallel_write_safe': True,
+    }
