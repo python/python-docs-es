@@ -108,6 +108,9 @@ Términos y bigramas
      underscore
       guión bajo ``glossary.po``
 
+     auditing event
+      evento de auditoria ``library/tempfile``
+
 
 Reglas de estilo
 ================
