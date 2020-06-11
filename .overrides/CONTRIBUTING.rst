@@ -141,6 +141,11 @@ A tener en cuenta
 * Wikipedia puede ser útil también. Busca la palabra en Inglés, y luego mira si
   tiene una traducción al Español en la barra de la izquierda. Suelen estar
   bastante bien explicados.
+  
+* Te recomendamos abrir una Pull Request aunque sea en formato borrador (marcada
+  como draft) desde los primeros commits de la traducción de tu fichero. De esta
+  forma, puedes recibir feedback desde el principio que puedes aplicar al resto
+  de la traducción, y probar el build más a menudo.
 
 
 .. note::
