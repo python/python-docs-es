@@ -91,6 +91,8 @@ Términos y bigramas
      auditing event
       evento de auditoria ``library/tempfile``
 
+     widget
+      widget ``library/tkinter``
 
 Reglas de estilo
 ================
