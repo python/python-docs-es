@@ -81,7 +81,13 @@ Términos y bigramas
 
      release
       version ``HOWTO``  
-   
+
+    slice
+      segmento ``datamodel.po``
+
+    slicing
+      segmentación ``datamodel.po``
+
      underscore
       guión bajo ``glossary.po``
 
