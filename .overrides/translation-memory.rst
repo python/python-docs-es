@@ -66,6 +66,9 @@ Términos y bigramas
 
      handle exception
       Gestionar excepción. ``tutorial/inputoutput.po``
+      
+     locale
+      Configuración regional. ``library/functions.po`` and others
 
      helper function
        función auxiliar  ``library/typing.po``
