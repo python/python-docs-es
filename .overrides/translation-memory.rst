@@ -63,6 +63,9 @@ Términos y bigramas
 
      handle exception
       Gestionar excepción. ``tutorial/inputoutput.po``
+      
+     locale
+      Configuración regional. ``library/functions.po`` and others
 
      loop
       Bucle. ``tutorial/controlflow.po``
@@ -88,6 +91,8 @@ Términos y bigramas
      auditing event
       evento de auditoria ``library/tempfile``
 
+     widget
+      widget ``library/tkinter``
 
 Reglas de estilo
 ================
