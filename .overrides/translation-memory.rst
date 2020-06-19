@@ -47,7 +47,10 @@ Términos y bigramas
       queda igual ``glossary.po``
 
      callable
-      invocable ``glossary.po``
+      invocable ``glossary.po``, ``library/functions.po``
+
+     code object
+      objeto código ``c-api``, ``library/functions.po``
 
      deallocated
       desalojable ``glossary.po``
@@ -60,6 +63,9 @@ Términos y bigramas
 
      handle exception
       Gestionar excepción. ``tutorial/inputoutput.po``
+      
+     locale
+      Configuración regional. ``library/functions.po`` and others
 
      loop
       Bucle. ``tutorial/controlflow.po``
@@ -73,12 +79,20 @@ Términos y bigramas
      path
       Ruta. ``glossary.po``
 
-     realease
+     raise
+      Lanzar, lanza. (referido a excepciones)  ``library/functions.po``, ``c-api``
+
+     release
       version ``HOWTO``  
    
      underscore
       guión bajo ``glossary.po``
 
+     auditing event
+      evento de auditoria ``library/tempfile``
+
+     widget
+      widget ``library/tkinter``
 
 Reglas de estilo
 ================
