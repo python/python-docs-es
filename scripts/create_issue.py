@@ -40,8 +40,9 @@ if any([
     sys.exit(1)
 
 # https://pygithub.readthedocs.io/en/latest/github_objects/Repository.html#github.Repository.Repository.create_issue
+title = f'Translate `{pofilename}`'
 issue = repo.create_issue(
-    title=f'Translate `{pofilename}`',
+    title=title,
     body=f'''This needs to reach 100% translated.
 
 Current stats for `{pofilename}`:
@@ -55,4 +56,4 @@ Please, comment here if you want this file to be assigned to you and an member w
 
 Remember to follow the steps in our [Contributing Guide](https://python-docs-es.readthedocs.io/page/CONTRIBUTING.html).''',
 )
-print(f'Issue created at {issue.html_url}')
+print(f'Issue "{title}" created at {issue.html_url}')
