@@ -31,6 +31,7 @@ help:
 	@echo " spell        Check spelling"
 	@echo " wrap         Wrap all the PO files to a fixed column width"
 	@echo " progress     To compute current progression on the tutorial"
+	@echo " dict_dups	Check duplicated entries on the dict"
 	@echo ""
 
 
@@ -40,7 +41,7 @@ help:
 #        treated as errors, which is good to skip simple Sphinx syntax mistakes.
 .PHONY: build
 build: setup
-		PYTHONWARNINGS=ignore::FutureWarning sphinx-build -j auto -W --keep-going -b html -d $(OUTPUT_DOCTREE) -D language=$(LANGUAGE) . $(OUTPUT_HTML)
+		PYTHONWARNINGS=ignore::FutureWarning $(VENV)/bin/sphinx-build -j auto -W --keep-going -b html -d $(OUTPUT_DOCTREE) -D language=$(LANGUAGE) . $(OUTPUT_HTML)
 		@echo "Success! Open file://`pwd`/$(OUTPUT_HTML)/index.html, " \
 					"or run 'make serve' to see them in http://localhost:8000";
 
@@ -94,3 +95,17 @@ spell: venv
 .PHONY: wrap
 wrap: venv
 	$(VENV)/bin/powrap **/*.po
+
+.PHONY: dict_dups
+SHELL:=/bin/bash
+.ONESHELL:
+dict_dups:
+	if [[ $$(cat dict| sort | uniq -dc) ]]; then
+		echo -e "\n #######################\n"
+		echo "duplicated lines in the dict file"
+		sort dict | uniq -dc |sort -h
+		exit 1
+	else
+		echo "no duplicated lines"
+		exit 0
+	fi
