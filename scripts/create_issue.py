@@ -1,3 +1,6 @@
+# Use together with `pageviews.py`
+# python scripts/pageviews.py | head -n 150 | grep -v whats | cut -d ' ' -f 2 | sed 's/\.html/\.po/g' | xargs -I '{}' python scripts/create_issue.py '{}'
+
 import os
 import sys
 from pathlib import Path
