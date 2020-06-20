@@ -1,0 +1,42 @@
+================================
+Guía para revisar una traducción
+================================
+
+El costado práctico
+===================
+La devolución deberá ser acertada para transmitir el mensaje que necesitamos que se transmita; de esta forma, les traductores podrán revisar su trabajo y saber qué necesitan hacer para mejorarlo.
+No olvides que esto se trata de una traducción técnica y como tal, el objetivo es que, básicamente, la persona que la lea pueda entender cómo funciona Python. Es por esto que, si bien es importante que la sintaxis sea correcta, el objetivo no es hacer una revisión intensiva del uso del español, a menos que la forma en que se expresó la idea imposibilite que otre la entienda. 
+
+Para esto, Github te ofrece opciones para afrontar una PR:
+
+
+* *Approve*: Dejar esta opción solo para PRs que no necesitan modificación alguna o que solo tengan pocas faltas de ortografía o errores de tipeo, o algún error que no genere un conflicto mayor en la traducción y en su integración al repositorio.
+
+PRs de más de 1000 líneas: hacer comentario al principio del PR para indicar hasta qué línea hemos hecho el review y qué hay que revisar hasta ese hito.
+“Needs work” genera en la línea anterior “#fuzzy” para que el traductor revise esa línea. Se puede usar cuando la traducción necesita revisión y en ese momento no podemos sugerir una traducción alternativa.
+
+El costado humano
+=================
+Teniendo en cuenta que todes somos voluntaries en este proyecto, es importante que la forma de comunicarnos sea clara, concisa y amable. Como revisor/a, ayudarás a voluntaries de diferentes culturas y lugares del mundo para que su traducción sea lo más acertada posible y podamos acercar Python a las comunidades de habla hispana. Recuerda que del otro lado de un PR hay una persona que ha dedicado tiempo y esfuerzo; es por eso es la forma en que le des una devolución sobre su trabajo influirá en su actitud hacia el proyecto…¡y en sus ganas de seguir participando de nuestra comunidad!
+Aquí te dejamos algunos *tips* para que tu devolución sea constructiva y genuina:
+
+* Siempre deja un comentario en la PR que deje una conclusión general de tu devolución para dejarle claro a les traductores qué necesita modificación y qué no. Recuerda siempre comenzar reconociendo los aspectos positivos del trabajo de la otra persona. 
+* Prioriza 
+
+El costado técnico
+==================
+Al revisar una traducción, deberás tener en cuenta ciertos aspectos propios de una traducción técnica de esta índole. Además de que debe entenderse el texto en español y que debes respetar el contenido de la documentación original (ver "A tener en cuenta" en la `Guía para contribuir en la traducción <https://python-docs-es.readthedocs.io/es/3.8/CONTRIBUTING.html>`), contamos con herramientas en este proyecto que pueden fallar en ciertos casos, y que como revisor/a deberás tener en cuenta.
+
+Cuatro razones por las que puede fallar el *build* de Travis:
+* Powrap falla
+* Pospell falla
+* Dict está duplicado
+* Sphinx falla
+
+
+
+
+
+
+
+
