@@ -37,6 +37,9 @@ Términos y bigramas
      awaitable
        aguardable ``glossary``
 
+     slash and backslash
+      barra y barra invertida ``c-api``,``tutorial``,``library/functions.po``
+
      built-in
        incorporada ``glossary.po``
 
@@ -62,13 +65,13 @@ Términos y bigramas
        clave
 
      handler
-       gestor ``tutorial/errors.po``
+       gestor ``tutorial/errors.po``, ``library/functions.po``
 
      handle exception
-      Gestionar excepción. ``tutorial/inputoutput.po``
+       Gestionar excepción. ``tutorial/inputoutput.po``
       
      locale
-      Configuración regional. ``library/functions.po`` and others
+       Configuración regional. ``library/functions.po`` and others
 
      helper function
        función auxiliar  ``library/typing.po``
@@ -109,13 +112,13 @@ Términos y bigramas
        Nota: úsese como sinónimo de *type hint*
 
      underscore
-      guión bajo ``glossary.po``
+       guión bajo ``glossary.po``
 
      auditing event
-      evento de auditoria ``library/tempfile``
+       evento de auditoria ``library/tempfile``
 
      widget
-      widget ``library/tkinter``
+       widget ``library/tkinter``
 
 Reglas de estilo
 ================
