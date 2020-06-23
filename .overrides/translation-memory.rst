@@ -37,6 +37,9 @@ Términos y bigramas
      awaitable
       aguardable ``glossary``
 
+     slash and backslash
+      barra y barra invertida ``c-api``,``tutorial``,``library/functions.po``
+
      built-in
       incorporada ``glossary.po``
 
@@ -59,7 +62,7 @@ Términos y bigramas
       docstring. ``library/idle.po``
 
      handler
-      gestor ``tutorial/errors.po``
+      gestor ``tutorial/errors.po``, ``library/functions.po``
 
      handle exception
       Gestionar excepción. ``tutorial/inputoutput.po``
@@ -84,7 +87,19 @@ Términos y bigramas
 
      release
       version ``HOWTO``  
-   
+
+     slice
+      segmento ``datamodel.po``
+
+     slicing
+      segmentación ``datamodel.po``
+
+     string
+      cadena de caracteres ``datamodel.po``
+
+     strings
+      cadenas de caracteres ``datamodel.po``
+
      underscore
       guión bajo ``glossary.po``
 
