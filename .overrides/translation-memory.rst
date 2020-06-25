@@ -63,6 +63,9 @@ Términos y bigramas
 
      key
        clave
+       
+     keyword arguments
+       argumentos por palabra clave
 
      handler
        gestor ``tutorial/errors.po``, ``library/functions.po``
