@@ -178,6 +178,26 @@ Puedes ver el resultado con tu navegador de internet (Firefox, Chrome, etc) ejec
 Y luego accediendo a http://localhost:8000/
 
 
+¿Cómo actualizar mi copia local del repositorio?
+---------------------------------------------------------
+
+Es recomendable mantener actualizada nuestra copia local para evitar 
+posibles conflictos entre los archivos que trabajamos y la última versión disponible 
+en el repositorio remoto. 
+Primero, necesitamos bajar los cambios de *upstream* (es el nombre que asignamos al 
+repositorio principal de la traducción). Se hace de la siguiente manera::
+
+    git fetch upstream
+
+Luego nos vamos a nuestra rama local, confirmamos e impactamos esos cambios::
+
+    git checkout 3.8
+    git merge upstream/3.8
+    git push origin 3.8 
+
+¡Eso es todo!
+
+
 ¿Tienen una lista de correo?
 ----------------------------
 

@@ -100,7 +100,7 @@ contribución, queremos señalar algunos lineamientos generales.
    .. note::
 
       Si hace tiempo que venis trabajando en una traducción es importante
-      mantener actualizada tu copia local antes de realizar el *Pull Request**
+      `mantener actualizada`_ tu copia local antes de realizar el *Pull Request**
 
 
 ¿Qué archivo traducir?
@@ -185,3 +185,5 @@ Tendrás que navegar hasta el archivo que hayas cambiado para ver cómo se visua
 .. _la traducción al Portugués: https://docs.python.org/pt-br/3/
 .. _lista de issues en GitHub:
    https://github.com/python/python-docs-es/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+no%3Aassignee+translate
+.. _mantener actualizada:
+   https://github.com/python/python-docs-es/blob/3.8/.overrides/faq.rst#c%C3%B3mo-actualizar-mi-copia-local-del-repositorio
