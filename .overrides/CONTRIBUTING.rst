@@ -97,6 +97,11 @@ contribución, queremos señalar algunos lineamientos generales.
 #. En la descripción de la *Pull Request* escribe ``Closes #<número de issue>``
    (así se cierra automáticamente cuando se hace *merge*)
 
+   .. note::
+
+      Si hace tiempo que venis trabajando en una traducción es importante
+      mantener actualizada tu copia local antes de realizar el *Pull Request**
+
 
 ¿Qué archivo traducir?
 ----------------------
@@ -141,6 +146,11 @@ A tener en cuenta
 * Wikipedia puede ser útil también. Busca la palabra en Inglés, y luego mira si
   tiene una traducción al Español en la barra de la izquierda. Suelen estar
   bastante bien explicados.
+  
+* Te recomendamos abrir una Pull Request aunque sea en formato borrador (marcada
+  como draft) desde los primeros commits de la traducción de tu fichero. De esta
+  forma, puedes recibir feedback desde el principio que puedes aplicar al resto
+  de la traducción, y probar el build más a menudo.
 
 
 .. note::
