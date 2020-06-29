@@ -100,7 +100,7 @@ contribución, queremos señalar algunos lineamientos generales.
    .. note::
 
       Si hace tiempo que venis trabajando en una traducción es importante
-      :ref:`mantener-actualizada` tu copia local antes de realizar el *Pull Request**
+      :ref:`mantener-actualizada` tu copia local antes de realizar el *Pull Request*
 
 
 ¿Qué archivo traducir?
