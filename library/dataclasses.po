@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-06-28 20:35-0300\n"
+"PO-Revision-Date: 2020-06-29 15:36-0300\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,14 +38,13 @@ msgid ""
 "`__repr__` to user-defined classes.  It was originally described in :pep:"
 "`557`."
 msgstr ""
-"Este módulo provee un decorador y funciones para añadir :term:`los métodos"
-" especiales <special method>` automáticamente, como por ejemplo :meth:`__init__` y :meth:"
-"`__repr__`, a clases definidas por el usuario. Fue originalmente descrito "
-"en :pep:`557`."
+"Este módulo provee un decorador y funciones para añadir :term:`los métodos "
+"especiales <special method>` automáticamente, como por ejemplo :meth:"
+"`__init__` y :meth:`__repr__`, a clases definidas por el usuario. Fue "
+"originalmente descrito en :pep:`557`."
 
 # 'variable miembo' para hacer énfasis en que cada miembro es una variable de un tipo determinado
 #: ../Doc/library/dataclasses.rst:19
-#, fuzzy
 msgid ""
 "The member variables to use in these generated methods are defined using :"
 "pep:`526` type annotations.  For example this code::"
@@ -73,15 +72,14 @@ msgstr ""
 msgid "Module-level decorators, classes, and functions"
 msgstr "Decoradores, clases y funciones del módulo"
 
-# Me genera duda la traduccion al español de 'generated special methods', alguien con conocimiento profundo de Python puede aportar para definir si tiene sentido la traduccion literaria 'metodos especiales generados', que quizas pueda llevar a confusion.
 #: ../Doc/library/dataclasses.rst:49
-#, fuzzy
 msgid ""
 "This function is a :term:`decorator` that is used to add generated :term:"
 "`special method`\\s to classes, as described below."
 msgstr ""
-"Esta función es un :term:`decorator` utilizado para añadir :term:`los métodos "
-"especiales <special method>` generados a las clases, como se describe a continuación."
+"Esta función es un :term:`decorator` utilizado para añadir :term:`los "
+"métodos especiales <special method>` generados a las clases, como se "
+"describe a continuación."
 
 #: ../Doc/library/dataclasses.rst:52
 msgid ""
@@ -112,9 +110,9 @@ msgid ""
 "class, the behavior depends on the parameter, as documented below. The "
 "decorator returns the same class that is called on; no new class is created."
 msgstr ""
-"El decorador :func:`dataclass` añade varios métodos mágicos (*dunder*) a la clase, "
-"descripto a continuación. Si algo de los métodos añadidos ya existe en la "
-"definición de la clase, el comportamiento dependerá del parámetro. El "
+"El decorador :func:`dataclass` añade varios métodos mágicos (*dunder*) a la "
+"clase, descripto a continuación. Si algo de los métodos añadidos ya existe "
+"en la definición de la clase, el comportamiento dependerá del parámetro. El "
 "decorador devuelve la misma clase que es llamada, no crea una nueva."
 
 #: ../Doc/library/dataclasses.rst:67
@@ -124,6 +122,8 @@ msgid ""
 "is, these three uses of :func:`dataclass` are equivalent::"
 msgstr ""
 "Si :func:`dataclass` es llamada sin parámetros, actúa con los valores por "
+"defecto documentados aquí. Específicamente, los siguientes tres usos de :"
+"func:`dataclass` son equivalentes::"
 
 #: ../Doc/library/dataclasses.rst:84
 msgid "The parameters to :func:`dataclass` are:"
@@ -185,18 +185,28 @@ msgid ""
 "instances in the comparison must be of the identical type.  If ``order`` is "
 "true and ``eq`` is false, a :exc:`ValueError` is raised."
 msgstr ""
+"``order``: Si true ( ``False`` es el valor por defecto), :meth:`__lt__`, :"
+"meth:`__le__`, :meth:`__gt__` y :meth:`__ge__` son generados. Estos permiten "
+"comparaciones entre instancias de la clase como si fueran una tupla de sus "
+"campos (en orden). Ambas instancias a comparar deben ser del mismo tipo. Si "
+"``order`` true y ``eq`` false, lanza la excepción :exc:`ValueError`."
 
 #: ../Doc/library/dataclasses.rst:117
 msgid ""
 "If the class already defines any of :meth:`__lt__`, :meth:`__le__`, :meth:"
 "`__gt__`, or :meth:`__ge__`, then :exc:`TypeError` is raised."
 msgstr ""
+"Si la clase ya define alguno de los siguientes métodos: :meth:`__lt__`, :"
+"meth:`__le__`, :meth:`__gt__` o :meth:`__ge__`, lanza la excepción :exc:"
+"`TypeError`."
 
 #: ../Doc/library/dataclasses.rst:121
 msgid ""
 "``unsafe_hash``: If ``False`` (the default), a :meth:`__hash__` method is "
 "generated according to how ``eq`` and ``frozen`` are set."
 msgstr ""
+"``unsafe_hash``: Si ``False`` (por defecto), se genera el método :meth:"
+"`__hash__` de acuerdo a los valores de ``eq`` y ``frozen`` definidos."
 
 #: ../Doc/library/dataclasses.rst:124
 msgid ""
@@ -207,6 +217,14 @@ msgid ""
 "existence and behavior of :meth:`__eq__`, and the values of the ``eq`` and "
 "``frozen`` flags in the :func:`dataclass` decorator."
 msgstr ""
+":meth:`__hash__` es utilizado por el método incorporado :meth:`hash()` y "
+"cuando los objetos definidos por la clase son añadidos a colecciones hash, "
+"como por ejemplo diccionarios y conjuntos. Una clase con el método :meth:"
+"`__hash__` definido implica que sus instancias son inmutables. La "
+"mutabilidad es una propiedad compleja, ya que depende de: cómo el "
+"programador utilice el objeto, la existencia y comportamiento de :meth:"
+"`__eq__` y del valor asignado a las banderas ``eq`` y ``frozen`` en el "
+"decorador :func:`dataclass`."
 
 #: ../Doc/library/dataclasses.rst:131
 msgid ""
@@ -216,8 +234,20 @@ msgid ""
 "attribute ``__hash__ = None`` has a specific meaning to Python, as described "
 "in the :meth:`__hash__` documentation."
 msgstr ""
+":func:`dataclass` no añade por defecto (de forma implícita) el método :meth:"
+"`__hash__` a menos que sea seguro hacerlo, tampoco añade o cambia un método :"
+"meth:`__hash__` explícitamente ya definido. Definir el atributo de clase "
+"``__hash__ = None`` tiene un significado específico en Python, descripto en "
+"la documentación dedicada a :meth:`__hash__`."
 
+# Sé que puede ser confuso en Python la mutabilidad e inmutablilidad de
+# los objetos, pero tiene su lógica por la cuestión de referencia
+# (heredado de los punteros de C parece), pero en este párrafo la línea
+# " if you class is logically immutable but nonetheless be mutated " es
+# muy ambigua y confusa. Es bienvenida a la traduccion cualquier
+#  arrojo de luz sobre esta cuestion. Gracias!
 #: ../Doc/library/dataclasses.rst:137
+#, fuzzy
 msgid ""
 "If :meth:`__hash__` is not explicit defined, or if it is set to ``None``, "
 "then :func:`dataclass` *may* add an implicit :meth:`__hash__` method. "
@@ -226,6 +256,13 @@ msgid ""
 "class is logically immutable but can nonetheless be mutated. This is a "
 "specialized use case and should be considered carefully."
 msgstr ""
+"Si :meth:`__hash__` no está definido explícitamente o si es designado como "
+"``None``, :func:`dataclass` *quizás* añade implícitamente el método :meth:"
+"`__hash__`. Aunque no sea recomendable, es posible forzar que :func:"
+"`dataclass`cree un método :meth:`__hash__` mediante ``unsafe_hash=True``; "
+"esto es factible si su clase es lógicamente inmutable pero sin embargo puede "
+"ser modificada. Este es un caso especial de uso que debe ser considerado "
+"cuidadosamente."
 
 #: ../Doc/library/dataclasses.rst:144
 msgid ""
@@ -234,8 +271,19 @@ msgid ""
 "in your dataclass and set ``unsafe_hash=True``; this will result in a :exc:"
 "`TypeError`."
 msgstr ""
+"A continuación se explican las reglas que aplican en la creación implícita "
+"del método :meth:`__hash__`. Observar que no es compatible definir "
+"explícitamente :meth:`__hash__` en su clase y a su vez asignar "
+"``unsafe_hash=True``; esto lanza la excepción :exc:`TypeError`."
 
+# Para mí hash, unhash no tienen una traducción literal interesante
+# y es un térmito bastante utilizado en la literatura, asi que decidí
+# dejarlo así, pero son bienvenidas las sugerencias por supuesto!
+# Lo mismo con true y false, la programacion misma te obliga a adoptar
+# el término en ingles e incluso así se mantiene en la literatura en español, por
+# lo menos donde he visto hasta el momento.
 #: ../Doc/library/dataclasses.rst:149
+#, fuzzy
 msgid ""
 "If ``eq`` and ``frozen`` are both true, by default :func:`dataclass` will "
 "generate a :meth:`__hash__` method for you.  If ``eq`` is true and "
@@ -245,6 +293,14 @@ msgid ""
 "superclass will be used (if the superclass is :class:`object`, this means it "
 "will fall back to id-based hashing)."
 msgstr ""
+"Si a ``eq`` y a `` frozen `` son asignadas true, :func:`dataclass` genera "
+"por defecto un método :meth:`hash` por ti. En el caso que ``eq`` sea true y "
+"``frozen`` false, a :meth:`__hash__` se le asigna ``None``, en consecuencia "
+"será unhashable (lo cual es deseable, ya que es mutable). Si ``eq`` es "
+"false :meth_`__hash__` permanece sin cambios, por lo tanto en este caso "
+"aplica el uso del método :meth:`hash` heredado de la superclase (sólo si la "
+"superclase es :class:`object`, esto significa que cae en manos del hashing "
+"basado en el id de los objetos)."
 
 #: ../Doc/library/dataclasses.rst:157
 msgid ""
@@ -253,6 +309,11 @@ msgid ""
 "`__setattr__` or :meth:`__delattr__` is defined in the class, then :exc:"
 "`TypeError` is raised.  See the discussion below."
 msgstr ""
+"``frozen``: Si true (el valor por defecto es ``False``), cualquier "
+"asignación a un campo de la clase lanza una excepción. Esto emula el "
+"comportamiento de las instancias frozen de sólo lectura. Si :meth:"
+"`__setattr__` o :meth:`___delattr__` son definidos en la class, lanzará la "
+"excepción :exc:`TypeError`. Esto es ampliado debajo."
 
 #: ../Doc/library/dataclasses.rst:162
 msgid ""
