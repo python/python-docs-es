@@ -178,6 +178,7 @@ Puedes ver el resultado con tu navegador de internet (Firefox, Chrome, etc) ejec
 Y luego accediendo a http://localhost:8000/
 
 .. _mantener-actualizada:
+
 ¿Cómo actualizar mi copia local del repositorio?
 ---------------------------------------------------------
 
