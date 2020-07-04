@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-06-18 09:38+0200\n"
+"PO-Revision-Date: 2020-07-05 00:06+0200\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -131,7 +131,7 @@ msgstr ""
 
 #: ../Doc/reference/lexical_analysis.rst:79
 msgid "Encoding declarations"
-msgstr "Declaraciones de Codificación"
+msgstr "Codificación de declaraciones"
 
 #: ../Doc/reference/lexical_analysis.rst:84
 msgid ""
@@ -291,6 +291,13 @@ msgid ""
 "lines using backslashes; the whitespace up to the first backslash determines "
 "the indentation."
 msgstr ""
+"Los tabuladores se sustituyen (de izquierda a derecha) por uno a ocho "
+"espacios, de manera que el número total de caracteres hasta el reemplazo "
+"inclusive es un múltiplo de ocho (se pretende que sea la misma regla que la "
+"utilizada por Unix).  El número total de espacios que preceden al primer "
+"carácter no en blanco determina entonces la sangría de la línea.  La sangría "
+"no puede dividirse en múltiples líneas físicas utilizando barras invertidas; "
+"el espacio en blanco hasta la primera barra invertida determina la sangría."
 
 #: ../Doc/reference/lexical_analysis.rst:190
 msgid ""
@@ -298,6 +305,9 @@ msgid ""
 "spaces in a way that makes the meaning dependent on the worth of a tab in "
 "spaces; a :exc:`TabError` is raised in that case."
 msgstr ""
+"La indentación se rechaza como inconsistente si un archivo fuente mezcla "
+"tabulaciones y espacios de manera que el significado depende del valor de "
+"una tabulación en los espacios; un :exc:`TabError` se produce en ese caso."
 
 #: ../Doc/reference/lexical_analysis.rst:194
 msgid ""
@@ -306,6 +316,11 @@ msgid ""
 "the indentation in a single source file.  It should also be noted that "
 "different platforms may explicitly limit the maximum indentation level."
 msgstr ""
+"**Nota de compatibilidad entre plataformas:** debido a la naturaleza de los "
+"editores de texto en plataformas que no sean UNIX, no es aconsejable "
+"utilizar una mezcla de espacios y tabuladores para la sangría en un solo "
+"archivo de origen.  También debe tenerse en cuenta que las diferentes "
+"plataformas pueden limitar explícitamente el nivel máximo de sangría."
 
 #: ../Doc/reference/lexical_analysis.rst:199
 msgid ""
@@ -314,12 +329,18 @@ msgid ""
 "occurring elsewhere in the leading whitespace have an undefined effect (for "
 "instance, they may reset the space count to zero)."
 msgstr ""
+"Un carácter *formfeed* puede estar presente al comienzo de la línea; será "
+"ignorado para los cálculos de sangría anteriores.  Los caracteres *formfeed* "
+"que aparecen en otras partes del espacio en blanco inicial tienen un efecto "
+"indefinido (por ejemplo, pueden poner a cero el recuento de espacio)."
 
 #: ../Doc/reference/lexical_analysis.rst:206
 msgid ""
 "The indentation levels of consecutive lines are used to generate INDENT and "
 "DEDENT tokens, using a stack, as follows."
 msgstr ""
+"Los niveles de sangría de las líneas consecutivas se utilizan para generar "
+"tokens INDENT y DEDENT, utilizando una pila, de la siguiente manera."
 
 #: ../Doc/reference/lexical_analysis.rst:209
 msgid ""
@@ -334,16 +355,28 @@ msgid ""
 "generated.  At the end of the file, a DEDENT token is generated for each "
 "number remaining on the stack that is larger than zero."
 msgstr ""
+"Antes de que se lea la primera línea del archivo, se empuja un solo cero en "
+"la pila; esto no volverá a saltar.  Los números empujados en la pila siempre "
+"irán aumentando estrictamente de abajo hacia arriba.  Al principio de cada "
+"línea lógica, el nivel de sangría de la línea se compara con la parte "
+"superior de la pila. Si es igual, no pasa nada. Si es mayor, se empuja en la "
+"pila, y se genera un token INDENT.  Si es más pequeño, *debe* ser uno de los "
+"números de la pila; todos los números de la pila que son más grandes se "
+"sacan, y por cada número sacado se genera un token DEDENT.  Al final del "
+"archivo, se genera un token DEDENT por cada número restante de la pila que "
+"sea mayor que cero."
 
 #: ../Doc/reference/lexical_analysis.rst:220
 msgid ""
 "Here is an example of a correctly (though confusingly) indented piece of "
 "Python code::"
 msgstr ""
+"Aquí hay un ejemplo de un código de Python con una correcta (aunque no tan "
+"clara) sangría::"
 
 #: ../Doc/reference/lexical_analysis.rst:235
 msgid "The following example shows various indentation errors::"
-msgstr ""
+msgstr "El siguiente ejemplo muestra varios errores de sangría::"
 
 #: ../Doc/reference/lexical_analysis.rst:245
 msgid ""
@@ -351,6 +384,9 @@ msgid ""
 "error is found by the lexical analyzer --- the indentation of ``return r`` "
 "does not match a level popped off the stack.)"
 msgstr ""
+"(En realidad, los tres primeros errores son detectados por el analizador; "
+"sólo el último error es encontrado por el analizador léxico --- la sangría "
+"de ``return r`` no coincide con un nivel sacado de la pila.)"
 
 #: ../Doc/reference/lexical_analysis.rst:253
 msgid "Whitespace between tokens"
