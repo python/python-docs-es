@@ -97,6 +97,11 @@ contribución, queremos señalar algunos lineamientos generales.
 #. En la descripción de la *Pull Request* escribe ``Closes #<número de issue>``
    (así se cierra automáticamente cuando se hace *merge*)
 
+   .. note::
+
+      Si hace tiempo que venis trabajando en una traducción es importante
+      :ref:`mantener actualizada <mantener-actualizada>` tu copia local antes de realizar el *Pull Request*.
+
 
 ¿Qué archivo traducir?
 ----------------------
