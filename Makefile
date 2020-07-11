@@ -89,7 +89,8 @@ progress: venv
 
 .PHONY: spell
 spell: venv
-	$(VENV)/bin/pospell -p dict -l es_ES **/*.po
+	cat dict dictionaries/*.txt > dict.txt
+	$(VENV)/bin/pospell -p dict.txt -l es_ES **/*.po
 
 
 .PHONY: wrap
