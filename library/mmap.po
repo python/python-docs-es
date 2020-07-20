@@ -6,25 +6,28 @@
 # Check https://github.com/PyCampES/python-docs-es/blob/3.8/TRANSLATORS to
 # get the list of volunteers
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2020-07-18 15:06-0500\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Adolfo Hristo David Roque Gámez <hristo.roqueg@gmail.com>\n"
+"Language: es_AR\n"
+"X-Generator: Poedit 2.3.1\n"
 
 #: ../Doc/library/mmap.rst:2
 msgid ":mod:`mmap` --- Memory-mapped file support"
-msgstr ""
+msgstr ":mod:`mmap` --- Soporte de archivos mapeados en memoria"
 
 #: ../Doc/library/mmap.rst:9
+#, fuzzy
 msgid ""
 "Memory-mapped file objects behave like both :class:`bytearray` and like :"
 "term:`file objects <file object>`.  You can use mmap objects in most places "
@@ -35,6 +38,15 @@ msgid ""
 "data starting at the current file position, and :meth:`seek` through the "
 "file to different positions."
 msgstr ""
+"Los objetos de archivos mapeados en memoria se comportan como :class:"
+"`bytearray` y :term:`Objetos archivo <file object>`.  Puedes usar objetos "
+"*mmap* en la mayoría de lugares donde se espera :class:`bytearray`; por "
+"ejemplo, puedes usar el módulo :mod:`re` para buscar entre un archivo "
+"mapeado en memoria.  También puedes cambiar un solo byte al hacer "
+"``obj[index]==97``, o cambiar una subsecuencia al asignarle una rebanada: "
+"``obj[i1:i2] = b'...'``.  También puedes leer y escribir datos que empiezan "
+"en la posición del archivo actual, y usar :meth:`seek` a través del archivo "
+"a diferentes posiciones."
 
 #: ../Doc/library/mmap.rst:17
 msgid ""
@@ -46,6 +58,14 @@ msgid ""
 "using the :func:`os.open` function, which returns a file descriptor directly "
 "(the file still needs to be closed when done)."
 msgstr ""
+"Un archivo mapeado en memoria se crea con el constructor :class:`~mmap."
+"mmap`, que es diferente en Unix y en Windows.  En cualquier caso, debes "
+"proporcionar un descriptor de archivo para un archivo abierto para la "
+"actualización. Si deseas mapear un objeto archivo de Python existente, use "
+"su método :meth:`fileno` para obtener el valor correcto para el parámetro "
+"*fileno*.  De otra manera, puedes abrir el archivo usando la función :func:"
+"`os.open`, que retorna un descriptor de archivo directamente (el archivo aún "
+"necesita ser cerrado cuando hayas terminado)."
 
 #: ../Doc/library/mmap.rst:26
 msgid ""
@@ -54,6 +74,10 @@ msgid ""
 "that local modifications to the buffers are actually available to the "
 "mapping."
 msgstr ""
+"Si quieres crear un mapeado en memoria para un archivo con permisos de "
+"escritura y en el búfer, debes ejecutar la función :func:`~io.IOBase.flush`. "
+"Es necesario para asegurar que las modificaciones locales a los búfer estén "
+"realmente disponible para el mapeado."
 
 #: ../Doc/library/mmap.rst:31
 msgid ""
@@ -70,16 +94,32 @@ msgid ""
 "Assignment to an :const:`ACCESS_COPY` memory map affects memory but does not "
 "update the underlying file."
 msgstr ""
+"Para las versiones del constructor de tanto Unix como de Windows, *access* "
+"puede ser especificado como un parámetro nombrado opcional. *access* acepta "
+"uno de cuatro valores: :const:`ACCESS_READ`, :const:`ACCESS_WRITE`, o :const:"
+"`ACCESS_DEFAULT` para especificar una memoria de sólo lectura, *write-"
+"through*, o *copy-on-write* respectivamente, o :const:`ACCES_DEFAULT` para "
+"deferir a *prot*. El parámetro *access* se puede usar tanto en Unix como en "
+"Windows.  Si *access* no es especificado, el *mmap* de Windows retorna un "
+"mapeado *write-through*.  Los valores de la memoria inicial para los tres "
+"tipos de acceso son tomados del archivo especificado.  La asignación a una "
+"mapa de memoria :const:`ACCESS_READ` lanza una excepción :exc:`TypeError`.  "
+"La asignación a un mapa de memoria :const:`ACCESS_WRITE` afecta tanto a la "
+"memoria como al archivo subyacente.  La asignación a un mapa de memoria :"
+"const:`ACCES_COPY` afecta a la memoria pero no actualiza el archivo "
+"subyacente."
 
 #: ../Doc/library/mmap.rst:44
 msgid "Added :const:`ACCESS_DEFAULT` constant."
-msgstr ""
+msgstr "Se añadió la constante :const:`ACCESS_DEFAULT`."
 
 #: ../Doc/library/mmap.rst:47
 msgid ""
 "To map anonymous memory, -1 should be passed as the fileno along with the "
 "length."
 msgstr ""
+"Para mapear memoria anónima, se debe pasar -1 como el *fileno* junto con la "
+"longitud."
 
 #: ../Doc/library/mmap.rst:51
 msgid ""
@@ -90,6 +130,13 @@ msgid ""
 "size of the file, except that if the file is empty Windows raises an "
 "exception (you cannot create an empty mapping on Windows)."
 msgstr ""
+"**(En la versión de Windows)** Mapea *length* bytes desde el archivo "
+"especificado por el gestor de archivo *fileno*, y crea un objeto *mmap*. Si "
+"*length* es más largo que el tamaño actual del archivo, el archivo es "
+"extendido para contener *length* bytes. Si *length* es ``0``, la longitud "
+"máxima del map es la tamaño actual del archivo, salvo que si el archivo está "
+"vacío Windows lanza una excepción (no puedes crear un mapeado vacío en "
+"Windows)"
 
 #: ../Doc/library/mmap.rst:58
 msgid ""
@@ -101,6 +148,13 @@ msgid ""
 "tag parameter will assist in keeping your code portable between Unix and "
 "Windows."
 msgstr ""
+"*tagname*, si está especifico y no es ``None``, es una cadena que "
+"proporciona el nombre de la etiqueta para el mapeado.  Windows te permite "
+"tener varios mapeados diferentes del mismo archivo.  Si especificas el "
+"nombre de una etiqueta existente, la etiqueta se abre, de otro modo una crea "
+"una nueva etiqueta.  Si este parámetro se omite o es ``None``, el mapeado es "
+"creado sin un nombre. Evitar el uso del parámetro etiqueta te ayudará a "
+"mantener tu código portable entre Unix y Windows."
 
 #: ../Doc/library/mmap.rst:66
 msgid ""
@@ -109,12 +163,18 @@ msgid ""
 "defaults to 0.  *offset* must be a multiple of the :const:"
 "`ALLOCATIONGRANULARITY`."
 msgstr ""
+"*offset* puede ser especificado como un *offset* entero no negativo. las "
+"referencias de *mmap* serán relativas al *offset* desde el comienzo del "
+"archivo. *offset* es por defecto 0. *offset* debe ser un múltiplo de :const:"
+"`ALLOCATIONGRANULARITY`."
 
 #: ../Doc/library/mmap.rst:70 ../Doc/library/mmap.rst:160
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``mmap.__new__`` with arguments "
 "``fileno``, ``length``, ``access``, ``offset``."
 msgstr ""
+"Lanza un :ref:`evento de inspección <auditing>` ``mmap.__new__`` con los "
+"argumentos ``fileno``, ``length``, ``access``, ``offset``."
 
 #: ../Doc/library/mmap.rst:75
 msgid ""
@@ -123,6 +183,10 @@ msgid ""
 "maximum length of the map will be the current size of the file when :class:"
 "`~mmap.mmap` is called."
 msgstr ""
+"**(En la versión de Unix)** Mapea *length* bytes desde el archivo "
+"especificado por el descriptor de archivo *fileno*, y retorna un objeto "
+"*mmap*.  Si *length* es ``0``, la longitud máxima del map será el tamaño "
+"actual del archivo cuando :class:`~mmap.mmap` sea llamado."
 
 #: ../Doc/library/mmap.rst:80
 msgid ""
@@ -132,6 +196,11 @@ msgid ""
 "that's shared with all other processes mapping the same areas of the file.  "
 "The default value is :const:`MAP_SHARED`."
 msgstr ""
+"*flags* especifica la naturaleza del mapeado. :const:`MAP_PRIVATE` crea un "
+"mapeado *copy-on-write* privado, por lo que los cambios al contenido del "
+"objeto *mmap* serán privados para este proceso, y :const:`MAP_SHARED` crea "
+"un mapeado que es compartido con todos los demás procesos que mapean las "
+"mismas áreas del archivo.  El valor por defecto es :const:`MAP_SHARED`."
 
 #: ../Doc/library/mmap.rst:86
 msgid ""
@@ -140,6 +209,10 @@ msgid ""
 "that the pages may be read or written.  *prot* defaults to :const:`PROT_READ "
 "\\| PROT_WRITE`."
 msgstr ""
+"*prot*, si se especifica, proporciona la protección de memoria deseado; los "
+"dos valores más útiles son :const:`PROT_READ` y :const:`PROT_WRITE`, para "
+"especificar que las páginas puedan ser escritas o leídas.  *prot* es por "
+"defecto :const:`PROT_READ\\|PROT_WRITE`."
 
 #: ../Doc/library/mmap.rst:91
 msgid ""
@@ -148,6 +221,10 @@ msgid ""
 "*access*.  See the description of *access* above for information on how to "
 "use this parameter."
 msgstr ""
+"*access* puede ser especificado en lugar de *flags* y *prot* como un "
+"parámetro nombrado opcional.  Es un error especificar tanto *flags*, *prot* "
+"como *access*. Véase la descripción de *access* arriba por información de "
+"cómo usar este parámetro."
 
 #: ../Doc/library/mmap.rst:96
 msgid ""
@@ -156,6 +233,11 @@ msgid ""
 "defaults to 0. *offset* must be a multiple of :const:`ALLOCATIONGRANULARITY` "
 "which is equal to :const:`PAGESIZE` on Unix systems."
 msgstr ""
+"*offset* puede ser especificado como un *offset* entero no negativo. Las "
+"referencias serán relativas al *offset* desde el comienzo del archivo. "
+"*offset* por defecto es 0. *offset* debe ser un múltiplo de :const:"
+"`ALLOCATIONGRANULARITY` que es igual a :const:`PAGESIZE` en los sistemas "
+"Unix."
 
 #: ../Doc/library/mmap.rst:101
 msgid ""
@@ -163,40 +245,51 @@ msgid ""
 "descriptor *fileno* is internally automatically synchronized with physical "
 "backing store on Mac OS X and OpenVMS."
 msgstr ""
+"Para asegurar la validez del mapeado en memoria creado el archivo "
+"especificado por el descriptor *fileno* es internamente y automáticamente "
+"sincronizado con la memoria de respaldo en Mac OS X y OpenVMS."
 
 #: ../Doc/library/mmap.rst:105
 msgid "This example shows a simple way of using :class:`~mmap.mmap`::"
-msgstr ""
+msgstr "Este ejemplo muestra un forma simple de usar :class:`~mmap.mmap`::"
 
 #: ../Doc/library/mmap.rst:130
 msgid ""
 ":class:`~mmap.mmap` can also be used as a context manager in a :keyword:"
 "`with` statement::"
 msgstr ""
+":class:`~mmap.mmap` también puede ser usado como un gestor de contexto en "
+"una sentencia :keyword:`with` ::"
 
 #: ../Doc/library/mmap.rst:138
 msgid "Context manager support."
-msgstr ""
+msgstr "Soporte del Gestor de Contexto."
 
 #: ../Doc/library/mmap.rst:142
 msgid ""
 "The next example demonstrates how to create an anonymous map and exchange "
 "data between the parent and child processes::"
 msgstr ""
+"El siguiente ejemplo demuestra como crear un mapa anónimo y cambiar los "
+"datos entre los procesos padre e hijo::"
 
 #: ../Doc/library/mmap.rst:161
 msgid "Memory-mapped file objects support the following methods:"
 msgstr ""
+"Los objetos de archivos mapeados en memoria soportan los siguiente métodos:"
 
 #: ../Doc/library/mmap.rst:165
 msgid ""
 "Closes the mmap. Subsequent calls to other methods of the object will result "
 "in a ValueError exception being raised. This will not close the open file."
 msgstr ""
+"Cierra el *mmap*. Las llamadas posteriores a otros métodos del objeto "
+"resultarán en que se lance una excepción *ValueError*. Esto no cerrará el "
+"archivo abierto."
 
 #: ../Doc/library/mmap.rst:172
 msgid "``True`` if the file is closed."
-msgstr ""
+msgstr "``True`` si el archivo está cerrado."
 
 #: ../Doc/library/mmap.rst:179
 msgid ""
@@ -205,11 +298,17 @@ msgid ""
 "arguments *start* and *end* are interpreted as in slice notation. Returns "
 "``-1`` on failure."
 msgstr ""
+"Retorna el índice mínimo en el objeto donde la subsecuencia *sub* es "
+"hallada, tal que *sub* este contenido en el rango [*start*, *end*]. Los "
+"argumentos opcionales *start* y *end* son interpretados como en una notación "
+"de rebanada. Retorna ``-1`` si falla."
 
 #: ../Doc/library/mmap.rst:184 ../Doc/library/mmap.rst:264
 #: ../Doc/library/mmap.rst:296
 msgid "Writable :term:`bytes-like object` is now accepted."
 msgstr ""
+"Ahora el objeto :term:`bytes-like object` con permisos de escritura se "
+"acepta."
 
 #: ../Doc/library/mmap.rst:190
 msgid ""
@@ -220,12 +319,21 @@ msgid ""
 "extent of the mapping is flushed.  *offset* must be a multiple of the :const:"
 "`PAGESIZE` or :const:`ALLOCATIONGRANULARITY`."
 msgstr ""
+"Transmite los cambios hechos a la copia en memoria de una archivo de vuelta "
+"al archivo. Sin el uso de esta llamada no hay garantía que los cambios sean "
+"escritos de vuelta antes de que los objetos sean destruidos.  Si *offset* y "
+"*size* son especificados, sólo los cambios al rango de bytes dado serán "
+"transmitidos al disco; de otra forma, la extensión completa al mapeado se "
+"transmite.  *offset* debe ser un múltiplo de la constante :const:`PAGESIZE` "
+"o :const:`ALLOCATIONGRANULARITY`."
 
 #: ../Doc/library/mmap.rst:197
 msgid ""
 "``None`` is returned to indicate success.  An exception is raised when the "
 "call failed."
 msgstr ""
+"Se retorna ``None`` para indicar éxito.  Una excepción es lanzada cuando la "
+"llamada falla."
 
 #: ../Doc/library/mmap.rst:200
 msgid ""
@@ -233,6 +341,10 @@ msgid ""
 "error under Windows.  A zero value was returned on success; an exception was "
 "raised on error under Unix."
 msgstr ""
+"Anteriormente, se retornaba un valor diferente de cero cuando era exitoso; "
+"se retornaba cero cuando pasaba un error en Windows.  Se retornaba un valor "
+"de cero cuando era exitoso; se lanzaba una excepción cuando pasaba un error "
+"en Unix."
 
 #: ../Doc/library/mmap.rst:208
 msgid ""
@@ -242,10 +354,15 @@ msgid ""
 "and *length* are omitted, the entire mapping is spanned.  On some systems "
 "(including Linux), *start* must be a multiple of the :const:`PAGESIZE`."
 msgstr ""
+"Envía un aviso *option* al kernel sobre la región de la memoria que comienza "
+"con *start* y se extiende *length* bytes.  *option* debe ser una de las :ref:"
+"`constantes MADV_ <madvide-constants>*` disponibles en el sistema.  Si "
+"*start* y *end* se omiten, se abarca al mapeo entero.  En algunos sistemas "
+"(incluyendo Linux), *start* debe ser un múltiplo de :const:`PAGESIZE`."
 
 #: ../Doc/library/mmap.rst:215
 msgid "Availability: Systems with the ``madvise()`` system call."
-msgstr ""
+msgstr "Disponibilidad: Sistemas con la llamada al sistema ``madvise()``."
 
 #: ../Doc/library/mmap.rst:222
 msgid ""
@@ -253,6 +370,9 @@ msgid ""
 "*dest*.  If the mmap was created with :const:`ACCESS_READ`, then calls to "
 "move will raise a :exc:`TypeError` exception."
 msgstr ""
+"Copia los *count* bytes empezando en el *offset* *src* al índice de destino "
+"*dest*.  Si el *mmap* fue creado con :const:`ACCESS_READ`, entonces las "
+"llamadas lanzaran una excepción :exc:`TypeError`."
 
 #: ../Doc/library/mmap.rst:229
 msgid ""
@@ -261,22 +381,31 @@ msgid ""
 "bytes from the current file position to the end of the mapping. The file "
 "position is updated to point after the bytes that were returned."
 msgstr ""
+"Retorna una clase :class:`bytes` que contiene hasta *n* bytes empezando "
+"desde la posición del archivo actual. Si se omite el argumento, es ``None`` "
+"o negativo, retorna todos los bytes desde la posición actual del archivo "
+"hasta el final del mapeado. Se actualiza la posición del archivo para "
+"apuntar después de los bytes que se retornaron."
 
 #: ../Doc/library/mmap.rst:235
 msgid "Argument can be omitted or ``None``."
-msgstr ""
+msgstr "El argumento puede ser omitido o ser ``None``."
 
 #: ../Doc/library/mmap.rst:240
 msgid ""
 "Returns a byte at the current file position as an integer, and advances the "
 "file position by 1."
 msgstr ""
+"Retorna un byte en la posición actual del archivo como un entero, y avanza "
+"la posición del archivo por 1."
 
 #: ../Doc/library/mmap.rst:246
 msgid ""
 "Returns a single line, starting at the current file position and up to the "
 "next newline."
 msgstr ""
+"Retorna una sola línea, empezando desde la posición actual del archivo y "
+"hasta la siguiente nueva línea."
 
 #: ../Doc/library/mmap.rst:252
 msgid ""
@@ -284,6 +413,9 @@ msgid ""
 "with :const:`ACCESS_READ` or :const:`ACCESS_COPY`, resizing the map will "
 "raise a :exc:`TypeError` exception."
 msgstr ""
+"Redimensiona el mapa y el archivo subyacente, si lo hubiera. Si el *mmap* "
+"fue creado con :const:`ACCESS_READ` o :const:`ACCESS_COPY`, redimensionar el "
+"mapa lanzará una excepción :exc:`TypeError`."
 
 #: ../Doc/library/mmap.rst:259
 msgid ""
@@ -292,6 +424,10 @@ msgid ""
 "arguments *start* and *end* are interpreted as in slice notation. Returns "
 "``-1`` on failure."
 msgstr ""
+"Retorna el índice más alto en el objeto donde la subsecuencia *sub* se "
+"encuentre, tal que *sub* sea contenido en el rango [*start*, *end*]. Los "
+"argumentos opcionales *start* y *end* son interpretados como un notación de "
+"rebanada. Retorna ``-1`` si falla."
 
 #: ../Doc/library/mmap.rst:270
 msgid ""
@@ -300,16 +436,23 @@ msgid ""
 "``os.SEEK_CUR`` or ``1`` (seek relative to the current position) and ``os."
 "SEEK_END`` or ``2`` (seek relative to the file's end)."
 msgstr ""
+"Establece la posición actual del archivo.  El argumento *whence* es opcional "
+"y es por defecto ``os.SEEK_SET`` o ``0`` (posicionamiento del archivo "
+"absoluto); otros valores son ``os.SEEK_CUR`` o ``1`` (búsqueda relativa a la "
+"posición actual) y ``os.SEEK_END`` o ``2`` (búsqueda relativa al final del "
+"archivo)."
 
 #: ../Doc/library/mmap.rst:278
 msgid ""
 "Return the length of the file, which can be larger than the size of the "
 "memory-mapped area."
 msgstr ""
+"Retorna el tamaño del archivo, que puede ser más grande que el tamaño del "
+"área mapeado en memoria."
 
 #: ../Doc/library/mmap.rst:284
 msgid "Returns the current position of the file pointer."
-msgstr ""
+msgstr "Retorna la posición actual del puntero del archivo."
 
 #: ../Doc/library/mmap.rst:289
 msgid ""
@@ -320,10 +463,16 @@ msgid ""
 "written.  If the mmap was created with :const:`ACCESS_READ`, then writing to "
 "it will raise a :exc:`TypeError` exception."
 msgstr ""
+"Escribe los bytes en *bytes* en memoria en la posición actual del puntero "
+"del archivo y retorna el números de bytes escritos (nunca menos que "
+"``len(bytes)``, ya que si la escritura falla, una excepción :exc:"
+"`ValueError` será lanzada).  La posición del archivo es actualizada para "
+"apuntar después de los bytes escritos.  Si el *mmap* fue creado con :const:"
+"`ACCESS_READ`, entonces escribirlo lanzará una excepción :exc:`TypeError`."
 
 #: ../Doc/library/mmap.rst:299
 msgid "The number of bytes written is now returned."
-msgstr ""
+msgstr "Ahora se retorna el número de bytes escritos."
 
 #: ../Doc/library/mmap.rst:305
 msgid ""
@@ -332,17 +481,23 @@ msgid ""
 "with :const:`ACCESS_READ`, then writing to it will raise a :exc:`TypeError` "
 "exception."
 msgstr ""
+"Escribe el entero *byte* en la memoria en la posición actual del puntero del "
+"archivo; se avanza la posición del archivo por ``1``. Si el *mmap* es creado "
+"con :const:`ACCES_READ`, entonces escribirlo hará que se lance la excepción :"
+"exc:`TypeError`."
 
 #: ../Doc/library/mmap.rst:313
 msgid "MADV_* Constants"
-msgstr ""
+msgstr "Constantes MADV_*"
 
 #: ../Doc/library/mmap.rst:338
 msgid ""
 "These options can be passed to :meth:`mmap.madvise`.  Not every option will "
 "be present on every system."
 msgstr ""
+"Se pueden pasar estas opciones al método :meth:`mmap.madvise`.  No todas las "
+"opciones estarán presentes en todos los sistemas."
 
 #: ../Doc/library/mmap.rst:341
 msgid "Availability: Systems with the madvise() system call."
-msgstr ""
+msgstr "Disponibilidad: Sistemas con la llamada al sistema *madvise()*."
