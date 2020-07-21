@@ -29,7 +29,7 @@ El costado técnico
 Al revisar una traducción, deberás tener en cuenta ciertos aspectos propios de una traducción técnica de esta índole. Además de que debe entenderse el texto en español y que debes respetar el contenido de la documentación original (ver "A tener en cuenta" en la `Guía para contribuir en la traducción <https://python-docs-es.readthedocs.io/es/3.8/CONTRIBUTING.html>`), contamos con herramientas en este proyecto que pueden fallar en ciertos casos, y que como revisor/a deberás tener en cuenta.
 
 Cuatro razones por las que puede fallar el *build* de Travis:
-* Powrap falla
-* Pospell falla
+* `powrap` falla
+* `pospell` falla
 * Dict está duplicado
 * Sphinx falla
