@@ -26,7 +26,7 @@ Para esto, Github te ofrece opciones para afrontar una PR (ver botón *Review Ch
 
 El costado técnico
 ==================
-Al revisar una traducción, deberás tener en cuenta ciertos aspectos propios de una traducción técnica de esta índole. Además de que debe entenderse el texto en español y que debes respetar el contenido de la documentación original (ver "A tener en cuenta" en la `Guía para contribuir en la traducción <https://python-docs-es.readthedocs.io/es/3.8/CONTRIBUTING.html>`), contamos con herramientas en este proyecto que pueden fallar en ciertos casos, y que como revisor/a deberás tener en cuenta.
+Al revisar una traducción, deberás tener en cuenta ciertos aspectos propios de una traducción técnica de esta índole. Además de que debe entenderse el texto en español y que debes respetar el contenido de la documentación original (ver "A tener en cuenta" en la `Guía para contribuir en la traducción <https://python-docs-es.readthedocs.io/es/3.8/CONTRIBUTING.html>`_), contamos con herramientas en este proyecto que pueden fallar en ciertos casos, y que como revisor/a deberás tener en cuenta.
 
 Cuatro razones por las que puede fallar el *build* de Travis:
 * `powrap` falla
