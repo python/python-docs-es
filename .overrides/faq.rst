@@ -61,6 +61,18 @@ Estamos trabajando para unificar el uso de un mismo set de diccionarios de espa�
 pero por el momento el chequeo que hacemos es con los diccionarios es_AR y es_ES.
 
 
+¿Cómo agrego una palabra al diccionario?
+----------------------------------------
+
+Si ``pospell`` falla diciendo que no conoce una palabra, pero estamos seguros que esa palabra está bien escrita,
+debemos agregarla al diccionario que ``pospell`` usa internamente para comprobar las palabras.
+
+Para eso debes editar (o crear, si no existe) el archivo ``<archivopo>.txt`` dentro del direcorio ``dictionaries``
+y agregar esa palabra al final de este archivo.
+Nota que debes reemplazar ``<archivopo>`` por el nombre del archivo que estés traduciendo.
+Por ejemplo, si estás traduciendo ``library/decimal.po``, debes editar/crear el archivos ``dictionaries/library_decimal.txt``.
+
+
 ¿Cómo puedo configurar git para manejar correctamente los finales de línea en Windows?
 --------------------------------------------------------------------------------------
 
@@ -87,6 +99,13 @@ y repetir el proceso para *Smart Dashes*.
    :align: center
 
    Desactivar "Smart Quotes" y "Smart Dashes"
+
+
+.. tip::
+
+   Este comando te puede ayudar a cambiar todas las comillas::
+
+     sed -i **/*.po -e 's|[“”]|\\"|g'
 
 
 ¿Qué parte de ``:ref:`` debo traducir?
@@ -169,3 +188,35 @@ Puedes ver el resultado con tu navegador de internet (Firefox, Chrome, etc) ejec
   make serve
 
 Y luego accediendo a http://localhost:8000/
+
+.. _mantener-actualizada:
+
+¿Cómo actualizar mi copia local del repositorio?
+---------------------------------------------------------
+
+Es recomendable mantener actualizada nuestra copia local para evitar 
+posibles conflictos entre los archivos que trabajamos y la última versión disponible 
+en el repositorio remoto. 
+Primero, necesitamos bajar los cambios de *upstream* (es el nombre que asignamos al 
+repositorio principal de la traducción). Se hace de la siguiente manera::
+
+    git fetch upstream
+
+Luego nos vamos a nuestra rama local, confirmamos e impactamos esos cambios::
+
+    git checkout 3.8
+    git merge upstream/3.8
+    git push origin 3.8 
+
+¡Eso es todo!
+
+
+¿Tienen una lista de correo?
+----------------------------
+
+Sí.
+
+No tiene mucho tráfico aún ya que estamos usando más el canal de Telegram por el momento.
+Puedes suscribirte ingresando aquí_.
+
+.. _aquí: https://mail.python.org/mailman3/lists/docs-es.python.org/
