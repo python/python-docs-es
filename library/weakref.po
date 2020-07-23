@@ -6,39 +6,45 @@
 # Check https://github.com/PyCampES/python-docs-es/blob/3.8/TRANSLATORS to
 # get the list of volunteers
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2020-07-23 16:11-0500\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Adolfo Hristo David Roque Gámez <hristo.roqueg@gmail.com>\n"
+"Language: es_PE\n"
+"X-Generator: Poedit 2.3.1\n"
 
 #: ../Doc/library/weakref.rst:2
 msgid ":mod:`weakref` --- Weak references"
-msgstr ""
+msgstr ":mod:`weakref` --- Referencias débiles"
 
 #: ../Doc/library/weakref.rst:12
 msgid "**Source code:** :source:`Lib/weakref.py`"
-msgstr ""
+msgstr "**Código Fuente:** :source:`Lib/weakref.py`"
 
 #: ../Doc/library/weakref.rst:16
 msgid ""
 "The :mod:`weakref` module allows the Python programmer to create :dfn:`weak "
 "references` to objects."
 msgstr ""
+"El módulo :mod:`weakref` le permite al programador de Python crear :dfn:"
+"`referencias débiles` a objetos."
 
 #: ../Doc/library/weakref.rst:22
 msgid ""
 "In the following, the term :dfn:`referent` means the object which is "
 "referred to by a weak reference."
 msgstr ""
+"En lo siguiente, el término :dfn:`referente` alude al objeto que es "
+"referenciado por una referencia débil."
 
 #: ../Doc/library/weakref.rst:25
 msgid ""
@@ -49,6 +55,12 @@ msgid ""
 "weak reference may return the object even if there are no strong references "
 "to it."
 msgstr ""
+"Una referencia débil a un objeto no es suficiente para mantener al objeto "
+"con vida: cuando las únicas referencias que le queden a un referente son "
+"referencias débiles, la recolección de basura (:term:`garbage collection`) "
+"es libre de destruir al referente y reusar su memoria para algo más.  Sin "
+"embargo, hasta que el objeto no sea realmente destruido, la referencia débil "
+"puede retornar el objeto incluso si no tiene referencias fuertes."
 
 #: ../Doc/library/weakref.rst:31
 msgid ""
@@ -56,6 +68,9 @@ msgid ""
 "large objects, where it's desired that a large object not be kept alive "
 "solely because it appears in a cache or mapping."
 msgstr ""
+"Un uso principal para las referencias débiles es para implementar caches o "
+"mapeados que mantienen objetos grandes, cuando no se desea que un objeto "
+"grande no sea mantenido con vida sólo porque aparece en un cache o mapeado."
 
 #: ../Doc/library/weakref.rst:35
 msgid ""
@@ -72,6 +87,19 @@ msgid ""
 "collection can reclaim the object, and its corresponding entries in weak "
 "mappings are simply deleted."
 msgstr ""
+"Por ejemplo, si tienes un número de grandes objetos de images binarias, "
+"puedes desear asociar un nombre con cada uno. Si usaras un diccionario de "
+"Python para mapear los nombres a imágenes, o imágenes a nombres, los objetos "
+"imagen quedarían con vida sólo porque aparecen como valores o llaves en los "
+"diccionarios.  Las clases :class:`WeakKeyDictionary` y :class:"
+"`WeakValueDictionary` que se proporcionan por el módulo :mod:`weakref` son "
+"una alternativa, usando referencias débiles para construir mapeados que no "
+"mantengan con vida el objeto sólo porque aparecen en el mapeado de objetos.  "
+"Si, por ejemplo, un objeto imagen es un valor en un :class:"
+"`WeakValueDictionary`, entonces cuando las últimas referencias que queden de "
+"ese objeto imagen sean las referencias débiles guardadas por mapeados "
+"débiles, la recolección de basura puede reclamar el objeto, y sus entradas "
+"correspondientes en mapeados débiles son simplemente eliminadas."
 
 #: ../Doc/library/weakref.rst:48
 msgid ""
@@ -82,8 +110,16 @@ msgid ""
 "class:`set` interface, but keeps weak references to its elements, just like "
 "a :class:`WeakKeyDictionary` does."
 msgstr ""
+":class:`WeakKeyDictionary` y :class:`WeakValueDictionary` usan referencias "
+"débiles en sus implementaciones, estableciendo funciones de devolución de "
+"llamadas (*callback*) en las referencias débiles que notifiquen a los "
+"diccionarios débiles cuando una llave o valor ha sido reclamado por la "
+"recolección de basura. :class:`WeakSet` implementa la interfaz :class:`set`, "
+"pero mantiene referencias débiles de sus elementos, justo como lo hace :"
+"class:`WeakKeyDictionary`."
 
 #: ../Doc/library/weakref.rst:55
+#, fuzzy
 msgid ""
 ":class:`finalize` provides a straight forward way to register a cleanup "
 "function to be called when an object is garbage collected. This is simpler "
@@ -91,6 +127,11 @@ msgid ""
 "the module automatically ensures that the finalizer remains alive until the "
 "object is collected."
 msgstr ""
+":class:`finalize` provee una forma directa de registrar una función de "
+"limpieza que se llame cuando un objeto es recogido por la recolección de "
+"basura. Esto es más simple que montar una función *callback* en una "
+"referencia débil pura, ya que el módulo automáticamente se asegura que el "
+"finalizador se mantenga con vida hasta que el objeto sea recolectado."
 
 #: ../Doc/library/weakref.rst:61
 msgid ""
@@ -99,6 +140,11 @@ msgid ""
 "your own weak references directly.  The low-level machinery is exposed by "
 "the :mod:`weakref` module for the benefit of advanced uses."
 msgstr ""
+"La mayoría de programas deben descubrir que usar uno de estos tipos de "
+"contenedores débiles o la clase :class:`finalize` es todo lo que necesitan "
+"-- usualmente no es necesario crear tus propias referencias débiles "
+"directamente.  La maquinaria de bajo nivel está expuesta por el módulo :mod:"
+"`weakref` para el beneficio de usuarios avanzados."
 
 #: ../Doc/library/weakref.rst:66
 msgid ""
@@ -108,28 +154,44 @@ msgid ""
 "`generators <generator>`, type objects, sockets, arrays, deques, regular "
 "expression pattern objects, and code objects."
 msgstr ""
+"No todos los objetos pueden ser débilmente referenciados; esos objetos que "
+"pueden incluir instancias de clases, funciones escritas en Python (pero no "
+"en C), métodos de instancia, conjuntos, conjuntos congelados (*frozensets*), "
+"algunos :term:`objetos de archivo <file object>`, :term:`generadores "
+"<generator>`, objetos de tipos, sockets, arreglos, *deques*, objetos de "
+"patrones de expresiones regulares, y objetos código."
 
 #: ../Doc/library/weakref.rst:72
 msgid "Added support for thread.lock, threading.Lock, and code objects."
 msgstr ""
+"Se añadió el soporte para thread.lock, threading.Lock, y objetos código."
 
 #: ../Doc/library/weakref.rst:75
+#, fuzzy
 msgid ""
 "Several built-in types such as :class:`list` and :class:`dict` do not "
 "directly support weak references but can add support through subclassing::"
 msgstr ""
+"Varios tipos incorporados como :class:`list` y :class:`dict` no soportan "
+"directamente referencias débiles pero pueden añadir soporte a través de "
+"*subclassing*::"
 
 #: ../Doc/library/weakref.rst:85
+#, fuzzy
 msgid ""
 "Other built-in types such as :class:`tuple` and :class:`int` do not support "
 "weak references even when subclassed."
 msgstr ""
+"Otros tipos incorporados como :class:`tuple` y :class:`int` no soportan "
+"referencias débiles incluso cuando son subclaseadas."
 
 #: ../Doc/library/weakref.rst:88
 msgid ""
 "Extension types can easily be made to support weak references; see :ref:"
 "`weakref-support`."
 msgstr ""
+"Los tipos de extensiones se pueden hacer para soportar referencias débiles; "
+"véase :ref:`weakref-support`."
 
 #: ../Doc/library/weakref.rst:94
 msgid ""
@@ -142,6 +204,14 @@ msgid ""
 "passed as the only parameter to the callback; the referent will no longer be "
 "available."
 msgstr ""
+"Retorna una referencia débil de *object*.  El objeto original puede ser "
+"recuperado al llamar la referencia del objeto si el referente sigue con "
+"vida; si el referente ya no está con vida, llamar a la  referencia del "
+"objeto causará que se retorne un :const:`None`.  Si se proporciona "
+"*callback* y no :const:`None`, y el objeto *weakref* retornado aún sigue con "
+"vida, el *callback* será llamado cuando el objeto esté a punto de ser "
+"finalizado; el objeto de la referencia débil será pasado como el único "
+"parámetro al callback, el referente ya no estará disponible."
 
 #: ../Doc/library/weakref.rst:102
 msgid ""
@@ -149,6 +219,10 @@ msgid ""
 "object. Callbacks registered for each weak reference will be called from the "
 "most recently registered callback to the oldest registered callback."
 msgstr ""
+"Se permite que muchas referencias débiles sean construidas por el mismo "
+"objeto. *Callbacks* registrados por cada referencia débil serán llamados "
+"desde el callback registrado más recientemente hasta el callback registrado "
+"más antiguo."
 
 #: ../Doc/library/weakref.rst:106
 msgid ""
@@ -156,16 +230,25 @@ msgid ""
 "output, but cannot be propagated; they are handled in exactly the same way "
 "as exceptions raised from an object's :meth:`__del__` method."
 msgstr ""
+"Las excepciones lanzadas por el *callback* serán anotadas en la salida de "
+"error estándar, pero no pueden ser propagadas; son manejadas igual que las "
+"excepciones lanzadas por el método :meth:`__del__` de un objeto."
 
 #: ../Doc/library/weakref.rst:110
+#, fuzzy
 msgid ""
 "Weak references are :term:`hashable` if the *object* is hashable.  They will "
 "maintain their hash value even after the *object* was deleted.  If :func:"
 "`hash` is called the first time only after the *object* was deleted, the "
 "call will raise :exc:`TypeError`."
 msgstr ""
+"Las referencias débiles son :term:`hashable` si el *objet* es hashable.  "
+"Ellos mantendrán su valor del hash incluso cuando el *objet* haya sido "
+"eliminado.  Si :func:`hash` es llamado por primera vez sólo después de que "
+"*object* sea eliminado, la llamada lanzará un :exc:`TypeError`."
 
 #: ../Doc/library/weakref.rst:115
+#, fuzzy
 msgid ""
 "Weak references support tests for equality, but not ordering.  If the "
 "referents are still alive, two references have the same equality "
@@ -173,10 +256,16 @@ msgid ""
 "referent has been deleted, the references are equal only if the reference "
 "objects are the same object."
 msgstr ""
+"Las referencias débiles soportan pruebas para igualdad, pero no de "
+"ordenación.  Si los referentes están todavía con vida, dos referencias tiene "
+"la misma relación de igualdad como sus referentes (sin importar el "
+"*callback*).  Si un referente ha sido eliminado, las referencias son iguales "
+"sólo si el objetos de referencia son el mismo objeto."
 
 #: ../Doc/library/weakref.rst:120
+#, fuzzy
 msgid "This is a subclassable type rather than a factory function."
-msgstr ""
+msgstr "Es un tipo que se puede subclasear en vez de una función de fábrica."
 
 #: ../Doc/library/weakref.rst:124
 msgid ""
@@ -184,10 +273,13 @@ msgid ""
 "weakref.  If there is no callback or if the referent of the weakref is no "
 "longer alive then this attribute will have value ``None``."
 msgstr ""
+"Estre atributo de sólo lectura retorna la llamada que está asociada "
+"actualmente con el *weakref*.  Si no hay callbacks o si el referente del "
+"*weakref* no está con vida entonces este atributo tendrá de valor ``None``."
 
 #: ../Doc/library/weakref.rst:128
 msgid "Added the :attr:`__callback__` attribute."
-msgstr ""
+msgstr "Se añadió el atributo :attr:`__callback__`."
 
 #: ../Doc/library/weakref.rst:134
 msgid ""
@@ -447,7 +539,7 @@ msgstr ""
 
 #: ../Doc/library/weakref.rst:414
 msgid "Example"
-msgstr ""
+msgstr "Ejemplo"
 
 #: ../Doc/library/weakref.rst:416
 msgid ""
