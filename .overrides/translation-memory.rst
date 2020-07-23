@@ -69,7 +69,10 @@ Términos y bigramas
 
      handle exception
        Gestionar excepción. ``tutorial/inputoutput.po``
-      
+
+     library
+       biblioteca. ``library/sqlite3.po``
+
      locale
        Configuración regional. ``library/functions.po`` and others
 
