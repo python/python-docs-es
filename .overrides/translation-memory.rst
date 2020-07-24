@@ -35,50 +35,108 @@ Términos y bigramas
 
 
      awaitable
-      aguardable ``glossary``
+       aguardable ``glossary``
+
+     slash and backslash
+      barra y barra invertida ``c-api``,``tutorial``,``library/functions.po``
 
      built-in
-      incorporada ``glossary.po``
+       incorporada ``glossary.po``
 
      built-in exceptions
-      excepciones predefinidas ``tutorial/errors.po``
+       excepciones predefinidas ``tutorial/errors.po``
 
      bytecodes
-      queda igual ``glossary.po``
+       queda igual ``glossary.po``
 
      callable
-      invocable ``glossary.po``
+       invocable ``glossary.po``, ``library/functions.po``
+
+     code object
+       objeto código ``c-api``, ``library/functions.po``
 
      deallocated
-      desalojable ``glossary.po``
+       desalojable ``glossary.po``
 
      docstring
-      docstring. ``library/idle.po``
+       docstring. ``library/idle.po``
+
+     key
+       clave
 
      handler
-      gestor ``tutorial/errors.po``
+       gestor ``tutorial/errors.po``, ``library/functions.po``
 
      handle exception
-      Gestionar excepción. ``tutorial/inputoutput.po``
+       Gestionar excepción. ``tutorial/inputoutput.po``
+
+     library
+       biblioteca. ``library/sqlite3.po``
+
+     locale
+       Configuración regional. ``library/functions.po`` and others
+
+     helper function
+       función auxiliar  ``library/typing.po``
 
      loop
-      Bucle. ``tutorial/controlflow.po``
+       bucle ``tutorial/controlflow.po``
 
      mapping
-      mapeo ``glossary.po``
+       mapeo ``glossary.po``
 
      named tuple.
-      tupla nombrada ``glossary.po``
+       tupla nombrada ``glossary.po``
 
      path
-      Ruta. ``glossary.po``
+       ruta ``glossary.po``
+
+     raise
+       lanzar, lanza. (referido a excepciones)  ``library/functions.po``, ``c-api``
 
      realease
-      version ``HOWTO``  
-   
-     underscore
-      guión bajo ``glossary.po``
+       version ``HOWTO``
 
+     runtime
+       tiempo de ejecución  ``tutorial/classes.po``
+
+     static type checker
+       Validador estático de tipos
+       Notas: mantener la mayúscula, usar validación cuando se refiera a la acción y no al agente.
+
+     third-party
+       de terceros ``library/typing.po``
+
+     type hint
+       indicador de tipo  ``library/typing.po``
+
+     type annotation  ``library/typing.po``
+       anotación de tipo
+       Nota: úsese como sinónimo de *type hint*
+
+     release
+      version ``HOWTO``  
+
+     slice
+      segmento ``datamodel.po``
+
+     slicing
+      segmentación ``datamodel.po``
+
+     string
+      cadena de caracteres ``datamodel.po``
+
+     strings
+      cadenas de caracteres ``datamodel.po``
+
+     underscore
+       guión bajo ``glossary.po``
+
+     auditing event
+       evento de auditoria ``library/tempfile``
+
+     widget
+       widget ``library/tkinter``
 
 Reglas de estilo
 ================
