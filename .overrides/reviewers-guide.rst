@@ -11,7 +11,7 @@ Aquí te dejamos algunos *tips* para que tu devolución sea constructiva y genui
 El costado práctico
 ===================
 La devolución deberá ser acertada para transmitir el mensaje que necesitamos que llegue; de esta forma, les traductores podrán revisar su trabajo y saber qué necesitan hacer para mejorarlo.
-No olvides que esto se trata de una traducción técnica y como tal, el objetivo es que, básicamente, la persona que la lea pueda entender cómo usar Python. Es por esto que, si bien es importante que la sintaxis sea correcta, el objetivo no es hacer una revisión intensiva del uso del español, a menos que la forma en que se expresó la idea imposibilite que otre la entienda. 
+No olvides que esto se trata de una traducción técnica y como tal, el objetivo es que, básicamente, la persona que la lea pueda entender cómo usar Python. Es por esto que, si bien es importante que la sintaxis sea correcta, el objetivo no es hacer una revisión intensiva del uso del español, a menos que la forma en que se expresó la idea imposibilite que otre la entienda.
 
 Para esto, Github te ofrece opciones para afrontar una PR (ver botón *Review Changes* arriba a la derecha de los archivos modificados por les traductores):
 * *Comment*: Puedes dejar un comentario sin necesariamente aprobar la PR. Asegúrate de hacerlo con claridad para que quien tradujo sepa que debe modificar algunas cosas antes de que su PR sea aprobada.
@@ -19,10 +19,9 @@ Para esto, Github te ofrece opciones para afrontar una PR (ver botón *Review Ch
 * *Request Changes*: Utiliza esta opción cuando la traducción necesita varias modificaciones que afectan su integración al repositorio. En este caso también asegúrate de que tu mensaje sea claro y amable para acompañar al traductor en el proceso de modificar y lograr que la PR se apruebe.
 
 *Tips*
- ====
+======
 * PRs de más de 1000 líneas: Te sugerimos hacer un comentario al principio del PR para indicar hasta qué línea haz hecho el review y qué hay que revisar hasta ese hito.
 * “Needs work” genera en la línea anterior “#fuzzy” para que el traductor revise esa línea. Se puede usar cuando la traducción necesita revisión y en ese momento no puedes sugerir una traducción alternativa.
-
 
 El costado técnico
 ==================
