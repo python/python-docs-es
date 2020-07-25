@@ -89,7 +89,7 @@ progress: venv
 
 .PHONY: spell
 spell: venv
-	cat dict dictionaries/*.txt > dict.txt
+	awk 1 dict dictionaries/*.txt > dict.txt
 	$(VENV)/bin/pospell -p dict.txt -l es_ES **/*.po
 
 
