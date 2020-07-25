@@ -61,6 +61,18 @@ Estamos trabajando para unificar el uso de un mismo set de diccionarios de espa�
 pero por el momento el chequeo que hacemos es con los diccionarios es_AR y es_ES.
 
 
+¿Cómo agrego una palabra al diccionario?
+----------------------------------------
+
+Si ``pospell`` falla diciendo que no conoce una palabra, pero estamos seguros que esa palabra está bien escrita,
+debemos agregarla al diccionario que ``pospell`` usa internamente para comprobar las palabras.
+
+Para eso debes editar (o crear, si no existe) el archivo ``<archivopo>.txt`` dentro del direcorio ``dictionaries``
+y agregar esa palabra al final de este archivo.
+Nota que debes reemplazar ``<archivopo>`` por el nombre del archivo que estés traduciendo.
+Por ejemplo, si estás traduciendo ``library/decimal.po``, debes editar/crear el archivos ``dictionaries/library_decimal.txt``.
+
+
 ¿Cómo puedo configurar git para manejar correctamente los finales de línea en Windows?
 --------------------------------------------------------------------------------------
 
