@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-07-25 05:01-0300\n"
+"PO-Revision-Date: 2020-07-28 01:42-0300\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -116,7 +116,7 @@ msgid ""
 "in the current dialect.  For full details about the dialect and formatting "
 "parameters, see section :ref:`csv-fmt-params`."
 msgstr ""
-"Retorna un objeto lector que iterará sobre las líneas del *csvfile* "
+"Retorna un objeto *reader* que iterará sobre las líneas del *csvfile* "
 "proporcionado. *csvfile* puede ser cualquier objeto que soporte el "
 "protocolo :term:`iterator` y devuelva una cadena de caracteres siempre que "
 "su método :meth:`!__next__` sea llamado --- tanto :term:`objetos de archivo "
@@ -167,7 +167,7 @@ msgid ""
 "returned from a ``cursor.fetch*`` call. All other non-string data are "
 "stringified with :func:`str` before being written."
 msgstr ""
-"Devuelve un objeto escritor responsable de convertir los datos del usuario a "
+"Devuelve un objeto *writer* responsable de convertir los datos del usuario a "
 "cadenas de caracteres delimitadas en el objeto proporcionado. *csvfile* "
 "puede ser cualquier objeto con un método :func:`write`. Si *csvfile* es un "
 "objeto de archivo, debería ser abierto con ``newline=''`` [1]_. Se puede "
@@ -242,8 +242,8 @@ msgid ""
 "information in each row to a :class:`dict` whose keys are given by the "
 "optional *fieldnames* parameter."
 msgstr ""
-"Crea un objeto que opera como un lector común, pero mapea la información en "
-"cada fila a un :class:`dict` cuyas claves son provistas en el parámetro "
+"Crea un objeto que opera como un *reader* común, pero mapea la información "
+"en cada fila a un :class:`dict` cuyas claves son provistas en el parámetro "
 "opcional *fieldnames*."
 
 #: ../Doc/library/csv.rst:156
@@ -284,9 +284,7 @@ msgstr ""
 msgid "Returned rows are now of type :class:`dict`."
 msgstr "Las filas retornadas son ahora de tipo :class:`dict`."
 
-# Se traduce secuencia o dejamos sequence?
 #: ../Doc/library/csv.rst:191
-#, fuzzy
 msgid ""
 "Create an object which operates like a regular writer but maps dictionaries "
 "onto output rows.  The *fieldnames* parameter is a :mod:`sequence "
@@ -301,7 +299,7 @@ msgid ""
 "other optional or keyword arguments are passed to the underlying :class:"
 "`writer` instance."
 msgstr ""
-"Crea un objeto que opera como un escritor común, pero mapea diccionarios a "
+"Crea un objeto que opera como un *writer* común, pero mapea diccionarios a "
 "filas de salida. El parámetro *fieldnames* es una :mod:`secuencia "
 "<collections.abc>` de claves que identifican el orden en el cual los valores "
 "en el diccionario pasados al método :meth:`writerow` son escritos en el "
@@ -421,10 +419,9 @@ msgstr ""
 #: ../Doc/library/csv.rst:297
 msgid "Instructs the reader to convert all non-quoted fields to type *float*."
 msgstr ""
-"Ordena al lector a convertir todos los campos no citados al tipo *float*."
+"Ordena al *reader* a convertir todos los campos no citados al tipo *float*."
 
 #: ../Doc/library/csv.rst:302
-#, fuzzy
 msgid ""
 "Instructs :class:`writer` objects to never quote fields.  When the current "
 "*delimiter* occurs in output data it is preceded by the current *escapechar* "
@@ -433,7 +430,7 @@ msgid ""
 msgstr ""
 "Ordena a los objetos :class:`writer` nunca citar campos. Cuando el "
 "*delimiter* actual aparece en los datos de salida es precedido por el "
-"carácter *escapechar* actual. Si *escapechar* no esta definido, el escritor "
+"carácter *escapechar* actual. Si *escapechar* no esta definido, el *writer* "
 "lanzará :exc:`Error` si cualquier carácter que requiere escaparse es "
 "encontrado."
 
@@ -474,11 +471,11 @@ msgstr ""
 "Un dialecto es una subclase de la clase :class:`Dialect` con un conjunto de "
 "métodos específicos y un solo método :meth:`validate`. Cuando se crean "
 "objetos :class:`reader` o :class:`writer`, el programador puede especificar "
-"una cadena o una subclase de la clase :class:`Dialect` como el parámetro de "
-"dialecto. Además de, o en vez de, el parámetro *dialect*, el programador "
-"también puede especificar parámetros de formateo individuales, con los "
-"mismos nombres que los atributos definidos debajo para la clase :class:"
-"`Dialect`."
+"una cadena de caracteres o una subclase de la clase :class:`Dialect` como el "
+"parámetro de dialecto. Además de, o en vez de, el parámetro *dialect*, el "
+"programador también puede especificar parámetros de formateo individuales, "
+"con los mismos nombres que los atributos definidos debajo para la clase :"
+"class:`Dialect`."
 
 #: ../Doc/library/csv.rst:331
 msgid "Dialects support the following attributes:"
@@ -520,7 +517,7 @@ msgid ""
 "from the following character. It defaults to :const:`None`, which disables "
 "escaping."
 msgstr ""
-"Una cadena de un solo carácter usada por el escritor para escapar al "
+"Una cadena de un solo carácter usada por el *writer* para escapar al "
 "*delimiter* si *quoting* está configurado como :const:`QUOTE_NONE` y al "
 "*quotechar* si *doublequote* es :const:`False`. En la lectura, el "
 "*escapechar* elimina cualquier significado especial del siguiente carácter. "
@@ -531,8 +528,8 @@ msgid ""
 "The string used to terminate lines produced by the :class:`writer`. It "
 "defaults to ``'\\r\\n'``."
 msgstr ""
-"La cadena usada para terminar las líneas producidas por :class:`writer`. Por "
-"defecto es ``'\\r\\n'``."
+"La cadena de caracteres usada para terminar las líneas producidas por :class:"
+"`writer`. Por defecto es ``'\\r\\n'``."
 
 #: ../Doc/library/csv.rst:365
 msgid ""
@@ -550,6 +547,9 @@ msgid ""
 "such as the *delimiter* or *quotechar*, or which contain new-line "
 "characters.  It defaults to ``'\"'``."
 msgstr ""
+"Una cadena de un solo carácter usada para citar campos que contienen "
+"caracteres especiales, como lo son *delimiter* o *quotechar*, o que "
+"contienen caracteres de nueva línea. Por defecto es  ``'\"'``."
 
 #: ../Doc/library/csv.rst:379
 msgid ""
@@ -557,28 +557,38 @@ msgid ""
 "reader.  It can take on any of the :const:`QUOTE_\\*` constants (see "
 "section :ref:`csv-contents`) and defaults to :const:`QUOTE_MINIMAL`."
 msgstr ""
+"Controla cuando las comillas deberían ser generadas por el *writer* y ser "
+"reconocidas por el *reader*. Puede tomar cualquiera de las constantes :const:"
+"`QUOTE_\\*` (ver sección :ref:`csv-contents`) y por defecto es :const:"
+"`QUOTE_MINIMAL`."
 
 #: ../Doc/library/csv.rst:386
 msgid ""
 "When :const:`True`, whitespace immediately following the *delimiter* is "
 "ignored. The default is :const:`False`."
 msgstr ""
+"Cuando es :const:`True`, el espacio en blanco que sigue después del "
+"*delimiter* es ignorado. Por defecto es :const:`False`."
 
 #: ../Doc/library/csv.rst:392
 msgid ""
 "When ``True``, raise exception :exc:`Error` on bad CSV input. The default is "
 "``False``."
 msgstr ""
+"Cuando es ``True``, lanza una excepción :exc:`Error` sobre una mala entrada "
+"CSV. Por defecto es ``False``."
 
 #: ../Doc/library/csv.rst:396
 msgid "Reader Objects"
-msgstr ""
+msgstr "Objetos *Reader*"
 
 #: ../Doc/library/csv.rst:398
 msgid ""
 "Reader objects (:class:`DictReader` instances and objects returned by the :"
 "func:`reader` function) have the following public methods:"
 msgstr ""
+"Los objetos *reader* (instancias de :class:`DictReader` y objetos devueltos "
+"por la función :func:`reader`) contienen los siguientes métodos públicos:"
 
 #: ../Doc/library/csv.rst:403
 msgid ""
@@ -587,34 +597,44 @@ msgid ""
 "instance), parsed according to the current dialect.  Usually you should call "
 "this as ``next(reader)``."
 msgstr ""
+"Devuelve la siguiente fila del objeto iterable del *reader* como una lista "
+"(si el objeto fue devuelto de :func:`reader`) o como un diccionario (si es "
+"una instancia de :class:`DictReader`), analizada acorde al dialecto actual. "
+"Normalmente deberías llamarlo como ``next(reader)``."
 
 #: ../Doc/library/csv.rst:409
 msgid "Reader objects have the following public attributes:"
-msgstr ""
+msgstr "Los objetos *reader* contienen los siguientes atributos públicos:"
 
 #: ../Doc/library/csv.rst:413
 msgid "A read-only description of the dialect in use by the parser."
-msgstr ""
+msgstr "Una descripción de sólo lectura del dialecto en uso por el intérprete."
 
 #: ../Doc/library/csv.rst:418
 msgid ""
 "The number of lines read from the source iterator. This is not the same as "
 "the number of records returned, as records can span multiple lines."
 msgstr ""
+"El número de líneas leídas del iterador fuente. Esto no es lo mismo que el "
+"número de registros devueltos, ya que los registros pueden abarcar múltiples "
+"líneas."
 
 #: ../Doc/library/csv.rst:422
 msgid "DictReader objects have the following public attribute:"
-msgstr ""
+msgstr "Los objetos *DictReader* tienen los siguientes atributos públicos:"
 
 #: ../Doc/library/csv.rst:426
 msgid ""
 "If not passed as a parameter when creating the object, this attribute is "
 "initialized upon first access or when the first record is read from the file."
 msgstr ""
+"Si no son pasados como parámetros cuando se crea el objeto, este atributo es "
+"inicializado en el primer acceso o cuando es leído el primer registro del "
+"archivo."
 
 #: ../Doc/library/csv.rst:433
 msgid "Writer Objects"
-msgstr ""
+msgstr "Objetos *Writer*"
 
 #: ../Doc/library/csv.rst:435
 msgid ""
@@ -627,6 +647,14 @@ msgid ""
 "problems for other programs which read CSV files (assuming they support "
 "complex numbers at all)."
 msgstr ""
+"Los objetos :class:`Writer` (instancias de :class:`DictWriter` y objetos "
+"devueltos por la función :func:`writer`) contienen los siguientes métodos "
+"públicos. Una *row* debe ser un iterable de cadenas de caracteres o números "
+"para objetos :class:`Writer` y un diccionario que mapea nombres de campo a "
+"cadenas de caracteres o números (pasándolos primero a través de :func:`str`) "
+"para objetos :class:`DictWriter`. Note que los números complejos se escriben "
+"rodeados de paréntesis. Esto puede causar algunos problemas para otros "
+"programas que leen archivos CSV (asumiendo que soportan números complejos)."
 
 #: ../Doc/library/csv.rst:446
 msgid ""
@@ -634,10 +662,13 @@ msgid ""
 "to the current dialect. Return the return value of the call to the *write* "
 "method of the underlying file object."
 msgstr ""
+"Escribe el parámetro *row* al objeto de archivo del *writer*, formateado "
+"según el dialecto actual. Devuelve el valor de retorno de la llamada al "
+"método *write* del objeto de archivo subyacente."
 
 #: ../Doc/library/csv.rst:450
 msgid "Added support of arbitrary iterables."
-msgstr ""
+msgstr "Agregado soporte para iterables."
 
 #: ../Doc/library/csv.rst:455
 msgid ""
@@ -645,18 +676,21 @@ msgid ""
 "above) to the writer's file object, formatted according to the current "
 "dialect."
 msgstr ""
+"Escribe todos los elementos en *rows* (un iterable de objetos *row* como se "
+"describe anteriormente) al objeto de archivo del *writer*, formateados según "
+"el dialecto actual."
 
 #: ../Doc/library/csv.rst:459
 msgid "Writer objects have the following public attribute:"
-msgstr ""
+msgstr "Los objetos *writer* contienen los siguientes atributos públicos:"
 
 #: ../Doc/library/csv.rst:464
 msgid "A read-only description of the dialect in use by the writer."
-msgstr ""
+msgstr "Una descripción de solo lectura del dialecto en uso por el *writer*."
 
 #: ../Doc/library/csv.rst:467
 msgid "DictWriter objects have the following public method:"
-msgstr ""
+msgstr "Los objetos *DictWriter* contienen los siguientes métodos públicos:"
 
 #: ../Doc/library/csv.rst:472
 msgid ""
@@ -664,28 +698,34 @@ msgid ""
 "writer's file object, formatted according to the current dialect. Return the "
 "return value of the :meth:`csvwriter.writerow` call used internally."
 msgstr ""
+"Escribe una fila con los nombres de los campos (como se especifica en el "
+"constructor) al objeto de archivo del *writer*, formateada según el dialecto "
+"actual. Devuelve el valor de retorno de la llamada a :meth:`csvwriter."
+"writerow` usada internamente."
 
 #: ../Doc/library/csv.rst:477
 msgid ""
 ":meth:`writeheader` now also returns the value returned by the :meth:"
 "`csvwriter.writerow` method it uses internally."
 msgstr ""
+":meth:`writeheader` ahora también devuelve el valor retornado por el método :"
+"meth:`csvwriter.writerow` que usa internamente."
 
 #: ../Doc/library/csv.rst:485
 msgid "Examples"
-msgstr ""
+msgstr "Ejemplos"
 
 #: ../Doc/library/csv.rst:487
 msgid "The simplest example of reading a CSV file::"
-msgstr ""
+msgstr "El ejemplo más simple de lectura de un archivo CSV::"
 
 #: ../Doc/library/csv.rst:495
 msgid "Reading a file with an alternate format::"
-msgstr ""
+msgstr "Lectura de un archivo con un formato alternativo::"
 
 #: ../Doc/library/csv.rst:503
 msgid "The corresponding simplest possible writing example is::"
-msgstr ""
+msgstr "El correspondiente ejemplo de escritura más simple es::"
 
 #: ../Doc/library/csv.rst:510
 msgid ""
@@ -694,32 +734,44 @@ msgid ""
 "`locale.getpreferredencoding`).  To decode a file using a different "
 "encoding, use the ``encoding`` argument of open::"
 msgstr ""
+"Ya que :func:`open` es usado para abrir un archivo CSV para lectura, el "
+"archivo será decodificado por defecto en unicode usando la codificación por "
+"defecto del sistema (ver :func:`locale.getpreferredencoding`). Para "
+"decodificar un archivo usando una codificación diferente, usa el argumento "
+"``encoding`` de open::"
 
 #: ../Doc/library/csv.rst:521
 msgid ""
 "The same applies to writing in something other than the system default "
 "encoding: specify the encoding argument when opening the output file."
 msgstr ""
+"Lo mismo aplica a escribir en algo diferente a la codificación por defecto "
+"del sistema: especifique el argumento de codificación cuando abra el archivo "
+"de salida."
 
 #: ../Doc/library/csv.rst:524
 msgid "Registering a new dialect::"
-msgstr ""
+msgstr "Registrando un nuevo dialecto::"
 
 #: ../Doc/library/csv.rst:531
 msgid ""
 "A slightly more advanced use of the reader --- catching and reporting "
 "errors::"
 msgstr ""
+"Un uso ligeramente más avanzado del *reader* --- captura y reporte de "
+"errores::"
 
 #: ../Doc/library/csv.rst:543
 msgid ""
 "And while the module doesn't directly support parsing strings, it can easily "
 "be done::"
 msgstr ""
+"Y a pesar de que el módulo no soporta el análisis de cadenas de caracteres "
+"directamente, puede ser realizado fácilmente::"
 
 #: ../Doc/library/csv.rst:552
 msgid "Footnotes"
-msgstr ""
+msgstr "Notas al pie"
 
 #: ../Doc/library/csv.rst:553
 msgid ""
@@ -729,3 +781,9 @@ msgid ""
 "safe to specify ``newline=''``, since the csv module does its own (:term:"
 "`universal <universal newlines>`) newline handling."
 msgstr ""
+"Si ``newline=''`` no es especificado, las nuevas líneas dentro de los campos "
+"citados no serán interpretadas correctamente y, en plataformas que utilicen "
+"finales de línea ``\\r\\n`` en la escritura, se añadirá un ``\\r`` extra. "
+"Siempre debería ser seguro especificar ``newline=''``, ya que el módulo csv "
+"realiza su propio manejo de nuevas líneas (:term:`universal <universal "
+"newlines>`)."
