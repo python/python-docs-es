@@ -89,6 +89,8 @@ progress: venv
 
 .PHONY: spell
 spell: venv
+        # 'cat' tenia el problema que algunos archivos no tenían una nueva línea al final
+        # 'awk 1' agregará una nueva línea en caso que falte.
 	awk 1 dict dictionaries/*.txt > dict.txt
 	$(VENV)/bin/pospell -p dict.txt -l es_ES **/*.po
 
