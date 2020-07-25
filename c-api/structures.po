@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../Doc/c-api/structures.rst:6
 msgid "Common Object Structures"
-msgstr ""
+msgstr "Estructuras de objetos comunes"
 
 #: ../Doc/c-api/structures.rst:8
 msgid ""
@@ -30,6 +30,9 @@ msgid ""
 "object types for Python.  This section describes these structures and how "
 "they are used."
 msgstr ""
+"Hay un gran número de estructuras que se utilizan en la definición de los "
+"tipos de objetos de Python. Esta sección describe estas estructuras y la "
+"forma en que se utilizan."
 
 #: ../Doc/c-api/structures.rst:12
 msgid ""
@@ -39,6 +42,12 @@ msgid ""
 "defined, in turn, by the expansions of some macros also used, whether "
 "directly or indirectly, in the definition of all other Python objects."
 msgstr ""
+"En última instancia, todos los objetos de Python comparten un pequeño número "
+"de campos en el comienzo de la representación del objeto en la memoria. "
+"Estos están representados por la :c:type:`PyObject` y :c:type:`PyVarObject`,"
+"que se definen, a su vez, por las expansiones de algunos macros también se "
+"utilizan, ya sea directa o indirectamente, en la definición de todos otros "
+"objetos de Python."
 
 #: ../Doc/c-api/structures.rst:21
 msgid ""
@@ -50,6 +59,14 @@ msgid ""
 "to a :c:type:`PyObject*`.  Access to the members must be done by using the "
 "macros :c:macro:`Py_REFCNT` and :c:macro:`Py_TYPE`."
 msgstr ""
+"Todos los tipos de objetos son extensiones de este tipo. Este es un tipo que "
+"contiene la información que Python necesita para tratar un puntero a un "
+"objeto como un objeto. En una construcción \"*release*\" normal, que "
+"contiene solo contador de referencia del objeto y un puntero al objeto de "
+"tipo correspondiente. En realidad nada es declarado como un :c:type:"
+"`PyObject`, pero cada puntero a un objeto de Python se puede convertir en "
+"una :c:type:`PyObject*`. El acceso a los miembros debe hacerse mediante el "
+"uso de las macros :c:macro:`Py_REFCNT` y :c:macro:`Py_TYPE`."
 
 #: ../Doc/c-api/structures.rst:33
 msgid ""
@@ -59,16 +76,24 @@ msgid ""
 "must be done by using the macros :c:macro:`Py_REFCNT`, :c:macro:`Py_TYPE`, "
 "and :c:macro:`Py_SIZE`."
 msgstr ""
+"Esta es una extensión de :c:type:`PyObject` que se suma el campo :attr:"
+"`ob_size`. Esto sólo se utiliza para objetos que tienen cierta noción de "
+"longitud (*length*). Este tipo no suele aparecer en la API Python/C. El "
+"acceso a los miembros debe hacerse mediante el uso de las macros :c:macro:"
+"`Py_REFCNT`, :c:macro:`Py_TYPE`, y :c:macro:`Py_SIZE`."
 
 #: ../Doc/c-api/structures.rst:42
 msgid ""
 "This is a macro used when declaring new types which represent objects "
 "without a varying length.  The PyObject_HEAD macro expands to::"
 msgstr ""
+"Esta es una macro utilizado cuando se declara nuevos tipos que representan "
+"objetos sin una longitud variable. La macro PyObject_HEAD se expande a::"
 
 #: ../Doc/c-api/structures.rst:47
 msgid "See documentation of :c:type:`PyObject` above."
 msgstr ""
+"Consulte la documentación de :c:type:`PyObject` en secciones anteriores."
 
 #: ../Doc/c-api/structures.rst:52
 msgid ""
@@ -76,34 +101,45 @@ msgid ""
 "length that varies from instance to instance. The PyObject_VAR_HEAD macro "
 "expands to::"
 msgstr ""
+"Esta es una macro utilizado cuando se declara nuevos tipos que representan "
+"objetos con una longitud que varía de una instancia a otra instancia. La "
+"macro PyObject_VAR_HEAD se expande a::"
 
 #: ../Doc/c-api/structures.rst:58
 msgid "See documentation of :c:type:`PyVarObject` above."
-msgstr ""
+msgstr "Consulte la documentación de :c:type:`PyVarObject` anteriormente."
 
 #: ../Doc/c-api/structures.rst:63
 msgid ""
 "This macro is used to access the :attr:`ob_type` member of a Python object. "
 "It expands to::"
 msgstr ""
+"Esta macro se utiliza para acceder al miembro :attr:`ob_type` de un objeto "
+"Python. Se expande a::"
 
 #: ../Doc/c-api/structures.rst:71
 msgid ""
 "This macro is used to access the :attr:`ob_refcnt` member of a Python "
 "object. It expands to::"
 msgstr ""
+"Esta macro se utiliza para acceder al miembro :attr:`ob_refcnt` de un objeto "
+"Python. Se expande a::"
 
 #: ../Doc/c-api/structures.rst:80
 msgid ""
 "This macro is used to access the :attr:`ob_size` member of a Python object. "
 "It expands to::"
 msgstr ""
+"Esta macro se utiliza para acceder al miembro :attr:`ob_size` de un objeto "
+"Python. Se expande a::"
 
 #: ../Doc/c-api/structures.rst:88
 msgid ""
 "This is a macro which expands to initialization values for a new :c:type:"
 "`PyObject` type.  This macro expands to::"
 msgstr ""
+"Esta es una macro que se expande para valores de inicialización para un "
+"nuevo tipo :c:type:`PyObject`. Esta macro expande::"
 
 #: ../Doc/c-api/structures.rst:97
 msgid ""
@@ -111,6 +147,9 @@ msgid ""
 "`PyVarObject` type, including the :attr:`ob_size` field. This macro expands "
 "to::"
 msgstr ""
+"Esta es una macro que se expande para valores de inicialización para un "
+"nuevo tipo :c:type:`PyVarObject`, incluyendo el campo :attr:`ob_size`. Esta "
+"macro se expande a::"
 
 #: ../Doc/c-api/structures.rst:107
 msgid ""
@@ -121,93 +160,107 @@ msgid ""
 "value of the function as exposed in Python.  The function must return a new "
 "reference."
 msgstr ""
+"Tipo de las funciones usadas para implementar la mayoría de invocables "
+"Python en C. Funciones de este tipo toman dos parámetros :c:type:`PyObject"
+"\\*` y retorna un valor de ese tipo. Si el valor de retorno es ``NULL``, una "
+"excepción fue establecida. Si no es ``NULL``, el valor retornado se "
+"interpreta como el valor de retorno de la función que se expone en Python. "
+"La función debe retornar una nueva referencia."
 
 #: ../Doc/c-api/structures.rst:117
 msgid ""
 "Type of the functions used to implement Python callables in C with "
 "signature :const:`METH_VARARGS | METH_KEYWORDS`."
 msgstr ""
+"Tipo de las funciones que se utilizan para implementar invocables Python en "
+"C con la firma :const:`METH_VARARGS | METH_KEYWORDS`."
 
 #: ../Doc/c-api/structures.rst:123
 msgid ""
 "Type of the functions used to implement Python callables in C with "
 "signature :const:`METH_FASTCALL`."
 msgstr ""
+"Tipo de las funciones que se utilizan para implementar invocables Python en "
+"C con la firma :const:`METH_FASTCALL`."
 
 #: ../Doc/c-api/structures.rst:129
 msgid ""
 "Type of the functions used to implement Python callables in C with "
 "signature :const:`METH_FASTCALL | METH_KEYWORDS`."
 msgstr ""
+"Tipo de las funciones que se utilizan para implementar invocables Python en "
+"C con la firma :const:`METH_FASTCALL | METH_KEYWORDS`."
 
 #: ../Doc/c-api/structures.rst:135
 msgid ""
 "Structure used to describe a method of an extension type.  This structure "
 "has four fields:"
 msgstr ""
+"Estructura utiliza para describir un método de un tipo de extensión. Esta "
+"estructura tiene cuatro campos:"
 
 #: ../Doc/c-api/structures.rst:139 ../Doc/c-api/structures.rst:279
 #: ../Doc/c-api/structures.rst:345
 msgid "Field"
-msgstr ""
+msgstr "Campo"
 
 #: ../Doc/c-api/structures.rst:139 ../Doc/c-api/structures.rst:279
 #: ../Doc/c-api/structures.rst:345
 msgid "C Type"
-msgstr ""
+msgstr "Tipo C"
 
 #: ../Doc/c-api/structures.rst:139 ../Doc/c-api/structures.rst:279
 #: ../Doc/c-api/structures.rst:345
 msgid "Meaning"
-msgstr ""
+msgstr "Significado"
 
 #: ../Doc/c-api/structures.rst:141
 msgid ":attr:`ml_name`"
-msgstr ""
+msgstr ":attr:`ml_name`"
 
 #: ../Doc/c-api/structures.rst:141 ../Doc/c-api/structures.rst:149
 #: ../Doc/c-api/structures.rst:281 ../Doc/c-api/structures.rst:294
 #: ../Doc/c-api/structures.rst:310 ../Doc/c-api/structures.rst:347
 #: ../Doc/c-api/structures.rst:355
 msgid "const char \\*"
-msgstr ""
+msgstr "const char \\*"
 
 #: ../Doc/c-api/structures.rst:141
 msgid "name of the method"
-msgstr ""
+msgstr "nombre del método"
 
 #: ../Doc/c-api/structures.rst:143
 msgid ":attr:`ml_meth`"
-msgstr ""
+msgstr ":attr:`ml_meth`"
 
 #: ../Doc/c-api/structures.rst:143
 msgid "PyCFunction"
-msgstr ""
+msgstr "PyCFunction"
 
 #: ../Doc/c-api/structures.rst:143
 msgid "pointer to the C implementation"
-msgstr ""
+msgstr "puntero a la implementación en C"
 
 #: ../Doc/c-api/structures.rst:146
 msgid ":attr:`ml_flags`"
-msgstr ""
+msgstr ":attr:`ml_flags`"
 
 #: ../Doc/c-api/structures.rst:146 ../Doc/c-api/structures.rst:283
 #: ../Doc/c-api/structures.rst:290 ../Doc/c-api/structures.rst:306
 msgid "int"
-msgstr ""
+msgstr "int"
 
 #: ../Doc/c-api/structures.rst:146
 msgid "flag bits indicating how the call should be constructed"
-msgstr ""
+msgstr "*flag* bits que indican cómo debe ser construida la llamada"
 
 #: ../Doc/c-api/structures.rst:149
 msgid ":attr:`ml_doc`"
-msgstr ""
+msgstr ":attr:`ml_doc`"
 
 #: ../Doc/c-api/structures.rst:149 ../Doc/c-api/structures.rst:294
 msgid "points to the contents of the docstring"
-msgstr ""
+msgstr "puntos a los contenidos del docstring"
 
 #: ../Doc/c-api/structures.rst:153
 msgid ""
@@ -218,6 +271,12 @@ msgid ""
 "first parameter as :c:type:`PyObject\\*`, it is common that the method "
 "implementation uses the specific C type of the *self* object."
 msgstr ""
+"El :attr:`ml_meth` es un puntero de función C. Las funciones pueden ser de "
+"diferentes tipos, pero siempre retornan :c:type:`PyObject\\*`. Si la función "
+"no es la de :c:type:`PyCFunction`, el compilador requiere una conversión de "
+"tipo en la tabla de métodos. A pesar de que :c:type:`PyCFunction` define el "
+"primer parámetro como :c:type:`PyObject\\*`, es común que la implementación "
+"del método utiliza el tipo específico C del objecto *self*."
 
 #: ../Doc/c-api/structures.rst:160
 msgid ""
@@ -225,6 +284,9 @@ msgid ""
 "flags. The individual flags indicate either a calling convention or a "
 "binding convention."
 msgstr ""
+"El campo :attr:`ml_flags` es un campo de bits que puede incluir las "
+"siguientes *flags*. Las *flags* individuales indican o bien una convención "
+"de llamada o una convención vinculante."
 
 #: ../Doc/c-api/structures.rst:164
 msgid ""
@@ -232,6 +294,10 @@ msgid ""
 "them can be combined with :const:`METH_KEYWORDS` to support also keyword "
 "arguments.  So there are a total of 6 calling conventions:"
 msgstr ""
+"Hay cuatro convenciones básicas de llamadas de argumentos posicionales y dos "
+"de ellos se pueden combinar con :const:`METH_KEYWORDS` para soportar también "
+"argumentos de palabra clave (*keyword*). Así que hay un total de 6 "
+"convenciones de llamada:"
 
 #: ../Doc/c-api/structures.rst:170
 msgid ""
@@ -242,6 +308,13 @@ msgid ""
 "object representing all arguments. This parameter is typically processed "
 "using :c:func:`PyArg_ParseTuple` or :c:func:`PyArg_UnpackTuple`."
 msgstr ""
+"Esta es la convención de llamada típica, donde los métodos tienen el tipo :c:"
+"type:`PyCFunction`. La función espera dos valores :c:type:`PyObject\\*`.  El "
+"primero es objeto *self* para los métodos; para las funciones del módulo, "
+"que es el objeto módulo. El segundo parámetro (a menudo llamado *args*) es "
+"un objeto tupla que representa todos los argumentos. Este parámetro se "
+"procesa típicamente usando :c:func:`PyArg_ParseTuple` o :c:func:"
+"`PyArg_UnpackTuple`."
 
 #: ../Doc/c-api/structures.rst:180
 msgid ""
@@ -251,6 +324,12 @@ msgid ""
 "if there are no keyword arguments.  The parameters are typically processed "
 "using :c:func:`PyArg_ParseTupleAndKeywords`."
 msgstr ""
+"Los métodos con estas *flags* deben ser del tipo :c:type:"
+"`PyCFunctionWithKeywords`. La función espera tres parámetros: *self*, "
+"*args*, *kwargs* donde *kwargs* es un diccionario de todos los argumentos de "
+"palabras clave o, posiblemente, ``NULL`` si no hay argumentos de palabra "
+"clave. Los parámetros se procesan típicamente usando :c:func:"
+"`PyArg_ParseTupleAndKeywords`."
 
 #: ../Doc/c-api/structures.rst:189
 msgid ""
@@ -260,10 +339,15 @@ msgid ""
 "arguments and the third parameter is the number of arguments (the length of "
 "the array)."
 msgstr ""
+"Convención de llamando rápido que soporta sólo argumentos posicionales. Los "
+"métodos tienen el tipo :c:type:`_PyCFunctionFast`. El primer parámetro es "
+"*self*, el segundo parámetro es un arreglo C de valores :c:type:`PyObject"
+"\\*` que indican los argumentos y el tercer parámetro es el número de "
+"argumentos (la longitud del arreglo)."
 
 #: ../Doc/c-api/structures.rst:195 ../Doc/c-api/structures.rst:210
 msgid "This is not part of the :ref:`limited API <stable>`."
-msgstr ""
+msgstr "Esto no es parte de la :ref:`API limitada <stable>`."
 
 #: ../Doc/c-api/structures.rst:202
 msgid ""
@@ -275,6 +359,14 @@ msgid ""
 "there are no keywords.  The values of the keyword arguments are stored in "
 "the *args* array, after the positional arguments."
 msgstr ""
+"Extensión de :const:`METH_FASTCALL` que apoya también argumentos de palabra "
+"clave, con los métodos de tipo :c:type:`_PyCFunctionFastWithKeywords`. "
+"argumentos de palabra clave se transmiten de la misma manera como en el "
+"protocolo vectorcall: hay un adicional cuarta :c:type:`PyObject\\*` "
+"parámetro que es una tupla que representa los nombres de los argumentos de "
+"palabra clave o posiblemente ``NULL`` si no hay palabras clave. Los valores "
+"de los argumentos de palabras clave se almacenan en el arreglo *args*, "
+"después de los argumentos posicionales."
 
 #: ../Doc/c-api/structures.rst:217
 msgid ""
@@ -284,6 +376,11 @@ msgid ""
 "and will hold a reference to the module or object instance.  In all cases "
 "the second parameter will be ``NULL``."
 msgstr ""
+"Métodos sin parámetros no tienen que comprobar si los argumentos se dan si "
+"están registrados con el *flag* :const:`METH_NOARGS`. Tienen que ser de "
+"tipo :c:type:`PyCFunction`. El primer parámetro normalmente se denomina "
+"*self* y llevará a cabo una referencia a la instancia módulo u objeto. En "
+"todos los casos el segundo parámetro será ``NULL``."
 
 #: ../Doc/c-api/structures.rst:226
 msgid ""
@@ -293,6 +390,11 @@ msgid ""
 "parameter, and a :c:type:`PyObject\\*` parameter representing the single "
 "argument."
 msgstr ""
+"Los métodos con un solo argumento objeto pueden ser listados con el *flag* :"
+"const:`METH_O`, en lugar de invocar :c:func:`PyArg_ParseTuple` con un "
+"argumento ``\"O\"``. Tienen el tipo :c:type:`PyCFunction`, con el parámetro "
+"*self*, y un parámetro :c:type:`PyObject\\*` que representa el único "
+"argumento."
 
 #: ../Doc/c-api/structures.rst:232
 msgid ""
@@ -301,6 +403,10 @@ msgid ""
 "functions defined for modules.  At most one of these flags may be set for "
 "any given method."
 msgstr ""
+"Estas dos constantes no se utilizan para indicar la convención de llamada si "
+"no la vinculación cuando su usan con métodos de las clases. Estos no se "
+"pueden usar para funciones definidas para módulos. A lo sumo uno de estos "
+"*flags* puede establecerse en un método dado."
 
 #: ../Doc/c-api/structures.rst:242
 msgid ""
@@ -308,6 +414,10 @@ msgid ""
 "an instance of the type.  This is used to create *class methods*, similar to "
 "what is created when using the :func:`classmethod` built-in function."
 msgstr ""
+"Al método se le pasará el objeto tipo como primer parámetro, en lugar de una "
+"instancia del tipo. Esto se utiliza para crear métodos de clase (*class "
+"methods*), similar a lo que se crea cuando se utiliza la función :func:"
+"`classmethod` incorporada."
 
 #: ../Doc/c-api/structures.rst:252
 msgid ""
@@ -315,12 +425,18 @@ msgid ""
 "instance of the type.  This is used to create *static methods*, similar to "
 "what is created when using the :func:`staticmethod` built-in function."
 msgstr ""
+"El método pasará ``NULL`` como el primer parámetro en lugar de una instancia "
+"del tipo. Esto se utiliza para crear métodos estáticos (*static methods*), "
+"similar a lo que se crea cuando se utiliza la función :func:`staticmethod` "
+"incorporada."
 
 #: ../Doc/c-api/structures.rst:256
 msgid ""
 "One other constant controls whether a method is loaded in place of another "
 "definition with the same method name."
 msgstr ""
+"En otros controles constantes dependiendo si se carga un método en su lugar "
+"(*in place*) de otra definición con el mismo nombre del método."
 
 #: ../Doc/c-api/structures.rst:262
 msgid ""
@@ -334,53 +450,67 @@ msgid ""
 "helpful because calls to PyCFunctions are optimized more than wrapper object "
 "calls."
 msgstr ""
+"El método se cargará en lugar de las definiciones existentes. Sin "
+"*METH_COEXIST*, el comportamiento predeterminado es saltarse las "
+"definiciones repetidas. Desde envolturas de ranura se cargan antes de la "
+"tabla de métodos, la existencia de una ranura *sq_contains*, por ejemplo, "
+"generaría un método envuelto llamado :meth:`__contains__` e impediría la "
+"carga de una PyCFunction correspondiente con el mismo nombre. Con el *flag* "
+"definido, la PyCFunction se cargará en lugar del objeto envoltorio y "
+"coexistirá con la ranura. Esto es útil porque las llamadas a PyCFunctions se "
+"optimizan más que las llamadas a objetos envolvente."
 
 #: ../Doc/c-api/structures.rst:275
 msgid ""
 "Structure which describes an attribute of a type which corresponds to a C "
 "struct member.  Its fields are:"
 msgstr ""
+"Estructura que describe un atributo de un tipo que corresponde a un miembro "
+"de la estructura de C. Sus campos son:"
 
 #: ../Doc/c-api/structures.rst:281
 msgid ":attr:`name`"
-msgstr ""
+msgstr ":attr:`name`"
 
 #: ../Doc/c-api/structures.rst:281
 msgid "name of the member"
-msgstr ""
+msgstr "nombre del miembro"
 
 #: ../Doc/c-api/structures.rst:283
 msgid ":attr:`!type`"
-msgstr ""
+msgstr ":attr:`!type`"
 
 #: ../Doc/c-api/structures.rst:283
 msgid "the type of the member in the C struct"
-msgstr ""
+msgstr "el tipo de miembro en la estructura de C"
 
 #: ../Doc/c-api/structures.rst:286
 msgid ":attr:`offset`"
-msgstr ""
+msgstr ":attr:`offset`"
 
 #: ../Doc/c-api/structures.rst:286 ../Doc/c-api/structures.rst:322
 msgid "Py_ssize_t"
-msgstr ""
+msgstr "Py_ssize_t"
 
 #: ../Doc/c-api/structures.rst:286
 msgid ""
 "the offset in bytes that the member is located on the type's object struct"
 msgstr ""
+"el desplazamiento en bytes que el miembro se encuentra en la estructura de "
+"objetos tipo"
 
 #: ../Doc/c-api/structures.rst:290
 msgid ":attr:`flags`"
-msgstr ""
+msgstr ":attr:`flags`"
 
 #: ../Doc/c-api/structures.rst:290
 msgid "flag bits indicating if the field should be read-only or writable"
 msgstr ""
+"*flags* bits que indican si el campo debe ser de sólo lectura o de escritura"
 
 #: ../Doc/c-api/structures.rst:294
 msgid ":attr:`doc`"
-msgstr ""
+msgstr ":attr:`doc`"
 
 #: ../Doc/c-api/structures.rst:298
 msgid ""
@@ -388,135 +518,138 @@ msgid ""
 "types.  When the member is accessed in Python, it will be converted to the "
 "equivalent Python type."
 msgstr ""
+":attr:`!type` puede ser uno de muchos macros ``T_`` correspondientes a "
+"diversos tipos C. Cuando se accede al miembro en Python, será convertida al "
+"tipo Python equivalente."
 
 #: ../Doc/c-api/structures.rst:303
 msgid "Macro name"
-msgstr ""
+msgstr "nombre de la macro"
 
 #: ../Doc/c-api/structures.rst:303
 msgid "C type"
-msgstr ""
+msgstr "tipo C"
 
 #: ../Doc/c-api/structures.rst:305
 msgid "T_SHORT"
-msgstr ""
+msgstr "T_SHORT"
 
 #: ../Doc/c-api/structures.rst:305
 msgid "short"
-msgstr ""
+msgstr "short"
 
 #: ../Doc/c-api/structures.rst:306
 msgid "T_INT"
-msgstr ""
+msgstr "T_INT"
 
 #: ../Doc/c-api/structures.rst:307
 msgid "T_LONG"
-msgstr ""
+msgstr "T_LONG"
 
 #: ../Doc/c-api/structures.rst:307
 msgid "long"
-msgstr ""
+msgstr "long"
 
 #: ../Doc/c-api/structures.rst:308
 msgid "T_FLOAT"
-msgstr ""
+msgstr "T_FLOAT"
 
 #: ../Doc/c-api/structures.rst:308
 msgid "float"
-msgstr ""
+msgstr "float"
 
 #: ../Doc/c-api/structures.rst:309
 msgid "T_DOUBLE"
-msgstr ""
+msgstr "T_DOUBLE"
 
 #: ../Doc/c-api/structures.rst:309
 msgid "double"
-msgstr ""
+msgstr "double"
 
 #: ../Doc/c-api/structures.rst:310
 msgid "T_STRING"
-msgstr ""
+msgstr "T_STRING"
 
 #: ../Doc/c-api/structures.rst:311
 msgid "T_OBJECT"
-msgstr ""
+msgstr "T_OBJECT"
 
 #: ../Doc/c-api/structures.rst:311 ../Doc/c-api/structures.rst:312
 msgid "PyObject \\*"
-msgstr ""
+msgstr "PyObject \\*"
 
 #: ../Doc/c-api/structures.rst:312
 msgid "T_OBJECT_EX"
-msgstr ""
+msgstr "T_OBJECT_EX"
 
 #: ../Doc/c-api/structures.rst:313
 msgid "T_CHAR"
-msgstr ""
+msgstr "T_CHAR"
 
 #: ../Doc/c-api/structures.rst:313 ../Doc/c-api/structures.rst:314
 #: ../Doc/c-api/structures.rst:319
 msgid "char"
-msgstr ""
+msgstr "char"
 
 #: ../Doc/c-api/structures.rst:314
 msgid "T_BYTE"
-msgstr ""
+msgstr "T_BYTE"
 
 #: ../Doc/c-api/structures.rst:315
 msgid "T_UBYTE"
-msgstr ""
+msgstr "T_UBYTE"
 
 #: ../Doc/c-api/structures.rst:315
 msgid "unsigned char"
-msgstr ""
+msgstr "unsigned char"
 
 #: ../Doc/c-api/structures.rst:316
 msgid "T_UINT"
-msgstr ""
+msgstr "T_UINT"
 
 #: ../Doc/c-api/structures.rst:316
 msgid "unsigned int"
-msgstr ""
+msgstr "unsigned int"
 
 #: ../Doc/c-api/structures.rst:317
 msgid "T_USHORT"
-msgstr ""
+msgstr "T_USHORT"
 
 #: ../Doc/c-api/structures.rst:317
 msgid "unsigned short"
-msgstr ""
+msgstr "unsigned short"
 
 #: ../Doc/c-api/structures.rst:318
 msgid "T_ULONG"
-msgstr ""
+msgstr "T_ULONG"
 
 #: ../Doc/c-api/structures.rst:318
 msgid "unsigned long"
-msgstr ""
+msgstr "unsigned long"
 
 #: ../Doc/c-api/structures.rst:319
 msgid "T_BOOL"
-msgstr ""
+msgstr "T_BOOL"
 
 #: ../Doc/c-api/structures.rst:320
 msgid "T_LONGLONG"
-msgstr ""
+msgstr "T_LONGLONG"
 
 #: ../Doc/c-api/structures.rst:320
 msgid "long long"
-msgstr ""
+msgstr "long long"
 
 #: ../Doc/c-api/structures.rst:321
 msgid "T_ULONGLONG"
-msgstr ""
+msgstr "T_ULONGLONG"
 
 #: ../Doc/c-api/structures.rst:321
 msgid "unsigned long long"
-msgstr ""
+msgstr "unsigned long long"
 
 #: ../Doc/c-api/structures.rst:322
 msgid "T_PYSSIZET"
-msgstr ""
+msgstr "T_PYSSIZET"
 
 #: ../Doc/c-api/structures.rst:325
 msgid ""
@@ -527,6 +660,12 @@ msgid ""
 "handles use of the :keyword:`del` statement on that attribute more correctly "
 "than :c:macro:`T_OBJECT`."
 msgstr ""
+":c:macro:`T_OBJECT` y :c:macro:`T_OBJECT_EX` se diferencian en que :c:macro:"
+"`T_OBJECT` retorna ``None`` si el miembro es ``NULL`` y :c:macro:"
+"`T_OBJECT_EX` lanza un :exc:`AttributeError`. Trate de usar :c:macro:"
+"`T_OBJECT_EX` sobre :c:macro:`T_OBJECT` porque :c:macro:`T_OBJECT_EX` maneja "
+"el uso de la declaración :keyword:`del` en ese atributo más correctamente "
+"que :c:macro:`T_OBJECT`."
 
 #: ../Doc/c-api/structures.rst:332
 msgid ""
@@ -536,79 +675,94 @@ msgid ""
 "macro:`T_OBJECT` and :c:macro:`T_OBJECT_EX` members can be deleted.  (They "
 "are set to ``NULL``)."
 msgstr ""
+":attr:`flags` puede ser ``0`` para el acceso de escritura y lectura o :c:"
+"macro:`READONLY` para el acceso de sólo lectura. El uso de :c:macro:"
+"`T_STRING` para :attr:`type` implica :c:macro:`READONLY`. Los datos :c:macro:"
+"`T_STRING` se interpretan como UTF-8. Sólo se pueden eliminar :c:macro:"
+"`T_OBJECT` y miembros :c:macro:`T_OBJECT_EX`. (Se establecen a ``NULL``)."
 
 #: ../Doc/c-api/structures.rst:341
 msgid ""
 "Structure to define property-like access for a type. See also description of "
 "the :c:member:`PyTypeObject.tp_getset` slot."
 msgstr ""
+"Estructura para definir el acceso para un tipo como el de una propiedad. "
+"Véase también la descripción de la ranura :c:member:`PyTypeObject.tp_getset`."
 
 #: ../Doc/c-api/structures.rst:347
 msgid "name"
-msgstr ""
+msgstr "nombre"
 
 #: ../Doc/c-api/structures.rst:347
 msgid "attribute name"
-msgstr ""
+msgstr "Nombre del Atributo"
 
 #: ../Doc/c-api/structures.rst:349
 msgid "get"
-msgstr ""
+msgstr "get"
 
 #: ../Doc/c-api/structures.rst:349
 msgid "getter"
-msgstr ""
+msgstr "getter"
 
 #: ../Doc/c-api/structures.rst:349
 msgid "C Function to get the attribute"
-msgstr ""
+msgstr "Función C para obtener el atributo"
 
 #: ../Doc/c-api/structures.rst:351
 msgid "set"
-msgstr ""
+msgstr "set"
 
 #: ../Doc/c-api/structures.rst:351
 msgid "setter"
-msgstr ""
+msgstr "setter"
 
 #: ../Doc/c-api/structures.rst:351
 msgid ""
 "optional C function to set or delete the attribute, if omitted the attribute "
 "is readonly"
 msgstr ""
+"función opcional C para establecer o eliminar el atributo, si se omite el "
+"atributo es de sólo lectura"
 
 #: ../Doc/c-api/structures.rst:355
 msgid "doc"
-msgstr ""
+msgstr "doc"
 
 #: ../Doc/c-api/structures.rst:355
 msgid "optional docstring"
-msgstr ""
+msgstr "docstring opcional"
 
 #: ../Doc/c-api/structures.rst:357
 msgid "closure"
-msgstr ""
+msgstr "clausura (*closure*)"
 
 #: ../Doc/c-api/structures.rst:357
 msgid "void \\*"
-msgstr ""
+msgstr "void \\*"
 
 #: ../Doc/c-api/structures.rst:357
 msgid ""
 "optional function pointer, providing additional data for getter and setter"
 msgstr ""
+"puntero de función opcional, proporcionar datos adicionales para *getter* y "
+"*setter*"
 
 #: ../Doc/c-api/structures.rst:362
 msgid ""
 "The ``get`` function takes one :c:type:`PyObject\\*` parameter (the "
 "instance) and a function pointer (the associated ``closure``)::"
 msgstr ""
+"La función ``get`` toma un parámetro :c:type:`PyObject\\*` (la instancia) y "
+"un puntero de función (el ``closure`` asociado)::"
 
 #: ../Doc/c-api/structures.rst:367
 msgid ""
 "It should return a new reference on success or ``NULL`` with a set exception "
 "on failure."
 msgstr ""
+"Debe devolver una nueva referencia en caso de éxito o ``NULL`` con una "
+"excepción establecida en caso de error."
 
 #: ../Doc/c-api/structures.rst:370
 msgid ""
@@ -616,9 +770,15 @@ msgid ""
 "and the value to be set) and a function pointer (the associated "
 "``closure``)::"
 msgstr ""
+"Las funciones ``set`` toman dos parámetros :c:type:`PyObject\\*` (la "
+"instancia y el valor a ser establecido) y un puntero de función (el "
+"``closure`` asociado)::"
 
 #: ../Doc/c-api/structures.rst:375
 msgid ""
 "In case the attribute should be deleted the second parameter is ``NULL``. "
 "Should return ``0`` on success or ``-1`` with a set exception on failure."
 msgstr ""
+"En caso de que el atributo deba suprimirse el segundo parámetro es ``NULL``. "
+"Debe retornar ``0`` en caso de éxito o ``-1`` con una excepción explícita en "
+"caso de fallo."
