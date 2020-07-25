@@ -41,7 +41,7 @@ help:
 #        treated as errors, which is good to skip simple Sphinx syntax mistakes.
 .PHONY: build
 build: setup
-		PYTHONWARNINGS=ignore::FutureWarning sphinx-build -j auto -W --keep-going -b html -d $(OUTPUT_DOCTREE) -D language=$(LANGUAGE) . $(OUTPUT_HTML)
+		PYTHONWARNINGS=ignore::FutureWarning $(VENV)/bin/sphinx-build -j auto -W --keep-going -b html -d $(OUTPUT_DOCTREE) -D language=$(LANGUAGE) . $(OUTPUT_HTML)
 		@echo "Success! Open file://`pwd`/$(OUTPUT_HTML)/index.html, " \
 					"or run 'make serve' to see them in http://localhost:8000";
 
@@ -89,7 +89,8 @@ progress: venv
 
 .PHONY: spell
 spell: venv
-	$(VENV)/bin/pospell -p dict -l es_ES **/*.po
+	cat dict dictionaries/*.txt > dict.txt
+	$(VENV)/bin/pospell -p dict.txt -l es_ES **/*.po
 
 
 .PHONY: wrap
