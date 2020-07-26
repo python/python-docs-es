@@ -63,13 +63,19 @@ Términos y bigramas
 
      key
        clave
+       
+     keyword argument
+       argumento por palabra clave / argumento de palabra clave
 
      handler
        gestor ``tutorial/errors.po``, ``library/functions.po``
 
      handle exception
        Gestionar excepción. ``tutorial/inputoutput.po``
-      
+
+     library
+       biblioteca. ``library/sqlite3.po``
+
      locale
        Configuración regional. ``library/functions.po`` and others
 
