@@ -1,0 +1,48 @@
+peer_labels: false
+duplicated_issues: false
+scheduled_tasks:
+  issues_warning:
+    if_type: issue
+    if_state: open
+    if_updated: "10 days"
+    comment: >
+      "Hola @${ASSIGNEE} este issue lleva un tiempo sin novedades. 
+       Estás todavía trabajando?\n 
+       Si necesitas ayuda :sos: no dudes en buscarla en nuestro Telegram"
+  issues_timeout:
+    if_type: issue
+    if_state: open
+    if_updated: "20 days"
+    remove_assignees: ${ASSIGNEE}
+    comment: >
+      "Hola @${ASSIGNEE} este issue ya lleva mucho tiempo sin novedades. 
+      Vamos a dejarlo disponible para que otres puedan tomarlo.\n 
+      Si necesitas ayuda no dudes en contactarnos en nuestro Telegram."
+  pr_warning_reviewers:
+    if_type: pr
+    if_state: open
+    if_review: required
+    if_updated: "1 days"
+    add_labels: "waiting for review"
+    comment: "Este PR está buscando alguien que le de un poco de cariño!! :sos: (y lecturas!) :nerd_face:"
+  pr_warning:
+    if_type: pr
+    if_state: open
+    if_review: changes_requested
+    if_updated: "7 days"
+    add_labels: "waiting for review"
+    comment: >
+      "Hola @${ASSIGNEE}. Este PR lleva unos días esperando que revises 
+      comentariosque alguién solicitó en un review.\n 
+      Por favor avisanos si necesitas ayuda (podes encontrarnos en nuestro Telegram)
+      o si tenes algún problema para continuar."
+  pr_timeout:
+    if_type: pr
+    if_state: open
+    if_review: changes_requested
+    if_updated: "21 days"
+    add_labels: "needs decision"
+    comment: >
+      "Hola @${ASSIGNEE}. Vamos a pedir a une admin de nuestro equipo que decida 
+      si alguien más puede finalizar este PR o si tenemos que cancelarlo.\n 
+      Por favor avisanos en caso de que puedas tomarte le tiempo para terminarlo."
