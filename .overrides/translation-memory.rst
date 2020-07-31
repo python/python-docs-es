@@ -73,7 +73,7 @@ Términos y bigramas
      handle exception
        Gestionar excepción. ``tutorial/inputoutput.po``
 
-     inplace
+     in-place, in place
        in situ. Aunque estrictamente no es español, su uso es generalizado.
 
      library
