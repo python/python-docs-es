@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-07-28 14:23-0300\n"
+"PO-Revision-Date: 2020-08-03 19:19-0300\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Last-Translator: Carlos A. Crespo <lvccrespo@gmail.com>\n"
 "Language: es\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.2.4\n"
 
 #: ../Doc/howto/logging-cookbook.rst:5
 msgid "Logging Cookbook"
@@ -209,14 +209,13 @@ msgstr ""
 
 #: ../Doc/howto/logging-cookbook.rst:274
 msgid "Configuration server example"
-msgstr ""
+msgstr "Ejemplo de servidor de configuración"
 
 #: ../Doc/howto/logging-cookbook.rst:276
-#, fuzzy
 msgid "Here is an example of a module using the logging configuration server::"
 msgstr ""
-"Aquí hay un ejemplo de un módulo que usa el servidor de configuración de "
-"registro::"
+"Aquí hay un ejemplo de un módulo que usa el servidor de configuración "
+"logging::"
 
 #: ../Doc/howto/logging-cookbook.rst:307
 msgid ""
@@ -224,10 +223,14 @@ msgid ""
 "server, properly preceded with the binary-encoded length, as the new logging "
 "configuration::"
 msgstr ""
+"Y aquí hay un script que toma un nombre de archivo y envía ese archivo al "
+"servidor, precedido adecuadamente con la longitud codificada en binario, "
+"como la nueva configuración de logging::"
 
 #: ../Doc/howto/logging-cookbook.rst:330
+#, fuzzy
 msgid "Dealing with handlers that block"
-msgstr ""
+msgstr "Tratar con gestores que bloquean"
 
 #: ../Doc/howto/logging-cookbook.rst:334
 msgid ""
@@ -235,8 +238,13 @@ msgid ""
 "blocking the thread you're logging from. This is common in Web applications, "
 "though of course it also occurs in other scenarios."
 msgstr ""
+"A veces tiene que hacer que sus gestores de registro hagan su trabajo sin "
+"bloquear el hilo desde el que está iniciando sesión. Esto es común en las "
+"aplicaciones web, aunque, por supuesto, también ocurre en otros escenarios."
 
+# -"under the hood": de bajo nivel? más técnicas?
 #: ../Doc/howto/logging-cookbook.rst:338
+#, fuzzy
 msgid ""
 "A common culprit which demonstrates sluggish behaviour is the :class:"
 "`SMTPHandler`: sending emails can take a long time, for a number of reasons "
@@ -246,6 +254,14 @@ msgid ""
 "which is too slow (and this query can be deep in the socket library code, "
 "below the Python layer, and outside your control)."
 msgstr ""
+"Un responsable común que demuestra comportamiento lento es la :class:"
+"`SMTPHandler`: el envío de correos electrónicos puede llevar mucho tiempo, "
+"por varias razones fuera del control del desarrollador (por ejemplo, una "
+"infraestructura de red o correo de bajo rendimiento). Pero casi cualquier "
+"controlador basado en red puede bloquear: Incluso una operación :class:"
+"`SocketHandler` puede hacer una consulta DNS de bajo nivel que es demasiado "
+"lenta (y esta consulta puede estar en el código de la biblioteca de socket, "
+"debajo de la capa de Python, y fuera de su control)."
 
 #: ../Doc/howto/logging-cookbook.rst:346
 msgid ""
@@ -260,6 +276,17 @@ msgid ""
 "to attach only ``QueueHandlers`` to your loggers) for the benefit of other "
 "developers who will use your code."
 msgstr ""
+"Una solución es utilizar un enfoque de dos partes. Para la primera parte, "
+"adjunte solo una : ¡class:`QueueHandler` a los loggers que se acceden desde "
+"subprocesos críticos de rendimiento. Simplemente escriben en su cola, que "
+"puede dimensionarse a una capacidad lo suficientemente grande o "
+"inicializarse sin límite superior a su tamaño. La escritura en la cola "
+"generalmente se aceptará rápidamente, aunque es probable que deba atrapar la "
+"excepción :exc:`queue.Full` como precaución en su código. Si usted es un "
+"desarrollador de bibliotecas que tiene subprocesos críticos de rendimiento "
+"en su código, asegúrese de documentar esto (junto con una sugerencia de "
+"adjuntar solo ``QueueHandlers`` a sus loggers) para el beneficio de otros "
+"desarrolladores que usarán su código."
 
 #: ../Doc/howto/logging-cookbook.rst:357
 msgid ""
