@@ -78,6 +78,9 @@ Términos y bigramas
 
      library
        biblioteca. ``library/sqlite3.po``
+       
+     list comprehension / list comprehensions
+       lista por comprensión / listas por comprensión. 
 
      locale
        Configuración regional. ``library/functions.po`` and others
