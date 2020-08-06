@@ -94,8 +94,14 @@ Términos y bigramas
      mapping
        mapeo ``glossary.po``
 
-     named tuple.
+     named tuple
        tupla nombrada ``glossary.po``
+       
+     overload, overloading
+       sobrecargar, sobrecarga
+       
+     override, overriding
+       sobreescribir, sobreescritura
 
      path
        ruta ``glossary.po``
