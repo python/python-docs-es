@@ -38,6 +38,7 @@ contribución, queremos señalar algunos lineamientos generales.
 
 - Colaborar haciendo reviews también es muy muy importante, así que si
   tienes un rato libre puedes comenzar por mirar los PRs pendientes de revisar.
+  (mira la `Guía del revisor`_)
 
 - Último pero no menos importante, divertite y contá con la ayuda de todes. Te
   esperamos en nuestro chat en telegram. ¡Gracias!
@@ -97,6 +98,11 @@ contribución, queremos señalar algunos lineamientos generales.
 #. En la descripción de la *Pull Request* escribe ``Closes #<número de issue>``
    (así se cierra automáticamente cuando se hace *merge*)
 
+   .. note::
+
+      Si hace tiempo que venis trabajando en una traducción es importante
+      :ref:`mantener actualizada <mantener-actualizada>` tu copia local antes de realizar el *Pull Request*.
+
 
 ¿Qué archivo traducir?
 ----------------------
@@ -141,7 +147,7 @@ A tener en cuenta
 * Wikipedia puede ser útil también. Busca la palabra en Inglés, y luego mira si
   tiene una traducción al Español en la barra de la izquierda. Suelen estar
   bastante bien explicados.
-  
+
 * Te recomendamos abrir una Pull Request aunque sea en formato borrador (marcada
   como draft) desde los primeros commits de la traducción de tu fichero. De esta
   forma, puedes recibir feedback desde el principio que puedes aplicar al resto
@@ -177,6 +183,8 @@ Tendrás que navegar hasta el archivo que hayas cambiado para ver cómo se visua
 .. _nuestro canal de Telegram: https://t.me/python_docs_es
 .. _Memoria de traducción:
    https://python-docs-es.readthedocs.io/page/translation-memory.html
+.. _Guía del revisor:
+   https://python-docs-es.readthedocs.io/page/reviewers-guide.html
 .. _la traducción al Portugués: https://docs.python.org/pt-br/3/
 .. _lista de issues en GitHub:
    https://github.com/python/python-docs-es/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+no%3Aassignee+translate
