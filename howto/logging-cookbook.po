@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-08-06 10:50-0300\n"
+"PO-Revision-Date: 2020-08-08 21:08-0300\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -329,7 +329,9 @@ msgstr ""
 msgid "which, when run, will produce:"
 msgstr "que, cuando se ejecuta, producirá:"
 
+# Está OK traducir "listener" por "oyente"??
 #: ../Doc/howto/logging-cookbook.rst:394
+#, fuzzy
 msgid ""
 "Prior to Python 3.5, the :class:`QueueListener` always passed every message "
 "received from the queue to every handler it was initialized with. (This was "
@@ -340,29 +342,48 @@ msgid ""
 "of each message with the handler's level, and only passes a message to a "
 "handler if it's appropriate to do so."
 msgstr ""
+"Antes de Python 3.5, :class:`QueueListener` siempre pasaba cada mensaje "
+"recibido de la cola a cada gestor con el que se inicializaba. (Esto se debió "
+"a que se asumió que el filtrado de nivel se realizó en el otro lado, donde "
+"se llena la cola). A partir de 3.5, este comportamiento se puede cambiar "
+"pasando un argumento de palabra clave ``respect_handler_level=True`` al "
+"constructor del oyente . Cuando se hace esto, el oyente compara el nivel de "
+"cada mensaje con el nivel del controlador, y solo pasa un mensaje a un "
+"controlador si es apropiado hacerlo."
 
 #: ../Doc/howto/logging-cookbook.rst:407
 msgid "Sending and receiving logging events across a network"
-msgstr ""
+msgstr "Enviar y recibir eventos logging a través de una red"
 
+# tengo dudas con "extremo final del envío"
 #: ../Doc/howto/logging-cookbook.rst:409
+#, fuzzy
 msgid ""
 "Let's say you want to send logging events across a network, and handle them "
 "at the receiving end. A simple way of doing this is attaching a :class:"
 "`SocketHandler` instance to the root logger at the sending end::"
 msgstr ""
+"Supongamos que desea enviar eventos logging a través de una red y "
+"gestionarlos en el extremo receptor. Una forma sencilla de hacer esto es "
+"adjuntar una instancia de :class:`SocketHandler` al logger raíz en el "
+"extremo final del envío::"
 
 #: ../Doc/howto/logging-cookbook.rst:437
 msgid ""
 "At the receiving end, you can set up a receiver using the :mod:"
 "`socketserver` module. Here is a basic working example::"
 msgstr ""
+"En el extremo receptor, puede configurar un receptor usando el módulo :mod:"
+"`socketserver`. Aquí hay un ejemplo básico de trabajo:"
 
 #: ../Doc/howto/logging-cookbook.rst:525
 msgid ""
 "First run the server, and then the client. On the client side, nothing is "
 "printed on the console; on the server side, you should see something like:"
 msgstr ""
+"Primero ejecuta el servidor, y luego el cliente. Del lado del cliente, nada "
+"se imprime en la consola; del lado del servidor, se debería ver algo como "
+"esto:"
 
 #: ../Doc/howto/logging-cookbook.rst:537
 msgid ""
@@ -372,11 +393,17 @@ msgid ""
 "implementing your alternative there, as well as adapting the above script to "
 "use your alternative serialization."
 msgstr ""
+"Tenga en cuenta que existen algunos problemas de seguridad con pickle en "
+"algunos escenarios. Si estos le afectan, puede usar un esquema de "
+"serialización alternativo anulando el método :meth:`~ handlers.SocketHandler."
+"makePickle` e implementando su alternativa allí, así como adaptar el script "
+"anterior para usar su serialización alternativa."
 
 #: ../Doc/howto/logging-cookbook.rst:547
 msgid "Adding contextual information to your logging output"
-msgstr ""
+msgstr "Agregar información contextual a su salida de logging"
 
+# no estoy seguro de la parte "se liberan de memoria via recolector de basura". En la wikipedia en español lo llaman así. "se liberan de memoria" es una agregado mío.
 #: ../Doc/howto/logging-cookbook.rst:549
 msgid ""
 "Sometimes you want logging output to contain contextual information in "
@@ -392,12 +419,27 @@ msgid ""
 "logging an application, it could be hard to manage if the number of :class:"
 "`Logger` instances becomes effectively unbounded."
 msgstr ""
+"A veces, desea que la salida de registro contenga información contextual "
+"además de los parámetros pasados ​​a la llamada del logging. Por ejemplo, en "
+"una aplicación en red, puede ser conveniente registrar información "
+"específica del cliente en el registro (por ejemplo, el nombre de usuario del "
+"cliente remoto o la dirección IP). Aunque puede usar el parámetro *extra* "
+"para lograr esto, no siempre es conveniente pasar la información de esta "
+"manera. Si bien puede resultar tentador crear instancias :class:`Logger` por "
+"conexión, esta no es una buena idea porque estas instancias no se liberan de "
+"memoria vía recolector de basura (*garbage collector*). Si bien esto no es "
+"un problema en la práctica, cuando el número de instancias de :class:"
+"`Logger` depende del nivel de granularidad que desea usar para registrar una "
+"aplicación, podría ser difícil de administrar si el número de instancias :"
+"class:`Logger` se vuelven efectivamente ilimitadas."
 
 #: ../Doc/howto/logging-cookbook.rst:564
 msgid "Using LoggerAdapters to impart contextual information"
-msgstr ""
+msgstr "Uso de LoggerAdapters para impartir información contextual"
 
+# "signatures" por "características"?
 #: ../Doc/howto/logging-cookbook.rst:566
+#, fuzzy
 msgid ""
 "An easy way in which you can pass contextual information to be output along "
 "with logging event information is to use the :class:`LoggerAdapter` class. "
@@ -407,8 +449,16 @@ msgid ""
 "signatures as their counterparts in :class:`Logger`, so you can use the two "
 "types of instances interchangeably."
 msgstr ""
+"Una manera fácil de pasar información contextual para que se genere junto "
+"con la información de eventos logging es usar la clase :class:"
+"`LoggerAdapter`. Esta clase está diseñada para parecerse a :class:`Logger`, "
+"de modo que pueda llamar : meth:`debug`, :meth:`info`, :meth:`warning`, :"
+"meth:`error`, :meth:`excepción`, :meth`critical` y :meth:`log`. Estos "
+"métodos tienen las mismas características que sus contrapartes en :class:"
+"`Logger`, por lo que puede usar los dos tipos de instancias indistintamente."
 
 #: ../Doc/howto/logging-cookbook.rst:574
+#, fuzzy
 msgid ""
 "When you create an instance of :class:`LoggerAdapter`, you pass it a :class:"
 "`Logger` instance and a dict-like object which contains your contextual "
@@ -418,6 +468,13 @@ msgid ""
 "contextual information in the delegated call. Here's a snippet from the code "
 "of :class:`LoggerAdapter`::"
 msgstr ""
+"Cuando creas una instancia de :class:`LoggerAdapter`, le pasas una "
+"instancia :class:`Logger` y un objeto tipo dict que contiene tu información "
+"contextual. Cuando llamas a uno de los métodos logging en una instancia de :"
+"class:`LoggerAdapter`, este último delega la llamada a la instancia "
+"subyacente de :class:`Logger` pasada a su constructor, y se arregla para "
+"pasar la información contextual en la llamada delegada . Aquí hay un "
+"fragmento del código de :class:`LoggerAdapter`::"
 
 #: ../Doc/howto/logging-cookbook.rst:590
 msgid ""
@@ -431,6 +488,15 @@ msgid ""
 "had passed an 'extra' keyword argument in the call to the adapter, it will "
 "be silently overwritten."
 msgstr ""
+"El método :meth:`~LoggerAdapter.process` de :class:`LoggerAdapter` es donde "
+"la información contextual se agrega a la salida del registro. Se pasa el "
+"mensaje y los argumentos de palabra clave de la llamada logging, y devuelve "
+"versiones (potencialmente) modificadas de estos para usar en la llamada al "
+"logging subyacente. La implementación predeterminada de este método deja el "
+"mensaje solo, pero inserta una clave 'extra' en el argumento de palabra "
+"clave cuyo valor es el objeto tipo dict pasado al constructor. Por supuesto, "
+"si ha pasado un argumento de palabra clave 'extra' en la llamada al "
+"adaptador, se sobrescribirá silenciosamente."
 
 #: ../Doc/howto/logging-cookbook.rst:599
 msgid ""
