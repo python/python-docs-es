@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-08-08 21:08-0300\n"
+"PO-Revision-Date: 2020-08-10 08:12-0300\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -508,20 +508,31 @@ msgid ""
 "string, you just need to subclass :class:`LoggerAdapter` and override :meth:"
 "`~LoggerAdapter.process` to do what you need. Here is a simple example::"
 msgstr ""
+"La ventaja de usar 'extra' es que los valores en el objeto dict se combinan "
+"en la instancia :class:`LogRecord`__dict__, lo que le permite usar cadenas "
+"personalizadas con sus instancias :class:`Formatter` que conocen las claves "
+"del objeto dict. Si necesita un método diferente, por ejemplo, si desea "
+"anteponer o agregar la información contextual a la cadena del mensaje, solo "
+"necesita la subclase :class:`LoggerAdapter` y anular :meth:`~ LoggerAdapter."
+"process` para hacer lo que necesita. Aquí hay un ejemplo simple:"
 
 #: ../Doc/howto/logging-cookbook.rst:615
 msgid "which you can use like this::"
-msgstr ""
+msgstr "que puede usar así::"
 
 #: ../Doc/howto/logging-cookbook.rst:620
 msgid ""
 "Then any events that you log to the adapter will have the value of "
 "``some_conn_id`` prepended to the log messages."
 msgstr ""
+"Luego, cualquier evento que registre en el adaptador tendrá el valor de "
+"``some_conn_id`` antepuesto a los mensajes de registro."
 
 #: ../Doc/howto/logging-cookbook.rst:624
 msgid "Using objects other than dicts to pass contextual information"
 msgstr ""
+"Usar objetos distintos a los diccionarios para transmitir información "
+"contextual"
 
 #: ../Doc/howto/logging-cookbook.rst:626
 msgid ""
@@ -531,10 +542,15 @@ msgid ""
 "if you want to generate values dynamically (whereas the values in a dict "
 "would be constant)."
 msgstr ""
+"No es necesario pasar un diccionario real a la :class:`LoggerAdapter` - "
+"puedes pasar una instancia de una clase que implemente ``__getitem__`` y "
+"``__iter__`` de modo que parezca un diccionario para el logging. Esto es "
+"útil si quieres generar valores dinámicamente (mientras que los valores en "
+"un diccionario son constantes)."
 
 #: ../Doc/howto/logging-cookbook.rst:635
 msgid "Using Filters to impart contextual information"
-msgstr ""
+msgstr "Usar filtros para impartir información contextual"
 
 #: ../Doc/howto/logging-cookbook.rst:637
 msgid ""
@@ -544,6 +560,12 @@ msgid ""
 "can then be output using a suitable format string, or if needed a custom :"
 "class:`Formatter`."
 msgstr ""
+"También puedes agregar información contextual a la salida del registro "
+"utilizando un :class:`Filter` definido por el usuario. Las instancias de "
+"``Filter`` pueden modificar los ``LogRecords`` que se les pasan, incluido el "
+"agregado de atributos adicionales que luego se pueden generar utilizando "
+"cadena de caracteres con el formato adecuado, o si es necesario, un :class:"
+"`Formatter` personalizado."
 
 #: ../Doc/howto/logging-cookbook.rst:642
 msgid ""
@@ -556,14 +578,23 @@ msgid ""
 "format string can be used to get similar output to that shown above. Here's "
 "an example script::"
 msgstr ""
+"Por ejemplo, en una aplicación web, la solicitud que se está procesando (o "
+"al menos, las partes interesantes de la misma) se pueden almacenar en una "
+"variable *threadlocal* (:class:`threading.local`) y luego se puede acceder a "
+"ella desde ``Filter`` para agregar información de la solicitud, - digamos, "
+"la dirección IP remota y el nombre de usuario-, al ``LogRecord``, usando los "
+"nombres de atributo 'ip' y 'user' como en el ejemplo anterior de "
+"``LoggerAdapter``. En ese caso, se puede usar el mismo formato de cadena de "
+"caracteres para obtener un resultado similar al que se muestra arriba. Aquí "
+"hay un script de ejemplo::"
 
 #: ../Doc/howto/logging-cookbook.rst:688
 msgid "which, when run, produces something like:"
-msgstr ""
+msgstr "que cuando se ejecuta, produce algo como:"
 
 #: ../Doc/howto/logging-cookbook.rst:709
 msgid "Logging to a single file from multiple processes"
-msgstr ""
+msgstr "Logging a un sólo archivo desde múltiples procesos"
 
 #: ../Doc/howto/logging-cookbook.rst:711
 msgid ""
