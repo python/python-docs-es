@@ -31,6 +31,7 @@ help:
 	@echo " spell        Check spelling"
 	@echo " wrap         Wrap all the PO files to a fixed column width"
 	@echo " progress     To compute current progression on the tutorial"
+	@echo " dict_dups	Check duplicated entries on the dict"
 	@echo ""
 
 
@@ -94,3 +95,17 @@ spell: venv
 .PHONY: wrap
 wrap: venv
 	$(VENV)/bin/powrap **/*.po
+
+.PHONY: dict_dups
+SHELL:=/bin/bash
+.ONESHELL:
+dict_dups:
+	if [[ $$(cat dict| sort | uniq -dc) ]]; then\
+		echo -e "\n\n\n ####################### \n\n\n"
+		echo "duplicated lines in the dict file"
+		uniq -dc dict
+		exit 1
+	else
+		echo "no duplicated lines"
+		exit 0
+	fi
