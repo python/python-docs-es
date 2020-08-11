@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-08-07 07:42+0200\n"
+"PO-Revision-Date: 2020-08-11 20:08+0200\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1086,7 +1086,7 @@ msgstr ""
 
 #: ../Doc/reference/lexical_analysis.rst:646
 msgid "Formatted string literals"
-msgstr ""
+msgstr "Literales de cadena formateados"
 
 #: ../Doc/reference/lexical_analysis.rst:650
 msgid ""
@@ -1096,6 +1096,11 @@ msgid ""
 "While other string literals always have a constant value, formatted strings "
 "are really expressions evaluated at run time."
 msgstr ""
+"Un :dfn:`formatted string literal` o :dfn:`f-string` es un literal de cadena "
+"que se prefija con ``'f'`` o ``'F'``.  Estas cadenas pueden contener campos "
+"de reemplazo, que son expresiones delimitadas por llaves ``{}``. Mientras "
+"que otros literales de cadena siempre tienen un valor constante, las cadenas "
+"formateadas son realmente expresiones evaluadas en tiempo de ejecución."
 
 #: ../Doc/reference/lexical_analysis.rst:656
 msgid ""
@@ -1103,6 +1108,9 @@ msgid ""
 "literal is also marked as a raw string).  After decoding, the grammar for "
 "the contents of the string is:"
 msgstr ""
+"Las secuencias de escape se decodifican como en los literales de cadena "
+"ordinarios (excepto cuando un literal también se marca como cadena *raw*).  "
+"Después de la decodificación, la gramática para el contenido de la cadena es:"
 
 #: ../Doc/reference/lexical_analysis.rst:670
 msgid ""
@@ -1115,6 +1123,14 @@ msgid ""
 "colon ``':'``.  A replacement field ends with a closing curly bracket "
 "``'}'``."
 msgstr ""
+"Las partes de la cadena fuera de llaves se tratan literalmente, excepto que "
+"cualquier llave doble ``'{{'`` o ``'}}'`` se reemplaza con la llave simple "
+"correspondiente.  Una llave de apertura simple ``'{'``` marca un campo de "
+"reemplazo, que comienza con una expresión de Python.  Después de la "
+"expresión, puede haber un campo de conversión, introducido por un signo de "
+"exclamación ``'!'``.  También se puede añadir un especificador de formato, "
+"introducido por dos puntos ``':'``.  Un campo de reemplazo termina con una "
+"llave de cierre ``'}'``."
 
 #: ../Doc/reference/lexical_analysis.rst:679
 msgid ""
@@ -1126,6 +1142,14 @@ msgid ""
 "they cannot contain comments.  Each expression is evaluated in the context "
 "where the formatted string literal appears, in order from left to right."
 msgstr ""
+"Las expresiones en literales de cadena formateados se tratan como "
+"expresiones regulares de Python rodeadas de paréntesis, con algunas "
+"excepciones. Una expresión vacía no está permitida, y tanto :keyword:"
+"`lambda` como las expresiones de asignación ``:=`` deben estar rodeadas de "
+"paréntesis explícitos. Las expresiones de sustitución pueden contener saltos "
+"de línea (por ejemplo, en cadenas de tres comillas), pero no pueden contener "
+"comentarios.  Cada expresión se evalúa en el contexto en el que aparece el "
+"literal de cadena formateado, en orden de izquierda a derecha."
 
 #: ../Doc/reference/lexical_analysis.rst:688
 msgid ""
@@ -1133,6 +1157,10 @@ msgid ""
 "containing an :keyword:`async for` clause were illegal in the expressions in "
 "formatted string literals due to a problem with the implementation."
 msgstr ""
+"Antes de Python 3.7, una expresión :keyword:`await` y comprensiones que "
+"contenían una cláusula :keyword:`async for` eran ilegales en las expresiones "
+"en literales de cadenas formateadas debido a un problema con la "
+"implementación."
 
 #: ../Doc/reference/lexical_analysis.rst:693
 msgid ""
@@ -1140,6 +1168,10 @@ msgid ""
 "converted before formatting.  Conversion ``'!s'`` calls :func:`str` on the "
 "result, ``'!r'`` calls :func:`repr`, and ``'!a'`` calls :func:`ascii`."
 msgstr ""
+"Si se especifica una conversión, el resultado de la evaluación de la "
+"expresión se convierte antes del formateo.  La conversión ```!s'`` llama :"
+"func:`str` al resultado, ```!r'`` llama :func:`repr`, y ```!a'`` llama :func:"
+"`ascii`."
 
 #: ../Doc/reference/lexical_analysis.rst:697
 msgid ""
@@ -1149,6 +1181,11 @@ msgid ""
 "omitted.  The formatted result is then included in the final value of the "
 "whole string."
 msgstr ""
+"El resultado es entonces formateado usando el protocolo :func:`format`.  El "
+"especificador de formato se pasa al método :meth:`__format__` del resultado "
+"de la expresión o conversión.  Se pasa una cadena vacía cuando se omite el "
+"especificador de formato.  El resultado formateado se incluye entonces en el "
+"valor final de toda la cadena."
 
 #: ../Doc/reference/lexical_analysis.rst:703
 msgid ""
@@ -1158,16 +1195,24 @@ msgid ""
 "fields. The :ref:`format specifier mini-language <formatspec>` is the same "
 "as that used by the string .format() method."
 msgstr ""
+"Los especificadores de formato de nivel superior pueden incluir campos de "
+"reemplazo anidados. Estos campos anidados pueden incluir sus propios campos "
+"de conversión y :ref:`especificadores de formato <formatspec>`, pero no "
+"pueden incluir campos de reemplazo con nidos más profundos. El :ref:`mini-"
+"lenguaje de especificadores de formato  <formatspec>` es el mismo que el "
+"utilizado por el método string `.format()`."
 
 #: ../Doc/reference/lexical_analysis.rst:709
 msgid ""
 "Formatted string literals may be concatenated, but replacement fields cannot "
 "be split across literals."
 msgstr ""
+"Los literales de cadena formateados pueden ser concatenados, pero los campos "
+"de reemplazo no pueden ser divididos entre los literales."
 
 #: ../Doc/reference/lexical_analysis.rst:712
 msgid "Some examples of formatted string literals::"
-msgstr ""
+msgstr "Algunos ejemplos de literales de cadena formateados::"
 
 #: ../Doc/reference/lexical_analysis.rst:731
 msgid ""
@@ -1175,29 +1220,42 @@ msgid ""
 "characters in the replacement fields must not conflict with the quoting used "
 "in the outer formatted string literal::"
 msgstr ""
+"Una consecuencia de compartir la misma sintaxis que los literales de cadena "
+"regulares es que los caracteres en los campos de reemplazo no deben entrar "
+"en conflicto con la comilla usada en el literal de cadena formateado "
+"exterior::"
 
 #: ../Doc/reference/lexical_analysis.rst:738
 msgid ""
 "Backslashes are not allowed in format expressions and will raise an error::"
 msgstr ""
+"Las barras inversas no están permitidas en las expresiones de formato y "
+"generarán un error::"
 
 #: ../Doc/reference/lexical_analysis.rst:743
 msgid ""
 "To include a value in which a backslash escape is required, create a "
 "temporary variable."
 msgstr ""
+"Para incluir un valor en el que se requiere un escape de barra inversa, hay "
+"que crear una variable temporal."
 
 #: ../Doc/reference/lexical_analysis.rst:750
 msgid ""
 "Formatted string literals cannot be used as docstrings, even if they do not "
 "include expressions."
 msgstr ""
+"Los literales de cadena formateados no pueden ser usados como cadenas de "
+"documentos (*docstrings*), aunque no incluyan expresiones."
 
 #: ../Doc/reference/lexical_analysis.rst:761
 msgid ""
 "See also :pep:`498` for the proposal that added formatted string literals, "
 "and :meth:`str.format`, which uses a related format string mechanism."
 msgstr ""
+"Ver también :pep:`498` para la propuesta que añadió literales de cadenas "
+"formateados, y :meth:`str.format`, que utiliza un mecanismo de cadenas "
+"formateadas relacionado."
 
 #: ../Doc/reference/lexical_analysis.rst:768
 msgid "Numeric literals"
