@@ -1,84 +1,114 @@
-# Makefile for es Python Documentation
 #
-# Here is what you can do:
+# Makefile for Spanish Python Documentation
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
-# - make  # Automatically build an html local version
-# - make todo  # To list remaining tasks
-# - make merge  # To merge pot from upstream
-# - make fuzzy  # To find fuzzy strings
-# - make progress  # To compute current progression
-# - make upgrade_venv  # To upgrade the venv that compiles the doc
+#  based on: https://github.com/python/python-docs-pt-br/blob/3.8/Makefile
 #
-# Modes are: autobuild-stable, autobuild-dev, and autobuild-html,
-# documented in gen/src/3.6/Doc/Makefile as we're only delegating the
-# real work to the Python Doc Makefile.
 
-CPYTHON_CLONE := ../cpython/
-SPHINX_CONF := $(CPYTHON_CLONE)/Doc/conf.py
-LANGUAGE := es
-VENV := ~/.venvs/python-docs-i18n/
-PYTHON := $(shell which python3)
-MODE := html
-BRANCH = 3.7
-COMMIT =
-JOBS = auto
+# Configuration
 
+CPYTHON_PATH        := cpython   #Current commit for this upstream repo is setted by the submodule
+BRANCH              := 3.8
+LANGUAGE_TEAM       := python-docs-es
+LANGUAGE            := es
 
-.PHONY: all
-all: $(SPHINX_CONF) $(VENV)/bin/activate
-ifneq "$(shell cd $(CPYTHON_CLONE) 2>/dev/null && git describe --contains --all HEAD)" "$(BRANCH)"
-	$(warning "Your ../cpython checkout may be on the wrong branch, got $(shell cd $(CPYTHON_CLONE) 2>/dev/null && git describe --contains --all HEAD) expected $(BRANCH)")
-endif
-	mkdir -p $(CPYTHON_CLONE)/locales/$(LANGUAGE)/
-	ln -nfs $(shell $(PYTHON) -c 'import os; print(os.path.realpath("."))') $(CPYTHON_CLONE)/locales/$(LANGUAGE)/LC_MESSAGES
-	$(MAKE) -C $(CPYTHON_CLONE)/Doc/ VENVDIR=$(VENV) PYTHON=$(PYTHON) SPHINXOPTS='-qW -j$(JOBS) -D locale_dirs=../locales -D language=$(LANGUAGE) -D gettext_compact=0 -D latex_engine=xelatex -D latex_elements.inputenc= -D latex_elements.fontenc=' $(MODE)
+# Internal variables
+VENV                := $(shell realpath ./venv)
+PYTHON              := $(shell which python3)
+CPYTHON_WORKDIR     := cpython
+OUTPUT_DOCTREE      := $(CPYTHON_WORKDIR)/Doc/_build/doctree
+OUTPUT_HTML      := $(CPYTHON_WORKDIR)/Doc/_build/html
+LOCALE_DIR          := $(CPYTHON_WORKDIR)/locale
+TRANSIFEX_PROJECT   := python-docs-es
+POSPELL_TMP_DIR     := .pospell
 
 
-$(SPHINX_CONF):
-	git clone --depth 1 --branch $(BRANCH) https://github.com/python/cpython.git $(CPYTHON_CLONE)
-	[ -n "$(COMMIT)" ] && (i=1; while ! $$(git -C $(CPYTHON_CLONE) checkout $(COMMIT)); do i=$$((i * 2)); git -C $(CPYTHON_CLONE) fetch --depth $$i; done) || true
+.PHONY: help
+help:
+	@echo "Please use 'make <target>' where <target> is one of:"
+	@echo " build        Build an local version in html, with warnings as errors"
+	@echo " serve        Serve a built documentation on http://localhost:8000"
+	@echo " spell        Check spelling"
+	@echo " wrap         Wrap all the PO files to a fixed column width"
+	@echo " progress     To compute current progression on the tutorial"
+	@echo " dict_dups	Check duplicated entries on the dict"
+	@echo ""
 
 
-.PHONY: upgrade_venv
-upgrade_venv:
-	$(MAKE) -C $(CPYTHON_CLONE)/Doc/ VENVDIR=$(VENV) PYTHON=$(PYTHON) venv
+# build: build the documentation using the translation files currently available
+#        at the moment. For most up-to-date docs, run "tx-config" and "pull"
+#        before this. If passing SPHINXERRORHANDLING='', warnings will not be
+#        treated as errors, which is good to skip simple Sphinx syntax mistakes.
+.PHONY: build
+build: setup
+		PYTHONWARNINGS=ignore::FutureWarning $(VENV)/bin/sphinx-build -j auto -W --keep-going -b html -d $(OUTPUT_DOCTREE) -D language=$(LANGUAGE) . $(OUTPUT_HTML)
+		@echo "Success! Open file://`pwd`/$(OUTPUT_HTML)/index.html, " \
+					"or run 'make serve' to see them in http://localhost:8000";
 
 
-$(VENV)/bin/activate:
-	$(MAKE) -C $(CPYTHON_CLONE)/Doc/ VENVDIR=$(VENV) PYTHON=$(PYTHON) venv
+# setup: After running "venv" target, prepare that virtual environment with
+#        a local clone of cpython repository and the translation files.
+#        If the directories exists, only update the cpython repository and
+#        the translation files copy which could have new/updated files.
+.PHONY: setup
+setup: venv
+	git submodule sync
+	git submodule update --init --force $(CPYTHON_PATH)
 
+
+# venv: create a virtual environment which will be used by almost every
+#       other target of this script
+.PHONY: venv
+venv:
+	if [ ! -d $(VENV) ]; then                                          \
+		$(PYTHON) -m venv --prompt $(LANGUAGE_TEAM) $(VENV);             \
+	fi
+
+	$(VENV)/bin/python -m pip install -q -r requirements.txt
+
+
+# serve: serve the documentation in a simple local web server, using cpython
+#        Makefile's "serve" target. Run "build" before using this target.
+.PHONY: serve
+serve:
+	$(MAKE) -C $(CPYTHON_WORKDIR)/Doc serve
+
+
+# clean: remove all .mo files and the venv directory that may exist and
+#        could have been created by the actions in other targets of this script
+.PHONY: clean
+clean:
+	rm -fr $(VENV)
+	rm -rf $(POSPELL_TMP_DIR)
+	find -name '*.mo' -delete
 
 .PHONY: progress
-progress:
-	@python3 -c 'import sys; print("{:.1%}".format(int(sys.argv[1]) / int(sys.argv[2])))'  \
-	$(shell msgcat *.po */*.po | msgattrib --translated | grep -c '^msgid') \
-	$(shell msgcat *.po */*.po | grep -c '^msgid')
+progress: venv
+	$(VENV)/bin/potodo --offline --path tutorial/
 
 
-.PHONY: merge
-merge: upgrade_venv
-ifneq "$(shell cd $(CPYTHON_CLONE) 2>/dev/null && git describe --contains --all HEAD)" "$(BRANCH)"
-	$(error "You're merging from a different branch:" "$(shell cd $(CPYTHON_CLONE) 2>/dev/null && git describe --contains --all HEAD)" vs "$(BRANCH)")
-endif
-	(cd $(CPYTHON_CLONE)/Doc; rm -f build/NEWS)
-	(cd $(CPYTHON_CLONE); $(VENV)/bin/sphinx-build -Q -b gettext -D gettext_compact=0 Doc pot/)
-	find $(CPYTHON_CLONE)/pot/ -name '*.pot' |\
-	    while read -r POT;\
-	    do\
-	        PO="./$$(echo "$$POT" | sed "s#$(CPYTHON_CLONE)/pot/##; s#\.pot\$$#.po#")";\
-	        mkdir -p "$$(dirname "$$PO")";\
-	        if [ -f "$$PO" ];\
-	        then\
-	            case "$$POT" in\
-	            *whatsnew*) msgmerge --backup=off --force-po --no-fuzzy-matching -U "$$PO" "$$POT" ;;\
-	            *)          msgmerge --backup=off --force-po -U "$$PO" "$$POT" ;;\
-	            esac\
-	        else\
-	            msgcat -o "$$PO" "$$POT";\
-	        fi\
-	    done
+.PHONY: spell
+spell: venv
+        # 'cat' tenia el problema que algunos archivos no tenían una nueva línea al final
+        # 'awk 1' agregará una nueva línea en caso que falte.
+	awk 1 dict dictionaries/*.txt > dict.txt
+	$(VENV)/bin/pospell -p dict.txt -l es_ES **/*.po
 
 
-.PHONY: fuzzy
-fuzzy:
-	for file in *.po */*.po; do echo $$(msgattrib --only-fuzzy --no-obsolete "$$file" | grep -c '#, fuzzy') $$file; done | grep -v ^0 | sort -gr
+.PHONY: wrap
+wrap: venv
+	$(VENV)/bin/powrap **/*.po
+
+.PHONY: dict_dups
+SHELL:=/bin/bash
+.ONESHELL:
+dict_dups:
+	if [[ $$(cat dict| sort | uniq -dc) ]]; then
+		echo -e "\n #######################\n"
+		echo "duplicated lines in the dict file"
+		sort dict | uniq -dc |sort -h
+		exit 1
+	else
+		echo "no duplicated lines"
+		exit 0
+	fi
