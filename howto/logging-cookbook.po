@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-08-10 08:12-0300\n"
+"PO-Revision-Date: 2020-08-14 20:32-0300\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Last-Translator: Carlos A. Crespo <lvccrespo@gmail.com>\n"
 "Language: es\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #: ../Doc/howto/logging-cookbook.rst:5
 msgid "Logging Cookbook"
@@ -596,7 +596,10 @@ msgstr "que cuando se ejecuta, produce algo como:"
 msgid "Logging to a single file from multiple processes"
 msgstr "Logging a un sólo archivo desde múltiples procesos"
 
+# Traté de refrasear las primeras oraciones para que no sea super repetitivo.
+# No tengo claro cómo es todo el tema de socket y si está bien traducido "socket server", "working socket".
 #: ../Doc/howto/logging-cookbook.rst:711
+#, fuzzy
 msgid ""
 "Although logging is thread-safe, and logging to a single file from multiple "
 "threads in a single process *is* supported, logging to a single file from "
@@ -611,6 +614,18 @@ msgid ""
 "includes a working socket receiver which can be used as a starting point for "
 "you to adapt in your own applications."
 msgstr ""
+"Aunque logging es seguro para subprocesos, y logging a un solo archivo desde "
+"múltiples subprocesos en un solo proceso *es* compatible, el registro en un "
+"solo archivo desde *múltiples procesos* *no* es compatible, porque no existe "
+"una forma estándar de serializar el acceso a un solo archivo en múltiples "
+"procesos en Python. Si necesita hacer esto último, una forma de abordarlo es "
+"hacer que todos los procesos se registren en una :class:`~handlers."
+"SocketHandler`, y tener un proceso separado que implemente un servidor de "
+"socket que lee del socket y los registros para archivar. (Si lo prefiere, "
+"puede dedicar un hilo en uno de los procesos existentes para realizar esta "
+"función.) :ref: `Esta sección <network-logging>` documenta este enfoque con "
+"más detalle e incluye un receptor socket que funciona que se puede utilizar "
+"como punto de partida para que se adapte a sus propias aplicaciones"
 
 #: ../Doc/howto/logging-cookbook.rst:724
 msgid ""
@@ -622,6 +637,13 @@ msgid ""
 "`multiprocessing` module does not provide working lock functionality on all "
 "platforms (see https://bugs.python.org/issue3770)."
 msgstr ""
+"También puedes escribir tu propio gestor que use la clase :class:"
+"`~multiprocessing.Lock` del módulo :mod:`multiprocessing` para serializar el "
+"acceso al archivo desde tus procesos. La existente :class:`FileHandler` y "
+"las subclases no hacen uso de :mod:`multiprocessing` en la actualidad, "
+"aunque pueden hacerlo en el futuro. Tenga en cuenta que, en la actualidad, "
+"el módulo :mod:`multiprocessing` no proporciona la funcionalidad de bloqueo "
+"de trabajo en todas las plataformas (ver https://bugs.python.org/issue3770)."
 
 #: ../Doc/howto/logging-cookbook.rst:734
 msgid ""
@@ -637,12 +659,25 @@ msgid ""
 "application, and can be used as the basis for code meeting your own specific "
 "requirements::"
 msgstr ""
+"Alternativamente, puede usar una ``Queue`` y :class:`QueueHandler` para "
+"enviar todos los logging a uno de los procesos en su aplicación multi-"
+"proceso. El siguiente script de ejemplo demuestra cómo puede hacer esto; en "
+"el ejemplo, un proceso de escucha independiente escucha los eventos enviados "
+"por otros procesos y los registra de acuerdo con su propia configuración de "
+"registro. Aunque el ejemplo solo demuestra una forma de hacerlo (por "
+"ejemplo, es posible que desee utilizar un hilo de escucha en lugar de un "
+"proceso de escucha separado; la implementación sería análoga), permite "
+"configuraciones de logging completamente diferentes para el oyente y los "
+"otros procesos en su aplicación. Y se puede utilizar como base para el "
+"código que cumpla con sus propios requisitos específicos::"
 
 #: ../Doc/howto/logging-cookbook.rst:850
 msgid ""
 "A variant of the above script keeps the logging in the main process, in a "
 "separate thread::"
 msgstr ""
+"Una variante del script anterior mantiene el logging en el proceso "
+"principal, en un hilo separado::"
 
 #: ../Doc/howto/logging-cookbook.rst:945
 msgid ""
@@ -653,10 +688,16 @@ msgid ""
 "events are generated in the worker processes) to direct the messages to the "
 "appropriate destinations."
 msgstr ""
+"Esta variante muestra cómo puede, por ejemplo, aplicar la configuración para "
+"logging particulares: el registrador ``foo`` tiene un gestor especial que "
+"almacena todos los eventos en el subsistema ``foo`` en un archivo ``mplog-"
+"foo.log``. Esto será utilizado por la maquinaria de registro en el proceso "
+"principal (aunque los eventos logging se generen en los procesos de trabajo) "
+"para dirigir los mensajes a los destinos apropiados."
 
 #: ../Doc/howto/logging-cookbook.rst:952
 msgid "Using concurrent.futures.ProcessPoolExecutor"
-msgstr ""
+msgstr "Usando concurrent.futures.ProcessPoolExecutor"
 
 #: ../Doc/howto/logging-cookbook.rst:954
 msgid ""
@@ -664,22 +705,27 @@ msgid ""
 "your worker processes, you need to create the queue slightly differently. "
 "Instead of"
 msgstr ""
+"Si desea utilizar :class:`concurrent.futures.ProcessPoolExecutor` para "
+"iniciar sus procesos de trabajo, debe crear la cola de manera ligeramente "
+"diferente. En vez de"
 
 #: ../Doc/howto/logging-cookbook.rst:962
 msgid "you should use"
-msgstr ""
+msgstr "debería usar"
 
+# No sé cómo traducir "worker creation".
 #: ../Doc/howto/logging-cookbook.rst:968
+#, fuzzy
 msgid "and you can then replace the worker creation from this::"
-msgstr ""
+msgstr "y entonces puedes reemplazar::"
 
 #: ../Doc/howto/logging-cookbook.rst:979
 msgid "to this (remembering to first import :mod:`concurrent.futures`)::"
-msgstr ""
+msgstr "a esto (recuerda el primer *import* :mod:`concurrent.futures`)::"
 
 #: ../Doc/howto/logging-cookbook.rst:987
 msgid "Using file rotation"
-msgstr ""
+msgstr "Usando rotación de archivos"
 
 #: ../Doc/howto/logging-cookbook.rst:992
 msgid ""
@@ -690,12 +736,20 @@ msgid ""
 "usage pattern, the logging package provides a :class:`~handlers."
 "RotatingFileHandler`::"
 msgstr ""
+"A veces, se desea dejar que un archivo de registro crezca hasta cierto "
+"tamaño y luego abra un nuevo archivo e inicie sesión en él. Es posible que "
+"desee conservar una cierta cantidad de estos archivos, y cuando se hayan "
+"creado tantos archivos, rote los archivos para que la cantidad de archivos y "
+"el tamaño de los archivos permanezcan limitados. Para este patrón de uso, el "
+"paquete logging proporciona :class:`~handlers.RotatingFileHandler`::"
 
 #: ../Doc/howto/logging-cookbook.rst:1024
 msgid ""
 "The result should be 6 separate files, each with part of the log history for "
 "the application:"
 msgstr ""
+"El resultado debe ser 6 archivos separados, cada uno con parte del historial "
+"de registro de la aplicación:"
 
 #: ../Doc/howto/logging-cookbook.rst:1036
 msgid ""
@@ -704,16 +758,24 @@ msgid ""
 "``.1``. Each of the existing backup files is renamed to increment the suffix "
 "(``.1`` becomes ``.2``, etc.)  and the ``.6`` file is erased."
 msgstr ""
+"El archivo más actual siempre es :file:`logging_rotatingfile_example.out`, y "
+"cada vez que alcanza el límite de tamaño, se le cambia el nombre con el "
+"sufijo``.1``. Se cambia el nombre de cada uno de los archivos de respaldo "
+"existentes para incrementar el sufijo (``.1`` se convierte en ``.2``, etc.) "
+"y se borra el archivo ``.6``."
 
 #: ../Doc/howto/logging-cookbook.rst:1041
 msgid ""
 "Obviously this example sets the log length much too small as an extreme "
 "example.  You would want to set *maxBytes* to an appropriate value."
 msgstr ""
+"Obviamente, este ejemplo establece la longitud del registro demasiado "
+"pequeña como un ejemplo extremo. Se querrá establecer *maxBytes* en un valor "
+"apropiado."
 
 #: ../Doc/howto/logging-cookbook.rst:1047
 msgid "Use of alternative formatting styles"
-msgstr ""
+msgstr "Uso de estilos de formato alternativos"
 
 #: ../Doc/howto/logging-cookbook.rst:1049
 #, python-format
