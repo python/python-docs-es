@@ -73,8 +73,14 @@ Términos y bigramas
      handle exception
        Gestionar excepción. ``tutorial/inputoutput.po``
 
+     in-place, in place
+       in situ. Aunque estrictamente no es español, su uso es generalizado.
+
      library
        biblioteca. ``library/sqlite3.po``
+       
+     list comprehension / list comprehensions
+       lista por comprensión / listas por comprensión. 
 
      locale
        Configuración regional. ``library/functions.po`` and others
@@ -88,8 +94,14 @@ Términos y bigramas
      mapping
        mapeo ``glossary.po``
 
-     named tuple.
+     named tuple
        tupla nombrada ``glossary.po``
+       
+     overload, overloading
+       sobrecargar, sobrecarga
+       
+     override, overriding
+       sobreescribir, sobreescritura
 
      path
        ruta ``glossary.po``
