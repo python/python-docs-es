@@ -1,8 +1,8 @@
 Spanish Translation of the Python Documentation
 ===============================================
 
-.. image:: https://travis-ci.org/PyCampES/python-docs-es.svg?branch=3.8 
-  :target: https://travis-ci.org/PyCampES/python-docs-es
+.. image:: https://travis-ci.org/python/python-docs-es.svg?branch=3.8
+  :target: https://travis-ci.org/python/python-docs-es
   :alt: Build Status
 
 .. image:: https://readthedocs.org/projects/python-docs-es/badge/?version=3.8
@@ -13,7 +13,7 @@ Spanish Translation of the Python Documentation
 How to Contribute
 -----------------
 
-We have a guide that will help you to contribute at: https://python-docs-es.readthedocs.io/es/3.7/CONTRIBUTING.html.
+We have a guide that will help you to contribute at: https://python-docs-es.readthedocs.io/page/CONTRIBUTING.html.
 Please, check the details there.
 
 
