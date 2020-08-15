@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-08-10 17:32+0200\n"
+"PO-Revision-Date: 2020-08-15 00:12+0000\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,6 +21,7 @@ msgstr ""
 "Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
 "Language: es\n"
 "X-Generator: Poedit 2.3.1\n"
+"X-Poedit-Bookmarks: -1,38,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: ../Doc/library/asyncio-eventloop.rst:6
 msgid "Event Loop"
@@ -92,7 +93,7 @@ msgstr ""
 
 #: ../Doc/library/asyncio-eventloop.rst:41
 msgid "Get the current event loop."
-msgstr "Obtenga el actual bucle de eventos."
+msgstr "Obtiene el actual bucle de eventos."
 
 #: ../Doc/library/asyncio-eventloop.rst:43
 msgid ""
@@ -101,7 +102,7 @@ msgid ""
 "will create a new event loop and set it as the current one."
 msgstr ""
 "Si no hay un bucle de eventos actual establecido en el hilo actual del "
-"sistema operativo, es fundamental el hilo del sistema operativo, y :func:"
+"sistema operativo, el hilo del sistema operativo es el principal, y :func:"
 "`set_event_loop` aún no ha sido llamado, asyncio creará un nuevo bucle de "
 "eventos y lo establecerá como el actual."
 
@@ -113,8 +114,8 @@ msgid ""
 msgstr ""
 "Dado que esta función tiene un comportamiento bastante complejo "
 "(especialmente cuando están en uso las políticas de bucle de eventos "
-"personalizadas), usando la función :func:`get_running_loop` es preferible "
-"por :func:`get_event_loop` en corrutinas y llamadas de retorno."
+"personalizadas), usar la función :func:`get_running_loop` es preferible "
+"antes que :func:`get_event_loop` en corrutinas y llamadas de retorno."
 
 #: ../Doc/library/asyncio-eventloop.rst:53
 msgid ""
@@ -127,7 +128,7 @@ msgstr ""
 #: ../Doc/library/asyncio-eventloop.rst:58
 msgid "Set *loop* as a current event loop for the current OS thread."
 msgstr ""
-"Establece *loop* como el actual bucle de eventos para el actual hilo del "
+"Establece *loop* como el bucle actual de eventos para el hilo actual del "
 "sistema operativo."
 
 #: ../Doc/library/asyncio-eventloop.rst:62
@@ -158,8 +159,8 @@ msgid ""
 "The `Event Loop Methods`_ section is the reference documentation of the "
 "event loop APIs;"
 msgstr ""
-"La sección `Event Loop Methods`_ es la documentación de referencia de las "
-"APIs del bucle de eventos;"
+"La sección `Métodos del bucle de eventos`_ es la documentación de referencia "
+"de las APIs del bucle de eventos;"
 
 #: ../Doc/library/asyncio-eventloop.rst:76
 msgid ""
@@ -168,16 +169,16 @@ msgid ""
 "meth:`loop.call_soon` and :meth:`loop.call_later`;"
 msgstr ""
 "La sección `Callback Handles`_ documenta las instancias :class:`Handle` y :"
-"class:`TimerHandle` las cuales son retornadas de métodos de programación "
-"como :meth:`loop.call_soon` y :meth:`loop.call_later`;"
+"class:`TimerHandle` las cuales son retornadas de métodos planificados como :"
+"meth:`loop.call_soon` y :meth:`loop.call_later`;"
 
 #: ../Doc/library/asyncio-eventloop.rst:80
 msgid ""
 "The `Server Objects`_ section documents types returned from event loop "
 "methods like :meth:`loop.create_server`;"
 msgstr ""
-"La sección `Server Objects`_ documenta tipos retornados de métodos de bucles "
-"de eventos como :meth:`loop.create_server`;"
+"La sección `Server Objects`_ documenta tipos retornados por los métodos del "
+"bucle de eventos como :meth:`loop.create_server`;"
 
 #: ../Doc/library/asyncio-eventloop.rst:83
 msgid ""
@@ -196,33 +197,37 @@ msgstr ""
 
 #: ../Doc/library/asyncio-eventloop.rst:93
 msgid "Event Loop Methods"
-msgstr "Métodos de bucle de evento"
+msgstr "Métodos del bucle de eventos"
 
 #: ../Doc/library/asyncio-eventloop.rst:95
 msgid "Event loops have **low-level** APIs for the following:"
-msgstr ""
+msgstr "Los bucles de eventos tienen APIs de **bajo nivel** para lo siguiente:"
 
 #: ../Doc/library/asyncio-eventloop.rst:103
 msgid "Running and stopping the loop"
-msgstr ""
+msgstr "Iniciar y para el loop"
 
 #: ../Doc/library/asyncio-eventloop.rst:107
 msgid "Run until the *future* (an instance of :class:`Future`) has completed."
 msgstr ""
+"Se ejecuta hasta que *future* (una instancia de :class:`Future`) se haya "
+"completado."
 
 #: ../Doc/library/asyncio-eventloop.rst:110
 msgid ""
 "If the argument is a :ref:`coroutine object <coroutine>` it is implicitly "
 "scheduled to run as a :class:`asyncio.Task`."
 msgstr ""
+"Si el argumento es un :ref:`objeto corrutina <coroutine>` está "
+"implícitamente planificado para ejecutarse como una :class:`asyncio.Task`."
 
 #: ../Doc/library/asyncio-eventloop.rst:113
 msgid "Return the Future's result or raise its exception."
-msgstr ""
+msgstr "Retorna el resultado del Futuro o genera una excepción."
 
 #: ../Doc/library/asyncio-eventloop.rst:117
 msgid "Run the event loop until :meth:`stop` is called."
-msgstr ""
+msgstr "Ejecuta el bucle de eventos hasta que :meth:`stop` es llamado."
 
 #: ../Doc/library/asyncio-eventloop.rst:119
 msgid ""
@@ -231,6 +236,10 @@ msgid ""
 "scheduled in response to I/O events (and those that were already scheduled), "
 "and then exit."
 msgstr ""
+"Si :meth:`stop` es llamado antes que :meth:`run_forever()`, el bucle va a "
+"sondear el selector de E/S una sola vez con un plazo de ejecución de cero, "
+"ejecuta todas las llamadas planificadas como respuesta a eventos E/S (y "
+"aquellas que ya hayan sido planificados), y entonces termina."
 
 #: ../Doc/library/asyncio-eventloop.rst:124
 msgid ""
@@ -240,10 +249,15 @@ msgid ""
 "will run the next time :meth:`run_forever` or :meth:`run_until_complete` is "
 "called."
 msgstr ""
+"Si :meth:`stop` es llamado mientras :meth:`run_forever` está corriendo, el "
+"loop ejecutará el lote actual de llamadas y después finalizará. Note que "
+"llamadas planificadas por otras llamadas no se ejecutarán en este caso; en "
+"su lugar, ellas correrán la próxima vez que :meth:`run_forever` o :meth:"
+"`run_until_complete` sean llamados."
 
 #: ../Doc/library/asyncio-eventloop.rst:132
 msgid "Stop the event loop."
-msgstr ""
+msgstr "Detener el bucle de eventos."
 
 #: ../Doc/library/asyncio-eventloop.rst:136
 msgid "Return ``True`` if the event loop is currently running."
@@ -270,12 +284,16 @@ msgid ""
 "This method clears all queues and shuts down the executor, but does not wait "
 "for the executor to finish."
 msgstr ""
+"Este método limpia todas las colas y apaga el ejecutor, pero no espera a que "
+"el ejecutor termine."
 
 #: ../Doc/library/asyncio-eventloop.rst:152
 msgid ""
 "This method is idempotent and irreversible.  No other methods should be "
 "called after the event loop is closed."
 msgstr ""
+"Este método es idempotente e irreversible. No se debe llamar ningún otro "
+"método después que el loop de eventos es cerrado."
 
 #: ../Doc/library/asyncio-eventloop.rst:157
 msgid ""
@@ -284,12 +302,19 @@ msgid ""
 "loop will issue a warning if a new asynchronous generator is iterated. This "
 "should be used to reliably finalize all scheduled asynchronous generators."
 msgstr ""
+"Programa todos los objetos :term:`asynchronous generator` abiertos "
+"actualmente para cerrarlos con una llamada :meth:`~agen.aclose()`.Despues de "
+"llamar este método, el bucle de evento emitirá una advertencia si un nuevo "
+"generador asíncrono es iterado. Esto debe ser usado para finalizar de manera "
+"confiable todos los generadores asíncronos planificados."
 
 #: ../Doc/library/asyncio-eventloop.rst:163
 msgid ""
 "Note that there is no need to call this function when :func:`asyncio.run` is "
 "used."
 msgstr ""
+"Note que no hay necesidad de llamar esta función cuando :func:`asyncio.run` "
+"es utilizado."
 
 #: ../Doc/library/asyncio-eventloop.rst:166
 #: ../Doc/library/asyncio-eventloop.rst:1062
@@ -306,12 +331,16 @@ msgid ""
 "Schedule a *callback* to be called with *args* arguments at the next "
 "iteration of the event loop."
 msgstr ""
+"Planifica un *callback* para ser ejecutada con los argumentos *args* en la "
+"próxima iteración del loop de evento."
 
 #: ../Doc/library/asyncio-eventloop.rst:185
 msgid ""
 "Callbacks are called in the order in which they are registered. Each "
 "callback will be called exactly once."
 msgstr ""
+"Llamadas que son ejecutadas en el orden en el que fueron registradas. Cada "
+"llamada será ejecutada exactamente una sola vez."
 
 #: ../Doc/library/asyncio-eventloop.rst:188
 #: ../Doc/library/asyncio-eventloop.rst:251
@@ -320,28 +349,38 @@ msgid ""
 "class:`contextvars.Context` for the *callback* to run in. The current "
 "context is used when no *context* is provided."
 msgstr ""
+"Un argumento *context* opcional y solo de palabra clave que permite "
+"especificar una clase :class:`contextvars.Context` personalizada en la cual "
+"*calback* será ejecutada. Cuando no se provee *context* el contexto actual "
+"es utilizado."
 
 #: ../Doc/library/asyncio-eventloop.rst:192
 msgid ""
 "An instance of :class:`asyncio.Handle` is returned, which can be used later "
 "to cancel the callback."
 msgstr ""
+"Una instancia de :class:`asyncio.Handle` es retornada, que puede ser "
+"utilizada después para cancelar la llamada."
 
 #: ../Doc/library/asyncio-eventloop.rst:195
 msgid "This method is not thread-safe."
-msgstr ""
+msgstr "Este método no es seguro para subprocesos."
 
 #: ../Doc/library/asyncio-eventloop.rst:199
 msgid ""
 "A thread-safe variant of :meth:`call_soon`.  Must be used to schedule "
 "callbacks *from another thread*."
 msgstr ""
+"Una variante de :meth:`call_soon` que es segura para subprocesos. Debe ser "
+"usada en llamadas planificadas *desde otro hilo*."
 
 #: ../Doc/library/asyncio-eventloop.rst:202
 msgid ""
 "See the :ref:`concurrency and multithreading <asyncio-multithreading>` "
 "section of the documentation."
 msgstr ""
+"Vea sección :ref:`concurrencia y multiproceso <asyncio-multithreading>` de "
+"la documentación."
 
 #: ../Doc/library/asyncio-eventloop.rst:205
 #: ../Doc/library/asyncio-eventloop.rst:255
@@ -350,34 +389,47 @@ msgid ""
 "The *context* keyword-only parameter was added. See :pep:`567` for more "
 "details."
 msgstr ""
+"Fue agregado el parámetro solo de palabra clave *context*. Vea :pep:`567` "
+"para mas detalles."
 
 #: ../Doc/library/asyncio-eventloop.rst:213
 msgid ""
 "Most :mod:`asyncio` scheduling functions don't allow passing keyword "
 "arguments.  To do that, use :func:`functools.partial`::"
 msgstr ""
+"La mayoría de las funciones planificadas de :mod:`asyncio` no permiten pasar "
+"argumentos de palabra clave. Para hacer eso utilice :func:`functools."
+"partial`::"
 
 #: ../Doc/library/asyncio-eventloop.rst:220
 msgid ""
 "Using partial objects is usually more convenient than using lambdas, as "
 "asyncio can render partial objects better in debug and error messages."
 msgstr ""
+"El uso de objetos parciales es usualmente mas conveniente que utilizar "
+"lambdas, ya que asyncio puede renderizar mejor objetos parciales en mensajes "
+"de depuración y error."
 
 #: ../Doc/library/asyncio-eventloop.rst:228
 msgid "Scheduling delayed callbacks"
-msgstr ""
+msgstr "Planificando llamadas retardadas"
 
 #: ../Doc/library/asyncio-eventloop.rst:230
 msgid ""
 "Event loop provides mechanisms to schedule callback functions to be called "
 "at some point in the future.  Event loop uses monotonic clocks to track time."
 msgstr ""
+"El bucle de evento provee mecanismos para planificar funciones de llamadas "
+"que serán ejecutadas en algún punto en el futuro. El bucle de evento usa "
+"relojes monotónicos para seguir el tiempo."
 
 #: ../Doc/library/asyncio-eventloop.rst:237
 msgid ""
 "Schedule *callback* to be called after the given *delay* number of seconds "
 "(can be either an int or a float)."
 msgstr ""
+"Planifica *callback* para ser ejecutada luego de *delay* número de segundos "
+"(puede ser tango un entero como un flotante)."
 
 #: ../Doc/library/asyncio-eventloop.rst:240
 #: ../Doc/library/asyncio-eventloop.rst:272
@@ -385,12 +437,17 @@ msgid ""
 "An instance of :class:`asyncio.TimerHandle` is returned which can be used to "
 "cancel the callback."
 msgstr ""
+"Una instancia de :class:`asyncio.TimerHandle` es retornada, la que puede ser "
+"utilizada para cancelar la ejecución."
 
 #: ../Doc/library/asyncio-eventloop.rst:243
 msgid ""
 "*callback* will be called exactly once.  If two callbacks are scheduled for "
 "exactly the same time, the order in which they are called is undefined."
 msgstr ""
+"*callback* será ejecutada exactamente una sola vez. Si dos llamadas son "
+"planificadas para el mismo momento exacto, el orden en el que son ejecutadas "
+"es indefinido."
 
 #: ../Doc/library/asyncio-eventloop.rst:247
 msgid ""
