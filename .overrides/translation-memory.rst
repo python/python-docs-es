@@ -71,7 +71,10 @@ Términos y bigramas
        gestor ``tutorial/errors.po``, ``library/functions.po``
 
      handle exception
-       Gestionar excepción. ``tutorial/inputoutput.po``
+       gestionar excepción. ``tutorial/inputoutput.po``
+       
+     i. e.
+       en otras palabras. ``library/sqlite3.po``
 
      in-place, in place
        in situ. Aunque estrictamente no es español, su uso es generalizado.
