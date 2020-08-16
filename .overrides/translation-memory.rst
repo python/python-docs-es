@@ -74,8 +74,7 @@ Términos y bigramas
        gestionar excepción. ``tutorial/inputoutput.po``
        
      i. e.
-       por ejemplo. ``library/sqlite3.po``
-       Aunque i. e. también aplica para español, "por ejemplo" se usa más.
+       en otras palabras. ``library/sqlite3.po``
 
      in-place, in place
        in situ. Aunque estrictamente no es español, su uso es generalizado.
