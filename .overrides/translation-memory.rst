@@ -71,7 +71,11 @@ Términos y bigramas
        gestor ``tutorial/errors.po``, ``library/functions.po``
 
      handle exception
-       Gestionar excepción. ``tutorial/inputoutput.po``
+       gestionar excepción. ``tutorial/inputoutput.po``
+       
+     i. e.
+       por ejemplo. ``library/sqlite3.po``
+       Aunque i. e. también aplica para español, "por ejemplo" se usa más.
 
      in-place, in place
        in situ. Aunque estrictamente no es español, su uso es generalizado.
