@@ -1,25 +1,27 @@
 # Copyright (C) 2001-2020, Python Software Foundation
 # This file is distributed under the same license as the Python package.
-# Maintained by the python-doc-es workteam. 
+# Maintained by the python-doc-es workteam.
 # docs-es@python.org / https://mail.python.org/mailman3/lists/docs-es.python.org/
 # Check https://github.com/PyCampES/python-docs-es/blob/3.8/TRANSLATORS to get the list of volunteers
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-06 11:59-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2020-06-24 22:59+0200\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
+"Language: es\n"
+"X-Generator: Poedit 2.3\n"
 
 #: ../Doc/extending/windows.rst:8
 msgid "Building C and C++ Extensions on Windows"
-msgstr ""
+msgstr "Creación de extensiones C y C++ en Windows"
 
 #: ../Doc/extending/windows.rst:10
 msgid ""
@@ -30,6 +32,13 @@ msgid ""
 "programmer interested in producing software which can be successfully built "
 "on both Unix and Windows."
 msgstr ""
+"Este capítulo explica brevemente cómo crear un módulo de extensión de "
+"Windows para Python usando Microsoft Visual C++, y sigue con información de "
+"fondo más detallada sobre cómo funciona. El material explicativo es útil "
+"tanto para el programador de Windows que está aprendiendo a construir "
+"extensiones de Python como para el programador de Unix interesado en "
+"producir software que se pueda construir con éxito tanto en Unix como en "
+"Windows."
 
 #: ../Doc/extending/windows.rst:17
 msgid ""
@@ -38,6 +47,10 @@ msgid ""
 "still need the C compiler that was used to build Python; typically Microsoft "
 "Visual C++."
 msgstr ""
+"Se alienta a los autores de módulos a utilizar el enfoque distutils para "
+"construir módulos de extensión, en lugar del descrito en esta sección. Aún "
+"necesitará el compilador de C que se utilizó para construir Python; "
+"típicamente Microsoft Visual C++."
 
 #: ../Doc/extending/windows.rst:24
 msgid ""
@@ -48,10 +61,16 @@ msgid ""
 "working with.  For example, if you are using Python 2.2.1, ``XY`` will "
 "actually be ``22``."
 msgstr ""
+"Este capítulo menciona varios nombres de archivo que incluyen un número de "
+"versión codificado de Python. Estos nombres de archivo se representan con el "
+"número de versión que se muestra como ``XY``; en la práctica, ``'X'`` será "
+"el número de versión principal y ``'Y'`` será el número de versión menor de "
+"la versión de Python con la que está trabajando. Por ejemplo, si está "
+"utilizando Python 2.2.1, ``XY`` en realidad será ``22``."
 
 #: ../Doc/extending/windows.rst:34
 msgid "A Cookbook Approach"
-msgstr ""
+msgstr "Un enfoque de libro de cocina"
 
 #: ../Doc/extending/windows.rst:36
 msgid ""
@@ -64,10 +83,19 @@ msgid ""
 "project file for the :source:`winsound <PCbuild/winsound.vcxproj>` standard "
 "library module."
 msgstr ""
+"Hay dos enfoques para construir módulos de extensión en Windows, al igual "
+"que en Unix: use el paquete :mod:`distutils` para controlar el proceso de "
+"construcción, o haga las cosas manualmente. El enfoque distutils funciona "
+"bien para la mayoría de las extensiones; La documentación sobre el uso de :"
+"mod:`distutils` para compilar y empaquetar módulos de extensión está "
+"disponible en :ref:`distutils-index`. Si encuentra que realmente necesita "
+"hacer las cosas manualmente, puede ser instructivo estudiar el archivo del "
+"proyecto para el módulo de biblioteca estándar :source:`winsound <PCbuild/"
+"winsound.vcxproj>`."
 
 #: ../Doc/extending/windows.rst:48
 msgid "Differences Between Unix and Windows"
-msgstr ""
+msgstr "Diferencias entre Unix y Windows"
 
 #: ../Doc/extending/windows.rst:53
 msgid ""
@@ -75,6 +103,9 @@ msgid ""
 "code.  Before you try to build a module that can be dynamically loaded, be "
 "aware of how your system works."
 msgstr ""
+"Unix y Windows usan paradigmas completamente diferentes para la carga de "
+"código en tiempo de ejecución. Antes de intentar construir un módulo que se "
+"pueda cargar dinámicamente, tenga en cuenta cómo funciona su sistema."
 
 #: ../Doc/extending/windows.rst:57
 msgid ""
@@ -85,6 +116,13 @@ msgid ""
 "actual locations in the program where the functions and data are placed in "
 "memory. This is basically a link operation."
 msgstr ""
+"En Unix, un archivo de objeto compartido (:file:`.so`) contiene código para "
+"ser utilizado por el programa, y también los nombres de funciones y datos "
+"que espera encontrar en el programa. Cuando el archivo se une al programa, "
+"todas las referencias a esas funciones y datos en el código del archivo se "
+"cambian para apuntar a las ubicaciones reales en el programa donde las "
+"funciones y los datos se colocan en la memoria. Esto es básicamente una "
+"operación de enlace."
 
 #: ../Doc/extending/windows.rst:64
 msgid ""
@@ -95,6 +133,13 @@ msgid ""
 "and the lookup table is modified at runtime to point to the functions and "
 "data."
 msgstr ""
+"En Windows, un archivo de biblioteca de enlace dinámico (:file:`.dll`) no "
+"tiene referencias colgantes. En cambio, un acceso a funciones o datos pasa "
+"por una tabla de búsqueda. Por lo tanto, el código DLL no tiene que "
+"repararse en tiempo de ejecución para referirse a la memoria del programa; "
+"en cambio, el código ya usa la tabla de búsqueda de la DLL, y la tabla de "
+"búsqueda se modifica en tiempo de ejecución para apuntar a las funciones y "
+"los datos."
 
 #: ../Doc/extending/windows.rst:70
 msgid ""
@@ -105,6 +150,12 @@ msgid ""
 "files in the libraries; if it finds it, it will include all the code from "
 "that object file."
 msgstr ""
+"En Unix, solo hay un tipo de archivo de biblioteca (:file:`.a`) que contiene "
+"código de varios archivos de objeto (:file:`.o`). Durante el paso de enlace "
+"para crear un archivo de objeto compartido (:file:`.so`), el enlazador puede "
+"encontrar que no sabe dónde se define un identificador. El enlazador lo "
+"buscará en los archivos de objetos en las bibliotecas; si lo encuentra, "
+"incluirá todo el código de ese archivo de objeto."
 
 #: ../Doc/extending/windows.rst:76
 msgid ""
@@ -119,6 +170,17 @@ msgid ""
 "will need to be used for all future DLLs that depend on the symbols in the "
 "application or DLL."
 msgstr ""
+"En Windows, hay dos tipos de biblioteca, una biblioteca estática y una "
+"biblioteca de importación (ambas llamadas :file:`.lib`). Una biblioteca "
+"estática es como un archivo Unix :file:`.a`; Contiene código para ser "
+"incluido según sea necesario. Una biblioteca de importación se usa "
+"básicamente solo para asegurarle al enlazador que cierto identificador es "
+"legal y estará presente en el programa cuando se cargue la DLL. Por lo "
+"tanto, el enlazador utiliza la información de la biblioteca de importación "
+"para crear la tabla de búsqueda para usar identificadores que no están "
+"incluidos en la DLL. Cuando se vincula una aplicación o una DLL, se puede "
+"generar una biblioteca de importación, que deberá usarse para todas las DLL "
+"futuras que dependan de los símbolos en la aplicación o DLL."
 
 #: ../Doc/extending/windows.rst:86
 msgid ""
@@ -130,6 +192,14 @@ msgid ""
 "`A.lib` to the linker for B and C.  :file:`A.lib` does not contain code; it "
 "just contains information which will be used at runtime to access A's code."
 msgstr ""
+"Suponga que está creando dos módulos de carga dinámica, B y C, que deberían "
+"compartir otro bloque de código A. En Unix, *no* pasaría :file:`A.a` al "
+"enlazador para :file:`B.so` y :file:`C.so`; eso haría que se incluyera dos "
+"veces, de modo que B y C tengan cada uno su propia copia. En Windows, "
+"compilar :file:`A.dll` también compilará :file:`A.lib`. Usted *si* pasa :"
+"file:`A.lib` al enlazador para B y C. :file:`A.lib` no contiene código; solo "
+"contiene información que se usará en tiempo de ejecución para acceder al "
+"código de A."
 
 #: ../Doc/extending/windows.rst:94
 msgid ""
@@ -138,10 +208,14 @@ msgid ""
 "On Unix, linking with a library is more like ``from spam import *``; it does "
 "create a separate copy."
 msgstr ""
+"En Windows, usar una biblioteca de importación es como usar ``importar "
+"spam``; le da acceso a los nombres de spam, pero no crea una copia separada. "
+"En Unix, vincular con una biblioteca es más como ``from spam import*``; crea "
+"una copia separada."
 
 #: ../Doc/extending/windows.rst:103
 msgid "Using DLLs in Practice"
-msgstr ""
+msgstr "Usar DLL en la práctica"
 
 #: ../Doc/extending/windows.rst:108
 msgid ""
@@ -149,6 +223,9 @@ msgid ""
 "or may not work (though Borland seems to).  The rest of this section is MSVC+"
 "+ specific."
 msgstr ""
+"Windows Python está construido en Microsoft Visual C++; el uso de otros "
+"compiladores puede o no funcionar (aunque Borland parece funcionar). El "
+"resto de esta sección es específica de MSVC++."
 
 #: ../Doc/extending/windows.rst:112
 msgid ""
@@ -156,6 +233,9 @@ msgid ""
 "linker. To build two DLLs, spam and ni (which uses C functions found in "
 "spam), you could use these commands::"
 msgstr ""
+"Al crear archivos DLL en Windows, debe pasar :file:`pythonXY.lib` al "
+"enlazador. Para construir dos DLL, spam y ni (que usa funciones C que se "
+"encuentran en el spam), puede usar estos comandos::"
 
 #: ../Doc/extending/windows.rst:119
 msgid ""
@@ -164,6 +244,10 @@ msgid ""
 "functions (such as :c:func:`PyArg_ParseTuple`), but it does know how to find "
 "the Python code thanks to :file:`pythonXY.lib`."
 msgstr ""
+"El primer comando creó tres archivos: :file:`spam.obj`, :file:`spam.dll` y :"
+"file:`spam.lib`. :file:`Spam.dll` no contiene ninguna función de Python "
+"(como :c:func:`PyArg_ParseTuple`), pero sabe cómo encontrar el código de "
+"Python gracias a :file:`pythonXY.lib`."
 
 #: ../Doc/extending/windows.rst:124
 msgid ""
@@ -171,6 +255,9 @@ msgid ""
 "lib`), which knows how to find the necessary functions from spam, and also "
 "from the Python executable."
 msgstr ""
+"El segundo comando creó :file:`ni.dll` (y :file:`.obj` y :file:`.lib`), que "
+"sabe cómo encontrar las funciones necesarias del spam, y también del "
+"ejecutable de Python."
 
 #: ../Doc/extending/windows.rst:128
 msgid ""
@@ -179,6 +266,10 @@ msgid ""
 "say ``_declspec(dllexport)``, as in ``void _declspec(dllexport) "
 "initspam(void)`` or ``PyObject _declspec(dllexport) *NiGetSpamData(void)``."
 msgstr ""
+"No todos los identificadores se exportan a la tabla de búsqueda. Si desea "
+"que cualquier otro módulo (incluido Python) pueda ver sus identificadores, "
+"debe decir ``_declspec(dllexport)``, como en ``void _declspec(dllexport) "
+"initspam(void)`` o ``PyObject_declspec(dllexport) *NiGetSpamData(void)``."
 
 #: ../Doc/extending/windows.rst:133
 msgid ""
@@ -187,3 +278,8 @@ msgid ""
 "the Project Settings dialog, Link tab, to specify *ignore default "
 "libraries*.  Add the correct :file:`msvcrtxx.lib` to the list of libraries."
 msgstr ""
+"Developer Studio incluirá muchas bibliotecas de importación que realmente no "
+"necesita, agregando aproximadamente 100K a su ejecutable. Para deshacerse de "
+"ellos, use el cuadro de diálogo Configuración del proyecto, pestaña Enlace, "
+"para especificar *ignorar las bibliotecas predeterminadas*. Agregue el "
+"archivo correcto :file:`msvcrtxx.lib` a la lista de bibliotecas."
