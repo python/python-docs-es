@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-08-14 20:32-0300\n"
+"PO-Revision-Date: 2020-08-17 16:32-0300\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -786,6 +786,11 @@ msgid ""
 "`string.Template` (added in Python 2.4) and :meth:`str.format` (added in "
 "Python 2.6)."
 msgstr ""
+"Cuando se agregó logging a la biblioteca estándar de Python, la única forma "
+"de formatear mensajes con contenido variable era usar el método de formateo "
+"'%'. Desde entonces, Python ha ganado dos nuevos enfoques de formato: :class:"
+"`string.Template` (agregado en Python 2.4) y :meth:`str.format` (agregado en "
+"Python 2.6)."
 
 #: ../Doc/howto/logging-cookbook.rst:1055
 msgid ""
@@ -799,6 +804,16 @@ msgid ""
 "meth:`str.format` or :class:`string.Template`. Here's an example console "
 "session to show the possibilities:"
 msgstr ""
+"Logging (a partir de la versión 3.2) proporciona un soporte mejorado para "
+"estos dos estilos de formato adicionales. La clase :class:`Formatter` ha "
+"sido mejorada para tomar un parámetro de palabra clave adicional llamado "
+"``style``. El valor predeterminado es ``'%'``, pero otros valores posibles "
+"son ``'{'`` y ``'$'``, que corresponden a los otros dos estilos de formato. "
+"La compatibilidad con versiones anteriores se mantiene de forma "
+"predeterminada (como era de esperar), pero al especificar explícitamente un "
+"parámetro de estilo, tiene la capacidad de especificar cadenas de formato "
+"que funcionan con :meth:`str.format` o :class:`string.Template`. Aquí hay "
+"una sesión de consola de ejemplo para mostrar las posibilidades:"
 
 #: ../Doc/howto/logging-cookbook.rst:1089
 #, python-format
@@ -807,9 +822,14 @@ msgid ""
 "completely independent of how an individual logging message is constructed. "
 "That can still use %-formatting, as shown here::"
 msgstr ""
+"Tenga en cuenta que el formato de logging para la salida final a los "
+"registros es completamente independiente de cómo se construye un mensaje de "
+"registro individual. Para eso todavía puede usar el formateo \"%\", como se "
+"muestra aquí:"
 
+# No entiendo este bloque en inglés ni en español :P
 #: ../Doc/howto/logging-cookbook.rst:1097
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Logging calls (``logger.debug()``, ``logger.info()`` etc.) only take "
 "positional parameters for the actual logging message itself, with keyword "
@@ -824,6 +844,20 @@ msgid ""
 "logging calls which are out there in existing code will be using %-format "
 "strings."
 msgstr ""
+"Las llamadas de Logging (``logger.debug()``, ``logger.info()``, etc.) solo "
+"toman parámetros posicionales para el mensaje de registro real en sí, con "
+"parámetros de palabras clave que se usan solo para determinar opciones sobre "
+"cómo gestionar la llamada real a Logging (por ejemplo, el parámetro de "
+"palabra clave `` exc_info '' para indicar que la información de rastreo debe "
+"registrarse, o el parámetro de palabra clave `` extra '' para indicar "
+"información contextual adicional que se agregará al registro). Por lo tanto, "
+"no puede realizar llamadas de registro directamente usando la sintaxis: "
+"meth: `str.format` o: class:` string.Template`, porque internamente el "
+"paquete de registro usa% -formatting para fusionar la cadena de formato y "
+"los argumentos de las variables. No habría ningún cambio en esto mientras se "
+"conserva la compatibilidad con versiones anteriores, ya que todas las "
+"llamadas de registro que están en el código existente usarán cadenas de"
+"% -format."
 
 #: ../Doc/howto/logging-cookbook.rst:1110
 msgid ""
@@ -833,6 +867,12 @@ msgid ""
 "will call ``str()`` on that object to get the actual format string. Consider "
 "the following two classes::"
 msgstr ""
+"Sin embargo, existe una forma en la que puede usar el formato {} - y $ - "
+"para construir sus mensajes de registro individuales. Recuerde que para un "
+"mensaje puede usar un objeto arbitrario como una cadena de caracteres de "
+"formato de mensaje, y que el paquete logging llamará a ``str()`` en ese "
+"objeto para obtener la cadena de carácteres de formato real. Considere las "
+"siguientes dos clases::"
 
 #: ../Doc/howto/logging-cookbook.rst:1134
 #, python-format
@@ -845,6 +885,14 @@ msgid ""
 "__ (double underscore --- not to be confused with _, the single underscore "
 "used as a synonym/alias for :func:`gettext.gettext` or its brethren)."
 msgstr ""
+"Cualquiera de estos puede usarse en lugar de una cadena de formato, para "
+"permitir que se use el formato {} - o $ - para construir la parte del "
+"\"mensaje\" real que aparece en la salida del registro en lugar de "
+"\"%(message)s\" o \"{message}\" o \"$message\". Es un poco difícil de "
+"manejar usar los nombres de las clases siempre que quieras registrar algo, "
+"pero es bastante aceptable si usas un alias como __ (doble subrayado --- no "
+"confundir con _, el subrayado simple usado como sinónimo/alias para :func:"
+"`gettext.gettext` o sus hermanos)."
 
 #: ../Doc/howto/logging-cookbook.rst:1142
 msgid ""
@@ -852,6 +900,10 @@ msgid ""
 "copy and paste into your own code. They can be used as follows (assuming "
 "that they're declared in a module called ``wherever``):"
 msgstr ""
+"Las clases anteriores no están incluidas en Python, aunque son bastante "
+"fáciles de copiar y pegar en su propio código. Se pueden usar de la "
+"siguiente manera (asumiendo que están declaradas en un módulo llamado "
+"``wherever``):"
 
 #: ../Doc/howto/logging-cookbook.rst:1164
 msgid ""
@@ -859,6 +911,9 @@ msgid ""
 "you would of course use ``logger.debug()`` or similar to actually log using "
 "this approach."
 msgstr ""
+"Si bien los ejemplos anteriores usan ``print()`` para mostrar cómo funciona "
+"el formateo, por supuesto usaría ``logger.debug()`` o similar para realmente "
+"registrar usando este enfoque."
 
 #: ../Doc/howto/logging-cookbook.rst:1168
 msgid ""
@@ -870,22 +925,34 @@ msgid ""
 "not just the format string. That's because the __ notation is just syntax "
 "sugar for a constructor call to one of the XXXMessage classes."
 msgstr ""
+"Una cosa a tener en cuenta es que no paga una penalización de rendimiento "
+"significativa con este enfoque: el formateo real no ocurre cuando realiza la "
+"llamada a logging, sino cuando (y si) el mensaje registrado está a punto de "
+"ser enviado a un registro por un gestor. Entonces, lo único un poco inusual "
+"que podría confundirte es que los paréntesis rodean la cadena de formato y "
+"los argumentos, no solo la cadena de formato. Eso es porque la notación __ "
+"es solo azúcar sintáctico para una llamada de constructor a una de las "
+"clases XXXMessage."
 
 #: ../Doc/howto/logging-cookbook.rst:1176
 msgid ""
 "If you prefer, you can use a :class:`LoggerAdapter` to achieve a similar "
 "effect to the above, as in the following example::"
 msgstr ""
+"Si lo prefiere, puede usar :class:`LoggerAdapter` para lograr un efecto "
+"similar al anterior, como en el siguiente ejemplo::"
 
 #: ../Doc/howto/logging-cookbook.rst:1207
 msgid ""
 "The above script should log the message ``Hello, world!`` when run with "
 "Python 3.2 or later."
 msgstr ""
+"El script anterior debería registrar el mensaje ``Hello, world!`` Cuando se "
+"ejecuta con Python 3.2 o posterior."
 
 #: ../Doc/howto/logging-cookbook.rst:1216
 msgid "Customizing ``LogRecord``"
-msgstr ""
+msgstr "Personalización de ``LogRecord``"
 
 #: ../Doc/howto/logging-cookbook.rst:1218
 msgid ""
@@ -897,12 +964,22 @@ msgid ""
 "disabled). Before Python 3.2, there were only two places where this creation "
 "was done:"
 msgstr ""
+"Cada evento logging está representado por una instancia :class:`LogRecord`. "
+"Cuando se registra un evento y no se filtra por el nivel de un registrador, "
+"se crea :class:`LogRecord`, se llena con información sobre el evento y luego "
+"se pasa a los gestores de ese registrador (y sus antepasados, hasta (e "
+"incluyéndolo) el registrador donde se deshabilita una mayor propagación en "
+"la jerarquía). Antes de Python 3.2, solo había dos lugares donde se "
+"realizaba esta creación:"
 
 #: ../Doc/howto/logging-cookbook.rst:1225
 msgid ""
 ":meth:`Logger.makeRecord`, which is called in the normal process of logging "
 "an event. This invoked :class:`LogRecord` directly to create an instance."
 msgstr ""
+":meth:`Logger.makeRecord`, que se llama en el proceso normal de registro de "
+"un evento. Esto invoca :class:`LogRecord` directamente para crear una "
+"instancia."
 
 #: ../Doc/howto/logging-cookbook.rst:1228
 msgid ""
@@ -912,12 +989,19 @@ msgid ""
 "via a :class:`~handlers.SocketHandler`, or in JSON form via an :class:"
 "`~handlers.HTTPHandler`)."
 msgstr ""
+":func:`makeLogRecord`, que se llama con un diccionario que contiene "
+"atributos que se agregarán al *LogRecord*. Esto se suele invocar cuando se "
+"ha recibido un diccionario adecuado a través de la red (por ejemplo, en "
+"forma de *pickle* a través de :class:`~handlers.SocketHandler`, o en formato "
+"JSON a través de :class:`~handlers.HTTPHandler`)."
 
 #: ../Doc/howto/logging-cookbook.rst:1234
 msgid ""
 "This has usually meant that if you need to do anything special with a :class:"
 "`LogRecord`, you've had to do one of the following."
 msgstr ""
+"Por lo general, esto significa que si necesita hacer algo especial con :"
+"class:`LogRecord`, debe hacer una de las siguientes cosas."
 
 #: ../Doc/howto/logging-cookbook.rst:1237
 msgid ""
@@ -925,6 +1009,9 @@ msgid ""
 "makeRecord`, and set it using :func:`~logging.setLoggerClass` before any "
 "loggers that you care about are instantiated."
 msgstr ""
+"Cree su propia subclase :class:`Logger`, que anula :meth:`Logger."
+"makeRecord`, y configúrelo usando :func:`~logging.setLoggerClass` antes de "
+"que se creen instancias de los registradores que le interesan."
 
 #: ../Doc/howto/logging-cookbook.rst:1240
 msgid ""
@@ -932,6 +1019,9 @@ msgid ""
 "special manipulation you need when its :meth:`~Filter.filter` method is "
 "called."
 msgstr ""
+"Agregua un :class:`Filter` a un registrador o gestor, que realiza la "
+"manipulación especial necesaria que necesita cuando se llama a su método :"
+"meth:`~Filter.filter`."
 
 #: ../Doc/howto/logging-cookbook.rst:1244
 msgid ""
@@ -940,6 +1030,10 @@ msgid ""
 "attempt to set its own :class:`Logger` subclass, and the one which did this "
 "last would win."
 msgstr ""
+"El primer enfoque sería un poco difícil de manejar en el escenario en el que "
+"(digamos) varias bibliotecas diferentes quisieran hacer cosas diferentes. "
+"Cada uno intentaría establecer su propia subclase :class:`Logger`, y el que "
+"hiciera esto último ganaría."
 
 #: ../Doc/howto/logging-cookbook.rst:1249
 msgid ""
@@ -949,6 +1043,12 @@ msgid ""
 "to remember to do this every time they introduced a new logger (which they "
 "would do simply by adding new packages or modules and doing ::"
 msgstr ""
+"El segundo enfoque funciona razonablemente bien en muchos casos, pero no le "
+"permite, por ejemplo, usar una subclase especializada de :class:`LogRecord`. "
+"Los desarrolladores de bibliotecas pueden establecer un filtro adecuado en "
+"sus registradores, pero tendrían que recordar hacerlo cada vez que "
+"introduzcan un nuevo registrador (lo que harían simplemente agregando nuevos "
+"paquetes o módulos y haciendo ::"
 
 #: ../Doc/howto/logging-cookbook.rst:1257
 msgid ""
@@ -959,8 +1059,16 @@ msgid ""
 "so output from that handler would not reflect the intentions of the library "
 "developer."
 msgstr ""
+"a nivel de módulo). Probablemente sean demasiadas cosas en las que pensar. "
+"Los desarrolladores también podrían agregar el filtro a :class:`~logging."
+"NullHandler` adjunto a su registrador de nivel superior, pero esto no se "
+"invocaría si un desarrollador de aplicaciones adjuntara un controlador a un "
+"registrador de biblioteca de nivel inferior --- así que la salida de ese "
+"gestor no reflejaría las intenciones del desarrollador de la biblioteca."
 
+# ¿"fábrica"?
 #: ../Doc/howto/logging-cookbook.rst:1263
+#, fuzzy
 msgid ""
 "In Python 3.2 and later, :class:`~logging.LogRecord` creation is done "
 "through a factory, which you can specify. The factory is just a callable you "
@@ -969,6 +1077,12 @@ msgid ""
 "signature as the :class:`~logging.LogRecord` constructor, as :class:"
 "`LogRecord` is the default setting for the factory."
 msgstr ""
+"En Python 3.2 y posterior, la creación :class:`~logging.LogRecord` se "
+"realiza a través de una fábrica, que puede especificar. La fábrica es solo "
+"un invocable que puede configurar con :func:`~logging.setLogRecordFactory`, "
+"e interrogar con :func:`~logging.getLogRecordFactory`. La fábrica se invoca "
+"con la misma firma que el constructor :class:`~logging.LogRecord`, ya que :"
+"class:`LogRecord` es la configuración predeterminada de la fábrica."
 
 #: ../Doc/howto/logging-cookbook.rst:1270
 msgid ""
@@ -977,6 +1091,10 @@ msgid ""
 "additional attributes to the record once created, using a pattern similar to "
 "this::"
 msgstr ""
+"Este enfoque permite que una fábrica personalizada controle todos los "
+"aspectos de la creación de *LogRecord*. Por ejemplo, podría devolver una "
+"subclase, o simplemente agregar algunos atributos adicionales al registro "
+"una vez creado, usando un patrón similar a este::"
 
 #: ../Doc/howto/logging-cookbook.rst:1283
 msgid ""
@@ -987,10 +1105,17 @@ msgid ""
 "time overhead to all logging operations, and the technique should only be "
 "used when the use of a :class:`Filter` does not provide the desired result."
 msgstr ""
+"Este patrón permite que diferentes bibliotecas encadenen fábricas juntas, y "
+"siempre que no sobrescriban los atributos de las demás o sobrescriban "
+"involuntariamente los atributos proporcionados como estándar, no debería "
+"haber sorpresas. Sin embargo, debe tenerse en cuenta que cada eslabón de la "
+"cadena agrega una sobrecarga de tiempo de ejecución a todas las operaciones "
+"de registro, y la técnica solo debe usarse cuando el uso de :class:`Filter` "
+"no proporciona el resultado deseado."
 
 #: ../Doc/howto/logging-cookbook.rst:1294
 msgid "Subclassing QueueHandler - a ZeroMQ example"
-msgstr ""
+msgstr "Subclasificación QueueHandler - un ejemplo de ZeroMQ"
 
 #: ../Doc/howto/logging-cookbook.rst:1296
 msgid ""
@@ -998,42 +1123,51 @@ msgid ""
 "of queues, for example a ZeroMQ 'publish' socket. In the example below,the "
 "socket is created separately and passed to the handler (as its 'queue')::"
 msgstr ""
+"Puede usar una subclase :class:`QueueHandler` para enviar mensajes a otros "
+"tipos de colas, por ejemplo, un socket de 'publicación' ZeroMQ. En el "
+"siguiente ejemplo, el socket se crea por separado y se pasa al gestor (como "
+"su 'cola')::"
 
 #: ../Doc/howto/logging-cookbook.rst:1315
 msgid ""
 "Of course there are other ways of organizing this, for example passing in "
 "the data needed by the handler to create the socket::"
 msgstr ""
+"Por supuesto, hay otras formas de organizar esto, por ejemplo, pasando los "
+"datos que necesita el gestor para crear el socket::"
 
 #: ../Doc/howto/logging-cookbook.rst:1333
 msgid "Subclassing QueueListener - a ZeroMQ example"
-msgstr ""
+msgstr "Subclasificación QueueListener - un ejemplo de ZeroMQ"
 
 #: ../Doc/howto/logging-cookbook.rst:1335
 msgid ""
 "You can also subclass :class:`QueueListener` to get messages from other "
 "kinds of queues, for example a ZeroMQ 'subscribe' socket. Here's an example::"
 msgstr ""
+"También puede subclasificar :class:`QueueListener` para obtener mensajes de "
+"otros tipos de colas, por ejemplo, un socket de 'suscripción' de ZeroMQ. "
+"Aquí tienes un ejemplo::"
 
 #: ../Doc/howto/logging-cookbook.rst:1354
 msgid "Module :mod:`logging`"
-msgstr ""
+msgstr "Módulo :mod:`logging`"
 
 #: ../Doc/howto/logging-cookbook.rst:1354
 msgid "API reference for the logging module."
-msgstr ""
+msgstr "Referencia de API para el módulo logging"
 
 #: ../Doc/howto/logging-cookbook.rst:1357
 msgid "Module :mod:`logging.config`"
-msgstr ""
+msgstr "Módulo :mod:`logging.config`"
 
 #: ../Doc/howto/logging-cookbook.rst:1357
 msgid "Configuration API for the logging module."
-msgstr ""
+msgstr "API de configuración para el módulo logging."
 
 #: ../Doc/howto/logging-cookbook.rst:1360
 msgid "Module :mod:`logging.handlers`"
-msgstr ""
+msgstr "Módulo :mod:`logging.handlers`"
 
 #: ../Doc/howto/logging-cookbook.rst:1360
 msgid "Useful handlers included with the logging module."
