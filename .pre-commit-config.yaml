@@ -6,14 +6,12 @@ repos:
 -   repo: local
     hooks:
     -   id: merge-dicts
-    -   name: merge-dicts
-    -   entry: bash -c 'awk 1 dict dictionaries/*.txt > dict.txt'
-   # from the example
-   # -   entry: bash -c 'lines=$(pylint api/ | wc -l) && (( lines > 10)) && exit 1'
-   # - language: system
+        name: merge-dicts
+        entry: ./scripts/merge-dicts.sh
+        language: script
 # This one requires package ``hunspell-es_es`` in Archlinux
 -   repo: https://github.com/humitos/pospell
     rev: pre-commit
     hooks:
     -   id: pospell
-        args: ['--personal-dict', 'dict', '--modified', '--language', 'es_ES', '--language', 'es_AR']
+        args: ['--personal-dict', 'dict.txt', '--modified', '--language', 'es_ES', '--language', 'es_AR']
