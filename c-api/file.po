@@ -6,23 +6,25 @@
 # Check https://github.com/PyCampES/python-docs-es/blob/3.8/TRANSLATORS to
 # get the list of volunteers
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2020-05-10 20:52+0200\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
+"Language: es\n"
+"X-Generator: Poedit 2.3\n"
 
 #: ../Doc/c-api/file.rst:6
 msgid "File Objects"
-msgstr ""
+msgstr "Objetos archivo"
 
 #: ../Doc/c-api/file.rst:10
 msgid ""
@@ -35,6 +37,16 @@ msgid ""
 "reporting in the interpreter; third-party code is advised to access the :mod:"
 "`io` APIs instead."
 msgstr ""
+"Estas API son una emulación mínima de la API Python 2 en C para objetos de "
+"archivo incorporados, que solía depender del soporte de E/S (*I/O*) "
+"almacenadas en la memoria intermedia (:c:type:`FILE\\*`) de la biblioteca "
+"estándar C. En Python 3, los archivos y las secuencias utilizan el nuevo "
+"módulo :mod:`io`, que define varias capas sobre las E/S sin búfer de bajo "
+"nivel del sistema operativo. Las funciones que se describen a continuación "
+"son envoltorios en C de conveniencia sobre estas nuevas API y están "
+"destinadas principalmente a la notificación de errores internos en el "
+"intérprete; se recomienda que el código de terceros acceda a las API :mod:"
+"`io`."
 
 #: ../Doc/c-api/file.rst:22
 msgid ""
@@ -45,6 +57,13 @@ msgid ""
 "failure. For a more comprehensive description of the arguments, please refer "
 "to the :func:`io.open` function documentation."
 msgstr ""
+"Crea un objeto archivo Python a partir del descriptor de archivo de un "
+"archivo ya abierto *fd*. Los argumentos *name*, *encoding*, *errors* y "
+"*newline* pueden ser ``NULL`` para usar los valores predeterminados; "
+"*buffering* puede ser *-1* para usar el valor predeterminado. *name* se "
+"ignora y se mantiene por compatibilidad con versiones anteriores. Retorna "
+"``NULL`` en caso de error. Para obtener una descripción más completa de los "
+"argumentos, consulte la documentación de la función :func:`io.open`."
 
 #: ../Doc/c-api/file.rst:31
 msgid ""
@@ -52,10 +71,14 @@ msgid ""
 "level file descriptors can produce various issues (such as unexpected "
 "ordering of data)."
 msgstr ""
+"Dado que las transmisiones (*streams*) de Python tienen su propia capa de "
+"almacenamiento en búfer, combinarlas con descriptores de archivos a nivel "
+"del sistema operativo puede producir varios problemas (como un pedido "
+"inesperado de datos)."
 
 #: ../Doc/c-api/file.rst:35
 msgid "Ignore *name* attribute."
-msgstr ""
+msgstr "Ignora el atributo *name*."
 
 #: ../Doc/c-api/file.rst:41
 msgid ""
@@ -65,6 +88,11 @@ msgid ""
 "integer, which is returned as the file descriptor value.  Sets an exception "
 "and returns ``-1`` on failure."
 msgstr ""
+"Retorna el descriptor de archivo asociado con *p* como :c:type:`int`. Si el "
+"objeto es un entero, se retorna su valor. Si no, se llama al método :meth:"
+"`~io.IOBase.fileno` del objeto si existe; el método debe retornar un número "
+"entero, que se retorna como el valor del descriptor de archivo. Establece "
+"una excepción y retorna ``-1`` en caso de error."
 
 #: ../Doc/c-api/file.rst:52
 msgid ""
@@ -78,18 +106,32 @@ msgid ""
 "regardless of length, but :exc:`EOFError` is raised if the end of the file "
 "is reached immediately."
 msgstr ""
+"Equivalente a ``p.readline([n])``, esta función lee una línea del objeto "
+"*p*. *p* puede ser un objeto archivo o cualquier objeto con un método :meth:"
+"`~io.IOBase.readline`. Si *n* es ``0``, se lee exactamente una línea, "
+"independientemente de la longitud de la línea. Si *n* es mayor que ``0``, no "
+"se leerán más de *n* bytes del archivo; se puede retornar una línea parcial. "
+"En ambos casos, se retorna una cadena de caracteres vacía si se llega al "
+"final del archivo de inmediato. Si *n* es menor que ``0``, sin embargo, se "
+"lee una línea independientemente de la longitud, pero :exc:`EOFError` se "
+"lanza si se llega al final del archivo de inmediato."
 
 #: ../Doc/c-api/file.rst:65
 msgid ""
 "Overrides the normal behavior of :func:`io.open_code` to pass its parameter "
 "through the provided handler."
 msgstr ""
+"Sobrescribe el comportamiento normal de :func:`io.open_code` para pasar su "
+"parámetro a través del controlador proporcionado."
 
 #: ../Doc/c-api/file.rst:68
 msgid ""
 "The handler is a function of type :c:type:`PyObject *(\\*)(PyObject *path, "
 "void *userData)`, where *path* is guaranteed to be :c:type:`PyUnicodeObject`."
 msgstr ""
+"El controlador es una función de tipo :c:type:`PyObject *(\\*)(PyObject "
+"*path, void *userData)`, donde se garantiza que *path* sea :c:type:"
+"`PyUnicodeObject`."
 
 #: ../Doc/c-api/file.rst:71
 msgid ""
@@ -97,6 +139,9 @@ msgid ""
 "functions may be called from different runtimes, this pointer should not "
 "refer directly to Python state."
 msgstr ""
+"El puntero *userData* se pasa a la función de enlace. Dado que las funciones "
+"de enlace pueden llamarse desde diferentes tiempos de ejecución, este "
+"puntero no debe referirse directamente al estado de Python."
 
 #: ../Doc/c-api/file.rst:75
 msgid ""
@@ -104,6 +149,9 @@ msgid ""
 "modules during its execution unless they are known to be frozen or available "
 "in ``sys.modules``."
 msgstr ""
+"Como este *hook* se usa intencionalmente durante la importación, evite "
+"importar nuevos módulos durante su ejecución a menos que se sepa que están "
+"congelados o disponibles en ``sys.modules``."
 
 #: ../Doc/c-api/file.rst:79
 msgid ""
@@ -111,10 +159,14 @@ msgid ""
 "to :c:func:`PyFile_SetOpenCodeHook` will fail. On failure, the function "
 "returns -1 and sets an exception if the interpreter has been initialized."
 msgstr ""
+"Una vez que se ha establecido un *hook*, no se puede quitar ni reemplazar, y "
+"luego llamadas a :c:func:`PyFile_SetOpenCodeHook` fallarán. En caso de "
+"error, la función retorna -1 y establece una excepción si el intérprete se "
+"ha inicializado."
 
 #: ../Doc/c-api/file.rst:83
 msgid "This function is safe to call before :c:func:`Py_Initialize`."
-msgstr ""
+msgstr "Es seguro llamar a esta función antes de :c:func:`Py_Initialize`."
 
 #: ../Doc/c-api/file.rst:93
 msgid ""
@@ -123,9 +175,16 @@ msgid ""
 "instead of the :func:`repr`.  Return ``0`` on success or ``-1`` on failure; "
 "the appropriate exception will be set."
 msgstr ""
+"Escribe el objecto *obj* en el objeto archivo *p*. El único indicador "
+"admitido para *flags* es :const:`Py_PRINT_RAW`; si se proporciona, se "
+"escribe el :func:`str` del objeto en lugar de :func:`repr`. Retorna ``0`` en "
+"caso de éxito o ``-1`` en caso de error; se establecerá la excepción "
+"apropiada."
 
 #: ../Doc/c-api/file.rst:101
 msgid ""
 "Write string *s* to file object *p*.  Return ``0`` on success or ``-1`` on "
 "failure; the appropriate exception will be set."
 msgstr ""
+"Escribe la cadena *s* en el objeto archivo *p*. Retorna ``0`` en caso de "
+"éxito o ``-1`` en caso de error; se establecerá la excepción apropiada."
