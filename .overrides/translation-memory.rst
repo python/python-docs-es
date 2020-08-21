@@ -28,44 +28,167 @@ Si quieres ver cómo se ha utilizado un término anteriormente, puedes utilizar 
    ├────────────────────────────────────────────────────────────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────┤
 
 
+Términos y bigramas
+===================
+
 Éstos son las palabras que hemos coordinado hasta el momento:
 
 
      awaitable
-      aguardable ``glossary``
+       aguardable ``glossary``
 
-     built-in 
-      incorporada ``glossary.po``
+     slash and backslash
+      barra y barra invertida ``c-api``,``tutorial``,``library/functions.po``
+
+     built-in
+       incorporada ``glossary.po``
+
+     built-in exceptions
+       excepciones predefinidas ``tutorial/errors.po``
 
      bytecodes
-      queda igual ``glossary.po``
+       queda igual ``glossary.po``
 
      callable
-      invocable ``glossary.po``
+       invocable ``glossary.po``, ``library/functions.po``
+
+     code object
+       objeto código ``c-api``, ``library/functions.po``
 
      deallocated
-      desalojable ``glossary.po``
+       desalojable ``glossary.po``
 
      docstring
-      docstring. ``library/idle.po``
+       docstring. ``library/idle.po``
+
+     key
+       clave
+       
+     keyword argument
+       argumento por palabra clave / argumento de palabra clave
+
+     handler
+       gestor ``tutorial/errors.po``, ``library/functions.po``
 
      handle exception
-      Gestionar excepción. ``tutorial/inputoutput.po``
+       gestionar excepción. ``tutorial/inputoutput.po``
+       
+     i. e.
+       en otras palabras. ``library/sqlite3.po``
+
+     in-place, in place
+       in situ. Aunque estrictamente no es español, su uso es generalizado.
+
+     library
+       biblioteca. ``library/sqlite3.po``
+       
+     list comprehension / list comprehensions
+       lista por comprensión / listas por comprensión. 
+
+     locale
+       Configuración regional. ``library/functions.po`` and others
+
+     helper function
+       función auxiliar  ``library/typing.po``
 
      loop
-      Bucle. ``tutorial/controlflow.po``
+       bucle ``tutorial/controlflow.po``
 
      mapping
-      mapeo ``glossary.po``
+       mapeo ``glossary.po``
 
-     named tuple.
-      tupla nombrada ``glossary.po``
+     named tuple
+       tupla nombrada ``glossary.po``
+       
+     overload, overloading
+       sobrecargar, sobrecarga
+       
+     override, overriding
+       sobreescribir, sobreescritura
 
      path
-      Ruta. ``glossary.po``
+       ruta ``glossary.po``
+
+     raise
+       lanzar, lanza. (referido a excepciones)  ``library/functions.po``, ``c-api``
 
      realease
+       version ``HOWTO``
+       
+     return
+       retorna. ``library/sqlite3.po``
+
+     runtime
+       tiempo de ejecución  ``tutorial/classes.po``
+
+     static type checker
+       Validador estático de tipos
+       Notas: mantener la mayúscula, usar validación cuando se refiera a la acción y no al agente.
+
+     third-party
+       de terceros ``library/typing.po``
+
+     type hint
+       indicador de tipo  ``library/typing.po``
+
+     type annotation  ``library/typing.po``
+       anotación de tipo
+       Nota: úsese como sinónimo de *type hint*
+
+     release
       version ``HOWTO``  
-   
+
+     slice
+      segmento ``datamodel.po``
+
+     slicing
+      segmentación ``datamodel.po``
+
+     string
+      cadena de caracteres ``datamodel.po``
+
+     strings
+      cadenas de caracteres ``datamodel.po``
+
      underscore
-      guión bajo ``glossary.po``
+       guión bajo ``glossary.po``
+
+     auditing event
+       evento de auditoria ``library/tempfile``
+
+     widget
+       widget ``library/tkinter``
+
+Reglas de estilo
+================
+
+Estas son las reglas de estilo que hemos convenido hasta el momento:
+
+* En títulos [de sección] sólo se usará mayúscula en la primera palabra salvo nombre propios,
+  en contraste con el inglés, que lo hace en todas las palabras principales (conectores no).
+
+  Referencia: https://www.rae.es/dpd/may%C3%BAsculas 4.17
+
+  Ejemplo: ``tutorial/errors.po``
+  `en`: Predefined Clean-up Actions
+  `es`: Acciones de limpieza predefinidas
+
+* Se priorizará la segunda persona del singular no formal (tu/vos) frente al formal (usted).
+  Sin embargo, allí donde sea posible, se usarán formas impersonales (con se), ya que son comunes a
+  todas las variantes del español.
+
+  Referencia: https://www.rae.es/dpd/se punto 2
+
+  Ejemplo: ``tutorial/errors.po``
+  `en`: Look at the following example, [...]
+  `es`: Véase el siguiente ejemplo, [...]
+
+* En general se evitará la traducción literal de la voz pasiva del original en inglés y se usará
+  el impersonal (pasiva refleja) en la traducción al español.
+
+  Referencia: https://www.rae.es/dpd/se punto 2
+
+  Ejemplo: ``tutorial/errors.po``
+  `en`: [...] where the error was detected.
+  `es`: [...] donde se detectó el error.
+  Nota cf. "fue detectado"
