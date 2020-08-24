@@ -63,13 +63,28 @@ Términos y bigramas
 
      key
        clave
+       
+     keyword argument
+       argumento por palabra clave / argumento de palabra clave
 
      handler
        gestor ``tutorial/errors.po``, ``library/functions.po``
 
      handle exception
-       Gestionar excepción. ``tutorial/inputoutput.po``
-      
+       gestionar excepción. ``tutorial/inputoutput.po``
+       
+     i. e.
+       en otras palabras. ``library/sqlite3.po``
+
+     in-place, in place
+       in situ. Aunque estrictamente no es español, su uso es generalizado.
+
+     library
+       biblioteca. ``library/sqlite3.po``
+       
+     list comprehension / list comprehensions
+       lista por comprensión / listas por comprensión. 
+
      locale
        Configuración regional. ``library/functions.po`` and others
 
@@ -82,8 +97,14 @@ Términos y bigramas
      mapping
        mapeo ``glossary.po``
 
-     named tuple.
+     named tuple
        tupla nombrada ``glossary.po``
+       
+     overload, overloading
+       sobrecargar, sobrecarga
+       
+     override, overriding
+       sobreescribir, sobreescritura
 
      path
        ruta ``glossary.po``
@@ -93,6 +114,9 @@ Términos y bigramas
 
      realease
        version ``HOWTO``
+       
+     return
+       retorna. ``library/sqlite3.po``
 
      runtime
        tiempo de ejecución  ``tutorial/classes.po``
