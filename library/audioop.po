@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-06 11:59-0400\n"
-"PO-Revision-Date: 2020-08-25 08:47-0500\n"
+"PO-Revision-Date: 2020-08-26 09:25-0500\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -117,23 +117,32 @@ msgid ""
 "Return the average peak-peak value over all samples in the fragment. No "
 "filtering is done, so the usefulness of this routine is questionable."
 msgstr ""
+"Retorna el promedio del valor de pico a pico de todas las muestras en el "
+"fragmento. No se hace ningún filtrado, por lo que la utilidad de esta rutina "
+"es cuestionable."
 
 #: ../Doc/library/audioop.rst:75
 msgid ""
 "Return a fragment that is the original fragment with a bias added to each "
 "sample.  Samples wrap around in case of overflow."
 msgstr ""
+"Retorna un fragmento que es el fragmento original con un *bias* añadido a "
+"cada muestra.  Las muestras se envuelven en caso de desbordamiento."
 
 #: ../Doc/library/audioop.rst:81
 msgid ""
 "\"Byteswap\" all samples in a fragment and returns the modified fragment. "
 "Converts big-endian samples to little-endian and vice versa."
 msgstr ""
+"Intercambia los bytes (\"Byteswap\") de todas las muestras en un fragmento y "
+"retorna el fragmento modificado. Convierte muestras *big-endian* en *little-"
+"endian* y viceversa."
 
 #: ../Doc/library/audioop.rst:89
 msgid ""
 "Return the number of zero crossings in the fragment passed as an argument."
 msgstr ""
+"Retorna el número de cruces por 0 en el fragmento pasado como un argumento."
 
 #: ../Doc/library/audioop.rst:94
 msgid ""
@@ -142,10 +151,14 @@ msgid ""
 "to make it match as well as possible to *fragment*.  The fragments should "
 "both contain 2-byte samples."
 msgstr ""
+"Retorna un factor *F* tal que ``rms(add(fragment, mul(reference, -F)))`` sea "
+"minimal, i.e., retorna el factor con el cual debes multiplicar la "
+"*reference* para hacerlo coincidir tanto como sea posible a *fragment*.  Los "
+"fragmentos deben contener muestras de 2-byte."
 
 #: ../Doc/library/audioop.rst:99
 msgid "The time taken by this routine is proportional to ``len(fragment)``."
-msgstr ""
+msgstr "El tiempo tomado por esta rutina es proporcional a ``len(fragment``."
 
 #: ../Doc/library/audioop.rst:104
 msgid ""
@@ -157,6 +170,14 @@ msgid ""
 "(integer) offset into *fragment* where the optimal match started and "
 "*factor* is the (floating-point) factor as per :func:`findfactor`."
 msgstr ""
+"Intenta hacer coincidir *reference* tanto bien como sea posible a un "
+"*fragment* (que debe ser el fragmento más largo).  Esto es (conceptualmente) "
+"hecho al tomar segmentos de *fragment*, usando :func:`findfactor` para "
+"computar la mejor coincidencia, y minimizando el resultado.  Los fragmentos "
+"deben contener muestras de 2-byte. Retorna una tupla ``(offset, factor)`` "
+"donde *offset* (entero) es el *offset* en *fragment* donde la coincidencia "
+"más óptima empezó y *factor* es el (número flotante) factor según :func:"
+"`findfactor`."
 
 #: ../Doc/library/audioop.rst:115
 msgid ""
@@ -164,14 +185,18 @@ msgid ""
 "maximum energy, i.e., return *i* for which ``rms(fragment[i*2:(i"
 "+length)*2])`` is maximal.  The fragments should both contain 2-byte samples."
 msgstr ""
+"Inspecciona *fragment* por un segmento de longitud *length* muestras (¡no "
+"bytes!) con la energia máxima, i.e., retorna *i* por el cual "
+"``rms(fragment[i*2:(i+length)*2])`` es maximal.  Los fragmentos deben "
+"contener muestras de 2 bytes."
 
 #: ../Doc/library/audioop.rst:119
 msgid "The routine takes time proportional to ``len(fragment)``."
-msgstr ""
+msgstr "La rutina tarda proporcionalmente a ``len(fragment)``."
 
 #: ../Doc/library/audioop.rst:124
 msgid "Return the value of sample *index* from the fragment."
-msgstr ""
+msgstr "Retorna el valor de la muestra *index* del fragmento."
 
 #: ../Doc/library/audioop.rst:129
 msgid ""
@@ -181,8 +206,15 @@ msgid ""
 "algorithm has been selected for use by the IMA, so it may well become a "
 "standard."
 msgstr ""
+"Convierte las muestras en codificaciones Indel/DVI ADPCM de 4 bits. La "
+"codificación ADPCM es un esquema de codificación adaptativo a través del "
+"cual cada número de 4 bits es la diferencia entre una muestra y la "
+"siguiente, dividido por un paso (inconsistente). El algoritmo de Intel/DVI "
+"ADPCM ha sido seleccionado para su uso por el *IMA*, por lo que bien puede "
+"convertirse en un estándar."
 
 #: ../Doc/library/audioop.rst:134
+#, fuzzy
 msgid ""
 "*state* is a tuple containing the state of the coder.  The coder returns a "
 "tuple ``(adpcmfrag, newstate)``, and the *newstate* should be passed to the "
@@ -190,6 +222,11 @@ msgid ""
 "as the state. *adpcmfrag* is the ADPCM coded fragment packed 2 4-bit values "
 "per byte."
 msgstr ""
+"*state* es una tupla que contiene el estado del codificador.  El codificador "
+"retorna una tupla ``(adpcmfrag, newstate)``, y el *newstate* debe ser pasado "
+"en la siguiente llamada de :func:`lin2adpcm`. En la llamada inicial, Se "
+"puede pasar ``None`` como el estado. *adpcmfrag* es el fragmento codificado "
+"con 2 a 4 bits de valores comprimidos por byte."
 
 #: ../Doc/library/audioop.rst:142
 msgid ""
@@ -198,10 +235,15 @@ msgid ""
 "range of about 13 bits using only 8 bit samples.  It is used by the Sun "
 "audio hardware, among others."
 msgstr ""
+"Convierte las muestras en el fragmento de audio en una codificación a-LAW y "
+"los retorna como un objeto de bytes. a-LAW es un formato de codificación de "
+"audio a través del cual obtienes un rango dinámico de cerca de 13 bits "
+"usando sólo muestras de 8 bits. Es usado por el hardware de audio Sun, entre "
+"otros."
 
 #: ../Doc/library/audioop.rst:150
 msgid "Convert samples between 1-, 2-, 3- and 4-byte formats."
-msgstr ""
+msgstr "Convierte muestras entre formatos de 1, 2, 3, y 4 bytes."
 
 #: ../Doc/library/audioop.rst:154
 msgid ""
