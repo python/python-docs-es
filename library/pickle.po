@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-08-19 22:31-0300\n"
+"PO-Revision-Date: 2020-08-27 21:10-0300\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -946,40 +946,45 @@ msgstr "Libera el búfer subyacente expuesto por el objeto PickleBuffer."
 #: ../Doc/library/pickle.rst:493
 msgid "What can be pickled and unpickled?"
 msgstr ""
+"¿Qué se puede serializar y deserializar con `pickle` (pickled y unpickled)?"
 
 #: ../Doc/library/pickle.rst:495
 msgid "The following types can be pickled:"
-msgstr ""
+msgstr "Los siguientes tipos se pueden serializar con `pickle` (pickled):"
 
 #: ../Doc/library/pickle.rst:497
 msgid "``None``, ``True``, and ``False``"
-msgstr ""
+msgstr "``None``, ``True``, y ``False``"
 
 #: ../Doc/library/pickle.rst:499
 msgid "integers, floating point numbers, complex numbers"
-msgstr ""
+msgstr "enteros, números de coma flotante, números complejos"
 
 #: ../Doc/library/pickle.rst:501
 msgid "strings, bytes, bytearrays"
-msgstr ""
+msgstr "cadenas, bytes, bytearrays"
 
 #: ../Doc/library/pickle.rst:503
 msgid "tuples, lists, sets, and dictionaries containing only picklable objects"
 msgstr ""
+"tuplas, listas, conjuntos y diccionarios que contiene solo objetos "
+"serializables con `pickle`"
 
 #: ../Doc/library/pickle.rst:505
 msgid ""
 "functions defined at the top level of a module (using :keyword:`def`, not :"
 "keyword:`lambda`)"
 msgstr ""
+"funciones definidas en el nivel superior de un módulo (usando :keyword:"
+"`def`, no :keyword:`lambda`)"
 
 #: ../Doc/library/pickle.rst:508
 msgid "built-in functions defined at the top level of a module"
-msgstr ""
+msgstr "funciones integradas definidas en el nivel superior de un módulo"
 
 #: ../Doc/library/pickle.rst:510
 msgid "classes that are defined at the top level of a module"
-msgstr ""
+msgstr "clases que se definen en el nivel superior de un módulo"
 
 #: ../Doc/library/pickle.rst:512
 msgid ""
@@ -987,6 +992,9 @@ msgid ""
 "calling :meth:`__getstate__` is picklable  (see section :ref:`pickle-inst` "
 "for details)."
 msgstr ""
+"instancias de tales clases cuyo :attr:`~object.__dict__` o el resultado de "
+"llamar a :meth:`__getstate__` es serializable con `pickle` (picklable)  "
+"(consulte la sección :ref:`pickle-inst` para obtener más detalles)."
 
 #: ../Doc/library/pickle.rst:516
 msgid ""
@@ -997,6 +1005,13 @@ msgid ""
 "`RecursionError` will be raised in this case.  You can carefully raise this "
 "limit with :func:`sys.setrecursionlimit`."
 msgstr ""
+"Los intentos de serializar objetos no serializables con `pickle` lanzaran la "
+"excepción :exc:`PicklingError`; cuando esto sucede, es posible que ya se "
+"haya escrito una cantidad no especificada de bytes en el archivo "
+"subyacente.  Intentar serializar con `pickle` una estructura de datos "
+"altamente recursiva puede exceder la profundidad máxima de recursividad, en "
+"este caso se lanzará  un :exc:`RecursionError`.  Puede aumentar "
+"cuidadosamente este límite con :func:`sys.setrecursionlimit`."
 
 #: ../Doc/library/pickle.rst:523
 msgid ""
@@ -1008,6 +1023,14 @@ msgid ""
 "environment, and the module must contain the named object, otherwise an "
 "exception will be raised. [#]_"
 msgstr ""
+"Tenga en cuenta que las funciones (integradas y definidas por el usuario) se "
+"serializan con `pickle` por referencia de nombre \"totalmente calificado\", "
+"no por valor. [#]_  Esto significa que solo se serializa con `pickle` el "
+"nombre de la función, junto con el nombre del módulo en el que está definida "
+"la función.  Ni el código de la función, ni ninguno de sus atributos de "
+"función se serializa.  Por lo tanto, el módulo de definición debe ser "
+"importable en el entorno donde se hará el `unpickling`, y el módulo debe "
+"contener el objeto nombrado; de lo contrario, se lanzará una excepción. [#]_"
 
 #: ../Doc/library/pickle.rst:530
 msgid ""
@@ -1016,12 +1039,20 @@ msgid ""
 "data is pickled, so in the following example the class attribute ``attr`` is "
 "not restored in the unpickling environment::"
 msgstr ""
+"De manera similar, las clases se serializan con `pickle` por referencia con "
+"nombre, por lo que se aplican las mismas restricciones en el entorno donde "
+"se hará el `unpickling`.  Tenga en cuenta que ninguno de los datos o el "
+"código de la clase son serializados con `pickle`, por lo que en el siguiente "
+"ejemplo el atributo de clase ``attr`` no se restaura en el entorno donde se "
+"hará el `unpickling`::"
 
 #: ../Doc/library/pickle.rst:540
 msgid ""
 "These restrictions are why picklable functions and classes must be defined "
 "in the top level of a module."
 msgstr ""
+"Estas restricciones son la razón por la que las funciones y clases "
+"serializables con `pickle` deben definirse en el nivel superior de un módulo."
 
 #: ../Doc/library/pickle.rst:543
 msgid ""
@@ -1034,6 +1065,15 @@ msgid ""
 "that suitable conversions can be made by the class's :meth:`__setstate__` "
 "method."
 msgstr ""
+"De manera similar, cuando las instancias de clases son serializadas con "
+"`pickle`, el código y los datos de la clase no son serializadas junto con "
+"ella.  Solo los datos de la instancia son serializados con `pickle` "
+"(`pickled`).  Esto se hace a propósito, por lo que puede corregir errores en "
+"una clase o agregar métodos a la clase y aún cargar objetos que fueron "
+"creados con una versión anterior de la clase.  Si planea tener objetos de "
+"larga duración que verán muchas versiones de una clase, puede valer la pena "
+"poner un número de versión en los objetos para que las conversiones "
+"adecuadas se puedan realizar mediante el método :meth:`__setstate__`."
 
 #: ../Doc/library/pickle.rst:555
 msgid "Pickling Class Instances"
