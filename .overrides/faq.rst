@@ -26,7 +26,8 @@ pospell. Pospell puede ser instalada en tu entorno de Python empleando pip
 Una vez instalado, para chequear el fichero .po sobre el que estás trabajando,
 ejecuta desde el directorio principal del repo::
 
-    pospell -p dict -l es_AR -l es_ES path/tu_fichero.po
+    awk 1 dict dictionaries/*.txt > dict.txt
+    pospell -p dict.txt -l es_AR -l es_ES path/tu_fichero.po
 
 pospell emplea la herramienta de diccionarios hunspell. Si pospell falla dando
 como error que no tiene hunspell instalado, lo puedes instalar así:
@@ -59,6 +60,18 @@ como error que no tiene hunspell instalado, lo puedes instalar así:
 
 Estamos trabajando para unificar el uso de un mismo set de diccionarios de español,
 pero por el momento el chequeo que hacemos es con los diccionarios es_AR y es_ES.
+
+
+¿Cómo agrego una palabra al diccionario?
+----------------------------------------
+
+Si ``pospell`` falla diciendo que no conoce una palabra, pero estamos seguros que esa palabra está bien escrita,
+debemos agregarla al diccionario que ``pospell`` usa internamente para comprobar las palabras.
+
+Para eso debes editar (o crear, si no existe) el archivo ``<archivopo>.txt`` dentro del direcorio ``dictionaries``
+y agregar esa palabra al final de este archivo.
+Nota que debes reemplazar ``<archivopo>`` por el nombre del archivo que estés traduciendo.
+Por ejemplo, si estás traduciendo ``library/decimal.po``, debes editar/crear el archivos ``dictionaries/library_decimal.txt``.
 
 
 ¿Cómo puedo configurar git para manejar correctamente los finales de línea en Windows?
@@ -176,6 +189,27 @@ Puedes ver el resultado con tu navegador de internet (Firefox, Chrome, etc) ejec
   make serve
 
 Y luego accediendo a http://localhost:8000/
+
+.. _mantener-actualizada:
+
+¿Cómo actualizar mi copia local del repositorio?
+---------------------------------------------------------
+
+Es recomendable mantener actualizada nuestra copia local para evitar 
+posibles conflictos entre los archivos que trabajamos y la última versión disponible 
+en el repositorio remoto. 
+Primero, necesitamos bajar los cambios de *upstream* (es el nombre que asignamos al 
+repositorio principal de la traducción). Se hace de la siguiente manera::
+
+    git fetch upstream
+
+Luego nos vamos a nuestra rama local, confirmamos e impactamos esos cambios::
+
+    git checkout 3.8
+    git merge upstream/3.8
+    git push origin 3.8 
+
+¡Eso es todo!
 
 
 ¿Tienen una lista de correo?
