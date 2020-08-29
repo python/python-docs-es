@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-08-28 17:54+0200\n"
+"PO-Revision-Date: 2020-08-29 15:50+0200\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -433,25 +433,27 @@ msgstr "``'subprocess'``: instancia de :class:`subprocess.Popen`"
 
 #: ../Doc/library/asyncio-protocol.rst:227
 msgid "Set a new protocol."
-msgstr ""
+msgstr "Establece un nuevo protocolo."
 
 #: ../Doc/library/asyncio-protocol.rst:229
 msgid ""
 "Switching protocol should only be done when both protocols are documented to "
 "support the switch."
 msgstr ""
+"El cambio de protocolo solo debe realizarse cuando esté documentado que "
+"ambos protocolos admiten el cambio."
 
 #: ../Doc/library/asyncio-protocol.rst:234
 msgid "Return the current protocol."
-msgstr ""
+msgstr "Retorna el protocolo actual."
 
 #: ../Doc/library/asyncio-protocol.rst:238
 msgid "Read-only Transports"
-msgstr ""
+msgstr "Transportes de solo lectura"
 
 #: ../Doc/library/asyncio-protocol.rst:242
 msgid "Return ``True`` if the transport is receiving new data."
-msgstr ""
+msgstr "Retorna ``True`` si el transporte está recibiendo nuevos datos."
 
 #: ../Doc/library/asyncio-protocol.rst:248
 msgid ""
@@ -459,12 +461,17 @@ msgid ""
 "protocol's :meth:`protocol.data_received() <Protocol.data_received>` method "
 "until :meth:`resume_reading` is called."
 msgstr ""
+"Pausa el extremo receptor del transporte. No se pasarán datos al método :"
+"meth:`protocol.data_received() <Protocol.data_received>` del protocolo hasta "
+"que se llame a :meth:`resume_reading`."
 
 #: ../Doc/library/asyncio-protocol.rst:252
 msgid ""
 "The method is idempotent, i.e. it can be called when the transport is "
 "already paused or closed."
 msgstr ""
+"El método es idempotente, es decir, se puede llamar cuando el transporte ya "
+"está en pausa o cerrado."
 
 #: ../Doc/library/asyncio-protocol.rst:258
 msgid ""
@@ -472,16 +479,21 @@ msgid ""
 "<Protocol.data_received>` method will be called once again if some data is "
 "available for reading."
 msgstr ""
+"Reanudar el extremo receptor. El método :meth:`protocol.data_received() "
+"<Protocol.data_received>` del protocolo se llamará una vez más si hay "
+"algunos datos disponibles para su lectura."
 
 #: ../Doc/library/asyncio-protocol.rst:262
 msgid ""
 "The method is idempotent, i.e. it can be called when the transport is "
 "already reading."
 msgstr ""
+"El método es idempotente, es decir, se puede llamar cuando el transporte "
+"está leyendo."
 
 #: ../Doc/library/asyncio-protocol.rst:268
 msgid "Write-only Transports"
-msgstr ""
+msgstr "Transportes de solo escritura"
 
 #: ../Doc/library/asyncio-protocol.rst:272
 msgid ""
@@ -490,30 +502,43 @@ msgid ""
 "protocol's :meth:`protocol.connection_lost() <BaseProtocol.connection_lost>` "
 "method will eventually be called with :const:`None` as its argument."
 msgstr ""
+"Cierra el transporte inmediatamente, sin esperar a que finalicen las "
+"operaciones pendientes. Se perderán los datos almacenados en el búfer. No se "
+"recibirán más datos. El método del protocolo :meth:`protocol."
+"connection_lost() <BaseProtocol.connection_lost>` eventualmente será llamado "
+"con :const:`None` como argumento."
 
 #: ../Doc/library/asyncio-protocol.rst:280
 msgid ""
 "Return :const:`True` if the transport supports :meth:`~WriteTransport."
 "write_eof`, :const:`False` if not."
 msgstr ""
+"Retorna :const:`True` si el transporte admite :meth:`~WriteTransport."
+"write_eof`, en caso contrario :const:`False`."
 
 #: ../Doc/library/asyncio-protocol.rst:285
 msgid "Return the current size of the output buffer used by the transport."
 msgstr ""
+"Retorna el tamaño actual del búfer de salida utilizado por el transporte."
 
 #: ../Doc/library/asyncio-protocol.rst:289
 msgid ""
 "Get the *high* and *low* watermarks for write flow control. Return a tuple "
 "``(low, high)`` where *low* and *high* are positive number of bytes."
 msgstr ""
+"Obtiene los límites superior e inferior para el control del flujo de "
+"escritura. Retorna una tupla ``(low, high)`` donde *low* (inferior) y *high* "
+"(superior) son un número de bytes positivo."
 
 #: ../Doc/library/asyncio-protocol.rst:293
 msgid "Use :meth:`set_write_buffer_limits` to set the limits."
-msgstr ""
+msgstr "Usa :meth:`set_write_buffer_limits` para establecer los límites."
 
 #: ../Doc/library/asyncio-protocol.rst:299
 msgid "Set the *high* and *low* watermarks for write flow control."
 msgstr ""
+"Establece los límites *high* (superior) y *low* (inferior) para el control "
+"del flujo del escritura."
 
 #: ../Doc/library/asyncio-protocol.rst:301
 msgid ""
@@ -523,6 +548,11 @@ msgid ""
 "called. If specified, the low watermark must be less than or equal to the "
 "high watermark.  Neither *high* nor *low* can be negative."
 msgstr ""
+"Estos dos valores (medidos en número de bytes) controlan cuándo se llaman "
+"los métodos :meth:`protocol.pause_writing() <BaseProtocol.pause_writing>` y :"
+"meth:`protocol.resume_writing() <BaseProtocol.resume_writing>` del "
+"protocolo . Si se especifica, el límite inferior debe ser menor o igual que "
+"el límite superior . Ni *high* ni *low* pueden ser negativos."
 
 #: ../Doc/library/asyncio-protocol.rst:309
 msgid ""
@@ -531,6 +561,10 @@ msgid ""
 "`~BaseProtocol.resume_writing` is called when the buffer size becomes less "
 "than or equal to the *low* value."
 msgstr ""
+":meth:`~BaseProtocol.pause_writing` se llama cuando el tamaño del búfer es "
+"mayor o igual que el valor *high* (superior). Si se ha pausado la escritura, "
+"se llama a :meth:`~BaseProtocol.resume_writing` cuando el tamaño del búfer "
+"es menor o igual que el valor *low* (inferior)."
 
 #: ../Doc/library/asyncio-protocol.rst:314
 msgid ""
@@ -543,14 +577,25 @@ msgid ""
 "Use of zero for either limit is generally sub-optimal as it reduces "
 "opportunities for doing I/O and computation concurrently."
 msgstr ""
+"Los valores por defecto son específicos de la implementación. Si solo se "
+"proporciona el límite superior, el inferior toma de forma predeterminada un "
+"valor específico dependiente de la implementación menor o igual que el "
+"límite superior. Establecer *high* (superior) en cero fuerza *low* "
+"(inferior) a cero también y hace que :meth:`~BaseProtocol.pause_writing` sea "
+"llamado siempre que el búfer no esté vacío. Establecer *low* (inferior) en "
+"cero hace que :meth:`~BaseProtocol.resume_writing` sea llamado únicamente "
+"cuando el búfer esté vacío. El uso de cero para cualquiera de los límites es "
+"generalmente subóptimo, ya que reduce las oportunidades para realizar E/S y "
+"cálculos simultáneamente."
 
 #: ../Doc/library/asyncio-protocol.rst:325
 msgid "Use :meth:`~WriteTransport.get_write_buffer_limits` to get the limits."
 msgstr ""
+"Usa :meth:`~WriteTransport.get_write_buffer_limits` para obtener los límites."
 
 #: ../Doc/library/asyncio-protocol.rst:330
 msgid "Write some *data* bytes to the transport."
-msgstr ""
+msgstr "Escribe los bytes de *data* en el transporte."
 
 #: ../Doc/library/asyncio-protocol.rst:332
 #: ../Doc/library/asyncio-protocol.rst:361
@@ -558,6 +603,8 @@ msgid ""
 "This method does not block; it buffers the data and arranges for it to be "
 "sent out asynchronously."
 msgstr ""
+"Este método no bloquea; almacena los datos en el búfer y organiza que se "
+"envíen de forma asincrónica."
 
 #: ../Doc/library/asyncio-protocol.rst:337
 msgid ""
@@ -565,22 +612,31 @@ msgid ""
 "functionally equivalent to calling :meth:`write` on each element yielded by "
 "the iterable, but may be implemented more efficiently."
 msgstr ""
+"Escribe una lista (o cualquier iterable) de bytes de datos en el transporte. "
+"Esto es funcionalmente equivalente a llamar a :meth:`write` en cada elemento "
+"generado por el iterable, pero puede ser implementado de manera más "
+"eficiente."
 
 #: ../Doc/library/asyncio-protocol.rst:344
 msgid ""
 "Close the write end of the transport after flushing all buffered data. Data "
 "may still be received."
 msgstr ""
+"Cierra el extremo de escritura del transporte después de vaciar todos los "
+"datos almacenados en el búfer. Aún es posible recibir datos."
 
 #: ../Doc/library/asyncio-protocol.rst:347
 msgid ""
 "This method can raise :exc:`NotImplementedError` if the transport (e.g. SSL) "
 "doesn't support half-closed connections."
 msgstr ""
+"Este método puede lanzar una excepción :exc:`NotImplementedError` si el "
+"transporte (p. ej. SSL) no soporta conexiones half-closed (\"medio cerradas"
+"\")."Traducido library/asyncio-protocol (al 70%)
 
 #: ../Doc/library/asyncio-protocol.rst:352
 msgid "Datagram Transports"
-msgstr ""
+msgstr "Transportes de datagramas"
 
 #: ../Doc/library/asyncio-protocol.rst:356
 msgid ""
@@ -588,6 +644,10 @@ msgid ""
 "dependent target address).  If *addr* is :const:`None`, the data is sent to "
 "the target address given on transport creation."
 msgstr ""
+"Envía los bytes *data* al par remoto proporcionado por *addr* (una dirección "
+"de destino dependiente del transporte). Si *addr* es :const:`None`, los "
+"datos se envían a la dirección de destino proporcionada en la creación del "
+"transporte."
 
 #: ../Doc/library/asyncio-protocol.rst:366
 msgid ""
@@ -596,42 +656,55 @@ msgid ""
 "protocol's :meth:`protocol.connection_lost() <BaseProtocol.connection_lost>` "
 "method will eventually be called with :const:`None` as its argument."
 msgstr ""
+"Cierra el transporte inmediatamente, sin esperar a que finalicen las "
+"operaciones pendientes. Se perderán los datos almacenados en el búfer. No se "
+"recibirán más datos. El método del protocolo :meth:`protocol.connection_lost "
+"() <BaseProtocol.connection_lost>` será eventualmente llamado con :const:"
+"`None` como argumento."
 
 #: ../Doc/library/asyncio-protocol.rst:376
 msgid "Subprocess Transports"
-msgstr ""
+msgstr "Transportes de subprocesos"
 
 #: ../Doc/library/asyncio-protocol.rst:380
 msgid "Return the subprocess process id as an integer."
-msgstr ""
+msgstr "Retorna la id del subproceso como un número entero."
 
 #: ../Doc/library/asyncio-protocol.rst:384
 msgid ""
 "Return the transport for the communication pipe corresponding to the integer "
 "file descriptor *fd*:"
 msgstr ""
+"Retorna el transporte para la pipe de comunicación correspondiente al "
+"descriptor de archivo entero *fd*:"
 
 #: ../Doc/library/asyncio-protocol.rst:387
 msgid ""
 "``0``: readable streaming transport of the standard input (*stdin*), or :"
 "const:`None` if the subprocess was not created with ``stdin=PIPE``"
 msgstr ""
+"``0``: transporte de transmisión legible de la entrada estándar (*stdin*) o :"
+"const:`None` si el subproceso no se creó con ``stdin = PIPE``"
 
 #: ../Doc/library/asyncio-protocol.rst:389
 msgid ""
 "``1``: writable streaming transport of the standard output (*stdout*), or :"
 "const:`None` if the subprocess was not created with ``stdout=PIPE``"
 msgstr ""
+"``1``: transporte de transmisión de escritura de la salida estándar "
+"(*stdout*) o :const:`None` si el subproceso no se creó con ``stdout = PIPE``"
 
 #: ../Doc/library/asyncio-protocol.rst:391
 msgid ""
 "``2``: writable streaming transport of the standard error (*stderr*), or :"
 "const:`None` if the subprocess was not created with ``stderr=PIPE``"
 msgstr ""
+"`2``: transporte de transmisión de escritura del error estándar (*stderr*) "
+"o :const:`None` si el subproceso no se creó con ``stderr = PIPE``"
 
 #: ../Doc/library/asyncio-protocol.rst:393
 msgid "other *fd*: :const:`None`"
-msgstr ""
+msgstr "otro *fd*: :const:`None`"
 
 #: ../Doc/library/asyncio-protocol.rst:397
 msgid ""
@@ -639,58 +712,70 @@ msgid ""
 "hasn't returned, which is similar to the :attr:`subprocess.Popen.returncode` "
 "attribute."
 msgstr ""
+"Retorna el código de retorno del subproceso como un entero o :const:`None` "
+"si no ha retornado aún, lo que es similar al atributo :attr:`subprocess."
+"Popen.returncode`."
 
 #: ../Doc/library/asyncio-protocol.rst:403
 msgid "Kill the subprocess."
-msgstr ""
+msgstr "Mata el subproceso."
 
 #: ../Doc/library/asyncio-protocol.rst:405
 msgid ""
 "On POSIX systems, the function sends SIGKILL to the subprocess. On Windows, "
 "this method is an alias for :meth:`terminate`."
 msgstr ""
+"En los sistemas POSIX, la función envía SIGKILL al subproceso. En Windows, "
+"este método es un alias para :meth:`terminate`."
 
 #: ../Doc/library/asyncio-protocol.rst:408
 msgid "See also :meth:`subprocess.Popen.kill`."
-msgstr ""
+msgstr "Ver también :meth:`subprocess.Popen.kill`."
 
 #: ../Doc/library/asyncio-protocol.rst:412
 msgid ""
 "Send the *signal* number to the subprocess, as in :meth:`subprocess.Popen."
 "send_signal`."
 msgstr ""
+"Envía el número de *señal* al subproceso, como en :meth:`subprocess.Popen."
+"send_signal`."
 
 #: ../Doc/library/asyncio-protocol.rst:417
 msgid "Stop the subprocess."
-msgstr ""
+msgstr "Detiene el subproceso."
 
 #: ../Doc/library/asyncio-protocol.rst:419
 msgid ""
 "On POSIX systems, this method sends SIGTERM to the subprocess. On Windows, "
 "the Windows API function TerminateProcess() is called to stop the subprocess."
 msgstr ""
+"En los sistemas POSIX, este método envía SIGTERM al subproceso. En Windows, "
+"se llama a la función de la API de Windows *TerminateProcess ()* para "
+"detener el subproceso."
 
 #: ../Doc/library/asyncio-protocol.rst:423
 msgid "See also :meth:`subprocess.Popen.terminate`."
-msgstr ""
+msgstr "Ver también :meth:`subprocess.Popen.terminate`."
 
 #: ../Doc/library/asyncio-protocol.rst:427
 msgid "Kill the subprocess by calling the :meth:`kill` method."
-msgstr ""
+msgstr "Mata el subproceso llamando al método :meth:`kill`."
 
 #: ../Doc/library/asyncio-protocol.rst:429
 msgid ""
 "If the subprocess hasn't returned yet, and close transports of *stdin*, "
 "*stdout*, and *stderr* pipes."
 msgstr ""
+"Si el subproceso aún no ha retornado, cierra los transportes de las pipes "
+"*stdin*, *stdout* y *stderr*."
 
 #: ../Doc/library/asyncio-protocol.rst:436
 msgid "Protocols"
-msgstr ""
+msgstr "Protocolos"
 
 #: ../Doc/library/asyncio-protocol.rst:438
 msgid "**Source code:** :source:`Lib/asyncio/protocols.py`"
-msgstr ""
+msgstr "**Código fuente:** :source:`Lib/asyncio/protocols.py`"
 
 #: ../Doc/library/asyncio-protocol.rst:442
 msgid ""
@@ -698,6 +783,9 @@ msgid ""
 "implement network protocols.  Those classes are meant to be used together "
 "with :ref:`transports <asyncio-transport>`."
 msgstr ""
+"asyncio proporciona un conjunto de clases base abstractas que pueden usarse "
+"para implementar protocolos de red. Estas clases están destinadas a ser "
+"utilizadas junto con los :ref:`transportes <asyncio-transport>`."
 
 #: ../Doc/library/asyncio-protocol.rst:446
 msgid ""
@@ -706,47 +794,60 @@ msgid ""
 "certain events, for example when some data is received. A base protocol "
 "method should be called by the corresponding transport."
 msgstr ""
+"Las subclases de las clases base abstractas de protocolo pueden implementar "
+"algunos o todos los métodos. Todos estos métodos son retrollamadas: son "
+"llamados por los transportes en ciertos eventos, por ejemplo, cuando se "
+"reciben algunos datos. Un método base de protocolo debe ser llamado por el "
+"transporte correspondiente."
 
 #: ../Doc/library/asyncio-protocol.rst:453
 msgid "Base Protocols"
-msgstr ""
+msgstr "Protocolos base"
 
 #: ../Doc/library/asyncio-protocol.rst:457
 msgid "Base protocol with methods that all protocols share."
-msgstr ""
+msgstr "Protocolo base con métodos que comparten todos los protocolos."
 
 #: ../Doc/library/asyncio-protocol.rst:461
 msgid ""
 "The base class for implementing streaming protocols (TCP, Unix sockets, etc)."
 msgstr ""
+"La clase base para implementar protocolos de transmisión (TCP, sockets Unix, "
+"etc)."
 
 #: ../Doc/library/asyncio-protocol.rst:466
 msgid ""
 "A base class for implementing streaming protocols with manual control of the "
 "receive buffer."
 msgstr ""
+"Una clase base para implementar protocolos de transmisión con control manual "
+"del búfer de recepción."
 
 #: ../Doc/library/asyncio-protocol.rst:471
 msgid "The base class for implementing datagram (UDP) protocols."
-msgstr ""
+msgstr "La clase base para implementar protocolos de datagramas (UDP)."
 
 #: ../Doc/library/asyncio-protocol.rst:475
 msgid ""
 "The base class for implementing protocols communicating with child processes "
 "(unidirectional pipes)."
 msgstr ""
+"La clase base para implementar protocolos que se comunican con procesos "
+"secundarios (pipes unidireccionales)."
 
 #: ../Doc/library/asyncio-protocol.rst:480
 msgid "Base Protocol"
-msgstr ""
+msgstr "Protocolo base"
 
 #: ../Doc/library/asyncio-protocol.rst:482
 msgid "All asyncio protocols can implement Base Protocol callbacks."
 msgstr ""
+"Todos los protocolos asyncio pueden implementar las retrollamadas del "
+"protocolo base."
 
 #: ../Doc/library/asyncio-protocol.rst:485
 msgid "Connection Callbacks"
-msgstr ""
+msgstr "Retrollamadas de conexión"
 
 #: ../Doc/library/asyncio-protocol.rst:486
 msgid ""
@@ -754,20 +855,25 @@ msgid ""
 "successful connection.  All other protocol callbacks can only be called "
 "between those two methods."
 msgstr ""
+"Las retrollamadas de conexión son llamadas en todos los protocolos, . Todas "
+"las demás retrollamadas del protocolo solo pueden ser llamadas entre estos "
+"dos métodos."
 
 #: ../Doc/library/asyncio-protocol.rst:492
 msgid "Called when a connection is made."
-msgstr ""
+msgstr "Es llamado cuando se establece una conexión."
 
 #: ../Doc/library/asyncio-protocol.rst:494
 msgid ""
 "The *transport* argument is the transport representing the connection.  The "
 "protocol is responsible for storing the reference to its transport."
 msgstr ""
+"El argumento *transport* es el transporte que representa la conexión. El "
+"protocolo se encarga de almacenar la referencia a su propio transporte."
 
 #: ../Doc/library/asyncio-protocol.rst:500
 msgid "Called when the connection is lost or closed."
-msgstr ""
+msgstr "Es llamado cuando la conexión se pierde o se cierra."
 
 #: ../Doc/library/asyncio-protocol.rst:502
 msgid ""
@@ -775,36 +881,48 @@ msgid ""
 "means a regular EOF is received, or the connection was aborted or closed by "
 "this side of the connection."
 msgstr ""
+"El argumento es un objeto excepción o :const:`None`. Esto último significa "
+"que se recibe un EOF regular o que la conexión fue cancelada o cerrada por "
+"este lado de la conexión."
 
 #: ../Doc/library/asyncio-protocol.rst:508
 msgid "Flow Control Callbacks"
-msgstr ""
+msgstr "Retrollamadas de control de flujo"
 
 #: ../Doc/library/asyncio-protocol.rst:509
 msgid ""
 "Flow control callbacks can be called by transports to pause or resume "
 "writing performed by the protocol."
 msgstr ""
+"Los transportes pueden llamar a las retrollamadas de control de flujo para "
+"pausar o reanudar la escritura llevada a cabo por el protocolo."
 
 #: ../Doc/library/asyncio-protocol.rst:512
 msgid ""
 "See the documentation of the :meth:`~WriteTransport.set_write_buffer_limits` "
 "method for more details."
 msgstr ""
+"Consulta la documentación del método :meth:`~WriteTransport."
+"set_write_buffer_limits` para obtener más detalles."
 
 #: ../Doc/library/asyncio-protocol.rst:517
 msgid "Called when the transport's buffer goes over the high watermark."
-msgstr ""
+msgstr "Se llama cuando el búfer del transporte supera el límite superior."
 
 #: ../Doc/library/asyncio-protocol.rst:521
 msgid "Called when the transport's buffer drains below the low watermark."
 msgstr ""
+"Se llama cuando el búfer del transporte se vacía por debajo del límite "
+"inferior."
 
 #: ../Doc/library/asyncio-protocol.rst:523
 msgid ""
 "If the buffer size equals the high watermark, :meth:`~BaseProtocol."
 "pause_writing` is not called: the buffer size must go strictly over."
 msgstr ""
+"Si el tamaño del búfer es igual al límite superior, :meth:`~BaseProtocol."
+"pause_writing` no será llamado: el tamaño del búfer debe superarse "
+"estrictamente."
 
 #: ../Doc/library/asyncio-protocol.rst:527
 msgid ""
@@ -812,6 +930,10 @@ msgid ""
 "size is equal or lower than the low watermark.  These end conditions are "
 "important to ensure that things go as expected when either mark is zero."
 msgstr ""
+"Por el contrario, se llama a :meth:`~BaseProtocol.resume_writing` cuando el "
+"tamaño del búfer es igual o menor que el límite inferior. Estas condiciones "
+"finales son importantes para garantizar que todo salga como se espera cuando "
+"cualquiera de los dos límites sea cero."
 
 #: ../Doc/library/asyncio-protocol.rst:534
 msgid "Streaming Protocols"
