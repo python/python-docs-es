@@ -16,14 +16,17 @@ La devolución deberá ser acertada para transmitir el mensaje que necesitamos q
 No olvides que esto se trata de una traducción técnica y como tal, el objetivo es que, básicamente, la persona que la lea pueda entender cómo usar Python. Es por esto que, si bien es importante que la sintaxis sea correcta, el objetivo no es hacer una revisión intensiva del uso del español, a menos que la forma en que se expresó la idea imposibilite que otre la entienda.
 
 Para esto, Github te ofrece opciones para afrontar una PR (ver botón *Review Changes* arriba a la derecha de los archivos modificados por les traductores):
+
 * *Comment*: Puedes dejar un comentario sin necesariamente aprobar la PR. Asegúrate de hacerlo con claridad para que quien tradujo sepa que debe modificar algunas cosas antes de que su PR sea aprobada.
 * *Approve*: Dejar esta opción solo para PRs que no necesitan modificación alguna o que solo tengan pocas faltas de ortografía o errores de tipeo, o algún error que no genere un conflicto mayor en la traducción y en su integración al repositorio.
 * *Request Changes*: Utiliza esta opción cuando la traducción necesita varias modificaciones que afectan su integración al repositorio. En este caso también asegúrate de que tu mensaje sea claro y amable para acompañar al traductor en el proceso de modificar y lograr que la PR se apruebe.
 
 *Tips*
 ======
-* PRs de más de 1000 líneas: Te sugerimos hacer un comentario al principio del PR para indicar hasta qué línea haz hecho el review y qué hay que revisar hasta ese hito.
-* “Needs work” genera en la línea anterior “#fuzzy” para que el traductor revise esa línea. Se puede usar cuando la traducción necesita revisión y en ese momento no puedes sugerir una traducción alternativa.
+
+* PRs de más de 1000 líneas: Te sugerimos hacer un comentario al principio del PR para indicar hasta qué línea haz hecho el review y qué hay que revisar hasta ese hito. También si tú mismo vas a continuar la review, pero no puedes hacerla de una sola vez, es útil para saber donde retomar tu trabajo.
+* El uso del checkbox “Needs work” en poedit genera en la línea anterior al párrafo un comentario “#fuzzy” para que el traductor revise esa línea. Se puede usar cuando la traducción necesita revisión y en ese momento no puedes sugerir una traducción alternativa. Ten en cuenta que los párrafos con esa marca no aparecerán traducidos en el build. Como revisor, también podrías incluir ese comentario tu mismo como sugerencia.
+* Al igual que cuando uno traduce, en el proceso de revisión puedes consultar y emplear las herramientas que tenemos. Por ejemplo, si no estás seguro sobre la traducción de un término sobre el que puede que ya hayamos tomado una decisión consensuada, puedes consultar la memoria de traducción, usar el script find in po o incluso comentarlo en nuestro grupo de telegram.
 
 El costado técnico
 ==================
@@ -34,3 +37,5 @@ Cuatro razones por las que puede fallar el *build* de Travis:
 * `pospell` falla
 * Dict está duplicado
 * Sphinx falla
+
+
