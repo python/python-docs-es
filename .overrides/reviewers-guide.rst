@@ -37,5 +37,3 @@ Cuatro razones por las que puede fallar el *build* de Travis:
 * `pospell` falla
 * Dict está duplicado
 * Sphinx falla
-
-
