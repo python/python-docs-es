@@ -26,7 +26,7 @@ Para esto, Github te ofrece opciones para afrontar una PR (ver botón *Review Ch
 
 * PRs de más de 1000 líneas: Te sugerimos hacer un comentario al principio del PR para indicar hasta qué línea haz hecho el review y qué hay que revisar hasta ese hito. También si tú mismo vas a continuar la review, pero no puedes hacerla de una sola vez, es útil para saber donde retomar tu trabajo.
 * El uso del checkbox "Needs work" en poedit genera en la línea anterior al párrafo un comentario "#, fuzzy" para que el traductor revise esa línea. Se puede usar cuando la traducción necesita revisión y en ese momento no puedes sugerir una traducción alternativa. Ten en cuenta que los párrafos con esa marca no aparecerán traducidos en el build. Como revisor, también podrías incluir ese comentario tu mismo como sugerencia.
-* Al igual que cuando uno traduce, en el proceso de revisión puedes consultar y emplear las herramientas que tenemos. Por ejemplo, si no estás seguro sobre la traducción de un término sobre el que puede que ya hayamos tomado una decisión consensuada, puedes consultar la memoria de traducción, usar `scripts/find_in_po.py` o incluso comentarlo en nuestro grupo de Telegram.
+* Al igual que cuando uno traduce, en el proceso de revisión puedes consultar y emplear las herramientas que tenemos. Por ejemplo, si no estás seguro sobre la traducción de un término sobre el que puede que ya hayamos tomado una decisión consensuada, puedes consultar la memoria de traducción [,](https://github.com/python/python-docs-es/blob/3.8/.overrides/translation-memory.rst) usar `scripts/find_in_po.py` o incluso comentarlo en nuestro grupo de Telegram.
 
 El costado técnico
 ==================
