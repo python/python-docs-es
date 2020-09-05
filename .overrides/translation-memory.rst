@@ -63,7 +63,7 @@ Términos y bigramas
 
      key
        clave
-       
+
      keyword argument
        argumento por palabra clave / argumento de palabra clave
 
@@ -71,16 +71,19 @@ Términos y bigramas
        gestor ``tutorial/errors.po``, ``library/functions.po``
 
      handle exception
-       Gestionar excepción. ``tutorial/inputoutput.po``
+       gestionar excepción. ``tutorial/inputoutput.po``
+
+     i. e.
+       en otras palabras. ``library/sqlite3.po``
 
      in-place, in place
        in situ. Aunque estrictamente no es español, su uso es generalizado.
 
      library
        biblioteca. ``library/sqlite3.po``
-       
+
      list comprehension / list comprehensions
-       lista por comprensión / listas por comprensión. 
+       lista por comprensión / listas por comprensión.
 
      locale
        Configuración regional. ``library/functions.po`` and others
@@ -96,10 +99,10 @@ Términos y bigramas
 
      named tuple
        tupla nombrada ``glossary.po``
-       
+
      overload, overloading
        sobrecargar, sobrecarga
-       
+
      override, overriding
        sobreescribir, sobreescritura
 
@@ -109,15 +112,30 @@ Términos y bigramas
      raise
        lanzar, lanza. (referido a excepciones)  ``library/functions.po``, ``c-api``
 
-     realease
+     release
        version ``HOWTO``
+
+     return
+       retorna. ``library/sqlite3.po``
 
      runtime
        tiempo de ejecución  ``tutorial/classes.po``
 
+     slice
+      segmento ``datamodel.po``
+
+     slicing
+      segmentación ``datamodel.po``
+
      static type checker
        Validador estático de tipos
        Notas: mantener la mayúscula, usar validación cuando se refiera a la acción y no al agente.
+
+     string
+      cadena de caracteres ``datamodel.po``
+
+     strings
+      cadenas de caracteres ``datamodel.po``
 
      third-party
        de terceros ``library/typing.po``
@@ -128,21 +146,6 @@ Términos y bigramas
      type annotation  ``library/typing.po``
        anotación de tipo
        Nota: úsese como sinónimo de *type hint*
-
-     release
-      version ``HOWTO``  
-
-     slice
-      segmento ``datamodel.po``
-
-     slicing
-      segmentación ``datamodel.po``
-
-     string
-      cadena de caracteres ``datamodel.po``
-
-     strings
-      cadenas de caracteres ``datamodel.po``
 
      underscore
        guión bajo ``glossary.po``
