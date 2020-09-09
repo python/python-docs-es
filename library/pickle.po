@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-08-27 21:26-0300\n"
+"PO-Revision-Date: 2020-09-08 21:09-0300\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Last-Translator: Manuel Ramos <manuelramos175@gmail.com>\n"
 "Language: es\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #: ../Doc/library/pickle.rst:2
 msgid ":mod:`pickle` --- Python object serialization"
@@ -1077,13 +1077,16 @@ msgstr ""
 
 #: ../Doc/library/pickle.rst:555
 msgid "Pickling Class Instances"
-msgstr ""
+msgstr "`Pickling` de Instancias de clases"
 
 #: ../Doc/library/pickle.rst:559
 msgid ""
 "In this section, we describe the general mechanisms available to you to "
 "define, customize, and control how class instances are pickled and unpickled."
 msgstr ""
+"En esta sección, describimos los mecanismos generales disponibles para que "
+"usted defina, personalice y controle cómo se serializan y deserializan con "
+"`Pickle` las instancias de clase."
 
 #: ../Doc/library/pickle.rst:562
 msgid ""
@@ -1094,12 +1097,22 @@ msgid ""
 "uninitialized instance and then restores the saved attributes.  The "
 "following code shows an implementation of this behaviour::"
 msgstr ""
+"En la mayoría de los casos, no se necesita código adicional para hacer que "
+"las instancias sean `picklable` (serializables con `pickle`).  Por defecto, "
+"`pickle` recuperará la clase y los atributos de una instancia a través de la "
+"introspección. Cuando una instancia de clase es deserializada con `pickle` "
+"(`unpickled`), su método :meth:`__init__` generalmente *no* se invoca.  El "
+"comportamiento predeterminado es que primero crea una instancia no "
+"inicializada y luego restaura los atributos guardados.  El siguiente código "
+"muestra una implementación de este comportamiento::"
 
 #: ../Doc/library/pickle.rst:577
 msgid ""
 "Classes can alter the default behaviour by providing one or several special "
 "methods:"
 msgstr ""
+"Las clases pueden alterar el comportamiento predeterminado proporcionando "
+"uno o varios métodos especiales:"
 
 #: ../Doc/library/pickle.rst:582
 msgid ""
@@ -1110,6 +1123,12 @@ msgid ""
 "dictionary of named arguments for constructing the object.  Those will be "
 "passed to the :meth:`__new__` method upon unpickling."
 msgstr ""
+"En los protocolos 2 y más recientes, las clases que implementan el método :"
+"meth:`__getnewargs_ex__` pueden dictar los valores pasados al método :meth:"
+"`__new__` al hacer`unpickling`.  El método debe devolver un par ``(args, "
+"kwargs)`` donde *args* es una tupla de argumentos posicionales y *kwargs* un "
+"diccionario de argumentos con nombre para construir el objeto.  Estos se "
+"pasarán al método :meth:`__new__` al hacer `unpickling`."
 
 #: ../Doc/library/pickle.rst:590
 msgid ""
@@ -1117,10 +1136,13 @@ msgid ""
 "requires keyword-only arguments.  Otherwise, it is recommended for "
 "compatibility to implement :meth:`__getnewargs__`."
 msgstr ""
+"Debes implementar este método si el método :meth:`__new__` de tu clase "
+"requiere argumentos de solo palabras clave.  De lo contrario, se recomienda "
+"para la compatibilidad implementar :meth:`__getnewargs__`."
 
 #: ../Doc/library/pickle.rst:594
 msgid ":meth:`__getnewargs_ex__` is now used in protocols 2 and 3."
-msgstr ""
+msgstr ":meth:`__getnewargs_ex__` ahora se usa en los protocolos 2 y 3."
 
 #: ../Doc/library/pickle.rst:600
 msgid ""
@@ -1128,18 +1150,25 @@ msgid ""
 "supports only positional arguments.  It must return a tuple of arguments "
 "``args`` which will be passed to the :meth:`__new__` method upon unpickling."
 msgstr ""
+"Este método tiene un propósito similar a :meth:`__getnewargs_ex__`, pero "
+"solo admite argumentos posicionales.  Debe devolver una tupla de argumentos "
+"``args`` que se pasarán al método :meth:`__new__` al hacer `unpickling`."
 
 #: ../Doc/library/pickle.rst:604
 msgid ""
 ":meth:`__getnewargs__` will not be called if :meth:`__getnewargs_ex__` is "
 "defined."
 msgstr ""
+":meth:`__getnewargs__` no se llamará si :meth:`__getnewargs_ex__` está "
+"definido."
 
 #: ../Doc/library/pickle.rst:607
 msgid ""
 "Before Python 3.6, :meth:`__getnewargs__` was called instead of :meth:"
 "`__getnewargs_ex__` in protocols 2 and 3."
 msgstr ""
+"Antes de Python 3.6, se llamaba a, :meth:`__getnewargs__` en lugar de :meth:"
+"`__getnewargs_ex__` en los protocolos 2 y 3."
 
 #: ../Doc/library/pickle.rst:614
 msgid ""
@@ -1149,6 +1178,12 @@ msgid ""
 "of the instance's dictionary.  If the :meth:`__getstate__` method is absent, "
 "the instance's :attr:`~object.__dict__` is pickled as usual."
 msgstr ""
+"Las clases pueden influir aún más en cómo sus instancias se serializan con "
+"`pickle`; si la clase define el método :meth:`__getstate__`, este es llamado "
+"y el objeto devuelto se selecciona como contenido de la instancia, en lugar "
+"del contenido del diccionario de la instancia.  Si el método :meth:"
+"`__getstate__` está ausente, el :attr:`~object.__dict__` de la instancia se "
+"conserva como de costumbre."
 
 #: ../Doc/library/pickle.rst:623
 msgid ""
@@ -1157,18 +1192,27 @@ msgid ""
 "state object to be a dictionary.  Otherwise, the pickled state must be a "
 "dictionary and its items are assigned to the new instance's dictionary."
 msgstr ""
+"Al hacer `unpickling`, si la clase define :meth:`__setstate__`, este es "
+"llamado con el estado `unpickled` (no serializado con `pickle`).  En ese "
+"caso, no es necesario que el objeto de estado sea un diccionario.  De lo "
+"contrario, el estado `pickled` (`pickled state`) debe ser un diccionario y "
+"sus elementos se asignan al diccionario de la nueva instancia."
 
 #: ../Doc/library/pickle.rst:630
 msgid ""
 "If :meth:`__getstate__` returns a false value, the :meth:`__setstate__` "
 "method will not be called upon unpickling."
 msgstr ""
+"Si :meth:`__getstate__` devuelve un valor falso, el método :meth:"
+"`__setstate__` no se llamará al hacer `unpickling`."
 
 #: ../Doc/library/pickle.rst:634
 msgid ""
 "Refer to the section :ref:`pickle-state` for more information about how to "
 "use the methods :meth:`__getstate__` and :meth:`__setstate__`."
 msgstr ""
+"Consulte la sección :ref:`pickle-state` para obtener más información sobre "
+"cómo utilizar los métodos :meth:`__getstate__` y :meth:`__setstate__`."
 
 #: ../Doc/library/pickle.rst:639
 msgid ""
@@ -1178,6 +1222,12 @@ msgid ""
 "should implement :meth:`__new__` to establish such an invariant, as :meth:"
 "`__init__` is not called when unpickling an instance."
 msgstr ""
+"Al moment de hacer `unpickling`, algunos métodos como :meth:`__getattr__`, :"
+"meth:`__getattribute__`, o :meth:`__setattr__` pueden invocarse sobre la "
+"instancia.  En caso de que esos métodos dependan de que algún invariante "
+"interno sea verdadero, el tipo debería implementar :meth:`__new__` para "
+"establecer tal invariante, ya que :meth:`__init__` no se llama cuando se "
+"hace `unpickling` de una instancia."
 
 #: ../Doc/library/pickle.rst:648
 msgid ""
