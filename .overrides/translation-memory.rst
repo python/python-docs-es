@@ -67,14 +67,23 @@ Términos y bigramas
 Dividimos esta sección en dos partes, los términos que se traducen y los que mantenemos el original.
 Éstas son las palabras que hemos coordinado hasta el momento:
 
+     auditing event
+       evento de auditoría ``library/tempfile`` and many others
+     
      awaitable
        aguardable ``glossary``
+
+     slash and backslash
+      barra y barra invertida ``c-api``,``tutorial``,``library/functions.po``
 
      built-in
        incorporada ``glossary.po``
 
      built-in exceptions
        excepciones predefinidas ``tutorial/errors.po``
+       
+     bytecodes
+       queda igual ``glossary.po``
 
      callable
        invocable ``glossary.po``, ``library/functions.po``
@@ -88,13 +97,39 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
      deallocated
        desalojable ``glossary.po``
 
+     docstring
+       docstring. ``library/idle.po``
+
+     key
+       clave
+
+     keyword argument
+       argumento por palabra clave / argumento de palabra clave
+       
      handler
        gestor ``tutorial/errors.po``
 
      handle exception
        gestionar [una] excepción. ``tutorial/inputoutput.po``
-
        gestionar excepciones
+
+     i. e.
+       en otras palabras. ``library/sqlite3.po``
+
+     in-place, in place
+       in situ. Aunque estrictamente no es español, su uso es generalizado.
+
+     library
+       biblioteca. ``library/sqlite3.po``
+
+     list comprehension / list comprehensions
+       lista por comprensión / listas por comprensión.
+
+     locale
+       Configuración regional. ``library/functions.po`` and others
+
+     helper function
+       función auxiliar  ``library/typing.po``
 
      loop
        bucle ``tutorial/controlflow.po``
@@ -104,6 +139,12 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 
      named tuple.
        tupla nombrada ``glossary.po``
+       
+     overload, overloading
+       sobrecargar, sobrecarga
+
+     override, overriding
+       sobreescribir, sobreescritura
 
      path
        ruta ``glossary.po``
@@ -121,6 +162,9 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 
      release
        version ``HOWTO``
+       
+     return / returns
+       retorna / retornar ``library/sqlite3.po`` and many others
 
      return type
        tipo de retorno ``library/typing.po``
@@ -132,10 +176,21 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
      runtime
        tiempo de ejecución  ``tutorial/classes.po``
 
+     slice
+      segmento ``datamodel.po``
+
+     slicing
+      segmentación ``datamodel.po``
+
      static type checker
        Validador estático de tipos
-         Notas: en general mantener la mayúscula aunque no es necesario,
-         usar validación cuando se refiera a la acción y no al agente.
+       Notas: mantener la mayúscula, usar validación cuando se refiera a la acción y no al agente.
+
+     string
+      cadena de caracteres ``datamodel.po``
+
+     strings
+      cadenas de caracteres ``datamodel.po``
 
      third-party
        de terceros ``library/typing.po``
@@ -149,7 +204,11 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
          es algo accesorio, un comentario, y type hint implica que el Validador hará comprobaciones
 
      underscore
-       guión bajo ``glossary.po``
+       guión bajo ``glossary.po``     
+
+     widget
+       widget ``library/tkinter``
+
 
 
 Términos que no se traducen
@@ -169,6 +228,7 @@ asterísticos).
 Puedes revisar los términos no traducidos usando la siguiente regex en tu IDE:
 
     ``\*[^*]+\*``
+
 
 Reglas de estilo
 ================
