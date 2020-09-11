@@ -164,7 +164,7 @@ asterísticos).
 
 Puedes revisar los términos no traducidos usando la siguiente regex en tu IDE:
 
-    \*[^*]+\*
+    ``\*[^*]+\*``
 
 Reglas de estilo
 ================
