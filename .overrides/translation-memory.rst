@@ -108,7 +108,9 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 
      pythonic
        *pythónico*
+       
        idiomático
+       
        Estes dos términos son próximos en el contexto que se usan, utilizar complementariamente
        según el contexto. Referencia: https://docs.python-guide.org/writing/style/
 
