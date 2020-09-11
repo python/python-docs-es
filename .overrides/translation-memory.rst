@@ -92,6 +92,7 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 
      handle exception
        gestionar [una] excepción. ``tutorial/inputoutput.po``
+
        gestionar excepciones
 
      loop
