@@ -78,6 +78,7 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 
      callable
        invocable ``glossary.po``, ``library/functions.po``
+
        Nota: en ocasiones es mejora mantener callable, especialmente cuando se refiere directamente
        a la anotación de typing Callable
 
