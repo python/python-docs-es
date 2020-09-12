@@ -229,6 +229,10 @@ Puedes revisar los términos no traducidos usando la siguiente regex en tu IDE:
 
     ``\*[^*]+\*``
 
+Si quieres buscar esos términos sólo en el texto traducido en el archivo dado en input, puedes emplear el siguiente comando:
+
+    ``msgexec --input library/datetime.po grep -E --regexp="\*[^*]+\*"``
+
 
 Reglas de estilo
 ================
