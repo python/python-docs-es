@@ -180,8 +180,8 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
        tipo de retorno ``library/typing.po``
        tipo retornado
        tipo devuelto
-         Nota: en algunos contextos es mejor usar el participio (retornado/devuelto), se prefiere
-         retornado por semejanza con el original inglés "return".
+       Nota: en algunos contextos es mejor usar el participio (retornado/devuelto), se prefiere
+       retornado por semejanza con el original inglés "return".
 
      runtime
        tiempo de ejecución  ``tutorial/classes.po``
