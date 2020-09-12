@@ -36,29 +36,34 @@ Fuentes recomendadas
 ====================
 
   :Diccionario Panhispánico de dudas:
+  
   https://www.rae.es/dpd/
 
   Obra orientada a resolver dudas en diferentes áreas de la lengua española: ortografía, sintaxis,
   gramática ...
 
   :Wordreference:
+  
   https://www.wordreference.com/
 
   Diccionario y traductor multilingue
 
   :Linguee.es:
+  
   https://www.linguee.es/
   
 Diccionario y traductor multilíngue con millones de traducciones indexadas. De los creadores
   de DeepL
 
   :Fundéu BBVA - Fundación para el español urgente:
+  
   https://www.fundeu.es/
 
   Fundación dedicada a la resolución de dudas. Creada originalmente por la agencia estatal
   española de noticias EFE, a partir de su departamento y libro de estilo.
 
   :IATE - European Union terminology:
+  
   https://iate.europa.eu/home
 
   Base de datos de las traducciones oficiales de la Unión Europea. Permite búsqueda por término
@@ -169,7 +174,7 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
        version ``HOWTO``
        
      return / returns
-       retorna / retornar ``library/sqlite3.po`` and many others
+       retorna / retornar ``library/sqlite3.po``
 
      return type
        tipo de retorno ``library/typing.po``
@@ -253,6 +258,7 @@ Estas son las reglas de estilo que hemos convenido hasta el momento:
   `en`: Predefined Clean-up Actions
   `es`: Acciones de limpieza predefinidas
 
+
 * Se priorizará la segunda persona del singular no formal (tu/vos) frente al formal (usted).
   Sin embargo, allí donde sea posible, se usarán formas impersonales (con se), ya que son comunes a
   todas las variantes del español.
@@ -263,6 +269,7 @@ Estas son las reglas de estilo que hemos convenido hasta el momento:
   `en`: Look at the following example, [...]
   `es`: Véase el siguiente ejemplo, [...]
 
+
 * En general se evitará la traducción literal de la voz pasiva del original en inglés y se usará
   el impersonal (pasiva refleja) en la traducción al español.
 
@@ -272,6 +279,7 @@ Estas son las reglas de estilo que hemos convenido hasta el momento:
   `en`: [...] where the error was detected.
   `es`: [...] donde se detectó el error.
   Nota cf. "fue detectado"
+
 
 * Al incluír voces latinas (in situ, a priori ...) se recomienda el uso de *cursiva* salvo en
   aquellas expresiones más habituales como etcetera o viceversa, por ser considerados
