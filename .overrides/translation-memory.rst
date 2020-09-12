@@ -35,27 +35,32 @@ habituales y con cierta referencialidad en el mundo hispanohablante o de la trad
 Fuentes recomendadas
 ====================
 
-  Diccionario Panhispánico de dudas
+  :Diccionario Panhispánico de dudas:
   https://www.rae.es/dpd/
+
   Obra orientada a resolver dudas en diferentes áreas de la lengua española: ortografía, sintaxis,
   gramática ...
 
-  Wordreference
+  :Wordreference:
   https://www.wordreference.com/
+
   Diccionario y traductor multilingue
 
-  Linguee.es
+  :Linguee.es:
   https://www.linguee.es/
-  Diccionario y traductor multilíngue con millones de traducciones indexadas. De los creadores
+  
+Diccionario y traductor multilíngue con millones de traducciones indexadas. De los creadores
   de DeepL
 
-  Fundéu BBVA - Fundación para el español urgente
+  :Fundéu BBVA - Fundación para el español urgente:
   https://www.fundeu.es/
+
   Fundación dedicada a la resolución de dudas. Creada originalmente por la agencia estatal
   española de noticias EFE, a partir de su departamento y libro de estilo.
 
-  IATE - European Union terminology
+  :IATE - European Union terminology:
   https://iate.europa.eu/home
+
   Base de datos de las traducciones oficiales de la Unión Europea. Permite búsqueda por término
   y sector.
 
