@@ -46,9 +46,9 @@ potools_, que son compatibles con Python 2. Se puede utilizar `pip` para instala
 
 .. code-block:: bash
 
-   pip install podiff
-   # o
-   pip install potools
+    pip install podiff
+    # o
+    pip install potools
 
 .. _Brew: https://docs.brew.sh/Installation
 .. _podiff: https://pypi.org/project/podiff/
