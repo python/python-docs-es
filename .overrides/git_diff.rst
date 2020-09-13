@@ -45,6 +45,7 @@ Para las distribuciones de Linux se pueden utilizar algunas herramientas, como p
 potools_, que son compatibles con Python 2. Se puede utilizar `pip` para instalarlas.
 
 .. code-block:: bash
+
    pip install podiff
    # o
    pip install potools
