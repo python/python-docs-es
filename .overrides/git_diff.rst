@@ -11,7 +11,9 @@ El comando `git diff` tiene datos que pueden llegar a ser inútiles como por eje
     -#: ../Doc/library/signal.rst:406
     +#: ../Doc/library/signal.rst:408
 
-Para ellos debemos instalar brew. Si no lo tienes instalado puedes seguir el instructivo de instalación Brew_.
+La instalación de `podiff` mediante `pip` no se encuentra totalmente funcional, pero los usuarios de macOS
+podrán continuar con estas instrucciones.
+Primero debemos instalar brew. Si no lo tienes instalado puedes seguir el instructivo de instalación Brew_.
 
 .. tabs::
 
