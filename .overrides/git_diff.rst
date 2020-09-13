@@ -21,22 +21,6 @@ Para ellos debemos instalar brew. Si no lo tienes instalado puedes seguir el ins
 
          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
-   .. tab:: Linux
-
-      Para instalar brew en Linux ejecutar
-
-         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-
-      Luego ejecutar los siguientes comandos::
-
-         test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
-         test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-         test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
-         echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
-
-      Ten en cuenta que si usas un sistema Debian/Ubunut se utiliza el archivo `~/.profile` mientras que
-      para sistemas CentOS/Fedora/RedHat se utiliza `~/.bash_profile`
-
 Una vez instalado brew, hay que instalar podiff, para ellos ejectar el siguiente comando:
 
 .. code-block:: bash
@@ -57,4 +41,14 @@ archivos .po con los que se van a trabajar, crealo, y luego,  agregar la siguien
 
     *.po diff=podiff
 
+Para las distribuciones de Linux se pueden utilizar algunas herramientas, como por ejemplo podiff_ y
+potools_, que son compatibles con Python 2. Se puede utilizar `pip` para instalarlas.
+
+.. code-block:: bash
+   pip install podiff
+   # o
+   pip install potools
+
 .. _Brew: https://docs.brew.sh/Installation
+.. _podiff: https://pypi.org/project/podiff/
+.. _potools: https://pypi.org/project/potools/
