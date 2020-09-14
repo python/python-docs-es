@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-06 11:59-0400\n"
-"PO-Revision-Date: 2020-09-14 09:15+0200\n"
+"PO-Revision-Date: 2020-09-14 17:43+0200\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -55,7 +55,7 @@ msgid ""
 msgstr ""
 "Esta clase implementa puntos de interrupción temporales, dando la "
 "posibilidad de ignorar recuentos, desactivar y (re-)activar puntos de "
-"interrupción y de definir condiciones de interrupción para los mismos."
+"interrupción y definir condiciones de interrupción para los mismos."
 
 #: ../Doc/library/bdb.rst:28
 msgid ""
@@ -171,8 +171,9 @@ msgstr ""
 "El argumento *skip*, si se proporciona, debe ser un iterable de patrones de "
 "nombre al estilo del módulo glob. El depurador no entrará en los marcos de "
 "ejecución que se originen en un módulo que coincida con uno de estos "
-"patrones. Lo que determina si se considera que un marco de ejecución se "
-"origina en un módulo determinado, es ``__name__`` en los globales del mismo."
+"patrones. Para determinar si un marco de ejecución se origina en un módulo "
+"determinado, se hace uso de ``__name__`` de las variables globales del marco "
+"de ejecución."
 
 #: ../Doc/library/bdb.rst:91
 msgid "The *skip* argument."
@@ -388,74 +389,98 @@ msgid ""
 "possibility that a break might be necessary anywhere inside the called "
 "function."
 msgstr ""
+"Este método se llama desde :meth:`dispatch_call` cuando existe la "
+"posibilidad de que sea necesaria una interrupción en cualquier lugar dentro "
+"de la función llamada."
 
 #: ../Doc/library/bdb.rst:196
 msgid ""
 "This method is called from :meth:`dispatch_line` when either :meth:"
 "`stop_here` or :meth:`break_here` yields ``True``."
 msgstr ""
+"Este método se llama desde :meth:`dispatch_line` cuando :meth:`stop_here` o :"
+"meth:`break_here` producen ``True``."
 
 #: ../Doc/library/bdb.rst:201
 msgid ""
 "This method is called from :meth:`dispatch_return` when :meth:`stop_here` "
 "yields ``True``."
 msgstr ""
+"Este método se llama desde :meth:`dispatch_return` cuando :meth:`stop_here` "
+"produce ``True``."
 
 #: ../Doc/library/bdb.rst:206
 msgid ""
 "This method is called from :meth:`dispatch_exception` when :meth:`stop_here` "
 "yields ``True``."
 msgstr ""
+"Este método se llama desde :meth:`dispatch_exception` cuando :meth:"
+"`stop_here` produce ``True``."
 
 #: ../Doc/library/bdb.rst:211
 msgid "Handle how a breakpoint must be removed when it is a temporary one."
 msgstr ""
+"Maneja cómo un punto de interrupción debe ser eliminado cuando es temporal."
 
 #: ../Doc/library/bdb.rst:213
 msgid "This method must be implemented by derived classes."
-msgstr ""
+msgstr "Este método debe ser implementado por las clases derivadas."
 
 #: ../Doc/library/bdb.rst:216
 msgid ""
 "Derived classes and clients can call the following methods to affect the "
 "stepping state."
 msgstr ""
+"Las clases derivadas y los clientes pueden llamar a los siguientes métodos "
+"para influir en el estado de transición."
 
 #: ../Doc/library/bdb.rst:221
 msgid "Stop after one line of code."
-msgstr ""
+msgstr "Se detiene después de una línea de código."
 
 #: ../Doc/library/bdb.rst:225
 msgid "Stop on the next line in or below the given frame."
 msgstr ""
+"Se detiene en la siguiente línea dentro o debajo del marco de ejecución dado."
 
 #: ../Doc/library/bdb.rst:229
 msgid "Stop when returning from the given frame."
-msgstr ""
+msgstr "Se detiene cuando se retorna del marco de ejecución dado."
 
 #: ../Doc/library/bdb.rst:233
 msgid ""
 "Stop when the line with the line no greater than the current one is reached "
 "or when returning from current frame."
 msgstr ""
+"Se detiene cuando se alcanza un número de línea superior al de la línea "
+"actual o retorna el marco de ejecución actual."
 
 #: ../Doc/library/bdb.rst:238
 msgid ""
 "Start debugging from *frame*.  If *frame* is not specified, debugging starts "
 "from caller's frame."
 msgstr ""
+"Inicia la depuración desde el marco de ejecución *frame*. Si *frame* no se "
+"especifica, la depuración se inicia desde el marco de ejecución que produce "
+"la llamada."
 
 #: ../Doc/library/bdb.rst:243
 msgid ""
 "Stop only at breakpoints or when finished.  If there are no breakpoints, set "
 "the system trace function to ``None``."
 msgstr ""
+"Se detiene solo en los puntos de interrupción o cuando haya terminado. Si no "
+"hay puntos de interrupción, se configura la función de seguimiento del "
+"sistema en ``None``."
 
 #: ../Doc/library/bdb.rst:248
 msgid ""
 "Set the :attr:`quitting` attribute to ``True``.  This raises :exc:`BdbQuit` "
 "in the next call to one of the :meth:`dispatch_\\*` methods."
 msgstr ""
+"Establece el atributo :attr:`quitting` en ``True``. Esto lanza una "
+"excepción :exc:`BdbQuit` en la siguiente llamada a uno de los métodos :meth:"
+"`dispatch_\\*`."
 
 #: ../Doc/library/bdb.rst:252
 msgid ""
@@ -463,6 +488,10 @@ msgid ""
 "breakpoints.  These methods return a string containing an error message if "
 "something went wrong, or ``None`` if all is well."
 msgstr ""
+"Las clases derivadas y los clientes pueden llamar a los siguientes métodos "
+"para manipular los puntos de interrupción. Estos métodos retornan una cadena "
+"de caracteres que contiene un mensaje de error si algo fue mal, o ``None`` "
+"si todo fue correctamente."
 
 #: ../Doc/library/bdb.rst:258
 msgid ""
@@ -470,12 +499,18 @@ msgid ""
 "passed as argument, return an error message.  The *filename* should be in "
 "canonical form, as described in the :meth:`canonic` method."
 msgstr ""
+"Establece un nuevo punto de interrupción. Si la línea en la posición "
+"*lineno* no existe en el archivo *filename* pasado como argumento, se "
+"retorna un mensaje de error. El *filename* debe estar en su forma canónica, "
+"tal como se describe en el método :meth:`canonic`."
 
 #: ../Doc/library/bdb.rst:264
 msgid ""
 "Delete the breakpoints in *filename* and *lineno*.  If none were set, an "
 "error message is returned."
 msgstr ""
+"Elimina el punto de interrupción en *filename* y *lineno*. Si no se ha "
+"establecido ninguno, se retorna un mensaje de error."
 
 #: ../Doc/library/bdb.rst:269
 msgid ""
@@ -483,16 +518,21 @@ msgid ""
 "bpbynumber`.  If *arg* is not numeric or out of range, return an error "
 "message."
 msgstr ""
+"Elimina el punto de interrupción que tiene el índice *arg* en :attr:"
+"`Breakpoint.bpbynumber`. Si *arg* no es un valor numérico o es un indice "
+"fuera de rango, se retorna un mensaje de error."
 
 #: ../Doc/library/bdb.rst:275
 msgid ""
 "Delete all breakpoints in *filename*.  If none were set, an error message is "
 "returned."
 msgstr ""
+"Elimina todos los puntos de interrupción en *filename*. Si no se ha "
+"establecido ninguno, se retorna un mensaje de error."
 
 #: ../Doc/library/bdb.rst:280
 msgid "Delete all existing breakpoints."
-msgstr ""
+msgstr "Elimina todos los puntos de interrupción que existen."
 
 #: ../Doc/library/bdb.rst:284
 msgid ""
@@ -501,24 +541,32 @@ msgid ""
 "given breakpoint never existed or has been deleted, a :exc:`ValueError` is "
 "raised."
 msgstr ""
+"Retorna un punto de interrupción especificado por el número dado. Si *arg* "
+"es una cadena de caracteres, será convertido en un número. Si *arg* es una "
+"cadena no numérica, o el punto de interrupción dado nunca existió o ha sido "
+"eliminado, se generá una excepción :exc:`ValueError`."
 
 #: ../Doc/library/bdb.rst:293
 msgid "Check if there is a breakpoint for *lineno* of *filename*."
-msgstr ""
+msgstr "Comprueba si hay un punto de interrupción para *lineno* en *filename*."
 
 #: ../Doc/library/bdb.rst:297
 msgid ""
 "Return all breakpoints for *lineno* in *filename*, or an empty list if none "
 "are set."
 msgstr ""
+"Retorna todos los puntos de interrupción para *lineno* en *filename*, o una "
+"lista vacía si no se ha establecido ninguno."
 
 #: ../Doc/library/bdb.rst:302
 msgid "Return all breakpoints in *filename*, or an empty list if none are set."
 msgstr ""
+"Retorna todos los puntos de interrupción en *filename*, o una lista vacía si "
+"no hay ninguno establecido."
 
 #: ../Doc/library/bdb.rst:306
 msgid "Return all breakpoints that are set."
-msgstr ""
+msgstr "Retorna todos los puntos de interrupción establecidos."
 
 #: ../Doc/library/bdb.rst:309
 msgid ""
