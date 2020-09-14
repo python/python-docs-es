@@ -214,7 +214,7 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
          es algo accesorio, un comentario, y type hint implica que el Validador hará comprobaciones
 
      underscore
-       guión bajo ``glossary.po``     
+       guion bajo ``glossary.po``
 
      widget
        widget ``library/tkinter``
