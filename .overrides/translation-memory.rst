@@ -73,6 +73,14 @@ Términos y bigramas
      handle exception
        gestionar excepción. ``tutorial/inputoutput.po``
 
+     host
+       host  ``library/smtplib.po``
+       Significado: máquina conectada a una red que provee de servicios
+
+     hostname
+       hostname  ``library/smtplib.po``
+       Significado: nombre de la máquina conectada a una red que provee de servicios
+
      i. e.
        en otras palabras. ``library/sqlite3.po``
 
@@ -139,6 +147,10 @@ Términos y bigramas
 
      third-party
        de terceros ``library/typing.po``
+
+     timeout
+       timeout  ``library/smtplib.po``
+       Significado: tiempo de espera para establecer/reintentar una conexión de red
 
      type hint
        indicador de tipo  ``library/typing.po``
