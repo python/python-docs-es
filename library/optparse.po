@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-09-16 08:11+0200\n"
+"PO-Revision-Date: 2020-09-16 17:52+0200\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -113,7 +113,7 @@ msgstr ""
 
 #: ../Doc/library/optparse.rst:81
 msgid "Background"
-msgstr ""
+msgstr "Contexto"
 
 #: ../Doc/library/optparse.rst:83
 msgid ""
@@ -123,14 +123,20 @@ msgid ""
 "conventionally used under Unix.  If you are unfamiliar with these "
 "conventions, read this section to acquaint yourself with them."
 msgstr ""
+":mod:`optparse` ha sido diseñado explícitamente para fomentar la creación de "
+"programas con interfaces de línea de comandos convencionales y sencillas. "
+"Con ese fin en mente, solo admite la sintaxis y semántica de línea de "
+"comandos más común y convencionalmente usada en Unix. Si no estás "
+"familiarizado con estas convenciones, lee esta sección para familiarizarte "
+"con ellas."
 
 #: ../Doc/library/optparse.rst:93
 msgid "Terminology"
-msgstr ""
+msgstr "Terminología"
 
 #: ../Doc/library/optparse.rst:104
 msgid "argument"
-msgstr ""
+msgstr "argumento"
 
 #: ../Doc/library/optparse.rst:96
 msgid ""
@@ -139,6 +145,11 @@ msgid ""
 "(``sys.argv[0]`` is the name of the program being executed).  Unix shells "
 "also use the term \"word\"."
 msgstr ""
+"una cadena de caracteres ingresada en la línea de comandos y pasada mediante "
+"el shell a ``execl()`` o ``execv()``. En Python, los argumentos son "
+"elementos de ``sys.argv[1:]`` (dado que ``sys.argv[0]`` es el propio nombre "
+"del programa que se está ejecutando). Los shells de Unix también usan el "
+"término \"*word*\" ('palabra') para referirse a ellos."
 
 #: ../Doc/library/optparse.rst:101
 msgid ""
@@ -147,10 +158,14 @@ msgid ""
 "argv[1:]``, or of some other list provided as a substitute for ``sys."
 "argv[1:]``\"."
 msgstr ""
+"En ocasiones es deseable sustituir una lista de argumentos que no sea ``sys."
+"argv[1:]``, por lo que debería considerar un 'argumento' como 'un elemento "
+"de ``sys.argv[1:]``, o de alguna otra lista proporcionada como sustituto de "
+"``sys.argv[1:]``'."
 
 #: ../Doc/library/optparse.rst:134
 msgid "option"
-msgstr ""
+msgstr "opción"
 
 #: ../Doc/library/optparse.rst:107
 msgid ""
@@ -163,16 +178,28 @@ msgid ""
 "separated words, e.g. ``--file`` or ``--dry-run``.  These are the only two "
 "option syntaxes provided by :mod:`optparse`."
 msgstr ""
+"un argumento utilizado para proporcionar información adicional con la "
+"finalidad de guiar o personalizar la ejecución de un programa. Existen "
+"muchas sintaxis diferentes para especificar opciones. La sintaxis "
+"tradicional de Unix es un guion (\"-\") seguido de una sola letra, por "
+"ejemplo ``-x`` o ``-F``. La sintaxis tradicional de Unix permite además "
+"fusionar múltiples opciones en un solo argumento, por ejemplo ``-x -F`` es "
+"equivalente a ``-xF``. Por otro lado, el proyecto GNU introdujo ``--`` "
+"seguido de una serie de palabras separadas por guiones, por ejemplo ``--"
+"file`` o ``--dry-run``. Estas son las únicas dos sintaxis para opciones "
+"proporcionadas por :mod:`optparse`."
 
 #: ../Doc/library/optparse.rst:116
 msgid "Some other option syntaxes that the world has seen include:"
-msgstr ""
+msgstr "Algunas de las otras sintaxis para opciones que el mundo ha visto son:"
 
 #: ../Doc/library/optparse.rst:118
 msgid ""
 "a hyphen followed by a few letters, e.g. ``-pf`` (this is *not* the same as "
 "multiple options merged into a single argument)"
 msgstr ""
+"un guion seguido de algunas letras, por ejemplo ``-pf`` (esto *no* es lo "
+"mismo que múltiples opciones fusionadas en un solo argumento)"
 
 #: ../Doc/library/optparse.rst:121
 msgid ""
@@ -180,18 +207,25 @@ msgid ""
 "equivalent to the previous syntax, but they aren't usually seen in the same "
 "program)"
 msgstr ""
+"un guion seguido de una palabra completa, por ejemplo ``-file`` (esto es "
+"técnicamente equivalente a la sintaxis anterior, pero generalmente no se ven "
+"ambas en un mismo programa)"
 
 #: ../Doc/library/optparse.rst:125
 msgid ""
 "a plus sign followed by a single letter, or a few letters, or a word, e.g. ``"
 "+f``, ``+rgb``"
 msgstr ""
+"un signo más seguido de una sola letra, unas pocas letras o una palabra, por "
+"ejemplo ``+f`` o ``+rgb``"
 
 #: ../Doc/library/optparse.rst:128
 msgid ""
 "a slash followed by a letter, or a few letters, or a word, e.g. ``/f``, ``/"
 "file``"
 msgstr ""
+"una barra seguida de una letra, de unas pocas letras o de una palabra, por "
+"ejemplo ``/f`` o ``/file``"
 
 #: ../Doc/library/optparse.rst:131
 msgid ""
@@ -200,10 +234,14 @@ msgid ""
 "environment, and the last only makes sense if you're exclusively targeting "
 "VMS, MS-DOS, and/or Windows."
 msgstr ""
+"Estas sintaxis para opciones no son compatibles con :mod:`optparse` y nunca "
+"lo serán. Esto es deliberado: los tres primeros no son estándar en ningún "
+"entorno y el último solo tiene sentido si se dirige exclusivamente a VMS, MS-"
+"DOS y/o Windows."
 
 #: ../Doc/library/optparse.rst:160
 msgid "option argument"
-msgstr ""
+msgstr "argumento de opción"
 
 #: ../Doc/library/optparse.rst:137
 msgid ""
@@ -212,10 +250,14 @@ msgid ""
 "`optparse`, option arguments may either be in a separate argument from their "
 "option:"
 msgstr ""
+"un argumento que sigue a una opción, está estrechamente asociado con ella y "
+"se consume de la lista de argumentos cuando esa opción lo es. Con :mod:"
+"`optparse`, los argumentos de las opciones pueden estar en un argumento "
+"separado de su opción:"
 
 #: ../Doc/library/optparse.rst:147
 msgid "or included in the same argument:"
-msgstr ""
+msgstr "o incluido en el mismo argumento:"
 
 #: ../Doc/library/optparse.rst:154
 msgid ""
@@ -227,10 +269,17 @@ msgid ""
 "interpret ``-ab``?  Because of this ambiguity, :mod:`optparse` does not "
 "support this feature."
 msgstr ""
+"Normalmente, una opción dada puede aceptar o no un argumento. Mucha gente "
+"desea una característica de \"argumentos de opción opcionales\", lo que "
+"implica que algunas opciones aceptarán un argumento si está presente y no "
+"harán si no lo está. Esto es algo controvertido, porque hace que el análisis "
+"sea ambiguo: si ``-a`` toma un argumento opcional y ``-b`` es otra opción "
+"completamente distinta, ¿cómo interpretamos ``-ab``? Debido a esta "
+"ambigüedad, :mod:`optparse` no es compatible con esta funcionalidad."
 
 #: ../Doc/library/optparse.rst:165
 msgid "positional argument"
-msgstr ""
+msgstr "argumento posicional"
 
 #: ../Doc/library/optparse.rst:163
 msgid ""
@@ -238,10 +287,14 @@ msgid ""
 "after options and their arguments have been parsed and removed from the "
 "argument list."
 msgstr ""
+"es algo que queda en la lista de argumentos después de que las opciones "
+"hayan sido analizadas sintácticamente, es decir, después de que las opciones "
+"y sus argumentos hayan sido analizados y eliminados de la lista de "
+"argumentos."
 
 #: ../Doc/library/optparse.rst:171
 msgid "required option"
-msgstr ""
+msgstr "opción requerida"
 
 #: ../Doc/library/optparse.rst:168
 msgid ""
@@ -250,10 +303,14 @@ msgid ""
 "doesn't prevent you from implementing required options, but doesn't give you "
 "much help at it either."
 msgstr ""
+"es una opción que debe proporcionarse en la línea de comandos; ten en cuenta "
+"que la frase \"opción requerida\" se contradice a si misma. :mod:`optparse` "
+"no te impide implementar opciones requeridas, pero tampoco brinda mucha "
+"ayuda."
 
 #: ../Doc/library/optparse.rst:173
 msgid "For example, consider this hypothetical command-line::"
-msgstr ""
+msgstr "Por ejemplo, considera esta hipotética linea de comandos:"
 
 #: ../Doc/library/optparse.rst:177
 msgid ""
@@ -261,10 +318,13 @@ msgid ""
 "one argument, ``report.txt`` is an option argument.  ``foo`` and ``bar`` are "
 "positional arguments."
 msgstr ""
+"``-v`` y ``--report`` son ambas opciones. ``report.txt`` es un argumento "
+"opcional, suponiendo que ``--report`` toma un argumento. En cambio, ``foo`` "
+"y ``bar`` son argumentos posicionales."
 
 #: ../Doc/library/optparse.rst:185
 msgid "What are options for?"
-msgstr ""
+msgstr "¿Qué finalidad tienen las opciones?"
 
 #: ../Doc/library/optparse.rst:187
 msgid ""
@@ -277,6 +337,15 @@ msgid ""
 "have been rightly criticized for their non-standard syntax and confusing "
 "interfaces.)"
 msgstr ""
+"Las opciones se utilizan para poder proporcionar información adicional con "
+"el fin de ajustar o personalizar la ejecución de un programa. Por si aún no "
+"ha quedado claro, las opciones suelen ser *opcionales*. Un programa debería "
+"poder ejecutarse sin problemas sin ninguna opción. (Elija un programa "
+"aleatorio del conjunto de herramientas de Unix o GNU. ¿Puede ejecutarse sin "
+"ninguna opción y aún así tener sentido? Las principales excepciones son "
+"``find``, ``tar`` y ``dd``\\ ---los cuales son todos bichos raros mutantes "
+"que han sido apropiadamente criticados por su sintaxis no estándar y por "
+"tener interfaces confusas)."
 
 #: ../Doc/library/optparse.rst:195
 msgid ""
@@ -285,6 +354,11 @@ msgid ""
 "of information that your program absolutely requires in order to run "
 "successfully, that's what positional arguments are for."
 msgstr ""
+"Mucha gente quiere que sus programas tengan \"opciones requeridas\". Pero "
+"piensa en ello detenidamente. ¡Si es necesario, entonces *no es opcional*! "
+"Si hay una pieza de información absolutamente requerida para que tu programa "
+"pueda ejecutarse correctamente no uses opciones, para eso están los "
+"argumentos posicionales."
 
 #: ../Doc/library/optparse.rst:200
 msgid ""
@@ -294,6 +368,12 @@ msgid ""
 "``cp`` fails if you run it with no arguments.  However, it has a flexible, "
 "useful syntax that does not require any options at all::"
 msgstr ""
+"Como ejemplo de un buen diseño de una interfaz de línea de comandos, "
+"considera la humilde herramienta ``cp`` para copiar archivos. No tiene mucho "
+"sentido intentar copiar archivos sin proporcionar un destino y al menos una "
+"fuente de origen. Por lo tanto, ``cp`` falla si lo ejecuta sin argumentos. "
+"Sin embargo, tiene una sintaxis flexible y útil que no requiere ninguna "
+"opción:"
 
 #: ../Doc/library/optparse.rst:209
 msgid ""
@@ -304,16 +384,26 @@ msgid ""
 "mission of ``cp``, which is to copy either one file to another, or several "
 "files to another directory."
 msgstr ""
+"Puedes hacer mucho simplemente con eso. La mayoría de las implementaciones "
+"de ``cp`` proporcionan un montón de opciones para modificar exactamente cómo "
+"se copian los archivos: se puede preservar el modo y la fecha de "
+"modificación, evitar que se sigan enlaces simbólicos, preguntar antes de "
+"sobrescribir el contenido de archivos existentes, etc. Pero nada de esto "
+"distrae de la misión principal de ``cp``, que consiste en copiar uno o "
+"varios archivos en otro directorio."
 
 #: ../Doc/library/optparse.rst:220
 msgid "What are positional arguments for?"
-msgstr ""
+msgstr "¿Qué finalidad tienen los argumentos posicionales?"
 
 #: ../Doc/library/optparse.rst:222
 msgid ""
 "Positional arguments are for those pieces of information that your program "
 "absolutely, positively requires to run."
 msgstr ""
+"Los argumentos posicionales son adecuados para aquellas piezas de "
+"información que tu programa, absolutamente y sin duda alguna, requiere para "
+"funcionar."
 
 #: ../Doc/library/optparse.rst:225
 msgid ""
@@ -325,6 +415,13 @@ msgid ""
 "configuration file, or a GUI: if you make that many demands on your users, "
 "most of them will simply give up."
 msgstr ""
+"Una buena interfaz de usuario debería tener la menor cantidad de requisitos "
+"absolutos posibles. Si tu programa requiere 17 piezas distintas de "
+"información para ejecutarse correctamente, no importa mucho *cómo* obtengas "
+"esa información del usuario; la mayoría de ellos se rendirán y se irán antes "
+"de ejecutar con éxito el programa. Esto se aplica tanto si la interfaz de "
+"usuario es una línea de comandos, un archivo de configuración o una GUI: si "
+"hace demasiadas demandas a sus usuarios, la mayoría simplemente se rendirá."
 
 #: ../Doc/library/optparse.rst:233
 msgid ""
@@ -338,6 +435,17 @@ msgid ""
 "has drawbacks as well, of course; too many options can overwhelm users and "
 "make your code much harder to maintain."
 msgstr ""
+"En resumen, trata de minimizar la cantidad de información que los usuarios "
+"están absolutamente obligados a proporcionar, utiliza valores "
+"predeterminados sensibles siempre que sea posible. Como es natural, también "
+"deseas que tus programas sean razonablemente flexibles, para eso están las "
+"opciones. De nuevo, no importa si son entradas en un archivo de "
+"configuración, widgets en un cuadro de diálogo de \"Preferencias\" de una "
+"GUI u opciones en la línea de comandos; cuantas más opciones implementes, "
+"más flexible será tu programa y más complicada se vuelve su implementación. "
+"Una excesiva flexibilidad evidentemente también tiene inconvenientes, "
+"demasiadas opciones pueden abrumar a los usuarios y hacer que tu código sea "
+"mucho más difícil de mantener."
 
 #: ../Doc/library/optparse.rst:246
 msgid "Tutorial"
