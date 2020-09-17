@@ -6,31 +6,33 @@
 # Check https://github.com/PyCampES/python-docs-es/blob/3.8/TRANSLATORS to
 # get the list of volunteers
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2020-09-16 21:31+0200\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
+"Language: es\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #: ../Doc/library/email.message.rst:2
 msgid ":mod:`email.message`: Representing an email message"
-msgstr ""
+msgstr ":mod:`email.message`: Representando un mensaje de correo electrónico"
 
 #: ../Doc/library/email.message.rst:10
 msgid "**Source code:** :source:`Lib/email/message.py`"
-msgstr ""
+msgstr "**Código fuente:** :source:`Lib/email/message.py`"
 
 #: ../Doc/library/email.message.rst:14
 msgid "[1]_"
-msgstr ""
+msgstr "[1]_"
 
 #: ../Doc/library/email.message.rst:16
 msgid ""
@@ -40,6 +42,12 @@ msgid ""
 "functionality for setting and querying header fields, for accessing message "
 "bodies, and for creating or modifying structured messages."
 msgstr ""
+"La clase central en el paquete de :mod:`email` es la clase :class:"
+"`EmailMessage`, importada desde el módulo :mod:`email.message`. Esta es la "
+"clase base para el modelo de objeto :mod:`email`. :class:`EmailMessage` "
+"provee la funcionalidad clave para configurar y consultar los *headers*, "
+"para acceder al cuerpo del mensaje, y para crear o modificar la estructura "
+"del mensaje."
 
 #: ../Doc/library/email.message.rst:22
 msgid ""
@@ -53,6 +61,15 @@ msgid ""
 "having a MIME type such as :mimetype:`multipart/\\*` or :mimetype:`message/"
 "rfc822`."
 msgstr ""
+"Un mensaje de e-mail consiste en *headers* y un *payload* (al que también "
+"nos referimos como *content*). *Headers* como :rfc:`5322` o :rfc:`6532` son "
+"nombres de campos de estilo y valores, donde el nombre y valor están "
+"separados por un ':'. Los dos puntos no son parte ni del nombre ni del "
+"valor. El *payload* puede ser un simple mensaje, un objeto binario, o una "
+"secuencia estructurada de sub-mensajes, cada uno con su propio conjunto de "
+"*headers* y su propio *payload*. El último tipo de *payload* es indicado por "
+"el mensaje con un MIME como :mimetype:`multipart/\\*` o :mimetype:`message/"
+"rfc822` ."
 
 #: ../Doc/library/email.message.rst:31
 msgid ""
@@ -65,6 +82,14 @@ msgid ""
 "type), for operating on the payload, for generating a serialized version of "
 "the message, and for recursively walking over the object tree."
 msgstr ""
+"El modelo conceptual provisto por un objeto :class:`EmailMessage` es el de "
+"un diccionario ordenado de *headers* emparejados con un *payload* que "
+"representa al cuerpo del mensaje :rfc:`5322`, que podría ser una lista de "
+"objetos sub-``EmailMessage``. Además de los métodos normales de diccionario "
+"para acceder a los *headers* y valores, tiene métodos para acceder a "
+"información especializada desde los *headers* (por ejemplo, el tipo de "
+"contenido MIME), para operar en el *payload*, generar una versión "
+"serializada del mensaje, y recorrer recursivamente el árbol de objetos."
 
 #: ../Doc/library/email.message.rst:40
 msgid ""
@@ -77,6 +102,7 @@ msgid ""
 "keys."
 msgstr ""
 
+# No encuentro la manera que se me haga correcta de traducir la última oración, la escribí lo mejor que pude.
 #: ../Doc/library/email.message.rst:47
 msgid ""
 "The *payload* is either a string or bytes object, in the case of simple "
@@ -84,6 +110,10 @@ msgid ""
 "container documents such as :mimetype:`multipart/\\*` and :mimetype:`message/"
 "rfc822` message objects."
 msgstr ""
+"El *payload* es un objeto de cadena de caracteres o bytes, en el caso de "
+"objetos de mensaje simples, o una lista de objetos :class:`EmailMessage`, "
+"para documentos de contenedor MIME como :mimetype:`multipart/\\*` y objetos "
+"de mensaje :mimetype:`message/rfc822`."
 
 #: ../Doc/library/email.message.rst:55
 msgid ""
@@ -94,6 +124,12 @@ msgid ""
 "Python standard ``\\n`` line endings).  For more information see the :mod:"
 "`~email.policy` documentation."
 msgstr ""
+"Si se especifica *policy*, use las reglas especificadas para actualizar y "
+"serializar la representación del mensaje. Si *policy* no es establecida, "
+"use :class:`~email.policy.default`, que sigue las reglas RFC de email "
+"excepto para el fin de línea(en lugar del RFC ``\\r\\n``, usa los finales "
+"estándar de Python ``\\n`` como final de línea). Para más información ve a "
+"la documentación del :mod:`~email.policy`."
 
 #: ../Doc/library/email.message.rst:64
 msgid ""
@@ -108,6 +144,17 @@ msgid ""
 "produced by the method, since the specified *policy* will be passed to the :"
 "class:`~email.generator.Generator`."
 msgstr ""
+"Retorna el mensaje entero como cadena de caracteres. Cuando la opción "
+"*unixform* es verdadera, el *header* está incluido en la cadena de "
+"caracteres retornada. *unixform* está predeterminado con valor ``False``. "
+"Por compatibilidad con versiones anteriores, la base :class:`~email.message."
+"Message`, la case *maxheaderlen* es aceptada pero con valor ``None`` como "
+"predeterminado, por lo que la longitud de línea se controla mediante :attr:"
+"`~email.policy.EmailPolicy.max_line_length`. El argumento *policy* puede ser "
+"usado para anular el valor predeterminado obtenido de la instancia del "
+"mensaje. Esto puede ser usado para controlar parte del formato producido por "
+"el método, ya que el *policy* especificado pasará a :class:`~email.generator."
+"Generator`."
 
 #: ../Doc/library/email.message.rst:76 ../Doc/library/email.message.rst:114
 msgid ""
@@ -115,6 +162,10 @@ msgid ""
 "defaults need to be filled in to complete the transformation to a string "
 "(for example, MIME boundaries may be generated or modified)."
 msgstr ""
+"Aplanar el mensaje puede acarrear cambios en :class:`EmailMessage` si es "
+"necesario rellenar los valores predeterminados para completar la "
+"transformación a una cadena de caracteres (por ejemplo, se pueden generar o "
+"modificar límites MIME)."
 
 #: ../Doc/library/email.message.rst:80
 msgid ""
@@ -125,6 +176,13 @@ msgid ""
 "restricted to producing messages serialized as \"7 bit clean\" when :attr:"
 "`~email.policy.EmailPolicy.utf8` is ``False``, which is the default."
 msgstr ""
+"Tenga en cuenta que este método se proporciona como una comodidad y quizás "
+"no sea la forma más eficiente de serializar mensajes en su aplicación, "
+"especialmente si estás tratando con múltiples mensajes. Consulte :class:"
+"`~email.generator.Generator` por una API más flexible para serializar "
+"mensajes. No olvide también que este método está restringido a producir "
+"mensajes serializados como \"7 bit clean\" cuando :attr:`~email.policy.Email."
+"Policy.utf8` es ``False``, que es el valor predeterminado."
 
 #: ../Doc/library/email.message.rst:88
 msgid ""
@@ -132,6 +190,8 @@ msgid ""
 "defaulting to 0 to defaulting to the value of *max_line_length* from the "
 "policy."
 msgstr ""
+"el comportamiento predeterminado cuando *maxheaderlen* no está especificado "
+"cambió de 0 al valor de *max_line_length* ."
 
 #: ../Doc/library/email.message.rst:95
 msgid ""
@@ -139,6 +199,9 @@ msgid ""
 "``str(msg)`` to produce a string containing the serialized message in a "
 "readable format."
 msgstr ""
+"Equivalente a ``as_string(policy=self.policy.clone(utf8=True))``. Permite "
+"``str(msg)`` para producir un *string* que contenga un mensaje serializado "
+"en un formato legible."
 
 #: ../Doc/library/email.message.rst:99
 msgid ""
@@ -146,6 +209,8 @@ msgid ""
 "like message representation, instead of being a direct alias for :meth:"
 "`as_string`."
 msgstr ""
+"el método se cambió para usar ``utf8=True``, produciendo así un :rfc:`6531` "
+"como representación del mensaje, en vez de ser un alias de :meth:`as_string`."
 
 #: ../Doc/library/email.message.rst:106
 msgid ""
@@ -157,6 +222,13 @@ msgid ""
 "specified *policy* will be passed to the :class:`~email.generator."
 "BytesGenerator`."
 msgstr ""
+"Retorna el mensaje plano como un objeto de bytes. Cuando *unixform* es "
+"verdadero, el *header* es incluido en la cadena de caracteres retornada. El "
+"valor predeterminado de *unixform* es ``False``. El argumento *policy* puede "
+"ser usado para sobreescribir el valor predeterminado obtenido de la "
+"instancia del mensaje. Esto puede ser usado para controlar parte del formato "
+"producido por el método, ya que el *policy* especificado pasará a :class:"
+"`~email.generator.Generator`."
 
 #: ../Doc/library/email.message.rst:118
 msgid ""
@@ -165,12 +237,19 @@ msgid ""
 "dealing with multiple messages.  See :class:`email.generator.BytesGenerator` "
 "for a more flexible API for serializing messages."
 msgstr ""
+"Tenga en cuenta que este método se proporciona como una comodidad y quizás "
+"no sea la forma más eficiente de serializar mensajes en su aplicación, "
+"especialmente si estas tratando con múltiples mensajes. Consulte :class:"
+"`~email.generator.Generator` por una API más flexible para serializar "
+"mensajes."
 
 #: ../Doc/library/email.message.rst:127
 msgid ""
 "Equivalent to :meth:`.as_bytes()`.  Allows ``bytes(msg)`` to produce a bytes "
 "object containing the serialized message."
 msgstr ""
+"Equivalente a :meth:`.as_bytes()`. Permite ``bytes(msg)`` para producir un "
+"objeto byte que contenga el mensaje serializado."
 
 #: ../Doc/library/email.message.rst:133
 msgid ""
@@ -183,18 +262,31 @@ msgid ""
 "example, ``is_multipart`` will return ``True`` when the :class:"
 "`EmailMessage` is of type ``message/rfc822``."
 msgstr ""
+"Retorna ``True`` si el *payload* del mensaje es una lista de objetos de sub-"
+"\\ :class:`EmailMessage`, de otra manera retorna ``False``. Cuando :meth:"
+"`is_multipart` retorna ``False``, el *payload* deberá ser un objeto cadena "
+"de caracteres (que podría ser un *payload* binario codificado con CTE). Note "
+"que si :meth:`is_multipart` retorna ``True`` no necesariamente significa que "
+"\"msg.get_content_maintype() == 'multipart'\" retornará ``True``. Por "
+"ejemplo, ``is_multipart`` retornará ``True`` cuando la :class:`EmailMessage` "
+"sea del tipo ``message/rfc822``."
 
 #: ../Doc/library/email.message.rst:145
 msgid ""
 "Set the message's envelope header to *unixfrom*, which should be a string.  "
 "(See :class:`~mailbox.mboxMessage` for a brief description of this header.)"
 msgstr ""
+"Configura la cabecera del mensaje a *unixform*, que debería ser una cadena "
+"de caracteres. (Consulte :class:`~mailbox.mboxMessage` para una descripción "
+"de este *header*)"
 
 #: ../Doc/library/email.message.rst:152
 msgid ""
 "Return the message's envelope header.  Defaults to ``None`` if the envelope "
 "header was never set."
 msgstr ""
+"Retorna la cabecera del mensaje. Predeterminado ``None`` si la cabecera no "
+"ha sido configurada."
 
 #: ../Doc/library/email.message.rst:156
 msgid ""
@@ -209,22 +301,36 @@ msgid ""
 "header deleted and then re-added is always appended to the end of the header "
 "list."
 msgstr ""
+"Los siguientes métodos implementan el mapeo como una interfaz para acceder "
+"al *header* del mensaje. Tenga en cuenta que hay algunas diferencias "
+"semánticas entre esos métodos y una interfaz de mapeo normal(es decir, "
+"diccionario). Por ejemplo, en un diccionario no hay claves duplicadas, pero "
+"pueden haber *headers* duplicados. Además, en los diccionarios no hay un "
+"orden garantizado para las claves retornadas por :meth:`keys`, pero en un "
+"objeto :class:`EmailMessage`, los *headers* siempre regresan en orden de "
+"aparición en el mensaje original, o en el que fueron agregados luego. "
+"Cualquier *header* borrado y vuelto a añadir siempre se agrega al final de "
+"la lista."
 
 #: ../Doc/library/email.message.rst:167
 msgid ""
 "These semantic differences are intentional and are biased toward convenience "
 "in the most common use cases."
 msgstr ""
+"Estas diferencias semánticas son intencionales y están sesgadas hacia la "
+"conveniencia en los casos de uso más comunes."
 
 #: ../Doc/library/email.message.rst:170
 msgid ""
 "Note that in all cases, any envelope header present in the message is not "
 "included in the mapping interface."
 msgstr ""
+"Note que en todos los casos, cualquier *header* presente en el mensaje no se "
+"incluye en la interfaz de mapeo."
 
 #: ../Doc/library/email.message.rst:176
 msgid "Return the total number of headers, including duplicates."
-msgstr ""
+msgstr "Retorna el número total de *headers*, incluidos los duplicados."
 
 #: ../Doc/library/email.message.rst:181
 msgid ""
@@ -232,6 +338,9 @@ msgid ""
 "done without regard to case and *name* does not include the trailing colon.  "
 "Used for the ``in`` operator.  For example::"
 msgstr ""
+"Retorna ``True`` si el objeto del mensaje tiene un campo llamado 'nombre'. "
+"La comparación se realiza sin tener en cuenta mayúsculas o minúsculas y "
+"'nombre' no incluye ':'.  Se utiliza para el operador ``in`` Por ejemplo::"
 
 #: ../Doc/library/email.message.rst:191
 msgid ""
@@ -239,6 +348,9 @@ msgid ""
 "colon field separator.  If the header is missing, ``None`` is returned; a :"
 "exc:`KeyError` is never raised."
 msgstr ""
+"Retorna el valor del *header* nombrado. *name* no incluye el separador de "
+"dos puntos, ':'. Si el *header* se pierde, regresa ``None``, un :exc:"
+"`KeyError` no se genera nunca."
 
 #: ../Doc/library/email.message.rst:195
 msgid ""
@@ -247,18 +359,26 @@ msgid ""
 "Use the :meth:`get_all` method to get the values of all the extant headers "
 "named *name*."
 msgstr ""
+"Tenga en cuenta que si el campo nombrado aparece más de una vez en el "
+"*header* del mensaje, esa cantidad de veces el valor regresado será "
+"indefinido. Use el método :meth:`get_all` para obtener los valores de todos "
+"los *headers* existentes llamados *name*."
 
 #: ../Doc/library/email.message.rst:200
 msgid ""
 "Using the standard (non-``compat32``) policies, the returned value is an "
 "instance of a subclass of :class:`email.headerregistry.BaseHeader`."
 msgstr ""
+"Usando el *standard non-'compat32'*, el valor regresado es una instancia de "
+"una subclase de :class:`email.headerregistry.BaseHeader`."
 
 #: ../Doc/library/email.message.rst:206
 msgid ""
 "Add a header to the message with field name *name* and value *val*.  The "
 "field is appended to the end of the message's existing headers."
 msgstr ""
+"Agrega un *header* al mensaje con un campo 'nombre' y un valor 'val'. El "
+"campo se agrega al final de los *headers* existentes en el mensaje."
 
 #: ../Doc/library/email.message.rst:209
 msgid ""
@@ -266,6 +386,9 @@ msgid ""
 "same name.  If you want to ensure that the new header is the only one "
 "present in the message with field name *name*, delete the field first, e.g.::"
 msgstr ""
+"Tenga en cuenta que esto no sobrescribe ni borra ningún *header* con el "
+"mismo nombre. Si quiere asegurarse de que el nuevo *header* es el único en "
+"el mensaje con el campo 'nombre', borre el campo primero, por ejemplo::"
 
 #: ../Doc/library/email.message.rst:216
 msgid ""
@@ -276,6 +399,11 @@ msgid ""
 "we may choose to make such assignments do an automatic deletion of the "
 "existing header in the future."
 msgstr ""
+"Si el :mod:`policy` define ciertos *headers* para ser únicos(como lo hace el "
+"*standard*), este método puede generar un :exc:`ValueError` cuando se "
+"intenta asignar un valor a un *header* preexistente. Este comportamiento es "
+"intencional por consistencia, pero no dependa de ello, ya que podemos optar "
+"por hacer que tales asignaciones eliminen el *header* en el futuro."
 
 #: ../Doc/library/email.message.rst:226
 msgid ""
@@ -283,20 +411,27 @@ msgid ""
 "headers.  No exception is raised if the named field isn't present in the "
 "headers."
 msgstr ""
+"Elimine todas las apariciones del campo 'nombre' de los *headers* del "
+"mensaje. No se genera ninguna excepción si el campo nombrado no está "
+"presente en los encabezados."
 
 #: ../Doc/library/email.message.rst:233
 msgid "Return a list of all the message's header field names."
 msgstr ""
+"Retorna una lista de los nombres de todos los campos del *header* del "
+"mensaje."
 
 #: ../Doc/library/email.message.rst:238
 msgid "Return a list of all the message's field values."
-msgstr ""
+msgstr "Retorna una lista de todos los valores de los campos del mensaje."
 
 #: ../Doc/library/email.message.rst:243
 msgid ""
 "Return a list of 2-tuples containing all the message's field headers and "
 "values."
 msgstr ""
+"Retorna una lista de 2 tuplas que contienen todos los campos *header* y "
+"*value* del mensaje."
 
 #: ../Doc/library/email.message.rst:249
 msgid ""
@@ -304,10 +439,14 @@ msgid ""
 "`__getitem__` except that optional *failobj* is returned if the named header "
 "is missing (*failobj* defaults to ``None``)."
 msgstr ""
+"Retorna el valor del *header* nombrado. Esto es idéntico a :meth:"
+"`__getitem__` excepto si el opcional *failobj* regresado en el *header* "
+"nombrado no se encuentra(*failobj* es por defecto ``None``)."
 
 #: ../Doc/library/email.message.rst:254
 msgid "Here are some additional useful header related methods:"
 msgstr ""
+"Aquí hay algunos métodos adicionales útiles relacionados con el *header*:"
 
 #: ../Doc/library/email.message.rst:259
 msgid ""
@@ -315,6 +454,9 @@ msgid ""
 "such named headers in the message, *failobj* is returned (defaults to "
 "``None``)."
 msgstr ""
+"Retorna una lista de todos los valores para el campo *nombre*. Si no se "
+"nombran tales *headers* en el mensaje, regresa *failobj* (por defecto "
+"``None``)"
 
 #: ../Doc/library/email.message.rst:266
 msgid ""
@@ -323,6 +465,9 @@ msgid ""
 "arguments.  *_name* is the header field to add and *_value* is the *primary* "
 "value for the header."
 msgstr ""
+"Configuración extendida de *headers*. Este método es similar a :meth:"
+"`__setitem__`, excepto que se pueden proporcionar parámetros de *header* "
+"adicionales como argumentos de palabras clave."
 
 #: ../Doc/library/email.message.rst:271
 msgid ""
@@ -332,6 +477,11 @@ msgid ""
 "as ``key=\"value\"`` unless the value is ``None``, in which case only the "
 "key will be added."
 msgstr ""
+"Por cada ítem en los parámetros del diccionario *_params*, la clave se toma "
+"como el nombre del parámetro, con barra baja ('_') convertidos a guiones "
+"('-') (ya que en Python no se permiten '-' como identificadores). "
+"Normalmente, el parámetro debe ser añadido como ``key='value'`` a menos que "
+"el valor sea ``None``, en ese caso solo la clave debe ser añadida."
 
 #: ../Doc/library/email.message.rst:277
 msgid ""
@@ -345,18 +495,28 @@ msgid ""
 "automatically encoded in :rfc:`2231` format using a ``CHARSET`` of ``utf-8`` "
 "and a ``LANGUAGE`` of ``None``."
 msgstr ""
+"Si el valor contiene caracteres no-ASCII, el *charset* y el lenguaje deben "
+"ser controlados especificando el valor como una triple tupla en formato "
+"``(CHARSET, LANGUAJE, VALUE)``, donde ``CHARSET`` es una *string* llamando "
+"al *charset* usado para codificar el valor, ``LANGUAJE`` generalmente se "
+"establece en ``None`` o en una cadena de caracteres vacía (consulte :rfc:"
+"`2231` para más opciones), y ``VALUE`` es el valor de la cadena de "
+"caracteres que contiene puntos de código no-ASCII. Si la triple tupla no "
+"pasa y el valor contiene caracteres no-ASCII, es automáticamente codificada "
+"en formato :rfc:`2231`, usando ``CHARSET`` de ``utf-8`` y ``LANGUAJE`` "
+"``None``."
 
 #: ../Doc/library/email.message.rst:287
 msgid "Here is an example::"
-msgstr ""
+msgstr "Aquí hay un ejemplo::"
 
 #: ../Doc/library/email.message.rst:291
 msgid "This will add a header that looks like ::"
-msgstr ""
+msgstr "Esto agregará un *header* que se ve como::"
 
 #: ../Doc/library/email.message.rst:295
 msgid "An example of the extended interface with non-ASCII characters::"
-msgstr ""
+msgstr "Un ejemplo de la interfaz extendida con caracteres no-ASCII::"
 
 #: ../Doc/library/email.message.rst:303
 msgid ""
@@ -364,6 +524,10 @@ msgid ""
 "matches *_name*, retaining header order and field name case of the original "
 "header.  If no matching header is found, raise a :exc:`KeyError`."
 msgstr ""
+"Reemplaza un *header*. Reemplaza el primer *header* encontrado en el mensaje "
+"que coincida con *_name*, conservando el orden de *header* y uso de "
+"minúsculas (y mayúsculas) del nombre de campo del *header* original. Si no "
+"hay coincidencia, se lanzará un :exc:`KeyError`."
 
 #: ../Doc/library/email.message.rst:311
 msgid ""
@@ -373,6 +537,10 @@ msgid ""
 "`get_default_type`.  If the :mailheader:`Content-Type` header is invalid, "
 "return ``text/plain``."
 msgstr ""
+"Retorna el tipo de contenido del mensaje, pasado a minúsculas de la forma :"
+"mimetype:`maintype/subtype`. Si no hay *header* llamado :mailheader:`Content-"
+"Type` en el mensaje, regresa el valor de :meth:`get_default_type`. Si :"
+"mailheader:`Content-Type` no es válido, retorna ``text/plain``."
 
 #: ../Doc/library/email.message.rst:317
 msgid ""
@@ -446,6 +614,8 @@ msgid ""
 "Use of the *requote* parameter with :class:`EmailMessage` objects is "
 "deprecated."
 msgstr ""
+"El uso del parámetro *requote* con objetos :class:`EmailMessage` está "
+"obsoleto."
 
 #: ../Doc/library/email.message.rst:380
 msgid ""
@@ -456,7 +626,7 @@ msgstr ""
 
 #: ../Doc/library/email.message.rst:384
 msgid "``replace`` keyword was added."
-msgstr ""
+msgstr "Se agregó la palabra clave ``replace``."
 
 #: ../Doc/library/email.message.rst:389
 msgid ""
@@ -548,6 +718,8 @@ msgid ""
 "The following methods relate to interrogating and manipulating the content "
 "(payload) of the message."
 msgstr ""
+"Los siguientes métodos se refieren a interrogar y manipular el contenido "
+"(*payload*) del mensaje."
 
 #: ../Doc/library/email.message.rst:477
 msgid ""
@@ -562,6 +734,8 @@ msgid ""
 "Here's an example that prints the MIME type of every part of a multipart "
 "message structure:"
 msgstr ""
+"Aquí hay un ejemplo que imprime el tipo MIME de cada parte de una estructura "
+"de mensaje de varias partes:"
 
 #: ../Doc/library/email.message.rst:503
 msgid ""
@@ -583,6 +757,8 @@ msgid ""
 "Return the MIME part that is the best candidate to be the \"body\" of the "
 "message."
 msgstr ""
+"Retorna la parte MIME que es la mejor candidata para ser el \"cuerpo\" del "
+"mensaje."
 
 #: ../Doc/library/email.message.rst:541
 msgid ""
@@ -596,6 +772,8 @@ msgid ""
 "Start looking for candidate matches with the object on which the "
 "``get_body`` method is called."
 msgstr ""
+"Empieza a buscar coincidencias candidatas con el objeto en el que se llama "
+"al método ``get_body``'."
 
 #: ../Doc/library/email.message.rst:548
 msgid ""
@@ -623,6 +801,8 @@ msgid ""
 "If none of the candidates matches any of the preferences in "
 "*preferencelist*, return ``None``."
 msgstr ""
+"Si ninguno de los candidatos coincide con ninguna de las preferencias en "
+"*preferencelist*, retorna ``None``."
 
 #: ../Doc/library/email.message.rst:563
 msgid ""
@@ -748,7 +928,7 @@ msgstr ""
 
 #: ../Doc/library/email.message.rst:689
 msgid "Remove the payload and all of the headers."
-msgstr ""
+msgstr "Elimina el *payload* y todos los *headers*."
 
 #: ../Doc/library/email.message.rst:694
 msgid ""
@@ -813,7 +993,7 @@ msgstr ""
 
 #: ../Doc/library/email.message.rst:748
 msgid "Footnotes"
-msgstr ""
+msgstr "Notas al pie"
 
 #: ../Doc/library/email.message.rst:749
 msgid ""
