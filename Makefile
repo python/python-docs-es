@@ -41,7 +41,8 @@ help:
 #        treated as errors, which is good to skip simple Sphinx syntax mistakes.
 .PHONY: build
 build: setup
-	PYTHONWARNINGS=ignore::FutureWarning $(VENV)/bin/sphinx-build -j auto -W --keep-going -b html -d $(OUTPUT_DOCTREE) -D language=$(LANGUAGE) . $(OUTPUT_HTML) && \
+	source $(VENV)/bin/activate && \
+		PYTHONWARNINGS=ignore::FutureWarning $(VENV)/bin/sphinx-build -j auto -W --keep-going -b html -d $(OUTPUT_DOCTREE) -D language=$(LANGUAGE) . $(OUTPUT_HTML) && \
 		echo "Success! Open file://`pwd`/$(OUTPUT_HTML)/index.html, " \
 			"or run 'make serve' to see them in http://localhost:8000";
 
@@ -64,7 +65,7 @@ venv:
 		$(PYTHON) -m venv --prompt $(LANGUAGE_TEAM) $(VENV);             \
 	fi
 
-	$(VENV)/bin/python -m pip install -q -r requirements.txt
+	source $(VENV)/bin/activate && $(VENV)/bin/python -m pip install -q -r requirements.txt
 
 
 # serve: serve the documentation in a simple local web server, using cpython
@@ -84,7 +85,7 @@ clean:
 
 .PHONY: progress
 progress: venv
-	$(VENV)/bin/potodo --offline --path tutorial/
+	source $(VENV)/bin/activate && $(VENV)/bin/potodo --offline --path tutorial/
 
 
 .PHONY: spell
@@ -92,12 +93,12 @@ spell: venv
 	# 'cat' tenia el problema que algunos archivos no tenían una nueva línea al final
 	# 'awk 1' agregará una nueva línea en caso que falte.
 	awk 1 dict dictionaries/*.txt > dict.txt
-	$(VENV)/bin/pospell -p dict.txt -l es_ES **/*.po
+	source $(VENV)/bin/activate && $(VENV)/bin/pospell -p dict.txt -l es_ES **/*.po
 
 
 .PHONY: wrap
 wrap: venv
-	$(VENV)/bin/powrap **/*.po
+	source $(VENV)/bin/activate && $(VENV)/bin/powrap **/*.po
 
 .PHONY: dict_dups
 SHELL:=/bin/bash
