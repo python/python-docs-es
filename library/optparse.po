@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-09-17 11:14+0200\n"
+"PO-Revision-Date: 2020-09-18 11:05+0200\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -582,7 +582,7 @@ msgstr ""
 "Las acciones le dicen a :mod:`optparse` qué hacer cuando encuentra una "
 "determinada opción en la línea de comandos. Hay un conjunto fijo de acciones "
 "codificadas en :mod:`optparse`. Agregar nuevas acciones es un tema avanzado "
-"cubierto en la sección :ref:`optparse-extend-optparse`. La mayoría de las "
+"cubierto en la sección :ref:`optparse-extending-optparse`. La mayoría de las "
 "acciones indican a :mod:`optparse` que almacene un valor en alguna variable, "
 "por ejemplo, tomar una cadena de caracteres de la línea de comandos y "
 "almacenarla en un atributo ``options``."
@@ -694,7 +694,7 @@ msgid ""
 "is covered in section :ref:`optparse-extending-optparse`."
 msgstr ""
 ":mod:`optparse` también incluye el tipo incorporado ``complex``. La adición "
-"de nuevos tipos se cubre en la sección :ref:`optparse-extend-optparse`."
+"de nuevos tipos se cubre en la sección :ref:`optparse-extending-optparse`."
 
 #: ../Doc/library/optparse.rst:380
 msgid "Handling boolean (flag) options"
@@ -808,8 +808,8 @@ msgid ""
 "set ``verbose`` to ``True`` unless ``-q`` is seen, then we can do this::"
 msgstr ""
 "Primero, considera el ejemplo verbose/quiet anterior. Si queremos que :mod:"
-"`optparse` establezca ``verbose`` en ``True`` a menos que vea ``-q ``, "
-"entonces podemos hacer esto::"
+"`optparse` establezca ``verbose`` en ``True`` a menos que encuentre ``-q``, "
+"entonces podemos hacer lo siguiente::"
 
 #: ../Doc/library/optparse.rst:440
 msgid ""
@@ -856,7 +856,7 @@ msgstr ""
 
 #: ../Doc/library/optparse.rst:470
 msgid "Generating help"
-msgstr ""
+msgstr "Generando ayuda"
 
 #: ../Doc/library/optparse.rst:472
 msgid ""
@@ -866,6 +866,12 @@ msgid ""
 "short usage message for your whole program.  Here's an OptionParser "
 "populated with user-friendly (documented) options::"
 msgstr ""
+"La capacidad de :mod:`optparse` para generar ayuda y texto de uso "
+"automáticamente es útil para crear interfaces de línea de comandos fáciles "
+"de usar. Todo lo que tienes que hacer es proporcionar un valor :attr:`~ "
+"Option.help` para cada opción y, opcionalmente, un breve mensaje de uso para "
+"el programa en general. A continuación hay un OptionParser al que se le han "
+"añadido múltiples opciones fáciles de usar (documentadas)::"
 
 #: ../Doc/library/optparse.rst:493
 msgid ""
@@ -873,22 +879,29 @@ msgid ""
 "line, or if you just call :meth:`parser.print_help`, it prints the following "
 "to standard output:"
 msgstr ""
+"Si :mod:`optparse` encuentra ``-h`` o ``--help`` en la línea de comandos, o "
+"si simplemente se llama al método :meth:`parser.print_help`, se imprime lo "
+"siguiente en la salida estándar :"
 
 #: ../Doc/library/optparse.rst:510
 msgid ""
 "(If the help output is triggered by a help option, :mod:`optparse` exits "
 "after printing the help text.)"
 msgstr ""
+"(Si la salida de ayuda se activa mediante una opción de ayuda, :mod:"
+"`optparse` termina después de imprimir el texto de ayuda.)"
 
 #: ../Doc/library/optparse.rst:513
 msgid ""
 "There's a lot going on here to help :mod:`optparse` generate the best "
 "possible help message:"
 msgstr ""
+"Hay mucho trabajo por hacer aquí para ayudar a que :mod:`optparse` genere el "
+"mejor mensaje de ayuda posible:"
 
 #: ../Doc/library/optparse.rst:516
 msgid "the script defines its own usage message::"
-msgstr ""
+msgstr "el script define su propio mensaje de uso::"
 
 #: ../Doc/library/optparse.rst:520
 msgid ""
@@ -896,6 +909,10 @@ msgid ""
 "current program, i.e. ``os.path.basename(sys.argv[0])``.  The expanded "
 "string is then printed before the detailed option help."
 msgstr ""
+":mod:`optparse` expande ``% prog`` en la cadena de uso reemplazándolo por el "
+"nombre del programa actual, es decir, ``os.path.basename (sys.argv [0])``. A "
+"continuación, la cadena expandida se imprime antes de la ayuda detallada de "
+"la opción."
 
 #: ../Doc/library/optparse.rst:524
 msgid ""
@@ -903,6 +920,9 @@ msgid ""
 "sensible default: ``\"Usage: %prog [options]\"``, which is fine if your "
 "script doesn't take any positional arguments."
 msgstr ""
+"Si no proporciona una cadena de uso, :mod:`optparse` usa un valor "
+"predeterminado anodino pero apropiado: ``\"Usage: %prog [options]\"``, lo "
+"cual está bien si tu script no toma ningún argumento posicional."
 
 #: ../Doc/library/optparse.rst:528
 msgid ""
@@ -910,12 +930,17 @@ msgid ""
 "\\ :mod:`optparse` takes care of wrapping lines and making the help output "
 "look good."
 msgstr ""
+"cada opción simplemente define una cadena de ayuda y no se preocupa por el "
+"ajuste de línea. :mod:`optparse` se encarga de ajustar las líneas y hacer "
+"que la salida de ayuda se vea bien."
 
 #: ../Doc/library/optparse.rst:532
 msgid ""
 "options that take a value indicate this fact in their automatically-"
 "generated help message, e.g. for the \"mode\" option::"
 msgstr ""
+"las opciones que toman un valor indican este hecho en su mensaje de ayuda "
+"generado automáticamente, por ejemplo, para la opción \"*mode*\"::"
 
 #: ../Doc/library/optparse.rst:537
 msgid ""
@@ -926,6 +951,13 @@ msgid ""
 "the ``--filename`` option explicitly sets ``metavar=\"FILE\"``, resulting in "
 "this automatically-generated option description::"
 msgstr ""
+"Aquí, a \"*MODE*\" se le denomina una metavariable: representa el argumento "
+"que se espera que el usuario proporcione a ``-m``/``--mode``. De forma "
+"predeterminada, :mod:`optparse` convierte el nombre de la variable de "
+"destino a mayúsculas y lo usa para la metavariable. En ocasiones, eso no es "
+"lo que se desea, por ejemplo, la opción ``--filename`` establece "
+"explícitamente ``metavar=\"FILE\"``, lo que da como resultado la siguiente "
+"descripción de opción generada automáticamente::"
 
 #: ../Doc/library/optparse.rst:546
 msgid ""
@@ -936,6 +968,12 @@ msgid ""
 "effective way to make your help text a lot clearer and more useful for end "
 "users."
 msgstr ""
+"Sin embargo, esto es importante para algo más que para ahorrar espacio: el "
+"texto de ayuda escrito manualmente utiliza la metavariable ``FILE`` para "
+"indicarle al usuario que hay una conexión entre la sintaxis semiformal ``-f "
+"FILE`` y la descripción semántica informal \"escribir salida en FILE\". Esta "
+"es una manera simple pero efectiva de hacer que su texto de ayuda sea mucho "
+"más claro y útil para los usuarios finales."
 
 #: ../Doc/library/optparse.rst:552
 #, python-format
@@ -945,10 +983,15 @@ msgid ""
 "default value.  If an option has no default value (or the default value is "
 "``None``), ``%default`` expands to ``none``."
 msgstr ""
+"las opciones que tienen un valor predeterminado pueden incluir ``%default`` "
+"en la cadena de ayuda, en cuyo caso, :mod:`optparse` lo reemplazará por el "
+"resultado de aplicar :func:`str` al valor por defecto de esa opción. Si una "
+"opción no tiene un valor por defecto (o el valor por defecto es ``None``), ``"
+"%default`` se reemplaza por ``none``."
 
 #: ../Doc/library/optparse.rst:558
 msgid "Grouping Options"
-msgstr ""
+msgstr "Opciones de agrupación"
 
 #: ../Doc/library/optparse.rst:560
 msgid ""
@@ -956,27 +999,34 @@ msgid ""
 "better help output.  An :class:`OptionParser` can contain several option "
 "groups, each of which can contain several options."
 msgstr ""
+"Cuando se trabaja con muchas opciones, suele ser conveniente agruparlas para "
+"obtener una mejor salida de ayuda. La clase :class:`OptionParser` puede "
+"contener varios grupos de opciones, cada uno de los cuales puede contener "
+"múltiples opciones."
 
 #: ../Doc/library/optparse.rst:564
 msgid "An option group is obtained using the class :class:`OptionGroup`:"
 msgstr ""
+"Podemos obtener un grupo de opciones usando la clase :clase:`OptionGroup`:"
 
 #: ../Doc/library/optparse.rst:568 ../Doc/library/optparse.rst:1620
 msgid "where"
-msgstr ""
+msgstr "donde"
 
 #: ../Doc/library/optparse.rst:570
 msgid ""
 "parser is the :class:`OptionParser` instance the group will be inserted in to"
 msgstr ""
+"*parser* es la instancia de :class:`OptionParser` en la que se insertará el "
+"grupo"
 
 #: ../Doc/library/optparse.rst:572
 msgid "title is the group title"
-msgstr ""
+msgstr "*title* es el título dado al grupo"
 
 #: ../Doc/library/optparse.rst:573
 msgid "description, optional, is a long description of the group"
-msgstr ""
+msgstr "*description*, opcional, es la descripción larga del grupo"
 
 #: ../Doc/library/optparse.rst:575
 msgid ""
@@ -984,38 +1034,50 @@ msgid ""
 "`OptionParser`) and so the :meth:`add_option` method can be used to add an "
 "option to the group."
 msgstr ""
+"la clase :class:`OptionGroup` hereda de :class:`OptionContainer` (al igual "
+"que :class:`OptionParser`), por lo que el método :meth:`add_option` se puede "
+"usar para agregar una opción al grupo."
 
 #: ../Doc/library/optparse.rst:579
 msgid ""
 "Once all the options are declared, using the :class:`OptionParser` method :"
 "meth:`add_option_group` the group is added to the previously defined parser."
 msgstr ""
+"Una vez que se han declarado todas las opciones, usando el método :meth:"
+"`add_option_group` de la clase :class:`OptionParser` el grupo se agrega al "
+"analizador sintáctico previamente definido."
 
 #: ../Doc/library/optparse.rst:582
 msgid ""
 "Continuing with the parser defined in the previous section, adding an :class:"
 "`OptionGroup` to a parser is easy::"
 msgstr ""
+"Agregar un :class:`OptionGroup` a un analizador es fácil, continuando con el "
+"analizador definido en la sección anterior::"
 
 #: ../Doc/library/optparse.rst:591
 msgid "This would result in the following help output:"
-msgstr ""
+msgstr "Esto daría como resultado la siguiente salida de ayuda:"
 
 #: ../Doc/library/optparse.rst:612
 msgid ""
 "A bit more complete example might involve using more than one group: still "
 "extending the previous example::"
 msgstr ""
+"Un ejemplo un poco más completo podría implicar el uso de más de un grupo, "
+"ampliando el ejemplo anterior::"
 
 #: ../Doc/library/optparse.rst:629
 msgid "that results in the following output:"
-msgstr ""
+msgstr "lo que da como resultado la siguiente salida:"
 
 #: ../Doc/library/optparse.rst:655
 msgid ""
 "Another interesting method, in particular when working programmatically with "
 "option groups is:"
 msgstr ""
+"Otro método interesante, particularmente cuando se trabaja programáticamente "
+"con grupos de opciones, es:"
 
 #: ../Doc/library/optparse.rst:660
 msgid ""
@@ -1023,10 +1085,13 @@ msgid ""
 "*opt_str* (e.g. ``'-o'`` or ``'--option'``) belongs. If there's no such :"
 "class:`OptionGroup`, return ``None``."
 msgstr ""
+"Retorna el :class:`OptionGroup` al que pertenece la cadena de opciones corta "
+"o larga *opt_str* (por ejemplo,``'-o'`` o ``' --option'``). Si no existe "
+"dicho :class:`OptionGroup`, el método retorna ``None``."
 
 #: ../Doc/library/optparse.rst:667
 msgid "Printing a version string"
-msgstr ""
+msgstr "Imprime una cadena de caracteres con la versión del programa"
 
 #: ../Doc/library/optparse.rst:669
 msgid ""
@@ -1034,6 +1099,9 @@ msgid ""
 "string for your program.  You have to supply the string as the ``version`` "
 "argument to OptionParser::"
 msgstr ""
+"Similar a la cadena de uso abreviada, :mod:`optparse` también puede imprimir "
+"una cadena de versión para su programa. Debe proporcionar la cadena como "
+"argumento de ``version`` para OptionParser::"
 
 #: ../Doc/library/optparse.rst:675
 msgid ""
@@ -1043,16 +1111,24 @@ msgid ""
 "encounters this option on the command line, it expands your ``version`` "
 "string (by replacing ``%prog``), prints it to stdout, and exits."
 msgstr ""
+"``%prog`` se expande al igual que en ``usage``. Aparte de eso, ``version`` "
+"puede contener cualquier cosa que desee. Cuando se proporciona, :mod:"
+"`optparse` agrega automáticamente una opción ``--version`` al analizador. Si "
+"encuentra esta opción en la línea de comandos, expande la cadena ``version`` "
+"(reemplazando ``%prog``), la imprime en la salida estándar y termina la "
+"ejecución."
 
 #: ../Doc/library/optparse.rst:681
 msgid "For example, if your script is called ``/usr/bin/foo``:"
-msgstr ""
+msgstr "Por ejemplo, si tu script se llama ``/usr/bin/foo``:"
 
 #: ../Doc/library/optparse.rst:688
 msgid ""
 "The following two methods can be used to print and get the ``version`` "
 "string:"
 msgstr ""
+"Para imprimir y obtener la cadena de caracteres ``version``, se pueden "
+"utilizar los dos siguientes métodos:"
 
 #: ../Doc/library/optparse.rst:692
 msgid ""
@@ -1061,16 +1137,23 @@ msgid ""
 "%prog`` in ``self.version`` is replaced with the name of the current "
 "program.  Does nothing if ``self.version`` is empty or undefined."
 msgstr ""
+"Imprime el mensaje con la versión del programa actual (``self.version``) en "
+"*file* (por defecto, la salida estándar). Al igual que con :meth:"
+"`print_usage`, cualquier aparición de ``%prog`` en ``self.version`` se "
+"reemplaza con el nombre del programa actual. El método no hace nada si "
+"``self.version`` está vacío o no está definido."
 
 #: ../Doc/library/optparse.rst:699
 msgid ""
 "Same as :meth:`print_version` but returns the version string instead of "
 "printing it."
 msgstr ""
+"Igual que :meth:`print_version`, pero retorna la cadena de versión en lugar "
+"de imprimirla."
 
 #: ../Doc/library/optparse.rst:706
 msgid "How :mod:`optparse` handles errors"
-msgstr ""
+msgstr "Cómo maneja los errores el módulo :mod:`optparse`"
 
 #: ../Doc/library/optparse.rst:708
 msgid ""
@@ -1081,6 +1164,13 @@ msgid ""
 "are dealt with in the usual way: raise an exception (either :exc:`optparse."
 "OptionError` or :exc:`TypeError`) and let the program crash."
 msgstr ""
+"A grandes rasgos, hay dos clases de errores de los que :mod:`optparse` tiene "
+"que preocuparse: errores del programador y errores del usuario. Los errores "
+"del programador suelen ser el resultado de llamadas erróneas a :func:"
+"`OptionParser.add_option`, como cadenas de opciones no válidas, atributos de "
+"opciones desconocidos, atributos de opciones que faltan, etc. Se tratan de "
+"la forma habitual: generan una excepción (ya sea :exc:`optparse.OptionError` "
+"o :exc:`TypeError`) y hace que el programa se bloquee."
 
 #: ../Doc/library/optparse.rst:715
 msgid ""
@@ -1092,6 +1182,14 @@ msgid ""
 "you can call :func:`OptionParser.error` to signal an application-defined "
 "error condition::"
 msgstr ""
+"Manejar los errores del usuario es mucho más importante, ya que está "
+"garantizado que sucederán sin importar cuán estable sea el código. :mod:"
+"`optparse` puede detectar automáticamente algunos errores del usuario, como "
+"argumentos de opciones incorrectas (pasar ``-n 4x``donde ``-n`` toma un "
+"argumento entero) o la falta de argumentos (``-n`` al final de la línea de "
+"comandos, donde ``-n`` toma un argumento de cualquier tipo). Además de esto, "
+"puede llamar a :func:`OptionParser.error` para señalar una condición de "
+"error definida por la propia aplicación::"
 
 #: ../Doc/library/optparse.rst:728
 msgid ""
@@ -1099,16 +1197,22 @@ msgid ""
 "the program's usage message and an error message to standard error and exits "
 "with error status 2."
 msgstr ""
+"En cualquier caso, :mod:`optparse` maneja el error de la misma manera: "
+"imprime el mensaje de uso del programa junto a un mensaje de error en la "
+"salida de errores estándar y termina la ejecución con el estado de error 2."
 
 #: ../Doc/library/optparse.rst:732
 msgid ""
 "Consider the first example above, where the user passes ``4x`` to an option "
 "that takes an integer:"
 msgstr ""
+"Considere el primero de los dos ejemplos anteriores, donde el usuario pasa "
+"``4x`` a una opción que toma un número entero:"
 
 #: ../Doc/library/optparse.rst:742
 msgid "Or, where the user fails to pass a value at all:"
 msgstr ""
+"O, en el caso en el que el usuario definitivamente no pasa ningún valor:"
 
 #: ../Doc/library/optparse.rst:751
 msgid ""
@@ -1116,6 +1220,9 @@ msgid ""
 "option involved in the error; be sure to do the same when calling :func:"
 "`OptionParser.error` from your application code."
 msgstr ""
+"Los mensajes de error generados por :mod:`optparse` tienen siempre cuidado "
+"de mencionar la opción involucrada en el error. Asegúrate de hacer lo mismo "
+"cuando llames a :func:`OptionParser.error` desde el código de tu aplicación."
 
 #: ../Doc/library/optparse.rst:755
 msgid ""
@@ -1123,14 +1230,18 @@ msgid ""
 "needs, you'll need to subclass OptionParser and override its :meth:"
 "`~OptionParser.exit` and/or :meth:`~OptionParser.error` methods."
 msgstr ""
+"Si el comportamiento del manejo de errores predeterminado de :mod:`optparse` "
+"no se adapta a tus necesidades, deberás subclasificar OptionParser y "
+"redefinir su método :meth:`~OptionParser.exit` y/o :meth:`~OptionParser."
+"error`."
 
 #: ../Doc/library/optparse.rst:763
 msgid "Putting it all together"
-msgstr ""
+msgstr "Reuniendo todas las piezas"
 
 #: ../Doc/library/optparse.rst:765
 msgid "Here's what :mod:`optparse`\\ -based scripts usually look like::"
-msgstr ""
+msgstr "Así es como los scripts basados en :mod:`optparse` usualmente se ven:"
 
 #: ../Doc/library/optparse.rst:793
 msgid "Reference Guide"
