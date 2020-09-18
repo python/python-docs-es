@@ -42,9 +42,8 @@ help:
 .PHONY: build
 build: setup
 	source $(VENV)/bin/activate && \
-		PYTHONWARNINGS=ignore::FutureWarning $(VENV)/bin/sphinx-build -j auto -W --keep-going -b html -d $(OUTPUT_DOCTREE) -D language=$(LANGUAGE) . $(OUTPUT_HTML) && \
-		echo "Success! Open file://`pwd`/$(OUTPUT_HTML)/index.html, " \
-			"or run 'make serve' to see them in http://localhost:8000";
+		PYTHONWARNINGS=ignore::FutureWarning $(VENV)/bin/sphinx-build -j auto -W --keep-going -b html -d $(OUTPUT_DOCTREE) -D language=$(LANGUAGE) . $(OUTPUT_HTML)
+		echo "Success! Open file://`pwd`/$(OUTPUT_HTML)/index.html, or run 'make serve' to see them in http://localhost:8000"
 
 
 # setup: After running "venv" target, prepare that virtual environment with
