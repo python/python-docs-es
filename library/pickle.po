@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-09-19 15:39-0300\n"
+"PO-Revision-Date: 2020-09-19 16:17-0300\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1596,7 +1596,7 @@ msgstr ""
 
 #: ../Doc/library/pickle.rst:928
 msgid "Out-of-band Buffers"
-msgstr ""
+msgstr "Búferes fuera de banda"
 
 #: ../Doc/library/pickle.rst:932
 msgid ""
@@ -1607,6 +1607,13 @@ msgid ""
 "structure of objects into a sequential stream of bytes, intrinsically "
 "involves copying data to and from the pickle stream."
 msgstr ""
+"En algunos contextos, el módulo :mod:`pickle` se usa para transferir "
+"cantidades masivas de datos.  Por lo tanto, puede ser importante minimizar "
+"el número de copias de memoria para preservar el rendimiento y el consumo de "
+"recursos.  Sin embargo, el funcionamiento normal del módulo :mod:`pickle`, "
+"ya que transforma una estructura gráfica de objetos en un flujo secuencial "
+"de bytes, implica intrínsecamente copiar datos hacia y desde el flujo "
+"`pickle`."
 
 #: ../Doc/library/pickle.rst:939
 msgid ""
@@ -1615,10 +1622,14 @@ msgid ""
 "implementation of the communications system) support the out-of-band "
 "transfer facilities provided by pickle protocol 5 and higher."
 msgstr ""
+"Esta restricción puede evitarse si tanto el *proveedor* (la implementación "
+"de los tipos de objeto a transferir) como el *consumidor* (a implementación "
+"del sistema de comunicaciones) admiten las facilidades de transferencia "
+"fuera de banda proporcionadas por el protocolo `pickle` 5 y mayor."
 
 #: ../Doc/library/pickle.rst:945
 msgid "Provider API"
-msgstr ""
+msgstr "API de proveedor"
 
 #: ../Doc/library/pickle.rst:947
 msgid ""
@@ -1627,6 +1638,10 @@ msgid ""
 "`PickleBuffer` instance (instead of e.g. a :class:`bytes` object) for any "
 "large data."
 msgstr ""
+"Los objetos de datos grandes que se van a serializar con `pickle` deben "
+"implementar un método :meth:`__reduce_ex__` especializado para el protocolo "
+"5 y superior, que devuelve una instancia de :class:`PickleBuffer` (en lugar "
+"de, por ejemplo, un objeto :class:`bytes` object) para cualquier datos."
 
 #: ../Doc/library/pickle.rst:952
 msgid ""
@@ -1636,16 +1651,23 @@ msgid ""
 "opt-in to tell :mod:`pickle` that they will handle those buffers by "
 "themselves."
 msgstr ""
+"Un objeto :class:`PickleBuffer` *indica* que el búfer subyacente es elegible "
+"para la transferencia de datos fuera de banda.  Estos objetos siguen siendo "
+"compatibles con el uso normal del módulo :mod:`pickle` .  Sin embargo, los "
+"consumidores también pueden optar por decirle a :mod:`pickle` que manejarán "
+"esos búferes por sí mismos."
 
 #: ../Doc/library/pickle.rst:959
 msgid "Consumer API"
-msgstr ""
+msgstr "API de consumidor"
 
 #: ../Doc/library/pickle.rst:961
 msgid ""
 "A communications system can enable custom handling of the :class:"
 "`PickleBuffer` objects generated when serializing an object graph."
 msgstr ""
+"Un sistema de comunicaciones puede permitir el manejo personalizado de los "
+"objetos :class:`PickleBuffer` generados al serializar un gráfico de objetos."
 
 #: ../Doc/library/pickle.rst:964
 msgid ""
@@ -1655,6 +1677,11 @@ msgid ""
 "graph.  Buffers accumulated by the *buffer_callback* will not see their data "
 "copied into the pickle stream, only a cheap marker will be inserted."
 msgstr ""
+"En el lado del envío, necesita pasar un argumento *buffer_callback* a :class:"
+"`Pickler` (o a las funciones :func:`dump` o :func:`dumps`), que se llamará "
+"con cada :class:`PickleBuffer` generado al hacer `pickling` del gráfico del "
+"objeto.  Los búferes acumulados por *buffer_callback* no verán sus datos "
+"copiados en el flujo de `pickle`, solo se insertará un marcador barato."
 
 #: ../Doc/library/pickle.rst:971
 msgid ""
@@ -1666,6 +1693,13 @@ msgid ""
 "reconstructors of the objects whose pickling produced the original :class:"
 "`PickleBuffer` objects."
 msgstr ""
+"En el lado receptor, necesita pasar un argumento *buffers* a :class:"
+"`Unpickler` (o a las funciones :func:`load` o :func:`loads`), que es un "
+"iterable de los búferes que fueron pasado a *buffer_callback*. Ese iterable "
+"debería producir búferes en el mismo orden en que se pasaron a "
+"*buffer_callback*.   Esos búferes proporcionarán los datos esperados por los "
+"reconstructores de los objetos cuyo `pickling` produjo los objetos "
+"originales :class:`PickleBuffer`."
 
 #: ../Doc/library/pickle.rst:979
 msgid ""
@@ -1674,16 +1708,22 @@ msgid ""
 "Potential optimizations include the use of shared memory or datatype-"
 "dependent compression."
 msgstr ""
+"Entre el lado de envío y el lado de recepción, el sistema de comunicaciones "
+"es libre de implementar su propio mecanismo de transferencia para memorias "
+"intermedias fuera de banda. Las posibles optimizaciones incluyen el uso de "
+"memoria compartida o compresión dependiente del tipo de datos."
 
 #: ../Doc/library/pickle.rst:985
 msgid "Example"
-msgstr ""
+msgstr "Ejemplo"
 
 #: ../Doc/library/pickle.rst:987
 msgid ""
 "Here is a trivial example where we implement a :class:`bytearray` subclass "
 "able to participate in out-of-band buffer pickling::"
 msgstr ""
+"Aquí hay un ejemplo trivial donde implementamos una subclase :class:"
+"`bytearray` capaz de participar en el `pickling` de un búfer fuera de banda::"
 
 #: ../Doc/library/pickle.rst:1011
 msgid ""
@@ -1691,18 +1731,26 @@ msgid ""
 "providing object if it has the right type.  This is an easy way to simulate "
 "zero-copy behaviour on this toy example."
 msgstr ""
+"El reconstructor (el método de clase ``_reconstruct``) devuelve el objeto "
+"que proporciona el búfer si tiene el tipo correcto.  Esta es una manera "
+"fácil de simular el comportamiento de copia cero en este ejemplo de juguete."
 
 #: ../Doc/library/pickle.rst:1015
 msgid ""
 "On the consumer side, we can pickle those objects the usual way, which when "
 "unserialized will give us a copy of the original object::"
 msgstr ""
+"En el lado del consumidor, podemos serializar con `pickle` esos objetos de "
+"la forma habitual, que cuando no se serializan nos dará una copia del objeto "
+"original::"
 
 #: ../Doc/library/pickle.rst:1024
 msgid ""
 "But if we pass a *buffer_callback* and then give back the accumulated "
 "buffers when unserializing, we are able to get back the original object::"
 msgstr ""
+"Pero si pasamos un *buffer_callback* y luego devolvemos los búferes "
+"acumulados al anular la serialización, podemos recuperar el objeto original::"
 
 #: ../Doc/library/pickle.rst:1034
 msgid ""
@@ -1713,10 +1761,16 @@ msgid ""
 "making as few copies as possible) when transferring between distinct "
 "processes or systems."
 msgstr ""
+"Este ejemplo está limitado por el hecho de que :class:`bytearray` asigna su "
+"propia memoria: no puedes crear una instancia de :class:`bytearray` que esté "
+"respaldada por la memoria de otro objeto.  Sin embargo, los tipos de datos "
+"de terceros, como las matrices NumPy no tienen esta limitación y permiten el "
+"uso de `pickling` de copia cero (o realizar la menor cantidad de copias "
+"posible) cuando se transfieren entre procesos o sistemas distintos."
 
 #: ../Doc/library/pickle.rst:1041
 msgid ":pep:`574` -- Pickle protocol 5 with out-of-band data"
-msgstr ""
+msgstr ":pep:`574` -- Protocolo `Pickle` 5 con datos fuera de banda"
 
 #: ../Doc/library/pickle.rst:1047
 msgid "Restricting Globals"
