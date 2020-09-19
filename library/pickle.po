@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-09-19 16:17-0300\n"
+"PO-Revision-Date: 2020-09-19 16:41-0300\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1774,7 +1774,7 @@ msgstr ":pep:`574` -- Protocolo `Pickle` 5 con datos fuera de banda"
 
 #: ../Doc/library/pickle.rst:1047
 msgid "Restricting Globals"
-msgstr ""
+msgstr "Restricción de Globals"
 
 #: ../Doc/library/pickle.rst:1052
 msgid ""
@@ -1783,6 +1783,11 @@ msgid ""
 "it permits the unpickler to import and invoke arbitrary code.  Just consider "
 "what this hand-crafted pickle data stream does when loaded::"
 msgstr ""
+"De forma predeterminada, el `unpickling` importará cualquier clase o función "
+"que encuentre en los datos de `pickle`.  Para muchas aplicaciones, este "
+"comportamiento es inaceptable, ya que permite al `unpickler` importar e "
+"invocar código arbitrario.  Solo considere lo que hace este flujo de datos "
+"de `pickle` hechos a mano cuando se carga::"
 
 #: ../Doc/library/pickle.rst:1062
 msgid ""
@@ -1791,6 +1796,9 @@ msgid ""
 "is inoffensive, it is not difficult to imagine one that could damage your "
 "system."
 msgstr ""
+"En este ejemplo, el `unpickler` importa la función :func:`os.system` y luego "
+"aplica el argumento de cadena \"echo hello world\".  Aunque este ejemplo es "
+"inofensivo, no es difícil imaginar uno que pueda dañar su sistema."
 
 #: ../Doc/library/pickle.rst:1066
 msgid ""
@@ -1800,16 +1808,25 @@ msgid ""
 "requested.  Thus it is possible to either completely forbid globals or "
 "restrict them to a safe subset."
 msgstr ""
+"Por esta razón, es posible que desee controlar lo que se deserializa con "
+"`pickle` personalizando :meth:`Unpickler.find_class`.  A diferencia de lo "
+"que sugiere su nombre, :meth:`Unpickler.find_class` se llama siempre que se "
+"solicita un global (es decir, una clase o una función).  Por lo tanto, es "
+"posible prohibir completamente los globales o restringirlos a un subconjunto "
+"seguro."
 
 #: ../Doc/library/pickle.rst:1072
 msgid ""
 "Here is an example of an unpickler allowing only few safe classes from the :"
 "mod:`builtins` module to be loaded::"
 msgstr ""
+"Aquí hay un ejemplo de un `unpickler` que permite cargar solo unas pocas "
+"clases seguras del módulo :mod:`builtins`::"
 
 #: ../Doc/library/pickle.rst:1101
 msgid "A sample usage of our unpickler working has intended::"
 msgstr ""
+"Un uso de muestra de nuestro `unpickler` trabajando tiene la intención de::"
 
 #: ../Doc/library/pickle.rst:1120
 msgid ""
@@ -1818,6 +1835,10 @@ msgid ""
 "alternatives such as the marshalling API in :mod:`xmlrpc.client` or third-"
 "party solutions."
 msgstr ""
+"Como muestran nuestros ejemplos, debes tener cuidado con lo que permites que "
+"se deserialize con `pickle`.  Por lo tanto, si la seguridad es un problema, "
+"puede considerar alternativas como la API de `marshalling` en :mod:`xmlrpc."
+"client` o soluciones de terceros."
 
 #: ../Doc/library/pickle.rst:1127
 msgid "Performance"
