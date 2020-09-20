@@ -1,31 +1,25 @@
+.. image:: https://travis-ci.org/python/python-docs-es.svg?branch=3.8
+  :target: https://travis-ci.org/python/python-docs-es
+  :alt: Build Status
+
+.. image:: https://readthedocs.org/projects/python-docs-es/badge/?version=3.8
+   :target: https://python-docs-es.readthedocs.io/es/3.8/?badge=3.8
+   :alt: Documentation Status
+
+
 Traducción al Español de la Documentación de Python
 ===================================================
 
-.. image:: https://travis-ci.org/python/python-docs-es.svg?branch=3.8
-  :target: https://travis-ci.org/python/python-docs-es
-  :alt: Build Status
-
-.. image:: https://readthedocs.org/projects/python-docs-es/badge/?version=3.8
-   :target: https://python-docs-es.readthedocs.io/es/3.8/?badge=3.8
-   :alt: Documentation Status
-
-Como contribuir
+Cómo contribuir
 ---------------
 
 Tenemos una guía que te ayudará a contribuir en: https://python-docs-es.readthedocs.io/page/CONTRIBUTING.html.
-Por favor, consulta por más detalle.
+Por favor, consulta para saber más detalle.
+
+
 
 Spanish Translation of the Python Documentation
 ===============================================
-
-.. image:: https://travis-ci.org/python/python-docs-es.svg?branch=3.8
-  :target: https://travis-ci.org/python/python-docs-es
-  :alt: Build Status
-
-.. image:: https://readthedocs.org/projects/python-docs-es/badge/?version=3.8
-   :target: https://python-docs-es.readthedocs.io/es/3.8/?badge=3.8
-   :alt: Documentation Status
-
 
 How to Contribute
 -----------------
