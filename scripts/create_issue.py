@@ -17,7 +17,7 @@ pofile = PoFileStats(Path(pofilename))
 
 g = Github(os.environ.get('GITHUB_TOKEN'))
 
-repo = g.get_repo('PyCampES/python-docs-es')
+repo = g.get_repo('python/python-docs-es')
 
 
 issues = repo.get_issues(state='all')
@@ -41,9 +41,13 @@ if any([
 
 # https://pygithub.readthedocs.io/en/latest/github_objects/Repository.html#github.Repository.Repository.create_issue
 title = f'Translate `{pofilename}`'
+urlfile = pofilename.replace('.po', '.html')
 issue = repo.create_issue(
     title=title,
     body=f'''This needs to reach 100% translated.
+
+The rendered version of this file will be available at https://docs.python.org/es/3.8/{urlfile} once translated.
+Meanwhile, the English version is shown.
 
 Current stats for `{pofilename}`:
 
