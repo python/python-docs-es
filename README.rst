@@ -14,7 +14,7 @@ Cómo contribuir
 ---------------
 
 Tenemos una guía que te ayudará a contribuir en: https://python-docs-es.readthedocs.io/page/CONTRIBUTING.html.
-Por favor, consulta para saber más detalle.
+Por favor, consulta para saber más detalles.
 
 
 
