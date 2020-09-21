@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-09-21 12:18+0200\n"
+"PO-Revision-Date: 2020-09-21 18:18+0200\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3022,7 +3022,7 @@ msgid ""
 "command-line options are the action and type of each option, the most likely "
 "direction of extension is to add new actions and new types."
 msgstr ""
-"Dado que los dos factores principales que controlan como el modulo :mod: "
+"Dado que los dos factores principales que controlan como el modulo :mod:"
 "`optparse` interpreta las opciones de la línea de comandos son la acción y "
 "el tipo de cada opción, los objetivos más probables de extensión son agregar "
 "nuevas acciones y nuevos tipos."
@@ -3157,17 +3157,19 @@ msgstr ""
 
 #: ../Doc/library/optparse.rst:1934
 msgid "Adding new actions"
-msgstr ""
+msgstr "Agregando nuevas acciones"
 
 #: ../Doc/library/optparse.rst:1936
 msgid ""
 "Adding new actions is a bit trickier, because you have to understand that :"
 "mod:`optparse` has a couple of classifications for actions:"
 msgstr ""
+"Agregar nuevas acciones es un poco más complicado, dado que hay que "
+"comprender que :mod:`optparse` tiene un par de categorías para las acciones:"
 
 #: ../Doc/library/optparse.rst:1942
 msgid "\"store\" actions"
-msgstr ""
+msgstr "Acciones \"store\""
 
 #: ../Doc/library/optparse.rst:1940
 msgid ""
@@ -3175,10 +3177,14 @@ msgid ""
 "the current OptionValues instance; these options require a :attr:`~Option."
 "dest` attribute to be supplied to the Option constructor."
 msgstr ""
+"acciones que dan como resultado que :mod: `optparse` almacene un valor en un "
+"atributo de la instancia actual de OptionValues. Estas opciones requieren un "
+"atributo :attr:`~Option.dest` para que pueda ser proporcionado al "
+"constructor de Option."
 
 #: ../Doc/library/optparse.rst:1948
 msgid "\"typed\" actions"
-msgstr ""
+msgstr "Acciones \"typed\""
 
 #: ../Doc/library/optparse.rst:1945
 msgid ""
@@ -3187,6 +3193,10 @@ msgid ""
 "These options require a :attr:`~Option.type` attribute to the Option "
 "constructor."
 msgstr ""
+"acciones que toman un valor de la línea de comandos, esperando que sea de "
+"cierto tipo; o mejor dicho, una cadena de caracteres que se pueda convertir "
+"a un determinado tipo. Estas opciones requieren un atributo :attr:`~Option."
+"type` para el constructor de Option."
 
 #: ../Doc/library/optparse.rst:1950
 msgid ""
@@ -3195,24 +3205,31 @@ msgid ""
 "default \"typed\" actions are ``\"store\"``, ``\"append\"``, and ``\"callback"
 "\"``."
 msgstr ""
+"Ambas categorías se solapan entre si: algunas acciones ``store`` "
+"predeterminadas son ``\"store\"``, ``\"store_const\"``, ``\"append\"`` y ``"
+"\"count\"``, mientras que las acciones \"typed\" predeterminadas son ``"
+"\"store\"``, ``\"append\"`` y ``\"callback\"``."
 
 #: ../Doc/library/optparse.rst:1954
 msgid ""
 "When you add an action, you need to categorize it by listing it in at least "
 "one of the following class attributes of Option (all are lists of strings):"
 msgstr ""
+"Cuando agregas una acción, debes categorizarla enumerándola en al menos uno "
+"de los siguientes atributos de clase de Option (todos ellos son listas de "
+"cadenas de caracteres):"
 
 #: ../Doc/library/optparse.rst:1959
 msgid "All actions must be listed in ACTIONS."
-msgstr ""
+msgstr "Todas las acciones deben aparecer en ACTIONS."
 
 #: ../Doc/library/optparse.rst:1963
 msgid "\"store\" actions are additionally listed here."
-msgstr ""
+msgstr "Las acciones \"store\" también se enumeran aquí."
 
 #: ../Doc/library/optparse.rst:1967
 msgid "\"typed\" actions are additionally listed here."
-msgstr ""
+msgstr "Las acciones \"typed\" también se enumeran aquí."
 
 #: ../Doc/library/optparse.rst:1971
 msgid ""
@@ -3221,12 +3238,20 @@ msgid ""
 "assigns the default type, ``\"string\"``, to options with no explicit type "
 "whose action is listed in :attr:`ALWAYS_TYPED_ACTIONS`."
 msgstr ""
+"Las acciones que siempre toman un tipo (es decir, aquellas cuyas opciones "
+"siempre toman un valor) también deben enumerarse aquí. La única consecuencia "
+"de esto es que :mod:`optparse` asigna el tipo predeterminado, ``string``, a "
+"las opciones cuya acción se enumera en :attr:`ALWAYS_TYPED_ACTIONS` pero que "
+"no tienen asignado un tipo explícito."
 
 #: ../Doc/library/optparse.rst:1976
 msgid ""
 "In order to actually implement your new action, you must override Option's :"
 "meth:`take_action` method and add a case that recognizes your action."
 msgstr ""
+"Para implementar realmente tu nueva acción, debes redefinir el método :meth:"
+"`take_action` de Option, implementando un nuevo método que reconozca tu "
+"acción."
 
 #: ../Doc/library/optparse.rst:1979
 msgid ""
@@ -3237,18 +3262,25 @@ msgid ""
 "existing list with them.  That is, if ``--names`` is an ``\"extend\"`` "
 "option of type ``\"string\"``, the command line ::"
 msgstr ""
+"Por ejemplo, agreguemos una nueva acción ``\"extend\"``. Esta es similar a "
+"la acción estándar ``\"append\"``, pero en lugar de tomar un solo valor de "
+"la línea de comandos y agregarlo a una lista existente, ``\"extend\"`` "
+"tomará múltiples valores en una sola cadena de caracteres delimitada por "
+"comas y amplía una lista previamente existente con ellos. Es decir, si ``--"
+"names`` es una opción ``\"extend\"`` de tipo ``\"string\"``, la línea de "
+"comandos ::"
 
 #: ../Doc/library/optparse.rst:1988
 msgid "would result in a list  ::"
-msgstr ""
+msgstr "daría como resultado una lista como la siguiente::"
 
 #: ../Doc/library/optparse.rst:1992
 msgid "Again we define a subclass of Option::"
-msgstr ""
+msgstr "De nuevo, definimos una subclase de Option::"
 
 #: ../Doc/library/optparse.rst:2009
 msgid "Features of note:"
-msgstr ""
+msgstr "Detalles a tener en cuenta:"
 
 #: ../Doc/library/optparse.rst:2011
 msgid ""
@@ -3256,6 +3288,9 @@ msgid ""
 "value somewhere, so it goes in both :attr:`~Option.STORE_ACTIONS` and :attr:"
 "`~Option.TYPED_ACTIONS`."
 msgstr ""
+"``\"extend\"`` espera un valor en la línea de comandos y también almacena "
+"ese valor en algún lugar, por lo que se agrega tanto a :attr:`~Option."
+"STORE_ACTIONS` como a :attr:`~Option.TYPED_ACTIONS`."
 
 #: ../Doc/library/optparse.rst:2015
 msgid ""
@@ -3263,6 +3298,9 @@ msgid ""
 "``\"extend\"`` actions, we put the ``\"extend\"`` action in :attr:`~Option."
 "ALWAYS_TYPED_ACTIONS` as well."
 msgstr ""
+"para asegurarnos de que :mod:`optparse` asigna el tipo predeterminado ``"
+"\"string\"`` a las acciones ``\"extend\"``, agregamos también la acción ``"
+"\"extend\"`` a :attr:`~Opción.ALWAYS_TYPED_ACTIONS`."
 
 #: ../Doc/library/optparse.rst:2019
 msgid ""
@@ -3270,6 +3308,9 @@ msgid ""
 "control back to :meth:`Option.take_action` for the standard :mod:`optparse` "
 "actions."
 msgstr ""
+"el método :meth:`MyOption.take_action` solo se encarga de implementar esta "
+"nueva acción y posteriormente le pasa el control al método :meth:`Option."
+"take_action` para las acciones estándar de :mod:`optparse`."
 
 #: ../Doc/library/optparse.rst:2023
 msgid ""
@@ -3277,6 +3318,10 @@ msgid ""
 "provides the very useful :meth:`ensure_value` method. :meth:`ensure_value` "
 "is essentially :func:`getattr` with a safety valve; it is called as ::"
 msgstr ""
+"``values`` es una instancia de la clase *optparse_parser.Values*, que "
+"proporciona el útil método :meth:`ensure_value`. El método :meth:"
+"`ensure_value` es en esencia lo mismo que :func:`getattr` pero con un "
+"mecanismo de seguridad agregado; es llamado como::"
 
 #: ../Doc/library/optparse.rst:2029
 msgid ""
@@ -3290,3 +3335,13 @@ msgid ""
 "question; they can just leave the default as ``None`` and :meth:"
 "`ensure_value` will take care of getting it right when it's needed."
 msgstr ""
+"Si el atributo ``attr`` de ``values`` no existe o es ``None``, entonces "
+"*ensure_value()* primero lo establece en ``value`` y luego retorna *'value*. "
+"Esto es muy útil para acciones como `\"extend\"``, ``\"append\"`` y ``\"count"
+"\"``, dado que todas ellas acumulan datos en una variable y esperan que esa "
+"variable sea de cierto tipo (una lista para las dos primeras, un número "
+"entero para la última). Usar el método :meth:`sure_value` significa que los "
+"scripts que usan tu acción no tienen que preocuparse por establecer un valor "
+"predeterminado para los destinos de opción en cuestión; simplemente pueden "
+"dejar el valor predeterminado como ``None`` y :meth:`secure_value` se "
+"encargará de hacerlo bien cuando sea necesario."
