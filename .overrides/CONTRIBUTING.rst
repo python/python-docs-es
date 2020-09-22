@@ -124,7 +124,7 @@ A tener en cuenta
 
 * No debes traducir el contenido de ``:ref:...`` y ``:term:...``.
 
-* Si tienes que usar palabras en inglés debes ponerlas en *italics* (rodeadas
+* Si tienes que usar palabras en inglés debes ponerlas en *cursiva* (rodeadas
   por asteriscos)
 
 * Puedes revisar las :doc:`faq` para leer sobre problemas conocidos.
