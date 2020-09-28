@@ -82,8 +82,8 @@ contribución, queremos señalar algunos lineamientos generales.
 #. Cuando hayas terminado tu sesión, debes guardar tus cambios y enviarlos a
    GitHub de nuevo::
 
-     git commit -am 'Traducido archivo {nombre de archivo}' git push origin
-     traduccion-glosario
+     git commit -am 'Traducido archivo {nombre de archivo}' 
+     git push origin traduccion-glosario
 
 #. No olvides añadir tu nombre al archivo ``TRANSLATORS`` si no lo has hecho
    todavía.  Los nombres se encuentran ordenados alfabéticamente por apellido.
@@ -124,7 +124,7 @@ A tener en cuenta
 
 * No debes traducir el contenido de ``:ref:...`` y ``:term:...``.
 
-* Si tienes que usar palabras en inglés debes ponerlas en *italics* (rodeadas
+* Si tienes que usar palabras en inglés debes ponerlas en *cursiva* (rodeadas
   por asteriscos)
 
 * Puedes revisar las :doc:`faq` para leer sobre problemas conocidos.
