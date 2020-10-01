@@ -135,6 +135,9 @@ Términos y bigramas
      slicing
       segmentación ``datamodel.po``
 
+     statement
+      sentencia ``smtplib.po``
+
      static type checker
        Validador estático de tipos
        Notas: mantener la mayúscula, usar validación cuando se refiera a la acción y no al agente.
