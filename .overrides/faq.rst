@@ -26,7 +26,8 @@ pospell. Pospell puede ser instalada en tu entorno de Python empleando pip
 Una vez instalado, para chequear el fichero .po sobre el que estás trabajando,
 ejecuta desde el directorio principal del repo::
 
-    pospell -p dict -l es_AR -l es_ES path/tu_fichero.po
+    awk 1 dict dictionaries/*.txt > dict.txt
+    pospell -p dict.txt -l es_AR -l es_ES path/tu_fichero.po
 
 pospell emplea la herramienta de diccionarios hunspell. Si pospell falla dando
 como error que no tiene hunspell instalado, lo puedes instalar así:
