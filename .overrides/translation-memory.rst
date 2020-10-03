@@ -103,6 +103,9 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 
      code object
        objeto código ``c-api``, ``library/functions.po``
+       
+     context manager
+       gestor de contexto
 
      deallocated
        desalojable ``glossary.po``
