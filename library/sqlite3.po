@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-10-01 23:21-0500\n"
+"PO-Revision-Date: 2020-10-03 10:19-0500\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -493,7 +493,7 @@ msgid ""
 msgstr ""
 "Este es un atajo no estándar que crea un objeto cursor llamando el método :meth:"
 "`~Connection.cursor`, llama su método :meth:`~Cursor.execute` con los *parameters* dados, "
-"y regresa el cursor."
+"y retorna el cursor."
 
 #: ../Doc/library/sqlite3.rst:331
 msgid ""
@@ -626,7 +626,7 @@ msgid ""
 "These constants are available in the :mod:`sqlite3` module."
 msgstr ""
 "Esta rutina registra un *callback*. El *callback* es invocado para cada intento de acceso "
-"a un columna de una tabla en la base de datos. El *callback* deberá regresar :const:"
+"a un columna de una tabla en la base de datos. El *callback* deberá retornar :const:"
 "`SQLITE_OK` si el acceso esta permitido, :const:`SQLITE_DENY` si la completa declaración "
 "SQL deberá ser abortada con un error y :const:`SQLITE_IGNORE` si la columna deberá ser "
 "tratada como un valor NULL. Estas constantes están disponibles en el módulo :mod:"
@@ -768,22 +768,30 @@ msgid ""
 "will return Unicode objects for ``TEXT``. If you want to return bytestrings instead, you "
 "can set it to :class:`bytes`."
 msgstr ""
+"Usando este atributo se puede controlar que objetos son retornados por el tipo de dato "
+"``TEXT``. Por defecto, este atributo es configurado a :class:`str` y el módulo :mod:"
+"`sqlite3` retornará objetos Unicode para ``TEXT``. Si en cambio se quiere retornar "
+"*bytestrings*, se debe configurar a :class:`bytes`."
 
 #: ../Doc/library/sqlite3.rst:513
 msgid ""
 "You can also set it to any other callable that accepts a single bytestring parameter and "
 "returns the resulting object."
 msgstr ""
+"También se puede configurar a cualquier otro *callable* que acepte un único parámetro "
+"*bytestring* y retorne el objeto resultante"
 
 #: ../Doc/library/sqlite3.rst:516
 msgid "See the following example code for illustration:"
-msgstr ""
+msgstr "Ver el siguiente ejemplo de código para ilustración:"
 
 #: ../Doc/library/sqlite3.rst:523
 msgid ""
 "Returns the total number of database rows that have been modified, inserted, or deleted "
 "since the database connection was opened."
 msgstr ""
+"Regresa el número total de filas de la base de datos que han sido modificadas, insertadas "
+"o borradas desde que la conexión a la base de datos fue abierta."
 
 #: ../Doc/library/sqlite3.rst:529
 msgid ""
@@ -791,10 +799,13 @@ msgid ""
 "memory database for later restoration.  This function provides the same capabilities as "
 "the :kbd:`.dump` command in the :program:`sqlite3` shell."
 msgstr ""
+"Regresa un iterador para volcar la base de datos en un texto de formato SQL. Es útil "
+"cuando guardamos una base de datos en memoria para posterior restauración. Esta función "
+"provee las mismas capacidades que el comando :kbd:`dump` en el *shell* :program:`sqlite3`."
 
 #: ../Doc/library/sqlite3.rst:534
 msgid "Example::"
-msgstr ""
+msgstr "Ejemplo::"
 
 #: ../Doc/library/sqlite3.rst:548
 msgid ""
@@ -802,6 +813,10 @@ msgid ""
 "clients, or concurrently by the same connection.  The copy will be written into the "
 "mandatory argument *target*, that must be another :class:`Connection` instance."
 msgstr ""
+"Este método crea un respaldo de una base de datos SQLite incluso mientras está siendo "
+"accedida por otros clientes, o concurrente por la misma conexión. La copia será escrita "
+"dentro del argumento mandatorio *target*, que deberá ser otra instancia de :class:"
+"`Connection`."
 
 #: ../Doc/library/sqlite3.rst:553
 msgid ""
@@ -809,6 +824,9 @@ msgid ""
 "copied in a single step; otherwise the method performs a loop copying up to *pages* pages "
 "at a time."
 msgstr ""
+"Por defecto, o cuando *pages* es ``0`` o un entero negativo, la base de datos completa es "
+"copiada en un solo paso; de otra forma el método realiza un bucle copiando hasta el "
+"número de *pages* a la vez."
 
 #: ../Doc/library/sqlite3.rst:557
 msgid ""
@@ -817,6 +835,10 @@ msgid ""
 "last iteration, the *remaining* number of pages still to be copied and the *total* number "
 "of pages."
 msgstr ""
+"Si *progress* es especificado, deberá ser ``None`` o un objeto *callable* que será "
+"ejecutado en cada iteración con los tres argumentos enteros, respectivamente el estado "
+"*status* de la última iteración, el restante *remaining* numero de páginas presentes para "
+"ser copiadas y el número total *total* de páginas."
 
 #: ../Doc/library/sqlite3.rst:562
 msgid ""
@@ -825,6 +847,11 @@ msgid ""
 "to indicate the temporary database or the name specified after the ``AS`` keyword in an "
 "``ATTACH DATABASE`` statement for an attached database."
 msgstr ""
+"El argumento *name* especifica el nombre de la base de datos que será copiada: deberá ser "
+"una cadena de texto que contenga el por defecto ``\"main\"``, que indica la base de datos "
+"principal, ``\"temp\"`` que indica la base de datos temporal o el nombre especificado "
+"después de la palabra clave ``AS`` en una sentencia ``ATTACH DATABASE`` para una base de "
+"datos adjunta."
 
 #: ../Doc/library/sqlite3.rst:568
 msgid ""
@@ -832,18 +859,21 @@ msgid ""
 "attempts to backup remaining pages, can be specified either as an integer or a floating "
 "point value."
 msgstr ""
+"El argumento *sleep* especifica el número de segundos a dormir entre sucesivos intentos "
+"de respaldar páginas restantes, puede ser especificado como un entero o un valor de punto "
+"flotante."
 
 #: ../Doc/library/sqlite3.rst:572
 msgid "Example 1, copy an existing database into another::"
-msgstr ""
+msgstr "Ejemplo 1, copiar una base de datos existente en otra::"
 
 #: ../Doc/library/sqlite3.rst:586
 msgid "Example 2, copy an existing database into a transient copy::"
-msgstr ""
+msgstr "Ejemplo 2: copiar una base de datos existente en una copia transitoria::"
 
 #: ../Doc/library/sqlite3.rst:594
 msgid "Availability: SQLite 3.6.11 or higher"
-msgstr ""
+msgstr "Disponibilidad: SQLite 3.6.11 o superior"
 
 #: ../Doc/library/sqlite3.rst:602
 msgid "Cursor Objects"
