@@ -4,10 +4,11 @@
 Guía para revisar una traducción
 ================================
 
-Antes que nada, queremos compartir contigo [unos videos](https://www.youtube.com/watch?v=uIaQMTuwtoU&list=PLma583Z70SlztPF8SitlWJZx3SW1aAePk&index=3&t=7s&ab_channel=Cristi%C3%A1nMaureira-Fredes) que uno de nuestros colaboradores ha preparado donde se explica el resumen del proceso a través de un ejemplo.
+Antes que nada, queremos compartir contigo `unos videos`_ que uno de nuestros colaboradores ha preparado donde se explica el resumen del proceso a través de un ejemplo.
 
 Asimismo, si nunca has hecho una revisión pero ya has colaborado con el proyecto, te recomendamos que pruebes esta otra manera de colaborar, ya que permite ponerse en el lugar de otra persona, y muchas veces ayuda a mejorar las traducciones propias.
 
+.. _`unos videos`: https://www.youtube.com/watch?v=uIaQMTuwtoU&list=PLma583Z70SlztPF8SitlWJZx3SW1aAePk&index=3&t=7s&ab_channel=Cristi%C3%A1nMaureira-Fredes
 El costado humano
 =================
 Teniendo en cuenta que todes somos voluntaries en este proyecto, es importante que la forma de comunicarnos sea clara, concisa y amable. Como revisor/a, ayudarás a voluntaries de diferentes culturas y lugares del mundo para que su traducción sea lo más acertada posible y podamos acercar Python a las comunidades de habla hispana. Recuerda que del otro lado de un PR hay una persona que ha dedicado tiempo y esfuerzo; es por eso es la forma en que le des una devolución sobre su trabajo influirá en su actitud hacia el proyecto…¡y en sus ganas de seguir participando de nuestra comunidad!
