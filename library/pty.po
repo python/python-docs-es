@@ -1,20 +1,24 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2001-2019, Python Software Foundation
+# Copyright (C) 2001-2020, Python Software Foundation
 # This file is distributed under the same license as the Python package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Maintained by the python-doc-es workteam.
+# docs-es@python.org /
+# https://mail.python.org/mailman3/lists/docs-es.python.org/
+# Check https://github.com/python/python-docs-es/blob/3.8/TRANSLATORS to
+# get the list of volunteers
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Python 3.7\n"
+"Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-06 11:59-0400\n"
+"POT-Creation-Date: 2020-05-05 12:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
 
 #: ../Doc/library/pty.rst:2
 msgid ":mod:`pty` --- Pseudo-terminal utilities"
@@ -62,27 +66,63 @@ msgstr ""
 msgid ""
 "Spawn a process, and connect its controlling terminal with the current "
 "process's standard io. This is often used to baffle programs which insist on "
-"reading from the controlling terminal."
+"reading from the controlling terminal. It is expected that the process "
+"spawned behind the pty will eventually terminate, and when it does *spawn* "
+"will return."
 msgstr ""
 
-#: ../Doc/library/pty.rst:48
+#: ../Doc/library/pty.rst:50
 msgid ""
-"The functions *master_read* and *stdin_read* should be functions which read "
-"from a file descriptor. The defaults try to read 1024 bytes each time they "
-"are called."
+"The functions *master_read* and *stdin_read* are passed a file descriptor "
+"which they should read from, and they should always return a byte string. In "
+"order to force spawn to return before the child process exits an :exc:"
+"`OSError` should be thrown."
 msgstr ""
 
-#: ../Doc/library/pty.rst:52
+#: ../Doc/library/pty.rst:55
+msgid ""
+"The default implementation for both functions will read and return up to "
+"1024 bytes each time the function is called. The *master_read* callback is "
+"passed the pseudoterminal’s master file descriptor to read output from the "
+"child process, and *stdin_read* is passed file descriptor 0, to read from "
+"the parent process's standard input."
+msgstr ""
+
+#: ../Doc/library/pty.rst:61
+msgid ""
+"Returning an empty byte string from either callback is interpreted as an end-"
+"of-file (EOF) condition, and that callback will not be called after that. If "
+"*stdin_read* signals EOF the controlling terminal can no longer communicate "
+"with the parent process OR the child process. Unless the child process will "
+"quit without any input, *spawn* will then loop forever. If *master_read* "
+"signals EOF the same behavior results (on linux at least)."
+msgstr ""
+
+#: ../Doc/library/pty.rst:68
+msgid ""
+"If both callbacks signal EOF then *spawn* will probably never return, unless "
+"*select* throws an error on your platform when passed three empty lists. "
+"This is a bug, documented in `issue 26228 <https://bugs.python.org/"
+"issue26228>`_."
+msgstr ""
+
+#: ../Doc/library/pty.rst:73
+msgid ""
+"Raises an :ref:`auditing event <auditing>` ``pty.spawn`` with argument "
+"``argv``."
+msgstr ""
+
+#: ../Doc/library/pty.rst:74
 msgid ""
 ":func:`spawn` now returns the status value from :func:`os.waitpid` on the "
 "child process."
 msgstr ""
 
-#: ../Doc/library/pty.rst:57
+#: ../Doc/library/pty.rst:79
 msgid "Example"
 msgstr ""
 
-#: ../Doc/library/pty.rst:61
+#: ../Doc/library/pty.rst:83
 msgid ""
 "The following program acts like the Unix command :manpage:`script(1)`, using "
 "a pseudo-terminal to record all input and output of a terminal session in a "
