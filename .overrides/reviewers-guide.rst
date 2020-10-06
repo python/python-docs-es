@@ -4,7 +4,7 @@
 Guía para revisar una traducción
 ================================
 
-Antes que nada, queremos compartir contigo el video que uno de nuestros colaboradores ha preparado donde se explica el resumen del proceso y se muestra a través de un ejemplo: https://www.youtube.com/watch?v=uIaQMTuwtoU&list=PLma583Z70SlztPF8SitlWJZx3SW1aAePk&index=3&t=7s&ab_channel=Cristi%C3%A1nMaureira-Fredes
+Antes que nada, queremos compartir contigo [unos videos](https://www.youtube.com/watch?v=uIaQMTuwtoU&list=PLma583Z70SlztPF8SitlWJZx3SW1aAePk&index=3&t=7s&ab_channel=Cristi%C3%A1nMaureira-Fredes) que uno de nuestros colaboradores ha preparado donde se explica el resumen del proceso a través de un ejemplo.
 
 Asimismo, si nunca has hecho una revisión pero ya has colaborado con el proyecto, te recomendamos que pruebes esta otra manera de colaborar, ya que permite ponerse en el lugar de otra persona, y muchas veces ayuda a mejorar las traducciones propias.
 
@@ -65,4 +65,3 @@ Durante la renderización de la documentación hay toda una serie de referencias
 .. image:: sphinx_warnings_example_inconsistent_terms.png
 
 Indica que alguna de las referencias falta en la traducción. Lo más probable es que al traducir se haya cambiado algo de la sintaxis particular como las comillas, y por eso no esté siendo reconocida.
-
