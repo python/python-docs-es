@@ -49,7 +49,7 @@ Tres razones por las que puede fallar el *build* de Travis:
 Para facilitar la comparación de ficheros se emplea este programa que va a hacer que todas las líneas tengan el mismo tamaño. Solucionar este problema en nuestra traducción es muy sencillo, solo hay que instalar la herramienta powrap en nuestro entorno y ejecutar el comando ``powrap nuestro_fichero.po``
 
 
-``pospell`` falla:
+``pospell`` falla
 ---------------------
 
 Los fallos en pospell pueden ser variados y según con que nos encontremos tenemos que actuar de una manera u otra. En principio es un chequeo de ortografía contra un diccionario de español, por lo que nos va a fallar tanto si usamos palabras en otro idioma, como si usamos palabras en español mal escritas como si usamos palabras que simplemente no están en el diccionario. Por ejemplo:
