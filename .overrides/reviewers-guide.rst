@@ -43,7 +43,7 @@ Tres razones por las que puede fallar el *build* de Travis:
 
 .. image:: powrap_fail.png
 
-Para facilitar la comparación de ficheros se emplea este programa que va a hacer que todas las líneas tengan el mismo tamaño. Solucionar este problema en nuestra traducción es muy sencillo, solo hay que instalar la herramienta powrap en nuestro entorno y hacer powrap nuestro_fichero.po
+Para facilitar la comparación de ficheros se emplea este programa que va a hacer que todas las líneas tengan el mismo tamaño. Solucionar este problema en nuestra traducción es muy sencillo, solo hay que instalar la herramienta powrap en nuestro entorno y ejecutar el comando powrap nuestro_fichero.po
 
 
 * `pospell` falla:
