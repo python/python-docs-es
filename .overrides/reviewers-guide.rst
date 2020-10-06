@@ -39,7 +39,7 @@ Al revisar una traducción, deberás tener en cuenta ciertos aspectos propios de
 
 Tres razones por las que puede fallar el *build* de Travis:
 
-* `powrap` falla:
+* ``powrap`` falla:
 
 .. image:: powrap_fail.png
 
