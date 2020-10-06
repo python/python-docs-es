@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-10-04 20:18-0500\n"
+"PO-Revision-Date: 2020-10-06 09:54-0500\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -858,7 +858,7 @@ msgid ""
 "parameter and returns the resulting object."
 msgstr ""
 "También se puede configurar a cualquier otro *callable* que acepte un único "
-"parámetro *bytestring* y retorne el objeto resultante"
+"parámetro *bytestring* y retorne el objeto resultante."
 
 #: ../Doc/library/sqlite3.rst:516
 msgid "See the following example code for illustration:"
@@ -1004,10 +1004,13 @@ msgid ""
 "the sequence *seq_of_parameters*.  The :mod:`sqlite3` module also allows "
 "using an :term:`iterator` yielding parameters instead of a sequence."
 msgstr ""
+"Ejecuta un comando SQL contra todas las secuencias de parámetros o mapeos "
+"encontrados en la secuencia *seq_of_parameters*. El módulo también permite "
+"usar un :term:`iterator` produciendo parámetros en lugar de una secuencia."
 
 #: ../Doc/library/sqlite3.rst:636
 msgid "Here's a shorter example using a :term:`generator`:"
-msgstr ""
+msgstr "Acá un corto ejemplo usando un :term:`generator`:"
 
 #: ../Doc/library/sqlite3.rst:643
 msgid ""
@@ -1015,22 +1018,30 @@ msgid ""
 "statements at once. It issues a ``COMMIT`` statement first, then executes "
 "the SQL script it gets as a parameter."
 msgstr ""
+"Este es un conveniente método no estándar para ejecutar múltiples sentencias "
+"SQL de una vez. Emite una sentencia ``COMMIT`` primero, luego ejecuta el "
+"script SQL obtenido como parámetro."
 
 #: ../Doc/library/sqlite3.rst:647
 msgid "*sql_script* can be an instance of :class:`str`."
-msgstr ""
+msgstr "*sql_script* puede ser una instancia de :class:`str`."
 
 #: ../Doc/library/sqlite3.rst:656
 msgid ""
 "Fetches the next row of a query result set, returning a single sequence, or :"
 "const:`None` when no more data is available."
 msgstr ""
+"Obtiene la siguiente fila de un conjunto resultado, retorna una única "
+"secuencia, o :const:`None` cuando no hay más datos disponibles."
 
 #: ../Doc/library/sqlite3.rst:662
 msgid ""
 "Fetches the next set of rows of a query result, returning a list.  An empty "
 "list is returned when no more rows are available."
 msgstr ""
+"Obtiene el siguiente conjunto de filas del resultado de una consulta, "
+"retornando una lista. Una lista vacía es retornada cuando no hay más filas "
+"disponibles."
 
 #: ../Doc/library/sqlite3.rst:665
 msgid ""
@@ -1040,6 +1051,12 @@ msgid ""
 "size parameter. If this is not possible due to the specified number of rows "
 "not being available, fewer rows may be returned."
 msgstr ""
+"El número de filas a obtener por llamado es especificado por el parámetro "
+"*size*. Si no es suministrado, el *arraysize* del cursor determina el número "
+"de filas a obtener. El método debería intentar obtener tantas filas como las "
+"indicadas por el parámetro *size*. Si esto no es posible debido a que el "
+"número especificado de filas no está disponible, entonces menos filas "
+"deberán ser retornadas."
 
 #: ../Doc/library/sqlite3.rst:671
 msgid ""
@@ -1048,6 +1065,10 @@ msgid ""
 "attribute. If the *size* parameter is used, then it is best for it to retain "
 "the same value from one :meth:`fetchmany` call to the next."
 msgstr ""
+"Nótese que hay consideraciones de desempeño involucradas con el parámetro "
+"*size*. Para un optimo desempeño, es usualmente mejor usar el atributo "
+"*arraysize*. Si el parámetro *size* es usado, entonces es mejor retener el "
+"mismo valor de una llamada :meth:`fetchmany` a la siguiente."
 
 #: ../Doc/library/sqlite3.rst:678
 msgid ""
@@ -1055,10 +1076,13 @@ msgid ""
 "the cursor's arraysize attribute can affect the performance of this "
 "operation. An empty list is returned when no rows are available."
 msgstr ""
+"Obtiene todas las filas (restantes) del resultado de una consulta. Nótese "
+"que el atributo *arraysize* del cursor puede afectar el desempeño de esta "
+"operación. Una lista vacía será retornada cuando no hay filas disponibles."
 
 #: ../Doc/library/sqlite3.rst:684
 msgid "Close the cursor now (rather than whenever ``__del__`` is called)."
-msgstr ""
+msgstr "Cierra el cursor ahora (en lugar que cuando ``__del__`` es llamado)"
 
 #: ../Doc/library/sqlite3.rst:686
 msgid ""
@@ -1066,6 +1090,9 @@ msgid ""
 "`ProgrammingError` exception will be raised if any operation is attempted "
 "with the cursor."
 msgstr ""
+"El cursor no será usable de este punto en adelante; una exepción :exc:"
+"`ProgrammingError` será lanzada si se intenta cualquier operación con el "
+"cursor."
 
 #: ../Doc/library/sqlite3.rst:691
 msgid ""
@@ -1073,12 +1100,17 @@ msgid ""
 "this attribute, the database engine's own support for the determination of "
 "\"rows affected\"/\"rows selected\" is quirky."
 msgstr ""
+"A pesar de que la clase :class:`Cursor` del módulo :mod:`sqlite3` implementa "
+"este atributo, el propio soporte del motor de base de datos para la "
+"determinación de \"filas afectadas\"/\"filas seleccionadas\" es raro."
 
 #: ../Doc/library/sqlite3.rst:695
 msgid ""
 "For :meth:`executemany` statements, the number of modifications are summed "
 "up into :attr:`rowcount`."
 msgstr ""
+"Para sentencias :meth:`executemany`, el número de modificaciones se resumen "
+"en :attr:`rowcount`."
 
 #: ../Doc/library/sqlite3.rst:698
 msgid ""
@@ -1088,12 +1120,20 @@ msgid ""
 "includes ``SELECT`` statements because we cannot determine the number of "
 "rows a query produced until all rows were fetched."
 msgstr ""
+"Cómo lo requiere la especificación Python DB API, el atributo :attr:"
+"`rowcount` \"es -1 en caso de que ``executeXX()`` no haya sido ejecutada en "
+"el cursor o en el *rowcount* de la última operación no haya sido determinada "
+"por la interface\". Esto incluye sentencias ``SELECT`` porque no podemos "
+"determinar el número de filas que una consulta produce hasta que todas las "
+"filas sean obtenidas."
 
 #: ../Doc/library/sqlite3.rst:704
 msgid ""
 "With SQLite versions before 3.6.5, :attr:`rowcount` is set to 0 if you make "
 "a ``DELETE FROM table`` without any condition."
 msgstr ""
+"Con versiones de SQLite anteriores a 3.6.5, :attr:`rowcount` es configurado "
+"a 0 si se hace un ``DELETE FROM table`` sin ninguna condición."
 
 #: ../Doc/library/sqlite3.rst:709
 msgid ""
@@ -1103,16 +1143,23 @@ msgid ""
 "or when :meth:`executemany` is called, :attr:`lastrowid` is set to :const:"
 "`None`."
 msgstr ""
+"Este atributo de solo lectura provee el *rowid* de la última fila "
+"modificada. Solo se configura si se emite una sentencia ``INSERT`` o "
+"``REPLACE`` usando el método :meth:`execute`. Para otras operaciones "
+"diferentes a ``INSERT`` o ``REPLACE`` o cuando :meth:`executemany` es "
+"llamado, attr:`lastrowid` es configurado a :const:`None`."
 
 #: ../Doc/library/sqlite3.rst:715
 msgid ""
 "If the ``INSERT`` or ``REPLACE`` statement failed to insert the previous "
 "successful rowid is returned."
 msgstr ""
+"Si la sentencia ``INSERT`` o ``REPLACE`` no se pudo insertar, se retorna el "
+"anterior *rowid* exitoso."
 
 #: ../Doc/library/sqlite3.rst:718
 msgid "Added support for the ``REPLACE`` statement."
-msgstr ""
+msgstr "Se agregó soporte para sentencias ``REPLACE``."
 
 #: ../Doc/library/sqlite3.rst:723
 msgid ""
@@ -1120,6 +1167,9 @@ msgid ""
 "`fetchmany`. The default value is 1 which means a single row would be "
 "fetched per call."
 msgstr ""
+"Atributo de lectura/escritura que controla el número de filas retornadas "
+"por :meth:`fetchmany`. El valor por defecto es 1, lo cual significa que una "
+"única fila será obtenida por llamada."
 
 #: ../Doc/library/sqlite3.rst:728
 msgid ""
@@ -1127,10 +1177,15 @@ msgid ""
 "remain compatible with the Python DB API, it returns a 7-tuple for each "
 "column where the last six items of each tuple are :const:`None`."
 msgstr ""
+"Este atributo de solo lectura provee el nombre de las columnas de la última "
+"consulta. Para ser compatible con *Python DB API*, retorna una 7-tupla para "
+"cada columna en donde los últimos seis ítems de cada tupla son :const:`None`."
 
 #: ../Doc/library/sqlite3.rst:732
 msgid "It is set for ``SELECT`` statements without any matching rows as well."
 msgstr ""
+"También es configurado para sentencias ``SELECT`` sin ninguna fila "
+"coincidente."
 
 #: ../Doc/library/sqlite3.rst:736
 msgid ""
@@ -1139,6 +1194,10 @@ msgid ""
 "calling :meth:`con.cursor() <Connection.cursor>` will have a :attr:"
 "`connection` attribute that refers to *con*::"
 msgstr ""
+"Este atributo de solo lectura provee la :class:`Connection` de la base de "
+"datos SQLite usada por el objeto :class:`Cursor`. Un objeto :class:`Cursor` "
+"creado por la llamada de :meth:`con.cursor() <Connection.cursor>` tendrá un "
+"atributo :attr:`connection` que se fiere a *con*::"
 
 #: ../Doc/library/sqlite3.rst:749
 msgid "Row Objects"
