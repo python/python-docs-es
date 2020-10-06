@@ -3,6 +3,11 @@
 ================================
 Guía para revisar una traducción
 ================================
+
+Antes que nada, queremos compartir contigo el video que uno de nuestros colaboradores ha preparado donde se explica el resumen del proceso y se muestra a través de un ejemplo: https://www.youtube.com/watch?v=uIaQMTuwtoU&list=PLma583Z70SlztPF8SitlWJZx3SW1aAePk&index=3&t=7s&ab_channel=Cristi%C3%A1nMaureira-Fredes
+
+Asimismo, si nunca has hecho una revisión pero ya has colaborado con el proyecto, te recomendamos que pruebes esta otra manera de colaborar, ya que permite ponerse en el lugar de otra persona, y muchas veces ayuda a mejorar las traducciones propias.
+
 El costado humano
 =================
 Teniendo en cuenta que todes somos voluntaries en este proyecto, es importante que la forma de comunicarnos sea clara, concisa y amable. Como revisor/a, ayudarás a voluntaries de diferentes culturas y lugares del mundo para que su traducción sea lo más acertada posible y podamos acercar Python a las comunidades de habla hispana. Recuerda que del otro lado de un PR hay una persona que ha dedicado tiempo y esfuerzo; es por eso es la forma en que le des una devolución sobre su trabajo influirá en su actitud hacia el proyecto…¡y en sus ganas de seguir participando de nuestra comunidad!
@@ -32,8 +37,15 @@ El costado técnico
 ==================
 Al revisar una traducción, deberás tener en cuenta ciertos aspectos propios de una traducción técnica de esta índole. Además de que debe entenderse el texto en español y que debes respetar el contenido de la documentación original (ver "A tener en cuenta" en la `Guía para contribuir en la traducción <https://python-docs-es.readthedocs.io/es/3.8/CONTRIBUTING.html>`_), contamos con herramientas en este proyecto que pueden fallar en ciertos casos, y que como revisor/a deberás tener en cuenta.
 
-Cuatro razones por las que puede fallar el *build* de Travis:
-* `powrap` falla
-* `pospell` falla
-* Dict está duplicado
-* Sphinx falla
+Tres razones por las que puede fallar el *build* de Travis:
+
+* `powrap` falla:
+
+
+
+* `pospell` falla:
+
+
+
+* Sphinx falla:
+
