@@ -62,7 +62,7 @@ msgstr ""
 
 #: ../Doc/library/signal.rst:29
 msgid "Execution of Python signal handlers"
-msgstr ""
+msgstr "Ejecución de los controladores de señales de Python"
 
 #: ../Doc/library/signal.rst:31
 msgid ""
@@ -72,6 +72,11 @@ msgid ""
 "handler at a later point(for example at the next :term:`bytecode` "
 "instruction). This has consequences:"
 msgstr ""
+"Un controlador de señáles de Python no se ejecuta dentro del controlador de señales "
+"de bajo nivel (C). En vez de eso, el controlador de señales de bajo nivel establece una señal que "
+"le dice al :term:`virtual machine` que ejecute la correspondiente señal del "
+"controlador de Python en una posición posterior (por ejemplo en la próxima instrucción :term:`bytecode). "
+"Esto tiene consecuencias: "
 
 #: ../Doc/library/signal.rst:37
 msgid ""
@@ -82,6 +87,11 @@ msgid ""
 "onwards, you can use the :mod:`faulthandler` module to report on synchronous "
 "errors."
 msgstr ""
+"Tiene poco sentido detectar errores sincrónicos como :const:`SIGFPE` o "
+":const:`SIGSEGV` que son causados ​​por una operación no válida en código C. Python "
+"devolverá desde el controlador de señales a códico C, que es probable que extienda "
+"la misma señal otra vez, ocasionando que Python se cuelgue aparentente. Desde Python 3.3 "
+"en adelante, puedes usar el módulo :mod:`faulthandler` para reportar errores síncronos."
 
 #: ../Doc/library/signal.rst:44
 msgid ""
@@ -90,10 +100,14 @@ msgid ""
 "arbitrary amount of time, regardless of any signals received.  The Python "
 "signal handlers will be called when the calculation finishes."
 msgstr ""
+"Un cálculo de larga duración implementado exclusivamente en C (como una coincidencia "
+"de expresiones regulares en un gran cuerpo de texto) puede funcionar interrumpidamente durante una "
+"cantidad arbitraria de tiempo, independientemente de las señales recibidas. Los controladores "
+"de señales de Python serán llamados cuando el cálculo finalice."
 
 #: ../Doc/library/signal.rst:54
 msgid "Signals and threads"
-msgstr ""
+msgstr "Señales e hilos"
 
 #: ../Doc/library/signal.rst:56
 msgid ""
@@ -102,14 +116,18 @@ msgid ""
 "be used as a means of inter-thread communication.  You can use the "
 "synchronization primitives from the :mod:`threading` module instead."
 msgstr ""
+"Los controladores de señales de Python se ejecutan siempre en el hilo principal de Python, incluso "
+"si la señal fue recibida desde otro hilo. Esto significa que las señales no pueden "
+"ser usadas como un medio de comunicación entre hilos. Puedes usar las "
+"primitivas de sincronización desde el módulo :mod:`threading` en su lugar."
 
 #: ../Doc/library/signal.rst:61
 msgid "Besides, only the main thread is allowed to set a new signal handler."
-msgstr ""
+msgstr "Además, solo el hilo principal puede configurar un nuevo controlador de señal."
 
 #: ../Doc/library/signal.rst:65
 msgid "Module contents"
-msgstr ""
+msgstr "Contenidos del módulo"
 
 #: ../Doc/library/signal.rst:67
 msgid ""
@@ -119,6 +137,11 @@ msgid ""
 "`getsignal`, :func:`pthread_sigmask`, :func:`sigpending` and :func:`sigwait` "
 "functions return human-readable :class:`enums <enum.IntEnum>`."
 msgstr ""
+"Señal (SIG*), controlador (:const:`SIG_DFL`, :const:`SIG_IGN`) y 'sigmask' "
+"(:const:`SIG_BLOCK`, :const:`SIG_UNBLOCK`, :const:`SIG_SETMASK`) las clases "
+"relacionadas abajo se cambian en las funciones :class:`enums <enum.IntEnum>`. :func:"
+"`getsignal`, :func:`pthread_sigmask`, :func:`sigpending` y :func:`sigwait` "
+"que devuelven :class:`enums <enum.IntEnum>` que pueden ser leídas por humanos."
 
 #: ../Doc/library/signal.rst:77
 msgid "The variables defined in the :mod:`signal` module are:"
