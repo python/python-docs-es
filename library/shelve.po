@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-06 11:59-0400\n"
-"PO-Revision-Date: 2020-09-30 21:46-0400\n"
+"PO-Revision-Date: 2020-10-07 00:55-0300\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +24,6 @@ msgid ":mod:`shelve` --- Python object persistence"
 msgstr ":mod:`shelve` --- Persistencia de objetos de Python"
 
 #: ../Doc/library/shelve.rst:7
-#, fuzzy
 msgid "**Source code:** :source:`Lib/shelve.py`"
 msgstr "**Source code:** :source:`Lib/shelve.py`"
 
@@ -37,13 +36,13 @@ msgid ""
 "and objects containing lots of shared  sub-objects.  The keys are ordinary "
 "strings."
 msgstr ""
-"Un \"estante\" es un objeto persistente similar a un diccionario.  La "
-"diferencia con las bases de datos \"dbm\" es que los valores (¡no las "
-"claves!) en un estante pueden ser esencialmente objetos Python arbitrarios "
-"--- cualquier cosa que el módulo :mod:'pickle' pueda manejar. Esto incluye "
-"la mayoría de las instancias de clase, tipos de datos recursivos y objetos "
-"que contienen muchos subobjetos compartidos.  Las claves son cadenas "
-"ordinarias."
+"Un \"estante\" o *shelve*, es un objeto persistente similar a un "
+"diccionario.  La diferencia con las bases de datos \"dbm\" es que los "
+"valores (¡no las claves!) en un estante pueden ser esencialmente objetos "
+"Python arbitrarios --- cualquier cosa que el módulo :mod:`pickle` pueda "
+"manejar. Esto incluye la mayoría de las instancias de clase, tipos de datos "
+"recursivos y objetos que contienen muchos subobjetos compartidos.  Las "
+"claves son cadenas ordinarias."
 
 #: ../Doc/library/shelve.rst:22
 msgid ""
@@ -59,16 +58,15 @@ msgstr ""
 "secundario, se puede agregar una extensión al nombre de archivo y se puede "
 "crear más de un archivo.  De forma predeterminada, el archivo de base de "
 "datos subyacente se abre para leer y escribir.  El parámetro opcional *flag* "
-"tiene la misma interpretación que el parámetro *flag* de :func:'dbm.open'."
+"tiene la misma interpretación que el parámetro *flag* de :func:`dbm.open`."
 
 #: ../Doc/library/shelve.rst:28
-#, fuzzy
 msgid ""
 "By default, version 3 pickles are used to serialize values.  The version of "
 "the pickle protocol can be specified with the *protocol* parameter."
 msgstr ""
-"De forma predeterminada, los pickles de la versión 3 se utilizan para "
-"serializar valores.  La versión del protocolo de pickle se puede especificar "
+"De forma predeterminada, los *pickles* de la versión 3 se utilizan para "
+"serializar valores.  La versión del protocolo *pickle* se puede especificar "
 "con el parámetro *protocol*."
 
 #: ../Doc/library/shelve.rst:31
@@ -85,6 +83,19 @@ msgid ""
 "determine which accessed entries are mutable, nor which ones were actually "
 "mutated)."
 msgstr ""
+"Debido a la semántica de Python, un estante no puede saber cuándo se "
+"modifica una entrada de diccionario persistente mutable.  De forma "
+"predeterminada, los objetos modificados se escriben \"sólo\" cuando se "
+"asignan al estante (consulte :ref:`shelve-example`).  Si el parámetro "
+"opcional *writeback* se establece en ``Verdadero``, todas las entradas a las "
+"que se accede también se almacenan en caché en la memoria y se vuelven a "
+"escribir en :meth:`~Shelf.sync`  y :meth:`~Shelf.close`; esto puede hacer "
+"que sea más práctico mutar entradas mutables en el diccionario persistente, "
+"pero, si se accede a muchas entradas, puede consumir grandes cantidades de "
+"memoria para la memoria caché, y puede hacer que la operación de cierre sea "
+"muy lenta ya que todas las entradas a las que se accede se vuelven a "
+"escribir (no hay manera de determinar qué entradas a las que se accede son "
+"mutables, ni cuáles se mutaron realmente)."
 
 #: ../Doc/library/shelve.rst:45
 msgid ""
@@ -92,6 +103,9 @@ msgid ""
 "`~Shelf.close` explicitly when you don't need it any more, or use :func:"
 "`shelve.open` as a context manager::"
 msgstr ""
+"No confíe en que el estante se cerrará automáticamente; siempre llame a :"
+"meth:`~Shelf.close`  explícitamente cuando ya no lo necesite, o use :func:"
+"`shelve.open` como administrador de contexto::"
 
 #: ../Doc/library/shelve.rst:54
 msgid ""
@@ -99,6 +113,10 @@ msgid ""
 "to load a shelf from an untrusted source.  Like with pickle, loading a shelf "
 "can execute arbitrary code."
 msgstr ""
+"Debido a que el módulo :mod:`shelve` está respaldado por :mod:`pickle`, es "
+"inseguro cargar un estante desde una fuente que no es de confianza.  Al "
+"igual que con el *pickle*, cargar un estante puede ejecutar código "
+"arbitrario."
 
 #: ../Doc/library/shelve.rst:58
 msgid ""
@@ -106,6 +124,9 @@ msgid ""
 "transition from dictionary based scripts to those requiring persistent "
 "storage."
 msgstr ""
+"Los objetos de estante admiten todos los métodos admitidos por los "
+"diccionarios.  Esto facilita la transición de scripts basados en "
+"diccionarios a aquellos que requieren almacenamiento persistente."
 
 #: ../Doc/library/shelve.rst:61
 msgid "Two additional methods are supported:"
@@ -118,12 +139,18 @@ msgid ""
 "dictionary on disk, if feasible.  This is called automatically when the "
 "shelf is closed with :meth:`close`."
 msgstr ""
+"Escriba todas las entradas en la caché si el estante se abrió con "
+"*writeback* establecido en :const:`True`. También vacíe la caché y "
+"sincronice el diccionario persistente en el disco, si es posible. Esto se "
+"llama automáticamente cuando el estante se cierra con :meth:`close`."
 
 #: ../Doc/library/shelve.rst:72
 msgid ""
 "Synchronize and close the persistent *dict* object.  Operations on a closed "
 "shelf will fail with a :exc:`ValueError`."
 msgstr ""
+"Sincronice y cierre el objeto persistente *dict*. Las operaciones en un "
+"estante cerrado fallarán con un :exc:`ValueError`."
 
 #: ../Doc/library/shelve.rst:78
 msgid ""
@@ -131,10 +158,13 @@ msgid ""
 ">`_ with widely supported storage formats and having the speed of native "
 "dictionaries."
 msgstr ""
+"`Receta de diccionario persistente <https://code.activestate.com/"
+"recipes/576642/>` _ con formatos de almacenamiento ampliamente compatibles y "
+"con la velocidad de los diccionarios nativos."
 
 #: ../Doc/library/shelve.rst:84
 msgid "Restrictions"
-msgstr ""
+msgstr "Restricciones"
 
 #: ../Doc/library/shelve.rst:90
 msgid ""
@@ -146,6 +176,14 @@ msgid ""
 "the database should be fairly small, and in rare cases key collisions may "
 "cause the database to refuse updates."
 msgstr ""
+"La elección de qué paquete de base de datos se utilizará (como :mod:`dbm."
+"ndbm` o :mod:`dbm.gnu`) depende de la interfaz disponible. Por lo tanto, no "
+"es seguro abrir la base de datos directamente usando :mod:`dbm`. La base de "
+"datos también está (desafortunadamente) sujeta a las limitaciones de :mod:"
+"`dbm`, si se usa --- esto significa que (la representación *pickle* de) los "
+"objetos almacenados en la base de datos debe ser bastante pequeña, y en "
+"casos raros las colisiones de claves pueden hacer que la base de datos "
+"rechace las actualizaciones."
 
 #: ../Doc/library/shelve.rst:98
 msgid ""
@@ -156,12 +194,21 @@ msgid ""
 "this differs across Unix versions and requires knowledge about the database "
 "implementation used."
 msgstr ""
+"El módulo :mod:`shelve` no admite el acceso \"concurrente\" de lectura/"
+"escritura a los objetos almacenados. (Los accesos de lectura múltiples "
+"simultáneos son seguros). Cuando un programa tiene un estante abierto para "
+"escritura, ningún otro programa debe tenerlo abierto para lectura o "
+"escritura. El bloqueo de archivos Unix se puede usar para resolver esto, "
+"pero esto difiere entre las versiones de Unix y requiere conocimiento sobre "
+"la implementación de la base de datos utilizada."
 
 #: ../Doc/library/shelve.rst:108
 msgid ""
 "A subclass of :class:`collections.abc.MutableMapping` which stores pickled "
 "values in the *dict* object."
 msgstr ""
+"Una subclase de :class:`collections.abc.MutableMapping` que almacena valores "
+"*pickle* en el objeto *dict*."
 
 #: ../Doc/library/shelve.rst:111
 msgid ""
@@ -169,6 +216,10 @@ msgid ""
 "the pickle protocol can be specified with the *protocol* parameter. See the :"
 "mod:`pickle` documentation for a discussion of the pickle protocols."
 msgstr ""
+"De forma predeterminada, los *pickles* de la versión 3 se utilizan para "
+"serializar valores. La versión del protocolo *pickle* se puede especificar "
+"con el parámetro *protocol*. Vea la documentación de :mod:`pickle` para una "
+"discusión de los protocolos de *pickle*."
 
 #: ../Doc/library/shelve.rst:115
 msgid ""
@@ -177,30 +228,43 @@ msgid ""
 "times. This allows natural operations on mutable entries, but can consume "
 "much more memory and make sync and close take a long time."
 msgstr ""
+"Si el parámetro *writeback* es ``Verdadero``, el objeto mantendrá un caché "
+"de todas las entradas a las que se accedió y las volverá a escribir en el "
+"*dict* en las horas de sincronización y cierre. Esto permite operaciones "
+"naturales en entradas mutables, pero puede consumir mucha más memoria y "
+"hacer que la sincronización y el cierre tomen mucho tiempo."
 
 #: ../Doc/library/shelve.rst:120
 msgid ""
 "The *keyencoding* parameter is the encoding used to encode keys before they "
 "are used with the underlying dict."
 msgstr ""
+"El parámetro *keyencoding* es la codificación utilizada para codificar las "
+"claves antes de que se utilicen con el *dict* subyacente."
 
 #: ../Doc/library/shelve.rst:123
 msgid ""
 "A :class:`Shelf` object can also be used as a context manager, in which case "
 "it will be automatically closed when the :keyword:`with` block ends."
 msgstr ""
+"El objeto :class:`Shelf` también se puede utilizar como administrador de "
+"contexto, en cuyo caso se cerrará automáticamente cuando finalice el bloque :"
+"keyword:`with`."
 
 #: ../Doc/library/shelve.rst:126
 msgid ""
 "Added the *keyencoding* parameter; previously, keys were always encoded in "
 "UTF-8."
 msgstr ""
+"Se agregó el parámetro *keyencoding*; anteriormente, las claves siempre "
+"estaban codificadas en UTF-8."
 
 #: ../Doc/library/shelve.rst:130
 msgid "Added context manager support."
-msgstr ""
+msgstr "Agregado soporte para administrador de contexto."
 
 #: ../Doc/library/shelve.rst:136
+#, fuzzy
 msgid ""
 "A subclass of :class:`Shelf` which exposes :meth:`first`, :meth:`!next`, :"
 "meth:`previous`, :meth:`last` and :meth:`set_location` which are available "
@@ -212,6 +276,15 @@ msgid ""
 "*writeback*, and *keyencoding* parameters have the same interpretation as "
 "for the :class:`Shelf` class."
 msgstr ""
+"Una subclase de :class:`Shelf` que expone :meth:`first`, :meth:`!next`, :"
+"meth:`previous`, :meth:`last` y :meth:`set_location` que están disponibles "
+"en el módulo de terceros :mod:`bsddb` de `pybsddb <https://www.jcea.es/"
+"programacion/pybsddb.htm>`_ pero no en otros módulos de base de datos. El "
+"objeto *dict* que se pasa al constructor debe admitir esos métodos. Esto se "
+"logra generalmente llamando a uno de los siguientes :func:`bsddb.hashopen`, :"
+"func:`bsddb.btopen` o :func:`bsddb.rnopen`. Los parámetros opcionales "
+"*protocol*, *writeback* y *keyencoding* tienen la misma interpretación que "
+"para la clase :class:`Shelf`."
 
 #: ../Doc/library/shelve.rst:149
 msgid ""
@@ -222,29 +295,39 @@ msgid ""
 "open` function.  The optional *protocol* and *writeback* parameters have the "
 "same interpretation as for the :class:`Shelf` class."
 msgstr ""
+"Una subclase de :class:`Shelf` que acepta un *nombre de archivo* en lugar de "
+"un objeto tipo *dict*. El archivo subyacente se abrirá usando :func:`dbm."
+"open`. De forma predeterminada, el archivo se creará y se abrirá tanto para "
+"lectura como para escritura. El parámetro opcional *flag* tiene la misma "
+"interpretación que para la función :func:`.open`. Los parámetros opcionales "
+"*protocol* y *writeback* tienen la misma interpretación que para la clase :"
+"class:`Shelf`."
 
 #: ../Doc/library/shelve.rst:160
 msgid "Example"
 msgstr "Ejemplo"
 
 #: ../Doc/library/shelve.rst:162
+#, fuzzy
 msgid ""
 "To summarize the interface (``key`` is a string, ``data`` is an arbitrary "
 "object)::"
 msgstr ""
+"Para resumir la interfaz (``key`` es una cadena, ``data`` es un objeto "
+"arbitrario)::"
 
 #: ../Doc/library/shelve.rst:199
 msgid "Module :mod:`dbm`"
-msgstr ""
+msgstr "Módulo :mod:`dbm`"
 
 #: ../Doc/library/shelve.rst:199
 msgid "Generic interface to ``dbm``-style databases."
-msgstr ""
+msgstr "Interfaz genérica para bases de datos estilo ``dbm``."
 
 #: ../Doc/library/shelve.rst:201
 msgid "Module :mod:`pickle`"
-msgstr ""
+msgstr "Módulo :mod:`pickle`"
 
 #: ../Doc/library/shelve.rst:202
 msgid "Object serialization used by :mod:`shelve`."
-msgstr ""
+msgstr "Serialización de objetos utilizada por :mod:`shelve`."
