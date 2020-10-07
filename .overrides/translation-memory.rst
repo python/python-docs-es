@@ -36,34 +36,34 @@ Fuentes recomendadas
 ====================
 
   :Diccionario Panhispánico de dudas:
-  
+
   https://www.rae.es/dpd/
 
   Obra orientada a resolver dudas en diferentes áreas de la lengua española: ortografía, sintaxis,
   gramática ...
 
   :Wordreference:
-  
+
   https://www.wordreference.com/
 
   Diccionario y traductor multilingue
 
   :Linguee.es:
-  
+
   https://www.linguee.es/
-  
+
 Diccionario y traductor multilíngue con millones de traducciones indexadas. De los creadores
   de DeepL
 
   :Fundéu BBVA - Fundación para el español urgente:
-  
+
   https://www.fundeu.es/
 
   Fundación dedicada a la resolución de dudas. Creada originalmente por la agencia estatal
   española de noticias EFE, a partir de su departamento y libro de estilo.
 
   :IATE - European Union terminology:
-  
+
   https://iate.europa.eu/home
 
   Base de datos de las traducciones oficiales de la Unión Europea. Permite búsqueda por término
@@ -79,7 +79,7 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 
      auditing event
        evento de auditoría ``library/tempfile`` and many others
-     
+
      awaitable
        aguardable ``glossary``
 
@@ -91,7 +91,7 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 
      built-in exceptions
        excepciones predefinidas ``tutorial/errors.po``
-       
+
      bytecodes
        queda igual ``glossary.po``
 
@@ -101,8 +101,14 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
        Nota: en ocasiones es mejora mantener callable, especialmente cuando se refiere directamente
        a la anotación de typing Callable
 
+     checksum
+       suma de comprobación ``howto/clinic.po``
+
      code object
        objeto código ``c-api``, ``library/functions.po``
+
+     context manager
+       gestor de contexto
 
      deallocated
        desalojable ``glossary.po``
@@ -115,7 +121,7 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 
      keyword argument
        argumento por palabra clave / argumento de palabra clave
-       
+
      handler
        gestor ``tutorial/errors.po``
 
@@ -149,7 +155,7 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 
      named tuple.
        tupla nombrada ``glossary.po``
-       
+
      overload, overloading
        sobrecargar, sobrecarga
 
@@ -161,9 +167,9 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 
      pythonic
        *pythónico*
-       
+
        idiomático
-       
+
        Estes dos términos son próximos en el contexto que se usan, utilizar complementariamente
        según el contexto. Referencia: https://docs.python-guide.org/writing/style/
 
@@ -172,7 +178,7 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 
      release
        version ``HOWTO``
-       
+
      return / returns
        retorna / retornar ``library/sqlite3.po``
 
