@@ -3,6 +3,13 @@
 ================================
 Guía para revisar una traducción
 ================================
+
+Antes que nada, queremos compartir contigo `unos videos`_ que uno de nuestros colaboradores ha preparado donde se explica el resumen del proceso a través de un ejemplo.
+
+Asimismo, si nunca has hecho una revisión pero ya has colaborado con el proyecto, te recomendamos que pruebes esta otra manera de colaborar, ya que permite ponerse en el lugar de otra persona, y muchas veces ayuda a mejorar las traducciones propias.
+
+.. _`unos videos`: https://www.youtube.com/watch?v=uIaQMTuwtoU&list=PLma583Z70SlztPF8SitlWJZx3SW1aAePk&index=3&t=7s&ab_channel=Cristi%C3%A1nMaureira-Fredes
+
 El costado humano
 =================
 Teniendo en cuenta que todes somos voluntaries en este proyecto, es importante que la forma de comunicarnos sea clara, concisa y amable. Como revisor/a, ayudarás a voluntaries de diferentes culturas y lugares del mundo para que su traducción sea lo más acertada posible y podamos acercar Python a las comunidades de habla hispana. Recuerda que del otro lado de un PR hay una persona que ha dedicado tiempo y esfuerzo; es por eso es la forma en que le des una devolución sobre su trabajo influirá en su actitud hacia el proyecto…¡y en sus ganas de seguir participando de nuestra comunidad!
@@ -32,8 +39,34 @@ El costado técnico
 ==================
 Al revisar una traducción, deberás tener en cuenta ciertos aspectos propios de una traducción técnica de esta índole. Además de que debe entenderse el texto en español y que debes respetar el contenido de la documentación original (ver "A tener en cuenta" en la `Guía para contribuir en la traducción <https://python-docs-es.readthedocs.io/es/3.8/CONTRIBUTING.html>`_), contamos con herramientas en este proyecto que pueden fallar en ciertos casos, y que como revisor/a deberás tener en cuenta.
 
-Cuatro razones por las que puede fallar el *build* de Travis:
-* `powrap` falla
-* `pospell` falla
-* Dict está duplicado
-* Sphinx falla
+Tres razones por las que puede fallar el *build* de Travis:
+
+``powrap`` falla
+---------------------
+
+.. image:: powrap_fail.png
+
+Para facilitar la comparación de ficheros se emplea este programa que va a hacer que todas las líneas tengan el mismo tamaño. Solucionar este problema en nuestra traducción es muy sencillo, solo hay que instalar la herramienta powrap en nuestro entorno y ejecutar el comando ``powrap nuestro_fichero.po``
+
+
+``pospell`` falla
+---------------------
+
+Los fallos en pospell pueden ser variados y según con que nos encontremos tenemos que actuar de una manera u otra. En principio es un chequeo de ortografía contra un diccionario de español, por lo que nos va a fallar tanto si usamos palabras en otro idioma, como si usamos palabras en español mal escritas como si usamos palabras que simplemente no están en el diccionario. Por ejemplo:
+
+.. image:: pospell_fallo_spelling.png
+
+En este primer caso simplemente hay un error en la ortografía por lo que solucionarlo en nuestra traducción será lo únicoque tengamos que hacer.
+
+.. image:: pospell_warning_and_english_words.png
+
+En este segundo, en cambio, vemos un par de cosas más interesantes. En primer lugar, tenemos un warning de rst, donde nos da un error porque unas comillas no han sido reconocidas como final de una palabra. Si te fijas en el texto esto ocurre donde están los paréntesis pegados a la expresión entre comillas dobles SNDCTL_DSP_SYNC. Añadir un espacio allí solucionará nuestro problema. Por otro lado, nos lanza una serie de palabras que han fallado en pospell, pero como vemos, son o bien términos técnicos, o nombres en inglés (en este caso posiblemente parte de un nombre propio) y una palabra que está correctamente escrita en español pero es un poco técnica. Por tanto, en este caso no queremos cambiarlas en nuestra traducción, sino que queremos que sean una excepción en el chequeo de pospell. Para ello, lo que debemos hacer es o bien crear o bien incluir (si ya está creado) en un diccionario llamado como nuestro fichero y que se emplace en la carpeta dictionaries las palabras que deben ser una excepción. Por ejemplo, los diccionarios para el fichero clinic o argparse los encontramos dentro de ./dictionaries como howto_clinic.txt y library_argparse.txt. Cuando se haga el build se tendrán en cuenta estas excepciones y no tendremos ese error de pospell.
+
+Sphinx falla: 
+---------------------
+
+Durante la renderización de la documentación hay toda una serie de referencias cruzadas, que deben permanecer igual en español que en inglés. Un fallo habitual es el siguiente:
+
+.. image:: sphinx_warnings_example_inconsistent_terms.png
+
+Indica que alguna de las referencias falta en la traducción. Lo más probable es que al traducir se haya cambiado algo de la sintaxis particular como las comillas, y por eso no esté siendo reconocida.
