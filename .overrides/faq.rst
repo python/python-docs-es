@@ -220,7 +220,7 @@ No.
 En realidad, no tienen ningún efecto. Sphinx se da cuenta automáticamente de esto y simplemente
 deja un solo espacio en la versión final. Así que, no te preocupes si ves dos espacios juntos.
 
-Si estás interesada en saber más sobré "¿Porqué se usan dobles espacios?" puedes leer este artículo:
+Si estás interesada en saber más sobré "¿Por qué se usan dobles espacios?" puedes leer este artículo:
 `How Many Spaces Should Be After a Period? <https://www.instructionalsolutions.com/blog/one-space-vs-two-after-period>`_
 
 
