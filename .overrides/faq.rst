@@ -233,7 +233,8 @@ Si aparece el nombre de una función (por ejemplo, "IncrementalParser") en el or
 (no está en cursiva, ni en negrita ni en estilo de código), aunque sientas la tentación de ponerla como
 ``IncrementalParser``, no debes hacerlo.
 
-En principio, no debemos cambiar el formato de estas palabras. Si realmente crees que es un error y debería
+En principio, no debemos cambiar el formato de estas palabras. Si está con asteriscos, lo dejamos con asteriscos.
+Si está con backticks, lo dejamos con los backticks, etc. Si realmente crees que es un error y debería
 estar con un formato distinto, debes reportarlo en el repositorio de CPython.
 
 
