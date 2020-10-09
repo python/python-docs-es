@@ -64,7 +64,9 @@ Antes de comenzar
 
 #. Selecciona un :ref:`archivo para traducir <que-archivo-traducir>`.
 
-#. Verifica que estás en la rama principal del repositorio, **3.8**::
+#. Verifica que estás en la rama principal del repositorio, **3.8** (esto es muy 
+   importante para evitar crear una nueva rama a partir de una traducción 
+   anterior)::
 
      git checkout 3.8
 
