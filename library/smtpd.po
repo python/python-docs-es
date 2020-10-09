@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Python 3.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-06 11:59-0400\n"
-"PO-Revision-Date: 2020-10-08 22:32-0500\n"
+"PO-Revision-Date: 2020-10-08 22:47-0500\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -132,6 +132,13 @@ msgid ""
 "``kwargs['mail_options']`` list. *decode_data* and *enable_SMTPUTF8* cannot "
 "be set to ``True`` at the same time."
 msgstr ""
+"*decode_data* especifica si la porción de datos de la transacción SMTP debe "
+"decodificarse usando UTF-8. Cuando *decode_data* es ``False`` (el valor "
+"predeterminado), el servidor anuncia la extensión ``8BITMIME`` (:rfc:"
+"`6152`), acepta el parámetro ``BODY=8BITMIME`` al comando ``MAIL``, y cuando "
+"está presente lo pasa a :meth:`process_message` en la lista "
+"``kwargs[‘mail_options’]``. *decode_data* y *enable_SMTPUTF8* no se pueden "
+"establecer en ``True`` al mismo tiempo."
 
 #: ../Doc/library/smtpd.rst:71
 msgid ""
@@ -143,6 +150,13 @@ msgid ""
 "containing the contents of the e-mail (which should be in :rfc:`5321` "
 "format)."
 msgstr ""
+"Genera una excepción :exc:`NotImplementedError` . Reemplaza esto en "
+"subclases para hacer algo útil con este mensaje. Todo lo que se haya pasado "
+"en el constructor como *remoteaddr* estará disponible como el atributo :attr:"
+"`_remoteaddr`. *peer* es la dirección del host remoto, *mailfrom* es el "
+"creador del sobre, *rcpttos* son los destinatarios del sobre y *data* es una "
+"cadena que contiene el contenido del correo electrónico (que debe estar en "
+"formato :rfc:`5321`)."
 
 #: ../Doc/library/smtpd.rst:79
 msgid ""
@@ -150,6 +164,9 @@ msgid ""
 "argument will be a unicode string.  If it is set to ``False``, it will be a "
 "bytes object."
 msgstr ""
+"Si la palabra clave del constructor *decode_data* se establece en `True``, "
+"el argumento *data* será una cadena Unicode. Si se establece en ``False``, "
+"será un objeto de bytes."
 
 #: ../Doc/library/smtpd.rst:83
 msgid ""
@@ -157,6 +174,9 @@ msgid ""
 "``decode_data=True`` was given as an init argument, otherwise it contains "
 "the following keys:"
 msgstr ""
+"*kwargs* es un diccionario que contiene información adicional. Está vacío si "
+"se proporcionó ``decode_data=True`` como argumento de inicialización; de lo "
+"contrario, contiene las siguientes llaves:"
 
 #: ../Doc/library/smtpd.rst:90
 msgid "*mail_options*:"
@@ -180,6 +200,9 @@ msgid ""
 "same as *mail_options* but for the ``RCPT`` command. Currently no ``RCPT "
 "TO`` options are supported, so for now this will always be an empty list."
 msgstr ""
+"igual que *mail_options* pero para el comando ``RCPT``. Actualmente, no se "
+"admiten las opciones ``RCPT TO``, por lo que, por ahora, siempre será una "
+"lista vacía."
 
 #: ../Doc/library/smtpd.rst:97
 msgid ""
@@ -187,6 +210,9 @@ msgid ""
 "to accept arbitrary keyword arguments, since future feature enhancements may "
 "add keys to the kwargs dictionary."
 msgstr ""
+"Las implementaciones de ``process_message`` deben usar la firma ``**kwargs`` "
+"para aceptar argumentos de palabras clave arbitrarias, ya que las mejoras de "
+"funciones futuras pueden agregar llaves al diccionario kwargs."
 
 #: ../Doc/library/smtpd.rst:101
 msgid ""
@@ -323,18 +349,20 @@ msgid ""
 "To use a custom SMTPChannel implementation you need to override the :attr:"
 "`SMTPServer.channel_class` of your :class:`SMTPServer`."
 msgstr ""
+"Para utilizar una implementación SMTPChannel personalizada, debe anular :"
+"attr:`SMTPServer.channel_class` de su :class:`SMTPServer`."
 
 #: ../Doc/library/smtpd.rst:187
 msgid "The *decode_data* and *enable_SMTPUTF8* parameters were added."
-msgstr ""
+msgstr "Se agregaron los parámetros *decode_data* y *enable_SMTPUTF8*."
 
 #: ../Doc/library/smtpd.rst:193
 msgid "The :class:`SMTPChannel` has the following instance variables:"
-msgstr ""
+msgstr "El :class:`SMTPChannel` tiene las siguientes variables de instancia:"
 
 #: ../Doc/library/smtpd.rst:197
 msgid "Holds the :class:`SMTPServer` that spawned this channel."
-msgstr ""
+msgstr "Contiene :class:`SMTPServer` que generó este canal."
 
 #: ../Doc/library/smtpd.rst:201
 msgid "Holds the socket object connecting to the client."
@@ -354,47 +382,65 @@ msgid ""
 "client. The lines have their ``\"\\r\\n\"`` line ending translated to ``\"\\n"
 "\"``."
 msgstr ""
+"Contiene una lista de las cadenas de línea (decodificadas mediante UTF-8) "
+"recibidas del cliente. Las líneas tienen su final de línea ```”\\r\\n”`` "
+"traducido a ``”\\n”``."
 
 #: ../Doc/library/smtpd.rst:216
 msgid ""
 "Holds the current state of the channel. This will be either :attr:`COMMAND` "
 "initially and then :attr:`DATA` after the client sends a \"DATA\" line."
 msgstr ""
+"Mantiene el estado actual del canal. Este será :attr:`COMMAND` inicialmente "
+"y luego :attr:`DATA` después de que el cliente envíe una línea “DATA”."
 
 #: ../Doc/library/smtpd.rst:222
 msgid ""
 "Holds a string containing the greeting sent by the client in its \"HELO\"."
 msgstr ""
+"Sostiene una cadena que contiene el saludo enviado por el cliente en su "
+"“HELO”."
 
 #: ../Doc/library/smtpd.rst:226
 msgid ""
 "Holds a string containing the address identified in the \"MAIL FROM:\" line "
 "from the client."
 msgstr ""
+"Contiene una cadena que contiene la dirección identificada en la línea “MAIL "
+"FROM:” del cliente."
 
 #: ../Doc/library/smtpd.rst:231
 msgid ""
 "Holds a list of strings containing the addresses identified in the \"RCPT TO:"
 "\" lines from the client."
 msgstr ""
+"Contiene una lista de cadenas que contienen las direcciones identificadas en "
+"las líneas “RCPT TO:” del cliente."
 
 #: ../Doc/library/smtpd.rst:236
 msgid ""
 "Holds a string containing all of the data sent by the client during the DATA "
 "state, up to but not including the terminating ``\"\\r\\n.\\r\\n\"``."
 msgstr ""
+"Contiene una cadena que contiene todos los datos enviados por el cliente "
+"durante el estado de DATA, hasta pero sin incluir la terminación ``”\\r\\n."
+"\\r\\n”``."
 
 #: ../Doc/library/smtpd.rst:241
 msgid ""
 "Holds the fully-qualified domain name of the server as returned by :func:"
 "`socket.getfqdn`."
 msgstr ""
+"Contiene el nombre de dominio completo del servidor como lo devuelve :func:"
+"`socket.getfqdn`."
 
 #: ../Doc/library/smtpd.rst:246
 msgid ""
 "Holds the name of the client peer as returned by ``conn.getpeername()`` "
 "where ``conn`` is :attr:`conn`."
 msgstr ""
+"Contiene el nombre del par del cliente como lo devuelve ``conn."
+"getpeername()`` donde ``conn`` es :attr:`conn`."
 
 #: ../Doc/library/smtpd.rst:249
 msgid ""
@@ -403,6 +449,10 @@ msgid ""
 "into the base :class:`SMTPChannel` class are methods for handling the "
 "following commands (and responding to them appropriately):"
 msgstr ""
+"La clase :class:`SMTPChannel` opera invocando métodos llamados "
+"``smtp_<command>`` al recibir una línea de comando del cliente. Construído "
+"en la clase base :class:`SMTPChannel` son métodos para manejar los "
+"siguientes comandos (y responder a ellos de manera apropiada):"
 
 #: ../Doc/library/smtpd.rst:255
 msgid "Command"
