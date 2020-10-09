@@ -57,7 +57,7 @@ Antes de comenzar
 
       Al tener instalado los requerimientos, podrás utilizas las herramientas
       ``powrap`` y ``pospell`` para poder verificar tus archivos traducidos,
-      y también contruir la documentación localmente.
+      y también construir la documentación localmente.
 
 ¡Comienza a traducir!
 ---------------------
