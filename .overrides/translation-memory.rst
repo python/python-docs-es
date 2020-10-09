@@ -52,7 +52,7 @@ Fuentes recomendadas
 
   https://www.linguee.es/
 
-Diccionario y traductor multilíngue con millones de traducciones indexadas. De los creadores
+  Diccionario y traductor multilíngue con millones de traducciones indexadas. De los creadores
   de DeepL
 
   :Fundéu BBVA - Fundación para el español urgente:
@@ -77,153 +77,156 @@ Términos y bigramas
 Dividimos esta sección en dos partes, los términos que se traducen y los que mantenemos el original.
 Éstas son las palabras que hemos coordinado hasta el momento:
 
-     auditing event
-       evento de auditoría ``library/tempfile`` and many others
 
-     awaitable
-       aguardable ``glossary``
+.. glossary::
 
-     slash and backslash
-      barra y barra invertida ``c-api``,``tutorial``,``library/functions.po``
+   auditing event
+     evento de auditoría ``library/tempfile`` and many others
 
-     built-in
-       incorporada ``glossary.po``
+   awaitable
+     aguardable ``glossary``
 
-     built-in exceptions
-       excepciones predefinidas ``tutorial/errors.po``
+   slash and backslash
+     barra y barra invertida ``c-api``, ``tutorial``, ``library/functions.po``
 
-     bytecodes
-       queda igual ``glossary.po``
+   built-in
+     incorporada ``glossary.po``
 
-     callable
-       invocable ``glossary.po``, ``library/functions.po``
+   built-in exceptions
+     excepciones predefinidas ``tutorial/errors.po``
 
-       Nota: en ocasiones es mejora mantener callable, especialmente cuando se refiere directamente
-       a la anotación de typing Callable
+   bytecodes
+     queda igual ``glossary.po``
+  
+   callable
+     invocable ``glossary.po``, ``library/functions.po``
 
-     checksum
-       suma de comprobación ``howto/clinic.po``
+     Nota: en ocasiones es mejora mantener callable, especialmente cuando se refiere directamente
+     a la anotación de typing Callable.
 
-     code object
-       objeto código ``c-api``, ``library/functions.po``
+   checksum
+     suma de comprobación ``howto/clinic.po``
 
-     context manager
-       gestor de contexto
+   code object
+     objeto código ``c-api``, ``library/functions.po``
 
-     deallocated
-       desalojable ``glossary.po``
+   context manager
+     gestor de contexto
 
-     docstring
-       docstring. ``library/idle.po``
+   deallocated
+     desalojable ``glossary.po``
 
-     key
-       clave
+   docstring
+     docstring. ``library/idle.po``
 
-     keyword argument
-       argumento por palabra clave / argumento de palabra clave
+   key
+     clave
 
-     handler
-       gestor ``tutorial/errors.po``
+   keyword argument
+     argumento por palabra clave / argumento de palabra clave
 
-     handle exception
-       gestionar [una] excepción. ``tutorial/inputoutput.po``
-       gestionar excepciones
+   handler
+     gestor ``tutorial/errors.po``
 
-     i. e.
-       en otras palabras. ``library/sqlite3.po``
+   handle exception
+     gestionar [una] excepción. ``tutorial/inputoutput.po``
+     gestionar excepciones
 
-     in-place, in place
-       in situ. Aunque estrictamente no es español, su uso es generalizado.
+   i. e.
+     en otras palabras. ``library/sqlite3.po``
 
-     library
-       biblioteca. ``library/sqlite3.po``
+   in-place, in place
+     in situ. Aunque estrictamente no es español, su uso es generalizado.
 
-     list comprehension / list comprehensions
-       lista por comprensión / listas por comprensión.
+   library
+     biblioteca. ``library/sqlite3.po``
 
-     locale
-       Configuración regional. ``library/functions.po`` and others
+   list comprehension / list comprehensions
+     lista por comprensión / listas por comprensión.
 
-     helper function
-       función auxiliar  ``library/typing.po``
+   locale
+     Configuración regional. ``library/functions.po`` and others
 
-     loop
-       bucle ``tutorial/controlflow.po``
+   helper function
+     función auxiliar  ``library/typing.po``
 
-     mapping
-       mapeo ``glossary.po``
+   loop
+     bucle ``tutorial/controlflow.po``
 
-     named tuple.
-       tupla nombrada ``glossary.po``
+   mapping
+     mapeo ``glossary.po``
 
-     overload, overloading
-       sobrecargar, sobrecarga
+   named tuple.
+     tupla nombrada ``glossary.po``
 
-     override, overriding
-       sobreescribir, sobreescritura
+   overload, overloading
+     sobrecargar, sobrecarga
 
-     path
-       ruta ``glossary.po``
+   override, overriding
+     sobreescribir, sobreescritura
 
-     pythonic
-       *pythónico*
+   path
+     ruta ``glossary.po``
 
-       idiomático
+   pythonic
+     *pythónico*
 
-       Estes dos términos son próximos en el contexto que se usan, utilizar complementariamente
-       según el contexto. Referencia: https://docs.python-guide.org/writing/style/
+     idiomático
 
-     raise
-       lanzar, lanza. (referido a excepciones)  ``library/functions.po``, ``c-api``
+     Estes dos términos son próximos en el contexto que se usan, utilizar complementariamente
+     según el contexto. Referencia: https://docs.python-guide.org/writing/style/
 
-     release
-       version ``HOWTO``
+   raise
+     lanzar, lanza. (referido a excepciones)  ``library/functions.po``, ``c-api``
 
-     return / returns
-       retorna / retornar ``library/sqlite3.po``
+   release
+     version ``HOWTO``
 
-     return type
-       tipo de retorno ``library/typing.po``
-       tipo retornado
-       tipo devuelto
-       Nota: en algunos contextos es mejor usar el participio (retornado/devuelto), se prefiere
-       retornado por semejanza con el original inglés "return".
+   return / returns
+     retorna / retornar ``library/sqlite3.po``
 
-     runtime
-       tiempo de ejecución  ``tutorial/classes.po``
+   return type
+     tipo de retorno ``library/typing.po``
+     tipo retornado
+     tipo devuelto
+     Nota: en algunos contextos es mejor usar el participio (retornado/devuelto), se prefiere
+     retornado por semejanza con el original inglés "return".
 
-     slice
-      segmento ``datamodel.po``
+   runtime
+     tiempo de ejecución ``tutorial/classes.po``
 
-     slicing
-      segmentación ``datamodel.po``
+   slice
+    segmento ``datamodel.po``
 
-     static type checker
-       Validador estático de tipos
-       Notas: mantener la mayúscula, usar validación cuando se refiera a la acción y no al agente.
+   slicing
+    segmentación ``datamodel.po``
 
-     string
-      cadena de caracteres ``datamodel.po``
+   static type checker
+     Validador estático de tipos
+     Notas: mantener la mayúscula, usar validación cuando se refiera a la acción y no al agente.
 
-     strings
-      cadenas de caracteres ``datamodel.po``
+   string
+    cadena de caracteres ``datamodel.po``
 
-     third-party
-       de terceros ``library/typing.po``
+   strings
+    cadenas de caracteres ``datamodel.po``
 
-     type hint
-       indicador de tipo  ``library/typing.po``
+   third-party
+     de terceros ``library/typing.po``
 
-     type annotation  ``library/typing.po``
-       anotación de tipo
-         Nota: úsese como sinónimo de *type hint*, aunque en el texto se sobreentiende que anotación
-         es algo accesorio, un comentario, y type hint implica que el Validador hará comprobaciones
+   type hint
+     indicador de tipo ``library/typing.po``
 
-     underscore
-       guión bajo ``glossary.po``
+   type annotation
+     anotación de tipo ``library/typing.po``
+     Nota: úsese como sinónimo de *type hint*, aunque en el texto se sobreentiende que anotación
+     es algo accesorio, un comentario, y type hint implica que el Validador hará comprobaciones
 
-     widget
-       widget ``library/tkinter``
+   underscore
+     guión bajo ``glossary.po``
+
+   widget
+     widget ``library/tkinter``
 
 
 
