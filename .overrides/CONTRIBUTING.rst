@@ -4,55 +4,28 @@ Guía para contribuir en la traducción
 =====================================
 
 ¡Muchas gracias por tu interés en participar de la traducción de la
-documentación oficial de Python al Español! Necesitamos *mucho* de tu ayuda
-para poder seguir adelante con este proyecto. Te damos la bienvenida y
-te agradecemos anticipadamente por tus futuras colaboraciones.
+documentación oficial de Python al Español!
 
 Este es el grupo de trabajo para la traducción de la
 documentación oficial de Python al Español, todo el contenido de la traducción
 es mantenido por voluntaries que aportan su tiempo y trabajo a la comunidad.
 
 Antes de comenzar tu primera traducción, y que sigas con esta guia de
-contribución, queremos señalar algunos lineamientos generales.
-
-- Esta traducción es mantenida por personas de todo el mundo que hablan el
-  idioma Español. No queremos atarla a ninguna región en particular y creemos
-  que es un valor extra la diversidad de la misma.  Vas a encontrar secciones
-  con diferentes tonalidades de países, regiones o estilos. Lo único que pedimos
-  es consistencia dentro de un mismo módulo o sección (es decir no cambiar de
-  estilo de un párrafo a otro, por ejemplo) y siempre intentar que la persona del
-  otro lado pueda entender lo que estamos escribiendo (no usar lunfardo o
-  regionalismos muy propios de un único lugar).
-
-- La documentación es ENORME, cualquier traba que encuentres siempre puedes
-  marcar el texto como “fuzzy” o para revisar en el futuro.
-  No pierdas horas buscando la palabra perfecta.
-
-- En muchos casos el mejor criterio es pensar en el vocabulario que utilizamos
-  cuando le explicamos a otra persona, o en el trabajo. En muchas ocasiones la
-  versión en inglés o “spanglish” de la palabra es mucho mejor que decir “git
-  unir” (para git merge).
-
-- Siempre vas a tener un review de lo que propongas y en ese intercambio otras
-  personas van a ayudarte a destrabar las dudas que tengas.
-
-- Colaborar haciendo reviews también es muy muy importante, así que si
-  tienes un rato libre puedes comenzar por mirar los PRs pendientes de revisar.
-  (mira la `Guía del revisor`_)
-
-- Último pero no menos importante, divertite y contá con la ayuda de todes. Te
-  esperamos en nuestro chat en telegram. ¡Gracias!
-
+contribución, queremos señalar algunos
+:ref:`lineamientos generales <a-tener-en-cuenta>`.
 
 .. note::
 
    Si tienes cualquier duda, puedes enviarnos un email a docs-es@python.org.
 
+Antes de comenzar
+-----------------
 
-¡Comienza a traducir!
----------------------
+#. Para enviar una traducción, necesitas tener un **fork** del repositorio_
+   oficial, haciendo click en el botón encerrado en rojo.
 
-#. Crea un fork del repositorio_.
+   .. image:: fork.png
+     :alt: botón fork
 
    .. note::
 
@@ -70,8 +43,35 @@ contribución, queremos señalar algunos lineamientos generales.
 
      git remote add upstream https://github.com/python/python-docs-es.git
 
+#. (Opcional) Crea un entorno virtual y actívalo::
+
+     python -m venv env
+     source env/bin/activate   # macOS y Linux
+     env\Scripts\activate.bat  # Windows
+
+#. (Opcional) Instala los requerimientos del proyecto::
+
+     pip install -r requirements.txt
+
+   .. note::
+
+      Al tener instalado los requerimientos, podrás utilizas las herramientas
+      ``powrap`` y ``pospell`` para poder verificar tus archivos traducidos,
+      y también construir la documentación localmente.
+
+¡Comienza a traducir!
+---------------------
+
+#. Selecciona un :ref:`archivo para traducir <que-archivo-traducir>`.
+
+#. Verifica que estás en la rama principal del repositorio, **3.8** (esto es muy 
+   importante para evitar crear una nueva rama a partir de una traducción 
+   anterior)::
+
+     git checkout 3.8
+
 #. Crea una rama nueva en base al artículo en el que vayas a trabajar.  Por
-   ejemplo, si vas a trabajar en el archivo ``glosario.po``, usa un nombre
+   ejemplo, si vas a trabajar en el archivo ``library/glosario.po``, usa un nombre
    similar a::
 
      git checkout -b traduccion-glosario
@@ -80,20 +80,20 @@ contribución, queremos señalar algunos lineamientos generales.
    empezar a traducir.
 
 #. Cuando hayas terminado tu sesión, debes guardar tus cambios y enviarlos a
-   GitHub de nuevo::
+   GitHub (No olvides añadir tu nombre al archivo ``TRANSLATORS``)::
 
-     git commit -am 'Traducido archivo {nombre de archivo}' git push origin
-     traduccion-glosario
-
-#. No olvides añadir tu nombre al archivo ``TRANSLATORS`` si no lo has hecho
-   todavía.  Los nombres se encuentran ordenados alfabéticamente por apellido.
-
-#. Luego ve a tu página de GitHub y propone hacer un *Pull Request*.
+     git add library/glosario.po
+     git commit -m 'Traducido archivo library/glosario'
+     git push origin traduccion-glosario
 
    .. note::
 
+      Mira los mensajes que el último comando imprimirá por pantalla,
+      pues encontrarás un enlace para abrir un nuevo Pull-request directamente.
+
       Puedes consultar la `ayuda oficial de GitHub para crear un Pull Request`_
       si lo deseas.
+
 
 #. En la descripción de la *Pull Request* escribe ``Closes #<número de issue>``
    (así se cierra automáticamente cuando se hace *merge*)
@@ -101,8 +101,10 @@ contribución, queremos señalar algunos lineamientos generales.
    .. note::
 
       Si hace tiempo que venis trabajando en una traducción es importante
-      :ref:`mantener actualizada <mantener-actualizada>` tu copia local antes de realizar el *Pull Request*.
+      :ref:`mantener actualizada <mantener-actualizada>` tu copia local antes
+      de realizar el *Pull Request*.
 
+.. _que-archivo-traducir:
 
 ¿Qué archivo traducir?
 ----------------------
@@ -118,25 +120,51 @@ archivo es el siguiente:
 #. ¡Empieza a traducir!
 
 
+.. _a-tener-en-cuenta:
 
 A tener en cuenta
 -----------------
 
-* No debes traducir el contenido de ``:ref:...`` y ``:term:...``.
+* Esta traducción es mantenida por **personas de todo el mundo** que hablan el
+  idioma Español. No queremos atarla a ninguna región en particular y creemos
+  que es un valor extra la diversidad de la misma.  Vas a encontrar secciones
+  con diferentes tonalidades de países, regiones o estilos. Lo único que pedimos
+  es **consistencia** dentro de un mismo módulo o sección (es decir no cambiar de
+  estilo de un párrafo a otro, por ejemplo) y siempre intentar que la persona del
+  otro lado pueda entender lo que estamos escribiendo (no usar lunfardo o
+  regionalismos muy propios de un único lugar).
+
+* En muchos casos el **mejor criterio** es pensar en el vocabulario que utilizamos
+  cuando le explicamos a otra persona, o en el trabajo. En muchas ocasiones la
+  versión en inglés o “spanglish” de la palabra es mucho mejor que decir “git
+  unir” (para git merge).
+
+* Siempre vas a tener una **revisión de lo que propongas** y en ese intercambio otras
+  personas van a ayudarte a destrabar las dudas que tengas.
+
+* Colaborar **haciendo revisiones** también es muy muy importante, así que si
+  tienes un rato libre puedes comenzar por mirar los PRs pendientes de revisar.
+  (mira la :doc:`Guía del revisor <reviewers-guide>`)
+
+* La documentación es ENORME, cualquier traba que encuentres siempre puedes
+  marcar el texto como **"fuzzy"** o para revisar en el futuro.
+  No pierdas horas buscando la palabra perfecta.
+
+* **No debes** traducir el contenido de ``:ref:...``, ``:term:...``, ``:dfn:...``, etc.
 
 * Si tienes que usar palabras en inglés debes ponerlas en *cursiva* (rodeadas
   por asteriscos)
 
-* Puedes revisar las :doc:`faq` para leer sobre problemas conocidos.
+* Puedes revisar las :doc:`Preguntas Frecuentes <faq>` para leer sobre problemas conocidos.
 
-* Si traduces un título que es un link, por favor traduce el link también (por
+* Si **traduces un título que es un enlace**, por favor traduce el link también (por
   ejemplo un artículo a Wikipedia). En caso de que no haya una traducción del
   artículo en Wikipedia deja el título sin traducir.
 
-* Tenemos una `Memoria de Traducción`_, que usamos para tener consistencia con
-  algunos términos.
+* Tenemos una :doc:`Memoria de Traducción <translation-memory>`, que usamos para tener
+  consistencia con algunos términos.
 
-* Si tienes una duda sobre una palabra o término, escríbelo como mejor suene
+* Si tienes una **duda sobre una palabra o término**, escríbelo como mejor suene
   para vos y marca ese párrafo como "Need work" / "Necesita trabajo" en
   *poedit*. Además, escribe un comentario explicando cuál es el termino en ese
   párrafo con el que no estabas segura.
@@ -148,10 +176,13 @@ A tener en cuenta
   tiene una traducción al Español en la barra de la izquierda. Suelen estar
   bastante bien explicados.
 
-* Te recomendamos abrir una Pull Request aunque sea en formato borrador (marcada
+* Te recomendamos abrir una **Pull Request aunque sea en formato borrador** (marcada
   como draft) desde los primeros commits de la traducción de tu fichero. De esta
   forma, puedes recibir feedback desde el principio que puedes aplicar al resto
   de la traducción, y probar el build más a menudo.
+
+* Último pero no menos importante, **divertite y contá con la ayuda de todes**. Te
+  esperamos en nuestro chat en telegram. ¡Gracias!
 
 
 .. note::
@@ -181,10 +212,6 @@ Tendrás que navegar hasta el archivo que hayas cambiado para ver cómo se visua
 .. _poedit: https://poedit.net/
 
 .. _nuestro canal de Telegram: https://t.me/python_docs_es
-.. _Memoria de traducción:
-   https://python-docs-es.readthedocs.io/page/translation-memory.html
-.. _Guía del revisor:
-   https://python-docs-es.readthedocs.io/page/reviewers-guide.html
 .. _la traducción al Portugués: https://docs.python.org/pt-br/3/
 .. _lista de issues en GitHub:
    https://github.com/python/python-docs-es/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+no%3Aassignee+translate
