@@ -1,3 +1,4 @@
+import glob
 import os
 import sys
 
@@ -16,14 +17,12 @@ enable them to use the script instead.
 entries = set()
 
 # Read custom dictionaries
-for name in os.listdir("dictionaries"):
-    if name.endswith(".txt"):
-        filename = os.path.join("dictionaries", name)
-        with open(filename, "r") as f:
-            lines = [i.rstrip() for i in f.readlines()]
-            if lines:
-                entries.update(set(lines))
-                del lines
+for filename in glob.glob(os.path.join("dictionaries", "*.txt")):
+    with open(filename, "r") as f:
+        lines = [i.rstrip() for i in f.readlines()]
+    if lines:
+        entries.update(set(lines))
+        del lines
 
 # Remove empty string, from empty lines
 entries.remove("")
