@@ -1,6 +1,4 @@
-import glob
-import os
-import sys
+from pathlib import Path
 
 """
 Script to generate the 'dict.txt' dictionary based
@@ -17,7 +15,7 @@ enable them to use the script instead.
 entries = set()
 
 # Read custom dictionaries
-for filename in glob.glob(os.path.join("dictionaries", "*.txt")):
+for filename in Path("dictionaries").glob("*.txt"):
     with open(filename, "r") as f:
         lines = [i.rstrip() for i in f.readlines()]
     if lines:
