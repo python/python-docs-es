@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-06 11:59-0400\n"
-"PO-Revision-Date: 2020-10-11 14:34-0500\n"
+"PO-Revision-Date: 2020-10-11 15:01-0500\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -189,6 +189,10 @@ msgid ""
 "desired security access for the key.  Default is :const:`KEY_WRITE`.  See :"
 "ref:`Access Rights <access-rights>` for other allowed values."
 msgstr ""
+"*access* es un número entero que especifica una máscara de acceso que "
+"describe el acceso de seguridad deseado para la clave. El valor "
+"predeterminado es :const:`KEY_WRITE`. Ver :ref:`Access Rights <access-"
+"rights>` para otros valores permitidos."
 
 #: ../Doc/library/winreg.rst:124 ../Doc/library/winreg.rst:145
 msgid "Deletes the specified key."
@@ -200,6 +204,9 @@ msgid ""
 "*key* parameter.  This value must not be ``None``, and the key may not have "
 "subkeys."
 msgstr ""
+"*sub_key* es una cadena de caracteres que debe ser una subclave de la clave "
+"identificada por el parámetro *key*. Este valor no debe ser ``None``, y es "
+"posible que la clave no tenga subclaves."
 
 #: ../Doc/library/winreg.rst:132 ../Doc/library/winreg.rst:166
 msgid "*This method can not delete keys with subkeys.*"
@@ -226,6 +233,10 @@ msgid ""
 "the `RegDeleteKeyEx documentation <https://msdn.microsoft.com/en-us/library/"
 "ms724847%28VS.85%29.aspx>`__."
 msgstr ""
+"La función :func:`DeleteKeyEx` se implementa con la función RegDeleteKeyEx "
+"de la API de Windows, que es específica de las versiones de Windows de 64 "
+"bits. Consulte la `RegDeleteKeyEx documentation <https://msdn.microsoft.com/"
+"en-us/library/ms724847%28VS.85%29.aspx>`__."
 
 #: ../Doc/library/winreg.rst:156
 msgid ""
@@ -233,6 +244,9 @@ msgid ""
 "*key* parameter. This value must not be ``None``, and the key may not have "
 "subkeys."
 msgstr ""
+"*sub_key* es una cadena de caracteres que debe ser una subclave de la clave "
+"identificada por el parámetro *key*. Este valor no debe ser ``None``, y es "
+"posible que la clave no tenga subclaves."
 
 #: ../Doc/library/winreg.rst:162
 msgid ""
@@ -244,6 +258,7 @@ msgstr ""
 #: ../Doc/library/winreg.rst:171
 msgid "On unsupported Windows versions, :exc:`NotImplementedError` is raised."
 msgstr ""
+"En versiones de Windows no compatibles, se genera :exc:`NotImplementedError`."
 
 #: ../Doc/library/winreg.rst:183
 msgid "Removes a named value from a registry key."
@@ -251,7 +266,7 @@ msgstr "Elimina un valor con nombre de una clave de registro."
 
 #: ../Doc/library/winreg.rst:188
 msgid "*value* is a string that identifies the value to remove."
-msgstr ""
+msgstr "*value* es una cadena que identifica el valor a eliminar."
 
 #: ../Doc/library/winreg.rst:190
 msgid ""
@@ -262,10 +277,13 @@ msgstr ""
 #: ../Doc/library/winreg.rst:195
 msgid "Enumerates subkeys of an open registry key, returning a string."
 msgstr ""
+"Enumera las subclaves de una clave de registro abierta y devuelve una cadena "
+"de caracteres."
 
 #: ../Doc/library/winreg.rst:200
 msgid "*index* is an integer that identifies the index of the key to retrieve."
 msgstr ""
+"*index* es un número entero que identifica el índice de la clave a recuperar."
 
 #: ../Doc/library/winreg.rst:202
 msgid ""
@@ -273,16 +291,22 @@ msgid ""
 "typically called repeatedly until an :exc:`OSError` exception is raised, "
 "indicating, no more values are available."
 msgstr ""
+"La función recupera el nombre de una subclave cada vez que se llama. "
+"Normalmente se llama repetidamente hasta que se genera una excepción :exc:"
+"`OSError`, lo que indica que no hay más valores disponibles."
 
 #: ../Doc/library/winreg.rst:207
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``winreg.EnumKey`` with arguments "
 "``key``, ``index``."
 msgstr ""
+"Genera un :ref:`auditing event <auditing>` ``winreg.EnumKey`` con argumentos "
+"``key``, ``index``."
 
 #: ../Doc/library/winreg.rst:214
 msgid "Enumerates values of an open registry key, returning a tuple."
 msgstr ""
+"Enumera los valores de una clave de registro abierta y devuelve una tupla."
 
 #: ../Doc/library/winreg.rst:219
 msgid ""
@@ -353,18 +377,24 @@ msgid ""
 "Raises an :ref:`auditing event <auditing>` ``winreg.EnumValue`` with "
 "arguments ``key``, ``index``."
 msgstr ""
+"Genera un :ref:`auditing event <auditing>` ``winreg.EnumValue`` con "
+"argumentos ``key``, ``index``."
 
 #: ../Doc/library/winreg.rst:252
 msgid ""
 "Expands environment variable placeholders ``%NAME%`` in strings like :const:"
 "`REG_EXPAND_SZ`::"
 msgstr ""
+"Expande los marcadores de posición de la variable de entorno ``%NAME%`` en "
+"cadenas como :const:`REG_EXPAND_SZ`::"
 
 #: ../Doc/library/winreg.rst:258
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``winreg."
 "ExpandEnvironmentStrings`` with argument ``str``."
 msgstr ""
+"Genera un :ref:`auditing event <auditing>` ``winreg."
+"ExpandEnvironmentStrings`` con el argumento ``str``."
 
 #: ../Doc/library/winreg.rst:263
 msgid "Writes all the attributes of a key to the registry."
@@ -380,6 +410,13 @@ msgid ""
 "`FlushKey` if it requires absolute certainty that registry changes are on "
 "disk."
 msgstr ""
+"No es necesario llamar a :func:`FlushKey` para cambiar una clave. Los "
+"cambios en el registro se descargan en el disco mediante el registro "
+"mediante su vaciador diferido. Los cambios en el registro también se vacían "
+"en el disco cuando se apaga el sistema. A diferencia de :func:`CloseKey`, el "
+"método :func:`FlushKey` devuelve solo cuando todos los datos se han escrito "
+"en el registro. Una aplicación solo debe llamar a :func:`FlushKey` si "
+"requiere absoluta certeza de que los cambios de registro están en el disco."
 
 #: ../Doc/library/winreg.rst:277
 msgid ""
@@ -416,6 +453,10 @@ msgid ""
 "must have been created with the :func:`SaveKey` function. Under the file "
 "allocation table (FAT) file system, the filename may not have an extension."
 msgstr ""
+"*file_name* es el nombre del archivo desde el que cargar los datos de "
+"registro. Este archivo debe haber sido creado con la función :func:"
+"`SaveKey`. En el sistema de archivos de la tabla de asignación de archivos "
+"(FAT), es posible que el nombre del archivo no tenga extensión."
 
 #: ../Doc/library/winreg.rst:295
 msgid ""
@@ -424,6 +465,11 @@ msgid ""
 "from permissions -- see the `RegLoadKey documentation <https://msdn."
 "microsoft.com/en-us/library/ms724889%28v=VS.85%29.aspx>`__ for more details."
 msgstr ""
+"Una llamada a :func:`LoadKey` falla si el proceso de llamada no tiene el "
+"privilegio :const:`SE_RESTORE_PRIVILEGE`. Tenga en cuenta que los "
+"privilegios son diferentes de los permisos; consulte la `RegLoadKey "
+"documentation <https://msdn.microsoft.com/en-us/library/"
+"ms724889%28v=VS.85%29.aspx>`__ para obtener más detalles."
 
 #: ../Doc/library/winreg.rst:301
 msgid ""
@@ -539,24 +585,29 @@ msgstr ""
 #: ../Doc/library/winreg.rst:391
 msgid "*value_name* is a string indicating the value to query."
 msgstr ""
+"*value_name* es una cadena de caracteres que indica el valor a consultar."
 
 #: ../Doc/library/winreg.rst:393
 msgid "The result is a tuple of 2 items:"
-msgstr ""
+msgstr "El resultado es una tupla de 2 elementos:"
 
 #: ../Doc/library/winreg.rst:398
 msgid "The value of the registry item."
-msgstr ""
+msgstr "El valor del elemento de registro."
 
 #: ../Doc/library/winreg.rst:400
 msgid ""
 "An integer giving the registry type for this value (see table in docs for :"
 "meth:`SetValueEx`)"
 msgstr ""
+"Un número entero que proporciona el tipo de registro para este valor "
+"(consulte la tabla en docs para :meth:`SetValueEx`)"
 
 #: ../Doc/library/winreg.rst:410
 msgid "Saves the specified key, and all its subkeys to the specified file."
 msgstr ""
+"Guarda la clave especificada y todas sus subclaves en el archivo "
+"especificado."
 
 #: ../Doc/library/winreg.rst:415
 msgid ""
@@ -578,7 +629,7 @@ msgstr ""
 
 #: ../Doc/library/winreg.rst:428
 msgid "This function passes ``NULL`` for *security_attributes* to the API."
-msgstr ""
+msgstr "Esta función pasa ``NULL`` para *security_attributes* a la API."
 
 #: ../Doc/library/winreg.rst:430
 msgid ""
@@ -588,13 +639,15 @@ msgstr ""
 
 #: ../Doc/library/winreg.rst:435
 msgid "Associates a value with a specified key."
-msgstr ""
+msgstr "Asocia un valor con una clave especificada."
 
 #: ../Doc/library/winreg.rst:440
 msgid ""
 "*sub_key* is a string that names the subkey with which the value is "
 "associated."
 msgstr ""
+"*sub_key* es una cadena de caracteres que nombra la subclave con la que está "
+"asociado el valor."
 
 #: ../Doc/library/winreg.rst:442
 msgid ""
@@ -605,7 +658,7 @@ msgstr ""
 
 #: ../Doc/library/winreg.rst:446 ../Doc/library/winreg.rst:476
 msgid "*value* is a string that specifies the new value."
-msgstr ""
+msgstr "*value* es una cadena de caracteres que especifica el nuevo valor."
 
 #: ../Doc/library/winreg.rst:448
 msgid ""
@@ -634,17 +687,19 @@ msgstr ""
 
 #: ../Doc/library/winreg.rst:463
 msgid "Stores data in the value field of an open registry key."
-msgstr ""
+msgstr "Almacena datos en el campo de valor de una clave de registro abierta."
 
 #: ../Doc/library/winreg.rst:468
 msgid ""
 "*value_name* is a string that names the subkey with which the value is "
 "associated."
 msgstr ""
+"*value_name* es una cadena de caracteres que nombra la subclave con la que "
+"está asociado el valor."
 
 #: ../Doc/library/winreg.rst:471
 msgid "*reserved* can be anything -- zero is always passed to the API."
-msgstr ""
+msgstr "*reserved* puede ser cualquier cosa — cero siempre se pasa a la API."
 
 #: ../Doc/library/winreg.rst:473
 msgid ""
@@ -706,11 +761,11 @@ msgstr ""
 
 #: ../Doc/library/winreg.rst:526
 msgid "Determines the reflection state for the specified key."
-msgstr ""
+msgstr "Determina el estado de reflexión para la clave especificada."
 
 #: ../Doc/library/winreg.rst:531
 msgid "Returns ``True`` if reflection is disabled."
-msgstr ""
+msgstr "Retorna ``True`` si la reflexión está deshabilitada."
 
 #: ../Doc/library/winreg.rst:536
 msgid ""
@@ -720,7 +775,7 @@ msgstr ""
 
 #: ../Doc/library/winreg.rst:542
 msgid "Constants"
-msgstr ""
+msgstr "Constantes"
 
 #: ../Doc/library/winreg.rst:544
 msgid ""
@@ -729,7 +784,7 @@ msgstr ""
 
 #: ../Doc/library/winreg.rst:549
 msgid "HKEY_* Constants"
-msgstr ""
+msgstr "HKEY_* Constantes"
 
 #: ../Doc/library/winreg.rst:553
 msgid ""
@@ -772,6 +827,8 @@ msgid ""
 "Contains information about the current hardware profile of the local "
 "computer system."
 msgstr ""
+"Contiene información sobre el perfil de hardware actual del sistema "
+"informático local."
 
 #: ../Doc/library/winreg.rst:592
 msgid "This key is not used in versions of Windows after 98."
@@ -786,6 +843,8 @@ msgid ""
 "For more information, see `Registry Key Security and Access <https://msdn."
 "microsoft.com/en-us/library/ms724878%28v=VS.85%29.aspx>`__."
 msgstr ""
+"Para más información, ver `Registry Key Security and Access <https://msdn."
+"microsoft.com/en-us/library/ms724878%28v=VS.85%29.aspx>`__."
 
 #: ../Doc/library/winreg.rst:605
 msgid ""
@@ -794,22 +853,30 @@ msgid ""
 "`KEY_ENUMERATE_SUB_KEYS`, :const:`KEY_NOTIFY`, and :const:`KEY_CREATE_LINK` "
 "access rights."
 msgstr ""
+"Combina los derechos de acceso STANDARD_RIGHTS_REQUIRED, :const:"
+"`KEY_QUERY_VALUE`, :const:`KEY_SET_VALUE`, :const:`KEY_CREATE_SUB_KEY`, :"
+"const:`KEY_ENUMERATE_SUB_KEYS`, :const:`KEY_NOTIFY`, y :const:"
+"`KEY_CREATE_LINK`."
 
 #: ../Doc/library/winreg.rst:612
 msgid ""
 "Combines the STANDARD_RIGHTS_WRITE, :const:`KEY_SET_VALUE`, and :const:"
 "`KEY_CREATE_SUB_KEY` access rights."
 msgstr ""
+"Combina los derechos de acceso STANDARD_RIGHTS_WRITE, :const:"
+"`KEY_SET_VALUE`, y :const:`KEY_CREATE_SUB_KEY`."
 
 #: ../Doc/library/winreg.rst:617
 msgid ""
 "Combines the STANDARD_RIGHTS_READ, :const:`KEY_QUERY_VALUE`, :const:"
 "`KEY_ENUMERATE_SUB_KEYS`, and :const:`KEY_NOTIFY` values."
 msgstr ""
+"Combina los valores STANDARD_RIGHTS_READ, :const:`KEY_QUERY_VALUE`, :const:"
+"`KEY_ENUMERATE_SUB_KEYS`, y :const:`KEY_NOTIFY`."
 
 #: ../Doc/library/winreg.rst:622
 msgid "Equivalent to :const:`KEY_READ`."
-msgstr ""
+msgstr "Equivalente a :const:`KEY_READ`."
 
 #: ../Doc/library/winreg.rst:626
 msgid "Required to query the values of a registry key."
@@ -848,6 +915,8 @@ msgid ""
 "For more information, see `Accessing an Alternate Registry View <https://"
 "msdn.microsoft.com/en-us/library/aa384129(v=VS.85).aspx>`__."
 msgstr ""
+"Para más información, ver `Accessing an Alternate Registry View <https://"
+"msdn.microsoft.com/en-us/library/aa384129(v=VS.85).aspx>`__."
 
 #: ../Doc/library/winreg.rst:660
 msgid ""
@@ -889,6 +958,8 @@ msgstr "Número de 32 bits."
 msgid ""
 "A 32-bit number in little-endian format. Equivalent to :const:`REG_DWORD`."
 msgstr ""
+"Un número de 32 bits en formato little-endian. Equivalente a :const:"
+"`REG_DWORD`."
 
 #: ../Doc/library/winreg.rst:691
 msgid "A 32-bit number in big-endian format."
@@ -911,6 +982,8 @@ msgid ""
 "A sequence of null-terminated strings, terminated by two null characters. "
 "(Python handles this termination automatically.)"
 msgstr ""
+"Una secuencia de cadenas de caracteres terminadas en nulo, terminadas por "
+"dos caracteres nulos. (Python maneja esta terminación automáticamente)."
 
 #: ../Doc/library/winreg.rst:709
 msgid "No defined value type."
@@ -953,6 +1026,9 @@ msgid ""
 "object is destroyed.  To guarantee cleanup, you can call either the :meth:"
 "`~PyHKEY.Close` method on the object, or the :func:`CloseKey` function."
 msgstr ""
+"Este objeto envuelve un objeto HKEY de Windows y lo cierra automáticamente "
+"cuando se destruye. Para garantizar la limpieza, puede llamar al método :"
+"meth:`~PyHKEY.Close` en el objeto, o a la función :func:`CloseKey`."
 
 #: ../Doc/library/winreg.rst:749
 msgid "All registry functions in this module return one of these objects."
@@ -964,22 +1040,31 @@ msgid ""
 "All registry functions in this module which accept a handle object also "
 "accept an integer, however, use of the handle object is encouraged."
 msgstr ""
+"Todas las funciones de registro de este módulo que aceptan un objeto "
+"identificador también aceptan un número entero, sin embargo, se recomienda "
+"el uso del objeto identificador."
 
 #: ../Doc/library/winreg.rst:754
 msgid "Handle objects provide semantics for :meth:`__bool__` -- thus ::"
 msgstr ""
+"Los objetos de control proporcionan semántica para :meth:`__bool__` — thus ::"
 
 #: ../Doc/library/winreg.rst:759
 msgid ""
 "will print ``Yes`` if the handle is currently valid (has not been closed or "
 "detached)."
 msgstr ""
+"imprimirá ``Yes`` si el controlador es válido actualmente (no se ha cerrado "
+"o desprendido)."
 
 #: ../Doc/library/winreg.rst:762
 msgid ""
 "The object also support comparison semantics, so handle objects will compare "
 "true if they both reference the same underlying Windows handle value."
 msgstr ""
+"El objeto también admite la semántica de comparación, por lo que los objetos "
+"de identificador se compararán con verdadero si ambos hacen referencia al "
+"mismo valor de identificador de Windows subyacente."
 
 #: ../Doc/library/winreg.rst:765
 msgid ""
@@ -989,6 +1074,12 @@ msgid ""
 "integer handle, and also disconnect the Windows handle from the handle "
 "object."
 msgstr ""
+"Los objetos de identificador se pueden convertir a un número entero (por "
+"ejemplo, usando la función incorporada :func:`int` function), en cuyo caso "
+"se devuelve el valor de identificador de Windows subyacente. También puede "
+"usar el método :meth:`~PyHKEY.Detach` para devolver el identificador de "
+"enteros y también desconectar el identificador de Windows del objeto "
+"identificador."
 
 #: ../Doc/library/winreg.rst:773
 msgid "Closes the underlying Windows handle."
@@ -1018,12 +1109,18 @@ msgid ""
 "handle is not closed.  You would call this function when you need the "
 "underlying Win32 handle to exist beyond the lifetime of the handle object."
 msgstr ""
+"Después de llamar a esta función, el identificador se invalida "
+"efectivamente, pero el identificador no se cierra. Llamaría a esta función "
+"cuando necesite que el identificador Win32 subyacente exista más allá de la "
+"vida útil del objeto identificador."
 
 #: ../Doc/library/winreg.rst:790
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``winreg.PyHKEY.Detach`` with "
 "argument ``key``."
 msgstr ""
+"Genera un :ref:`auditing event <auditing>` ``winreg.PyHKEY.Detach`` con el "
+"argumento ``key``."
 
 #: ../Doc/library/winreg.rst:796
 msgid ""
@@ -1031,6 +1128,9 @@ msgid ""
 "__exit__` and thus supports the context protocol for the :keyword:`with` "
 "statement::"
 msgstr ""
+"El objeto HKEY implementa :meth:`~object.__enter__` y :meth:`~object."
+"__exit__` y, por lo tanto, admite el protocolo de contexto para la :keyword:"
+"`with` statement::"
 
 #: ../Doc/library/winreg.rst:803
 msgid ""
