@@ -10,7 +10,7 @@ install:
   - powrap --version
 script:
   - powrap --check --quiet **/*.po
-  - awk 1 dict dictionaries/*.txt > dict.txt
+  - python scripts/create_dict.py
   - pospell -p dict.txt -l es_AR -l es_ES **/*.po
   - pip install -q -r requirements.txt
   - PYTHONWARNINGS=ignore::FutureWarning sphinx-build -j auto -W --keep-going -b html -d cpython/Doc/_build/doctree -D language=es . cpython/Doc/_build/html
