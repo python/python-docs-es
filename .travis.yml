@@ -1,14 +1,19 @@
 language: python
-dist: xenial
-python: 3.7
+dist: bionic
+python: 3.8
 before_install:
   - sudo apt-get update
   - sudo apt-get install -y hunspell hunspell-es
 install:
-  - pip install pospell "powrap>=0.3.0"
+  - make setup
   - pospell --version
   - powrap --version
 script:
   - powrap --check --quiet **/*.po
-  - pospell -p dict -l es_ES **/*.po
-  - make CPYTHON_CLONE=/tmp/cpython/ COMMIT=15e7d2432294ec46f1ad84ce958fdeb9d4ca78b1
+  - awk 1 dict dictionaries/*.txt > dict.txt
+  - pospell -p dict.txt -l es_AR -l es_ES **/*.po
+  - pip install -q -r requirements.txt
+  - PYTHONWARNINGS=ignore::FutureWarning sphinx-build -j auto -W --keep-going -b html -d cpython/Doc/_build/doctree -D language=es . cpython/Doc/_build/html
+branches:
+  only:
+  - /^3\.\d$/

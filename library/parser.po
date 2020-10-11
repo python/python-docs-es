@@ -1,24 +1,30 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2001-2019, Python Software Foundation
+# Copyright (C) 2001-2020, Python Software Foundation
 # This file is distributed under the same license as the Python package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Maintained by the python-doc-es workteam.
+# docs-es@python.org /
+# https://mail.python.org/mailman3/lists/docs-es.python.org/
+# Check https://github.com/python/python-docs-es/blob/3.8/TRANSLATORS to
+# get the list of volunteers
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Python 3.7\n"
+"Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-06 11:59-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2020-05-05 12:54+0200\n"
+"PO-Revision-Date: 2020-10-07 16:51+0200\n"
+"Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Francisco Jesús Sevilla García <fjsevilla.dev@gmail.com>\n"
+"Language: es\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #: ../Doc/library/parser.rst:2
 msgid ":mod:`parser` --- Access Python parse trees"
-msgstr ""
+msgstr ":mod:`parser` --- Acceder a árboles de análisis sintáctico de Python"
 
 #: ../Doc/library/parser.rst:21
 msgid ""
@@ -30,6 +36,14 @@ msgid ""
 "in a manner identical to the code forming the application.  It is also "
 "faster."
 msgstr ""
+"El módulo :mod:`parser` proporciona una interfaz para el analizador "
+"sintáctico interno de Python y para el compilador de código de bytes. El "
+"propósito principal de esta interfaz es permitir que el código Python edite "
+"el árbol de análisis sintáctico de una expresión Python y cree código "
+"ejecutable a partir de este. Esto es mejor que intentar analizar y modificar "
+"una cadena de caracteres que conforma un fragmento de código Python "
+"arbitrario, porque el análisis se realiza de una manera idéntica al código "
+"que construye la aplicación. También es más rápido."
 
 #: ../Doc/library/parser.rst:30
 msgid ""
@@ -37,6 +51,9 @@ msgid ""
 "Syntax Tree (AST) generation and compilation stage, using the :mod:`ast` "
 "module."
 msgstr ""
+"A partir de Python 2.5, es más práctico realizar estas operaciones entre la "
+"generación del árbol de sintaxis abstracta (AST) y la etapa de compilación, "
+"utilizando para ello el módulo :mod:`ast`."
 
 #: ../Doc/library/parser.rst:34
 msgid ""
@@ -45,6 +62,11 @@ msgid ""
 "editing the parse trees for Python code, but some examples of using the :mod:"
 "`parser` module are presented."
 msgstr ""
+"Hay algunas cosas a tener en cuenta sobre este módulo, que son importantes "
+"para hacer un uso correcto de las estructuras de datos creadas. Este no es "
+"un tutorial sobre cómo editar los árboles de análisis sintáctico para código "
+"Python, no obstante, sí que se proporcionan algunos ejemplos de uso del "
+"módulo :mod:`parser`."
 
 #: ../Doc/library/parser.rst:39
 msgid ""
@@ -63,11 +85,31 @@ msgid ""
 "trees to be created in the target version, with the only restriction being "
 "that migrating to an older version of the interpreter will not support more "
 "recent language constructs.  The parse trees are not typically compatible "
-"from one version to another, whereas source code has always been forward-"
-"compatible."
+"from one version to another, though source code has usually been forward-"
+"compatible within a major release series."
 msgstr ""
+"Lo más importante es que se requiere una buena comprensión de la gramática "
+"de Python procesada por el analizador sintáctico interno. Para obtener "
+"información completa sobre la sintaxis del lenguaje, consulta :ref:"
+"`reference-index`. El analizador sintáctico en sí se crea a partir de una "
+"especificación gramatical definida en el archivo :file:`Grammar/Grammar` en "
+"la distribución estándar de Python. Los árboles de análisis sintáctico "
+"almacenados en los objetos ST creados por este módulo son la salida real del "
+"analizador interno cuando son creados por las funciones :func:`expr` o :func:"
+"`suite`, descritas a continuación. Los objetos ST creados por :func:"
+"`sequence2st` simulan fielmente esas estructuras. Ten en cuenta que los "
+"valores de las secuencias que se consideran \"correctas\" variarán de una "
+"versión de Python a otra, a medida que se revise la gramática formal del "
+"lenguaje. Por el contrario, portar código fuente en forma de texto de una "
+"versión de Python a otra siempre permitirá crear árboles de análisis "
+"correctos en la versión de destino, con la única restricción de la migración "
+"a una versión anterior del intérprete que no admita construcciones del "
+"lenguaje más recientes. Los árboles de análisis sintáctico no suelen ser "
+"compatibles de una versión a otra, aunque el código fuente suele ser "
+"compatible con versiones posteriores dentro de una misma serie de versiones "
+"principales."
 
-#: ../Doc/library/parser.rst:56
+#: ../Doc/library/parser.rst:57
 msgid ""
 "Each element of the sequences returned by :func:`st2list` or :func:"
 "`st2tuple` has a simple form.  Sequences representing non-terminal elements "
@@ -87,8 +129,28 @@ msgid ""
 "requested, the same token might be represented as ``(1, 'if', 12)``, where "
 "the ``12`` represents the line number at which the terminal symbol was found."
 msgstr ""
+"Cada elemento de las secuencias retornadas por :func:`st2list` o :func:"
+"`st2tuple` tiene una forma simple. Las secuencias que representan elementos "
+"no terminales en la gramática siempre tienen una longitud mayor que uno. El "
+"primer elemento es un número entero que identifica una regla de producción "
+"gramatical. Estos números enteros reciben nombres simbólicos en el archivo "
+"de cabecera :file:`Include/graminit.h` de C y en el módulo :mod:`symbol` de "
+"Python. Cada elemento adicional de la secuencia representa un componente de "
+"la producción tal como se reconoce en la cadena de entrada: siempre son "
+"secuencias que tienen la misma forma que la original. Un aspecto importante "
+"de esta estructura que debe tenerse en cuenta es que las palabras clave "
+"utilizadas para identificar el tipo de nodo principal, como la palabra "
+"clave :keyword:`if` en una :const:`if_stmt`, se incluyen en el árbol de "
+"nodos sin ningún tratamiento especial. Por ejemplo, la palabra clave :"
+"keyword:`!if` está representada por la tupla ``(1, 'if')``, donde ``1`` es "
+"el valor numérico asociado con todos los tokens :const:`NAME`, incluidos los "
+"nombres de variables y funciones definidos por el usuario. En una forma "
+"alternativa, que se retorna cuando se solicita información sobre el número "
+"de línea, el mismo token podría representarse como ``(1, 'if', 12)``, donde "
+"el ``12`` representa el número de línea en el que se encontró el símbolo "
+"terminal."
 
-#: ../Doc/library/parser.rst:73
+#: ../Doc/library/parser.rst:74
 msgid ""
 "Terminal elements are represented in much the same way, but without any "
 "child elements and the addition of the source text which was identified.  "
@@ -96,8 +158,13 @@ msgid ""
 "various types of terminal symbols are defined in the C header file :file:"
 "`Include/token.h` and the Python module :mod:`token`."
 msgstr ""
+"Los elementos terminales se representan de la misma manera, pero sin ningún "
+"elemento secundario y sin la adición del texto fuente que se identificó. El "
+"anterior ejemplo de la palabra clave :keyword:`if` es representativo de "
+"esto. Los diversos tipos de símbolos terminales se definen en el archivo de "
+"cabecera :file:`Include/token.h` de C y en el módulo :mod:`token` de Python."
 
-#: ../Doc/library/parser.rst:79
+#: ../Doc/library/parser.rst:80
 msgid ""
 "The ST objects are not required to support the functionality of this module, "
 "but are provided for three purposes: to allow an application to amortize the "
@@ -107,8 +174,17 @@ msgid ""
 "which manipulate parse trees.  A simple \"wrapper\" class may be created in "
 "Python to hide the use of ST objects."
 msgstr ""
+"Los objetos ST no son necesarios para soportar la funcionalidad de este "
+"módulo, pero se proporcionan para tres propósitos: para permitir que una "
+"aplicación amortice el coste de procesar árboles de análisis sintáctico "
+"complejos, para proporcionar una representación en forma de árbol de "
+"análisis sintáctico que preserve espacio en memoria, en comparación con la "
+"representación una lista o tupla de Python, y para facilitar la creación de "
+"módulos adicionales en C que manipulen árboles de análisis sintáctico. Se "
+"puede crear una simple clase \"contenedora\" en Python para ocultar el uso "
+"de objetos ST."
 
-#: ../Doc/library/parser.rst:87
+#: ../Doc/library/parser.rst:88
 msgid ""
 "The :mod:`parser` module defines functions for a few distinct purposes.  The "
 "most important purposes are to create ST objects and to convert ST objects "
@@ -116,53 +192,75 @@ msgid ""
 "there are also functions which serve to query the type of parse tree "
 "represented by an ST object."
 msgstr ""
+"El módulo :mod:`parser` define funciones para varios propósitos distintos. "
+"Los más importantes son crear objetos ST y convertir objetos ST en otras "
+"representaciones, como árboles de análisis sintáctico y objetos de código "
+"compilado. También existen funciones que sirven para consultar el tipo de "
+"árbol de análisis sintáctico representado por un objeto ST."
 
-#: ../Doc/library/parser.rst:97
+#: ../Doc/library/parser.rst:98
 msgid "Module :mod:`symbol`"
-msgstr ""
+msgstr "Módulo :mod:`symbol`"
 
-#: ../Doc/library/parser.rst:97
+#: ../Doc/library/parser.rst:98
 msgid "Useful constants representing internal nodes of the parse tree."
 msgstr ""
+"Constantes útiles que representan los nodos internos del árbol de análisis "
+"sintáctico."
 
-#: ../Doc/library/parser.rst:100
+#: ../Doc/library/parser.rst:101
 msgid "Module :mod:`token`"
-msgstr ""
+msgstr "Módulo :mod:`token`"
 
-#: ../Doc/library/parser.rst:100
+#: ../Doc/library/parser.rst:101
 msgid ""
 "Useful constants representing leaf nodes of the parse tree and functions for "
 "testing node values."
 msgstr ""
+"Constantes útiles que representan nodos hoja del árbol de análisis "
+"sintáctico y funciones para probar valores de nodos."
 
-#: ../Doc/library/parser.rst:107
+#: ../Doc/library/parser.rst:108
 msgid "Creating ST Objects"
-msgstr ""
+msgstr "Crear objetos ST"
 
-#: ../Doc/library/parser.rst:109
+#: ../Doc/library/parser.rst:110
 msgid ""
 "ST objects may be created from source code or from a parse tree. When "
 "creating an ST object from source, different functions are used to create "
 "the ``'eval'`` and ``'exec'`` forms."
 msgstr ""
+"Los objetos ST pueden crearse a partir del código fuente o de un árbol de "
+"análisis sintáctico. Al crear un objeto ST a partir del código fuente, se "
+"utilizan diferentes funciones para crear las formas ``'eval'`` y ``'exec'``."
 
-#: ../Doc/library/parser.rst:116
+#: ../Doc/library/parser.rst:117
 msgid ""
 "The :func:`expr` function parses the parameter *source* as if it were an "
 "input to ``compile(source, 'file.py', 'eval')``.  If the parse succeeds, an "
 "ST object is created to hold the internal parse tree representation, "
 "otherwise an appropriate exception is raised."
 msgstr ""
+"La función :func:`expr` analiza el parámetro *source* como si fuera una "
+"entrada para ``compile(source, 'file.py', 'eval')``. Si el análisis "
+"sintáctico tiene éxito, se crea un objeto ST para contener la representación "
+"del árbol de análisis sintáctico interno; de lo contrario, se lanza una "
+"excepción apropiada."
 
-#: ../Doc/library/parser.rst:124
+#: ../Doc/library/parser.rst:125
 msgid ""
 "The :func:`suite` function parses the parameter *source* as if it were an "
 "input to ``compile(source, 'file.py', 'exec')``.  If the parse succeeds, an "
 "ST object is created to hold the internal parse tree representation, "
 "otherwise an appropriate exception is raised."
 msgstr ""
+"La función :func:`suite` analiza el parámetro *source* como si fuera una "
+"entrada válida para ``compile(source, 'file.py', 'exec')``. Si el análisis "
+"sintáctico tiene éxito, se crea un objeto ST para contener la representación "
+"del árbol de análisis sintáctico interno; de lo contrario, se lanza una "
+"excepción apropiada."
 
-#: ../Doc/library/parser.rst:132
+#: ../Doc/library/parser.rst:133
 msgid ""
 "This function accepts a parse tree represented as a sequence and builds an "
 "internal representation if possible.  If it can validate that the tree "
@@ -178,8 +276,22 @@ msgid ""
 "``del f(0)``, which escapes the Python parser but is checked by the bytecode "
 "compiler."
 msgstr ""
+"Esta función acepta un árbol de análisis sintáctico representado como una "
+"secuencia y construye una representación interna si es posible. Si puede "
+"validar que el árbol se ajusta a la gramática de Python y que todos los "
+"nodos son tipos de nodo válidos en la versión anfitriona de Python, se crea "
+"un objeto ST a partir de la representación interna y se retorna a quien la "
+"invocó. Si hay un problema creando la representación interna, o si el árbol "
+"no se puede validar, se lanza una excepción :exc:`ParserError`. No se debe "
+"dar por supuesto que un objeto ST creado de esta manera se compila "
+"correctamente; las excepciones normalmente generadas en el proceso de "
+"compilación aún pueden iniciarse cuando el objeto ST se pasa a :func:"
+"`compilest`. Esto puede indicar problemas no relacionados con la sintaxis "
+"(como una excepción :exc:`MemoryError`), pero también puede deberse a "
+"construcciones como el resultado de analizar ``del f(0)``, que escapa al "
+"analizador de Python pero es verificado por el compilador de código de bytes."
 
-#: ../Doc/library/parser.rst:145
+#: ../Doc/library/parser.rst:146
 msgid ""
 "Sequences representing terminal tokens may be represented as either two-"
 "element lists of the form ``(1, 'name')`` or as three-element lists of the "
@@ -187,26 +299,39 @@ msgid ""
 "be a valid line number.  The line number may be specified for any subset of "
 "the terminal symbols in the input tree."
 msgstr ""
+"Las secuencias que representan tokens terminales pueden representarse como "
+"listas de dos elementos de la forma ``(1, 'nombre')`` o como listas de tres "
+"elementos de la forma ``(1, 'nombre', 56)``. Si el tercer elemento está "
+"presente, se supone que es un número de línea válido. El número de línea "
+"puede especificarse para cualquier subconjunto de los símbolos terminales en "
+"el árbol de entrada."
 
-#: ../Doc/library/parser.rst:154
+#: ../Doc/library/parser.rst:155
 msgid ""
 "This is the same function as :func:`sequence2st`.  This entry point is "
 "maintained for backward compatibility."
 msgstr ""
+"Esta es la misma función que :func:`sequence2st`. Este punto de entrada se "
+"mantiene solo por compatibilidad con versiones anteriores."
 
-#: ../Doc/library/parser.rst:161
+#: ../Doc/library/parser.rst:162
 msgid "Converting ST Objects"
-msgstr ""
+msgstr "Convertir objetos ST"
 
-#: ../Doc/library/parser.rst:163
+#: ../Doc/library/parser.rst:164
 msgid ""
 "ST objects, regardless of the input used to create them, may be converted to "
 "parse trees represented as list- or tuple- trees, or may be compiled into "
 "executable code objects.  Parse trees may be extracted with or without line "
 "numbering information."
 msgstr ""
+"Los objetos ST, independientemente de la entrada utilizada para crearlos, "
+"pueden convertirse en árboles de análisis sintáctico representados como "
+"árboles de listas o tuplas, o pueden compilarse en objetos de código "
+"ejecutable. Los árboles de análisis sintáctico se pueden extraer con o sin "
+"información de numeración de línea."
 
-#: ../Doc/library/parser.rst:171
+#: ../Doc/library/parser.rst:172
 msgid ""
 "This function accepts an ST object from the caller in *st* and returns a "
 "Python list representing the equivalent parse tree.  The resulting list "
@@ -218,30 +343,54 @@ msgid ""
 "required, this function is significantly faster than retrieving a tuple "
 "representation and converting that to nested lists."
 msgstr ""
+"Esta función acepta un objeto ST de quien la invoca mediante el argumento "
+"*st* y retorna una lista de Python que representa el árbol de análisis "
+"sintáctico equivalente. La representación de la lista resultante se puede "
+"utilizar para la inspección o la creación de un nuevo árbol de análisis "
+"sintáctico en forma de lista. Esta función no falla mientras haya memoria "
+"disponible para construir la representación de la lista. Si el árbol de "
+"análisis sintáctico sólo va a ser usado con fines de inspección, se debe "
+"usar :func:`st2tuple` en su lugar para reducir el consumo de memoria y la "
+"fragmentación. Cuando se requiere la representación en forma de lista, esta "
+"función es significativamente más rápida que recuperar una representación en "
+"forma de tupla y convertirla posteriormente en listas anidadas."
 
-#: ../Doc/library/parser.rst:181
+#: ../Doc/library/parser.rst:182
 msgid ""
 "If *line_info* is true, line number information will be included for all "
 "terminal tokens as a third element of the list representing the token.  Note "
 "that the line number provided specifies the line on which the token *ends*. "
 "This information is omitted if the flag is false or omitted."
 msgstr ""
+"Si *line_info* es verdadero, la información del número de línea se incluirá "
+"para todos los tokens terminales como un tercer elemento de la lista que "
+"representa el token. Ten en cuenta que el número de línea proporcionado "
+"especifica la línea en la que el token *termina*. Esta información se omite "
+"si el indicador es falso o se omite."
 
-#: ../Doc/library/parser.rst:189
+#: ../Doc/library/parser.rst:190
 msgid ""
 "This function accepts an ST object from the caller in *st* and returns a "
 "Python tuple representing the equivalent parse tree.  Other than returning a "
 "tuple instead of a list, this function is identical to :func:`st2list`."
 msgstr ""
+"Esta función acepta un objeto ST de quien la llama mediante el argumento "
+"*st* y retorna una tupla de Python que representa el árbol de análisis "
+"sintáctico equivalente. Aparte de retornar una tupla en lugar de una lista, "
+"esta función es idéntica a :func:`st2list`."
 
-#: ../Doc/library/parser.rst:193
+#: ../Doc/library/parser.rst:194
 msgid ""
 "If *line_info* is true, line number information will be included for all "
 "terminal tokens as a third element of the list representing the token.  This "
 "information is omitted if the flag is false or omitted."
 msgstr ""
+"Si *line_info* es verdadero, la información del número de línea se incluirá "
+"para todos los tokens terminales como un tercer elemento de la lista que "
+"representa el token. Esta información se omite si el indicador es falso o se "
+"omite."
 
-#: ../Doc/library/parser.rst:204
+#: ../Doc/library/parser.rst:205
 msgid ""
 "The Python byte compiler can be invoked on an ST object to produce code "
 "objects which can be used as part of a call to the built-in :func:`exec` or :"
@@ -250,8 +399,16 @@ msgid ""
 "file name specified by the *filename* parameter. The default value supplied "
 "for *filename* indicates that the source was an ST object."
 msgstr ""
+"El compilador de bytes de Python se puede invocar en un objeto ST para "
+"producir objetos de código que se pueden usar como parte de una llamada a "
+"las funciones incorporadas :func:`exec` o :func:`eval`. Esta función "
+"proporciona la interfaz para el compilador, pasando el árbol de análisis "
+"sintáctico interno de *st* al analizador sintáctico, utilizando el nombre "
+"del archivo fuente especificado por el parámetro *filename*. El valor "
+"predeterminado proporcionado para *filename* indica que la fuente era un "
+"objeto ST."
 
-#: ../Doc/library/parser.rst:211
+#: ../Doc/library/parser.rst:212
 msgid ""
 "Compiling an ST object may result in exceptions related to compilation; an "
 "example would be a :exc:`SyntaxError` caused by the parse tree for ``del "
@@ -262,49 +419,79 @@ msgid ""
 "module.  Most causes of compilation failure can be diagnosed "
 "programmatically by inspection of the parse tree."
 msgstr ""
+"La compilación de un objeto ST puede resultar en excepciones relacionadas "
+"con la compilación. Un ejemplo sería la excepción :exc:`SyntaxError` causada "
+"por el árbol de análisis sintáctico para ``del f(0)``: esta declaración se "
+"considera legal dentro de la gramática formal de Python pero no es una "
+"construcción del lenguaje legal. La excepción :exc:`SyntaxError` lanzada "
+"para esta condición es realmente generada por el compilador de bytes de "
+"Python, por lo que puede ser lanzada en este punto por el módulo :mod:"
+"`parser`. La mayoría de las causas de errores de compilación se pueden "
+"diagnosticar programáticamente mediante la inspección del árbol de análisis "
+"sintáctico."
 
-#: ../Doc/library/parser.rst:224
+#: ../Doc/library/parser.rst:225
 msgid "Queries on ST Objects"
-msgstr ""
+msgstr "Consultas en objetos ST"
 
-#: ../Doc/library/parser.rst:226
+#: ../Doc/library/parser.rst:227
 msgid ""
 "Two functions are provided which allow an application to determine if an ST "
 "was created as an expression or a suite.  Neither of these functions can be "
 "used to determine if an ST was created from source code via :func:`expr` or :"
 "func:`suite` or from a parse tree via :func:`sequence2st`."
 msgstr ""
+"Se proporcionan dos funciones que permiten a una aplicación determinar si un "
+"ST se creó como una expresión o una suite. Ninguna de estas funciones se "
+"puede utilizar para determinar si un ST se creó a partir del código fuente a "
+"través de :func:`expr` o :func:`suite`, o desde un árbol de análisis "
+"mediante :func:`sequence2st`."
 
-#: ../Doc/library/parser.rst:236
+#: ../Doc/library/parser.rst:237
 msgid ""
-"When *st* represents an ``'eval'`` form, this function returns true, "
-"otherwise it returns false.  This is useful, since code objects normally "
+"When *st* represents an ``'eval'`` form, this function returns ``True``, "
+"otherwise it returns ``False``.  This is useful, since code objects normally "
 "cannot be queried for this information using existing built-in functions.  "
 "Note that the code objects created by :func:`compilest` cannot be queried "
 "like this either, and are identical to those created by the built-in :func:"
 "`compile` function."
 msgstr ""
+"Esta función retorna ``True`` cuando *st* representa una forma ``'eval'`` y "
+"retorna ``False`` en caso contrario. Esto es útil, ya que los objetos de "
+"código normalmente no se pueden consultar para esta información utilizando "
+"las funciones incorporadas existentes. Ten en cuenta que los objetos de "
+"código creados por :func:`compilest` tampoco pueden consultarse así, además, "
+"son idénticos a los creados por la función incorporada :func:`compile`."
 
-#: ../Doc/library/parser.rst:245
+#: ../Doc/library/parser.rst:246
 msgid ""
 "This function mirrors :func:`isexpr` in that it reports whether an ST object "
 "represents an ``'exec'`` form, commonly known as a \"suite.\"  It is not "
 "safe to assume that this function is equivalent to ``not isexpr(st)``, as "
 "additional syntactic fragments may be supported in the future."
 msgstr ""
+"Esta función es un espejo de :func:`isexpr`, en el sentido de que informa si "
+"un objeto ST representa una forma ``'exec'``, comúnmente conocida como "
+"\"suite\". No es seguro asumir que esta función es equivalente a ``not "
+"isexpr(st)``, ya que es posible que se admitan fragmentos sintácticos "
+"adicionales en el futuro."
 
-#: ../Doc/library/parser.rst:254
+#: ../Doc/library/parser.rst:255
 msgid "Exceptions and Error Handling"
-msgstr ""
+msgstr "Manejo de errores y excepciones"
 
-#: ../Doc/library/parser.rst:256
+#: ../Doc/library/parser.rst:257
 msgid ""
 "The parser module defines a single exception, but may also pass other built-"
 "in exceptions from other portions of the Python runtime environment.  See "
 "each function for information about the exceptions it can raise."
 msgstr ""
+"El módulo parser define una única excepción, pero también puede lanzar otras "
+"excepciones incorporadas en otras partes del entorno de ejecución de Python. "
+"Consulta cada función para obtener información sobre las excepciones que "
+"puede generar."
 
-#: ../Doc/library/parser.rst:263
+#: ../Doc/library/parser.rst:264
 msgid ""
 "Exception raised when a failure occurs within the parser module.  This is "
 "generally produced for validation failures rather than the built-in :exc:"
@@ -315,8 +502,17 @@ msgid ""
 "handle either type of exception, while calls to other functions in the "
 "module will only need to be aware of the simple string values."
 msgstr ""
+"Excepción lanzada cuando se produce un fallo dentro del módulo parser. Esto "
+"generalmente se produce ante fallos de validación, en lugar de la excepción "
+"incorporada :exc:`SyntaxError`, lanzada durante el análisis normal. El "
+"argumento de la excepción puede ser una cadena de caracteres que describa la "
+"razón del error, o también una tupla que contenga la secuencia causante del "
+"fallo en el árbol de análisis pasado a :func:`sequence2st` y una cadena "
+"explicativa. Las llamadas a :func:`sequence2st` deben poder manejar ambos "
+"tipos de excepciones, mientras que las llamadas a otras funciones en el "
+"módulo solo necesitarán tener en cuenta los valores de cadena simples."
 
-#: ../Doc/library/parser.rst:272
+#: ../Doc/library/parser.rst:273
 msgid ""
 "Note that the functions :func:`compilest`, :func:`expr`, and :func:`suite` "
 "may raise exceptions which are normally raised by the parsing and "
@@ -326,68 +522,88 @@ msgid ""
 "normally associated with them. Refer to the descriptions of each function "
 "for detailed information."
 msgstr ""
+"Ten en cuenta que las funciones :func:`compilest`, :func:`expr` y :func:"
+"`suite` pueden lanzar excepciones que normalmente son generadas por el "
+"proceso de análisis y compilación. Estas incluyen las excepciones "
+"incorporadas :exc:`MemoryError`, :exc:`OverflowError`, :exc:`SyntaxError` y :"
+"exc:`SystemError`. En estos casos, estas excepciones tienen todo el "
+"significado que normalmente se asocia a ellas. Consulta las descripciones de "
+"cada función para obtener información detallada."
 
-#: ../Doc/library/parser.rst:283
+#: ../Doc/library/parser.rst:284
 msgid "ST Objects"
-msgstr ""
+msgstr "Objetos ST"
 
-#: ../Doc/library/parser.rst:285
+#: ../Doc/library/parser.rst:286
 msgid ""
 "Ordered and equality comparisons are supported between ST objects. Pickling "
 "of ST objects (using the :mod:`pickle` module) is also supported."
 msgstr ""
+"Se admiten comparaciones de orden y de igualdad entre objetos ST. También se "
+"admite la serialización de objetos ST (utilizando el módulo :mod:`pickle`)."
 
-#: ../Doc/library/parser.rst:291
+#: ../Doc/library/parser.rst:292
 msgid ""
 "The type of the objects returned by :func:`expr`, :func:`suite` and :func:"
 "`sequence2st`."
 msgstr ""
+"El tipo de los objetos retornados por :func:`expr`, :func:`suite` y :func:"
+"`sequence2st`."
 
-#: ../Doc/library/parser.rst:294
+#: ../Doc/library/parser.rst:295
 msgid "ST objects have the following methods:"
-msgstr ""
+msgstr "Los objetos ST tienen los siguientes métodos:"
 
-#: ../Doc/library/parser.rst:299
+#: ../Doc/library/parser.rst:300
 msgid "Same as ``compilest(st, filename)``."
-msgstr ""
+msgstr "Igual que ``compilest(st, filename)``."
 
-#: ../Doc/library/parser.rst:304
+#: ../Doc/library/parser.rst:305
 msgid "Same as ``isexpr(st)``."
-msgstr ""
+msgstr "Igual que ``isexpr(st)``."
 
-#: ../Doc/library/parser.rst:309
+#: ../Doc/library/parser.rst:310
 msgid "Same as ``issuite(st)``."
-msgstr ""
+msgstr "Igual que ``issuite(st)``."
 
-#: ../Doc/library/parser.rst:314
+#: ../Doc/library/parser.rst:315
 msgid "Same as ``st2list(st, line_info, col_info)``."
-msgstr ""
+msgstr "Igual que ``st2list(st, line_info, col_info)``."
 
-#: ../Doc/library/parser.rst:319
+#: ../Doc/library/parser.rst:320
 msgid "Same as ``st2tuple(st, line_info, col_info)``."
-msgstr ""
+msgstr "Igual que ``st2tuple(st, line_info, col_info)``."
 
-#: ../Doc/library/parser.rst:323
+#: ../Doc/library/parser.rst:324
 msgid "Example: Emulation of :func:`compile`"
-msgstr ""
+msgstr "Ejemplo: Emulación de :func:`compile`"
 
-#: ../Doc/library/parser.rst:325
+#: ../Doc/library/parser.rst:326
 msgid ""
 "While many useful operations may take place between parsing and bytecode "
 "generation, the simplest operation is to do nothing.  For this purpose, "
 "using the :mod:`parser` module to produce an intermediate data structure is "
 "equivalent to the code ::"
 msgstr ""
+"Si bien muchas operaciones útiles pueden tener lugar entre el análisis y la "
+"generación del códigos de bytes, la operación más simple es no hacer nada. "
+"Para este propósito, usar el módulo :mod:`parser` para producir una "
+"estructura de datos intermedia es equivalente al siguiente código::"
 
-#: ../Doc/library/parser.rst:335
+#: ../Doc/library/parser.rst:336
 msgid ""
 "The equivalent operation using the :mod:`parser` module is somewhat longer, "
 "and allows the intermediate internal parse tree to be retained as an ST "
 "object::"
 msgstr ""
+"La operación equivalente usando el módulo :mod:`parser` es algo más larga y "
+"permite que el árbol de análisis sintáctico interno intermedio se conserve "
+"como un objeto ST::"
 
-#: ../Doc/library/parser.rst:345
+#: ../Doc/library/parser.rst:346
 msgid ""
 "An application which needs both ST and code objects can package this code "
 "into readily available functions::"
 msgstr ""
+"Una aplicación que necesita tanto ST como objetos de código puede empaquetar "
+"este código en funciones fácilmente disponibles::"
