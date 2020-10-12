@@ -1,25 +1,27 @@
 # Copyright (C) 2001-2020, Python Software Foundation
 # This file is distributed under the same license as the Python package.
-# Maintained by the python-doc-es workteam. 
+# Maintained by the python-doc-es workteam.
 # docs-es@python.org / https://mail.python.org/mailman3/lists/docs-es.python.org/
 # Check https://github.com/python/python-docs-es/blob/3.8/TRANSLATORS to get the list of volunteers
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-06 11:59-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2020-10-10 10:39-0400\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Language: es_AR\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #: ../Doc/library/marshal.rst:2
 msgid ":mod:`marshal` --- Internal Python object serialization"
-msgstr ""
+msgstr ":mod:`marshal` --- Serialización interna de objetos Python"
 
 #: ../Doc/library/marshal.rst:10
 msgid ""
@@ -30,6 +32,13 @@ msgid ""
 "are undocumented on purpose; it may change between Python versions (although "
 "it rarely does). [#]_"
 msgstr ""
+"Este módulo contiene funciones que pueden leer y escribir valores de Python "
+"en un formato binario.  El formato es específico de Python, pero "
+"independiente de los problemas de arquitectura de la máquina (por ejemplo, "
+"puede escribir un valor de Python en un archivo en un PC, transportar el "
+"archivo a un Sun y leerlo allí).  Los detalles del formato están "
+"indocumentados a propósito; pueden cambiar entre las versiones de Python "
+"(aunque rara vez lo hacen). [#]_"
 
 #: ../Doc/library/marshal.rst:21
 msgid ""
@@ -44,6 +53,17 @@ msgid ""
 "guaranteed, and pickle supports a substantially wider range of objects than "
 "marshal."
 msgstr ""
+"Este no es un módulo general de \"persistencia\".  Para la persistencia "
+"general y la transferencia de objetos Python a través de llamadas RPC, "
+"consulte los módulos :mod:`pickle` y :mod:`shelve`.  El módulo :mod:"
+"`marshal` existe principalmente para admitir la lectura y escritura del "
+"código \"pseudocompilado\" para los módulos Python de archivos :file:`.pyc`. "
+"Por lo tanto, los mantenedores de Python se reservan el derecho de modificar "
+"el formato de cálculo de referencias de manera incompatible hacia atrás en "
+"caso de necesidad.  Si va a serializar y deserializar objetos Python, "
+"utilice el módulo :mod:`pickle` en su lugar: el rendimiento es comparable, "
+"la independencia de la versión está garantizada y pickle admite una gama "
+"sustancialmente más amplia de objetos que marshal."
 
 #: ../Doc/library/marshal.rst:33
 msgid ""
@@ -51,6 +71,9 @@ msgid ""
 "maliciously constructed data.  Never unmarshal data received from an "
 "untrusted or unauthenticated source."
 msgstr ""
+"El módulo :mod:`marshal` no está destinado a ser seguro contra datos "
+"erróneos o construidos maliciosamente.  Nunca deserializar con marshal los "
+"datos recibidos de una fuente no confiable o no autenticada."
 
 #: ../Doc/library/marshal.rst:39
 msgid ""
@@ -66,22 +89,39 @@ msgid ""
 "*version* lower than 3, recursive lists, sets and dictionaries cannot be "
 "written (see below)."
 msgstr ""
+"No se admiten todos los tipos de objetos de Python; en general, este módulo "
+"solo puede escribir y leer objetos cuyo valor es independiente de una "
+"invocación concreta de Python.  Se admiten los siguientes tipos: booleanos, "
+"enteros, números de punto flotante, números complejos, cadenas de "
+"caracteres, bytes, arrays de bytes (bytearray), tuplas, listas, conjuntos "
+"(set y frozenset), diccionarios y objetos de código, donde se debe entender "
+"que las tuplas, listas, conjuntos y diccionarios solo se admiten siempre que "
+"se admitan los valores contenidos en ellos mismos.  Los singletons :const:"
+"`None`, :const:`Ellipsis` y :exc:`StopIteration` también pueden ser "
+"marshalled y unmarshalled. Para el formato *versión* inferior a 3, no se "
+"pueden escribir listas, conjuntos ni diccionarios recursivos (véase más "
+"adelante)."
 
 #: ../Doc/library/marshal.rst:51
 msgid ""
 "There are functions that read/write files as well as functions operating on "
 "bytes-like objects."
 msgstr ""
+"Hay funciones que leen/escriben archivos, así como funciones que operan en "
+"objetos similares a bytes."
 
 #: ../Doc/library/marshal.rst:54
 msgid "The module defines these functions:"
-msgstr ""
+msgstr "El módulo define estas funciones:"
 
 #: ../Doc/library/marshal.rst:59
 msgid ""
 "Write the value on the open file.  The value must be a supported type.  The "
 "file must be a writeable :term:`binary file`."
 msgstr ""
+"Escribe el valor en el archivo abierto.  El valor debe ser un tipo "
+"admitido.  El archivo debe ser un archivo :term:`binary file` en el que se "
+"pueda escribir."
 
 #: ../Doc/library/marshal.rst:62
 msgid ""
@@ -90,12 +130,18 @@ msgid ""
 "written to the file.  The object will not be properly read back by :func:"
 "`load`."
 msgstr ""
+"Si el valor tiene (o contiene un objeto que tiene) un tipo no admitido, se "
+"produce una excepción :exc:`ValueError` --- pero los datos no utilizados "
+"también se escribirán en el archivo.  El objeto no será leído correctamente "
+"por :func:`load`."
 
 #: ../Doc/library/marshal.rst:66
 msgid ""
 "The *version* argument indicates the data format that ``dump`` should use "
 "(see below)."
 msgstr ""
+"El argumento *version* indica el formato de datos que ``dump`` debe usar "
+"(véase más adelante)."
 
 #: ../Doc/library/marshal.rst:72
 msgid ""
@@ -104,12 +150,19 @@ msgid ""
 "format), raise :exc:`EOFError`, :exc:`ValueError` or :exc:`TypeError`.  The "
 "file must be a readable :term:`binary file`."
 msgstr ""
+"Lee un valor del archivo abierto y lo retorna.  Si no se lee ningún valor "
+"válido (por ejemplo, porque los datos tienen un formato de cálculo de "
+"referencias incompatible de una versión de Python diferente), lanza una "
+"excepción :exc:`EOFError`, :exc:`ValueError` o :exc:`TypeError`.  El archivo "
+"debe ser un :term:`binary file` habilitado para lectura."
 
 #: ../Doc/library/marshal.rst:79
 msgid ""
 "If an object containing an unsupported type was marshalled with :func:"
 "`dump`, :func:`load` will substitute ``None`` for the unmarshallable type."
 msgstr ""
+"Si un objeto que contiene un tipo no admitido se calcula con :func:`dump`, :"
+"func:`load` sustituirá ``None`` por el tipo \"unmarshallable\"."
 
 #: ../Doc/library/marshal.rst:85
 msgid ""
@@ -117,12 +170,18 @@ msgid ""
 "file)``.  The value must be a supported type.  Raise a :exc:`ValueError` "
 "exception if value has (or contains an object that has) an unsupported type."
 msgstr ""
+"Retorna el objeto bytes que se escribiría en un archivo mediante "
+"``dump(value, file)``.  El valor debe ser un tipo admitido.  Lanza una "
+"excepción :exc:`ValueError` si ``value`` tiene (o contiene un objeto que "
+"tiene) un tipo no admitido."
 
 #: ../Doc/library/marshal.rst:89
 msgid ""
 "The *version* argument indicates the data format that ``dumps`` should use "
 "(see below)."
 msgstr ""
+"El argumento *version* indica el formato de datos que ``dumps`` debe usar "
+"(véase más adelante)."
 
 #: ../Doc/library/marshal.rst:95
 msgid ""
@@ -130,10 +189,14 @@ msgid ""
 "found, raise :exc:`EOFError`, :exc:`ValueError` or :exc:`TypeError`.  Extra "
 "bytes in the input are ignored."
 msgstr ""
+"Convierte el objeto :term:`bytes-like object` en un valor.  Si no se "
+"encuentra ningún valor válido, lanza una excepción :exc:`EOFError`, :exc:"
+"`ValueError` o :exc:`TypeError`.  Se omiten los bytes adicionales de la "
+"entrada."
 
 #: ../Doc/library/marshal.rst:100
 msgid "In addition, the following constants are defined:"
-msgstr ""
+msgstr "Además, se definen las siguientes constantes:"
 
 #: ../Doc/library/marshal.rst:104
 msgid ""
@@ -142,10 +205,15 @@ msgid ""
 "for floating point numbers. Version 3 adds support for object instancing and "
 "recursion. The current version is 4."
 msgstr ""
+"Indica el formato que utiliza el módulo. La versión 0 es el formato "
+"histórico, la versión 1 comparte cadenas internadas y la versión 2 utiliza "
+"un formato binario para los números de punto flotante. La versión 3 agrega "
+"compatibilidad con la creación de instancias de objetos y la recursividad. "
+"La versión actual es 4."
 
 #: ../Doc/library/marshal.rst:112
 msgid "Footnotes"
-msgstr ""
+msgstr "Notas al pie"
 
 #: ../Doc/library/marshal.rst:113
 msgid ""
@@ -155,3 +223,9 @@ msgid ""
 "marshal\" means to convert some data from internal to external form (in an "
 "RPC buffer for instance) and \"unmarshalling\" for the reverse process."
 msgstr ""
+"El nombre de este módulo proviene de algunos términos utilizados por los "
+"diseñadores de Modula-3 (entre otros), que utilizan el término \"marshalling"
+"\" para el envío de datos de forma auto-contenida. Estrictamente hablando "
+"\"marshalling\", significa convertir algunos datos internos en un formato "
+"externo (por ejemplo, en un búfer RPC) y \"unmarshalling\" es el proceso "
+"inverso."
