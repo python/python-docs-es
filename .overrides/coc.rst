@@ -236,7 +236,7 @@ Este Código de Conducta se bifucó (fork) a partir de las pólizas de ejemplo d
 `Geek Feminism wiki, creado por Ada Initiative y otros voluntarios`_, que está bajo una licencia
 `Creative Commons Zero`_.
 
-*Sage Sharp* de `Otter Tech`_ creó un nuevo lenguage y modificaciones adicionales.
+*Sage Sharp* de `Otter Tech`_ creó un nuevo lenguaje y modificaciones adicionales.
 
 El lenguaje se incorporó a partir de los siguientes códigos de conducta:
 
