@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Python en Español 3.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-10-13 18:42+0200\n"
+"PO-Revision-Date: 2020-10-13 23:10+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1980,24 +1980,30 @@ msgid ""
 "in some cases for better performance. Currently, it is only used on macOS "
 "and Linux (using glibc 2.24 or newer) if all these conditions are met:"
 msgstr ""
+"El módulo :mod:`subprocess` ahora puede usar en ciertos casos la función :"
+"func:`os.posix_spawn` para mejorar el rendimiento. Actualmente, solo se usa "
+"en macOS y Linux (usando glibc 2.24 o una versión más reciente) y siempre "
+"que se cumplan todas estas condiciones:"
 
 #: ../Doc/whatsnew/3.8.rst:1449
 msgid "*close_fds* is false;"
-msgstr ""
+msgstr "*close_fds* es falso;"
 
 #: ../Doc/whatsnew/3.8.rst:1450
 msgid ""
 "*preexec_fn*, *pass_fds*, *cwd* and *start_new_session* parameters are not "
 "set;"
 msgstr ""
+"los parámetros *preexec_fn*, *pass_fds*, *cwd* y *start_new_session* no "
+"están establecidos;"
 
 #: ../Doc/whatsnew/3.8.rst:1452
 msgid "the *executable* path contains a directory."
-msgstr ""
+msgstr "la ruta *executable* contiene un directorio."
 
 #: ../Doc/whatsnew/3.8.rst:1454
 msgid "(Contributed by Joannah Nanjekye and Victor Stinner in :issue:`35537`.)"
-msgstr ""
+msgstr "(Contribución de Joannah Nanjekye y Victor Stinner en :issue:`35537`.)"
 
 #: ../Doc/whatsnew/3.8.rst:1456
 #, python-format
@@ -2015,6 +2021,20 @@ msgid ""
 "dependent-efficient-copy-operations` section. (Contributed by Giampaolo "
 "Rodolà in :issue:`33671`.)"
 msgstr ""
+":func:`shutil.copyfile`, :func:`shutil.copy`, :func:`shutil.copy2`, :func:"
+"`shutil.copytree` y :func:`shutil.move` usan llamadas al sistema de \"copia-"
+"rápida\" específicas de la plataforma en Linux y macOS, con la finalidad de "
+"copiar ficheros más eficientemente. \"copia-rápida\" significa que la "
+"operación de copiado tiene lugar en el propio kernel, evitando que Python "
+"haga uso de búferes en el espacio de usuario como \"``outfd.write(infd."
+"read())``\". En Windows, :func:`shutil.copyfile` usa un tamaño de búfer "
+"predeterminado más grande (1 MiB en lugar de 16 KiB) y se usa una variante "
+"de :func:`shutil.copyfileobj` basada en :func:`memoryview`. La aceleración "
+"al copiar un archivo de 512 MiB dentro de la misma partición es de "
+"aproximadamente +26% en Linux, +50% en macOS y +40% en Windows. Además, se "
+"consumen muchos menos ciclos de CPU. Consultar la sección :ref:`shutil-"
+"platform-dependent-efficient-copy-operations`. (Contribución de Giampaolo "
+"Rodolà en :issue:`33671`.)"
 
 #: ../Doc/whatsnew/3.8.rst:1472
 #, python-format
@@ -2026,6 +2046,14 @@ msgid ""
 "syscalls is reduced by 38% making :func:`shutil.copytree` especially faster "
 "on network filesystems. (Contributed by Giampaolo Rodolà in :issue:`33695`.)"
 msgstr ""
+"Ahora :func:`shutil.copytree` usa la función :func:`os.scandir` y todas las "
+"funciones de copia que dependen de ella usan el valor en caché de :func:`os."
+"stat`. Al copiar un directorio con 8000 archivos, la mejora de velocidad es "
+"de +9% en Linux, +20% en Windows y +30% en recursos compartidos de Windows "
+"SMB. Además, el número de llamadas al sistema de :func:`os.stat` se reduce "
+"en un 38%, lo que hace que :func:`shutil.copytree` sea más rápida "
+"especialmente en sistemas de archivos de red. (Contribución de Giampaolo "
+"Rodolà en :issue:`33695`.)"
 
 #: ../Doc/whatsnew/3.8.rst:1479
 msgid ""
@@ -2033,6 +2061,9 @@ msgid ""
 "introduced in Python 3.4.  It offers better performance and smaller size "
 "compared to Protocol 3 available since Python 3.0."
 msgstr ""
+"El protocolo por defecto del módulo :mod:`pickle` es ahora el Protocolo 4, "
+"introducido por primera vez en Python 3.4. Ofrece un mejor desempeño y un "
+"menor tamaño, en comparación con el Protocolo 3 disponible desde Python 3.0."
 
 #: ../Doc/whatsnew/3.8.rst:1483
 msgid ""
@@ -2040,12 +2071,18 @@ msgid ""
 "objects (e.g. tuple, list, dict) size is reduced 4 or 8 bytes. (Contributed "
 "by Inada Naoki in :issue:`33597`.)"
 msgstr ""
+"Eliminado un miembro ``Py_ssize_t`` de ``PyGC_Head``. El tamaño de todos los "
+"objetos seguidos por el GC (por ejemplo tuple, list y dict) se ha reducido 4 "
+"u 8 bytes. (Contribución de Inada Naoki en :issue:`33597`.)"
 
 #: ../Doc/whatsnew/3.8.rst:1487
 msgid ""
 ":class:`uuid.UUID` now uses ``__slots__`` to reduce its memory footprint. "
 "(Contributed by Wouter Bolsterlee and Tal Einat in :issue:`30977`)"
 msgstr ""
+"La clase :class:`uuid.UUID` ahora usa ``__slots__`` para reducir su impacto "
+"en la memoria. (Contribución de Wouter Bolsterlee y Tal Einat en :issue:"
+"`30977`.)"
 
 #: ../Doc/whatsnew/3.8.rst:1490
 msgid ""
@@ -2054,6 +2091,11 @@ msgid ""
 "negative integer index into a tuple (which is the typical use case in the "
 "standard library).  (Contributed by Raymond Hettinger in :issue:`35664`.)"
 msgstr ""
+"Mejorado el rendimiento de :func:`operator.itemgetter` en un 33%. Se ha "
+"optimizado el manejo de argumentos y se ha agregado una ruta rápida al caso "
+"común de índices enteros no negativos únicos en tuplas (que constituye un "
+"caso de uso común en la biblioteca estándar). (Contribución de Raymond "
+"Hettinger en :issue:`35664`.)"
 
 #: ../Doc/whatsnew/3.8.rst:1496
 msgid ""
@@ -2062,6 +2104,11 @@ msgid ""
 "lookup in Python. (Contributed by Raymond Hettinger, Pablo Galindo, and Joe "
 "Jevnik, Serhiy Storchaka in :issue:`32492`.)"
 msgstr ""
+"Se han acelerado las búsquedas de campos en :func:`collections.namedtuple`. "
+"Ahora son más del doble de rápidas, lo que las convierte en la forma más "
+"rápida de búsqueda de variables de instancia en Python. (Contribución de "
+"Raymond Hettinger, Pablo Galindo, Joe Jevnik y Serhiy Storchaka en :issue:"
+"`32492`.)"
 
 #: ../Doc/whatsnew/3.8.rst:1501
 #, python-format
@@ -2071,6 +2118,11 @@ msgid ""
 "This makes the created list 12% smaller on average. (Contributed by Raymond "
 "Hettinger and Pablo Galindo in :issue:`33234`.)"
 msgstr ""
+"El constructor de :class:`list` no sobre-asignará el búfer del elemento "
+"interno si se conoce la longitud de la entrada iterable (es decir, si la "
+"entrada implementa ``__len__``). Esto hace que la lista generada sea, en "
+"promedio, un 12% más pequeña. (Contribución de Raymond Hettinger y Pablo "
+"Galindo en :issue:`33234`.)"
 
 #: ../Doc/whatsnew/3.8.rst:1506
 msgid ""
@@ -2079,6 +2131,11 @@ msgid ""
 "Stefan Behnel, Pablo Galindo Salgado, Raymond Hettinger, Neil Schemenauer, "
 "and Serhiy Storchaka in :issue:`36012`.)"
 msgstr ""
+"De ha duplicado la velocidad de escritura de variables de clase. Antes, "
+"cuando se actualizaba un atributo non-dunder, había una llamada innecesaria "
+"para actualizar slots. (Contribución de Stefan Behnel, Pablo Galindo "
+"Salgado, Raymond Hettinger, Neil Schemenauer y Serhiy Storchaka en :issue:"
+"`36012`.)"
 
 #: ../Doc/whatsnew/3.8.rst:1511
 msgid ""
@@ -2087,6 +2144,10 @@ msgid ""
 "up to 20--50%.  (Contributed by Serhiy Storchaka in :issue:`23867`, :issue:"
 "`35582` and :issue:`36127`.)"
 msgstr ""
+"Se ha reducido la sobrecarga de conversión de argumentos pasados a muchas "
+"funciones y métodos integrados. Esto acelera la llamada a algunas funciones "
+"y métodos incorporados simples hasta un 20-50%. (Contribución de Serhiy "
+"Storchaka en :issue:`23867`, :issue:`35582` y :issue:`36127`.)"
 
 #: ../Doc/whatsnew/3.8.rst:1516
 #, python-format
@@ -2095,6 +2156,9 @@ msgid ""
 "is about 40% faster now.  (Contributed by Yury Selivanov and Inada Naoki in :"
 "issue:`26219`.)"
 msgstr ""
+"La instrucción ``LOAD_GLOBAL`` ahora utiliza el nuevo mecanismo \"per opcode "
+"cache\". Ahora es aproximadamente un 40% más rápida. (Contribución de Yury "
+"Selivanov e Inada Naoki en :issue:`26219`.)"
 
 #: ../Doc/whatsnew/3.8.rst:1522
 msgid "Build and C API Changes"
