@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-06 11:59-0400\n"
-"PO-Revision-Date: 2020-10-12 19:35+0200\n"
+"PO-Revision-Date: 2020-10-17 16:54+0200\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../Doc/library/msilib.rst:2
 msgid ":mod:`msilib` --- Read and write Microsoft Installer files"
-msgstr ":mod:`msilib` --- Leer y escribir archivos Microsoft Installer"
+msgstr ":mod:`msilib` --- Leer y escribir archivos *Microsoft Installer*"
 
 #: ../Doc/library/msilib.rst:11
 msgid "**Source code:** :source:`Lib/msilib/__init__.py`"
@@ -29,7 +29,6 @@ msgstr "**Código fuente:** :source:`Lib/msilib/__init__.py`"
 
 # La última frase es rara
 #: ../Doc/library/msilib.rst:17
-#, fuzzy
 msgid ""
 "The :mod:`msilib` supports the creation of Microsoft Installer (``.msi``) "
 "files. Because these files often contain an embedded \"cabinet\" file (``."
@@ -37,7 +36,7 @@ msgid ""
 "cab`` files is currently not implemented; read support for the ``.msi`` "
 "database is possible."
 msgstr ""
-"El :mod:`msilib` soporta la creación de archivos Microsoft Installer (``."
+"El :mod:`msilib` soporta la creación de archivos *Microsoft Installer* (``."
 "msi``). Como estos archivos a menudo contienen archivos *cabinet* (``.cab``) "
 "embebidos, se expone también una API para crear archivos CAB. El soporte "
 "para leer archivos ``.cab`` todavía no está implementado; el soporte a "
@@ -84,7 +83,7 @@ msgid ""
 "algorithm."
 msgstr ""
 "Los archivos son añadidos al archivo CAB en el orden en el cual aparecen en "
-"la lista. Todos los archivos son añadidos a un sólo archivo CAB, utilizando "
+"la lista. Todos los archivos son añadidos a un solo archivo CAB, utilizando "
 "el algoritmo de compresión MSZIP."
 
 #: ../Doc/library/msilib.rst:42
@@ -238,8 +237,7 @@ msgstr ""
 "aa379205.aspx>`_ `UuidToString <https://msdn.microsoft.com/en-us/library/"
 "windows/desktop/aa379352.aspx>`_"
 
-# ¿Traducir "database" o poner en cursiva?
-# (ver contexto)
+# Estas traducciones corresponden a encabezados, pero no sé si debería traducir los nombres de los objetos. Yo no lo haría porque es como se definen en Python. La traducción en japonés parece que los traduce (es la única traducción disponible para esta página)
 #: ../Doc/library/msilib.rst:134
 #, fuzzy
 msgid "Database Objects"
@@ -250,7 +248,7 @@ msgid ""
 "Return a view object, by calling :c:func:`MSIDatabaseOpenView`. *sql* is the "
 "SQL statement to execute."
 msgstr ""
-"Returna un objeto de vista, llamando a :c:func:`MSIDatabaseOpenView`. *sql* "
+"Retorna un objeto de vista, llamando a :c:func:`MSIDatabaseOpenView`. *sql* "
 "es la sentencia SQL a ejecutar."
 
 # ¿commit=persistir?
@@ -573,7 +571,7 @@ msgstr ""
 "Genera un archivo CAB, lo añade como un flujo al archivo MSI, lo añade a la "
 "tabla ``Media``, y elimina el archivo generado del disco."
 
-# *¿Traducir "directory"?
+# ¿Traducir "directory"?
 #: ../Doc/library/msilib.rst:360
 #, fuzzy
 msgid "Directory Objects"
@@ -590,6 +588,15 @@ msgid ""
 "directory name.  *default* specifies the DefaultDir slot in the directory "
 "table. *componentflags* specifies the default flags that new components get."
 msgstr ""
+"Crea un nuevo directorio en la tabla *Directory*. Hay un componente actual "
+"en cada punto temporal para el directorio, el cual es, o bien explícitamente "
+"creado mediante :meth:`start_component`, o bien implícito cuando los "
+"archivos se añaden por primera vez. Los archivos son añadidos en el "
+"componente actual, y al archivo CAB. Para crear un directorio, un objeto de "
+"directorio base tiene que ser especificado (puede ser ``None``), la ruta al "
+"directorio físico, y un nombre de directorio lógico. *default* especifica el "
+"zócalo *DefaultDir* en la table de directorio. *componentflags* especifica "
+"las banderas por defecto que obtendrán los nuevos componentes."
 
 #: ../Doc/library/msilib.rst:377
 msgid ""
@@ -599,6 +606,12 @@ msgid ""
 "*flags* are given, the directory's default flags are used. If no *keyfile* "
 "is given, the KeyPath is left null in the Component table."
 msgstr ""
+"Añade una entrada a la tabla *Component*, y hace este componente el actual "
+"componente para este directorio. Si no se especifica ningún nombre de "
+"componente, se usará el nombre del directorio. Si no se especifica ninguna "
+"*feature*, se usará la característica actual. Si no se especifican *flags*, "
+"se usarán las banderas por defecto del directorio. Si no se especifica "
+"ningún *keyfile*, el *KeyPath* quedará nulo en la tabla *Component*."
 
 #: ../Doc/library/msilib.rst:386
 msgid ""
@@ -608,16 +621,25 @@ msgid ""
 "interpreted relative to the current directory. Optionally, a *version* and a "
 "*language* can be specified for the entry in the File table."
 msgstr ""
+"Añade el archivo al componente actual del directorio, inicializando uno "
+"nuevo si no existe un componente actual. Por defecto, el nombre del archivo "
+"en el origen y la tabla del archivo serán idénticos. Si se especifica el "
+"archivo *src*, se interpretará como relativo al directorio actual. "
+"Opcionalmente, se pueden especificar una *version* y un *language* para la "
+"entrada en la tabla *File*."
 
 #: ../Doc/library/msilib.rst:395
 msgid ""
 "Add a list of files to the current component as specified in the glob "
 "pattern.  Individual files can be excluded in the *exclude* list."
 msgstr ""
+"Añade una lista de archivos al componente actual, como se especifica en el "
+"patrón *glob*. Se pueden excluir archivos individualmente en la lista "
+"*exclude*."
 
 #: ../Doc/library/msilib.rst:401
 msgid "Remove ``.pyc`` files on uninstall."
-msgstr ""
+msgstr "Elimina los archivos ``.pyc`` al desinstalar."
 
 #: ../Doc/library/msilib.rst:406
 msgid ""
@@ -627,10 +649,17 @@ msgid ""
 "com/en-us/library/windows/desktop/aa368007.aspx>`_ `FeatureComponents Table "
 "<https://msdn.microsoft.com/en-us/library/windows/desktop/aa368579.aspx>`_"
 msgstr ""
+"`Directory Table <https://msdn.microsoft.com/en-us/library/windows/desktop/"
+"aa368295.aspx>`_ `File Table <https://msdn.microsoft.com/en-us/library/"
+"windows/desktop/aa368596.aspx>`_ `Component Table <https://msdn.microsoft."
+"com/en-us/library/windows/desktop/aa368007.aspx>`_ `FeatureComponents Table "
+"<https://msdn.microsoft.com/en-us/library/windows/desktop/aa368579.aspx>`_"
 
+# ¿Traducir "features"?
 #: ../Doc/library/msilib.rst:414
+#, fuzzy
 msgid "Features"
-msgstr ""
+msgstr "Features"
 
 #: ../Doc/library/msilib.rst:419
 msgid ""
@@ -639,6 +668,10 @@ msgid ""
 "resulting feature object can be passed to the :meth:`start_component` method "
 "of :class:`Directory`."
 msgstr ""
+"Añade un nuevo registro a la tabla ``Feature``, usando los valores *id*, "
+"*parent.id*, *title*, *desc*, *display*, *level*, *directory* y "
+"*attributes*. El objeto de característica resultante se le puede dar al "
+"método :meth:`start_component` de :class:`Directory`."
 
 #: ../Doc/library/msilib.rst:427
 msgid ""
@@ -646,16 +679,22 @@ msgid ""
 "automatically added to the default feature, unless a feature is explicitly "
 "specified."
 msgstr ""
+"Establece esta característica como la actual característica de :mod:"
+"`msilib`. Los nuevos componentes serán añadidos automáticamente a la "
+"característica por defecto, a no ser que se especifique explícitamente una "
+"característica."
 
 #: ../Doc/library/msilib.rst:434
 msgid ""
 "`Feature Table <https://msdn.microsoft.com/en-us/library/windows/desktop/"
 "aa368585.aspx>`_"
 msgstr ""
+"`Feature Table <https://msdn.microsoft.com/en-us/library/windows/desktop/"
+"aa368585.aspx>`_"
 
 #: ../Doc/library/msilib.rst:439
 msgid "GUI classes"
-msgstr ""
+msgstr "Clases GUI"
 
 #: ../Doc/library/msilib.rst:441
 msgid ""
@@ -664,30 +703,39 @@ msgid ""
 "`~distutils.command.bdist_msi` to create MSI files with a user-interface for "
 "installing Python packages."
 msgstr ""
+":mod:`msilib` dispone de varias clases que envuelven a las tablas GUI en una "
+"base de datos MSI. Sin embargo, no se dispone de ninguna interfaz de usuario "
+"estándar; se puede usar :mod:`~distutils.command.bdist_msi` para crear "
+"archivos MSI con una interfaz de usuario para instalar paquetes Python."
 
 #: ../Doc/library/msilib.rst:449
 msgid ""
 "Base class of the dialog controls. *dlg* is the dialog object the control "
 "belongs to, and *name* is the control's name."
 msgstr ""
+"Clase base de los controles de diálogo. *dlg* es el objeto de diálogo al que "
+"pertenece el control, y *name* es el nombre del control."
 
 #: ../Doc/library/msilib.rst:455
 msgid "Make an entry into the ``ControlEvent`` table for this control."
-msgstr ""
+msgstr "Crea una entrada en la tabla ``ControlEvent`` para este control."
 
 #: ../Doc/library/msilib.rst:460
 msgid "Make an entry into the ``EventMapping`` table for this control."
-msgstr ""
+msgstr "Crea una entrada en la tabla ``EventMapping`` para este control."
 
 #: ../Doc/library/msilib.rst:465
 msgid "Make an entry into the ``ControlCondition`` table for this control."
-msgstr ""
+msgstr "Crea una entrada en la tabla ``ControlCondition`` para este control."
 
 #: ../Doc/library/msilib.rst:470
 msgid ""
 "Create a radio button control named *name*. *property* is the installer "
 "property that gets set when a radio button is selected."
 msgstr ""
+"Crea un control de botón de selección llamado *name*. *property* es la "
+"propiedad del instalador que se establece cuando un botón de selección es "
+"seleccionado."
 
 #: ../Doc/library/msilib.rst:476
 msgid ""
@@ -695,6 +743,9 @@ msgid ""
 "*width*, *height*, and with the label *text*. If *value* is ``None``, it "
 "defaults to *name*."
 msgstr ""
+"Añade un botón de selección llamado *name* al grupo, en las coordenadas *x*, "
+"*y*, *width*, *height*, con la etiqueta *text*. Si *value* es ``None``, se "
+"establecerá por defecto a *name*."
 
 #: ../Doc/library/msilib.rst:483
 msgid ""
@@ -702,42 +753,50 @@ msgid ""
 "made, with the specified coordinates, dialog attributes, title, name of the "
 "first, default, and cancel controls."
 msgstr ""
+"Retorna un nuevo objeto :class:`Dialog`. Se creará una entrada en la tabla "
+"``Dialog`` con las coordenadas, atributos de diálogo y título especificados, "
+"así como los nombres del primer control y los controles por defecto y de "
+"cancelación."
 
 #: ../Doc/library/msilib.rst:490
 msgid ""
 "Return a new :class:`Control` object. An entry in the ``Control`` table is "
 "made with the specified parameters."
 msgstr ""
+"Retorna un nuevo objeto :class:`Control`. Se creará una entrada en la tabla "
+"``Control`` con los parámetros especificados."
 
 #: ../Doc/library/msilib.rst:493
 msgid ""
 "This is a generic method; for specific types, specialized methods are "
 "provided."
 msgstr ""
+"Este es un método genérico; para tipos específicos hay métodos "
+"especializados disponibles."
 
 #: ../Doc/library/msilib.rst:499
 msgid "Add and return a ``Text`` control."
-msgstr ""
+msgstr "Añade y retorna un control ``Text``."
 
 #: ../Doc/library/msilib.rst:504
 msgid "Add and return a ``Bitmap`` control."
-msgstr ""
+msgstr "Añade y retorna un control ``Bitmap``."
 
 #: ../Doc/library/msilib.rst:509
 msgid "Add and return a ``Line`` control."
-msgstr ""
+msgstr "Añade y retorna un control ``Line``."
 
 #: ../Doc/library/msilib.rst:514
 msgid "Add and return a ``PushButton`` control."
-msgstr ""
+msgstr "Añade y retorna un control ``PushButton``."
 
 #: ../Doc/library/msilib.rst:519
 msgid "Add and return a ``RadioButtonGroup`` control."
-msgstr ""
+msgstr "Añade y retorna un control ``RadioButtonGroup``."
 
 #: ../Doc/library/msilib.rst:524
 msgid "Add and return a ``CheckBox`` control."
-msgstr ""
+msgstr "Añade y retorna un control ``CheckBox``."
 
 #: ../Doc/library/msilib.rst:529
 msgid ""
@@ -751,16 +810,28 @@ msgid ""
 "us/library/windows/desktop/aa368559.aspx>`_ `RadioButton Table <https://msdn."
 "microsoft.com/en-us/library/windows/desktop/aa370962.aspx>`_"
 msgstr ""
+"`Dialog Table <https://msdn.microsoft.com/en-us/library/windows/desktop/"
+"aa368286.aspx>`_ `Control Table <https://msdn.microsoft.com/en-us/library/"
+"windows/desktop/aa368044.aspx>`_ `Control Types <https://msdn.microsoft.com/"
+"en-us/library/windows/desktop/aa368039.aspx>`_ `ControlCondition Table "
+"<https://msdn.microsoft.com/en-us/library/windows/desktop/aa368035.aspx>`_ "
+"`ControlEvent Table <https://msdn.microsoft.com/en-us/library/windows/"
+"desktop/aa368037.aspx>`_ `EventMapping Table <https://msdn.microsoft.com/en-"
+"us/library/windows/desktop/aa368559.aspx>`_ `RadioButton Table <https://msdn."
+"microsoft.com/en-us/library/windows/desktop/aa370962.aspx>`_"
 
 #: ../Doc/library/msilib.rst:540
 msgid "Precomputed tables"
-msgstr ""
+msgstr "Tablas pre-calculadas"
 
 #: ../Doc/library/msilib.rst:542
 msgid ""
 ":mod:`msilib` provides a few subpackages that contain only schema and table "
 "definitions. Currently, these definitions are based on MSI version 2.0."
 msgstr ""
+":mod:`msilib` proporciona algunos subpaquetes que contienen únicamente "
+"definiciones de esquema y tabla. Actualmente, estas definiciones están "
+"basadas en la versión 2.0 de MSI."
 
 #: ../Doc/library/msilib.rst:548
 msgid ""
@@ -768,6 +839,9 @@ msgid ""
 "providing a list of table definitions, and *_Validation_records* providing "
 "the data for MSI validation."
 msgstr ""
+"Este es el esquema estándar MSI para MSI 2.0, con la variable *tables* "
+"proporcionando una lista de definición de tablas, y *_Validation_records* "
+"proporcionando la información para la validación MSI."
 
 #: ../Doc/library/msilib.rst:555
 msgid ""
@@ -775,9 +849,14 @@ msgid ""
 "*AdminExecuteSequence*, *AdminUISequence*, *AdvtExecuteSequence*, "
 "*InstallExecuteSequence*, and *InstallUISequence*."
 msgstr ""
+"Este módulo alberga los contenidos de la tabla para las tablas de secuencia "
+"estándar: *AdminExecuteSequence*, *AdminUISequence*, *AdvtExecuteSequence*, "
+"*InstallExecuteSequence*, and *InstallUISequence*."
 
 #: ../Doc/library/msilib.rst:562
 msgid ""
 "This module contains definitions for the UIText and ActionText tables, for "
 "the standard installer actions."
 msgstr ""
+"Este módulo contiene definiciones para las tablas *UIText* y *ActionText*, "
+"para las acciones estándar del instalador."
