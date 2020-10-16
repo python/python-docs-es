@@ -57,14 +57,16 @@ Antes de comenzar
 
       Al tener instalado los requerimientos, podrás utilizas las herramientas
       ``powrap`` y ``pospell`` para poder verificar tus archivos traducidos,
-      y también contruir la documentación localmente.
+      y también construir la documentación localmente.
 
 ¡Comienza a traducir!
 ---------------------
 
 #. Selecciona un :ref:`archivo para traducir <que-archivo-traducir>`.
 
-#. Verifica que estás en la rama principal del repositorio, **3.8**::
+#. Verifica que estás en la rama principal del repositorio, **3.8** (esto es muy 
+   importante para evitar crear una nueva rama a partir de una traducción 
+   anterior)::
 
      git checkout 3.8
 
