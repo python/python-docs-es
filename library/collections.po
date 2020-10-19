@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-10-12 21:06-0500\n"
+"PO-Revision-Date: 2020-10-19 17:39-0500\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -103,7 +103,7 @@ msgstr ":class:`UserDict`"
 msgid "wrapper around dictionary objects for easier dict subclassing"
 msgstr ""
 "envoltura alrededor de los objetos de diccionario para facilitar "
-"*subclasificaciones* *dict*"
+"subclasificaciones *dict*"
 
 #: ../Doc/library/collections.rst:32
 msgid ":class:`UserList`"
@@ -185,7 +185,7 @@ msgid ""
 "In contrast, writes, updates, and deletions only operate on the first "
 "mapping."
 msgstr ""
-"Las búsquedas buscan las asignaciones subyacentes sucesivamente hasta que se "
+"Las búsquedas buscan los mapeos subyacentes sucesivamente hasta que se "
 "encuentra una clave. Por el contrario, las escrituras, actualizaciones y "
 "eliminaciones solo operan en el primer *mapeo*."
 
@@ -195,6 +195,9 @@ msgid ""
 "if one of the underlying mappings gets updated, those changes will be "
 "reflected in :class:`ChainMap`."
 msgstr ""
+"Un :class:`ChainMap` incorpora los mapeos subyacentes por referencia.  "
+"Entonces, si una de los mapeos subyacentes se actualiza, esos cambios se "
+"reflejarán en :class:`ChainMap`."
 
 #: ../Doc/library/collections.rst:69
 msgid ""
@@ -202,6 +205,9 @@ msgid ""
 "*maps* attribute, a method for creating new subcontexts, and a property for "
 "accessing all but the first mapping:"
 msgstr ""
+"Se admiten todos los métodos habituales de un diccionario. Además, hay un "
+"atributo *maps*, un método para crear nuevos sub contextos y una propiedad "
+"para acceder a todos menos al primer mapeo:"
 
 #: ../Doc/library/collections.rst:75
 msgid ""
@@ -210,6 +216,10 @@ msgid ""
 "which mappings are searched.  The list should always contain at least one "
 "mapping."
 msgstr ""
+"Una lista de mapeos actualizable por el usuario. La lista está ordenada "
+"desde la primera búsqueda hasta la última búsqueda. Es el único estado "
+"almacenado y se puede modificar para cambiar los mapeos que se buscan. La "
+"lista siempre debe contener al menos un mapeo."
 
 #: ../Doc/library/collections.rst:82
 msgid ""
@@ -220,10 +230,17 @@ msgid ""
 "*d.maps)``.  This method is used for creating subcontexts that can be "
 "updated without altering values in any of the parent mappings."
 msgstr ""
+"Devuelve un nuevo :class:`ChainMap` conteniendo un nuevo mapa seguido de "
+"todos los mapas de la instancia actual.  Si se especifica ``m``, se "
+"convierte en el nuevo mapa al principio de la lista de asignaciones; si no "
+"se especifica, se usa un dict vacío, de modo que una llamada a ``d."
+"new_child()`` es equivalente a: ``ChainMap({}, *d.maps)``.  Este método se "
+"utiliza para crear sub contextos que se pueden actualizar sin alterar los "
+"valores en ninguna de los mapeos padre."
 
 #: ../Doc/library/collections.rst:90
 msgid "The optional ``m`` parameter was added."
-msgstr ""
+msgstr "Se agregó el parámetro opcional ``m`` ."
 
 #: ../Doc/library/collections.rst:95
 msgid ""
@@ -234,18 +251,29 @@ msgid ""
 "cases also parallel those for the built-in :func:`super` function.  A "
 "reference to ``d.parents`` is equivalent to: ``ChainMap(*d.maps[1:])``."
 msgstr ""
+"Propiedad que devuelve un nuevo :class:`ChainMap` conteniendo todos los "
+"mapas de la instancia actual excepto el primero.  Esto es útil para omitir "
+"el primer mapa en la búsqueda.  Los casos de uso son similares a los de :"
+"keyword:`nonlocal` la palabra clave usada en :term:`alcances anidados "
+"<nested scope>`.  Los casos de uso también son paralelos a los de la función "
+"incorporada :func:`super`.  Una referencia a ``d.parents`` es equivalente a: "
+"``ChainMap(*d.maps[1:])``."
 
 #: ../Doc/library/collections.rst:103
 msgid ""
 "Note, the iteration order of a :class:`ChainMap()` is determined by scanning "
 "the mappings last to first::"
 msgstr ""
+"Tenga en cuenta que el orden de iteración de a :class:`ChainMap()` se "
+"determina escaneando los mapeos del último al primero::"
 
 #: ../Doc/library/collections.rst:111
 msgid ""
 "This gives the same ordering as a series of :meth:`dict.update` calls "
 "starting with the last mapping::"
 msgstr ""
+"Esto da el mismo orden que una serie de llamadas a :meth:`dict.update` "
+"comenzando con el último mapeo::"
 
 #: ../Doc/library/collections.rst:121
 msgid ""
@@ -254,6 +282,10 @@ msgid ""
 "<https://github.com/enthought/codetools>`_ has options to support writing to "
 "any mapping in the chain."
 msgstr ""
+"La `clase MultiContext <https://github.com/enthought/codetools/blob/4.0.0/"
+"codetools/contexts/multi_context.py>`_ en el paquete de Enthought llamado "
+"`CodeTools <https://github.com/enthought/codetools>`_ tiene opciones para "
+"admitir la escritura en cualquier mapeo de la cadena."
 
 #: ../Doc/library/collections.rst:127
 msgid ""
@@ -263,6 +295,11 @@ msgid ""
 "`~collections.ChainMap.new_child` method and the :attr:`~collections."
 "ChainMap.parents` property."
 msgstr ""
+"La clase de Django `Context <https://github.com/django/django/blob/master/"
+"django/template/context.py>`_ para crear plantillas es una cadena de mapeo "
+"de solo lectura.  También presenta características de pushing y popping de "
+"contextos similar al método :meth:`~collections.ChainMap.new_child` y a la "
+"propiedad :attr:`~collections.ChainMap.parents` ."
 
 #: ../Doc/library/collections.rst:134
 msgid ""
@@ -270,12 +307,17 @@ msgid ""
 "has options to control whether writes and other mutations apply only to the "
 "first mapping or to any mapping in the chain."
 msgstr ""
+"La `receta de Contextos Anidados <https://code.activestate.com/"
+"recipes/577434/>`_ tiene opciones para controlar si las escrituras y otras "
+"mutaciones se aplican solo al primer mapeo o a cualquier mapeo en la cadena."
 
 #: ../Doc/library/collections.rst:139
 msgid ""
 "A `greatly simplified read-only version of Chainmap <https://code."
 "activestate.com/recipes/305268/>`_."
 msgstr ""
+"Una `versión de solo lectura muy simplificada de Chainmap <https://code."
+"activestate.com/recipes/305268/>`_."
 
 #: ../Doc/library/collections.rst:144
 msgid ":class:`ChainMap` Examples and Recipes"
@@ -284,10 +326,11 @@ msgstr "Ejemplos y recetas :class:`ChainMap`"
 #: ../Doc/library/collections.rst:146
 msgid "This section shows various approaches to working with chained maps."
 msgstr ""
+"Esta sección muestra varios enfoques para trabajar con mapas encadenados."
 
 #: ../Doc/library/collections.rst:149
 msgid "Example of simulating Python's internal lookup chain::"
-msgstr ""
+msgstr "Ejemplo de simulación de la cadena de búsqueda interna de Python:"
 
 #: ../Doc/library/collections.rst:154
 msgid ""
@@ -295,12 +338,17 @@ msgid ""
 "over environment variables which in turn take precedence over default "
 "values::"
 msgstr ""
+"Ejemplo de dejar que los argumentos de la línea de comandos especificados "
+"por el usuario tengan prioridad sobre las variables de entorno que, a su "
+"vez, tienen prioridad sobre los valores predeterminados::"
 
 #: ../Doc/library/collections.rst:171
 msgid ""
 "Example patterns for using the :class:`ChainMap` class to simulate nested "
 "contexts::"
 msgstr ""
+"Patrones de ejemplo para usar la clase :class:`ChainMap` para simular "
+"contextos anidados::"
 
 #: ../Doc/library/collections.rst:190
 msgid ""
@@ -309,6 +357,11 @@ msgid ""
 "However, if deep writes and deletions are desired, it is easy to make a "
 "subclass that updates keys found deeper in the chain::"
 msgstr ""
+"La clase :class:`ChainMap` solo realiza actualizaciones (escrituras y "
+"eliminaciones) en el primer mapeo de la cadena, mientras que las búsquedas "
+"buscarán en la cadena completa. Sin embargo, si se desean escrituras y "
+"eliminaciones profundas, es fácil crear una subclase que actualice las "
+"llaves que se encuentran más profundas en la cadena::"
 
 #: ../Doc/library/collections.rst:221
 msgid ":class:`Counter` objects"
@@ -319,6 +372,8 @@ msgid ""
 "A counter tool is provided to support convenient and rapid tallies. For "
 "example::"
 msgstr ""
+"Se proporciona una herramienta de contador para respaldar recuentos rápidos "
+"y convenientes. Por ejemplo::"
 
 #: ../Doc/library/collections.rst:242
 msgid ""
@@ -328,24 +383,36 @@ msgid ""
 "integer value including zero or negative counts.  The :class:`Counter` class "
 "is similar to bags or multisets in other languages."
 msgstr ""
+"Una clase :class:`Counter` es una subclase :class:`dict` para contar objetos "
+"hashables. Es una colección donde los elementos se almacenan como llaves de "
+"diccionario y sus conteos se almacenan como valores de diccionario. Se "
+"permite que los conteos sean cualquier valor entero, incluidos los conteos "
+"de cero o negativos."
 
 #: ../Doc/library/collections.rst:248
 msgid ""
 "Elements are counted from an *iterable* or initialized from another "
 "*mapping* (or counter):"
 msgstr ""
+"Los elementos se cuentan desde un *iterable* o se inicializan desde otro "
+"*mapeo* (o contador):"
 
 #: ../Doc/library/collections.rst:256
 msgid ""
 "Counter objects have a dictionary interface except that they return a zero "
 "count for missing items instead of raising a :exc:`KeyError`:"
 msgstr ""
+"Los objetos Counter tienen una interfaz de diccionario, excepto que "
+"devuelven un conteo de cero para los elementos faltantes en lugar de "
+"levantar una :exc:`KeyError`:"
 
 #: ../Doc/library/collections.rst:263
 msgid ""
 "Setting a count to zero does not remove an element from a counter. Use "
 "``del`` to remove it entirely:"
 msgstr ""
+"Establecer un conteo en cero no elimina un elemento de un contador. Utilice "
+"``del`` para eliminarlo por completo:"
 
 #: ../Doc/library/collections.rst:271
 msgid ""
@@ -355,12 +422,19 @@ msgid ""
 "encountered in the left operand and then by the order encountered in the "
 "right operand."
 msgstr ""
+"Como subclase de :class:`dict` , :class:`Counter` heredó la capacidad de "
+"recordar el orden de inserción. Las operaciones matemáticas en objetos "
+"*Counter* también preserva el orden. Los resultados se ordenan cuando se "
+"encuentra un elemento por primera vez en el operando izquierdo y luego según "
+"el orden encontrado en el operando derecho."
 
 #: ../Doc/library/collections.rst:277
 msgid ""
 "Counter objects support three methods beyond those available for all "
 "dictionaries:"
 msgstr ""
+"Los objetos Counter admiten tres métodos más allá de los disponibles para "
+"todos los diccionarios:"
 
 #: ../Doc/library/collections.rst:282
 msgid ""
@@ -368,6 +442,10 @@ msgid ""
 "Elements are returned in the order first encountered. If an element's count "
 "is less than one, :meth:`elements` will ignore it."
 msgstr ""
+"Devuelve un iterador sobre los elementos que se repiten tantas veces como su "
+"conteo. Los elementos se devuelven en el orden en que se encontraron por "
+"primera vez. Si el conteo de un elemento es menor que uno, :meth:`elements` "
+"lo ignorará."
 
 #: ../Doc/library/collections.rst:292
 msgid ""
@@ -376,6 +454,10 @@ msgid ""
 "returns *all* elements in the counter. Elements with equal counts are "
 "ordered in the order first encountered:"
 msgstr ""
+"Devuelve una lista de los *n* elementos mas comunes y sus conteos, del mas "
+"común al menos común. Si se omite *n* o ``None``, :meth:`most_common` "
+"devuelve *todos* los elementos del contador. Los elementos con conteos "
+"iguales se ordenan en el orden en que se encontraron por primera vez:"
 
 #: ../Doc/library/collections.rst:302
 msgid ""
@@ -383,16 +465,22 @@ msgid ""
 "counter).  Like :meth:`dict.update` but subtracts counts instead of "
 "replacing them.  Both inputs and outputs may be zero or negative."
 msgstr ""
+"Los elementos se restan de un *iterable* o de otro *mapeo* (o contador). "
+"Como :meth:`dict.update` pero resta los conteos en lugar de reemplazarlos. "
+"Tanto las entradas como las salidas pueden ser cero o negativas."
 
 #: ../Doc/library/collections.rst:314
 msgid ""
 "The usual dictionary methods are available for :class:`Counter` objects "
 "except for two which work differently for counters."
 msgstr ""
+"Los métodos de diccionario habituales están disponibles para objetos :class:"
+"`Counter` excepto dos que funcionan de manera diferente para los contadores."
 
 #: ../Doc/library/collections.rst:319
 msgid "This class method is not implemented for :class:`Counter` objects."
 msgstr ""
+"Este método de clase no está implementado para objetos :class:`Counter` ."
 
 #: ../Doc/library/collections.rst:323
 msgid ""
@@ -401,10 +489,14 @@ msgid ""
 "them.  Also, the *iterable* is expected to be a sequence of elements, not a "
 "sequence of ``(key, value)`` pairs."
 msgstr ""
+"Los elementos se cuentan desde un *iterable* o agregados desde otro *mapeo* "
+"(o contador). Como :meth:`dict.update` pero agrega conteos en lugar de "
+"reemplazarlos. Además, se espera que el *iterable* sea una secuencia de "
+"elementos, no una secuencia de parejas ``(llave, valor)`` ."
 
 #: ../Doc/library/collections.rst:328
 msgid "Common patterns for working with :class:`Counter` objects::"
-msgstr ""
+msgstr "Patrones comunes para trabajar con objetos :class:`Counter` ::"
 
 #: ../Doc/library/collections.rst:340
 msgid ""
@@ -416,17 +508,28 @@ msgid ""
 "signed counts, but the output will exclude results with counts of zero or "
 "less."
 msgstr ""
+"Se proporcionan varias operaciones matemáticas para combinar objetos :class:"
+"`Counter` para producir multiconjuntos (contadores que tienen conteos "
+"mayores que cero). La suma y la resta combinan contadores sumando o restando "
+"los conteos de los elementos correspondientes. La Intersección y unión "
+"devuelven el mínimo y el máximo de conteos correspondientes. Cada operación "
+"puede aceptar entradas con conteos con signo, pero la salida excluirá los "
+"resultados con conteos de cero o menos."
 
 #: ../Doc/library/collections.rst:358
 msgid ""
 "Unary addition and subtraction are shortcuts for adding an empty counter or "
 "subtracting from an empty counter."
 msgstr ""
+"La suma y resta unaria son atajos para agregar un contador vacío o restar de "
+"un contador vacío."
 
 #: ../Doc/library/collections.rst:367
 msgid ""
 "Added support for unary plus, unary minus, and in-place multiset operations."
 msgstr ""
+"Se agregó soporte para operaciones unarias de adición, resta y multiconjunto "
+"en su lugar (*in-place*)."
 
 #: ../Doc/library/collections.rst:372
 msgid ""
@@ -435,6 +538,11 @@ msgid ""
 "cases needing other types or negative values.  To help with those use cases, "
 "this section documents the minimum range and type restrictions."
 msgstr ""
+"Los Counters se diseñaron principalmente para trabajar con números enteros "
+"positivos para representar conteos continuos; sin embargo, se tuvo cuidado "
+"de no excluir innecesariamente los casos de uso que necesitan otros tipos o "
+"valores negativos. Para ayudar con esos casos de uso, esta sección documenta "
+"el rango mínimo y las restricciones de tipo."
 
 #: ../Doc/library/collections.rst:377
 msgid ""
@@ -442,12 +550,18 @@ msgid ""
 "restrictions on its keys and values.  The values are intended to be numbers "
 "representing counts, but you *could* store anything in the value field."
 msgstr ""
+"La clase :class:`Counter` en sí misma es una subclase de diccionario sin "
+"restricciones en sus llaves y valores. Los valores están pensados para ser "
+"números que representan conteos, pero *podría* almacenar cualquier cosa en "
+"el campo de valor."
 
 #: ../Doc/library/collections.rst:381
 msgid ""
 "The :meth:`~Counter.most_common` method requires only that the values be "
 "orderable."
 msgstr ""
+"El método :meth:`~Counter.most_common` solo requiere que los valores se "
+"puedan ordenar."
 
 #: ../Doc/library/collections.rst:383
 msgid ""
@@ -457,6 +571,11 @@ msgid ""
 "`~Counter.update` and :meth:`~Counter.subtract` which allow negative and "
 "zero values for both inputs and outputs."
 msgstr ""
+"Para operaciones en su lugar (*in-place*) como ``c[key] += 1``, el tipo de "
+"valor solo necesita admitir la suma y la resta. Por lo tanto, las "
+"fracciones, flotantes y decimales funcionarían y se admiten valores "
+"negativos. Lo mismo ocurre con :meth:`~Counter.update` y :meth:`~Counter."
+"subtract` que permiten valores negativos y cero para las entradas y salidas."
 
 #: ../Doc/library/collections.rst:389
 msgid ""
@@ -465,29 +584,41 @@ msgid ""
 "are created.  There are no type restrictions, but the value type needs to "
 "support addition, subtraction, and comparison."
 msgstr ""
+"Los métodos de multiconjuntos están diseñados solo para casos de uso con "
+"valores positivos. Las entradas pueden ser negativas o cero, pero solo se "
+"crean salidas con valores positivos. No hay restricciones de tipo, pero el "
+"tipo de valor debe admitir la suma, la resta y la comparación."
 
 #: ../Doc/library/collections.rst:394
 msgid ""
 "The :meth:`~Counter.elements` method requires integer counts.  It ignores "
 "zero and negative counts."
 msgstr ""
+"El método :meth:`~Counter.elements` requiere conteos enteros. Ignora los "
+"conteos de cero y negativos."
 
 #: ../Doc/library/collections.rst:399
 msgid ""
 "`Bag class <https://www.gnu.org/software/smalltalk/manual-base/html_node/Bag."
 "html>`_ in Smalltalk."
 msgstr ""
+"`Clase Bag <https://www.gnu.org/software/smalltalk/manual-base/html_node/Bag."
+"html>`_ en Smalltalk."
 
 #: ../Doc/library/collections.rst:402
 msgid ""
 "Wikipedia entry for `Multisets <https://en.wikipedia.org/wiki/Multiset>`_."
 msgstr ""
+"Entrada de Wikipedia para `Multiconjuntos <https://es.wikipedia.org/wiki/"
+"Multiconjunto>`_."
 
 #: ../Doc/library/collections.rst:404
 msgid ""
 "`C++ multisets <http://www.java2s.com/Tutorial/Cpp/0380__set-multiset/"
 "Catalog0380__set-multiset.htm>`_ tutorial with examples."
 msgstr ""
+"Tutorial de `multiconjuntos de C++ <http://www.java2s.com/Tutorial/"
+"Cpp/0380__set-multiset/Catalog0380__set-multiset.htm>`_ con ejemplos"
 
 #: ../Doc/library/collections.rst:407
 msgid ""
@@ -495,12 +626,18 @@ msgid ""
 "Donald. The Art of Computer Programming Volume II, Section 4.6.3, Exercise "
 "19*."
 msgstr ""
+"Para operaciones matemáticas en multiconjuntos y sus casos de uso, consulte "
+"*Knuth, Donald. The Art of Computer Programming Volume II, Sección 4.6.3, "
+"Ejercicio 19*."
 
 #: ../Doc/library/collections.rst:411
 msgid ""
 "To enumerate all distinct multisets of a given size over a given set of "
 "elements, see :func:`itertools.combinations_with_replacement`::"
 msgstr ""
+"Para enumerar todos los distintos multiconjuntos de un tamaño dado sobre un "
+"conjunto dado de elementos, consulte :func:`itertools."
+"combinations_with_replacement`::"
 
 #: ../Doc/library/collections.rst:418
 msgid ":class:`deque` objects"
@@ -542,27 +679,27 @@ msgstr ""
 
 #: ../Doc/library/collections.rst:445
 msgid "Deque objects support the following methods:"
-msgstr ""
+msgstr "Los objetos deque admiten los siguientes métodos:"
 
 #: ../Doc/library/collections.rst:449
 msgid "Add *x* to the right side of the deque."
-msgstr ""
+msgstr "Agregue *x* al lado derecho del deque."
 
 #: ../Doc/library/collections.rst:454
 msgid "Add *x* to the left side of the deque."
-msgstr ""
+msgstr "Agregue *x* al lado izquierdo del deque."
 
 #: ../Doc/library/collections.rst:459
 msgid "Remove all elements from the deque leaving it with length 0."
-msgstr ""
+msgstr "Retire todos los elementos del deque dejándolo con longitud 0."
 
 #: ../Doc/library/collections.rst:464
 msgid "Create a shallow copy of the deque."
-msgstr ""
+msgstr "Crea una copia superficial del deque."
 
 #: ../Doc/library/collections.rst:471
 msgid "Count the number of deque elements equal to *x*."
-msgstr ""
+msgstr "Cuente el número de elementos deque igual a *x*."
 
 #: ../Doc/library/collections.rst:478
 msgid ""
@@ -586,7 +723,7 @@ msgstr ""
 
 #: ../Doc/library/collections.rst:500
 msgid "Insert *x* into the deque at position *i*."
-msgstr ""
+msgstr "Ingrese *x* en el dique en la posición *i*."
 
 #: ../Doc/library/collections.rst:502
 msgid ""
@@ -654,7 +791,7 @@ msgstr ""
 
 #: ../Doc/library/collections.rst:561
 msgid "Example:"
-msgstr ""
+msgstr "Ejemplo:"
 
 #: ../Doc/library/collections.rst:618
 msgid ":class:`deque` Recipes"
@@ -894,7 +1031,7 @@ msgstr ""
 
 #: ../Doc/library/collections.rst:845
 msgid "Added support for *rename*."
-msgstr ""
+msgstr "Se agregó soporte para *rename* ."
 
 #: ../Doc/library/collections.rst:848
 msgid ""
@@ -904,7 +1041,7 @@ msgstr ""
 
 #: ../Doc/library/collections.rst:852
 msgid "Added the *module* parameter."
-msgstr ""
+msgstr "Se agregó el parámetro *module* ."
 
 #: ../Doc/library/collections.rst:855
 msgid "Removed the *verbose* parameter and the :attr:`_source` attribute."
@@ -914,6 +1051,7 @@ msgstr ""
 msgid ""
 "Added the *defaults* parameter and the :attr:`_field_defaults` attribute."
 msgstr ""
+"Se agregaron el parámetro *defaults* y él atributo :attr:`_field_defaults` ."
 
 #: ../Doc/library/collections.rst:878
 msgid ""
@@ -965,7 +1103,7 @@ msgstr ""
 
 #: ../Doc/library/collections.rst:958
 msgid "Dictionary mapping field names to default values."
-msgstr ""
+msgstr "Diccionario de nombres de campos mapeados a valores predeterminados."
 
 #: ../Doc/library/collections.rst:968
 msgid ""
@@ -1008,7 +1146,7 @@ msgstr ""
 
 #: ../Doc/library/collections.rst:1017
 msgid "Property docstrings became writeable."
-msgstr ""
+msgstr "Los docstrings de propiedad se pueden escribir."
 
 #: ../Doc/library/collections.rst:1022
 msgid ""
@@ -1043,7 +1181,7 @@ msgstr ""
 
 #: ../Doc/library/collections.rst:1047
 msgid "Some differences from :class:`dict` still remain:"
-msgstr ""
+msgstr "Aún quedan algunas diferencias con :class:`dict` :"
 
 #: ../Doc/library/collections.rst:1049
 msgid ""
@@ -1082,6 +1220,8 @@ msgid ""
 ":class:`OrderedDict` has a :meth:`move_to_end` method to efficiently "
 "reposition an element to an endpoint."
 msgstr ""
+":class:`OrderedDict` tiene un método :meth:`move_to_end` para reposiciones "
+"eficientemente un elemento a un punto final."
 
 #: ../Doc/library/collections.rst:1069
 msgid "Until Python 3.8, :class:`dict` lacked a :meth:`__reversed__` method."
@@ -1113,6 +1253,8 @@ msgid ""
 "In addition to the usual mapping methods, ordered dictionaries also support "
 "reverse iteration using :func:`reversed`."
 msgstr ""
+"Además de los métodos de mapeo habituales, los diccionarios ordenados "
+"también admiten la iteración inversa usando :func:`reversed`."
 
 #: ../Doc/library/collections.rst:1106
 msgid ""
@@ -1185,6 +1327,8 @@ msgstr ""
 msgid ""
 "A real dictionary used to store the contents of the :class:`UserDict` class."
 msgstr ""
+"Un diccionario real utilizado para almacenar el contenido de la clase :class:"
+"`UserDict` ."
 
 #: ../Doc/library/collections.rst:1187
 msgid ":class:`UserList` objects"
@@ -1225,6 +1369,8 @@ msgid ""
 "A real :class:`list` object used to store the contents of the :class:"
 "`UserList` class."
 msgstr ""
+"Un objeto real :class:`list` usado para almacenar el contenido de la clase :"
+"class:`UserList` ."
 
 #: ../Doc/library/collections.rst:1214
 msgid ""
@@ -1276,9 +1422,13 @@ msgid ""
 "A real :class:`str` object used to store the contents of the :class:"
 "`UserString` class."
 msgstr ""
+"Un objeto real :class:`str` usado para almacenar el contenido de la clase :"
+"class:`UserString` ."
 
 #: ../Doc/library/collections.rst:1252
 msgid ""
 "New methods ``__getnewargs__``, ``__rmod__``, ``casefold``, ``format_map``, "
 "``isprintable``, and ``maketrans``."
 msgstr ""
+"Nuevos métodos ``__getnewargs__``, ``__rmod__``, ``casefold``, "
+"``format_map``, ``isprintable``, y ``maketrans``."
