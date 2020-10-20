@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-10-17 21:18-0500\n"
+"PO-Revision-Date: 2020-10-20 00:56-0500\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -279,7 +279,9 @@ msgstr "el parámetro *universal_newlines* no es compatible."
 #: ../Doc/library/asyncio-subprocess.rst:187
 #, fuzzy
 msgid "This class is :ref:`not thread safe <asyncio-multithreading>`."
-msgstr "Esta clase es :ref:`not thread safe <asyncio-multithreading>`."
+msgstr ""
+"Esta clase no es segura para subprocesos (:ref:`not thread safe <asyncio-"
+"multithreading>`)."
 
 #: ../Doc/library/asyncio-subprocess.rst:189
 msgid ""
@@ -298,7 +300,6 @@ msgid "Set and return the :attr:`returncode` attribute."
 msgstr "Define y retorna el atributo :attr:`returncode`."
 
 #: ../Doc/library/asyncio-subprocess.rst:200
-#, fuzzy
 msgid ""
 "This method can deadlock when using ``stdout=PIPE`` or ``stderr=PIPE`` and "
 "the child process generates so much output that it blocks waiting for the OS "
@@ -306,35 +307,37 @@ msgid ""
 "using pipes to avoid this condition."
 msgstr ""
 "Este método puede bloquearse cuando usa ``stdout=PIPE`` o ``stderr=PIPE`` y "
-"el proceso hijo genera tanta salida que bloquea esperando a que la tubería "
-"del SO acepte más datos. Use el método :meth:`communicate` cuando use pipes "
-"para evitar esta condición."
+"el proceso hijo genera tanta salida que se bloquea esperando a que la "
+"tubería de búfer del SO acepte más datos. Use el método :meth:`communicate` "
+"cuando use tuberías para evitar esta condición."
 
 #: ../Doc/library/asyncio-subprocess.rst:208
 msgid "Interact with process:"
-msgstr ""
+msgstr "Interactua con procesos:"
 
 #: ../Doc/library/asyncio-subprocess.rst:210
 msgid "send data to *stdin* (if *input* is not ``None``);"
-msgstr ""
+msgstr "envía datos a *stdin* (si *input* no es ``None``);"
 
 #: ../Doc/library/asyncio-subprocess.rst:211
 msgid "read data from *stdout* and *stderr*, until EOF is reached;"
-msgstr ""
+msgstr "lee datos desde *stdout* y *stderr*, hasta que el llegue al EOF;"
 
 #: ../Doc/library/asyncio-subprocess.rst:212
 msgid "wait for process to terminate."
-msgstr ""
+msgstr "espera a que el proceso termine."
 
 #: ../Doc/library/asyncio-subprocess.rst:214
 msgid ""
 "The optional *input* argument is the data (:class:`bytes` object) that will "
 "be sent to the child process."
 msgstr ""
+"El argumento opcional *input* son los datos (objetos :class:`bytes`) que "
+"serán enviados a los procesos hijos."
 
 #: ../Doc/library/asyncio-subprocess.rst:217
 msgid "Return a tuple ``(stdout_data, stderr_data)``."
-msgstr ""
+msgstr "Retorna una tupla ``(stdout_data, stderr_data)``."
 
 #: ../Doc/library/asyncio-subprocess.rst:219
 msgid ""
@@ -343,6 +346,10 @@ msgid ""
 "condition occurs when the process exits before all data are written into "
 "*stdin*."
 msgstr ""
+"Si se levanta la excepción :exc:`BrokenPipeError` o :exc:"
+"`ConnectionResetError` cuando se escribe *input* en *stdin*, la excepción es "
+"ignorada. Esta condición ocurre cuando el proceso finaliza antes de que "
+"todos los datos sean escritos en *stdin*."
 
 #: ../Doc/library/asyncio-subprocess.rst:224
 msgid ""
@@ -351,16 +358,22 @@ msgid ""
 "``None`` in the result tuple, the process has to be created with "
 "``stdout=PIPE`` and/or ``stderr=PIPE`` arguments."
 msgstr ""
+"Si se desea enviar datos al *stdin* del proceso, el proceso necesita ser "
+"creado con ``stdin=PIPE``. De manera similar, para obtener cualquier cosa "
+"excepto ``None`` en la tupla del resultado, el proceso tiene que ser creado "
+"con los argumentos ``stdout=PIPE`` y/o ``stderr=PIPE``."
 
 #: ../Doc/library/asyncio-subprocess.rst:230
 msgid ""
 "Note, that the data read is buffered in memory, so do not use this method if "
 "the data size is large or unlimited."
 msgstr ""
+"Tenga en cuenta que los datos leídos son almacenados en memoria, por lo que "
+"no utilice este método si el tamaño de los datos es más grande o ilimitado."
 
 #: ../Doc/library/asyncio-subprocess.rst:235
 msgid "Sends the signal *signal* to the child process."
-msgstr ""
+msgstr "Envíe la señal *signal* al proceso hijo."
 
 #: ../Doc/library/asyncio-subprocess.rst:239
 msgid ""
@@ -368,53 +381,67 @@ msgid ""
 "``CTRL_C_EVENT`` and ``CTRL_BREAK_EVENT`` can be sent to processes started "
 "with a *creationflags* parameter which includes ``CREATE_NEW_PROCESS_GROUP``."
 msgstr ""
+"En Windows, :py:data:`SIGTERM` es un alias para :meth:`terminate`. Se puede "
+"enviar ``CTRL_C_EVENT`` y ``CTRL_BREAK_EVENT`` a procesos iniciados con un "
+"parámetro *creationflags* que incluye ``CREATE_NEW_PROCESS_GROUP``."
 
 #: ../Doc/library/asyncio-subprocess.rst:246
 msgid "Stop the child process."
-msgstr ""
+msgstr "Para al proceso hijo."
 
 #: ../Doc/library/asyncio-subprocess.rst:248
 msgid ""
 "On POSIX systems this method sends :py:data:`signal.SIGTERM` to the child "
 "process."
 msgstr ""
+"En sistemas POSIX este método envía :py:data:`signal.SIGNTERM` al proceso "
+"hijo."
 
 #: ../Doc/library/asyncio-subprocess.rst:251
 msgid ""
 "On Windows the Win32 API function :c:func:`TerminateProcess` is called to "
 "stop the child process."
 msgstr ""
+"En Windows, la función de la API de Win32 :c:func:`TerminateProcess` es "
+"llamado para parar a los procesos hijos."
 
 #: ../Doc/library/asyncio-subprocess.rst:256
 msgid "Kill the child."
-msgstr ""
+msgstr "Mata al hijo."
 
 #: ../Doc/library/asyncio-subprocess.rst:258
 msgid ""
 "On POSIX systems this method sends :py:data:`SIGKILL` to the child process."
 msgstr ""
+"En sistemas POSIX, este método envía :py:data:`SIGKILL` al proceso hijo."
 
 #: ../Doc/library/asyncio-subprocess.rst:261
 msgid "On Windows this method is an alias for :meth:`terminate`."
-msgstr ""
+msgstr "En Windows este método es un alias para :meth:`terminate`."
 
 #: ../Doc/library/asyncio-subprocess.rst:265
 msgid ""
 "Standard input stream (:class:`StreamWriter`) or ``None`` if the process was "
 "created with ``stdin=None``."
 msgstr ""
+"Flujo de entrada estándar (:class:`StreamWriter`) o ``None`` si el proceso "
+"fue creado con ``stdin=None``."
 
 #: ../Doc/library/asyncio-subprocess.rst:270
 msgid ""
 "Standard output stream (:class:`StreamReader`) or ``None`` if the process "
 "was created with ``stdout=None``."
 msgstr ""
+"Flujo de salida estándar (:class:`SreamReader`) o ``None`` si el proceso fue "
+"creado con ``stdout=None``."
 
 #: ../Doc/library/asyncio-subprocess.rst:275
 msgid ""
 "Standard error stream (:class:`StreamReader`) or ``None`` if the process was "
 "created with ``stderr=None``."
 msgstr ""
+"Flujo de salida estándar (:class:`StreamReader`) o ``None`` si el proceso "
+"fue creado con ``stderr=None``."
 
 #: ../Doc/library/asyncio-subprocess.rst:280
 msgid ""
@@ -423,80 +450,105 @@ msgid ""
 "process.stderr.read <stderr>`. This avoids deadlocks due to streams pausing "
 "reading or writing and blocking the child process."
 msgstr ""
+"Utilice el método :meth:`communicate` en vez de :attr:`process.stdin.write() "
+"<stdin>`, :attr:`await process.stdout.read() <stdout>` o :attr:`await "
+"process.stderr.read <stderr>`. Esto evita bloqueos debido a que los flujos "
+"pausan la lectura o escritura y bloqueando al proceso hijo."
 
 #: ../Doc/library/asyncio-subprocess.rst:289
 msgid "Process identification number (PID)."
-msgstr ""
+msgstr "Número de identificación del Proceso (PID por sus siglas en inglés)."
 
 #: ../Doc/library/asyncio-subprocess.rst:291
 msgid ""
 "Note that for processes created by the :func:`create_subprocess_shell` "
 "function, this attribute is the PID of the spawned shell."
 msgstr ""
+"Tenga en cuenta que para procesos creados por la función :func:`create­"
+"_subprocess_shell`, este atributo es el PID del shell generado."
 
 #: ../Doc/library/asyncio-subprocess.rst:296
 msgid "Return code of the process when it exits."
-msgstr ""
+msgstr "Código de retorno del proceso cuando finaliza."
 
 #: ../Doc/library/asyncio-subprocess.rst:298
 msgid "A ``None`` value indicates that the process has not terminated yet."
-msgstr ""
+msgstr "Un valor ``None`` indica que el proceso todavía no ha finalizado."
 
 #: ../Doc/library/asyncio-subprocess.rst:300
 msgid ""
 "A negative value ``-N`` indicates that the child was terminated by signal "
 "``N`` (POSIX only)."
 msgstr ""
+"Un valor negativo ``-N`` indica que el hijo ha finalizado por la señal ``N`` "
+"(sólo para POSIX)."
 
 #: ../Doc/library/asyncio-subprocess.rst:307
 msgid "Subprocess and Threads"
-msgstr ""
+msgstr "Subprocesos y Hilos"
 
 #: ../Doc/library/asyncio-subprocess.rst:309
 msgid ""
 "Standard asyncio event loop supports running subprocesses from different "
 "threads by default."
 msgstr ""
+"Por defecto el bucle de eventos de asyncio estándar permite correr "
+"subprocesos desde hilos diferentes."
 
 #: ../Doc/library/asyncio-subprocess.rst:312
 msgid ""
 "On Windows subprocesses are provided by :class:`ProactorEventLoop` only "
 "(default), :class:`SelectorEventLoop` has no subprocess support."
 msgstr ""
+"En Windows, sólo :class:`ProactorEventLoop` proporciona subprocesos (por "
+"defecto), :class:`SelectorEventLoop` no es compatible con subprocesos."
 
 #: ../Doc/library/asyncio-subprocess.rst:315
+#, fuzzy
 msgid ""
 "On UNIX *child watchers* are used for subprocess finish waiting, see :ref:"
 "`asyncio-watchers` for more info."
 msgstr ""
+"En UNIX, los *observadores de hijos* son usados para la espera de "
+"finalización de subprocesos, véase :ref:`asyncio-watchers` para más "
+"información."
 
 #: ../Doc/library/asyncio-subprocess.rst:321
 msgid ""
 "UNIX switched to use :class:`ThreadedChildWatcher` for spawning subprocesses "
 "from different threads without any limitation."
 msgstr ""
+"UNIX cambió para usar :class:`ThreadedChildWatcher` para generar subprocesos "
+"de hilos diferentes sin ninguna limitación."
 
 #: ../Doc/library/asyncio-subprocess.rst:324
+#, fuzzy
 msgid ""
 "Spawning a subprocess with *inactive* current child watcher raises :exc:"
 "`RuntimeError`."
 msgstr ""
+"Crear un subproceso con el observador del hijo *inactivo* lanza un :exc:"
+"`RuntimeError`."
 
 #: ../Doc/library/asyncio-subprocess.rst:327
 msgid ""
 "Note that alternative event loop implementations might have own limitations; "
 "please refer to their documentation."
 msgstr ""
+"Tenga en cuenta que implementaciones alternativas del bucle de eventos "
+"pueden tener limitaciones propias; por favor consulte su documentación."
 
 #: ../Doc/library/asyncio-subprocess.rst:332
 msgid ""
 "The :ref:`Concurrency and multithreading in asyncio <asyncio-"
 "multithreading>` section."
 msgstr ""
+"La sección :ref:`Concurrencia y multihilos en asyncio <asyncio-"
+"multithreading>`."
 
 #: ../Doc/library/asyncio-subprocess.rst:337
 msgid "Examples"
-msgstr ""
+msgstr "Ejemplos"
 
 #: ../Doc/library/asyncio-subprocess.rst:339
 msgid ""
@@ -504,14 +556,20 @@ msgid ""
 "subprocess and the :class:`StreamReader` class to read from its standard "
 "output."
 msgstr ""
+"Un ejemplo usando la clase :class:`~asyncio.subprocess.Process` para "
+"controlar un subproceso y la clase :class:`StreamReader` para leer de su "
+"salida estándar."
 
 #: ../Doc/library/asyncio-subprocess.rst:345
 msgid ""
 "The subprocess is created by the :func:`create_subprocess_exec` function::"
 msgstr ""
+"El subproceso es creado por la función :func:`create_subprocess_exec`::"
 
 #: ../Doc/library/asyncio-subprocess.rst:372
 msgid ""
 "See also the :ref:`same example <asyncio_example_subprocess_proto>` written "
 "using low-level APIs."
 msgstr ""
+"Véase también los :ref:`ejemplos de prueba "
+"<asyncio_example_subprocess_proto>` escritos usandos APIs de bajo nivel."
