@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-10-28 17:29+0100\n"
+"PO-Revision-Date: 2020-10-30 17:51+0100\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1675,6 +1675,9 @@ msgid ""
 "Signals represent conditions that arise during computation. Each corresponds "
 "to one context flag and one context trap enabler."
 msgstr ""
+"Las señales representan condiciones que surgen durante el cálculo. Cada una "
+"se corresponde con un solo flag de contexto y un habilitador de trampas de "
+"contexto."
 
 #: ../Doc/library/decimal.rst:1536
 msgid ""
@@ -1683,6 +1686,11 @@ msgid ""
 "to determine whether a computation was exact). After checking the flags, be "
 "sure to clear all flags before starting the next computation."
 msgstr ""
+"El flag de contexto se establece siempre que se encuentra la condición. "
+"Después del cálculo, los flags pueden comprobarse con fines informativos "
+"(por ejemplo, para determinar si un cálculo fue exacto). Después de "
+"verificar los flags, asegúrate de borrarlos antes de comenzar con el "
+"siguiente cálculo."
 
 #: ../Doc/library/decimal.rst:1541
 msgid ""
@@ -1691,10 +1699,14 @@ msgid ""
 "`DivisionByZero` trap is set, then a :exc:`DivisionByZero` exception is "
 "raised upon encountering the condition."
 msgstr ""
+"Si el habilitador de trampas del contexto está configurado para la señal, "
+"entonces la condición hace que se lance una excepción de Python. Por "
+"ejemplo, si se establece la trampa :class:`DivisionByZero`, se genera una "
+"excepción :exc:`DivisionByZero` al encontrar la condición."
 
 #: ../Doc/library/decimal.rst:1549
 msgid "Altered an exponent to fit representation constraints."
-msgstr ""
+msgstr "Cambia un exponente para ajustar las restricciones de representación."
 
 #: ../Doc/library/decimal.rst:1551
 msgid ""
@@ -1702,14 +1714,18 @@ msgid ""
 "attr:`Emin` and :attr:`Emax` limits.  If possible, the exponent is reduced "
 "to fit by adding zeros to the coefficient."
 msgstr ""
+"Normalmente, la restricción ocurre cuando un exponente cae fuera de los "
+"límites :attr:`Emin` y :attr:`Emax` del contexto. Si es posible, el "
+"exponente se reduce para ajustar agregando ceros al coeficiente."
 
 #: ../Doc/library/decimal.rst:1558
 msgid "Base class for other signals and a subclass of :exc:`ArithmeticError`."
 msgstr ""
+"Clase base para otras señales. Es una subclase de :exc:`ArithmeticError`."
 
 #: ../Doc/library/decimal.rst:1563
 msgid "Signals the division of a non-infinite number by zero."
-msgstr ""
+msgstr "Señala la división de un número no infinito entre cero."
 
 #: ../Doc/library/decimal.rst:1565
 msgid ""
@@ -1718,10 +1734,14 @@ msgid ""
 "or :const:`-Infinity` with the sign determined by the inputs to the "
 "calculation."
 msgstr ""
+"Puede ocurrir en la división, en la división modular o al elevar un número a "
+"una potencia negativa. Si esta señal no es atrapada, se retorna :const:"
+"`Infinity` o :const:`-Infinity`, con el signo determinado por las entradas "
+"del cálculo."
 
 #: ../Doc/library/decimal.rst:1572
 msgid "Indicates that rounding occurred and the result is not exact."
-msgstr ""
+msgstr "Indica que se produjo un redondeo y el resultado no es exacto."
 
 #: ../Doc/library/decimal.rst:1574
 msgid ""
@@ -1729,20 +1749,25 @@ msgid ""
 "result is returned.  The signal flag or trap is used to detect when results "
 "are inexact."
 msgstr ""
+"Señala que se descartaron dígitos distintos de cero durante el redondeo. Se "
+"retorna el resultado redondeado. El flag o la trampa de señal se utiliza "
+"para detectar cuando los resultados son inexactos."
 
 #: ../Doc/library/decimal.rst:1581
 msgid "An invalid operation was performed."
-msgstr ""
+msgstr "Señala que se realizó una operación no válida."
 
 #: ../Doc/library/decimal.rst:1583
 msgid ""
 "Indicates that an operation was requested that does not make sense. If not "
 "trapped, returns :const:`NaN`.  Possible causes include::"
 msgstr ""
+"Indica que se solicitó una operación que no tiene lógica. Si esta señal no "
+"está atrapada, se retorna :const:`NaN`. Las posibles causas incluyen::"
 
 #: ../Doc/library/decimal.rst:1599
 msgid "Numerical overflow."
-msgstr ""
+msgstr "Desbordamiento numérico."
 
 #: ../Doc/library/decimal.rst:1601
 msgid ""
@@ -1752,10 +1777,16 @@ msgid ""
 "outward to :const:`Infinity`.  In either case, :class:`Inexact` and :class:"
 "`Rounded` are also signaled."
 msgstr ""
+"Indica que el exponente es mayor que :attr:`max` después de que se haya "
+"producido el redondeo. Si no está atrapada, el resultado depende del modo de "
+"redondeo, ya sea tirando hacia adentro hasta el mayor número finito "
+"representable o redondeando hacia afuera a :const:`Infinity`. En cualquier "
+"caso, también se activan las señales :class:`Inexact` y :class:`Rounded`."
 
 #: ../Doc/library/decimal.rst:1610
 msgid "Rounding occurred though possibly no information was lost."
 msgstr ""
+"Se produjo un redondeo, aunque posiblemente no hubo pérdida de información."
 
 #: ../Doc/library/decimal.rst:1612
 msgid ""
@@ -1764,30 +1795,39 @@ msgid ""
 "the result unchanged.  This signal is used to detect loss of significant "
 "digits."
 msgstr ""
+"Señal lanzada cada vez que el redondeo descarta dígitos; incluso si esos "
+"dígitos son cero (como al redondear :const:`5.00` a :const:`5.0`). Si no "
+"está atrapada, se retorna el resultado sin cambios. Esta señal se utiliza "
+"para detectar la pérdida de dígitos significativos."
 
 #: ../Doc/library/decimal.rst:1620
 msgid "Exponent was lower than :attr:`Emin` prior to rounding."
-msgstr ""
+msgstr "El exponente antes del redondeo era menor que :attr:`Emin`."
 
 #: ../Doc/library/decimal.rst:1622
 msgid ""
 "Occurs when an operation result is subnormal (the exponent is too small). If "
 "not trapped, returns the result unchanged."
 msgstr ""
+"Ocurre cuando el resultado de una operación es subnormal (el exponente es "
+"demasiado pequeño). Si no está atrapada, se retorna el resultado sin cambios."
 
 #: ../Doc/library/decimal.rst:1628
 msgid "Numerical underflow with result rounded to zero."
-msgstr ""
+msgstr "Desbordamiento numérico negativo con resultado redondeado a cero."
 
 #: ../Doc/library/decimal.rst:1630
 msgid ""
 "Occurs when a subnormal result is pushed to zero by rounding. :class:"
 "`Inexact` and :class:`Subnormal` are also signaled."
 msgstr ""
+"Ocurre cuando un resultado subnormal se lleva a cero mediante redondeo. :"
+"class:`Inexact` y :class:`Subnormal` también se señalan."
 
 #: ../Doc/library/decimal.rst:1636
 msgid "Enable stricter semantics for mixing floats and Decimals."
 msgstr ""
+"Habilita una semántica más estricta para mezclar flotantes y objetos Decimal."
 
 #: ../Doc/library/decimal.rst:1638
 msgid ""
@@ -1799,6 +1839,14 @@ msgid ""
 "conversions with :meth:`~decimal.Decimal.from_float` or :meth:`~decimal."
 "Context.create_decimal_from_float` do not set the flag."
 msgstr ""
+"Si la señal no está atrapada (predeterminado), se permite mezclar flotantes "
+"y objetos Decimal en el constructor de :class:`~decimal.Decimal`, en el "
+"método :meth:`~decimal.Context.create_decimal` y en todos los operadores de "
+"comparación. Tanto la conversión como las comparaciones son exactas. "
+"Cualquier ocurrencia de una operación mixta se registra silenciosamente "
+"estableciendo :exc:`FloatOperation` a los flags del contexto. Las "
+"conversiones explícitas usando :meth:`~decimal.Decimal.from_float` o :meth:"
+"`~decimal.Context.create_decimal_from_float` no establecen el flag."
 
 #: ../Doc/library/decimal.rst:1646
 msgid ""
@@ -1806,10 +1854,13 @@ msgid ""
 "conversions are silent. All other mixed operations raise :exc:"
 "`FloatOperation`."
 msgstr ""
+"En caso contrario (la señal está atrapada), solo las comparaciones de "
+"igualdad y las conversiones explícitas permanecen silenciadas. Todas las "
+"demás operaciones mixtas lanzan una excepción :exc:`FloatOperation`."
 
 #: ../Doc/library/decimal.rst:1650
 msgid "The following table summarizes the hierarchy of signals::"
-msgstr ""
+msgstr "La siguiente tabla resume la jerarquía de señales::"
 
 #: ../Doc/library/decimal.rst:1671
 msgid "Floating Point Notes"
@@ -2050,10 +2101,12 @@ msgid ""
 "Q. It is cumbersome to type ``decimal.Decimal('1234.5')``.  Is there a way "
 "to minimize typing when using the interactive interpreter?"
 msgstr ""
+"P. Es engorroso escribir ``decimal.Decimal('1234.5')``. ¿Hay alguna forma de "
+"minimizar la escritura cuando se usa el intérprete interactivo?"
 
 #: ../Doc/library/decimal.rst:1985
 msgid "A. Some users abbreviate the constructor to just a single letter:"
-msgstr ""
+msgstr "R. Algunos usuarios abrevian el constructor a una sola letra:"
 
 #: ../Doc/library/decimal.rst:1991
 msgid ""
@@ -2061,18 +2114,25 @@ msgid ""
 "many places and need to be rounded.  Others are not supposed to have excess "
 "digits and need to be validated.  What methods should be used?"
 msgstr ""
+"P. En una aplicación de coma fija con dos decimales, algunas entradas tienen "
+"muchos dígitos decimales y deben redondearse. En cambio, otras no tienen "
+"dígitos en exceso y deben ser validadas. ¿Qué métodos deben utilizarse?"
 
 #: ../Doc/library/decimal.rst:1995
 msgid ""
 "A. The :meth:`quantize` method rounds to a fixed number of decimal places. "
 "If the :const:`Inexact` trap is set, it is also useful for validation:"
 msgstr ""
+"R. El método :meth:`quantize` redondea a un número fijo de decimales. Si se "
+"establece la trampa :const:`Inexact`, también es útil para la validación:"
 
 #: ../Doc/library/decimal.rst:2013
 msgid ""
 "Q. Once I have valid two place inputs, how do I maintain that invariant "
 "throughout an application?"
 msgstr ""
+"P. Si tengo entradas validadas con dos dígitos decimales, ¿cómo mantengo eso "
+"invariante en una aplicación?"
 
 #: ../Doc/library/decimal.rst:2016
 msgid ""
@@ -2081,12 +2141,19 @@ msgid ""
 "division and non-integer multiplication, will change the number of decimal "
 "places and need to be followed-up with a :meth:`quantize` step:"
 msgstr ""
+"R. Algunas operaciones como la suma, la resta y la multiplicación por un "
+"número entero conservarán automáticamente el punto fijo. Otras operaciones, "
+"como la división y la multiplicación de números no enteros, cambiarán el "
+"número de lugares decimales y deberá aplicarse :meth:`quantize` después de "
+"ellas:"
 
 #: ../Doc/library/decimal.rst:2034
 msgid ""
 "In developing fixed-point applications, it is convenient to define functions "
 "to handle the :meth:`quantize` step:"
 msgstr ""
+"Al desarrollar aplicaciones de coma fija, es conveniente definir funciones "
+"para gestionar el paso :meth:`quantize`:"
 
 #: ../Doc/library/decimal.rst:2047
 msgid ""
@@ -2095,18 +2162,26 @@ msgid ""
 "value at various precisions. Is there a way to transform them to a single "
 "recognizable canonical value?"
 msgstr ""
+"P. Hay muchas formas de expresar un mismo valor. Los números :const:`200`, :"
+"const:`200.000`, :const:`2E2` y :const:`.02E+4` tienen todos el mismo valor "
+"pero con varias precisiones. ¿Hay alguna manera de transformarlos en un "
+"único valor canónico reconocible?"
 
 #: ../Doc/library/decimal.rst:2052
 msgid ""
 "A. The :meth:`normalize` method maps all equivalent values to a single "
 "representative:"
 msgstr ""
+"R. El método :meth:`normalize` mapea todos los valores equivalentes a un "
+"solo representante:"
 
 #: ../Doc/library/decimal.rst:2059
 msgid ""
 "Q. Some decimal values always print with exponential notation.  Is there a "
 "way to get a non-exponential representation?"
 msgstr ""
+"P. Algunos valores decimales siempre se imprimen usando notación "
+"exponencial. ¿Hay alguna forma de obtener una representación no exponencial?"
 
 #: ../Doc/library/decimal.rst:2062
 msgid ""
@@ -2115,6 +2190,11 @@ msgid ""
 "const:`5.0E+3` as :const:`5000` keeps the value constant but cannot show the "
 "original's two-place significance."
 msgstr ""
+"R. Para algunos valores, la notación exponencial es la única forma de "
+"expresar el número de lugares significativos que tiene el coeficiente. Por "
+"ejemplo, expresar :const:`5.0E+3` como :const:`5000` mantiene el valor "
+"constante, pero no puede mostrar la significación de dos lugares que tiene "
+"el original."
 
 #: ../Doc/library/decimal.rst:2067
 msgid ""
@@ -2122,10 +2202,14 @@ msgid ""
 "remove the exponent and trailing zeroes, losing significance, but keeping "
 "the value unchanged:"
 msgstr ""
+"Si una aplicación no necesita preocuparse por el seguimiento de "
+"significación, es fácil eliminar el exponente y los ceros finales, perdiendo "
+"significación, pero manteniendo el valor sin cambios:"
 
 #: ../Doc/library/decimal.rst:2077
 msgid "Q. Is there a way to convert a regular float to a :class:`Decimal`?"
 msgstr ""
+"P. ¿Hay alguna forma de convertir un flotante regular en un :class:`Decimal`?"
 
 #: ../Doc/library/decimal.rst:2079
 msgid ""
@@ -2133,12 +2217,18 @@ msgid ""
 "Decimal though an exact conversion may take more precision than intuition "
 "would suggest:"
 msgstr ""
+"R. Sí, cualquier número de coma flotante binario se puede expresar "
+"exactamente mediante un Decimal, aunque una conversión exacta puede requerir "
+"más precisión de la que sugiere la intuición:"
 
 #: ../Doc/library/decimal.rst:2088
 msgid ""
 "Q. Within a complex calculation, how can I make sure that I haven't gotten a "
 "spurious result because of insufficient precision or rounding anomalies."
 msgstr ""
+"P. Dentro de un cálculo complejo, ¿cómo puedo asegurarme de que no he "
+"obtenido un resultado adulterado debido a una precisión insuficiente o "
+"anomalías de redondeo?"
 
 #: ../Doc/library/decimal.rst:2091
 msgid ""
@@ -2147,6 +2237,11 @@ msgid ""
 "Widely differing results indicate insufficient precision, rounding mode "
 "issues, ill-conditioned inputs, or a numerically unstable algorithm."
 msgstr ""
+"R. El módulo decimal facilita la comprobación de resultados. Una buena "
+"práctica es volver a ejecutar los cálculos con mayor precisión y con varios "
+"modos de redondeo. La obtención de resultados muy dispares indica una "
+"precisión insuficiente, problemas relacionados con el modo de redondeo, "
+"entradas mal acondicionadas o un algoritmo numéricamente inestable."
 
 #: ../Doc/library/decimal.rst:2096
 msgid ""
@@ -2154,6 +2249,9 @@ msgid ""
 "but not to the inputs.  Is there anything to watch out for when mixing "
 "values of different precisions?"
 msgstr ""
+"P. Noté que la precisión del contexto se aplica a los resultados de las "
+"operaciones pero no a las entradas. ¿Hay algo a tener en cuenta al mezclar "
+"valores con distintas precisiones?"
 
 #: ../Doc/library/decimal.rst:2100
 msgid ""
@@ -2163,22 +2261,31 @@ msgid ""
 "disadvantage is that the results can look odd if you forget that the inputs "
 "haven't been rounded:"
 msgstr ""
+"R. Sí. El principio es que todos los valores se consideran exactos y también "
+"lo es la aritmética de esos valores. Solo se redondean los resultados. La "
+"ventaja para las entradas es que \"lo que escribes es lo que obtienes\". Una "
+"desventaja es que los resultados pueden parecer extraños si olvidas que las "
+"entradas no se han redondeado:"
 
 #: ../Doc/library/decimal.rst:2113
 msgid ""
 "The solution is either to increase precision or to force rounding of inputs "
 "using the unary plus operation:"
 msgstr ""
+"La solución es aumentar la precisión o forzar el redondeo de las entradas "
+"utilizando la operación unaria más:"
 
 #: ../Doc/library/decimal.rst:2122
 msgid ""
 "Alternatively, inputs can be rounded upon creation using the :meth:`Context."
 "create_decimal` method:"
 msgstr ""
+"Alternativamente, las entradas se pueden redondear en el momento que se "
+"crean usando el método :meth:`Context.create_decimal`:"
 
 #: ../Doc/library/decimal.rst:2128
 msgid "Q. Is the CPython implementation fast for large numbers?"
-msgstr ""
+msgstr "P. ¿La implementación de CPython es rápida para números grandes?"
 
 #: ../Doc/library/decimal.rst:2130
 msgid ""
@@ -2192,6 +2299,15 @@ msgid ""
 "Discrete_Fourier_transform_(general)#Number-theoretic_transform>`_ for very "
 "large numbers."
 msgstr ""
+"R. Sí. En las implementaciones de CPython y PyPy3, las versiones C/CFFI del "
+"módulo decimal integran la biblioteca de alta velocidad `libmpdec <https://"
+"www.bytereef.org/mpdecimal/doc/libmpdec/index.html>`_ para aritmética de "
+"precisión arbitraria de coma flotante decimal correctamente redondeada [#]_. "
+"``libmpdec`` usa la `multiplicación de Karatsuba <https://es.wikipedia.org/"
+"wiki/Algoritmo_de_Karatsuba>`_ para números de tamaño mediano y la "
+"transformada teórico-numérica (`Number Theoretic Transform <https://en."
+"wikipedia.org/wiki/Discrete_Fourier_transform_(general)#Number-"
+"theoretic_transform>`_) para números muy grandes."
 
 #: ../Doc/library/decimal.rst:2140
 msgid ""
@@ -2200,18 +2316,26 @@ msgid ""
 "`clamp` should always be 0 (the default).  Setting :attr:`prec` requires "
 "some care."
 msgstr ""
+"El contexto debe adaptarse para una aritmética de precisión arbitraria "
+"exacta. :attr:`Emin` y :attr:`Emax` siempre deben establecerse en sus "
+"valores máximos, :attr:`clamp` siempre debe ser 0 (el valor predeterminado). "
+"Establecer :attr:`prec` requiere cierto cuidado."
 
 #: ../Doc/library/decimal.rst:2144
 msgid ""
 "The easiest approach for trying out bignum arithmetic is to use the maximum "
 "value for :attr:`prec` as well [#]_::"
 msgstr ""
+"El enfoque más fácil para probar la aritmética bignum es usar también el "
+"valor máximo para :attr:`prec` [#]_::"
 
 #: ../Doc/library/decimal.rst:2153
 msgid ""
 "For inexact results, :attr:`MAX_PREC` is far too large on 64-bit platforms "
 "and the available memory will be insufficient::"
 msgstr ""
+"Para resultados inexactos, :attr:`MAX_PREC` es demasiado grande en "
+"plataformas de 64 bits y la memoria disponible será insuficiente::"
 
 #: ../Doc/library/decimal.rst:2161
 msgid ""
@@ -2220,6 +2344,10 @@ msgid ""
 "have 8GB of RAM and expect 10 simultaneous operands using a maximum of 500MB "
 "each::"
 msgstr ""
+"En sistemas con sobreasignación (por ejemplo, Linux), un enfoque más "
+"sofisticado es establecer :attr:`prec` a la cantidad de RAM disponible. "
+"Supongamos que tenemos 8GB de RAM y esperamos 10 operandos simultáneos "
+"usando un máximo de 500 MB cada uno::"
 
 #: ../Doc/library/decimal.rst:2185
 msgid ""
@@ -2227,9 +2355,14 @@ msgid ""
 "recommended to estimate even tighter bounds and set the :attr:`Inexact` trap "
 "if all calculations are expected to be exact."
 msgstr ""
+"En general (y especialmente en sistemas sin sobreasignación), se recomienda "
+"estimar límites aún más estrictos y establecer la trampa :attr:`Inexact` si "
+"se espera que todos los cálculos sean exactos."
 
 #: ../Doc/library/decimal.rst:2194
 msgid ""
 "This approach now works for all exact results except for non-integer powers. "
 "Also backported to 3.7 and 3.8."
 msgstr ""
+"Este enfoque ahora funciona para todos los resultados exactos excepto para "
+"las potencias no enteras. También retro-portado a 3.7 y 3.8."
