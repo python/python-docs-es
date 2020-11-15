@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-10-18 13:00+0200\n"
+"PO-Revision-Date: 2020-11-15 09:19+0000\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3592,7 +3592,7 @@ msgstr "setUpClass y tearDownClass"
 
 #: ../Doc/library/unittest.rst:2348
 msgid "These must be implemented as class methods::"
-msgstr ""
+msgstr "Estos deben ser implementados como métodos de clase::"
 
 #: ../Doc/library/unittest.rst:2361
 msgid ""
@@ -3600,6 +3600,9 @@ msgid ""
 "then you must call up to them yourself. The implementations in :class:"
 "`TestCase` are empty."
 msgstr ""
+"Si quieres que se invoque a \"SetUpClass\" y \"BreakdownClass\" en clases "
+"base, debes llamarlos tú mismo. Las implementaciones en  :class:`TestCase`  "
+"están vacías."
 
 #: ../Doc/library/unittest.rst:2365
 msgid ""
@@ -3609,6 +3612,11 @@ msgid ""
 "`SkipTest` exception then the class will be reported as having been skipped "
 "instead of as an error."
 msgstr ""
+"Si se lanza una excepción durante una \"SetUpClass\", entonces los tests de "
+"la clase no se ejecutan y la \"BreakDownClass\" no se ejecuta. Las clases "
+"que se salten no tendrán \"setUpClass\" o \"tearDownClass\". Si la excepción "
+"es una :exc:`SkipTest``  entonces la clase será reportada como salteada en "
+"lugar de como un error."
 
 #: ../Doc/library/unittest.rst:2373
 msgid "setUpModule and tearDownModule"
@@ -3625,6 +3633,10 @@ msgid ""
 "exception is a :exc:`SkipTest` exception then the module will be reported as "
 "having been skipped instead of as an error."
 msgstr ""
+"Si se lanza una excepción en un  ``setUpModule``, entonces no se ejecutará "
+"ninguna de las pruebas del módulo y no se ejecutará el ``tearDownModule``. "
+"Si la excepción es una :exc:`SkipTest`   entonces el módulo será reportado "
+"como saltado en lugar de como un error."
 
 #: ../Doc/library/unittest.rst:2388
 msgid ""
@@ -3642,18 +3654,28 @@ msgid ""
 "are called with any arguments and keyword arguments passed into :meth:"
 "`addModuleCleanup` when they are added."
 msgstr ""
+"Añade una función que se llamará después de :func:`tearDownModule` para "
+"limpiar los recursos utilizados durante la clase de test. Las funciones se "
+"llamarán en orden inverso al orden en que se agregan (:abbr:`LIFO (last-in, "
+"first-out)`). Se llaman con cualquier argumento y palabra clave que se pase "
+"a :meth:`addModuleCleanup` cuando se añadan."
 
 #: ../Doc/library/unittest.rst:2400
 msgid ""
 "If :meth:`setUpModule` fails, meaning that :func:`tearDownModule` is not "
 "called, then any cleanup functions added will still be called."
 msgstr ""
+"Si :meth:`setUpModule` falla, lo que significa que :func:`tearDownModule` no "
+"se invoca, entonces cualquier función de limpieza añadida seguirá siendo "
+"invocada."
 
 #: ../Doc/library/unittest.rst:2408
 msgid ""
 "This function is called unconditionally after :func:`tearDownModule`, or "
 "after :func:`setUpModule` if :func:`setUpModule` raises an exception."
 msgstr ""
+"Esta función se llama incondicionalmente después de :func:`tearDownModule`, "
+"o después de :func:`setUpModule` si :func:`setUpModule` lanza una excepción."
 
 #: ../Doc/library/unittest.rst:2411
 msgid ""
@@ -3661,12 +3683,18 @@ msgid ""
 "`addCleanupModule`. If you need cleanup functions to be called *prior* to :"
 "func:`tearDownModule` then you can call :func:`doModuleCleanups` yourself."
 msgstr ""
+"Es responsable de invocar a todas las funciones de limpieza añadidas por :"
+"func:`addCleanupModule`. Si necesitas que las funciones de limpieza se "
+"llamen *previamente* a  :func:`tearDownModule` entonces puedes invocar a :"
+"func:`doModuleCleanups`  tú mismo."
 
 #: ../Doc/library/unittest.rst:2416
 msgid ""
 ":func:`doModuleCleanups` pops methods off the stack of cleanup functions one "
 "at a time, so it can be called at any time."
 msgstr ""
+":func:`doModuleCleanups` saca los métodos de la pila de funciones de "
+"limpieza uno a uno, así que se puede llamar en cualquier momento."
 
 #: ../Doc/library/unittest.rst:2422
 msgid "Signal Handling"
