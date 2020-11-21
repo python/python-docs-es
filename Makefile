@@ -16,8 +16,8 @@ LANGUAGE            := es
 VENV                := $(shell realpath ./venv)
 PYTHON              := $(shell which python3)
 CPYTHON_WORKDIR     := cpython
-OUTPUT_DOCTREE      := $(CPYTHON_WORKDIR)/Doc/_build/doctree
-OUTPUT_HTML      := $(CPYTHON_WORKDIR)/Doc/_build/html
+OUTPUT_DOCTREE      := $(CPYTHON_WORKDIR)/Doc/build/doctree
+OUTPUT_HTML         := $(CPYTHON_WORKDIR)/Doc/build/html
 LOCALE_DIR          := $(CPYTHON_WORKDIR)/locale
 TRANSIFEX_PROJECT   := python-docs-es
 POSPELL_TMP_DIR     := .pospell
@@ -41,9 +41,9 @@ help:
 #        treated as errors, which is good to skip simple Sphinx syntax mistakes.
 .PHONY: build
 build: setup
-		PYTHONWARNINGS=ignore::FutureWarning $(VENV)/bin/sphinx-build -j auto -W --keep-going -b html -d $(OUTPUT_DOCTREE) -D language=$(LANGUAGE) . $(OUTPUT_HTML) && \
-		@echo "Success! Open file://`pwd`/$(OUTPUT_HTML)/index.html, " \
-					"or run 'make serve' to see them in http://localhost:8000";
+	PYTHONWARNINGS=ignore::FutureWarning $(VENV)/bin/sphinx-build -j auto -W --keep-going -b html -d $(OUTPUT_DOCTREE) -D language=$(LANGUAGE) . $(OUTPUT_HTML) && \
+		echo "Success! Open file://`pwd`/$(OUTPUT_HTML)/index.html, " \
+			"or run 'make serve' to see them in http://localhost:8000";
 
 
 # setup: After running "venv" target, prepare that virtual environment with
@@ -78,7 +78,7 @@ serve:
 #        could have been created by the actions in other targets of this script
 .PHONY: clean
 clean:
-	rm -fr $(VENV)
+	rm -rf $(VENV)
 	rm -rf $(POSPELL_TMP_DIR)
 	find -name '*.mo' -delete
 
