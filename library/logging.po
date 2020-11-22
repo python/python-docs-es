@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-11-20 22:25-0300\n"
+"PO-Revision-Date: 2020-11-22 14:11-0300\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1769,7 +1769,7 @@ msgstr "*processName* fue agregado."
 
 #: ../Doc/library/logging.rst:857
 msgid "LoggerAdapter Objects"
-msgstr ""
+msgstr "Objetos LoggerAdapter"
 
 #: ../Doc/library/logging.rst:859
 msgid ""
@@ -1777,12 +1777,18 @@ msgid ""
 "information into logging calls. For a usage example, see the section on :ref:"
 "`adding contextual information to your logging output <context-info>`."
 msgstr ""
+"Las instancias :class:`LoggerAdapter` se utilizan para pasar "
+"convenientemente información contextual en las llamadas de logging. Para ver "
+"un ejemplo de uso, consulte la sección sobre :ref:`agregar información "
+"contextual a su salida de logging <context-info>`."
 
 #: ../Doc/library/logging.rst:865
 msgid ""
 "Returns an instance of :class:`LoggerAdapter` initialized with an "
 "underlying :class:`Logger` instance and a dict-like object."
 msgstr ""
+"Retorna una instancia de :class:`LoggerAdapter` inicializada con una "
+"instancia subyacente :class:`Logger` y un objeto del tipo *dict*."
 
 #: ../Doc/library/logging.rst:870
 msgid ""
@@ -1792,6 +1798,11 @@ msgid ""
 "'extra'. The return value is a (*msg*, *kwargs*) tuple which has the "
 "(possibly modified) versions of the arguments passed in."
 msgstr ""
+"Modifica el mensaje y/o los argumentos de palabra clave pasados a una "
+"llamada de logging para insertar información contextual. Esta implementación "
+"toma el objeto pasado como *extra* al constructor y lo agrega a *kwargs* "
+"usando la clave 'extra'. El valor de retorno es una tupla (*msg*, *kwargs*) "
+"que tiene las versiones (posiblemente modificadas) de los argumentos pasados."
 
 #: ../Doc/library/logging.rst:876
 msgid ""
@@ -1804,6 +1815,14 @@ msgid ""
 "counterparts in :class:`Logger`, so you can use the two types of instances "
 "interchangeably."
 msgstr ""
+"Además de lo anterior, :class:`LoggerAdapter` admite los siguientes métodos "
+"de :class:`Logger`: :meth:`~Logger.debug`, :meth:`~Logger.info`, :meth:"
+"`~Logger.warning`, :meth:`~Logger.error`, :meth:`~Logger.exception`, :meth:"
+"`~Logger.critical`, :meth:`~Logger.log`, :meth:`~Logger.isEnabledFor`, :meth:"
+"`~Logger.getEffectiveLevel`, :meth:`~Logger.setLevel` y :meth:`~Logger."
+"hasHandlers`. Estos métodos tienen las mismas firmas que sus contrapartes "
+"en :class:`Logger`, por lo que puede usar los dos tipos de instancias "
+"indistintamente."
 
 #: ../Doc/library/logging.rst:885
 msgid ""
@@ -1811,12 +1830,17 @@ msgid ""
 "`~Logger.setLevel` and :meth:`~Logger.hasHandlers` methods were added to :"
 "class:`LoggerAdapter`.  These methods delegate to the underlying logger."
 msgstr ""
+"Los métodos :meth:`~Logger.isEnabledFor`, :meth:`~Logger."
+"getEffectiveLevel`, :meth:`~Logger.setLevel` y :meth:`~Logger.hasHandlers` "
+"se agregaron a :class:`LoggerAdapter` . Estos métodos se delegan al logger "
+"subyacente."
 
 #: ../Doc/library/logging.rst:892
 msgid "Thread Safety"
-msgstr ""
+msgstr "Seguridad del hilo"
 
 #: ../Doc/library/logging.rst:894
+#, fuzzy
 msgid ""
 "The logging module is intended to be thread-safe without any special work "
 "needing to be done by its clients. It achieves this though using threading "
@@ -1824,6 +1848,11 @@ msgid ""
 "and each handler also creates a lock to serialize access to its underlying I/"
 "O."
 msgstr ""
+"El módulo logging está diseñado para ser seguro para subprocesos sin que sus "
+"clientes tengan que realizar ningún trabajo especial. Lo logra mediante el "
+"uso de bloqueos de hilos; hay un bloqueo para serializar el acceso a los "
+"datos compartidos del módulo, y cada gestor también crea un bloqueo para "
+"serializar el acceso a su E/S subyacente."
 
 #: ../Doc/library/logging.rst:899
 msgid ""
@@ -1832,16 +1861,23 @@ msgid ""
 "is because lock implementations in the :mod:`threading` module are not "
 "always re-entrant, and so cannot be invoked from such signal handlers."
 msgstr ""
+"Si está implementando gestores de señales asíncronos usando el módulo :mod:"
+"`signal`, es posible que no pueda usar logging desde dichos gestores. Esto "
+"se debe a que las implementaciones de bloqueo en el módulo :mod:`threading` "
+"no siempre son reentrantes y, por lo tanto, no se pueden invocar desde "
+"dichos gestores de señales."
 
 #: ../Doc/library/logging.rst:906
 msgid "Module-Level Functions"
-msgstr ""
+msgstr "Funciones a nivel de módulo"
 
 #: ../Doc/library/logging.rst:908
 msgid ""
 "In addition to the classes described above, there are a number of module-"
 "level functions."
 msgstr ""
+"Además de las clases descritas anteriormente, hay una serie de funciones a "
+"nivel de módulo."
 
 #: ../Doc/library/logging.rst:914
 msgid ""
@@ -1851,6 +1887,11 @@ msgid ""
 "d'*. Choice of these names is entirely up to the developer who is using "
 "logging."
 msgstr ""
+"Retorna un logger con el nombre especificado o, si el nombre es ``None``, "
+"retorna un logger que es el logger principal de la jerarquía. Si se "
+"especifica, el nombre suele ser un nombre jerárquico separado por puntos "
+"como *'a'*, *'a.b'* or *'a.b.c.d'*. La elección de estos nombres depende "
+"totalmente del desarrollador que utiliza logging."
 
 #: ../Doc/library/logging.rst:919
 msgid ""
@@ -1858,6 +1899,9 @@ msgid ""
 "instance. This means that logger instances never need to be passed between "
 "different parts of an application."
 msgstr ""
+"Todas las llamadas a esta función con un nombre dado devuelven la misma "
+"instancia de registrador. Esto significa que las instancias del registrador "
+"nunca necesitan pasar entre diferentes partes de una aplicación."
 
 #: ../Doc/library/logging.rst:926
 msgid ""
@@ -1867,6 +1911,11 @@ msgid ""
 "class will not undo customizations already applied by other code. For "
 "example::"
 msgstr ""
+"Retorna ya sea la clase estándar :class:`Logger`, o la última clase pasada "
+"a :func:`setLoggerClass`. Esta función se puede llamar desde una nueva "
+"definición de clase, para garantizar que la instalación de una clase "
+"personalizada :class:`Logger` no deshaga las customizaciones ya aplicadas "
+"por otro código. Por ejemplo::"
 
 #: ../Doc/library/logging.rst:937
 msgid "Return a callable which is used to create a :class:`LogRecord`."
