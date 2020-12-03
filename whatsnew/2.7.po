@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-11-28 20:45-0300\n"
+"PO-Revision-Date: 2020-12-03 12:40-0300\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -333,7 +333,7 @@ msgstr ""
 #: ../Doc/whatsnew/2.7.rst:182
 msgid "A new version of the :mod:`io` library, rewritten in C for performance."
 msgstr ""
-"Una nueva versión para la librería :mod:`io`, re escrito en C para un mejor "
+"Una nueva versión para la librería :mod:`io`, rescrito en C para un mejor "
 "desempeño."
 
 #: ../Doc/whatsnew/2.7.rst:183
@@ -374,7 +374,7 @@ msgid ""
 "Float-to-string and string-to-float conversions are correctly rounded. The :"
 "func:`round` function is also now correctly rounded."
 msgstr ""
-"Las conversiones float-to-string y string-to-float se redondean "
+"Las conversiones flotante a cadena y cadena a flotante se redondean "
 "correctamente. La función :func:`round` también ahora se redondea "
 "correctamente."
 
@@ -439,7 +439,7 @@ msgstr ""
 "La API :class:`~collections.OrderedDict` proporciona la misma interfaz que "
 "los diccionarios normales, pero recorre en iteración las claves y los "
 "valores en un orden garantizado en función de cuándo se insertó una clave "
-"por primera vez::"
+"por primera vez:"
 
 #: ../Doc/whatsnew/2.7.rst:233
 msgid ""
@@ -447,12 +447,11 @@ msgid ""
 "is left unchanged::"
 msgstr ""
 "Si una nueva entrada sobrescribe una entrada existente, la posición de "
-"inserción original no se modifica::"
+"inserción original no se modifica:"
 
 #: ../Doc/whatsnew/2.7.rst:240
 msgid "Deleting an entry and reinserting it will move it to the end::"
-msgstr ""
-"Borrando una entrada y luego reinsertandola, moverá la misma al final::"
+msgstr "Borrando una entrada y luego reinsertándola, moverá la misma al final:"
 
 #: ../Doc/whatsnew/2.7.rst:247
 msgid ""
@@ -464,7 +463,7 @@ msgstr ""
 "El método :meth:`~collections.OrderedDict.popitem` tiene un argumento *last* "
 "opcional que por defecto esta en ``True`` (verdadero). Si *last* es "
 "verdadero, la ultima llave ingresada es regresada y eliminada; si es falso, "
-"se selecciona la llave más antigua::"
+"se selecciona la llave más antigua:"
 
 #: ../Doc/whatsnew/2.7.rst:262
 msgid ""
@@ -472,7 +471,7 @@ msgid ""
 "requires that the insertion order was the same::"
 msgstr ""
 "La comparación de dos diccionarios ordenados comprueba tanto las claves como "
-"los valores, y requiere que el orden de inserción sea el mismo::"
+"los valores, y requiere que el orden de inserción sea el mismo:"
 
 #: ../Doc/whatsnew/2.7.rst:278
 msgid ""
@@ -636,6 +635,16 @@ msgid ""
 "`argparse` API consistent with :mod:`optparse`'s interface was discussed but "
 "rejected as too messy and difficult.)"
 msgstr ""
+"Esto significa que Python ahora admite tres módulos diferentes para analizar "
+"argumentos de línea de comandos: :mod:`getopt`, :mod:`optparse`, y :mod:"
+"`argparse`.  El módulo :mod:`getopt` se parece mucho a la función :c:func:"
+"`getopt` de la biblioteca C, por lo que sigue siendo útil si estás "
+"escribiendo un prototipo de Python que finalmente se reescribe en C. :mod:"
+"`optparse` se vuelve redundante, pero no hay planes para eliminarlo porque "
+"hay muchos scripts que todavía lo usan, y no hay una manera automatizada de "
+"actualizar estos scripts.  (Hacer que la API :mod:`argparse` sea coherente "
+"con la interfaz de :mod:`optparse` fue discutido pero rechazado como "
+"demasiado desordenado y difícil.)"
 
 #: ../Doc/whatsnew/2.7.rst:366
 msgid ""
@@ -643,22 +652,30 @@ msgid ""
 "compatibility with earlier versions of Python, use :mod:`argparse` instead "
 "of :mod:`optparse`."
 msgstr ""
+"En resumen, si estás escribiendo un nuevo script y no necesitas preocuparte "
+"por la compatibilidad con versiones anteriores de Python, usa :mod:"
+"`argparse` en lugar de :mod:`optparse`."
 
 #: ../Doc/whatsnew/2.7.rst:370
 msgid "Here's an example::"
-msgstr ""
+msgstr "Este es un ejemplo::"
 
 #: ../Doc/whatsnew/2.7.rst:393
 msgid ""
 "Unless you override it, :option:`!-h` and :option:`!--help` switches are "
 "automatically added, and produce neatly formatted output::"
 msgstr ""
+"A menos que lo reemplace, los modificadores :option:`!-h` y :option:`!--"
+"help` se agregan automáticamente, y producen una salida con formato ordenado:"
 
 #: ../Doc/whatsnew/2.7.rst:410
 msgid ""
 "As with :mod:`optparse`, the command-line switches and arguments are "
 "returned as an object with attributes named by the *dest* parameters::"
 msgstr ""
+"Al igual que con :mod:`optparse`, los modificadores y argumentos de línea de "
+"comandos se devuelven como un objeto con atributos denominados por los "
+"parámetros *dest*:"
 
 #: ../Doc/whatsnew/2.7.rst:425
 msgid ""
@@ -671,32 +688,43 @@ msgid ""
 "FileType`, which will automatically open files for you and understands that "
 "``'-'`` means standard input or output."
 msgstr ""
+":mod:`argparse` tiene una validación mucho más fantasiosa que :mod:"
+"`optparse`; puede especificar un número exacto de argumentos como un entero, "
+"0 o más argumentos pasando ``'*'``, 1 o más pasando ``'+'``, o un argumento "
+"opcional con ``'?'``.  Un analizador de nivel superior puede contener sub "
+"analizadores para definir subcomandos que tienen diferentes conjuntos de "
+"modificadores, como en ``svn commit``, ``svn checkout``, etc.  Puede "
+"especificar el tipo de un argumento como :class:`~argparse.FileType`, que "
+"abrirá automáticamente los archivos y entiende que ``'-'`` significa entrada "
+"o salida estándar."
 
 #: ../Doc/whatsnew/2.7.rst:438
 msgid ":mod:`argparse` documentation"
-msgstr ""
+msgstr ":mod:`argparse` documentación"
 
 #: ../Doc/whatsnew/2.7.rst:438
 msgid "The documentation page of the argparse module."
-msgstr ""
+msgstr "La página de documentación del módulo argparse."
 
 #: ../Doc/whatsnew/2.7.rst:442
 msgid ":ref:`upgrading-optparse-code`"
-msgstr ""
+msgstr ":ref:`upgrading-optparse-code`"
 
 #: ../Doc/whatsnew/2.7.rst:441
 msgid ""
 "Part of the Python documentation, describing how to convert code that uses :"
 "mod:`optparse`."
 msgstr ""
+"Parte de la documentación de Python, que describe cómo convertir código que "
+"usa :mod:`optparse`."
 
 #: ../Doc/whatsnew/2.7.rst:444
 msgid ":pep:`389` - argparse - New Command Line Parsing Module"
-msgstr ""
+msgstr ":pep:`389` - argparse - Nuevo módulo de análisis de línea de comandos"
 
 #: ../Doc/whatsnew/2.7.rst:445
 msgid "PEP written and implemented by Steven Bethard."
-msgstr ""
+msgstr "PEP escrito e implementado por Steven Bethard."
 
 #: ../Doc/whatsnew/2.7.rst:448
 msgid "PEP 391: Dictionary-Based Configuration For Logging"
