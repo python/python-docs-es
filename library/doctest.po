@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-11-22 14:43-0500\n"
+"PO-Revision-Date: 2020-12-05 21:32-0500\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -667,7 +667,7 @@ msgstr ""
 
 #: ../Doc/library/doctest.rst:513
 msgid "Option Flags"
-msgstr ""
+msgstr "Banderas de Opción"
 
 #: ../Doc/library/doctest.rst:515
 msgid ""
@@ -678,16 +678,26 @@ msgid ""
 "and may be passed to the doctest command line interface via the ``-o`` "
 "option."
 msgstr ""
+"Varias banderas de opción controlan diversos aspectos del comportamiento de "
+"doctest. Los nombres simbólicos para las banderas son proporcionados como "
+"constantes del módulo, que pueden ser :ref:`unidas por *OR* <bitwise>` "
+"juntas y pasadas a varias funciones. Los nombres también pueden ser usados "
+"en las :ref:`directivas de doctest <doctest-directives>`, y se pueden pasar "
+"a la interfaz de la línea de comandos de doctest a través de la opción ``-"
+"o``."
 
 #: ../Doc/library/doctest.rst:521
 msgid "The ``-o`` command line option."
-msgstr ""
+msgstr "La opción de la línea de comandos ``-o``."
 
 #: ../Doc/library/doctest.rst:524
 msgid ""
 "The first group of options define test semantics, controlling aspects of how "
 "doctest decides whether actual output matches an example's expected output:"
 msgstr ""
+"El primer grupo de opciones definen las semánticas de la prueba, controlando "
+"aspectos de cómo doctest decide si la salida de hecho concuerda con la "
+"salida esperada del ejemplo:"
 
 #: ../Doc/library/doctest.rst:530
 msgid ""
@@ -700,6 +710,14 @@ msgid ""
 "output still work in these cases.  This option will probably go away, but "
 "not for several years."
 msgstr ""
+"Por defecto, si un bloque de salida esperada contiene sólo ``1``, se "
+"considera igual a un bloque de salida real conteniendo sólo ``1`` o "
+"``true``, y similarmente para ``0`` contra ``False``. Cuando se especifica :"
+"const:`DONT_ACCEPT_TRUE_FOR_1``, no se permite ninguna sustitución.  El "
+"comportamiento por defecto atiende a que Python cambió el tipo de retorno de "
+"muchas funciones de enteros a booleanos; los doctest esperando salidas \"de "
+"pequeño enteros\" todavía trabajan en estos casos. Esta opción probablemente "
+"se vaya, pero no por muchos años."
 
 #: ../Doc/library/doctest.rst:542
 msgid ""
@@ -709,6 +727,12 @@ msgid ""
 "is the only way to communicate that a blank line is expected.  When :const:"
 "`DONT_ACCEPT_BLANKLINE` is specified, this substitution is not allowed."
 msgstr ""
+"Por defecto, si un bloque de salida esperada contiene una línea que sólo "
+"tiene la cadena de caracteres ``<BLANKLINE>``, entonces esa línea "
+"corresponderá a una línea en blanco en la salida real. Ya que una línea en "
+"blanca auténtica delimita la salida esperada, esta es la única manera de "
+"comunicar que una línea en blanco es esperada. Cuando se especifica :const:"
+"`DONT_ACCEPT_BLANKLINE`, esta substitución no se permite."
 
 #: ../Doc/library/doctest.rst:551
 msgid ""
@@ -719,6 +743,13 @@ msgid ""
 "useful when a line of expected output is very long, and you want to wrap it "
 "across multiple lines in your source."
 msgstr ""
+"Cuando se especifica, todas las secuencias de espacios en blanco (vacías y "
+"nuevas líneas) son tratadas como iguales. Cualquier secuencia de espacios en "
+"blanco dentro de la salida esperada corresponderá a cualquier secuencia de "
+"espacios en blanco dentro de la salida real. Por defecto, los espacios en "
+"blanco deben corresponderse exactamente.  :const:`NORMALIZE_WHITESPACE` es "
+"especialmente útil cuando una línea de la salida esperada es muy larga, y "
+"quieres envolverla a través de múltiples líneas en tu código fuente."
 
 #: ../Doc/library/doctest.rst:562
 msgid ""
@@ -728,6 +759,13 @@ msgid ""
 "this simple. Complicated uses can lead to the same kinds of \"oops, it "
 "matched too much!\" surprises that ``.*`` is prone to in regular expressions."
 msgstr ""
+"Cuando se especifica, un marcador de puntos suspensivos (``...``) en la "
+"salida esperada puede corresponder a cualquier cadena de caracteres en la "
+"salida real. Esto incluye las cadenas de caracteres que abarcan límites de "
+"líneas, y cadenas de caracteres vacías, por lo que es mejor mantener su uso "
+"simple. Usos complicados pueden conducir a los mismo tipos de sorpresa de "
+"\"ups, coincidió demasiado\", que ``.*`` es propenso a hacer en expresiones "
+"regulares."
 
 #: ../Doc/library/doctest.rst:571
 msgid ""
@@ -737,6 +775,11 @@ msgid ""
 "the actual exception raised is ``ValueError: 3*14``, but will fail, e.g., "
 "if :exc:`TypeError` is raised."
 msgstr ""
+"Cuando se especifica, un ejemplo que espera una excepción pasa si una "
+"excepción del tipo esperado es levantado, incluso si el detalle de la "
+"excepción no corresponde. Por ejemplo, un ejemplo esperando ``ValueError: "
+"42`` pasará si la excepción real lanzada es ``ValueError: 3*14``, pero "
+"fallará, e.g., si :exc:`TypeError` es lanzado."
 
 #: ../Doc/library/doctest.rst:577
 msgid ""
@@ -744,8 +787,13 @@ msgid ""
 "both of these variations will work with the flag specified, regardless of "
 "whether the test is run under Python 2.7 or Python 3.2 (or later versions)::"
 msgstr ""
+"También ignorará el nombre del módulo usado en los reportes de doctest de "
+"Python 3. Por lo que ambas de estas variaciones trabajarán con las banderas "
+"especificadas, sin importar si la prueba es ejecutada bajo Python 2.7 o "
+"Python 3.2 (o versiones más modernas)::"
 
 #: ../Doc/library/doctest.rst:589
+#, fuzzy
 msgid ""
 "Note that :const:`ELLIPSIS` can also be used to ignore the details of the "
 "exception message, but such a test may still fail based on whether or not "
@@ -756,21 +804,37 @@ msgid ""
 "support :ref:`doctest directives <doctest-directives>` and ignore them as "
 "irrelevant comments). For example::"
 msgstr ""
+"Note que :const:`ELLIPSIS` también se puede usar para ignorar los detalles "
+"del mensaje de excepción, pero tal prueba todavía puede fallar basado en sin "
+"importar si los detalles del módulo se imprimem como parte del nombre de "
+"excepción. Usar :const:`IGNORE_EXCEPTION_DETAIL` y los detallles de Python "
+"2.3 son también la única manera de escribir un doctest que no le importe el "
+"detalle de excepción y todavía pasa bajo Python 2.3 o menos (estas partes no "
+"soportan :ref:`directivas de doctest <doctest-directives>` y los ignora como "
+"comentarios irrelevantes). Por ejemplo::"
 
 #: ../Doc/library/doctest.rst:603
+#, fuzzy
 msgid ""
 "passes under Python 2.3 and later Python versions with the flag specified, "
 "even though the detail changed in Python 2.4 to say \"does not\" instead of "
 "\"doesn't\"."
 msgstr ""
+"pasa bajo Python 2.3 y versiones más tardes de Python con la bandera "
+"especificada, incluso si el detalle cambió en Python 2.4 para decir \"does "
+"not\" en vez de \"doesn't\"."
 
 #: ../Doc/library/doctest.rst:607
+#, fuzzy
 msgid ""
 ":const:`IGNORE_EXCEPTION_DETAIL` now also ignores any information relating "
 "to the module containing the exception under test."
 msgstr ""
+":const:`IGNORE_EXCEPTION_DETAIL` también ignora cualquier información "
+"relacionado al módulo conteniendo la excepción en la prueba."
 
 #: ../Doc/library/doctest.rst:614
+#, fuzzy
 msgid ""
 "When specified, do not run the example at all.  This can be useful in "
 "contexts where doctest examples serve as both documentation and test cases, "
@@ -778,33 +842,52 @@ msgid ""
 "be checked.  E.g., the example's output might be random; or the example "
 "might depend on resources which would be unavailable to the test driver."
 msgstr ""
+"Cuando se especifica, no ejecutas el ejemplo del todo. Puede ser útil en "
+"contextos donde los ejemplos de doctest sirven como documentación y casos de "
+"prueba a la vez, y un ejemplo debe ser incluido para propósitos de "
+"documentación."
 
 #: ../Doc/library/doctest.rst:620
+#, fuzzy
 msgid ""
 "The SKIP flag can also be used for temporarily \"commenting out\" examples."
 msgstr ""
+"La bandera *SKIP* también se puede usar para temporalmente \"quitar\" "
+"ejemplos."
 
 #: ../Doc/library/doctest.rst:625
+#, fuzzy
 msgid "A bitmask or'ing together all the comparison flags above."
 msgstr ""
+"Una máscara de bits o juntados lógicamente todas las comparaciones arriba."
 
 #: ../Doc/library/doctest.rst:627
+#, fuzzy
 msgid "The second group of options controls how test failures are reported:"
 msgstr ""
+"El segundo grupo de opciones controla cómo las fallas de pruebas son "
+"reportadas:"
 
 #: ../Doc/library/doctest.rst:632
+#, fuzzy
 msgid ""
 "When specified, failures that involve multi-line expected and actual outputs "
 "are displayed using a unified diff."
 msgstr ""
+"Cuando se especifica, las fallas que involucran salidas esperades y reales "
+"de multilínea son mostradas usando un diff unificado."
 
 #: ../Doc/library/doctest.rst:638
+#, fuzzy
 msgid ""
 "When specified, failures that involve multi-line expected and actual outputs "
 "will be displayed using a context diff."
 msgstr ""
+"Cuando se especifica, las fallas que involucran salidas multilínea esperadas "
+"y reales se mostrarán un diff context."
 
 #: ../Doc/library/doctest.rst:644
+#, fuzzy
 msgid ""
 "When specified, differences are computed by ``difflib.Differ``, using the "
 "same algorithm as the popular :file:`ndiff.py` utility. This is the only "
@@ -813,8 +896,15 @@ msgid ""
 "output contains letter ``l``, a line is inserted with a caret marking the "
 "mismatching column positions."
 msgstr ""
+"Cuando se especifica, las diferencias son computadas por ``difflib.Differ``, "
+"usando el mismo algoritmo que la popular utilidad :file:`ndiff.py`. Este es "
+"el único método que marca diferencias dentro de líneas también como a través "
+"de líneas. Por ejemplo, si una línea de salida esperada contiene dígito "
+"``1`` donde la salida actual contiene la letra ``l``, una línea insertada "
+"con un caret markando la posición de las columnas que no combinan."
 
 #: ../Doc/library/doctest.rst:653
+#, fuzzy
 msgid ""
 "When specified, display the first failing example in each doctest, but "
 "suppress output for all remaining examples.  This will prevent doctest from "
@@ -824,32 +914,54 @@ msgid ""
 "remaining examples are still run, and still count towards the total number "
 "of failures reported; only the output is suppressed."
 msgstr ""
+"Cuando se especifica, muestra el primer ejemplo fallido en cada doctest, "
+"pero suprime la salida para todos ejemplos restantes. Esto preventirá "
+"doctest de reportar los ejemplo correctos que rompen porque los fallos "
+"tempranos; pero también puede esconder ejemplos incorrectos que fallen "
+"independientemente de la primera falla. Cuando se especifica :const:"
+"`REPORT_ONLY_FIRST_FAILURE`, los ejemplos restantes aún se corren, y todavía "
+"hacia el número total de fallas reportadas, sólo la salida es suprimida."
 
 #: ../Doc/library/doctest.rst:664
+#, fuzzy
 msgid ""
 "When specified, exit after the first failing example and don't attempt to "
 "run the remaining examples. Thus, the number of failures reported will be at "
 "most 1.  This flag may be useful during debugging, since examples after the "
 "first failure won't even produce debugging output."
 msgstr ""
+"Cuando se especifica, sale después del primer ejemplo fallido y no intenta "
+"ejecutar los ejemplos restantes. Por lo tanto, el número de fallas "
+"reportadas será como mucho 1. Esta bandera puede ser útil durante el "
+"debuggin, ya que los ejemplos después de la primera falla ni siquiera "
+"producirán salida de debugging."
 
 #: ../Doc/library/doctest.rst:669
+#, fuzzy
 msgid ""
 "The doctest command line accepts the option ``-f`` as a shorthand for ``-o "
 "FAIL_FAST``."
 msgstr ""
+"La línea de comandos de doctest acepta la opción ``-f`` como un atajo para "
+"``-o FAIL_FAST``."
 
 #: ../Doc/library/doctest.rst:677
+#, fuzzy
 msgid "A bitmask or'ing together all the reporting flags above."
-msgstr ""
+msgstr "Una máscara de bits o todas las banderas de reporte arriba combinadas."
 
 #: ../Doc/library/doctest.rst:680
+#, fuzzy
 msgid ""
 "There is also a way to register new option flag names, though this isn't "
 "useful unless you intend to extend :mod:`doctest` internals via subclassing:"
 msgstr ""
+"También hay una manera de registrar nombres de nuevas opciones de banderas, "
+"aunque esto no es útil a menos que intentes extender :mod:`doctest` a través "
+"de herencia:"
 
 #: ../Doc/library/doctest.rst:686
+#, fuzzy
 msgid ""
 "Create a new option flag with a given name, and return the new flag's "
 "integer value.  :func:`register_optionflag` can be used when subclassing :"
@@ -857,6 +969,11 @@ msgid ""
 "are supported by your subclasses.  :func:`register_optionflag` should always "
 "be called using the following idiom::"
 msgstr ""
+"Crea una nueva bandera de opción con un nombre dado, y retorna el valor "
+"entero de la nueva bandera. :func:`register_optionflag` puede ser usado "
+"cuando se hereda :class:`OutputChecker` o :class:`DocTestRunner` para crear "
+"nuevas opciones que son soportadas por tus clases heredadas. :func:"
+"`register_optionflag` siempre debe ser llmado usando el siguiente idioma::"
 
 #: ../Doc/library/doctest.rst:702
 msgid "Directives"
