@@ -57,14 +57,16 @@ Antes de comenzar
 
       Al tener instalado los requerimientos, podrás utilizas las herramientas
       ``powrap`` y ``pospell`` para poder verificar tus archivos traducidos,
-      y también contruir la documentación localmente.
+      y también construir la documentación localmente.
 
 ¡Comienza a traducir!
 ---------------------
 
 #. Selecciona un :ref:`archivo para traducir <que-archivo-traducir>`.
 
-#. Verifica que estás en la rama principal del repositorio, **3.8**::
+#. Verifica que estás en la rama principal del repositorio, **3.8** (esto es muy 
+   importante para evitar crear una nueva rama a partir de una traducción 
+   anterior)::
 
      git checkout 3.8
 
@@ -142,7 +144,7 @@ A tener en cuenta
 
 * Colaborar **haciendo revisiones** también es muy muy importante, así que si
   tienes un rato libre puedes comenzar por mirar los PRs pendientes de revisar.
-  (mira la `Guía del revisor`_)
+  (mira la :doc:`Guía del revisor <reviewers-guide>`)
 
 * La documentación es ENORME, cualquier traba que encuentres siempre puedes
   marcar el texto como **"fuzzy"** o para revisar en el futuro.
@@ -159,8 +161,8 @@ A tener en cuenta
   ejemplo un artículo a Wikipedia). En caso de que no haya una traducción del
   artículo en Wikipedia deja el título sin traducir.
 
-* Tenemos una `Memoria de Traducción`_, que usamos para tener consistencia con
-  algunos términos.
+* Tenemos una :doc:`Memoria de Traducción <translation-memory>`, que usamos para tener
+  consistencia con algunos términos.
 
 * Si tienes una **duda sobre una palabra o término**, escríbelo como mejor suene
   para vos y marca ese párrafo como "Need work" / "Necesita trabajo" en
@@ -210,10 +212,6 @@ Tendrás que navegar hasta el archivo que hayas cambiado para ver cómo se visua
 .. _poedit: https://poedit.net/
 
 .. _nuestro canal de Telegram: https://t.me/python_docs_es
-.. _Memoria de traducción:
-   https://python-docs-es.readthedocs.io/page/translation-memory.html
-.. _Guía del revisor:
-   https://python-docs-es.readthedocs.io/page/reviewers-guide.html
 .. _la traducción al Portugués: https://docs.python.org/pt-br/3/
 .. _lista de issues en GitHub:
    https://github.com/python/python-docs-es/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+no%3Aassignee+translate
