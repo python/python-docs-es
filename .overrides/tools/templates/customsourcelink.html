@@ -4,9 +4,24 @@
     <ul class="this-page-menu">
         <li><a href="{{ pathto('bugs') }}">{% trans %}Report a Bug{% endtrans %}</a></li>
         <li>
-            <a href="https://github.com/PyCampES/python-docs-es/blob/{{ version }}/{{ sourcename|replace('.rst.txt', '.po') }}"
-               rel="nofollow">{{ _('Show Source') }}
-            </a>
+            {# 
+                Las siguientes líneas están para que se pueda redireccionar
+                al correctamente el código fuente en python-docs-es.readthedocs.io/
+            #}
+            {% set overriden_pages = ['coc', 'CONTRIBUTING', 'faq', 'reviewers-guide','progress', 'translation-memory', 'upgrade-python-version'] %}
+            {% if pagename in overriden_pages %}
+                <li>
+                    <a href="https://github.com/python/python-docs-es/blob/{{ version }}/.overrides/{{ sourcename|replace('.rst.txt', '.rst') }}"
+                    rel="nofollow">{{ _('Show Source') }}
+                    </a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="https://github.com/python/python-docs-es/blob/{{ version }}/{{ sourcename|replace('.rst.txt', '.po') }}"
+                    rel="nofollow">{{ _('Show Source') }}
+                    </a>
+                </li>
+            {% endif %}
         </li>
     </ul>
 </div>
