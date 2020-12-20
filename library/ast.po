@@ -1,28 +1,34 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2001-2019, Python Software Foundation
+# Copyright (C) 2001-2020, Python Software Foundation
 # This file is distributed under the same license as the Python package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Maintained by the python-doc-es workteam.
+# docs-es@python.org /
+# https://mail.python.org/mailman3/lists/docs-es.python.org/
+# Check https://github.com/python/python-docs-es/blob/3.8/TRANSLATORS to
+# get the list of volunteers
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Python 3.7\n"
+"Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-06 11:59-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2020-05-05 12:54+0200\n"
+"PO-Revision-Date: 2020-06-29 00:37+0200\n"
+"Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
+"Language: es\n"
+"X-Generator: Poedit 2.3\n"
 
 #: ../Doc/library/ast.rst:2
 msgid ":mod:`ast` --- Abstract Syntax Trees"
-msgstr ""
+msgstr ":mod:`ast` --- Árboles de sintaxis abstracta"
 
 #: ../Doc/library/ast.rst:10
 msgid "**Source code:** :source:`Lib/ast.py`"
-msgstr ""
+msgstr "**Código fuente:** :source:`Lib/ast.py`"
 
 #: ../Doc/library/ast.rst:14
 msgid ""
@@ -31,6 +37,10 @@ msgid ""
 "with each Python release; this module helps to find out programmatically "
 "what the current grammar looks like."
 msgstr ""
+"El módulo :mod:`ast` ayuda a las aplicaciones de Python a procesar árboles "
+"de la gramática de sintaxis abstracta de Python. La sintaxis abstracta en sí "
+"misma puede cambiar con cada versión de Python; Este módulo ayuda a "
+"descubrir mediante programación cómo se ve la gramática actual."
 
 #: ../Doc/library/ast.rst:19
 msgid ""
@@ -41,10 +51,16 @@ msgid ""
 "syntax tree can be compiled into a Python code object using the built-in :"
 "func:`compile` function."
 msgstr ""
+"Se puede generar un árbol de sintaxis abstracta pasando :data:`ast."
+"PyCF_ONLY_AST` como un indicador de la función incorporada :func:`compile`, "
+"o usando el ayudante :func:`parse` provisto en este módulo. El resultado "
+"será un árbol de objetos cuyas clases todas heredan de :class:`ast.AST`. Se "
+"puede compilar un árbol de sintaxis abstracta en un objeto de código Python "
+"utilizando la función incorporada :func:`compile`."
 
 #: ../Doc/library/ast.rst:27
 msgid "Node classes"
-msgstr ""
+msgstr "Clases Nodo"
 
 #: ../Doc/library/ast.rst:31
 msgid ""
@@ -53,6 +69,10 @@ msgid ""
 "`below <abstract-grammar>`.  They are defined in the :mod:`_ast` C module "
 "and re-exported in :mod:`ast`."
 msgstr ""
+"Esta es la base de todas las clases de nodo AST. Las clases de nodo reales "
+"se derivan del archivo :file:`Parser/Python.asdl`, que se reproduce :ref:"
+"`abajo <abstract-grammar>`. Se definen en el módulo :mod:`_ast` C y se "
+"reexportan en :mod:`ast`."
 
 #: ../Doc/library/ast.rst:36
 msgid ""
@@ -64,12 +84,22 @@ msgid ""
 "rules with alternatives (aka \"sums\"), the left-hand side class is "
 "abstract: only instances of specific constructor nodes are ever created."
 msgstr ""
+"Hay una clase definida para cada símbolo del lado izquierdo en la gramática "
+"abstracta (por ejemplo, :class:`ast.stmt` o :class:`ast.expr`). Además, hay "
+"una clase definida para cada constructor en el lado derecho; estas clases "
+"heredan de las clases para los árboles del lado izquierdo. Por ejemplo, :"
+"class:`ast.BinOp` hereda de :class:`ast.expr`. Para las reglas de producción "
+"con alternativas (también conocidas como \"sumas\"), la clase del lado "
+"izquierdo es abstracta: solo se crean instancias de nodos de constructor "
+"específicos."
 
 #: ../Doc/library/ast.rst:49
 msgid ""
 "Each concrete class has an attribute :attr:`_fields` which gives the names "
 "of all child nodes."
 msgstr ""
+"Cada clase concreta tiene un atributo :attr:`_fields` que proporciona los "
+"nombres de todos los nodos secundarios."
 
 #: ../Doc/library/ast.rst:52
 msgid ""
@@ -77,6 +107,9 @@ msgid ""
 "the type as defined in the grammar.  For example, :class:`ast.BinOp` "
 "instances have an attribute :attr:`left` of type :class:`ast.expr`."
 msgstr ""
+"Cada instancia de una clase concreta tiene un atributo para cada nodo "
+"secundario, del tipo definido en la gramática. Por ejemplo, las instancias :"
+"class:`ast.BinOp` tienen un atributo :attr:`left` de tipo :class:`ast.expr`."
 
 #: ../Doc/library/ast.rst:56
 msgid ""
@@ -86,106 +119,250 @@ msgid ""
 "lists.  All possible attributes must be present and have valid values when "
 "compiling an AST with :func:`compile`."
 msgstr ""
+"Si estos atributos están marcados como opcionales en la gramática (usando un "
+"signo de interrogación), el valor podría ser ``None``. Si los atributos "
+"pueden tener cero o más valores (marcados con un asterisco), los valores se "
+"representan como listas de Python. Todos los atributos posibles deben estar "
+"presentes y tener valores válidos al compilar un AST con :func:`compile`."
 
-#: ../Doc/library/ast.rst:65
+#: ../Doc/library/ast.rst:67
 msgid ""
 "Instances of :class:`ast.expr` and :class:`ast.stmt` subclasses have :attr:"
-"`lineno` and :attr:`col_offset` attributes.  The :attr:`lineno` is the line "
-"number of source text (1-indexed so the first line is line 1) and the :attr:"
-"`col_offset` is the UTF-8 byte offset of the first token that generated the "
-"node.  The UTF-8 offset is recorded because the parser uses UTF-8 internally."
+"`lineno`, :attr:`col_offset`, :attr:`lineno`, and :attr:`col_offset` "
+"attributes.  The :attr:`lineno` and :attr:`end_lineno` are the first and "
+"last line numbers of source text span (1-indexed so the first line is line "
+"1) and the :attr:`col_offset` and :attr:`end_col_offset` are the "
+"corresponding UTF-8 byte offsets of the first and last tokens that generated "
+"the node. The UTF-8 offset is recorded because the parser uses UTF-8 "
+"internally."
 msgstr ""
+"Las instancias de las subclases :class:`ast.expr` y :class:`ast.stmt` tienen "
+"atributos :attr:`lineno`, :attr:`col_offset`, :attr:`lineno`, y :attr:"
+"`col_offset`. Los :attr:`lineno` y :attr:`end_lineno` son los números de la "
+"primera y última línea del intervalo de texto de origen (1 indexado, por lo "
+"que la primera línea es la línea 1) y el :attr:`col_offset` y :attr:"
+"`end_col_offset` son las correspondientes compensaciones de bytes UTF-8 del "
+"primer y último token que generó el nodo. El desplazamiento UTF-8 se "
+"registra porque el analizador utiliza UTF-8 internamente."
 
-#: ../Doc/library/ast.rst:72
+#: ../Doc/library/ast.rst:75
+msgid ""
+"Note that the end positions are not required by the compiler and are "
+"therefore optional. The end offset is *after* the last symbol, for example "
+"one can get the source segment of a one-line expression node using "
+"``source_line[node.col_offset : node.end_col_offset]``."
+msgstr ""
+"Tenga en cuenta que el compilador no requiere las posiciones finales y, por "
+"lo tanto, son opcionales. El desplazamiento final es *después* del último "
+"símbolo, por ejemplo, uno puede obtener el segmento fuente de un nodo de "
+"expresión de una línea usando ``source_line[node.col_offset: node."
+"end_col_offset]``."
+
+#: ../Doc/library/ast.rst:80
 msgid ""
 "The constructor of a class :class:`ast.T` parses its arguments as follows:"
 msgstr ""
+"El constructor de una clase :class:`ast.T` analiza sus argumentos de la "
+"siguiente manera:"
 
-#: ../Doc/library/ast.rst:74
+#: ../Doc/library/ast.rst:82
 msgid ""
 "If there are positional arguments, there must be as many as there are items "
 "in :attr:`T._fields`; they will be assigned as attributes of these names."
 msgstr ""
+"Si hay argumentos posicionales, debe haber tantos como elementos en :attr:`T."
+"_fields`; serán asignados como atributos de estos nombres."
 
-#: ../Doc/library/ast.rst:76
+#: ../Doc/library/ast.rst:84
 msgid ""
 "If there are keyword arguments, they will set the attributes of the same "
 "names to the given values."
 msgstr ""
+"Si hay argumentos de palabras clave, establecerán los atributos de los "
+"mismos nombres a los valores dados."
 
-#: ../Doc/library/ast.rst:79
+#: ../Doc/library/ast.rst:87
 msgid ""
 "For example, to create and populate an :class:`ast.UnaryOp` node, you could "
 "use ::"
 msgstr ""
+"Por ejemplo, para crear y completar un nodo :class:`ast.UnaryOp`, puede "
+"usar ::"
 
-#: ../Doc/library/ast.rst:91
+#: ../Doc/library/ast.rst:99
 msgid "or the more compact ::"
-msgstr ""
+msgstr "o la más compacta ::"
 
-#: ../Doc/library/ast.rst:100
+#: ../Doc/library/ast.rst:106
+msgid "Class :class:`ast.Constant` is now used for all constants."
+msgstr "La clase :class:`ast.Constant` ahora se usa para todas las constantes."
+
+#: ../Doc/library/ast.rst:110
+msgid ""
+"Old classes :class:`ast.Num`, :class:`ast.Str`, :class:`ast.Bytes`, :class:"
+"`ast.NameConstant` and :class:`ast.Ellipsis` are still available, but they "
+"will be removed in future Python releases.  In the meanwhile, instantiating "
+"them will return an instance of a different class."
+msgstr ""
+"Las clases antiguas :class:`ast.Num`, :class:`ast.Str`, :class:`ast.Bytes`, :"
+"class:`ast.NameConstant` y :class:`ast.Ellipsis` todavía están disponibles, "
+"pero se eliminarán en futuras versiones de Python. Mientras tanto, "
+"instanciarlos retornará una instancia de una clase diferente."
+
+#: ../Doc/library/ast.rst:119
 msgid "Abstract Grammar"
-msgstr ""
+msgstr "Gramática abstracta"
 
-#: ../Doc/library/ast.rst:102
+#: ../Doc/library/ast.rst:121
 msgid "The abstract grammar is currently defined as follows:"
-msgstr ""
+msgstr "La gramática abstracta se define actualmente de la siguiente manera:"
 
-#: ../Doc/library/ast.rst:109
+#: ../Doc/library/ast.rst:128
 msgid ":mod:`ast` Helpers"
-msgstr ""
+msgstr "Ayudantes de :mod:`ast`"
 
-#: ../Doc/library/ast.rst:111
+#: ../Doc/library/ast.rst:130
 msgid ""
 "Apart from the node classes, the :mod:`ast` module defines these utility "
 "functions and classes for traversing abstract syntax trees:"
 msgstr ""
+"Además de las clases de nodo, el módulo :mod:`ast` define estas funciones y "
+"clases de utilidad para atravesar árboles de sintaxis abstracta:"
 
-#: ../Doc/library/ast.rst:116
+#: ../Doc/library/ast.rst:135
 msgid ""
 "Parse the source into an AST node.  Equivalent to ``compile(source, "
 "filename, mode, ast.PyCF_ONLY_AST)``."
 msgstr ""
+"Analiza la fuente en un nodo AST. Equivalente a ``compile(source, filename, "
+"mode, ast.PyCF_ONLY_AST)``."
 
-#: ../Doc/library/ast.rst:120 ../Doc/library/ast.rst:138
+#: ../Doc/library/ast.rst:138
+msgid ""
+"If ``type_comments=True`` is given, the parser is modified to check and "
+"return type comments as specified by :pep:`484` and :pep:`526`. This is "
+"equivalent to adding :data:`ast.PyCF_TYPE_COMMENTS` to the flags passed to :"
+"func:`compile()`.  This will report syntax errors for misplaced type "
+"comments.  Without this flag, type comments will be ignored, and the "
+"``type_comment`` field on selected AST nodes will always be ``None``.  In "
+"addition, the locations of ``# type: ignore`` comments will be returned as "
+"the ``type_ignores`` attribute of :class:`Module` (otherwise it is always an "
+"empty list)."
+msgstr ""
+"Si se proporciona ``type_comments=True``, el analizador se modifica para "
+"verificar y retornar los comentarios de tipo según lo especificado por :pep:"
+"`484` y :pep:`526`. Esto es equivalente a agregar :data:`ast."
+"PyCF_TYPE_COMMENTS` a los flags pasados a :func:`compile()`. Esto informará "
+"errores de sintaxis para comentarios de tipo fuera de lugar. Sin este flag, "
+"los comentarios de tipo se ignorarán y el campo ``type_comment`` en los "
+"nodos AST seleccionados siempre será ``None``. Además, las ubicaciones de "
+"los comentarios ``# type: ignore`` se retornarán como el atributo "
+"``type_ignores`` de :class:`Module` (de lo contrario, siempre es una lista "
+"vacía)."
+
+#: ../Doc/library/ast.rst:148
+msgid ""
+"In addition, if ``mode`` is ``'func_type'``, the input syntax is modified to "
+"correspond to :pep:`484` \"signature type comments\", e.g. ``(str, int) -> "
+"List[str]``."
+msgstr ""
+"Además, si ``modo`` es ``'func_type'``, la sintaxis de entrada se modifica "
+"para corresponder a :pep:`484` \"comentarios de tipo de firma\", por ejemplo "
+"``(str, int) -> List[str]``."
+
+#: ../Doc/library/ast.rst:152
+msgid ""
+"Also, setting ``feature_version`` to a tuple ``(major, minor)`` will attempt "
+"to parse using that Python version's grammar. Currently ``major`` must equal "
+"to ``3``.  For example, setting ``feature_version=(3, 4)`` will allow the "
+"use of ``async`` and ``await`` as variable names.  The lowest supported "
+"version is ``(3, 4)``; the highest is ``sys.version_info[0:2]``."
+msgstr ""
+"Además, establece ``feature_version`` en una tupla ``(major, minor)`` "
+"intentará analizar usando la gramática de esa versión de Python. Actualmente "
+"``major`` debe ser igual a ``3``. Por ejemplo, establece "
+"``feature_version=(3, 4)`` permitirá el uso de ``async`` y ``await`` como "
+"nombres de variables. La versión más baja admitida es ``(3, 4)``; la más "
+"alto es ``sys.version_info[0:2]``."
+
+#: ../Doc/library/ast.rst:160 ../Doc/library/ast.rst:181
 msgid ""
 "It is possible to crash the Python interpreter with a sufficiently large/"
 "complex string due to stack depth limitations in Python's AST compiler."
 msgstr ""
+"Es posible bloquear el intérprete de Python con una cadena de caracteres "
+"suficientemente grande/compleja debido a las limitaciones de profundidad de "
+"pila en el compilador AST de Python."
 
-#: ../Doc/library/ast.rst:127
+#: ../Doc/library/ast.rst:164
+msgid "Added ``type_comments``, ``mode='func_type'`` and ``feature_version``."
+msgstr ""
+"Se agregaron ``type_comments``, ``mode='func_type'`` y ``feature_version``."
+
+#: ../Doc/library/ast.rst:170
 msgid ""
 "Safely evaluate an expression node or a string containing a Python literal "
 "or container display.  The string or node provided may only consist of the "
 "following Python literal structures: strings, bytes, numbers, tuples, lists, "
 "dicts, sets, booleans, and ``None``."
 msgstr ""
+"Evalúa de forma segura un nodo de expresión o una cadena de caracteres que "
+"contenga un literal de Python o un visualizador de contenedor. La cadena o "
+"nodo proporcionado solo puede consistir en las siguientes estructuras "
+"literales de Python: cadenas de caracteres, bytes, números, tuplas, listas, "
+"diccionarios, conjuntos, booleanos y ``None``."
 
-#: ../Doc/library/ast.rst:132
+#: ../Doc/library/ast.rst:175
 msgid ""
 "This can be used for safely evaluating strings containing Python values from "
 "untrusted sources without the need to parse the values oneself.  It is not "
 "capable of evaluating arbitrarily complex expressions, for example involving "
 "operators or indexing."
 msgstr ""
+"Esto se puede usar para evaluar de forma segura las cadenas de caracteres "
+"que contienen valores de Python de fuentes no confiables sin la necesidad de "
+"analizar los valores uno mismo. No es capaz de evaluar expresiones complejas "
+"arbitrariamente, por ejemplo, que involucran operadores o indexación."
 
-#: ../Doc/library/ast.rst:142
+#: ../Doc/library/ast.rst:185
 msgid "Now allows bytes and set literals."
-msgstr ""
+msgstr "Ahora permite bytes y establece literales."
 
-#: ../Doc/library/ast.rst:148
+#: ../Doc/library/ast.rst:191
 msgid ""
 "Return the docstring of the given *node* (which must be a :class:"
 "`FunctionDef`, :class:`AsyncFunctionDef`, :class:`ClassDef`, or :class:"
 "`Module` node), or ``None`` if it has no docstring. If *clean* is true, "
 "clean up the docstring's indentation with :func:`inspect.cleandoc`."
 msgstr ""
+"Retorna la cadena de caracteres de documentación del *node* dado (que debe "
+"ser un nodo :class:`FunctionDef`, :class:`AsyncFunctionDef`, :class:"
+"`ClassDef`, o :class:`Module`), o ``None`` si no tiene docstring. Si *clean* "
+"es verdadero, limpia la sangría del docstring con :func:`inspect.cleandoc`."
 
-#: ../Doc/library/ast.rst:154
+#: ../Doc/library/ast.rst:197
 msgid ":class:`AsyncFunctionDef` is now supported."
-msgstr ""
+msgstr ":class:`AsyncFunctionDef` ahora está soportada."
 
-#: ../Doc/library/ast.rst:160
+#: ../Doc/library/ast.rst:203
+msgid ""
+"Get source code segment of the *source* that generated *node*. If some "
+"location information (:attr:`lineno`, :attr:`end_lineno`, :attr:"
+"`col_offset`, or :attr:`end_col_offset`) is missing, return ``None``."
+msgstr ""
+"Obtenga el segmento de código fuente del *source* que generó *node*. Si "
+"falta información de ubicación (:attr:`lineno`, :attr:`end_lineno`, :attr:"
+"`col_offset`, o :attr:`end_col_offset`), retorna ``None``."
+
+#: ../Doc/library/ast.rst:207
+msgid ""
+"If *padded* is ``True``, the first line of a multi-line statement will be "
+"padded with spaces to match its original position."
+msgstr ""
+"Si *padded* es ``True``, la primera línea de una declaración de varias "
+"líneas se rellenará con espacios para que coincidan con su posición original."
+
+#: ../Doc/library/ast.rst:215
 msgid ""
 "When you compile a node tree with :func:`compile`, the compiler expects :"
 "attr:`lineno` and :attr:`col_offset` attributes for every node that supports "
@@ -193,82 +370,133 @@ msgid ""
 "adds these attributes recursively where not already set, by setting them to "
 "the values of the parent node.  It works recursively starting at *node*."
 msgstr ""
+"Cuando compila un árbol de nodos con :func:`compile`, el compilador espera "
+"los atributos :attr:`lineno` y :attr:`col_offset` para cada nodo que los "
+"soporta. Es bastante tedioso completar los nodos generados, por lo que este "
+"ayudante agrega estos atributos de forma recursiva donde aún no están "
+"establecidos, configurándolos en los valores del nodo principal. Funciona de "
+"forma recursiva comenzando en *node*."
 
-#: ../Doc/library/ast.rst:169
+#: ../Doc/library/ast.rst:224
 msgid ""
-"Increment the line number of each node in the tree starting at *node* by "
-"*n*. This is useful to \"move code\" to a different location in a file."
+"Increment the line number and end line number of each node in the tree "
+"starting at *node* by *n*. This is useful to \"move code\" to a different "
+"location in a file."
 msgstr ""
+"Incremente el número de línea y el número de línea final de cada nodo en el "
+"árbol comenzando en *node* por *n*. Esto es útil para \"mover código\" a una "
+"ubicación diferente en un archivo."
 
-#: ../Doc/library/ast.rst:175
+#: ../Doc/library/ast.rst:231
 msgid ""
-"Copy source location (:attr:`lineno` and :attr:`col_offset`) from *old_node* "
-"to *new_node* if possible, and return *new_node*."
+"Copy source location (:attr:`lineno`, :attr:`col_offset`, :attr:"
+"`end_lineno`, and :attr:`end_col_offset`) from *old_node* to *new_node* if "
+"possible, and return *new_node*."
 msgstr ""
+"Copia la ubicación de origen (:attr:`lineno`, :attr:`col_offset`, :attr:"
+"`end_lineno`, y :attr:`end_col_offset`) de *old_node* a *new_node* si es "
+"posible, y retorna *new_node*."
 
-#: ../Doc/library/ast.rst:181
+#: ../Doc/library/ast.rst:238
 msgid ""
 "Yield a tuple of ``(fieldname, value)`` for each field in ``node._fields`` "
 "that is present on *node*."
 msgstr ""
+"Produce (*yield*) una tupla de ``(fieldname, value)`` para cada campo en "
+"``node._fields`` que está presente en *node*."
 
-#: ../Doc/library/ast.rst:187
+#: ../Doc/library/ast.rst:244
 msgid ""
 "Yield all direct child nodes of *node*, that is, all fields that are nodes "
 "and all items of fields that are lists of nodes."
 msgstr ""
+"Cede todos los nodos secundarios directos de *node*, es decir, todos los "
+"campos que son nodos y todos los elementos de campos que son listas de nodos."
 
-#: ../Doc/library/ast.rst:193
+#: ../Doc/library/ast.rst:250
 msgid ""
 "Recursively yield all descendant nodes in the tree starting at *node* "
 "(including *node* itself), in no specified order.  This is useful if you "
 "only want to modify nodes in place and don't care about the context."
 msgstr ""
+"Recursivamente produce todos los nodos descendientes en el árbol comenzando "
+"en *node* (incluido *node* en sí mismo), en ningún orden especificado. Esto "
+"es útil si solo desea modificar los nodos en su lugar y no le importa el "
+"contexto."
 
-#: ../Doc/library/ast.rst:200
+#: ../Doc/library/ast.rst:257
 msgid ""
 "A node visitor base class that walks the abstract syntax tree and calls a "
 "visitor function for every node found.  This function may return a value "
 "which is forwarded by the :meth:`visit` method."
 msgstr ""
+"Una clase base de visitante de nodo que recorre el árbol de sintaxis "
+"abstracta y llama a una función de visitante para cada nodo encontrado. Esta "
+"función puede retornar un valor que se reenvía mediante el método :meth:"
+"`visit`."
 
-#: ../Doc/library/ast.rst:204
+#: ../Doc/library/ast.rst:261
 msgid ""
 "This class is meant to be subclassed, with the subclass adding visitor "
 "methods."
 msgstr ""
+"Esta clase está destinada a ser subclase, con la subclase agregando métodos "
+"de visitante."
 
-#: ../Doc/library/ast.rst:209
+#: ../Doc/library/ast.rst:266
 msgid ""
 "Visit a node.  The default implementation calls the method called :samp:"
 "`self.visit_{classname}` where *classname* is the name of the node class, "
 "or :meth:`generic_visit` if that method doesn't exist."
 msgstr ""
+"Visita un nodo. La implementación predeterminada llama al método llamado :"
+"samp:`self.visit_{classname}` donde *classname* es el nombre de la clase de "
+"nodo, o :meth:`generic_visit` si ese método no existe."
 
-#: ../Doc/library/ast.rst:215
+#: ../Doc/library/ast.rst:272
 msgid "This visitor calls :meth:`visit` on all children of the node."
-msgstr ""
+msgstr "Este visitante llama :meth:`visit` en todos los hijos del nodo."
 
-#: ../Doc/library/ast.rst:217
+#: ../Doc/library/ast.rst:274
 msgid ""
 "Note that child nodes of nodes that have a custom visitor method won't be "
 "visited unless the visitor calls :meth:`generic_visit` or visits them itself."
 msgstr ""
+"Tenga en cuenta que los nodos secundarios de los nodos que tienen un método "
+"de visitante personalizado no se visitarán a menos que el visitante llame :"
+"meth:`generic_visit` o los visite a sí mismo."
 
-#: ../Doc/library/ast.rst:221
+#: ../Doc/library/ast.rst:278
 msgid ""
 "Don't use the :class:`NodeVisitor` if you want to apply changes to nodes "
 "during traversal.  For this a special visitor exists (:class:"
 "`NodeTransformer`) that allows modifications."
 msgstr ""
+"No use :class:`NodeVisitor` si desea aplicar cambios a los nodos durante el "
+"recorrido. Para esto existe un visitante especial (:class:`NodeTransformer`) "
+"que permite modificaciones."
 
-#: ../Doc/library/ast.rst:228
+#: ../Doc/library/ast.rst:284
+msgid ""
+"Methods :meth:`visit_Num`, :meth:`visit_Str`, :meth:`visit_Bytes`, :meth:"
+"`visit_NameConstant` and :meth:`visit_Ellipsis` are deprecated now and will "
+"not be called in future Python versions.  Add the :meth:`visit_Constant` "
+"method to handle all constant nodes."
+msgstr ""
+"Los métodos :meth:`visit_Num`, :meth:`visit_Str`, :meth:`visit_Bytes`, :meth:"
+"`visit_NameConstant` y :meth:`visit_Ellipsis` están en desuso ahora y no "
+"serán llamados en futuras versiones de Python. Agregue el método :meth:"
+"`visit_Constant` para manejar todos los nodos constantes."
+
+#: ../Doc/library/ast.rst:292
 msgid ""
 "A :class:`NodeVisitor` subclass that walks the abstract syntax tree and "
 "allows modification of nodes."
 msgstr ""
+"Una subclase de :class:`NodeVisitor` que recorre el árbol de sintaxis "
+"abstracta y permite la modificación de nodos."
 
-#: ../Doc/library/ast.rst:231
+#: ../Doc/library/ast.rst:295
 msgid ""
 "The :class:`NodeTransformer` will walk the AST and use the return value of "
 "the visitor methods to replace or remove the old node.  If the return value "
@@ -276,43 +504,81 @@ msgid ""
 "location, otherwise it is replaced with the return value.  The return value "
 "may be the original node in which case no replacement takes place."
 msgstr ""
+"La clase :class:`NodeTransformer` recorrerá el AST y usará el valor de "
+"retorno de los métodos del visitante para reemplazar o eliminar el nodo "
+"anterior. Si el valor de retorno del método de visitante es ``None``, el "
+"nodo se eliminará de su ubicación; de lo contrario, se reemplazará con el "
+"valor de retorno. El valor de retorno puede ser el nodo original, en cuyo "
+"caso no se realiza ningún reemplazo."
 
-#: ../Doc/library/ast.rst:237
+#: ../Doc/library/ast.rst:301
 msgid ""
 "Here is an example transformer that rewrites all occurrences of name lookups "
 "(``foo``) to ``data['foo']``::"
 msgstr ""
+"Aquí hay un transformador de ejemplo que reescribe todas las apariciones de "
+"búsquedas de nombres (``foo``) en ``data['foo']``::"
 
-#: ../Doc/library/ast.rst:249
+#: ../Doc/library/ast.rst:313
 msgid ""
 "Keep in mind that if the node you're operating on has child nodes you must "
 "either transform the child nodes yourself or call the :meth:`generic_visit` "
 "method for the node first."
 msgstr ""
+"Tenga en cuenta que si el nodo en el que está operando tiene nodos "
+"secundarios, debe transformar los nodos secundarios usted mismo o llamar "
+"primero al método :meth:`generic_visit` para el nodo."
 
-#: ../Doc/library/ast.rst:253
+#: ../Doc/library/ast.rst:317
 msgid ""
 "For nodes that were part of a collection of statements (that applies to all "
 "statement nodes), the visitor may also return a list of nodes rather than "
 "just a single node."
 msgstr ""
+"Para los nodos que formaban parte de una colección de declaraciones (que se "
+"aplica a todos los nodos de declaración), el visitante también puede "
+"retornar una lista de nodos en lugar de solo un nodo."
 
-#: ../Doc/library/ast.rst:257
-msgid "Usually you use the transformer like this::"
+#: ../Doc/library/ast.rst:321
+msgid ""
+"If :class:`NodeTransformer` introduces new nodes (that weren't part of "
+"original tree) without giving them location information (such as :attr:"
+"`lineno`), :func:`fix_missing_locations` should be called with the new sub-"
+"tree to recalculate the location information::"
 msgstr ""
+"Si :class:`NodeTransformer` introduce nuevos nodos (que no eran parte del "
+"árbol original) sin darles información de ubicación (como :attr:`lineno`), :"
+"func:`fix_missing_locations` debería llamarse con el nuevo sub-árbol para "
+"recalcular la información de ubicación ::"
 
-#: ../Doc/library/ast.rst:264
+#: ../Doc/library/ast.rst:329
+msgid "Usually you use the transformer like this::"
+msgstr "Usualmente usas el transformador así:"
+
+#: ../Doc/library/ast.rst:336
 msgid ""
 "Return a formatted dump of the tree in *node*.  This is mainly useful for "
-"debugging purposes.  The returned string will show the names and the values "
-"for fields.  This makes the code impossible to evaluate, so if evaluation is "
-"wanted *annotate_fields* must be set to ``False``.  Attributes such as line "
-"numbers and column offsets are not dumped by default.  If this is wanted, "
-"*include_attributes* can be set to ``True``."
+"debugging purposes.  If *annotate_fields* is true (by default), the returned "
+"string will show the names and the values for fields. If *annotate_fields* "
+"is false, the result string will be more compact by omitting unambiguous "
+"field names.  Attributes such as line numbers and column offsets are not "
+"dumped by default.  If this is wanted, *include_attributes* can be set to "
+"true."
 msgstr ""
+"Retorna un volcado formateado del árbol en *node*. Esto es principalmente "
+"útil para propósitos de depuración. Si *annotate_fields* es verdadero (por "
+"defecto), la cadena de caracteres retornada mostrará los nombres y los "
+"valores de los campos. Si *annotate_fields* es falso, la cadena de "
+"resultados será más compacta omitiendo nombres de campo no ambiguos. Los "
+"atributos como los números de línea y las compensaciones de columna no se "
+"vuelcan de forma predeterminada. Si esto se desea, *include_attributes* se "
+"puede establecer en verdadero."
 
-#: ../Doc/library/ast.rst:273
+#: ../Doc/library/ast.rst:346
 msgid ""
 "`Green Tree Snakes <https://greentreesnakes.readthedocs.io/>`_, an external "
 "documentation resource, has good details on working with Python ASTs."
 msgstr ""
+"`Green Tree Snakes <https://greentreesnakes.readthedocs.io/>`_, un recurso "
+"de documentación externo, tiene buenos detalles sobre cómo trabajar con "
+"Python AST."
