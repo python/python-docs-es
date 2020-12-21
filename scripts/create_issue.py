@@ -17,7 +17,7 @@ pofile = PoFileStats(Path(pofilename))
 
 g = Github(os.environ.get('GITHUB_TOKEN'))
 
-repo = g.get_repo('PyCampES/python-docs-es')
+repo = g.get_repo('python/python-docs-es')
 
 
 issues = repo.get_issues(state='all')
