@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-06 11:59-0400\n"
-"PO-Revision-Date: 2020-12-09 18:20-0600\n"
+"PO-Revision-Date: 2020-12-28 00:25-0600\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -694,7 +694,7 @@ msgstr ""
 
 #: ../Doc/whatsnew/3.5.rst:479
 msgid "PEP 475: Retry system calls failing with EINTR"
-msgstr ""
+msgstr "PEP 475: Reintentar las llamadas al sistema que fallan con EINTR"
 
 #: ../Doc/whatsnew/3.5.rst:481
 msgid ""
@@ -703,16 +703,23 @@ msgid ""
 "would raise :exc:`InterruptedError` in such cases.  This meant that, when "
 "writing a Python application, the developer had two choices:"
 msgstr ""
+"Se retorna un código de error :py:data:`errno.EINTR` siempre que una llamada "
+"al sistema, que está esperando E/S, es interrumpida por una señal. "
+"Anteriormente, Python generaría :exc:`InterruptedError` en tales casos. Esto "
+"significaba que, al escribir una aplicación en Python, el desarrollador "
+"tenía dos opciones:"
 
 #: ../Doc/whatsnew/3.5.rst:486
 msgid "Ignore the ``InterruptedError``."
-msgstr ""
+msgstr "Ignorar el ``InterruptedError``."
 
 #: ../Doc/whatsnew/3.5.rst:487
 msgid ""
 "Handle the ``InterruptedError`` and attempt to restart the interrupted "
 "system call at every call site."
 msgstr ""
+"Manejar el ``InterruptedError`` y probar reiniciar la llamada interrumpida "
+"al sistema en cada sitio de llamada."
 
 #: ../Doc/whatsnew/3.5.rst:490
 msgid ""
@@ -720,10 +727,13 @@ msgid ""
 "adds a large amount of boilerplate that makes the code nearly unreadable.  "
 "Compare::"
 msgstr ""
+"La primera opción hace que una aplicación falle intermitentemente. La "
+"segunda opción agrega una gran cantidad de código repetitivo que hace que el "
+"código sea casi ilegible. Compara::"
 
 #: ../Doc/whatsnew/3.5.rst:496
 msgid "and::"
-msgstr ""
+msgstr "y::"
 
 #: ../Doc/whatsnew/3.5.rst:505
 msgid ""
@@ -733,20 +743,28 @@ msgid ""
 "standard library, more robust.  Note that the system call is only retried if "
 "the signal handler does not raise an exception."
 msgstr ""
+":pep:`475` implementa el reintento automático de las llamadas al sistema en "
+"``EINTR``. Esto elimina la carga de lidiar con ``EINTR`` o la excepción :exc:"
+"`InterruptedError` en el código de usuario en la mayoría de las situaciones "
+"y hace que los programas de Python, incluida la biblioteca estándar, sean "
+"más robustos. Ten en cuenta que la llamada al sistema sólo se reintenta si "
+"el gestor de señales no lanza una excepción."
 
 #: ../Doc/whatsnew/3.5.rst:512
 msgid ""
 "Below is a list of functions which are now retried when interrupted by a "
 "signal:"
 msgstr ""
+"A continuación se muestra una lista de funciones que ahora se reintentan "
+"cuando son interrumpidas por una señal:"
 
 #: ../Doc/whatsnew/3.5.rst:515
 msgid ":func:`open` and :func:`io.open`;"
-msgstr ""
+msgstr ":func:`open` y :func:`io.open`;"
 
 #: ../Doc/whatsnew/3.5.rst:517
 msgid "functions of the :mod:`faulthandler` module;"
-msgstr ""
+msgstr "funciones del módulo :mod:`faulthandler`;"
 
 #: ../Doc/whatsnew/3.5.rst:519
 msgid ""
@@ -759,6 +777,14 @@ msgid ""
 "wait4`, :func:`~os.wait`, :func:`~os.waitid`, :func:`~os.waitpid`, :func:"
 "`~os.write`, :func:`~os.writev`;"
 msgstr ""
+"funciones del módulo :mod:`os`: :func:`~os.fchdir`, :func:`~os.fchmod`, :"
+"func:`~os.fchown`, :func:`~os.fdatasync`, :func:`~os.fstat`, :func:`~os."
+"fstatvfs`, :func:`~os.fsync`, :func:`~os.ftruncate`, :func:`~os.mkfifo`, :"
+"func:`~os.mknod`, :func:`~os.open`, :func:`~os.posix_fadvise`, :func:`~os."
+"posix_fallocate`, :func:`~os.pread`, :func:`~os.pwrite`, :func:`~os.read`, :"
+"func:`~os.readv`, :func:`~os.sendfile`, :func:`~os.wait3`, :func:`~os."
+"wait4`, :func:`~os.wait`, :func:`~os.waitid`, :func:`~os.waitpid`, :func:"
+"`~os.write`, :func:`~os.writev`;"
 
 #: ../Doc/whatsnew/3.5.rst:529
 msgid ""
@@ -766,6 +792,9 @@ msgid ""
 "`~errno.EINTR` errors; the syscall is not retried (see the PEP for the "
 "rationale);"
 msgstr ""
+"casos especiales: ahora :func:`os.close` y :func:`os.dup2` ignoran errores :"
+"py:data:`~errno.EINTR`; no se reintenta la llamada al sistema (consultar la "
+"PEP para la justificación);"
 
 #: ../Doc/whatsnew/3.5.rst:533
 msgid ""
@@ -773,6 +802,10 @@ msgid ""
 "`epoll.poll() <select.epoll.poll>`, :func:`kqueue.control() <select.kqueue."
 "control>`, :func:`poll.poll() <select.poll.poll>`, :func:`~select.select`;"
 msgstr ""
+"funciones del módulo :mod:`select`: :func:`devpoll.poll() <select.devpoll."
+"poll>`, :func:`epoll.poll() <select.epoll.poll>`, :func:`kqueue.control() "
+"<select.kqueue.control>`, :func:`poll.poll() <select.poll.poll>`, :func:"
+"`~select.select`;"
 
 #: ../Doc/whatsnew/3.5.rst:538
 msgid ""
@@ -782,28 +815,35 @@ msgid ""
 "socket.recvmsg`, :meth:`~socket.socket.send`, :meth:`~socket.socket."
 "sendall`, :meth:`~socket.socket.sendmsg`, :meth:`~socket.socket.sendto`;"
 msgstr ""
+"métodos de la clase :class:`~socket.socket`: :meth:`~socket.socket.accept`, :"
+"meth:`~socket.socket.connect` (excepto para sockets sin bloqueo), :meth:"
+"`~socket.socket.recv`, :meth:`~socket.socket.recvfrom`, :meth:`~socket."
+"socket.recvmsg`, :meth:`~socket.socket.send`, :meth:`~socket.socket."
+"sendall`, :meth:`~socket.socket.sendmsg`, :meth:`~socket.socket.sendto`;"
 
 #: ../Doc/whatsnew/3.5.rst:545
 msgid ":func:`signal.sigtimedwait` and :func:`signal.sigwaitinfo`;"
-msgstr ""
+msgstr ":func:`signal.sigtimedwait` y :func:`signal.sigwaitinfo`;"
 
 #: ../Doc/whatsnew/3.5.rst:547
 msgid ":func:`time.sleep`."
-msgstr ""
+msgstr ":func:`time.sleep`."
 
 #: ../Doc/whatsnew/3.5.rst:552
 msgid ":pep:`475` -- Retry system calls failing with EINTR"
-msgstr ""
+msgstr ":pep:`475` -- Reintentar las llamadas al sistema que fallan con EINTR"
 
 #: ../Doc/whatsnew/3.5.rst:552
 msgid ""
 "PEP and implementation written by Charles-François Natali and Victor "
 "Stinner, with the help of Antoine Pitrou (the French connection)."
 msgstr ""
+"PEP e implementación escrita por Charles-François Natali y Victor Stinner, "
+"con la ayuda de Antoine Pitrou (la conexión francesa)."
 
 #: ../Doc/whatsnew/3.5.rst:559
 msgid "PEP 479: Change StopIteration handling inside generators"
-msgstr ""
+msgstr "PEP 479: Cambiar el gestor de StopIteration dentro de generadores"
 
 #: ../Doc/whatsnew/3.5.rst:561
 msgid ""
@@ -813,6 +853,11 @@ msgid ""
 "function was interpreted as the end of the iteration by the loop construct "
 "driving the generator."
 msgstr ""
+"La interacción de los generadores y :exc:`StopIteration` en las versiones de "
+"Python 3.4 y anteriores a veces fue sorprendente y podría ocultar bugs "
+"oscuros. Anteriormente, el ``StopIteration`` lanzado accidentalmente dentro "
+"de una función de generadores se interpretó como el final de la iteración "
+"por la construcción de bucle que impulsa el generador."
 
 #: ../Doc/whatsnew/3.5.rst:567
 msgid ""
@@ -824,12 +869,22 @@ msgid ""
 "generator to terminate silently. This is particularly pernicious in "
 "combination with the ``yield from`` construct."
 msgstr ""
+":pep:`479` cambia el comportamiento de los generadores: cuando se lanza una "
+"excepción ``StopIteration`` dentro de un generador, se reemplaza con una "
+"excepción :exc:`RuntimeError` antes de que salga del marco del generador. El "
+"objetivo principal de este cambio es facilitar la depuración en la situación "
+"en la que una llamada desprotegida a la función :func:`next` lanza una "
+"excepción ``StopIteration`` y hace que la iteración controlada por el "
+"generador termine silenciosamente. Esto es particularmente pernicioso en "
+"combinación con la construcción ``yield from``."
 
 #: ../Doc/whatsnew/3.5.rst:575
 msgid ""
 "This is a backwards incompatible change, so to enable the new behavior, a :"
 "term:`__future__` import is necessary::"
 msgstr ""
+"Este es un cambio incompatible hacia atrás, así que para habilitar el nuevo "
+"comportamiento, es necesario importar :term:`__future__`::"
 
 #: ../Doc/whatsnew/3.5.rst:595
 msgid ""
@@ -837,20 +892,25 @@ msgid ""
 "raised whenever a :exc:`StopIteration` exception is raised inside a "
 "generator."
 msgstr ""
+"Si no se importa ``__future__``, se lanzará la excepción :exc:"
+"`PendingDeprecationWarning` siempre que se lance una excepción :exc:"
+"`StopIteration` dentro de un generador."
 
 #: ../Doc/whatsnew/3.5.rst:601
 msgid ":pep:`479` -- Change StopIteration handling inside generators"
-msgstr ""
+msgstr ":pep:`479` -- Cambiar el gestor de StopIteration dentro de generadores"
 
 #: ../Doc/whatsnew/3.5.rst:601
 msgid ""
 "PEP written by Chris Angelico and Guido van Rossum. Implemented by Chris "
 "Angelico, Yury Selivanov and Nick Coghlan."
 msgstr ""
+"PEP escrito por Chris Angelico y Guido van Rossum. Implementado por Chris "
+"Angelico, Yury Selivanov y Nick Coghlan."
 
 #: ../Doc/whatsnew/3.5.rst:608
 msgid "PEP 485: A function for testing approximate equality"
-msgstr ""
+msgstr "PEP 485: Una función para probar la igualdad aproximada"
 
 #: ../Doc/whatsnew/3.5.rst:610
 msgid ""
@@ -861,25 +921,37 @@ msgid ""
 "the maximum allowed difference between ``isclose`` arguments, relative to "
 "the larger absolute value::"
 msgstr ""
+":pep:`485` agrega las funciones :func:`math.isclose` y :func:`cmath.isclose` "
+"que indican si dos valores son aproximadamente iguales o \"cercanos\" entre "
+"sí. Si dos valores se consideran cercanos o no, se determina conforme con "
+"las tolerancias absolutas y relativas dadas. La tolerancia relativa es la "
+"diferencia máxima permitida entre los argumentos ``isclose``, en relación "
+"con el valor absoluto mayor::"
 
 #: ../Doc/whatsnew/3.5.rst:625
 msgid ""
 "It is also possible to compare two values using absolute tolerance, which "
 "must be a non-negative value::"
 msgstr ""
+"También es posible comparar dos valores usando una tolerancia absoluta, que "
+"debe ser un valor no negativo::"
 
 #: ../Doc/whatsnew/3.5.rst:639
 msgid ":pep:`485` -- A function for testing approximate equality"
-msgstr ""
+msgstr ":pep:`485` -- Una función para probar la igualdad aproximada"
 
 #: ../Doc/whatsnew/3.5.rst:639
 msgid ""
 "PEP written by Christopher Barker; implemented by Chris Barker and Tal Einat."
 msgstr ""
+"PEP escrito por Christopher Barker; implementado por Chris Barker y Tal "
+"Einat."
 
 #: ../Doc/whatsnew/3.5.rst:646
 msgid "PEP 486: Make the Python Launcher aware of virtual environments"
 msgstr ""
+"PEP 486: Hacer que el launcher de Python sea consciente de los entornos "
+"virtuales"
 
 #: ../Doc/whatsnew/3.5.rst:648
 msgid ""
@@ -888,18 +960,24 @@ msgid ""
 "``VIRTUAL_ENV`` environment variable is set, the interpreter in the virtual "
 "environment will be used."
 msgstr ""
+":pep:`486` hace que el launcher de Windows (consultar :pep:`397`) sea "
+"consciente de un entorno virtual activo. Cuando se usa el intérprete "
+"predeterminado y se establece la variable de entorno ``VIRTUAL_ENV`` está "
+"configurado, se utilizará el intérprete en el entorno virtual."
 
 #: ../Doc/whatsnew/3.5.rst:655
 msgid ":pep:`486` -- Make the Python Launcher aware of virtual environments"
 msgstr ""
+":pep:`486` -- Hacer que el launcher de Python sea consciente de los entornos "
+"virtuales"
 
 #: ../Doc/whatsnew/3.5.rst:656
 msgid "PEP written and implemented by Paul Moore."
-msgstr ""
+msgstr "PEP escrito e implementado por Paul Moore."
 
 #: ../Doc/whatsnew/3.5.rst:662
 msgid "PEP 488: Elimination of PYO files"
-msgstr ""
+msgstr "PEP 488: Eliminación de archivos PYO"
 
 #: ../Doc/whatsnew/3.5.rst:664
 msgid ""
@@ -913,24 +991,37 @@ msgid ""
 "`importlib.util.cache_from_source` has an updated API to help with this "
 "change."
 msgstr ""
+":pep:`488` elimina el concepto de archivos ``.pyo``. Esto significa que los "
+"archivos ``.pyc`` representan tanto bytecode optimizado y sin optimizar. "
+"Para evitar la necesidad de regenerar constantemente archivos bytecode, "
+"ahora los archivos ``.pyc`` tienen una etiqueta opcional ``opt-`` en su "
+"nombre cuando se optimiza el bytecode. Esto tiene el efecto secundario de "
+"que no habrá más conflictos de nombres de archivos de bytecode cuando se "
+"ejecuta bajo :option:`-O` o :option:`-OO`. Por consiguiente, ahora los "
+"archivos bytecode generados a partir de :option:`-O` y :option:`-OO` pueden "
+"existir simultáneamente. :func:`importlib.util.cache_from_source` tiene una "
+"API actualizada para ayudar con este cambio."
 
 #: ../Doc/whatsnew/3.5.rst:676
 msgid ":pep:`488` -- Elimination of PYO files"
-msgstr ""
+msgstr ":pep:`488` -- Eliminación de archivos PYO"
 
 #: ../Doc/whatsnew/3.5.rst:677
 msgid "PEP written and implemented by Brett Cannon."
-msgstr ""
+msgstr "PEP escrito e implementado por Brett Cannon."
 
 #: ../Doc/whatsnew/3.5.rst:683
 msgid "PEP 489: Multi-phase extension module initialization"
-msgstr ""
+msgstr "PEP 489: Inicialización del módulo de extensión multifase"
 
 #: ../Doc/whatsnew/3.5.rst:685
 msgid ""
 ":pep:`489` updates extension module initialization to take advantage of the "
 "two step module loading mechanism introduced by :pep:`451` in Python 3.4."
 msgstr ""
+":pep:`489` actualiza la inicialización del módulo de extensión para "
+"aprovechar el mecanismo de carga del módulo de dos pasos introducido por :"
+"pep:`451` en Python 3.4."
 
 #: ../Doc/whatsnew/3.5.rst:688
 msgid ""
@@ -939,16 +1030,23 @@ msgid ""
 "modules, including the ability to use any valid identifier as a module name, "
 "rather than being restricted to ASCII."
 msgstr ""
+"Este cambio acerca la semántica de importación de los módulos de extensión "
+"que optan por usar el mecanismo nuevo a la de los módulos fuente y de "
+"bytecode de Python, incluida la capacidad de utilizar cualquier "
+"identificador válido como un nombre de módulo, en lugar de estar restringido "
+"a ASCII."
 
 #: ../Doc/whatsnew/3.5.rst:696
 msgid ":pep:`489` -- Multi-phase extension module initialization"
-msgstr ""
+msgstr ":pep:`489` -- Inicialización del módulo de extensión multifase"
 
 #: ../Doc/whatsnew/3.5.rst:696
 msgid ""
 "PEP written by Petr Viktorin, Stefan Behnel, and Nick Coghlan; implemented "
 "by Petr Viktorin."
 msgstr ""
+"PEP escrito por Petr Viktorin, Stefan Behnel y Nick Coghlan; implementado "
+"por Petr Viktorin."
 
 #: ../Doc/whatsnew/3.5.rst:701
 msgid "Other Language Changes"
