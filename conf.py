@@ -69,10 +69,16 @@ latex_documents = [
      _stdauthor, 'manual'),
 ]
 
-extensions.extend([
-    'sphinx_tabs.tabs',
-    'sphinxemoji.sphinxemoji',
-])
+try:
+    extensions.extend([
+        'sphinx_tabs.tabs',
+        'sphinxemoji.sphinxemoji',
+    ])
+except NameError:
+    extensions = [
+        'sphinx_tabs.tabs',
+        'sphinxemoji.sphinxemoji',
+    ]
 
 
 def setup(app):
