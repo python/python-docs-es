@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-12-23 13:32-0600\n"
+"PO-Revision-Date: 2021-01-11 20:12-0600\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2714,6 +2714,9 @@ msgid ""
 "of strings that represents the names accessible on module. If present, this "
 "function overrides the standard :func:`dir` search on a module."
 msgstr ""
+"La función ``__dir__`` debe no aceptar argumentos y retornar una secuencia "
+"de cadena de caracteres que representan los nombres accesibles en el módulo. "
+"De existir, esta función anula la búsqueda estándar :func:´dir´ en un módulo."
 
 #: ../Doc/reference/datamodel.rst:1583
 msgid ""
@@ -2721,6 +2724,10 @@ msgid ""
 "attributes, properties, etc.), one can set the ``__class__`` attribute of a "
 "module object to a subclass of :class:`types.ModuleType`. For example::"
 msgstr ""
+"Para una personalización más precisa sobre el comportamiento del módulo "
+"(estableciendo atributos, propiedades, etc.), se puede establecer el "
+"atributo ``__class__`` de un objeto de módulo a una subclase de :class:"
+"`types.ModuleType`. Por ejemplo::"
 
 #: ../Doc/reference/datamodel.rst:1601
 msgid ""
@@ -2729,26 +2736,31 @@ msgid ""
 "module globals (whether by code within the module, or via a reference to the "
 "module's globals dictionary) is unaffected."
 msgstr ""
+"Definiendo un módulo ``__getattr__`` y estableciendo un módulo ``__class__`` "
+"solo afecta búsquedas que utilizan la sintaxis de acceso a atributo -- "
+"acceder directamente a las globales del módulo (ya sea por código dentro del "
+"módulo, o a través de una referencia al diccionario de globales del módulo) "
+"no se ve afectado."
 
 #: ../Doc/reference/datamodel.rst:1606
 msgid "``__class__`` module attribute is now writable."
-msgstr ""
+msgstr "El atributo de módulo ``__class__`` es ahora escribible."
 
 #: ../Doc/reference/datamodel.rst:1609
 msgid "``__getattr__`` and ``__dir__`` module attributes."
-msgstr ""
+msgstr "Atributos de módulo ``__getattr__`` y ``__dir__``"
 
 #: ../Doc/reference/datamodel.rst:1614
 msgid ":pep:`562` - Module __getattr__ and __dir__"
-msgstr ""
+msgstr ":pep:`562` - Módulos __getattr__ y __dir__"
 
 #: ../Doc/reference/datamodel.rst:1615
 msgid "Describes the ``__getattr__`` and ``__dir__`` functions on modules."
-msgstr ""
+msgstr "Describe las funciones ``__getattr__`` y ``__dir__`` en módulos."
 
 #: ../Doc/reference/datamodel.rst:1621
 msgid "Implementing Descriptors"
-msgstr ""
+msgstr "Implementando Descriptores"
 
 #: ../Doc/reference/datamodel.rst:1623
 msgid ""
@@ -2759,6 +2771,12 @@ msgid ""
 "\" refers to the attribute whose name is the key of the property in the "
 "owner class' :attr:`~object.__dict__`."
 msgstr ""
+"Los siguientes métodos solo aplican cuando una instancia de clase que "
+"contiene el método (llamado clase *descriptora*) aparece en una clase "
+"*propietaria* (el descriptor debe estar en el diccionario de clase del "
+"propietario o en el diccionario de clase de alguno de sus padres). En los "
+"ejemplos a continuación, “el atributo” se refiere al atributo cuyo nombre es "
+"la llave de la propiedad en la clase propietaria :attr:`~object.__dict__`."
 
 #: ../Doc/reference/datamodel.rst:1633
 msgid ""
@@ -2768,12 +2786,19 @@ msgid ""
 "the attribute was accessed through, or ``None`` when the attribute is "
 "accessed through the *owner*."
 msgstr ""
+"Es llamado para obtener el atributo de la clase propietaria (acceso a "
+"atributos de clase) o de una instancia de dicha clase (acceso a atributos de "
+"instancia). El argumento opcional *owner* es la clase propietaria, mientras "
+"que *instance* es la instancia a través de la cual el atributo fue accedido, "
+"o ``None`` cuando el atributo es accedido a través de *owner*."
 
 #: ../Doc/reference/datamodel.rst:1639
 msgid ""
 "This method should return the computed attribute value or raise an :exc:"
 "`AttributeError` exception."
 msgstr ""
+"Este método debe retornar el valor de atributo calculado o lanzar una "
+"excepción :exc:`AttributeError`."
 
 #: ../Doc/reference/datamodel.rst:1642
 msgid ""
@@ -2784,12 +2809,20 @@ msgid ""
 "implementation always passes in both arguments whether they are required or "
 "not."
 msgstr ""
+":PEP:`252` especifica que :meth:`__get__` puede ser llamado con uno o dos "
+"argumentos. Los propios descriptores incorporados de Python soportan esta "
+"especificación; sin embargo, es probable que algunas herramientas de "
+"terceros tengan descriptores que requieran ambos argumentos. La propia "
+"implementación de :meth:`__getattribute__` en Python siempre pasa ambos "
+"argumentos si son requeridos o no."
 
 #: ../Doc/reference/datamodel.rst:1651
 msgid ""
 "Called to set the attribute on an instance *instance* of the owner class to "
 "a new value, *value*."
 msgstr ""
+"Es llamado para establecer el atributo en una instancia *instance* de la "
+"clase propietaria a un nuevo valor *value*."
 
 #: ../Doc/reference/datamodel.rst:1654
 msgid ""
@@ -2797,17 +2830,24 @@ msgid ""
 "descriptor to a \"data descriptor\".  See :ref:`descriptor-invocation` for "
 "more details."
 msgstr ""
+"Nota, agregar :meth:`__set__` o :meth:`__delete__` cambia el tipo de "
+"descriptor a un “descriptor de datos”. Ver :ref:`descriptor-invocation` para "
+"más detalles."
 
 #: ../Doc/reference/datamodel.rst:1660
 msgid ""
 "Called to delete the attribute on an instance *instance* of the owner class."
 msgstr ""
+"Es llamado para borrar el atributo en una instancia *instance* de la clase "
+"propietaria."
 
 #: ../Doc/reference/datamodel.rst:1665
 msgid ""
 "Called at the time the owning class *owner* is created. The descriptor has "
 "been assigned to *name*."
 msgstr ""
+"Es llamado al momento en el que se crea la clase propietaria *owner*. El "
+"descriptor es asignado a *name*."
 
 #: ../Doc/reference/datamodel.rst:1670
 msgid ""
@@ -2815,10 +2855,14 @@ msgid ""
 "constructor, so it will need to be called explicitly with the appropriate "
 "parameters when a descriptor is added to a class after initial creation::"
 msgstr ""
+":meth:`__set_name__` solo es llamado implícitamente como parte del "
+"constructor :class:`type`, así que será necesario llamarlo explícitamente "
+"con los parámetros apropiados cuando un descriptor se agrega a la clase "
+"después de su creación inicial::"
 
 #: ../Doc/reference/datamodel.rst:1681
 msgid "See :ref:`class-object-creation` for more details."
-msgstr ""
+msgstr "Ver :ref:`class-object-creation` para más detalles."
 
 #: ../Doc/reference/datamodel.rst:1685
 msgid ""
@@ -2830,10 +2874,17 @@ msgid ""
 "argument (for example, CPython sets this attribute for unbound methods that "
 "are implemented in C)."
 msgstr ""
+"El atributo :attr:`__objclass__` es interpretado por el módulo :mod:"
+"`inspect` como la especificación de la clase donde el objeto fue definido "
+"(establecer esto adecuadamente puede ayudar en introspección de atributos "
+"dinámicos de clases en tiempo de ejecución). Para llamables, puede indicar "
+"que una instancia de un tipo (o subclase) dado es esperado o requerido como "
+"el primero argumento posicional (por ejemplo, CPython establece este "
+"atributo para métodos independientes que son implementados en C)."
 
 #: ../Doc/reference/datamodel.rst:1696
 msgid "Invoking Descriptors"
-msgstr ""
+msgstr "Invocando Descriptores"
 
 #: ../Doc/reference/datamodel.rst:1698
 msgid ""
