@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2021-01-11 20:12-0600\n"
+"PO-Revision-Date: 2021-01-14 18:46-0600\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2748,7 +2748,7 @@ msgstr "El atributo de módulo ``__class__`` es ahora escribible."
 
 #: ../Doc/reference/datamodel.rst:1609
 msgid "``__getattr__`` and ``__dir__`` module attributes."
-msgstr "Atributos de módulo ``__getattr__`` y ``__dir__``"
+msgstr "Atributos de módulo ``__getattr__`` y ``__dir__``."
 
 #: ../Doc/reference/datamodel.rst:1614
 msgid ":pep:`562` - Module __getattr__ and __dir__"
@@ -2893,6 +2893,11 @@ msgid ""
 "protocol:  :meth:`__get__`, :meth:`__set__`, and :meth:`__delete__`. If any "
 "of those methods are defined for an object, it is said to be a descriptor."
 msgstr ""
+"De manera general, un descriptor es un atributo de objeto con "
+"“comportamiento enlazado”, cuyo atributo de acceso ha sido anulado por "
+"métodos en el protocolo del descriptor: :meth:`__get__`, :meth:`__set__`, y :"
+"meth:`__delete__`. Si cualquiera de esos métodos son definidos por un "
+"objeto, se dice que es un descriptor."
 
 #: ../Doc/reference/datamodel.rst:1703
 msgid ""
@@ -2901,6 +2906,11 @@ msgid ""
 "chain starting with ``a.__dict__['x']``, then ``type(a).__dict__['x']``, and "
 "continuing through the base classes of ``type(a)`` excluding metaclasses."
 msgstr ""
+"El comportamiento por defecto para atributos de acceso es obtener (*get*), "
+"establecer (*set*) o borrar (*delete*) el atributo del diccionario del "
+"objeto. Por ejemplo, ``a.x`` tiene una cadena de búsqueda que comienza con "
+"``a.__dict__[‘x’]``, luego ``type(a).__dict__[‘x’]``, y continúa por las "
+"clases base de ``type(a)`` excluyendo meta clases."
 
 #: ../Doc/reference/datamodel.rst:1708
 msgid ""
@@ -2909,46 +2919,59 @@ msgid ""
 "descriptor method instead.  Where this occurs in the precedence chain "
 "depends on which descriptor methods were defined and how they were called."
 msgstr ""
+"Sin embargo, si el valor buscado es un objeto definiendo uno de los métodos "
+"del descriptor, entonces Python puede anular el comportamiento por defecto e "
+"invocar al método del descriptor en su lugar. Dónde ocurre esto en la cadena "
+"de precedencia depende de qué métodos de descriptor fueron definidos y cómo "
+"son llamados."
 
 #: ../Doc/reference/datamodel.rst:1713
 msgid ""
 "The starting point for descriptor invocation is a binding, ``a.x``. How the "
 "arguments are assembled depends on ``a``:"
 msgstr ""
+"El punto de inicio por invocación de descriptor es un enlace ``a.x``. Cómo "
+"los argumentos son ensamblados dependen de ``a``:"
 
 #: ../Doc/reference/datamodel.rst:1718
 msgid "Direct Call"
-msgstr ""
+msgstr "Llamado Directo"
 
 #: ../Doc/reference/datamodel.rst:1717
 msgid ""
 "The simplest and least common call is when user code directly invokes a "
 "descriptor method:    ``x.__get__(a)``."
 msgstr ""
+"El llamado más simple y menos común es cuando el código de usuario invoca "
+"directamente un método descriptor: ``x.__get__(a)``."
 
 #: ../Doc/reference/datamodel.rst:1722
 msgid "Instance Binding"
-msgstr ""
+msgstr "Enlace de Instancia"
 
 #: ../Doc/reference/datamodel.rst:1721
 msgid ""
 "If binding to an object instance, ``a.x`` is transformed into the call: "
 "``type(a).__dict__['x'].__get__(a, type(a))``."
 msgstr ""
+"Al enlazar a una instancia de objeto, ``a`` es transformado en un llamado: "
+"``type(a).__dict__[‘x’].__get__(a, type(a))``."
 
 #: ../Doc/reference/datamodel.rst:1726
 msgid "Class Binding"
-msgstr ""
+msgstr "Enlace de Clase"
 
 #: ../Doc/reference/datamodel.rst:1725
 msgid ""
 "If binding to a class, ``A.x`` is transformed into the call: ``A."
 "__dict__['x'].__get__(None, A)``."
 msgstr ""
+"Al enlazar a una clase, ``A.x`` es transformado en un llamado: ``A."
+"__dict__[‘x’].__get__(None, A)``."
 
 #: ../Doc/reference/datamodel.rst:1732
 msgid "Super Binding"
-msgstr ""
+msgstr "Súper Enlace"
 
 #: ../Doc/reference/datamodel.rst:1729
 msgid ""
@@ -2957,6 +2980,10 @@ msgid ""
 "immediately preceding ``B`` and then invokes the descriptor with the call: "
 "``A.__dict__['m'].__get__(obj, obj.__class__)``."
 msgstr ""
+"Si ``a`` es una instancia de :class:`super`, entonces el enlace ``super(B, "
+"obj).m()`` busca ``obj.__class__.__mro__`` la clase base ``A`` que precede "
+"inmediatamente ``B`` y luego invoca al descriptor con el llamado: ``A."
+"__dict__[‘m’].__get__(obj, obj.__class__)``."
 
 #: ../Doc/reference/datamodel.rst:1734
 msgid ""
@@ -2973,6 +3000,19 @@ msgid ""
 "defined always override a redefinition in an instance dictionary.  In "
 "contrast, non-data descriptors can be overridden by instances."
 msgstr ""
+"Para enlace de instancias, la precedencia de la invocación de descriptor "
+"depende de qué métodos de descriptor son definidos. Un descriptor puede "
+"definir cualquier combinación de :meth:`__get__`, :meth:`__set__` y :meth:"
+"`__delete__`. Si no define :meth:`__get__`, entonces el acceso al atributo "
+"retornará el objeto de descriptor a menos que exista un valor en el "
+"diccionario de instancias del objeto. Si el descriptor define :meth:"
+"`__set__` y/o :meth:`__delete__`, es un descriptor de datos; si no define "
+"alguno, es un descriptor sin datos. Normalmente los descriptores de datos "
+"definen ambos :meth:`__get__` y :meth:`__set__`, mientras que los "
+"descriptores sin datos solo tienen el método :meth:`__get__`. Descriptores "
+"de datos con :meth:`__set__` y :meth:`__get__` definidos siempre anulan una "
+"redefinición en el diccionario de instancias. Por el contrario, los "
+"descriptores sin datos pueden ser anulados por instancias."
 
 #: ../Doc/reference/datamodel.rst:1747
 msgid ""
@@ -2981,16 +3021,23 @@ msgid ""
 "and override methods.  This allows individual instances to acquire behaviors "
 "that differ from other instances of the same class."
 msgstr ""
+"Métodos de Python (que incluyen :func:`staticmethod` y :func:`classmethod`) "
+"son implementados como descriptores sin datos. Por consiguiente, las "
+"instancias pueden redefinir y anular métodos. Esto permite que instancias "
+"individuales adquieran comportamientos que pueden diferir de otras "
+"instancias de la misma clase."
 
 #: ../Doc/reference/datamodel.rst:1752
 msgid ""
 "The :func:`property` function is implemented as a data descriptor. "
 "Accordingly, instances cannot override the behavior of a property."
 msgstr ""
+"La función :func:`property` es implementada como un descriptor de datos. Por "
+"lo tanto, las instancias no pueden anular el comportamiento de una propiedad."
 
 #: ../Doc/reference/datamodel.rst:1759
 msgid "__slots__"
-msgstr ""
+msgstr "__slots__"
 
 #: ../Doc/reference/datamodel.rst:1761
 msgid ""
@@ -2998,12 +3045,18 @@ msgid ""
 "and deny the creation of *__dict__* and *__weakref__* (unless explicitly "
 "declared in *__slots__* or available in a parent.)"
 msgstr ""
+"*__slots__* nos permiten declarar de manera explícita miembros de datos "
+"(como propiedades) y negar la creación de *__dict__* y *__weakref__* (a "
+"menos que se declare explícitamente en *__slots__* o se encuentre disponible "
+"en un elemento padre.)"
 
 #: ../Doc/reference/datamodel.rst:1765
 msgid ""
 "The space saved over using *__dict__* can be significant. Attribute lookup "
 "speed can be significantly improved as well."
 msgstr ""
+"El espacio ganado al usar *__dict__* puede ser importante. La velocidad de "
+"búsqueda de atributos también puede mejorar significativamente."
 
 #: ../Doc/reference/datamodel.rst:1770
 msgid ""
@@ -3012,16 +3065,23 @@ msgid ""
 "for the declared variables and prevents the automatic creation of *__dict__* "
 "and *__weakref__* for each instance."
 msgstr ""
+"Esta variable de clase se le puede asignar una cadena de caracteres, un "
+"elemento iterable o una secuencia de cadena de caracteres con nombres de "
+"variables utilizados por instancias. *__slots__* reserva espacio para las "
+"variables declaradas y previene la creación automática de *__dict__* y "
+"*__weakref__* para cada instancia."
 
 #: ../Doc/reference/datamodel.rst:1777
 msgid "Notes on using *__slots__*"
-msgstr ""
+msgstr "Notas sobre el uso de  *__slots__*"
 
 #: ../Doc/reference/datamodel.rst:1779
 msgid ""
 "When inheriting from a class without *__slots__*, the *__dict__* and "
 "*__weakref__* attribute of the instances will always be accessible."
 msgstr ""
+"Cuando se hereda de una clase sin *__slots__*, los atributos *__dict__* y "
+"*__weakref__* de las instancias siempre serán accesibles."
 
 #: ../Doc/reference/datamodel.rst:1782
 msgid ""
@@ -3031,6 +3091,12 @@ msgid ""
 "variables is desired, then add ``'__dict__'`` to the sequence of strings in "
 "the *__slots__* declaration."
 msgstr ""
+"Sin una variable *__dict__*, no se puede asignar a instancias nuevas "
+"variables que no se encuentren listadas en la definición de *__slots__*. "
+"Intentos de asignación a una variable no listada lanza una excepción :exc:"
+"`AttributeError`. Si se desea hacer una asignación dinámica a variables "
+"nuevas, se debe agregar ``’__dict__’`` a la secuencia de cadena de "
+"caracteres en la declaración de *__slots__*."
 
 #: ../Doc/reference/datamodel.rst:1788
 msgid ""
@@ -3039,6 +3105,11 @@ msgid ""
 "reference support is needed, then add ``'__weakref__'`` to the sequence of "
 "strings in the *__slots__* declaration."
 msgstr ""
+"Sin una variable *__weakref__* por cada instancia, las clases que definen "
+"*__slots__* no soportan “referencias débiles” (*weak references*) a sus "
+"instancias. Si se desea el soporte de dichas referencias, se debe agregar "
+"``’__weakref__’`` a la secuencia de cadena de caracteres en la declaración "
+"de *__slots__*."
 
 #: ../Doc/reference/datamodel.rst:1793
 msgid ""
