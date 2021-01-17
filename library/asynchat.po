@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-06 11:59-0400\n"
-"PO-Revision-Date: 2021-01-09 23:05+0100\n"
+"PO-Revision-Date: 2021-01-17 01:54+0100\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,7 +44,6 @@ msgstr ""
 # -He "traducido" el verbo de "subclass" por "heredar", ¿alguna solución mejor?
 # -TODO: ver contexto de "channel map"
 #: ../Doc/library/asynchat.rst:22
-#, fuzzy
 msgid ""
 "This module builds on the :mod:`asyncore` infrastructure, simplifying "
 "asynchronous clients and servers and making it easier to handle protocols "
@@ -62,13 +61,13 @@ msgstr ""
 "simplificando los clientes y servidores asíncronos y facilitando gestionar "
 "protocolos cuyos elementos son terminados por cadenas de texto arbitrarias o "
 "de longitud variable. :mod:`asynchat` define la clase abstracta :class:"
-"`async_chat` de la que se debe heredar, dando implementaciones de los "
-"métodos :meth:`collect_incoming_data` y :meth:`found_terminator`. Utiliza el "
-"mismo bucle asíncrono que :mod:`asyncore`, y los dos tipos de canal, :class:"
-"`asyncore.dispatcher` y :class:`asynchat.async_chat`, que se pueden mezclar "
-"libremente en el mapa de canal. Normalmente un canal de servidor :class:"
-"`asyncore.dispatcher` genera nuevos objetos de canal :class:`asynchat."
-"async_chat`, al recibir peticiones de conexión entrantes."
+"`async_chat` de la que se debe heredar, implementado los métodos :meth:"
+"`collect_incoming_data` y :meth:`found_terminator`. Utiliza el mismo bucle "
+"asíncrono que :mod:`asyncore`, y los dos tipos de canal, :class:`asyncore."
+"dispatcher` y :class:`asynchat.async_chat`, que se pueden mezclar libremente "
+"en el mapa de canal. Normalmente un canal de servidor :class:`asyncore."
+"dispatcher` genera nuevos objetos de canal :class:`asynchat.async_chat`, al "
+"recibir peticiones de conexión entrantes."
 
 #: ../Doc/library/asynchat.rst:37
 msgid ""
@@ -78,6 +77,11 @@ msgid ""
 "methods. The :class:`asyncore.dispatcher` methods can be used, although not "
 "all make sense in a message/response context."
 msgstr ""
+"Esta clase es una subclase abstracta de :class:`asyncore.dispatcher`. Para "
+"el uso práctico del código se debe heredar :class:`async_chat`, definiendo "
+"los métodos significativos :meth:`collect_incoming_data` y :meth:"
+"`found_terminator`. Los métodos de :class:`asyncore.dispatcher` se pueden "
+"utilizar, aunque no todos tienen sentido en un contexto de mensaje/respuesta."
 
 #: ../Doc/library/asynchat.rst:44
 msgid ""
@@ -87,22 +91,33 @@ msgid ""
 "`async_chat` object's methods are called by the event-processing framework "
 "with no action on the part of the programmer."
 msgstr ""
+"Al igual que :class:`asyncore.dispatcher`, :class:`async_chat` define una "
+"serie de eventos generados por un análisis sobre las condiciones de "
+"_socket_, tras una llamada a :c:func:`select`. Una vez que el bucle de "
+"_polling_ haya sido iniciado, los métodos de los objetos :class:`async_chat` "
+"son llamados por el _framework_ que procesa los eventos, sin que tengamos "
+"que programar ninguna acción a mayores."
 
 #: ../Doc/library/asynchat.rst:50
 msgid ""
 "Two class attributes can be modified, to improve performance, or possibly "
 "even to conserve memory."
 msgstr ""
+"Se pueden modificar dos atributos de clase, para mejorar el rendimiento o "
+"incluso hasta para ahorrar memoria."
 
 #: ../Doc/library/asynchat.rst:56
 msgid "The asynchronous input buffer size (default ``4096``)."
-msgstr ""
+msgstr "El tamaño del _buffer_ de entrada asíncrona (por defecto ``4096``)."
 
 #: ../Doc/library/asynchat.rst:61
 msgid "The asynchronous output buffer size (default ``4096``)."
-msgstr ""
+msgstr "El tamaño del _buffer_ de salida asíncrona (por defecto ``4096``)."
 
+# -Traducido "exhaustion" como "agotamiento", ¿alguna palabra más técnica mejor?
+# -¿Traducción de "endpoint"? en este caso posiblemente dependa del contexto
 #: ../Doc/library/asynchat.rst:63
+#, fuzzy
 msgid ""
 "Unlike :class:`asyncore.dispatcher`, :class:`async_chat` allows you to "
 "define a :abbr:`FIFO (first-in, first-out)` queue of *producers*. A producer "
@@ -116,6 +131,18 @@ msgid ""
 "recognize the end of, or an important breakpoint in, an incoming "
 "transmission from the remote endpoint."
 msgstr ""
+"Al contrario que :class:`asyncore.dispatcher`, :class:`async_chat` permite "
+"definir una cola :abbr:`FIFO (first-in, first-out)` de productores "
+"(*producers*). Un productor necesita tener un solo método, :meth:`more`, que "
+"debe devolver los datos que se vayan a transmitir en el canal. Cuando el "
+"método :meth:`more` devuelve un objeto bytes vacío, significa que el "
+"productor ya se ha agotado (por ejemplo, que no contiene más datos). En este "
+"punto, el objeto :class:`async_chat` elimina el productor de la cola y "
+"empieza a usar el siguiente productor, si existiese. Cuando la cola de "
+"productores está vacía, el método :meth:`handle_write` no hace nada. El "
+"método :meth:`set_terminator` de los objetos de canal se utiliza para "
+"describir cómo reconocer, en una transmisión entrante desde el punto remoto, "
+"el final de esta transmisión o un punto de ruptura importante en la misma."
 
 #: ../Doc/library/asynchat.rst:76
 msgid ""
@@ -124,12 +151,18 @@ msgid ""
 "data that the channel receives asynchronously. The methods are described "
 "below."
 msgstr ""
+"Para construir una subclase funcional de :class:`async_chat`, los métodos de "
+"entrada :meth:`collect_incoming_data` and :meth:`found_terminator` deben "
+"tratar los datos que el canal recibe asíncronamente. Los métodos se "
+"describen a continuación."
 
 #: ../Doc/library/asynchat.rst:84
 msgid ""
 "Pushes a ``None`` on to the producer queue. When this producer is popped off "
 "the queue it causes the channel to be closed."
 msgstr ""
+"Añade un ``None`` en la cola de productores. Cuando este productor se extrae "
+"de la cola, hace que el canal se cierre."
 
 #: ../Doc/library/asynchat.rst:90
 msgid ""
@@ -181,39 +214,43 @@ msgstr ""
 
 #: ../Doc/library/asynchat.rst:137
 msgid "term"
-msgstr ""
+msgstr "término"
 
 #: ../Doc/library/asynchat.rst:137
 msgid "Description"
-msgstr ""
+msgstr "Descripción"
 
 #: ../Doc/library/asynchat.rst:139
 msgid "*string*"
-msgstr ""
+msgstr "*string*"
 
 #: ../Doc/library/asynchat.rst:139
 msgid ""
 "Will call :meth:`found_terminator` when the string is found in the input "
 "stream"
 msgstr ""
+"Llamará a :meth:`found_terminator` cuando la cadena de caracteres se "
+"encuentre en el flujo de datos de entrada"
 
 #: ../Doc/library/asynchat.rst:142
 msgid "*integer*"
-msgstr ""
+msgstr "*integer*"
 
 #: ../Doc/library/asynchat.rst:142
 msgid ""
 "Will call :meth:`found_terminator` when the indicated number of characters "
 "have been received"
 msgstr ""
+"Llamará a :meth:`found_terminator` cuando el número de caracteres indicado "
+"se haya recibido"
 
 #: ../Doc/library/asynchat.rst:146
 msgid "``None``"
-msgstr ""
+msgstr "``None``"
 
 #: ../Doc/library/asynchat.rst:146
 msgid "The channel continues to collect data forever"
-msgstr ""
+msgstr "El canal continúa recopilando datos indefinidamente"
 
 #: ../Doc/library/asynchat.rst:150
 msgid ""
@@ -223,7 +260,7 @@ msgstr ""
 
 #: ../Doc/library/asynchat.rst:157
 msgid "asynchat Example"
-msgstr ""
+msgstr "Ejemplo de asynchat"
 
 #: ../Doc/library/asynchat.rst:159
 msgid ""
