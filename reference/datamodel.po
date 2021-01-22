@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2021-01-15 18:04-0600\n"
+"PO-Revision-Date: 2021-01-21 19:59-0600\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3336,36 +3336,50 @@ msgid ""
 "classes that will be used instead of this base. The tuple may be empty, in "
 "such case the original base is ignored."
 msgstr ""
+"Si una base que aparece en la definición de una clase no es una instancia "
+"de :class:`type`, entonces el método ``__mro_entries__`` se busca en ella. "
+"Si es encontrado, se llama con la tupla de bases originales. Este método "
+"debe retornar una tupla de clases que será utilizado en lugar de esta base. "
+"La tupla puede estar vacía, en cuyo caso la base original es ignorada."
 
 #: ../Doc/reference/datamodel.rst:1924 ../Doc/reference/datamodel.rst:2114
 msgid ":pep:`560` - Core support for typing module and generic types"
 msgstr ""
+":pep:`560` - Soporte central para módulos de clasificación y tipos genéricos"
 
 #: ../Doc/reference/datamodel.rst:1928
 msgid "Determining the appropriate metaclass"
-msgstr ""
+msgstr "Determinando la metaclase adecuada"
 
 #: ../Doc/reference/datamodel.rst:1932
 msgid ""
 "The appropriate metaclass for a class definition is determined as follows:"
 msgstr ""
+"La metaclase adecuada para la definición de una clase es determinada de la "
+"siguiente manera:"
 
 #: ../Doc/reference/datamodel.rst:1934
 msgid ""
 "if no bases and no explicit metaclass are given, then :func:`type` is used;"
 msgstr ""
+"si no se dan bases ni metaclases explícitas, entonces se utiliza :func:"
+"`type`;"
 
 #: ../Doc/reference/datamodel.rst:1935
 msgid ""
 "if an explicit metaclass is given and it is *not* an instance of :func:"
 "`type`, then it is used directly as the metaclass;"
 msgstr ""
+"si se da una metaclase explícita y *no* es una instancia de :func:`type`, "
+"entonces se utiliza directamente como la metaclase;"
 
 #: ../Doc/reference/datamodel.rst:1937
 msgid ""
 "if an instance of :func:`type` is given as the explicit metaclass, or bases "
 "are defined, then the most derived metaclass is used."
 msgstr ""
+"si se da una instancia de :func:`type` como la metaclase explícita, o se "
+"definen bases, entonces se utiliza la metaclase más derivada."
 
 #: ../Doc/reference/datamodel.rst:1940
 msgid ""
@@ -3375,10 +3389,13 @@ msgid ""
 "of these candidate metaclasses. If none of the candidate metaclasses meets "
 "that criterion, then the class definition will fail with ``TypeError``."
 msgstr ""
+"La metaclase más derivada es elegida de la metaclase especificada "
+"explícitamente (si existe) y de la metaclase (p. ej. ``type(cls)``) de todas "
+"las clases base especificadas."
 
 #: ../Doc/reference/datamodel.rst:1950
 msgid "Preparing the class namespace"
-msgstr ""
+msgstr "Preparando el espacio de nombres de la clase"
 
 #: ../Doc/reference/datamodel.rst:1955
 msgid ""
@@ -3391,24 +3408,34 @@ msgid ""
 "the final class object is created the namespace is copied into a new "
 "``dict``."
 msgstr ""
+"Una vez que se ha identificado la metaclase apropiada, entonces se prepara "
+"el espacio de nombres de la clase. Si la metaclase tiene un atributo "
+"``__prepare__``, es llamado como ``namespace = metaclass.__prepare__(name, "
+"bases, **kwds)`` (donde los argumentos de palabra clave adicionales, de "
+"existir, provienen de la definición de la clase). El método ``__prepare__`` "
+"debe ser implementado como :func:`classmethod`. El espacio de nombres "
+"retornado por ``__prepare__`` es pasado a ``__new__``, pero cuando el objeto "
+"de clase final es creado, el espacio de nombres es copiado en un ``dict``."
 
 #: ../Doc/reference/datamodel.rst:1963
 msgid ""
 "If the metaclass has no ``__prepare__`` attribute, then the class namespace "
 "is initialised as an empty ordered mapping."
 msgstr ""
+"Si la metaclase no tiene atributo ``__prepare__``, entonces el espacio de "
+"nombres de clase es iniciado como un mapeo vacío ordenado."
 
 #: ../Doc/reference/datamodel.rst:1968
 msgid ":pep:`3115` - Metaclasses in Python 3000"
-msgstr ""
+msgstr ":pep:`3115` - Metaclases en Python 3000"
 
 #: ../Doc/reference/datamodel.rst:1969
 msgid "Introduced the ``__prepare__`` namespace hook"
-msgstr ""
+msgstr "Introduce el enlace de espacio de nombres ``__prepare__``"
 
 #: ../Doc/reference/datamodel.rst:1973
 msgid "Executing the class body"
-msgstr ""
+msgstr "Ejecutando el cuerpo de la clase"
 
 #: ../Doc/reference/datamodel.rst:1978
 msgid ""
@@ -3418,6 +3445,11 @@ msgid ""
 "names from the current and outer scopes when the class definition occurs "
 "inside a function."
 msgstr ""
+"El cuerpo de la clase es ejecutado como ``exec(body, globals(), namespace)`` "
+"(aproximadamente). La diferencia clave con un llamado normal a :func:`exec` "
+"es que el alcance léxico permite que el cuerpo de la clase (incluyendo "
+"cualquier método) haga referencia a nombres de los alcances actuales y "
+"externos cuando la definición de clase sucede dentro de la función."
 
 #: ../Doc/reference/datamodel.rst:1984
 msgid ""
@@ -3427,10 +3459,16 @@ msgid ""
 "class methods, or through the implicit lexically scoped ``__class__`` "
 "reference described in the next section."
 msgstr ""
+"Sin embargo, aún cuando la definición de clase sucede dentro de la función, "
+"los métodos definidos dentro de la clase aún no pueden ver nombres definidos "
+"dentro del alcance de la clase. Variables de clase deben ser accedidas a "
+"través del primer parámetro de instancia o métodos de clase, o a través de "
+"la referencia al léxico implícito ``__class__`` descrita en la siguiente "
+"sección."
 
 #: ../Doc/reference/datamodel.rst:1993
 msgid "Creating the class object"
-msgstr ""
+msgstr "Creando el objeto de clase"
 
 #: ../Doc/reference/datamodel.rst:2000
 msgid ""
@@ -3439,6 +3477,10 @@ msgid ""
 "**kwds)`` (the additional keywords passed here are the same as those passed "
 "to ``__prepare__``)."
 msgstr ""
+"Una vez que el espacio de nombres de la clase ha sido poblado al ejecutar el "
+"cuerpo de la clase, el objeto de clase es creado al llamar ``metaclass(name, "
+"bases, namespace, **kwds)`` (las palabras clave adicionales que se pasan "
+"aquí, son las mismas que aquellas pasadas en ``__prepare__``)."
 
 #: ../Doc/reference/datamodel.rst:2005
 msgid ""
@@ -3450,6 +3492,14 @@ msgid ""
 "scoping, while the class or instance that was used to make the current call "
 "is identified based on the first argument passed to the method."
 msgstr ""
+"Este objeto de clase es el que será referenciado por la forma sin argumentos "
+"de :func:`super`. ``__class__`` es una referencia de cierre implícita creada "
+"por el compilador si cualquier método en el cuerpo de una clase se refiere "
+"tanto a ``__class__`` o ``super``. Esto permite que la forma sin argumentos "
+"de :func:`super` identifique correctamente la clase definida en base al "
+"alcance léxico, mientras la clase o instancia que fue utilizada para hacer "
+"el llamado actual es identificado en base al primer argumento que se pasa al "
+"método."
 
 #: ../Doc/reference/datamodel.rst:2015
 msgid ""
@@ -3459,6 +3509,11 @@ msgid ""
 "initialised correctly. Failing to do so will result in a :exc:`RuntimeError` "
 "in Python 3.8."
 msgstr ""
+"En CPython 3.6 y posterior, la celda ``__class__`` se pasa a la metaclase "
+"como una entrada ``__classcell__`` en el espacio de nombres de la clase. En "
+"caso de existir, esto debe ser propagado hacia el llamado ``type.__new__`` "
+"para que la clase se inicie correctamente. No hacerlo resultará en un error :"
+"exc:`RuntimeError` en Python 3.8."
 
 #: ../Doc/reference/datamodel.rst:2021
 msgid ""
