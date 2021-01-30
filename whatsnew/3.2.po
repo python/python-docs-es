@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2021-01-26 23:15-0300\n"
+"PO-Revision-Date: 2021-01-30 17:02-0300\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -491,20 +491,29 @@ msgid ""
 "package \"foo\", you may see these files when the distribution package is "
 "installed::"
 msgstr ""
+"El directorio común es \"pyshared\" y los nombres de los archivos se "
+"diferencian identificando la implementación de Python (como CPython, PyPy, "
+"Jython, etc.), los números de versión principal y secundaria, y las banderas "
+"de compilación opcionales (como \"d\" para debug, \"m\" para pymalloc, \"u\" "
+"para ancho-unicode). Para un paquete arbitrario \"foo\", se verán estos "
+"archivos cuando se instala el paquete de distribución::"
 
 #: ../Doc/whatsnew/3.2.rst:372
 msgid ""
 "In Python itself, the tags are accessible from functions in the :mod:"
 "`sysconfig` module::"
 msgstr ""
+"En Python mismo, las etiquetas son accesibles desde funciones en el módulo :"
+"mod:`sysconfig`::"
 
 #: ../Doc/whatsnew/3.2.rst:383
 msgid ":pep:`3149` - ABI Version Tagged .so Files"
 msgstr ""
+":pep:`3149` - PEP 3149: Archivos .so con etiquetado de versión para ABI"
 
 #: ../Doc/whatsnew/3.2.rst:388
 msgid "PEP 3333: Python Web Server Gateway Interface v1.0.1"
-msgstr ""
+msgstr "PEP 3333: Interfaz de puerta de enlace del servidor web Python v1.0.1"
 
 #: ../Doc/whatsnew/3.2.rst:390
 msgid ""
@@ -513,6 +522,10 @@ msgid ""
 "most conveniently handled with the :class:`str` type even though the HTTP "
 "protocol is itself bytes oriented."
 msgstr ""
+"Este PEP informativo aclara cómo el protocolo WSGI debe gestionar los "
+"problemas de bytes/texto. El desafío es que el manejo de cadenas de "
+"caracteres en Python 3 se maneja de manera más conveniente con el tipo :"
+"class:`str` aunque el protocolo HTTP está orientado a bytes."
 
 #: ../Doc/whatsnew/3.2.rst:395
 msgid ""
@@ -520,6 +533,10 @@ msgid ""
 "response headers and metadata versus *byte strings* which are used for the "
 "bodies of requests and responses."
 msgstr ""
+"El PEP diferencia las llamadas *cadenas nativas* que se utilizan para los "
+"encabezados y metadatos de solicitud/respuesta (*request/response*) frente a "
+"las *cadenas de bytes* que se utilizan para los cuerpos de las solicitudes y "
+"respuestas."
 
 #: ../Doc/whatsnew/3.2.rst:399
 msgid ""
@@ -531,17 +548,29 @@ msgid ""
 "respect to encoding. That is, they must either be *ISO-8859-1* characters or "
 "use :rfc:`2047` MIME encoding."
 msgstr ""
+"Las *cadenas nativas* son siempre de tipo :class:`str` pero están "
+"restringidas a puntos de código entre *U+0000 * hasta *U+00FF* que se pueden "
+"traducir a bytes usando la codificación *Latin-1*. Estas cadenas de "
+"caracteres se utilizan para las claves y valores en el diccionario de "
+"entorno y para los encabezados y estados de respuesta en la función :func:"
+"`start_response`. Deben seguir :rfc:`2616` con respecto a la codificación. "
+"Es decir, deben tener caracteres *ISO-8859-1* o utilizar codificación MIME :"
+"rfc:`2047`."
 
 #: ../Doc/whatsnew/3.2.rst:407
 msgid ""
 "For developers porting WSGI applications from Python 2, here are the salient "
 "points:"
 msgstr ""
+"Para los desarrolladores que portan aplicaciones WSGI desde Python 2, estos "
+"son los puntos destacados:"
 
 #: ../Doc/whatsnew/3.2.rst:410
 msgid ""
 "If the app already used strings for headers in Python 2, no change is needed."
 msgstr ""
+"Si la aplicación ya usó cadenas para encabezados en Python 2, no es "
+"necesario ningún cambio."
 
 #: ../Doc/whatsnew/3.2.rst:412
 msgid ""
@@ -550,6 +579,11 @@ msgid ""
 "header encoded in utf-8 was using ``h.encode('utf-8')`` now needs to convert "
 "from bytes to native strings using ``h.encode('utf-8').decode('latin-1')``."
 msgstr ""
+"Si, en cambio, la aplicación codificó encabezados de salida o decodificó "
+"encabezados de entrada, entonces los encabezados deberán volver a "
+"codificarse en Latin-1. Por ejemplo, un encabezado de salida codificado en "
+"utf-8 usaba ``h.encode('utf-8')``, ahora se necesita convertir de bytes a "
+"cadenas nativas usando ``h.encode('utf-8').decode('latin-1')``."
 
 #: ../Doc/whatsnew/3.2.rst:417
 msgid ""
@@ -557,6 +591,9 @@ msgid ""
 "be byte strings.  The :func:`start_response` function and environ must use "
 "native strings.  The two cannot be mixed."
 msgstr ""
+"Los valores proporcionados por una aplicación o enviados mediante el método :"
+"meth:`write` deben ser cadenas de bytes. La función :func:`start_response` y "
+"el entorno deben usar cadenas nativas. Los dos no se pueden mezclar."
 
 #: ../Doc/whatsnew/3.2.rst:421
 msgid ""
@@ -568,22 +605,31 @@ msgid ""
 "variables from :attr:`os.environ` into native strings and returning a new "
 "dictionary."
 msgstr ""
+"Para los implementadores de servidores que escriben rutas de CGI a WSGI u "
+"otros protocolos de estilo CGI, los usuarios deben poder acceder al entorno "
+"utilizando cadenas nativas, aunque la plataforma subyacente pueda tener una "
+"convención diferente. Para cerrar esta brecha, el módulo :mod:`wsgiref` "
+"tiene una nueva función, :func:`wsgiref.handlers.read_environ` para "
+"transcodificar variables CGI de :attr:`os.environ` en cadenas nativas y "
+"retornar un nuevo diccionario."
 
 #: ../Doc/whatsnew/3.2.rst:430
 msgid ":pep:`3333` - Python Web Server Gateway Interface v1.0.1"
 msgstr ""
+":pep:`3333` - Interfaz de puerta de enlace del servidor web Python v1.0.1"
 
 #: ../Doc/whatsnew/3.2.rst:431
 msgid "PEP written by Phillip Eby."
-msgstr ""
+msgstr "PEP escrito por Phillip Eby."
 
 #: ../Doc/whatsnew/3.2.rst:435
 msgid "Other Language Changes"
-msgstr ""
+msgstr "Otros cambios de lenguaje"
 
 #: ../Doc/whatsnew/3.2.rst:437
 msgid "Some smaller changes made to the core Python language are:"
 msgstr ""
+"Algunos cambios más pequeños realizados en el lenguaje central de Python son:"
 
 #: ../Doc/whatsnew/3.2.rst:439
 msgid ""
@@ -594,11 +640,18 @@ msgid ""
 "and Decimal, causing the output to always have a decimal point even when no "
 "digits follow it."
 msgstr ""
+"El formato de cadena de caracteres para :func:`format` y :meth:`str.format` "
+"obtuvo nuevas capacidades para el carácter de formato **#**. Anteriormente, "
+"para enteros en binario, octal o hexadecimal, hacía que la salida tuviera el "
+"prefijo '0b', '0o' o '0x' respectivamente. Ahora también puede manejar "
+"flotantes, complejos y decimales, lo que hace que la salida siempre tenga un "
+"punto decimal, incluso cuando no le siguen dígitos."
 
 #: ../Doc/whatsnew/3.2.rst:451
 msgid ""
 "(Suggested by Mark Dickinson and implemented by Eric Smith in :issue:`7094`.)"
 msgstr ""
+"(Sugerido por Mark Dickinson e implementado por Eric Smith en :issue:`7094`.)"
 
 #: ../Doc/whatsnew/3.2.rst:453
 msgid ""
@@ -611,12 +664,23 @@ msgid ""
 "class:`dict` subclasses that normalize keys before look-up or that supply a :"
 "meth:`__missing__` method for unknown keys::"
 msgstr ""
+"También hay un nuevo método :meth:`str.format_map` que amplía las "
+"capacidades del método existente :meth:`str.format` al aceptar objetos "
+"arbitrarios :term:`mapping`. Este nuevo método hace posible usar formato de "
+"cadena de caracteres con cualquiera de los muchos objetos similares a "
+"diccionarios de Python, como :class:`~collections.defaultdict`, :class:"
+"`~shelve.Shelf`, :class:`~configparser.ConfigParser`, o :mod:`dbm`. También "
+"es útil con subclases personalizadas :class:`dict` que normalizan claves "
+"antes de la búsqueda o que proporcionan un método :meth:`__missing__` para "
+"claves desconocidas::"
 
 #: ../Doc/whatsnew/3.2.rst:480
 msgid ""
 "(Suggested by Raymond Hettinger and implemented by Eric Smith in :issue:"
 "`6081`.)"
 msgstr ""
+"(Sugerido por Raymond Hettinger e implementado por Eric Smith en :issue:"
+"`6081`.)"
 
 #: ../Doc/whatsnew/3.2.rst:483
 msgid ""
@@ -625,10 +689,14 @@ msgid ""
 "interactive mode.  The option can be introspected using the :attr:`sys."
 "flags` attribute:"
 msgstr ""
+"El intérprete ahora puede iniciarse con una opción silenciosa, ``-q``, para "
+"evitar que la información de copyright y versión se muestre en el modo "
+"interactivo. La opción se puede introspectar usando el atributo :attr:`sys."
+"flags`:"
 
 #: ../Doc/whatsnew/3.2.rst:495
 msgid "(Contributed by Marcin Wojdyr in :issue:`1772833`)."
-msgstr ""
+msgstr "(Contribución de Marcin Wojdyr en :issue:`1772833`)."
 
 #: ../Doc/whatsnew/3.2.rst:497
 msgid ""
@@ -640,11 +708,20 @@ msgid ""
 "has been tightened to only catch :exc:`AttributeError` and let other "
 "exceptions pass through::"
 msgstr ""
+"La función :func:`hasattr` funciona llamando a :func:`getattr` y detectando "
+"si se genera una excepción. Esta técnica le permite detectar métodos creados "
+"dinámicamente por :meth:`__getattr__` o :meth:`__getattribute__` que de otra "
+"manera estarían ausentes en el diccionario de la clase. Anteriormente, "
+"*hasattr* detectaba cualquier excepción, posiblemente enmascarando errores "
+"genuinos. Ahora, *hasattr* se ha ajustado para capturar solo :exc:"
+"`AttributeError` y dejar que otras excepciones pasen::"
 
 #: ../Doc/whatsnew/3.2.rst:516
 msgid ""
 "(Discovered by Yury Selivanov and fixed by Benjamin Peterson; :issue:`9666`.)"
 msgstr ""
+"(Descubierto por Yury Selivanov y arreglado por Benjamin Peterson; :issue:"
+"`9666`.)"
 
 #: ../Doc/whatsnew/3.2.rst:518
 msgid ""
@@ -653,10 +730,14 @@ msgid ""
 "confusion and is no longer needed now that the shortest possible :func:"
 "`repr` is displayed by default:"
 msgstr ""
+"La :func:`str` de un número flotante o complejo ahora es el mismo que su :"
+"func:`repr`. Anteriormente, el formulario :func:`str` era más corto, pero "
+"eso solo causaba confusión y ya no es necesario ahora que el más corto "
+"posible :func:`repr` se muestra por defecto:"
 
 #: ../Doc/whatsnew/3.2.rst:529
 msgid "(Proposed and implemented by Mark Dickinson; :issue:`9337`.)"
-msgstr ""
+msgstr "(Propuesto e implementado por Mark Dickinson; :issue:`9337`.)"
 
 #: ../Doc/whatsnew/3.2.rst:531
 msgid ""
@@ -665,16 +746,22 @@ msgid ""
 "timely release of any resources that were acquired when requesting a buffer "
 "from the original object."
 msgstr ""
+"Los objetos :class:`memoryview` ahora tienen un método :meth:`~memoryview."
+"release()` y ahora también admiten el protocolo de gestión de contexto. Esto "
+"permite la liberación oportuna de los recursos adquiridos al solicitar un "
+"búfer del objeto original."
 
 #: ../Doc/whatsnew/3.2.rst:540
 msgid "(Added by Antoine Pitrou; :issue:`9757`.)"
-msgstr ""
+msgstr "(Añadido por Antoine Pitrou; :issue:`9757`.)"
 
 #: ../Doc/whatsnew/3.2.rst:542
 msgid ""
 "Previously it was illegal to delete a name from the local namespace if it "
 "occurs as a free variable in a nested block::"
 msgstr ""
+"Anteriormente, era ilegal eliminar un nombre del espacio de nombres local si "
+"aparece como una variable libre en un bloque anidado::"
 
 #: ../Doc/whatsnew/3.2.rst:551
 msgid ""
@@ -682,10 +769,14 @@ msgid ""
 "clause is cleared, so this code which used to work with Python 2.6, raised "
 "a :exc:`SyntaxError` with Python 3.1 and now works again::"
 msgstr ""
+"Esto ahora está permitido. Recuerde que el objetivo de una cláusula :keyword:"
+"`except` se borra, por lo que este código que solía funcionar con Python "
+"2.6, genera un :exc: SyntaxError` con Python 3.1 y ahora funciona "
+"nuevamente::"
 
 #: ../Doc/whatsnew/3.2.rst:564
 msgid "(See :issue:`4617`.)"
-msgstr ""
+msgstr "(Ver :issue:`4617`.)"
 
 #: ../Doc/whatsnew/3.2.rst:566
 msgid ""
@@ -696,24 +787,37 @@ msgid ""
 "argument.  This is a big step forward in making the C structures as flexible "
 "as their pure Python counterparts:"
 msgstr ""
+"La herramienta interna :c:type:`structsequence` ahora crea subclases de "
+"tupla. Esto significa que las estructuras C como las retornadas por :func:"
+"`os.stat`, :func:`time.gmtime`, y :attr:`sys.version_info` ahora funcionan "
+"como :term:`named tuple` y ahora trabaja con funciones y métodos que esperan "
+"una tupla como argumento. Este es un gran paso adelante para hacer que las "
+"estructuras de C sean tan flexibles como sus contrapartes de Python puro:"
 
 #: ../Doc/whatsnew/3.2.rst:579
 msgid ""
 "(Suggested by Arfrever Frehtes Taifersar Arahesis and implemented by "
 "Benjamin Peterson in :issue:`8413`.)"
 msgstr ""
+"(Sugerido por Arfrever Frehtes Taifersar Arahesis e implementado por "
+"Benjamin Peterson en :issue:`8413`.)"
 
 #: ../Doc/whatsnew/3.2.rst:582
 msgid ""
 "Warnings are now easier to control using the :envvar:`PYTHONWARNINGS` "
 "environment variable as an alternative to using ``-W`` at the command line:"
 msgstr ""
+"Las *Warnings* ahora son más fáciles de controlar usando la variable de "
+"entorno :envvar:`PYTHONWARNINGS` como alternativa al uso de ``-W`` en la "
+"línea de comando:"
 
 #: ../Doc/whatsnew/3.2.rst:589
 msgid ""
 "(Suggested by Barry Warsaw and implemented by Philip Jenvey in :issue:"
 "`7301`.)"
 msgstr ""
+"(Sugerido por Barry Warsaw e implementado por Philip Jenvey en :issue:"
+"`7301`.)"
 
 #: ../Doc/whatsnew/3.2.rst:591
 msgid ""
@@ -723,6 +827,11 @@ msgid ""
 "enabled through the means provided by the :mod:`warnings` module, or on the "
 "command line."
 msgstr ""
+"Se ha agregado una nueva categoría de advertencia, :exc:`ResourceWarning`. "
+"Se emite cuando se detectan problemas potenciales con el consumo de recursos "
+"o la limpieza. Está silenciado de forma predeterminada en las versiones de "
+"lanzamiento normales, pero se puede habilitar a través de los medios "
+"proporcionados por el módulo :mod:`warnings` o en la línea de comandos."
 
 #: ../Doc/whatsnew/3.2.rst:597
 msgid ""
@@ -731,6 +840,11 @@ msgid ""
 "uncollectable objects are printed.  This is meant to make the programmer "
 "aware that their code contains object finalization issues."
 msgstr ""
+"Un :exc:`ResourceWarning` se emite en el cierre del intérprete si la lista :"
+"data:`gc.garbage` no está vacía, y si :attr:`gc.DEBUG_UNCOLLECTABLE` está "
+"configurado, se imprimen todos los objetos no recolectados. Esto tiene como "
+"objetivo informar al programador de que su código contiene problemas de "
+"finalización de objetos."
 
 #: ../Doc/whatsnew/3.2.rst:602
 msgid ""
@@ -741,12 +855,21 @@ msgid ""
 "produce various issues, especially under Windows.  Here is an example of "
 "enabling the warning from the command line:"
 msgstr ""
+"Un :exc:`ResourceWarning` también se emite cuando un :term:`file object` se "
+"destruye sin haber sido cerrado explícitamente. Si bien el desasignador de "
+"dicho objeto asegura que cierra el recurso del sistema operativo subyacente "
+"(generalmente, un descriptor de archivo), la demora en desasignar el objeto "
+"podría producir varios problemas, especialmente en Windows. A continuación, "
+"se muestra un ejemplo de cómo habilitar la advertencia desde la línea de "
+"comando:"
 
 #: ../Doc/whatsnew/3.2.rst:616
 msgid ""
 "(Added by Antoine Pitrou and Georg Brandl in :issue:`10093` and :issue:"
 "`477863`.)"
 msgstr ""
+"(Agregado por Antoine Pitrou y Georg Brandl en :issue:`10093` y :issue:"
+"`477863`.)"
 
 #: ../Doc/whatsnew/3.2.rst:618
 msgid ""
@@ -757,12 +880,21 @@ msgid ""
 "and negative indices, even with values larger than :attr:`sys.maxsize`.  "
 "This makes *range* more interoperable with lists::"
 msgstr ""
+"Los objetos :class:`range` ahora admiten los métodos *index* y *count*. Esto "
+"es parte de un esfuerzo para hacer que más objetos implementen completamente "
+"la :term:`abstract base class` :class:`collections.Sequence`. Como "
+"resultado, el lenguaje tendrá una API más uniforme. Además, los objetos :"
+"class:`range` ahora admiten índices negativos y de corte, incluso con "
+"valores mayores que :attr:`sys.maxsize`. Esto hace que *range* sea más "
+"interoperable con listas::"
 
 #: ../Doc/whatsnew/3.2.rst:634
 msgid ""
 "(Contributed by Daniel Stutzbach in :issue:`9213`, by Alexander Belopolsky "
 "in :issue:`2690`, and by Nick Coghlan in :issue:`10889`.)"
 msgstr ""
+"(Contribuido por Daniel Stutzbach en :issue:`9213`, por Alexander Belopolsky "
+"en :issue:`2690`, y por Nick Coghlan en :issue:`10889`.)"
 
 #: ../Doc/whatsnew/3.2.rst:637
 msgid ""
@@ -770,10 +902,13 @@ msgid ""
 "provides a concise, readable alternative to using an :term:`abstract base "
 "class` in an expression like ``isinstance(x, collections.Callable)``:"
 msgstr ""
+"Se resucitó la función integrada :func:`callable` de Py2.x. Proporciona una "
+"alternativa concisa y legible al uso de una :term:`abstract base class` en "
+"una expresión como ``isinstance(x, collections.Callable)``:"
 
 #: ../Doc/whatsnew/3.2.rst:646
 msgid "(See :issue:`10518`.)"
-msgstr ""
+msgstr "(Ver :issue:`10518`.)"
 
 #: ../Doc/whatsnew/3.2.rst:648
 msgid ""
@@ -781,20 +916,26 @@ msgid ""
 "non-ASCII characters in the path name.  This solved an aggravating problem "
 "with home directories for users with non-ASCII characters in their usernames."
 msgstr ""
+"El mecanismo de importación de Python ahora puede cargar módulos instalados "
+"en directorios con caracteres no ASCII en el nombre de la ruta. Esto "
+"resolvió un problema agravante con los directorios de inicio para los "
+"usuarios con caracteres no ASCII en sus nombres de usuario."
 
 #: ../Doc/whatsnew/3.2.rst:652
 msgid "(Required extensive work by Victor Stinner in :issue:`9425`.)"
-msgstr ""
+msgstr "(Trabajo extenso requerido por Victor Stinner en :issue:`9425`.)"
 
 #: ../Doc/whatsnew/3.2.rst:656
 msgid "New, Improved, and Deprecated Modules"
-msgstr ""
+msgstr "Módulos nuevos, mejorados y obsoletos"
 
 #: ../Doc/whatsnew/3.2.rst:658
 msgid ""
 "Python's standard library has undergone significant maintenance efforts and "
 "quality improvements."
 msgstr ""
+"La biblioteca estándar de Python ha sido objeto de importantes esfuerzos de "
+"mantenimiento y mejoras de calidad."
 
 #: ../Doc/whatsnew/3.2.rst:661
 msgid ""
@@ -803,6 +944,10 @@ msgid ""
 "bytes/text model in Python 3.  For the first time, there is correct handling "
 "of messages with mixed encodings."
 msgstr ""
+"La mayor novedad para Python 3.2 es que el paquete :mod:`email`, el módulo :"
+"mod:`mailbox` y los módulos :mod:`nntplib` ahora funcionan correctamente con "
+"el modelo de bytes/texto en Python 3. Por primera vez , existe un manejo "
+"correcto de mensajes con codificaciones mixtas."
 
 #: ../Doc/whatsnew/3.2.rst:666
 msgid ""
@@ -811,6 +956,11 @@ msgid ""
 "the operating system are now better able to exchange non-ASCII data using "
 "the Windows MBCS encoding, locale-aware encodings, or UTF-8."
 msgstr ""
+"En toda la biblioteca estándar, se ha prestado más atención a las "
+"codificaciones y los problemas de texto frente a bytes. En particular, las "
+"interacciones con el sistema operativo ahora son más capaces de intercambiar "
+"datos que no son ASCII mediante la codificación MBCS de Windows, "
+"codificaciones con reconocimiento de configuración regional o UTF-8."
 
 #: ../Doc/whatsnew/3.2.rst:671
 msgid ""
@@ -1814,6 +1964,12 @@ msgid ""
 "filename needs to be specified with a full pathname.  The archiving step is "
 "non-destructive (the original files are left unchanged)."
 msgstr ""
+"Las funciones principales son :func:`~shutil.make_archive` y :func:`~shutil."
+"unpack_archive`. Por defecto, ambas operan en el directorio actual (que "
+"puede ser configurado por :func:`os.chdir`) y en cualquier subdirectorio. El "
+"nombre del archivo de almacenamiento debe especificarse con una ruta "
+"completa. El paso de archivado no es destructivo (los archivos originales no "
+"se modifican)."
 
 #: ../Doc/whatsnew/3.2.rst:1590
 msgid "sqlite3"
