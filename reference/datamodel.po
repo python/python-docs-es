@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2021-01-21 20:17-0600\n"
+"PO-Revision-Date: 2021-01-29 21:17-0600\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3521,24 +3521,34 @@ msgid ""
 "ultimately calls ``type.__new__``, the following additional customisation "
 "steps are invoked after creating the class object:"
 msgstr ""
+"Cuando se utiliza la metaclase por defecto :class:`type`, o cualquier otra "
+"metaclase que finalmente llama a ``type.__new__``, los siguientes pasos de "
+"personalización adicional son invocados después de crear el objeto de clase:"
 
 #: ../Doc/reference/datamodel.rst:2025
 msgid ""
 "first, ``type.__new__`` collects all of the descriptors in the class "
 "namespace that define a :meth:`~object.__set_name__` method;"
 msgstr ""
+"primero, ``type.__new__`` recolecta todos los descriptores en el espacio de "
+"nombres de la clase que definen un método :meth:`~object.__set_name__`;"
 
 #: ../Doc/reference/datamodel.rst:2027
 msgid ""
 "second, all of these ``__set_name__`` methods are called with the class "
 "being defined and the assigned name of that particular descriptor;"
 msgstr ""
+"segundo, todos esos métodos ``__set_name__`` son llamados con la clase "
+"definida y el nombre de un descriptor particular asignado;"
 
 #: ../Doc/reference/datamodel.rst:2029
+#, fuzzy
 msgid ""
 "finally, the :meth:`~object.__init_subclass__` hook is called on the "
 "immediate parent of the new class in its method resolution order."
 msgstr ""
+"finalmente, el enlace :meth:`~object.__init_subclass__` llama al padre "
+"inmediato de la nueva clase en su orden de resolución del método."
 
 #: ../Doc/reference/datamodel.rst:2032
 msgid ""
@@ -3546,6 +3556,9 @@ msgid ""
 "included in the class definition (if any) and the resulting object is bound "
 "in the local namespace as the defined class."
 msgstr ""
+"Después de que el objeto de clase es creado, se pasa al decorador de clase "
+"incluido en su definición (si existe) y el objeto resultante es enlazado en "
+"el espacio de nombres local como la clase definida."
 
 #: ../Doc/reference/datamodel.rst:2036
 msgid ""
@@ -3554,18 +3567,23 @@ msgid ""
 "object is discarded. The new copy is wrapped in a read-only proxy, which "
 "becomes the :attr:`~object.__dict__` attribute of the class object."
 msgstr ""
+"Cuando una nueva clase es creada por ``type.__new__``, el objeto "
+"proporcionado como el parámetro de espacio de nombres es copiado a un "
+"trazado ordenado y el objeto original es descartado. La nueva copia es "
+"*envuelta* en un proxy de solo lectura, que se convierte en el atributo :"
+"attr:`~object.__dict__` del objeto de clase."
 
 #: ../Doc/reference/datamodel.rst:2043
 msgid ":pep:`3135` - New super"
-msgstr ""
+msgstr ":pep:`3135` - Nuevo súper"
 
 #: ../Doc/reference/datamodel.rst:2044
 msgid "Describes the implicit ``__class__`` closure reference"
-msgstr ""
+msgstr "Describe la referencia de cierre implícita ``__class__``"
 
 #: ../Doc/reference/datamodel.rst:2048
 msgid "Uses for metaclasses"
-msgstr ""
+msgstr "Usos para metaclases"
 
 #: ../Doc/reference/datamodel.rst:2050
 msgid ""
@@ -3574,16 +3592,23 @@ msgid ""
 "automatic property creation, proxies, frameworks, and automatic resource "
 "locking/synchronization."
 msgstr ""
+"Los usos potenciales para metaclases son ilimitados. Algunas ideas que ya "
+"han sido exploradas incluyen enumeración, registros, revisión de interface, "
+"delegación automática, creación de propiedades automática, proxy, "
+"infraestructuras, y bloqueo/sincronización automática de recursos."
 
 #: ../Doc/reference/datamodel.rst:2057
 msgid "Customizing instance and subclass checks"
-msgstr ""
+msgstr "Personalizando revisiones de instancia y subclase"
 
 #: ../Doc/reference/datamodel.rst:2059
 msgid ""
 "The following methods are used to override the default behavior of the :func:"
 "`isinstance` and :func:`issubclass` built-in functions."
 msgstr ""
+"Los siguientes métodos son utilizados para anular el comportamiento por "
+"defecto de las funciones incorporadas :func:`isinstance` y :func:"
+"`issubclass`."
 
 #: ../Doc/reference/datamodel.rst:2062
 msgid ""
@@ -3592,6 +3617,10 @@ msgid ""
 "base classes\" to any class or type (including built-in types), including "
 "other ABCs."
 msgstr ""
+"En particular, la metaclase :class:`abc.ABCMeta` implementa estos métodos "
+"para permitir la adición de Clases Base Abstractas (ABCs, por su nombre en "
+"inglés *Abstract Base Clases*) como “clases base virtuales” a cualquier "
+"clase o tipo (incluyendo tipos incorporados), incluyendo otros ABCs."
 
 #: ../Doc/reference/datamodel.rst:2069
 msgid ""
@@ -3599,6 +3628,9 @@ msgid ""
 "instance of *class*. If defined, called to implement ``isinstance(instance, "
 "class)``."
 msgstr ""
+"Devuelve *true* si la instancia *instance* debe ser considerada una "
+"instancia (directa o indirecta) de clase *class*. De ser definida, es "
+"llamado para implementar ``isinstance(instance, class)``."
 
 #: ../Doc/reference/datamodel.rst:2076
 msgid ""
@@ -3606,6 +3638,9 @@ msgid ""
 "subclass of *class*.  If defined, called to implement ``issubclass(subclass, "
 "class)``."
 msgstr ""
+"Devuelve *true* si la subclase *subclass* debe ser considerada una subclase "
+"(directa o indirecta) de clase *class*. De ser definida, es llamado para "
+"implementar ``issubclass(subclass, class)``."
 
 #: ../Doc/reference/datamodel.rst:2081
 msgid ""
@@ -3614,10 +3649,15 @@ msgid ""
 "consistent with the lookup of special methods that are called on instances, "
 "only in this case the instance is itself a class."
 msgstr ""
+"Tome en cuenta que estos métodos son buscados en el tipo (metaclase) de una "
+"clase. No pueden ser definidos como métodos de clase en la clase actual. "
+"Esto es consistente con la búsqueda de métodos especiales que son llamados "
+"en instancias, solo en este caso la instancia es por sí misma una clase."
 
 #: ../Doc/reference/datamodel.rst:2092
 msgid ":pep:`3119` - Introducing Abstract Base Classes"
 msgstr ""
+":pep:`3119` - Introducción a Clases Base Abstractas (*Abstract Base Classes*)"
 
 #: ../Doc/reference/datamodel.rst:2089
 msgid ""
@@ -3627,22 +3667,31 @@ msgid ""
 "context of adding Abstract Base Classes (see the :mod:`abc` module) to the "
 "language."
 msgstr ""
+"Incluye la especificación para personalizar el comportamiento de :func:"
+"`isinstance` y :func:`issubclass` a través de :meth:`~class."
+"__instancecheck__` y :meth:`~class.__subclasscheck__`, con motivación para "
+"esta funcionalidad en el contexto de agregar Clases Base Abstractas (ver el "
+"módulo :mod:`abc`) al lenguaje."
 
 #: ../Doc/reference/datamodel.rst:2097
 msgid "Emulating generic types"
-msgstr ""
+msgstr "Emulando tipos genéricos"
 
 #: ../Doc/reference/datamodel.rst:2099
 msgid ""
 "One can implement the generic class syntax as specified by :pep:`484` (for "
 "example ``List[int]``) by defining a special method:"
 msgstr ""
+"Uno puede implementar la sintaxis de clase genérica como lo especifica :pep:"
+"`484` (por ejemplo ``List[int]``) definiendo un método especial:"
 
 #: ../Doc/reference/datamodel.rst:2104
 msgid ""
 "Return an object representing the specialization of a generic class by type "
 "arguments found in *key*."
 msgstr ""
+"Retornar un objeto representando la especialización de una clase genérica "
+"por argumentos de tipo encontrados en *key*."
 
 #: ../Doc/reference/datamodel.rst:2107
 msgid ""
@@ -3651,10 +3700,14 @@ msgid ""
 "is primarily reserved for use with static type hints, other usage is "
 "discouraged."
 msgstr ""
+"Este método es buscado en el objeto de clase mismo, y cuando es definido en "
+"el cuerpo de la clase, este método es un método de clase implícito. Tome en "
+"cuenta que este mecanismo es ante todo reservado para su uso con sugerencias "
+"de tipo (*type hints*), no se aconseja otro uso."
 
 #: ../Doc/reference/datamodel.rst:2120
 msgid "Emulating callable objects"
-msgstr ""
+msgstr "Emulando objetos que se pueden llamar"
 
 #: ../Doc/reference/datamodel.rst:2127
 msgid ""
@@ -3662,10 +3715,13 @@ msgid ""
 "defined, ``x(arg1, arg2, ...)`` is a shorthand for ``x.__call__(arg1, "
 "arg2, ...)``."
 msgstr ""
+"Es llamado cuando la instancia es “llamada” como una función; si este método "
+"es definido, ``x(arg1, arg2, …)`` es una clave corta para ``x.__call__(arg1, "
+"arg2, …)``."
 
 #: ../Doc/reference/datamodel.rst:2134
 msgid "Emulating container types"
-msgstr ""
+msgstr "Emulando tipos de contenedores"
 
 #: ../Doc/reference/datamodel.rst:2136
 msgid ""
@@ -3731,10 +3787,12 @@ msgstr ""
 msgid ""
 "Slicing is done exclusively with the following three methods.  A call like ::"
 msgstr ""
+"La segmentación se hace exclusivamente con los siguientes tres métodos. Un "
+"llamado como ::"
 
 #: ../Doc/reference/datamodel.rst:2205
 msgid "is translated to ::"
-msgstr ""
+msgstr "es traducido a ::"
 
 #: ../Doc/reference/datamodel.rst:2209
 msgid "and so forth.  Missing slice items are always filled in with ``None``."
