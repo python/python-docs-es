@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2021-02-08 23:40-0300\n"
+"PO-Revision-Date: 2021-02-13 22:43-0300\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1797,6 +1797,13 @@ msgid ""
 "`logging.raiseExceptions`.  The new default handler is stored in :attr:"
 "`logging.lastResort`."
 msgstr ""
+"Si no se establece ninguna configuración antes de que ocurra un evento de "
+"logging, ahora hay una configuración predeterminada que usa una :class:"
+"`~logging.StreamHandler` dirigido a :attr:`sys.stderr` para eventos de nivel "
+"``WARNING`` o mayor. Anteriormente, un evento que ocurría antes de que se "
+"establezca una configuración generaba una excepción o eliminaba "
+"silenciosamente el evento según el valor de :attr:`logging.raiseExceptions`. "
+"El nuevo gestor predeterminado se almacena en :attr:`logging.lastResort`."
 
 #: ../Doc/whatsnew/3.2.rst:1199
 msgid ""
@@ -1804,6 +1811,9 @@ msgid ""
 "`~logging.Filter` object, the predicate can be any Python callable that "
 "returns ``True`` or ``False``."
 msgstr ""
+"El uso de filtros ha sido simplificado. En lugar de crear un objeto :class:"
+"`~logging.Filter`, la declaración puede ser cualquier invocable Python que "
+"devuelva ``True`` o ``False``."
 
 #: ../Doc/whatsnew/3.2.rst:1203
 msgid ""
@@ -1811,6 +1821,9 @@ msgid ""
 "configuration.  See the module documentation for a full listing of changes "
 "in Python 3.2."
 msgstr ""
+"Hubo una serie de otras mejoras que agregan flexibilidad y simplifican la "
+"configuración. Consulte la documentación del módulo para obtener una lista "
+"completa de los cambios en Python 3.2."
 
 #: ../Doc/whatsnew/3.2.rst:1208
 msgid "csv"
@@ -1823,18 +1836,27 @@ msgid ""
 "style with ``'\\n'`` as the line terminator.  The registered dialect name is "
 "``unix``."
 msgstr ""
+"El módulo :mod:`csv` ahora admite un nuevo dialecto, :class:`~csv."
+"unix_dialect`, que aplica comillas para todos los campos y un estilo Unix "
+"tradicional con ``'\\n'`` como terminador de línea. El nombre del dialecto "
+"registrado es ``unix``."
 
 #: ../Doc/whatsnew/3.2.rst:1214
 msgid ""
 "The :class:`csv.DictWriter` has a new method, :meth:`~csv.DictWriter."
 "writeheader` for writing-out an initial row to document the field names::"
 msgstr ""
+"La clase :class:`csv.DictWriter` tiene un nuevo método, :meth:`~csv."
+"DictWriter.writeheader` para escribir una fila inicial para documentar los "
+"nombres de los campos::"
 
 #: ../Doc/whatsnew/3.2.rst:1228
 msgid ""
 "(New dialect suggested by Jay Talbot in :issue:`5975`, and the new method "
 "suggested by Ed Abraham in :issue:`1537721`.)"
 msgstr ""
+"(Nuevo dialecto sugerido por Jay Talbot en :issue:`5975`, y el nuevo método "
+"sugerido por Ed Abraham en :issue:`1537721`.)"
 
 #: ../Doc/whatsnew/3.2.rst:1232
 msgid "contextlib"
@@ -1846,12 +1868,18 @@ msgid ""
 "ContextDecorator` that is helpful for creating a :term:`context manager` "
 "that does double duty as a function decorator."
 msgstr ""
+"Hay una nueva y ligeramente alucinante herramienta :class:`~contextlib."
+"ContextDecorator` que es útil para crear un :term:`context manager` que "
+"cumple una doble función como decorador de funciones."
 
 #: ../Doc/whatsnew/3.2.rst:1238
 msgid ""
 "As a convenience, this new functionality is used by :func:`~contextlib."
 "contextmanager` so that no extra effort is needed to support both roles."
 msgstr ""
+"Para su comodidad, esta nueva funcionalidad es utilizada por :func:"
+"`~contextlib.contextmanager` de modo que no se necesita ningún esfuerzo "
+"adicional para admitir ambos roles."
 
 #: ../Doc/whatsnew/3.2.rst:1242
 msgid ""
@@ -1862,6 +1890,13 @@ msgid ""
 "is a need to write a pre-action or post-action wrapper that can be used in "
 "either role."
 msgstr ""
+"La idea básica es que tanto los gestores de contexto como los decoradores de "
+"funciones se pueden usar para envoltorios (*wrappers*) previos y posteriores "
+"a la acción. Los gestores de contexto envuelven un grupo de declaraciones "
+"usando la declaración :keyword:`with` y los decoradores de funciones "
+"envuelven un grupo de declaraciones encerradas en una función. Por lo tanto, "
+"ocasionalmente es necesario escribir un envoltorio de acción previa o "
+"posterior que se pueda usar en cualquiera de los roles."
 
 #: ../Doc/whatsnew/3.2.rst:1248
 msgid ""
@@ -1871,14 +1906,19 @@ msgid ""
 "task, the :func:`~contextlib.contextmanager` provides both capabilities in a "
 "single definition::"
 msgstr ""
+"Por ejemplo, a veces es útil envolver funciones o grupos de declaraciones "
+"con un logger que pueda rastrear el tiempo de entrada y el tiempo de salida. "
+"En lugar de escribir tanto un decorador de funciones como un gestor de "
+"contexto para la tarea, :func:`~contextlib.contextmanager` proporciona ambas "
+"capacidades en una sola definición::"
 
 #: ../Doc/whatsnew/3.2.rst:1265
 msgid "Formerly, this would have only been usable as a context manager::"
-msgstr ""
+msgstr "Anteriormente, esto solo se podía usar como gestor de contexto::"
 
 #: ../Doc/whatsnew/3.2.rst:1271
 msgid "Now, it can be used as a decorator as well::"
-msgstr ""
+msgstr "Ahora, también se puede usar como decorador::"
 
 #: ../Doc/whatsnew/3.2.rst:1278
 msgid ""
@@ -1887,6 +1927,10 @@ msgid ""
 "argument usable by a :keyword:`with` statement, but there is no parallel for "
 "function decorators."
 msgstr ""
+"Tratar de cumplir dos roles a la vez impone algunas limitaciones a la "
+"técnica. Los gestores de contexto normalmente tienen la flexibilidad de "
+"retornar un argumento utilizable por una instrucción :keyword:`with`, pero "
+"no hay paralelo para los decoradores de funciones."
 
 #: ../Doc/whatsnew/3.2.rst:1282
 msgid ""
@@ -1894,10 +1938,13 @@ msgid ""
 "*track_entry_and_exit* context manager to return a logging instance for use "
 "in the body of enclosed statements."
 msgstr ""
+"En el ejemplo anterior, no hay una forma limpia para que el gestor de "
+"contexto *track_entry_and_exit* retorne una instancia de logging para usar "
+"en el cuerpo de las declaraciones adjuntas."
 
 #: ../Doc/whatsnew/3.2.rst:1286
 msgid "(Contributed by Michael Foord in :issue:`9110`.)"
-msgstr ""
+msgstr "(Contribución de Michael Foord en :issue:`9110`.)"
 
 #: ../Doc/whatsnew/3.2.rst:1289
 msgid "decimal and fractions"
@@ -1909,6 +1956,9 @@ msgid ""
 "different numeric datatypes will have the same hash value whenever their "
 "actual values are equal (:issue:`8188`)::"
 msgstr ""
+"Mark Dickinson diseñó un esquema elegante y eficiente para asegurar que "
+"diferentes tipos de datos numéricos tendrán el mismo valor hash siempre que "
+"sus valores reales sean iguales (:issue:`8188`)::"
 
 #: ../Doc/whatsnew/3.2.rst:1298
 msgid ""
@@ -1917,6 +1967,10 @@ msgid ""
 "modulus, the hash values for *infinity* and *nan*, and the multiplier used "
 "for the imaginary part of a number:"
 msgstr ""
+"Algunos de los detalles de hash se exponen a través de un nuevo atributo, :"
+"attr:`sys.hash_info`, que describe el ancho de bits del valor hash, el "
+"módulo principal, los valores hash para *infinity* y *nan*, y el "
+"multiplicador utilizado para la parte imaginaria de un número:"
 
 #: ../Doc/whatsnew/3.2.rst:1306
 msgid ""
@@ -1929,6 +1983,14 @@ msgid ""
 "it makes sense to add them to the constructor and to support mixed-type "
 "comparisons."
 msgstr ""
+"Se ha atenuado una decisión temprana para limitar la interoperabilidad de "
+"varios tipos numéricos. Todavía no se admite (y es desaconsejable) tener una "
+"mezcla implícita en expresiones aritméticas como ``Decimal('1.1') + "
+"float('1.1')`` porque este último pierde información en el proceso de "
+"construcción del float binario. Sin embargo, dado que el valor de punto "
+"flotante existente se puede convertir sin pérdidas a una representación "
+"decimal o racional, tiene sentido agregarlos al constructor y admitir "
+"comparaciones de tipo mixto."
 
 #: ../Doc/whatsnew/3.2.rst:1314
 msgid ""
@@ -1936,6 +1998,9 @@ msgid ""
 "directly so there in no longer a need to use the :meth:`~decimal.Decimal."
 "from_float` method (:issue:`8257`)."
 msgstr ""
+"El constructor :class:`decimal.Decimal` ahora acepta objetos :class:`float` "
+"directamente, por lo que ya no es necesario utilizar el método :meth:"
+"`~decimal.Decimal.from_float` (:issue:`8257`)."
 
 #: ../Doc/whatsnew/3.2.rst:1318
 msgid ""
@@ -1943,6 +2008,10 @@ msgid ""
 "Decimal` objects can be directly compared with :class:`float` and :class:"
 "`fractions.Fraction` (:issue:`2531` and :issue:`8188`)."
 msgstr ""
+"Las comparaciones de tipos mixto ahora son totalmente compatibles, de modo "
+"que los objetos :class:`~decimal.Decimal` se pueden comparar directamente "
+"con :class:`float` y :class:`fractions.Fraction` (:issue:`2531` y :issue:"
+"`8188`)."
 
 #: ../Doc/whatsnew/3.2.rst:1322
 msgid ""
@@ -1950,6 +2019,9 @@ msgid ""
 "`~fractions.Fraction.from_float()` and :meth:`~fractions.Fraction."
 "from_decimal` methods are no longer needed (:issue:`8294`):"
 msgstr ""
+"Cambios similares se hicieron en :class:`fractions.Fraction` por lo que los "
+"métodos :meth:`~fractions.Fraction.from_float()` y :meth:`~fractions."
+"Fraction.from_decimal` ya no son necesarios (:issue:`8294`):"
 
 #: ../Doc/whatsnew/3.2.rst:1333
 msgid ""
@@ -1958,10 +2030,14 @@ msgid ""
 "contexts that correspond to the decimal interchange formats specified in "
 "IEEE 754 (see :issue:`8540`)."
 msgstr ""
+"Otro cambio útil para el módulo :mod:`decimal` es que el atributo :attr:"
+"`Context.clamp` ahora es público. Esto es útil para crear contextos que se "
+"correspondan con los formatos de intercambio decimal especificados en IEEE "
+"754 (ver :`8540`)."
 
 #: ../Doc/whatsnew/3.2.rst:1338
 msgid "(Contributed by Mark Dickinson and Raymond Hettinger.)"
-msgstr ""
+msgstr "(Contribución de Mark Dickinson y Raymond Hettinger.)"
 
 #: ../Doc/whatsnew/3.2.rst:1341
 msgid "ftp"
@@ -1973,18 +2049,26 @@ msgid ""
 "to unconditionally consume :exc:`socket.error` exceptions and to close the "
 "FTP connection when done::"
 msgstr ""
+"La clase :class:`ftplib.FTP` ahora admite el protocolo de gestor de contexto "
+"para consumir incondicionalmente las excepciones :exc:`socket.error` y "
+"cerrar la conexión FTP cuando haya terminado::"
 
 #: ../Doc/whatsnew/3.2.rst:1358
 msgid ""
 "Other file-like objects such as :class:`mmap.mmap` and :func:`fileinput."
 "input` also grew auto-closing context managers::"
 msgstr ""
+"Otros objetos similares a archivos como :class:`mmap.mmap` y :func:"
+"`fileinput.input` también adquirieron gestores de contexto de cierre "
+"automático::"
 
 #: ../Doc/whatsnew/3.2.rst:1365
 msgid ""
 "(Contributed by Tarek Ziadé and Giampaolo Rodolà in :issue:`4972`, and by "
 "Georg Brandl in :issue:`8046` and :issue:`1286`.)"
 msgstr ""
+"(Contribución de Tarek Ziadé y Giampaolo Rodolà en :issue:`4972`, y por "
+"Georg Brandl en :issue:`8046` y :issue:`1286`.)"
 
 #: ../Doc/whatsnew/3.2.rst:1368
 msgid ""
@@ -1993,10 +2077,14 @@ msgid ""
 "options, certificates and private keys into a single (potentially long-"
 "lived) structure."
 msgstr ""
+"La clase :class:`~ftplib.FTP_TLS` ahora acepta un parámetro *context*, que "
+"es un objeto :class:`ssl.SSLContext` que permite agrupar opciones de "
+"configuración SSL, certificados y claves privadas en una sola (y "
+"potencialmente de larga duración) estructura."
 
 #: ../Doc/whatsnew/3.2.rst:1372
 msgid "(Contributed by Giampaolo Rodolà; :issue:`8806`.)"
-msgstr ""
+msgstr "(Contribución de Giampaolo Rodolà; :issue:`8806`.)"
 
 #: ../Doc/whatsnew/3.2.rst:1375
 msgid "popen"
@@ -2007,12 +2095,17 @@ msgid ""
 "The :func:`os.popen` and :func:`subprocess.Popen` functions now support :"
 "keyword:`with` statements for auto-closing of the file descriptors."
 msgstr ""
+"Las funciones :func:`os.popen` y :func:`subprocess.Popen` ahora admiten "
+"declaraciones :keyword:`with` para el cierre automático de los descriptores "
+"de archivo."
 
 #: ../Doc/whatsnew/3.2.rst:1380
 msgid ""
 "(Contributed by Antoine Pitrou and Brian Curtin in :issue:`7461` and :issue:"
 "`10554`.)"
 msgstr ""
+"(Contribución de Antoine Pitrou y Brian Curtin en :issue:`7461` y :issue:"
+"`10554`.)"
 
 #: ../Doc/whatsnew/3.2.rst:1384
 msgid "select"
@@ -2025,10 +2118,15 @@ msgid ""
 "guaranteed not to block when :func:`select.select` says a pipe is ready for "
 "writing."
 msgstr ""
+"El módulo :mod:`select` ahora presenta un nuevo atributo constante, :attr:"
+"`~select.PIPE_BUF`, que da el número mínimo de bytes que están garantizados "
+"para no bloquearse cuando :func:`select.select` dice que una tubería está "
+"lista para escribir."
 
 #: ../Doc/whatsnew/3.2.rst:1395
 msgid "(Available on Unix systems. Patch by Sébastien Sablé in :issue:`9862`)"
 msgstr ""
+"(Disponbile en sitemas Unix. Parche de Sébastien Sablé en :issue:`9862`)"
 
 #: ../Doc/whatsnew/3.2.rst:1398
 msgid "gzip and zipfile"
@@ -2041,6 +2139,10 @@ msgid ""
 "`~gzip.GzipFile.peek` method and supports unseekable as well as zero-padded "
 "file objects."
 msgstr ""
+":class:`gzip.GzipFile` ahora implementa :class:`io.BufferedIOBase` :term:"
+"`clase base abstracta` (excepto para ``truncate()``). También tiene un "
+"método :meth:`~gzip.GzipFile.peek` y admite objetos de archivo con rellenos "
+"de ceros y que no se pueden buscar."
 
 #: ../Doc/whatsnew/3.2.rst:1405
 msgid ""
@@ -2049,6 +2151,10 @@ msgid ""
 "decompression.  Keep in mind that text needs to be encoded as :class:`bytes` "
 "before compressing and decompressing:"
 msgstr ""
+"El módulo :mod:`gzip` también obtiene las funciones :func:`~gzip.compress` "
+"y :func:`~gzip.decompress` para facilitar la compresión y descompresión en "
+"memoria. Tenga en cuenta que el texto debe codificarse como :class:`bytes` "
+"antes de comprimir y descomprimir::"
 
 #: ../Doc/whatsnew/3.2.rst:1422
 msgid ""
@@ -2056,6 +2162,9 @@ msgid ""
 "Aides and Brian Curtin in :issue:`9962`, :issue:`1675951`, :issue:`7471` "
 "and :issue:`2846`.)"
 msgstr ""
+"(Contribución de Anand B. Pillai en :issue:`3488`; y de Antoine Pitrou, Nir "
+"Aides y Brian Curtin en :issue:`9962`, :issue:`1675951`, :issue:`7471` y :"
+"issue:`2846`.)"
 
 #: ../Doc/whatsnew/3.2.rst:1426
 msgid ""
@@ -2065,10 +2174,16 @@ msgid ""
 "object for more speedups.  It also solves an issue where interleaved calls "
 "to *read* and *readline* gave the wrong results."
 msgstr ""
+"Además, la clase :class:`zipfile.ZipExtFile` se modificó internamente para "
+"representar archivos almacenados dentro de un archivo. La nueva "
+"implementación es significativamente más rápida y se puede incluir en un "
+"objeto :class:`io.BufferedReader` para obtener más aceleraciones. También "
+"resuelve un problema en el que las llamadas intercaladas a *read* y "
+"*readline* daban resultados incorrectos."
 
 #: ../Doc/whatsnew/3.2.rst:1432
 msgid "(Patch submitted by Nir Aides in :issue:`7610`.)"
-msgstr ""
+msgstr "(Parche enviado por Nir Aides en :issue:`7610`.)"
 
 #: ../Doc/whatsnew/3.2.rst:1435
 msgid "tarfile"
@@ -2081,6 +2196,10 @@ msgid ""
 "*filter*, that controls which files are added to the archive and allows the "
 "file metadata to be edited."
 msgstr ""
+"La clase :class:`~tarfile.TarFile` ahora se puede usar como gestor de "
+"contexto. Además, su método :meth:`~tarfile.TarFile.add` tiene una nueva "
+"opción, *filter*, que controla qué archivos se agregan y permite editar los "
+"metadatos del archivo."
 
 #: ../Doc/whatsnew/3.2.rst:1442
 msgid ""
@@ -2091,11 +2210,19 @@ msgid ""
 "class:`~tarfile.TarInfo` object, or if it wants the file to be excluded, the "
 "function can return ``None``::"
 msgstr ""
+"La nueva opción *filter* reemplaza el parámetro anterior y menos flexible "
+"*exclude* que ahora está deprecado. Si se especifica, el parámetro opcional "
+"*filter* debe ser un :term:`keyword argument`. La función *filter* "
+"proporcionada por el usuario acepta un objeto :class:`~tarfile.TarInfo` y "
+"retorna un objeto :class:`~tarfile.TarInfo` actualizado, o si desea que el "
+"archivo sea excluido, la función puede retornar ``None``::"
 
 #: ../Doc/whatsnew/3.2.rst:1466
 msgid ""
 "(Proposed by Tarek Ziadé and implemented by Lars Gustäbel in :issue:`6856`.)"
 msgstr ""
+"(Propuesto por Tarek Ziadé e implementado por Lars Gustäbel en :issue:"
+"`6856`.)"
 
 #: ../Doc/whatsnew/3.2.rst:1469
 msgid "hashlib"
@@ -2107,10 +2234,13 @@ msgid ""
 "hashing algorithms guaranteed to be present in all implementations and those "
 "available on the current implementation::"
 msgstr ""
+"El módulo :mod:`hashlib` tiene dos nuevos atributos constantes que enumeran "
+"los algoritmos hash garantizados para estar presentes en todas las "
+"implementaciones y los disponibles en la implementación actual::"
 
 #: ../Doc/whatsnew/3.2.rst:1486
 msgid "(Suggested by Carl Chenet in :issue:`7418`.)"
-msgstr ""
+msgstr "(Sugerido por Carl Chenet en :issue:`7418`.)"
 
 #: ../Doc/whatsnew/3.2.rst:1489
 msgid "ast"
@@ -2125,10 +2255,17 @@ msgid ""
 "and :class:`set` literals to the list of supported types: strings, bytes, "
 "numbers, tuples, lists, dicts, sets, booleans, and ``None``."
 msgstr ""
+"El módulo :mod:`ast` tiene una maravillosa herramienta de propósito general "
+"para evaluar cadenas de expresión de forma segura utilizando la sintaxis "
+"literal de Python. La función :func:`ast.literal_eval` sirve como una "
+"alternativa segura a la función incorporada :func:`eval` la cual se abusa "
+"fácilmente. Python 3.2 agrega :class:`bytes` y :class:`set` literales a la "
+"lista de tipos admitidos: cadenas de caracteres, bytes, números, tuplas, "
+"listas, diccionarios, sets, valores booleanos y ``None``."
 
 #: ../Doc/whatsnew/3.2.rst:1512
 msgid "(Implemented by Benjamin Peterson and Georg Brandl.)"
-msgstr ""
+msgstr "(Implementado por Benjamin Peterson y Georg Brandl.)"
 
 #: ../Doc/whatsnew/3.2.rst:1515
 msgid "os"
@@ -2141,6 +2278,10 @@ msgid ""
 "func:`~os.fsencode` and :func:`~os.fsdecode`, for encoding and decoding "
 "filenames:"
 msgstr ""
+"Los diferentes sistemas operativos utilizan varias codificaciones para los "
+"nombres de archivo y las variables de entorno. El módulo :mod:`os` "
+"proporciona dos funciones nuevas, :func:`~os.fsencode` y :func:`~os."
+"fsdecode`, para codificar y decodificar nombres de archivo:"
 
 #: ../Doc/whatsnew/3.2.rst:1527
 msgid ""
@@ -2148,6 +2289,9 @@ msgid ""
 "environment.  If so, the :attr:`os.supports_bytes_environ` constant will be "
 "true."
 msgstr ""
+"Algunos sistemas operativos permiten el acceso directo a bytes codificados "
+"en el entorno. Si es así, la constante :attr:`os.supports_bytes_environ` "
+"será verdadera."
 
 #: ../Doc/whatsnew/3.2.rst:1531
 msgid ""
@@ -2155,10 +2299,13 @@ msgid ""
 "new :func:`os.getenvb` function or use :data:`os.environb` which is a bytes "
 "version of :data:`os.environ`."
 msgstr ""
+"Para acceder directamente a las variables de entorno codificadas (si está "
+"disponible), utilice la nueva función :func:`os.getenvb` o utilice :data:`os."
+"environb`, que es una versión en bytes de :data:`os.environ`."
 
 #: ../Doc/whatsnew/3.2.rst:1535
 msgid "(Contributed by Victor Stinner.)"
-msgstr ""
+msgstr "(Contribución de Victor Stinner.)"
 
 #: ../Doc/whatsnew/3.2.rst:1538
 msgid "shutil"
@@ -2166,7 +2313,7 @@ msgstr "shutil"
 
 #: ../Doc/whatsnew/3.2.rst:1540
 msgid "The :func:`shutil.copytree` function has two new options:"
-msgstr ""
+msgstr "La función :func:`shutil.copytree` tiene dos nuevas opciones:"
 
 #: ../Doc/whatsnew/3.2.rst:1542
 msgid ""
@@ -2174,16 +2321,21 @@ msgid ""
 "copies a file pointed to by a symlink, not the symlink itself. This option "
 "will silence the error raised if the file doesn't exist."
 msgstr ""
+"*ignore_dangling_symlinks*: cuando ``symlinks=False`` para que la función "
+"copie un archivo apuntado por un enlace simbólico, no el enlace simbólico en "
+"sí. Esta opción silenciará el error generado si el archivo no existe."
 
 #: ../Doc/whatsnew/3.2.rst:1546
 msgid ""
 "*copy_function*: is a callable that will be used to copy files. :func:"
 "`shutil.copy2` is used by default."
 msgstr ""
+"*copy_function*: es un invocable que se utilizará para copiar archivos. :"
+"func:`shutil.copy2` se usa por defecto."
 
 #: ../Doc/whatsnew/3.2.rst:1549 ../Doc/whatsnew/3.2.rst:1587
 msgid "(Contributed by Tarek Ziadé.)"
-msgstr ""
+msgstr "(Contribución de Tarek Ziadé.)"
 
 #: ../Doc/whatsnew/3.2.rst:1551
 msgid ""
@@ -2193,6 +2345,11 @@ msgid ""
 "registering additional archiving file formats (such as xz compressed "
 "tarfiles or custom formats)."
 msgstr ""
+"Además, el módulo :mod:`shutil` ahora admite :ref:`operaciones de archivado "
+"<archiving-operations> `para archivos zip, archivos tar sin comprimir, "
+"archivos tar comprimidos con gzip y archivos tar bzip. Y hay funciones para "
+"registrar formatos de archivado de archivo adicionales (como archivos tar "
+"comprimidos xz o formatos personalizados)."
 
 #: ../Doc/whatsnew/3.2.rst:1556
 msgid ""
