@@ -47,19 +47,15 @@ exclude_patterns = [
 
 if not os.environ.get('SPHINX_GETTEXT') == 'True':
     # Override all the files from ``.overrides`` directory
-    import glob
-    for root, dirs, files in os.walk('.overrides'):
-        for fname in files:
-            if fname == 'README.rst' and root == '.overrides':
-                continue
-            destroot = root.replace('.overrides', '').lstrip('/')
-            outputdir = os.path.join(
-                'cpython',
-                'Doc',
-                destroot,
-                fname,
-            )
-            os.system(f'ln -nfs `pwd`/{root}/{fname} {outputdir}')
+    from pathlib import Path
+    overrides_paths = Path('.overrides')
+
+    for path in overrides_paths.glob('**/*.*'):
+        if path.name == 'README.rst' and path.parent == '.overrides':
+            continue
+        destroot = str(path.parent).replace('.overrides', '').lstrip('/')
+        outputdir = Path('cpython/Doc') / destroot / path.name
+        os.system(f'ln -nfs `pwd`/{path.parent}/{path.name} {outputdir}')
 
 gettext_compact = False
 locale_dirs = ['../locales', 'cpython/locales']  # relative to the sourcedir
@@ -73,10 +69,16 @@ latex_documents = [
      _stdauthor, 'manual'),
 ]
 
-extensions.extend([
-    'sphinx_tabs.tabs',
-    'sphinxemoji.sphinxemoji',
-])
+try:
+    extensions.extend([
+        'sphinx_tabs.tabs',
+        'sphinxemoji.sphinxemoji',
+    ])
+except NameError:
+    extensions = [
+        'sphinx_tabs.tabs',
+        'sphinxemoji.sphinxemoji',
+    ]
 
 
 def setup(app):
