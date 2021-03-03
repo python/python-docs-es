@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2021-02-26 21:07-0600\n"
+"PO-Revision-Date: 2021-03-02 18:09-0600\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4282,6 +4282,11 @@ msgid ""
 "object's instance dictionary.  That behaviour is the reason why the "
 "following code raises an exception::"
 msgstr ""
+"Para clases personalizadas, invocaciones implícitas de métodos especiales "
+"solo están garantizados para trabajar correctamente si son definidos en un "
+"tipo de objeto, no en el diccionario de instancia del objeto. Ese "
+"comportamiento es la razón por la que el siguiente código lanza una "
+"excepción::"
 
 #: ../Doc/reference/datamodel.rst:2533
 msgid ""
@@ -4291,6 +4296,11 @@ msgid ""
 "used the conventional lookup process, they would fail when invoked on the "
 "type object itself::"
 msgstr ""
+"La razón fundamental detrás de este comportamiento yace en una serie de "
+"métodos especiales como :meth:`__hash__` y :meth:`__repr__` que son "
+"implementados por todos los objetos, incluyendo objetos de tipo. Si la "
+"búsqueda implícita de estos métodos usaran el proceso de búsqueda "
+"convencional, fallarían al ser invocados en el objeto de tipo mismo::"
 
 #: ../Doc/reference/datamodel.rst:2546
 msgid ""
@@ -4298,6 +4308,9 @@ msgid ""
 "sometimes referred to as 'metaclass confusion', and is avoided by bypassing "
 "the instance when looking up special methods::"
 msgstr ""
+"Intentar invocar de manera incorrecta el método no ligado de una clase de "
+"esta forma a veces es denominado como ‘confusión de metaclase’, y se evita "
+"sobrepasando la instancia al buscar métodos especiales::"
 
 #: ../Doc/reference/datamodel.rst:2555
 msgid ""
@@ -4305,6 +4318,10 @@ msgid ""
 "correctness, implicit special method lookup generally also bypasses the :"
 "meth:`__getattribute__` method even of the object's metaclass::"
 msgstr ""
+"Además de sobrepasar cualquier atributo de instancia en aras de lo "
+"apropiado, la búsqueda implícita del método especial generalmente también "
+"sobrepasa al método :meth:`__getattribute__` incluso de la metaclase del "
+"objeto::"
 
 #: ../Doc/reference/datamodel.rst:2581
 msgid ""
@@ -4314,14 +4331,19 @@ msgid ""
 "method *must* be set on the class object itself in order to be consistently "
 "invoked by the interpreter)."
 msgstr ""
+"Sobrepasar el mecanismo de :meth:`__getattribute__` de esta forma "
+"proporciona un alcance importante para optimizaciones de velocidad dentro "
+"del intérprete, a costa de cierta flexibilidad en el manejo de métodos "
+"especiales (el método especial *debe* ser establecido en el objeto de clase "
+"mismo para ser invocado consistentemente por el intérprete)."
 
 #: ../Doc/reference/datamodel.rst:2592
 msgid "Coroutines"
-msgstr ""
+msgstr "Corrutinas"
 
 #: ../Doc/reference/datamodel.rst:2596
 msgid "Awaitable Objects"
-msgstr ""
+msgstr "Objetos Esperables"
 
 #: ../Doc/reference/datamodel.rst:2598
 msgid ""
@@ -4329,6 +4351,9 @@ msgid ""
 "method. :term:`Coroutine` objects returned from :keyword:`async def` "
 "functions are awaitable."
 msgstr ""
+"Un objeto :term:`awaitable` generalmente implementa a un método :meth:"
+"`__await__`. Objetos :term:`Coroutine` retornados a partir de funciones :"
+"keyword:`async def` son esperables."
 
 #: ../Doc/reference/datamodel.rst:2604
 msgid ""
@@ -4336,6 +4361,9 @@ msgid ""
 "with :func:`types.coroutine` or :func:`asyncio.coroutine` are also "
 "awaitable, but they do not implement :meth:`__await__`."
 msgstr ""
+"Los objetos :term:`generator iterator` retornados a partir de generadores "
+"decorados con :func:`types.coroutine` o :func:`asyncio.coroutine` también "
+"son esperables, pero no implementan :meth:`__await__`."
 
 #: ../Doc/reference/datamodel.rst:2610
 msgid ""
@@ -4343,14 +4371,17 @@ msgid ""
 "`awaitable` objects.  For instance, :class:`asyncio.Future` implements this "
 "method to be compatible with the :keyword:`await` expression."
 msgstr ""
+"Debe retornar un :term:`iterator`. Debe ser utilizado para implementar "
+"objetos :term:`awaitable`. Por ejemplo, :class:`asyncio.Future` implementa "
+"este método para ser compatible con la expresión :keyword:`await`."
 
 #: ../Doc/reference/datamodel.rst:2616
 msgid ":pep:`492` for additional information about awaitable objects."
-msgstr ""
+msgstr ":pep:`492` para información adicional sobre objetos esperables."
 
 #: ../Doc/reference/datamodel.rst:2622
 msgid "Coroutine Objects"
-msgstr ""
+msgstr "Objetos de Corrutina"
 
 #: ../Doc/reference/datamodel.rst:2624
 msgid ""
@@ -4362,6 +4393,14 @@ msgid ""
 "raises an exception, it is propagated by the iterator.  Coroutines should "
 "not directly raise unhandled :exc:`StopIteration` exceptions."
 msgstr ""
+"Objetos :term:`Coroutine` son objetos :term:`awaitable`. La ejecución de una "
+"corrutina puede ser controlada llamando :meth:`__await__` e iterando sobre "
+"el resultado. Cuando la corrutina ha terminado de ejecutar y retorna, el "
+"iterados levanta una excepción :exc:`StopIteration`, y el atributo :attr:"
+"`~StopIteration.value` de dicha excepción mantiene el valor de retorno. Si "
+"la corrutina lanza una excepción, ésta es propagada por el iterador. Las "
+"corrutinas no deben lanzar directamente excepciones :exc:`StopIteration` no "
+"manejadas."
 
 #: ../Doc/reference/datamodel.rst:2632
 msgid ""
@@ -4369,10 +4408,15 @@ msgid ""
 "of generators (see :ref:`generator-methods`).  However, unlike generators, "
 "coroutines do not directly support iteration."
 msgstr ""
+"Las corrutinas también tienen los métodos mencionados a continuación, los "
+"cuales son análogos a los de los generadores. (ver :ref:`generator-"
+"methods`). Sin embargo, a diferencia de los generadores, las corrutinas no "
+"soportan directamente iteración."
 
 #: ../Doc/reference/datamodel.rst:2636
 msgid "It is a :exc:`RuntimeError` to await on a coroutine more than once."
 msgstr ""
+"Es un error :exc:`RuntimeError` esperar a una corrutina más de una vez."
 
 #: ../Doc/reference/datamodel.rst:2642
 msgid ""
@@ -4383,6 +4427,13 @@ msgid ""
 "result (return value, :exc:`StopIteration`, or other exception) is the same "
 "as when iterating over the :meth:`__await__` return value, described above."
 msgstr ""
+"Inicia o continua la ejecución de una corrutina. Si *value* es ``None``, "
+"esto es equivalente a avanzar al iterador retornado por :meth:`__await__`. "
+"Si *value* no es ``None``, este método delega al método :meth:`~generator."
+"send` del iterador que causó la suspensión de la corrutina. El resultado (el "
+"valor de retorno, :exc:`StopIteration`, u otra excepción) es el mismo que "
+"cuando se itera sobre el valor de retorno de :meth:`__await__`, descrito "
+"anteriormente."
 
 #: ../Doc/reference/datamodel.rst:2652
 msgid ""
@@ -4394,6 +4445,13 @@ msgid ""
 "meth:`__await__` return value, described above.  If the exception is not "
 "caught in the coroutine, it propagates back to the caller."
 msgstr ""
+"Lanza la excepción especificada en la corrutina. Este método delega a :meth:"
+"`~generator.throw` del iterador que causó la suspensión de la corrutina, si "
+"dicho método existe. De lo contrario, la excepción es lanzada al punto de la "
+"suspensión. El resultado (valor de retorno, :exc:`StopIteration`, u otra "
+"excepción) es el mismo que cuando se itera sobre el valor de retorno de :"
+"meth:`__await__` descrito anteriormente. Si la excepción no es obtenida en "
+"la corrutina, ésta se propaga de regreso a quien realizó el llamado."
 
 #: ../Doc/reference/datamodel.rst:2663
 msgid ""
@@ -4404,47 +4462,64 @@ msgid ""
 "causing the coroutine to immediately clean itself up. Finally, the coroutine "
 "is marked as having finished executing, even if it was never started."
 msgstr ""
+"Causa que la corrutina misma se borre a sí misma y termine su ejecución. Si "
+"la corrutina es suspendida, este método primero delega a :meth:`~generator."
+"close`, si existe, del iterador que causó la suspensión de la corrutina. "
+"Luego lanza una excepción :exc:`GeneratorExit` en el punto de suspensión, "
+"causando que la corrutina se borre a sí misma. Finalmente, la corrutina es "
+"marcada como completada, aún si nunca inició."
 
 #: ../Doc/reference/datamodel.rst:2671
 msgid ""
 "Coroutine objects are automatically closed using the above process when they "
 "are about to be destroyed."
 msgstr ""
+"Objetos de corrutina son cerrados automáticamente utilizando el proceso "
+"anterior cuando están a punto de ser destruidos."
 
 #: ../Doc/reference/datamodel.rst:2677
 msgid "Asynchronous Iterators"
-msgstr ""
+msgstr "Iteradores asíncronos"
 
 #: ../Doc/reference/datamodel.rst:2679
 msgid ""
 "An *asynchronous iterator* can call asynchronous code in its ``__anext__`` "
 "method."
 msgstr ""
+"Un *iterador asíncrono* puede llamar código asíncrono en su método "
+"``__anext__``."
 
 #: ../Doc/reference/datamodel.rst:2682
 msgid ""
 "Asynchronous iterators can be used in an :keyword:`async for` statement."
 msgstr ""
+"Iteradores asíncronos pueden ser utilizados en la declaración :keyword:"
+"`async for`."
 
 #: ../Doc/reference/datamodel.rst:2686
 msgid "Must return an *asynchronous iterator* object."
-msgstr ""
+msgstr "Debe retornar un objeto de *iterador asíncrono*."
 
 #: ../Doc/reference/datamodel.rst:2690
 msgid ""
 "Must return an *awaitable* resulting in a next value of the iterator.  "
 "Should raise a :exc:`StopAsyncIteration` error when the iteration is over."
 msgstr ""
+"Debe retornar un *esperable* (awaitable) resultante en el siguiente valor "
+"del iterador. Debe levantar una excepción :exc:`StopAsyncIteration` cuando "
+"la iteración termina."
 
 #: ../Doc/reference/datamodel.rst:2693
 msgid "An example of an asynchronous iterable object::"
-msgstr ""
+msgstr "Un ejemplo de objeto iterable asíncrono::"
 
 #: ../Doc/reference/datamodel.rst:2710
 msgid ""
 "Prior to Python 3.7, ``__aiter__`` could return an *awaitable* that would "
 "resolve to an :term:`asynchronous iterator <asynchronous iterator>`."
 msgstr ""
+"Antes de Python 3.7, ``__aiter__`` podía retornar un *esperable* que se "
+"resolvería en un :term:`asynchronous iterator <asynchronous iterator>`."
 
 #: ../Doc/reference/datamodel.rst:2715
 msgid ""
