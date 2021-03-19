@@ -42,8 +42,9 @@ html_title = f'Documentación de Python en Español -- {release}'
 
 # Extend settings from upstream
 _exclude_patterns = [
-    # This file is not included and it not marked as :orphan:
-    '*/distutils/_setuptools_disclaimer.rst',
+    # This file is not included and it's not marked as :orphan:
+    'distutils/_setuptools_disclaimer.rst',
+    'cpython/Doc/distutils/_setuptools_disclaimer.rst',
 ]
 if 'exclude_patterns' in globals():
     exclude_patterns += _exclude_patterns
