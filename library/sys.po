@@ -10,17 +10,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-05 12:54+0200\n"
+"POT-Creation-Date: 2021-03-19 11:16+0100\n"
 "PO-Revision-Date: 2020-09-17 03:18+0200\n"
-"Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
+"Last-Translator: \n"
+"Language: es\n"
 "Language-Team: python-doc-es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
-"Last-Translator: \n"
-"Language: es\n"
-"X-Generator: Poedit 2.4.1\n"
 
 #: ../Doc/library/sys.rst:2
 msgid ":mod:`sys` --- System-specific parameters and functions"
@@ -62,11 +61,14 @@ msgstr ""
 "el intérprete actual."
 
 #: ../Doc/library/sys.rst:31
+#, fuzzy
 msgid ""
 "When an auditing event is raised through the :func:`sys.audit` function, "
 "each hook will be called in the order it was added with the event name and "
 "the tuple of arguments. Native hooks added by :c:func:`PySys_AddAuditHook` "
-"are called first, followed by hooks added in the current interpreter."
+"are called first, followed by hooks added in the current interpreter.  Hooks "
+"can then log the event, raise an exception to abort the operation, or "
+"terminate the process entirely."
 msgstr ""
 "Cuando se genera un evento de auditoría a través de la función :func:`sys."
 "audit`, cada gancho será llamado en el orden en que se agregó con el nombre "
@@ -74,6 +76,7 @@ msgstr ""
 "func:`PySys_AddAuditHook` se llaman primero, seguidos de los ganchos "
 "agregados en el intérprete actual."
 
+#: ../Doc/library/sys.rst:38
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``sys.addaudithook`` with no "
 "arguments."
@@ -81,13 +84,14 @@ msgstr ""
 "Lanza un :ref:`auditing event <auditing>` ``sys.addaudithook`` sin "
 "argumentos."
 
-#: ../Doc/library/sys.rst:38
+#: ../Doc/library/sys.rst:40
+#, fuzzy
 msgid ""
-"Raise an auditing event ``sys.addaudithook`` with no arguments. If any "
-"existing hooks raise an exception derived from :class:`RuntimeError`, the "
-"new hook will not be added and the exception suppressed. As a result, "
-"callers cannot assume that their hook has been added unless they control all "
-"existing hooks."
+"Calling :func:`sys.addaudithook` will itself raise an auditing event named "
+"``sys.addaudithook`` with no arguments. If any existing hooks raise an "
+"exception derived from :class:`RuntimeError`, the new hook will not be added "
+"and the exception suppressed. As a result, callers cannot assume that their "
+"hook has been added unless they control all existing hooks."
 msgstr ""
 "Lanza un evento de auditoría ``sys.addaudithook`` sin argumentos. Si algún "
 "gancho existente genera una excepción derivada de :class:`RuntimeError`, el "
@@ -95,7 +99,16 @@ msgstr ""
 "personas que llaman no pueden asumir que su enlace se ha agregado a menos "
 "que controlen todos los enlaces existentes."
 
-#: ../Doc/library/sys.rst:48
+#: ../Doc/library/sys.rst:47
+#, fuzzy
+msgid ""
+"See the :ref:`audit events table <audit-events>` for all events raised by "
+"CPython, and :pep:`578` for the original design discussion."
+msgstr ""
+"Consulte la :ref:`tabla de eventos de auditoría <audit-events>` para todos "
+"los eventos lanzados por CPython."
+
+#: ../Doc/library/sys.rst:54
 msgid ""
 "Exceptions derived from :class:`Exception` but not :class:`RuntimeError` are "
 "no longer suppressed."
@@ -103,7 +116,7 @@ msgstr ""
 "Las excepciones derivadas de :class:`Exception` pero no :class:"
 "`RuntimeError` ya no se suprimen."
 
-#: ../Doc/library/sys.rst:53
+#: ../Doc/library/sys.rst:59
 msgid ""
 "When tracing is enabled (see :func:`settrace`), Python hooks are only traced "
 "if the callable has a ``__cantrace__`` member that is set to a true value. "
@@ -114,7 +127,7 @@ msgstr ""
 "que se establece en un valor verdadero. De lo contrario, las funciones de "
 "seguimiento omitirán el enlace."
 
-#: ../Doc/library/sys.rst:60
+#: ../Doc/library/sys.rst:66
 msgid ""
 "The list of command line arguments passed to a Python script. ``argv[0]`` is "
 "the script name (it is operating system dependent whether this is a full "
@@ -131,7 +144,7 @@ msgstr ""
 "de secuencia de comandos al intérprete de Python, ``argv[0]`` es la cadena "
 "de caracteres vacía."
 
-#: ../Doc/library/sys.rst:66
+#: ../Doc/library/sys.rst:72
 msgid ""
 "To loop over the standard input, or the list of files given on the command "
 "line, see the :mod:`fileinput` module."
@@ -139,7 +152,7 @@ msgstr ""
 "Para recorrer la entrada estándar, o la lista de archivos dada en la línea "
 "de comando, vea el módulo :mod:`fileinput`."
 
-#: ../Doc/library/sys.rst:70
+#: ../Doc/library/sys.rst:76
 msgid ""
 "On Unix, command line arguments are passed by bytes from OS.  Python decodes "
 "them with filesystem encoding and \"surrogateescape\" error handler. When "
@@ -152,29 +165,32 @@ msgstr ""
 "bytes originales, puede obtenerlos mediante ``[os.fsencode (arg) for arg in "
 "sys.argv]``."
 
-#: ../Doc/library/sys.rst:82
+#: ../Doc/library/sys.rst:88
 msgid ""
-"Raise an auditing event with any active hooks. The event name is a string "
-"identifying the event and its associated schema, which is the number and "
-"types of arguments. The schema for a given event is considered public and "
-"stable API and should not be modified between releases."
+"Raise an auditing event and trigger any active auditing hooks. *event* is a "
+"string identifying the event, and *args* may contain optional arguments with "
+"more information about the event.  The number and types of arguments for a "
+"given event are considered a public and stable API and should not be "
+"modified between releases."
 msgstr ""
-"Lanza un evento de auditoría con cualquier gancho activo. El nombre del "
-"evento es una cadena que identifica el evento y su esquema asociado, que es "
-"el número y los tipos de argumentos. El esquema de un evento determinado se "
-"considera una API pública y estable y no debe modificarse entre versiones."
 
-#: ../Doc/library/sys.rst:87
+#: ../Doc/library/sys.rst:94
 msgid ""
-"This function will raise the first exception raised by any hook. In general, "
-"these errors should not be handled and should terminate the process as "
-"quickly as possible."
+"For example, one auditing event is named ``os.chdir``. This event has one "
+"argument called *path* that will contain the requested new working directory."
 msgstr ""
-"Esta función lanzará la primera excepción generada por cualquier gancho. En "
-"general, estos errores no deben manejarse y deben terminar el proceso lo más "
-"rápido posible."
 
-#: ../Doc/library/sys.rst:91
+#: ../Doc/library/sys.rst:98
+msgid ""
+":func:`sys.audit` will call the existing auditing hooks, passing the event "
+"name and arguments, and will re-raise the first exception from any hook. In "
+"general, if an exception is raised, it should not be handled and the process "
+"should be terminated as quickly as possible. This allows hook "
+"implementations to decide how to respond to particular events: they can "
+"merely log the event or abort the operation by raising an exception."
+msgstr ""
+
+#: ../Doc/library/sys.rst:106
 msgid ""
 "Hooks are added using the :func:`sys.addaudithook` or :c:func:"
 "`PySys_AddAuditHook` functions."
@@ -182,7 +198,7 @@ msgstr ""
 "Los ganchos se agregan usando las funciones :func:`sys.addaudithook` o :c:"
 "func:`PySys_AddAuditHook`."
 
-#: ../Doc/library/sys.rst:94
+#: ../Doc/library/sys.rst:109
 msgid ""
 "The native equivalent of this function is :c:func:`PySys_Audit`. Using the "
 "native function is preferred when possible."
@@ -190,7 +206,7 @@ msgstr ""
 "El equivalente nativo de esta función es :c:func:`PySys_Audit`. Se prefiere "
 "usar la función nativa cuando sea posible."
 
-#: ../Doc/library/sys.rst:97
+#: ../Doc/library/sys.rst:112
 msgid ""
 "See the :ref:`audit events table <audit-events>` for all events raised by "
 "CPython."
@@ -198,7 +214,7 @@ msgstr ""
 "Consulte la :ref:`tabla de eventos de auditoría <audit-events>` para todos "
 "los eventos lanzados por CPython."
 
-#: ../Doc/library/sys.rst:105
+#: ../Doc/library/sys.rst:120
 msgid ""
 "Set during Python startup, before ``site.py`` is run, to the same value as :"
 "data:`exec_prefix`. If not running in a :ref:`virtual environment <venv-"
@@ -217,7 +233,7 @@ msgstr ""
 "apuntando a la instalación base de Python (aquella desde la que se creó el "
 "entorno virtual)."
 
-#: ../Doc/library/sys.rst:119
+#: ../Doc/library/sys.rst:134
 msgid ""
 "Set during Python startup, before ``site.py`` is run, to the same value as :"
 "data:`prefix`. If not running in a :ref:`virtual environment <venv-def>`, "
@@ -236,7 +252,7 @@ msgstr ""
 "apuntando a la instalación base de Python (aquella desde la que se creó el "
 "entorno virtual)."
 
-#: ../Doc/library/sys.rst:132
+#: ../Doc/library/sys.rst:147
 msgid ""
 "An indicator of the native byte order.  This will have the value ``'big'`` "
 "on big-endian (most-significant byte first) platforms, and ``'little'`` on "
@@ -247,7 +263,7 @@ msgstr ""
 "``'little'`` en las plataformas little-endian (el byte menos significativo "
 "primero)."
 
-#: ../Doc/library/sys.rst:139
+#: ../Doc/library/sys.rst:154
 msgid ""
 "A tuple of strings giving the names of all modules that are compiled into "
 "this Python interpreter.  (This information is not available in any other "
@@ -258,7 +274,7 @@ msgstr ""
 "está disponible de ninguna otra manera --- ``modules.keys()`` solo enumera "
 "los módulos importados.)"
 
-#: ../Doc/library/sys.rst:146
+#: ../Doc/library/sys.rst:161
 msgid ""
 "Call ``func(*args)``, while tracing is enabled.  The tracing state is saved, "
 "and restored afterwards.  This is intended to be called from a debugger from "
@@ -269,13 +285,13 @@ msgstr ""
 "ser llamado desde un depurador desde un punto de control, para depurar "
 "recursivamente algún otro código."
 
-#: ../Doc/library/sys.rst:153
+#: ../Doc/library/sys.rst:168
 msgid "A string containing the copyright pertaining to the Python interpreter."
 msgstr ""
 "Una cadena de caracteres que contiene los derechos de autor pertenecientes "
 "al intérprete de Python."
 
-#: ../Doc/library/sys.rst:158
+#: ../Doc/library/sys.rst:173
 msgid ""
 "Clear the internal type cache. The type cache is used to speed up attribute "
 "and method lookups. Use the function *only* to drop unnecessary references "
@@ -286,12 +302,12 @@ msgstr ""
 "eliminar referencias innecesarias durante la depuración de fugas de "
 "referencia."
 
-#: ../Doc/library/sys.rst:162 ../Doc/library/sys.rst:178
+#: ../Doc/library/sys.rst:177 ../Doc/library/sys.rst:193
 msgid ""
 "This function should be used for internal and specialized purposes only."
 msgstr "Esta función debe usarse solo para fines internos y especializados."
 
-#: ../Doc/library/sys.rst:167
+#: ../Doc/library/sys.rst:182
 msgid ""
 "Return a dictionary mapping each thread's identifier to the topmost stack "
 "frame currently active in that thread at the time the function is called. "
@@ -303,7 +319,7 @@ msgstr ""
 "que se llama a la función. Tenga en cuenta que las funciones en el módulo :"
 "mod:`traceback` pueden construir la pila de llamadas dado tal marco."
 
-#: ../Doc/library/sys.rst:172
+#: ../Doc/library/sys.rst:187
 msgid ""
 "This is most useful for debugging deadlock:  this function does not require "
 "the deadlocked threads' cooperation, and such threads' call stacks are "
@@ -318,7 +334,7 @@ msgstr ""
 "actividad actual de ese subproceso en el momento en que el código de llamada "
 "examina el marco."
 
-#: ../Doc/library/sys.rst:180
+#: ../Doc/library/sys.rst:195
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``sys._current_frames`` with no "
 "arguments."
@@ -326,7 +342,7 @@ msgstr ""
 "Lanza un :ref:`auditing event <auditing>` ``sys._current_frames`` sin "
 "argumentos."
 
-#: ../Doc/library/sys.rst:185
+#: ../Doc/library/sys.rst:200
 msgid ""
 "This hook function is called by built-in :func:`breakpoint`.  By default, it "
 "drops you into the :mod:`pdb` debugger, but it can be set to any other "
@@ -337,7 +353,7 @@ msgstr ""
 "configurar en cualquier otra función para que pueda elegir qué depurador se "
 "utiliza."
 
-#: ../Doc/library/sys.rst:189
+#: ../Doc/library/sys.rst:204
 msgid ""
 "The signature of this function is dependent on what it calls.  For example, "
 "the default binding (e.g. ``pdb.set_trace()``) expects no arguments, but you "
@@ -353,7 +369,7 @@ msgstr ""
 "y ``**kws`` directamente. Lo que sea que retorne ``breakpointhooks()`` se "
 "retorna desde ``breakpoint()``."
 
-#: ../Doc/library/sys.rst:196
+#: ../Doc/library/sys.rst:211
 msgid ""
 "The default implementation first consults the environment variable :envvar:"
 "`PYTHONBREAKPOINT`.  If that is set to ``\"0\"`` then this function returns "
@@ -378,7 +394,7 @@ msgstr ""
 "``**kws``, y lo que sea que ``function()`` retorna, ``sys.breakpointhook()`` "
 "retorna a la función :func:`breakpoint`."
 
-#: ../Doc/library/sys.rst:208
+#: ../Doc/library/sys.rst:223
 msgid ""
 "Note that if anything goes wrong while importing the callable named by :"
 "envvar:`PYTHONBREAKPOINT`, a :exc:`RuntimeWarning` is reported and the "
@@ -388,7 +404,7 @@ msgstr ""
 "envvar:`PYTHONBREAKPOINT`, se informa un :exc:`RuntimeWarning` y se ignora "
 "el punto de interrupción (*breakpoint*)."
 
-#: ../Doc/library/sys.rst:212
+#: ../Doc/library/sys.rst:227
 msgid ""
 "Also note that if ``sys.breakpointhook()`` is overridden programmatically, :"
 "envvar:`PYTHONBREAKPOINT` is *not* consulted."
@@ -396,7 +412,7 @@ msgstr ""
 "También tenga en cuenta que si ``sys.breakpointhook()`` se anula mediante "
 "programación, :envvar:`PYTHONBREAKPOINT` *no* se consulta."
 
-#: ../Doc/library/sys.rst:219
+#: ../Doc/library/sys.rst:234
 msgid ""
 "Print low-level information to stderr about the state of CPython's memory "
 "allocator."
@@ -404,7 +420,7 @@ msgstr ""
 "Imprime información de bajo nivel para stderr sobre el estado del asignador "
 "de memoria de CPython."
 
-#: ../Doc/library/sys.rst:222
+#: ../Doc/library/sys.rst:237
 msgid ""
 "If Python is configured --with-pydebug, it also performs some expensive "
 "internal consistency checks."
@@ -412,7 +428,7 @@ msgstr ""
 "Si Python está configurado --with-pydebug, también realiza algunas "
 "comprobaciones de consistencia internas costosas."
 
-#: ../Doc/library/sys.rst:229
+#: ../Doc/library/sys.rst:244
 msgid ""
 "This function is specific to CPython.  The exact output format is not "
 "defined here, and may change."
@@ -420,16 +436,16 @@ msgstr ""
 "Esta función es específica de CPython. El formato exacto de salida no se "
 "define aquí y puede cambiar."
 
-#: ../Doc/library/sys.rst:235
+#: ../Doc/library/sys.rst:250
 msgid "Integer specifying the handle of the Python DLL."
 msgstr "Número entero que especifica el identificador de la DLL de Python."
 
-#: ../Doc/library/sys.rst:237 ../Doc/library/sys.rst:772
-#: ../Doc/library/sys.rst:1428 ../Doc/library/sys.rst:1634
+#: ../Doc/library/sys.rst:252 ../Doc/library/sys.rst:786
+#: ../Doc/library/sys.rst:1449 ../Doc/library/sys.rst:1661
 msgid ":ref:`Availability <availability>`: Windows."
 msgstr ":ref:`Disponibilidad <availability>`: Windows."
 
-#: ../Doc/library/sys.rst:242
+#: ../Doc/library/sys.rst:257
 msgid ""
 "If *value* is not ``None``, this function prints ``repr(value)`` to ``sys."
 "stdout``, and saves *value* in ``builtins._``. If ``repr(value)`` is not "
@@ -443,7 +459,7 @@ msgstr ""
 "stdout.errors`` (que probablemente sea ``'strict'``), codifíquelo para ``sys."
 "stdout.encoding`` con el controlador de errores ``'backslashreplace'``."
 
-#: ../Doc/library/sys.rst:248
+#: ../Doc/library/sys.rst:263
 msgid ""
 "``sys.displayhook`` is called on the result of evaluating an :term:"
 "`expression` entered in an interactive Python session.  The display of these "
@@ -455,17 +471,17 @@ msgstr ""
 "de estos valores se puede personalizar asignando otra función de un "
 "argumento a ``sys.displayhook``."
 
-#: ../Doc/library/sys.rst:252
+#: ../Doc/library/sys.rst:267
 msgid "Pseudo-code::"
 msgstr "Pseudo-código::"
 
-#: ../Doc/library/sys.rst:272
+#: ../Doc/library/sys.rst:287
 msgid "Use ``'backslashreplace'`` error handler on :exc:`UnicodeEncodeError`."
 msgstr ""
 "Usa el manejador de error ``'backslashreplace'`` en :exc:"
 "`UnicodeEncodeError`."
 
-#: ../Doc/library/sys.rst:278
+#: ../Doc/library/sys.rst:293
 msgid ""
 "If this is true, Python won't try to write ``.pyc`` files on the import of "
 "source modules.  This value is initially set to ``True`` or ``False`` "
@@ -480,7 +496,7 @@ msgstr ""
 "configurarlo usted mismo para controlar el código de bytes generación de "
 "archivos."
 
-#: ../Doc/library/sys.rst:287
+#: ../Doc/library/sys.rst:302
 msgid ""
 "If this is set (not ``None``), Python will write bytecode-cache ``.pyc`` "
 "files to (and read them from) a parallel directory tree rooted at this "
@@ -500,14 +516,14 @@ msgstr ""
 "ejecutarlo con el mismo prefijo de pycache (si lo hay) que usará en tiempo "
 "de ejecución."
 
-#: ../Doc/library/sys.rst:295
+#: ../Doc/library/sys.rst:310
 msgid ""
 "A relative path is interpreted relative to the current working directory."
 msgstr ""
 "Una ruta relativa se interpreta en relación con el directorio de directorio "
 "actual."
 
-#: ../Doc/library/sys.rst:297
+#: ../Doc/library/sys.rst:312
 msgid ""
 "This value is initially set based on the value of the :option:`-X` "
 "``pycache_prefix=PATH`` command-line option or the :envvar:"
@@ -519,13 +535,13 @@ msgstr ""
 "entorno :envvar:`PYTHONPYCACHEPREFIX` (la línea de comandos tiene "
 "prioridad). Si no se establece ninguno, es ``None``."
 
-#: ../Doc/library/sys.rst:307
+#: ../Doc/library/sys.rst:322
 msgid ""
 "This function prints out a given traceback and exception to ``sys.stderr``."
 msgstr ""
 "Esta función imprime un rastreo y una excepción dados a ``sys.stderr``."
 
-#: ../Doc/library/sys.rst:309
+#: ../Doc/library/sys.rst:324
 msgid ""
 "When an exception is raised and uncaught, the interpreter calls ``sys."
 "excepthook`` with three arguments, the exception class, exception instance, "
@@ -543,6 +559,7 @@ msgstr ""
 "excepciones de nivel superior se puede personalizar asignando otra función "
 "de tres argumentos a ``sys.excepthook``."
 
+#: ../Doc/library/sys.rst:331
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``sys.excepthook`` with arguments "
 "``hook``, ``type``, ``value``, ``traceback``."
@@ -550,7 +567,7 @@ msgstr ""
 "Lanza un :ref:`auditing event <auditing>` ``sys.excepthook`` con argumentos "
 "``hook``, ``type``, ``value``, ``traceback``."
 
-#: ../Doc/library/sys.rst:318
+#: ../Doc/library/sys.rst:333
 msgid ""
 "Raise an auditing event ``sys.excepthook`` with arguments ``hook``, "
 "``type``, ``value``, ``traceback`` when an uncaught exception occurs. If no "
@@ -567,7 +584,7 @@ msgstr ""
 "informará que la excepción del gancho de auditoría no se puede evaluar y se "
 "llamará a ``sys.excepthook``."
 
-#: ../Doc/library/sys.rst:327
+#: ../Doc/library/sys.rst:342
 msgid ""
 "The :func:`sys.unraisablehook` function handles unraisable exceptions and "
 "the :func:`threading.excepthook` function handles exception raised by :func:"
@@ -577,7 +594,7 @@ msgstr ""
 "pueden evaluar y la función :func:`threading.excepthook` maneja la excepción "
 "lanzada por :func:`threading.Thread.run`."
 
-#: ../Doc/library/sys.rst:337
+#: ../Doc/library/sys.rst:352
 msgid ""
 "These objects contain the original values of ``breakpointhook``, "
 "``displayhook``, ``excepthook``, and ``unraisablehook`` at the start of the "
@@ -591,15 +608,15 @@ msgstr ""
 "``unraisablehook`` se puedan restaurar en caso de que sean reemplazados por "
 "objetos rotos o alternativos."
 
-#: ../Doc/library/sys.rst:343
+#: ../Doc/library/sys.rst:358
 msgid "__breakpointhook__"
 msgstr "__breakpointhook__"
 
-#: ../Doc/library/sys.rst:346
+#: ../Doc/library/sys.rst:361
 msgid "__unraisablehook__"
 msgstr "__unraisablehook__"
 
-#: ../Doc/library/sys.rst:351
+#: ../Doc/library/sys.rst:366
 msgid ""
 "This function returns a tuple of three values that give information about "
 "the exception that is currently being handled.  The information returned is "
@@ -620,7 +637,7 @@ msgstr ""
 "cláusula except\". Para cualquier marco de pila, solo se puede acceder a la "
 "información sobre la excepción que se maneja actualmente."
 
-#: ../Doc/library/sys.rst:362
+#: ../Doc/library/sys.rst:377
 msgid ""
 "If no exception is being handled anywhere on the stack, a tuple containing "
 "three ``None`` values is returned.  Otherwise, the values returned are "
@@ -639,7 +656,7 @@ msgstr ""
 "<traceback-objects>` que encapsula la pila de llamadas en el punto donde "
 "ocurrió originalmente la excepción."
 
-#: ../Doc/library/sys.rst:373
+#: ../Doc/library/sys.rst:388
 msgid ""
 "A string giving the site-specific directory prefix where the platform-"
 "dependent Python files are installed; by default, this is also ``'/usr/"
@@ -661,7 +678,7 @@ msgstr ""
 "en :file:`{exec_prefix}/lib/python{XY}/lib-dynload`, donde *XY* es el número "
 "de versión de Python, por ejemplo,``3.2``."
 
-#: ../Doc/library/sys.rst:384
+#: ../Doc/library/sys.rst:399
 msgid ""
 "If a :ref:`virtual environment <venv-def>` is in effect, this value will be "
 "changed in ``site.py`` to point to the virtual environment. The value for "
@@ -673,7 +690,7 @@ msgstr ""
 "instalación de Python seguirá estando disponible a través de :data:"
 "`base_exec_prefix`."
 
-#: ../Doc/library/sys.rst:392
+#: ../Doc/library/sys.rst:407
 msgid ""
 "A string giving the absolute path of the executable binary for the Python "
 "interpreter, on systems where this makes sense. If Python is unable to "
@@ -685,7 +702,7 @@ msgstr ""
 "sentido. Si Python no puede recuperar la ruta real a su ejecutable, :data:"
 "`sys.executable` será una cadena de caracteres vacía o ``None``."
 
-#: ../Doc/library/sys.rst:400
+#: ../Doc/library/sys.rst:415
 msgid ""
 "Exit from Python.  This is implemented by raising the :exc:`SystemExit` "
 "exception, so cleanup actions specified by finally clauses of :keyword:`try` "
@@ -697,7 +714,7 @@ msgstr ""
 "finalmente de las declaraciones :keyword:`try` son respetadas y es posible "
 "interceptar el intento de salida en un nivel externo."
 
-#: ../Doc/library/sys.rst:405
+#: ../Doc/library/sys.rst:420
 msgid ""
 "The optional argument *arg* can be an integer giving the exit status "
 "(defaulting to zero), or another type of object.  If it is an integer, zero "
@@ -726,7 +743,7 @@ msgstr ""
 "código de salida de 1. En particular, ``sys.exit(\"algún mensaje de error"
 "\")`` es una forma rápida de salir de un programa cuando ocurre un error."
 
-#: ../Doc/library/sys.rst:418
+#: ../Doc/library/sys.rst:433
 msgid ""
 "Since :func:`exit` ultimately \"only\" raises an exception, it will only "
 "exit the process when called from the main thread, and the exception is not "
@@ -736,7 +753,7 @@ msgstr ""
 "del proceso cuando sea llamado desde el hilo principal, y la excepción no es "
 "interceptada."
 
-#: ../Doc/library/sys.rst:422
+#: ../Doc/library/sys.rst:437
 msgid ""
 "If an error occurs in the cleanup after the Python interpreter has caught :"
 "exc:`SystemExit` (such as an error flushing buffered data in the standard "
@@ -747,7 +764,7 @@ msgstr ""
 "almacenados en el búfer en los flujos estándar), el estado de salida cambia "
 "a 120."
 
-#: ../Doc/library/sys.rst:430
+#: ../Doc/library/sys.rst:445
 msgid ""
 "The :term:`named tuple` *flags* exposes the status of command line flags. "
 "The attributes are read only."
@@ -755,157 +772,160 @@ msgstr ""
 "El :term:`named tuple` *flags* expone el estado de los indicadores de la "
 "línea de comando. Los atributos son de solo lectura."
 
-#: ../Doc/library/sys.rst:434 ../Doc/library/sys.rst:482
-#: ../Doc/library/sys.rst:817
+#: ../Doc/library/sys.rst:449 ../Doc/library/sys.rst:498
+#: ../Doc/library/sys.rst:831
 msgid "attribute"
 msgstr "atributo"
 
-#: ../Doc/library/sys.rst:434
+#: ../Doc/library/sys.rst:449
 msgid "flag"
 msgstr "flag"
 
-#: ../Doc/library/sys.rst:436
+#: ../Doc/library/sys.rst:451
 msgid ":const:`debug`"
 msgstr ":const:`debug`"
 
-#: ../Doc/library/sys.rst:436
+#: ../Doc/library/sys.rst:451
 msgid ":option:`-d`"
 msgstr ":option:`-d`"
 
-#: ../Doc/library/sys.rst:437
+#: ../Doc/library/sys.rst:452
 msgid ":const:`inspect`"
 msgstr ":const:`inspect`"
 
-#: ../Doc/library/sys.rst:437 ../Doc/library/sys.rst:438
+#: ../Doc/library/sys.rst:452 ../Doc/library/sys.rst:453
 msgid ":option:`-i`"
 msgstr ":option:`-i`"
 
-#: ../Doc/library/sys.rst:438
+#: ../Doc/library/sys.rst:453
 msgid ":const:`interactive`"
 msgstr ":const:`interactive`"
 
-#: ../Doc/library/sys.rst:439
+#: ../Doc/library/sys.rst:454
 msgid ":const:`isolated`"
 msgstr ":const:`isolated`"
 
-#: ../Doc/library/sys.rst:439
+#: ../Doc/library/sys.rst:454
 msgid ":option:`-I`"
 msgstr ":option:`-I`"
 
-#: ../Doc/library/sys.rst:440
+#: ../Doc/library/sys.rst:455
 msgid ":const:`optimize`"
 msgstr ":const:`optimize`"
 
-#: ../Doc/library/sys.rst:440
+#: ../Doc/library/sys.rst:455
 msgid ":option:`-O` or :option:`-OO`"
 msgstr ":option:`-O` o :option:`-OO`"
 
-#: ../Doc/library/sys.rst:441
+#: ../Doc/library/sys.rst:456
 msgid ":const:`dont_write_bytecode`"
 msgstr ":const:`dont_write_bytecode`"
 
-#: ../Doc/library/sys.rst:441
+#: ../Doc/library/sys.rst:456
 msgid ":option:`-B`"
 msgstr ":option:`-B`"
 
-#: ../Doc/library/sys.rst:442
+#: ../Doc/library/sys.rst:457
 msgid ":const:`no_user_site`"
 msgstr ":const:`no_user_site`"
 
-#: ../Doc/library/sys.rst:442
+#: ../Doc/library/sys.rst:457
 msgid ":option:`-s`"
 msgstr ":option:`-s`"
 
-#: ../Doc/library/sys.rst:443
+#: ../Doc/library/sys.rst:458
 msgid ":const:`no_site`"
 msgstr ":const:`no_site`"
 
-#: ../Doc/library/sys.rst:443
+#: ../Doc/library/sys.rst:458
 msgid ":option:`-S`"
 msgstr ":option:`-S`"
 
-#: ../Doc/library/sys.rst:444
+#: ../Doc/library/sys.rst:459
 msgid ":const:`ignore_environment`"
 msgstr ":const:`ignore_environment`"
 
-#: ../Doc/library/sys.rst:444
+#: ../Doc/library/sys.rst:459
 msgid ":option:`-E`"
 msgstr ":option:`-E`"
 
-#: ../Doc/library/sys.rst:445
+#: ../Doc/library/sys.rst:460
 msgid ":const:`verbose`"
 msgstr ":const:`verbose`"
 
-#: ../Doc/library/sys.rst:445
+#: ../Doc/library/sys.rst:460
 msgid ":option:`-v`"
 msgstr ":option:`-v`"
 
-#: ../Doc/library/sys.rst:446
+#: ../Doc/library/sys.rst:461
 msgid ":const:`bytes_warning`"
 msgstr ":const:`bytes_warning`"
 
-#: ../Doc/library/sys.rst:446
+#: ../Doc/library/sys.rst:461
 msgid ":option:`-b`"
 msgstr ":option:`-b`"
 
-#: ../Doc/library/sys.rst:447
+#: ../Doc/library/sys.rst:462
 msgid ":const:`quiet`"
 msgstr ":const:`quiet`"
 
-#: ../Doc/library/sys.rst:447
+#: ../Doc/library/sys.rst:462
 msgid ":option:`-q`"
 msgstr ":option:`-q`"
 
-#: ../Doc/library/sys.rst:448
+#: ../Doc/library/sys.rst:463
 msgid ":const:`hash_randomization`"
 msgstr ":const:`hash_randomization`"
 
-#: ../Doc/library/sys.rst:448
+#: ../Doc/library/sys.rst:463
 msgid ":option:`-R`"
 msgstr ":option:`-R`"
 
-#: ../Doc/library/sys.rst:449
+#: ../Doc/library/sys.rst:464
 msgid ":const:`dev_mode`"
 msgstr ":const:`dev_mode`"
 
-#: ../Doc/library/sys.rst:449
-msgid ":option:`-X` ``dev``"
-msgstr ":option:`-X` ``dev``"
+#: ../Doc/library/sys.rst:464
+msgid ":option:`-X dev <-X>` (:ref:`Python Development Mode <devmode>`)"
+msgstr ""
 
-#: ../Doc/library/sys.rst:450
+#: ../Doc/library/sys.rst:465
 msgid ":const:`utf8_mode`"
 msgstr ":const:`utf8_mode`"
 
-#: ../Doc/library/sys.rst:450
-msgid ":option:`-X` ``utf8``"
+#: ../Doc/library/sys.rst:465
+#, fuzzy
+msgid ":option:`-X utf8 <-X>`"
 msgstr ":option:`-X` ``utf8``"
 
-#: ../Doc/library/sys.rst:453
+#: ../Doc/library/sys.rst:468
 msgid "Added ``quiet`` attribute for the new :option:`-q` flag."
 msgstr "Agregado el atributo ``quiet`` para el nuevo flag :option:`-q`."
 
-#: ../Doc/library/sys.rst:456
+#: ../Doc/library/sys.rst:471
 msgid "The ``hash_randomization`` attribute."
 msgstr "El atributo ``hash_randomization``."
 
-#: ../Doc/library/sys.rst:459
+#: ../Doc/library/sys.rst:474
 msgid "Removed obsolete ``division_warning`` attribute."
 msgstr "Eliminado el atributo obsoleto ``division_warning``."
 
-#: ../Doc/library/sys.rst:462
+#: ../Doc/library/sys.rst:477
 msgid "Added ``isolated`` attribute for :option:`-I` ``isolated`` flag."
 msgstr ""
 "Agregado el atributo ``isolated`` para  el flag :option:`-I` ``isolated``."
 
-#: ../Doc/library/sys.rst:465
+#: ../Doc/library/sys.rst:480
+#, fuzzy
 msgid ""
-"Added ``dev_mode`` attribute for the new :option:`-X` ``dev`` flag and "
-"``utf8_mode`` attribute for the new  :option:`-X` ``utf8`` flag."
+"Added the ``dev_mode`` attribute for the new :ref:`Python Development Mode "
+"<devmode>` and the ``utf8_mode`` attribute for the new  :option:`-X` "
+"``utf8`` flag."
 msgstr ""
 "Se agregó el atributo ``dev_mode`` para el nuevo flag :option:`-X` ``dev`` y "
 "el atributo ``utf8_mode`` para la nueva :option:`-X` ``utf8``."
 
-#: ../Doc/library/sys.rst:472
+#: ../Doc/library/sys.rst:488
 msgid ""
 "A :term:`named tuple` holding information about the float type. It contains "
 "low level information about the precision and internal representation.  The "
@@ -922,23 +942,23 @@ msgstr ""
 "IEC* C de 1999 [C99]_, 'Características de los tipos flotantes', para "
 "obtener más detalles."
 
-#: ../Doc/library/sys.rst:482
+#: ../Doc/library/sys.rst:498
 msgid "float.h macro"
 msgstr "macro float.h"
 
-#: ../Doc/library/sys.rst:482 ../Doc/library/sys.rst:817
+#: ../Doc/library/sys.rst:498 ../Doc/library/sys.rst:831
 msgid "explanation"
 msgstr "explicación"
 
-#: ../Doc/library/sys.rst:484
+#: ../Doc/library/sys.rst:500
 msgid ":const:`epsilon`"
 msgstr ":const:`epsilon`"
 
-#: ../Doc/library/sys.rst:484
+#: ../Doc/library/sys.rst:500
 msgid "DBL_EPSILON"
 msgstr "DBL_EPSILON"
 
-#: ../Doc/library/sys.rst:484
+#: ../Doc/library/sys.rst:500
 msgid ""
 "difference between 1.0 and the least value greater than 1.0 that is "
 "representable as a float"
@@ -946,15 +966,19 @@ msgstr ""
 "diferencia entre 1.0 y el menor valor mayor que 1.0 que es representable "
 "como flotante"
 
-#: ../Doc/library/sys.rst:487
+#: ../Doc/library/sys.rst:503
+msgid "See also :func:`math.ulp`."
+msgstr ""
+
+#: ../Doc/library/sys.rst:505
 msgid ":const:`dig`"
 msgstr ":const:`dig`"
 
-#: ../Doc/library/sys.rst:487
+#: ../Doc/library/sys.rst:505
 msgid "DBL_DIG"
 msgstr "DBL_DIG"
 
-#: ../Doc/library/sys.rst:487
+#: ../Doc/library/sys.rst:505
 msgid ""
 "maximum number of decimal digits that can be faithfully represented in a "
 "float;  see below"
@@ -962,15 +986,15 @@ msgstr ""
 "número máximo de dígitos decimales que se pueden representar fielmente en un "
 "flotante; véase a continuación"
 
-#: ../Doc/library/sys.rst:490
+#: ../Doc/library/sys.rst:508
 msgid ":const:`mant_dig`"
 msgstr ":const:`mant_dig`"
 
-#: ../Doc/library/sys.rst:490
+#: ../Doc/library/sys.rst:508
 msgid "DBL_MANT_DIG"
 msgstr "DBL_MANT_DIG"
 
-#: ../Doc/library/sys.rst:490
+#: ../Doc/library/sys.rst:508
 msgid ""
 "float precision: the number of base-``radix`` digits in the significand of a "
 "float"
@@ -978,27 +1002,27 @@ msgstr ""
 "precisión de flotantes: el número de dígitos base-``radix`` en el "
 "significando de un flotante"
 
-#: ../Doc/library/sys.rst:493
+#: ../Doc/library/sys.rst:511
 msgid ":const:`max`"
 msgstr ":const:`max`"
 
-#: ../Doc/library/sys.rst:493
+#: ../Doc/library/sys.rst:511
 msgid "DBL_MAX"
 msgstr "DBL_MAX"
 
-#: ../Doc/library/sys.rst:493
+#: ../Doc/library/sys.rst:511
 msgid "maximum representable positive finite float"
 msgstr "máximo punto flotante positivo representable"
 
-#: ../Doc/library/sys.rst:495
+#: ../Doc/library/sys.rst:513
 msgid ":const:`max_exp`"
 msgstr ":const:`max_exp`"
 
-#: ../Doc/library/sys.rst:495
+#: ../Doc/library/sys.rst:513
 msgid "DBL_MAX_EXP"
 msgstr "DBL_MAX_EXP"
 
-#: ../Doc/library/sys.rst:495
+#: ../Doc/library/sys.rst:513
 msgid ""
 "maximum integer *e* such that ``radix**(e-1)`` is a representable finite "
 "float"
@@ -1006,15 +1030,15 @@ msgstr ""
 "entero máximo *e* tal que ``radix**(e-1)`` es un flotante finito "
 "representable"
 
-#: ../Doc/library/sys.rst:498
+#: ../Doc/library/sys.rst:516
 msgid ":const:`max_10_exp`"
 msgstr ":const:`max_10_exp`"
 
-#: ../Doc/library/sys.rst:498
+#: ../Doc/library/sys.rst:516
 msgid "DBL_MAX_10_EXP"
 msgstr "DBL_MAX_10_EXP"
 
-#: ../Doc/library/sys.rst:498
+#: ../Doc/library/sys.rst:516
 msgid ""
 "maximum integer *e* such that ``10**e`` is in the range of representable "
 "finite floats"
@@ -1022,63 +1046,69 @@ msgstr ""
 "entero máximo *e* tal que ``10**e`` está en el rango de flotantes finitos "
 "representables"
 
-#: ../Doc/library/sys.rst:501
+#: ../Doc/library/sys.rst:519
 msgid ":const:`min`"
 msgstr ":const:`min`"
 
-#: ../Doc/library/sys.rst:501
+#: ../Doc/library/sys.rst:519
 msgid "DBL_MIN"
 msgstr "DBL_MIN"
 
-#: ../Doc/library/sys.rst:501
+#: ../Doc/library/sys.rst:519
 msgid "minimum representable positive *normalized* float"
 msgstr "flotante *normalizado* mínimo representable positivo"
 
-#: ../Doc/library/sys.rst:503
+#: ../Doc/library/sys.rst:521
+msgid ""
+"Use :func:`math.ulp(0.0) <math.ulp>` to get the smallest positive "
+"*denormalized* representable float."
+msgstr ""
+
+#: ../Doc/library/sys.rst:525
 msgid ":const:`min_exp`"
 msgstr ":const:`min_exp`"
 
-#: ../Doc/library/sys.rst:503
+#: ../Doc/library/sys.rst:525
 msgid "DBL_MIN_EXP"
 msgstr "DBL_MIN_EXP"
 
-#: ../Doc/library/sys.rst:503
+#: ../Doc/library/sys.rst:525
 msgid "minimum integer *e* such that ``radix**(e-1)`` is a normalized float"
 msgstr "entero mínimo *e* tal que ``radix**(e-1)`` es un flotante normalizado"
 
-#: ../Doc/library/sys.rst:506
+#: ../Doc/library/sys.rst:528
 msgid ":const:`min_10_exp`"
 msgstr ":const:`min_10_exp`"
 
-#: ../Doc/library/sys.rst:506
+#: ../Doc/library/sys.rst:528
 msgid "DBL_MIN_10_EXP"
 msgstr "DBL_MIN_10_EXP"
 
-#: ../Doc/library/sys.rst:506
+#: ../Doc/library/sys.rst:528
 msgid "minimum integer *e* such that ``10**e`` is a normalized float"
 msgstr "entero mínimo *e* tal que ``10**e`` es un valor flotante normalizado"
 
-#: ../Doc/library/sys.rst:509
+#: ../Doc/library/sys.rst:531
 msgid ":const:`radix`"
 msgstr ":const:`radix`"
 
-#: ../Doc/library/sys.rst:509
+#: ../Doc/library/sys.rst:531
 msgid "FLT_RADIX"
 msgstr "FLT_RADIX"
 
-#: ../Doc/library/sys.rst:509
+#: ../Doc/library/sys.rst:531
 msgid "radix of exponent representation"
 msgstr "base de representación de exponente"
 
-#: ../Doc/library/sys.rst:511
+#: ../Doc/library/sys.rst:533
 msgid ":const:`rounds`"
 msgstr ":const:`rounds`"
 
-#: ../Doc/library/sys.rst:511
+#: ../Doc/library/sys.rst:533
 msgid "FLT_ROUNDS"
 msgstr "FLT_ROUNDS"
 
-#: ../Doc/library/sys.rst:511
+#: ../Doc/library/sys.rst:533
 msgid ""
 "integer constant representing the rounding mode used for arithmetic "
 "operations.  This reflects the value of the system FLT_ROUNDS macro at "
@@ -1091,7 +1121,7 @@ msgstr ""
 "5.2.4.2.2 del estándar C99 para obtener una explicación de los posibles "
 "valores y sus significados."
 
-#: ../Doc/library/sys.rst:519
+#: ../Doc/library/sys.rst:541
 msgid ""
 "The attribute :attr:`sys.float_info.dig` needs further explanation.  If "
 "``s`` is any string representing a decimal number with at most :attr:`sys."
@@ -1104,7 +1134,7 @@ msgstr ""
 "flotante y viceversa recuperará una cadena que representa el mismo decimal "
 "valor::"
 
-#: ../Doc/library/sys.rst:532
+#: ../Doc/library/sys.rst:554
 msgid ""
 "But for strings with more than :attr:`sys.float_info.dig` significant "
 "digits, this isn't always true::"
@@ -1112,7 +1142,7 @@ msgstr ""
 "Pero para cadenas con más de :attr:`sys.float_info.dig` dígitos "
 "significativos, esto no siempre es cierto:"
 
-#: ../Doc/library/sys.rst:541
+#: ../Doc/library/sys.rst:563
 msgid ""
 "A string indicating how the :func:`repr` function behaves for floats.  If "
 "the string has value ``'short'`` then for a finite float ``x``, ``repr(x)`` "
@@ -1129,7 +1159,7 @@ msgstr ""
 "``float_repr_style`` tiene el valor ``'legacy'`` y ``repr(x)`` se comporta "
 "de la misma manera que en las versiones de Python anteriores a la 3.1."
 
-#: ../Doc/library/sys.rst:554
+#: ../Doc/library/sys.rst:576
 msgid ""
 "Return the number of memory blocks currently allocated by the interpreter, "
 "regardless of their size.  This function is mainly useful for tracking and "
@@ -1145,7 +1175,7 @@ msgstr ""
 "puede que tenga que llamar a :func:`_clear_type_cache()` y :func:`gc."
 "collect()` para obtener resultados más predecibles."
 
-#: ../Doc/library/sys.rst:561
+#: ../Doc/library/sys.rst:583
 msgid ""
 "If a Python build or implementation cannot reasonably compute this "
 "information, :func:`getallocatedblocks()` is allowed to return 0 instead."
@@ -1154,28 +1184,17 @@ msgstr ""
 "razonablemente esta información, :func:`getallocatedblocks()` puede retornar "
 "0 en su lugar."
 
-#: ../Doc/library/sys.rst:569
+#: ../Doc/library/sys.rst:591
 msgid "Return the build time API version of Android as an integer."
 msgstr ""
 "Retorna la versión de la API de tiempo de compilación de Android como un "
 "número entero."
 
-#: ../Doc/library/sys.rst:572
+#: ../Doc/library/sys.rst:594
 msgid ":ref:`Availability <availability>`: Android."
 msgstr ":ref:`Disponibilidad <availability>`: Android."
 
-#: ../Doc/library/sys.rst:578
-msgid ""
-"Return the interpreter's \"check interval\"; see :func:`setcheckinterval`."
-msgstr ""
-"Retorna el \"intervalo de verificación\" del intérprete; ver :func:"
-"`setcheckinterval`."
-
-#: ../Doc/library/sys.rst:580
-msgid "Use :func:`getswitchinterval` instead."
-msgstr "Use :func:`getswitchinterval` en su lugar."
-
-#: ../Doc/library/sys.rst:586
+#: ../Doc/library/sys.rst:600
 msgid ""
 "Return the name of the current default string encoding used by the Unicode "
 "implementation."
@@ -1183,7 +1202,7 @@ msgstr ""
 "Retorna el nombre de la codificación de cadena predeterminada actual "
 "utilizada por la implementación de Unicode."
 
-#: ../Doc/library/sys.rst:592
+#: ../Doc/library/sys.rst:606
 msgid ""
 "Return the current value of the flags that are used for :c:func:`dlopen` "
 "calls.  Symbolic names for the flag values can be found in the :mod:`os` "
@@ -1194,11 +1213,11 @@ msgstr ""
 "encontrar en el módulo :mod:`os` (constantes ``RTLD_xxx``, por ejemplo :data:"
 "`os.RTLD_LAZY`)."
 
-#: ../Doc/library/sys.rst:597 ../Doc/library/sys.rst:1201
+#: ../Doc/library/sys.rst:611 ../Doc/library/sys.rst:1222
 msgid ":ref:`Availability <availability>`: Unix."
 msgstr ":ref:`Disponibilidad <availability>`: Unix."
 
-#: ../Doc/library/sys.rst:602
+#: ../Doc/library/sys.rst:616
 msgid ""
 "Return the name of the encoding used to convert between Unicode filenames "
 "and bytes filenames. For best compatibility, str should be used for "
@@ -1214,11 +1233,11 @@ msgstr ""
 "admitir str o bytes y se deben convertir internamente a la representación "
 "preferida del sistema."
 
-#: ../Doc/library/sys.rst:609
+#: ../Doc/library/sys.rst:623
 msgid "This encoding is always ASCII-compatible."
 msgstr "Esta codificación es siempre compatible con ASCII."
 
-#: ../Doc/library/sys.rst:611 ../Doc/library/sys.rst:644
+#: ../Doc/library/sys.rst:625 ../Doc/library/sys.rst:658
 msgid ""
 ":func:`os.fsencode` and :func:`os.fsdecode` should be used to ensure that "
 "the correct encoding and errors mode are used."
@@ -1226,20 +1245,20 @@ msgstr ""
 ":func:`os.fsencode` y :func:`os.fsdecode` deben usarse para garantizar que "
 "se utilizan la codificación correcta y el modo de errores."
 
-#: ../Doc/library/sys.rst:614
+#: ../Doc/library/sys.rst:628
 msgid "In the UTF-8 mode, the encoding is ``utf-8`` on any platform."
 msgstr ""
 "En el modo UTF-8, la codificación es ``utf-8`` en cualquier plataforma."
 
-#: ../Doc/library/sys.rst:616
+#: ../Doc/library/sys.rst:630
 msgid "On macOS, the encoding is ``'utf-8'``."
 msgstr "En macOS, la codificación es ``'utf-8'``."
 
-#: ../Doc/library/sys.rst:618
+#: ../Doc/library/sys.rst:632
 msgid "On Unix, the encoding is the locale encoding."
 msgstr "En Unix, la codificación es la codificación local."
 
-#: ../Doc/library/sys.rst:620
+#: ../Doc/library/sys.rst:634
 msgid ""
 "On Windows, the encoding may be ``'utf-8'`` or ``'mbcs'``, depending on user "
 "configuration."
@@ -1247,20 +1266,20 @@ msgstr ""
 "En Windows, la codificación puede ser ``'utf-8'`` o ``'mbcs'``, según la "
 "configuración del usuario."
 
-#: ../Doc/library/sys.rst:623
+#: ../Doc/library/sys.rst:637
 msgid "On Android, the encoding is ``'utf-8'``."
 msgstr "En Android, la codificación es ``'utf-8'``."
 
-#: ../Doc/library/sys.rst:625
+#: ../Doc/library/sys.rst:639
 msgid "On VxWorks, the encoding is ``'utf-8'``."
 msgstr "En VxWorks, la codificación es ``'utf-8'``."
 
-#: ../Doc/library/sys.rst:627
+#: ../Doc/library/sys.rst:641
 msgid ":func:`getfilesystemencoding` result cannot be ``None`` anymore."
 msgstr ""
 "el resultado de :func:`getfilesystemencoding` ya no puede ser ``None``."
 
-#: ../Doc/library/sys.rst:630
+#: ../Doc/library/sys.rst:644
 msgid ""
 "Windows is no longer guaranteed to return ``'mbcs'``. See :pep:`529` and :"
 "func:`_enablelegacywindowsfsencoding` for more information."
@@ -1268,11 +1287,11 @@ msgstr ""
 "Ya no se garantiza que Windows retorne ``'mbcs'``. Consulte :pep:`529` y :"
 "func:`_enablelegacywindowsfsencoding` para obtener más información."
 
-#: ../Doc/library/sys.rst:634
+#: ../Doc/library/sys.rst:648
 msgid "Return 'utf-8' in the UTF-8 mode."
 msgstr "Retorna 'utf-8' en el modo UTF-8."
 
-#: ../Doc/library/sys.rst:640
+#: ../Doc/library/sys.rst:654
 msgid ""
 "Return the name of the error mode used to convert between Unicode filenames "
 "and bytes filenames. The encoding name is returned from :func:"
@@ -1282,7 +1301,7 @@ msgstr ""
 "de archivo Unicode y nombres de archivo en bytes. El nombre de la "
 "codificación se retorna desde :func:`getfilesystemencoding`."
 
-#: ../Doc/library/sys.rst:651
+#: ../Doc/library/sys.rst:665
 msgid ""
 "Return the reference count of the *object*.  The count returned is generally "
 "one higher than you might expect, because it includes the (temporary) "
@@ -1292,7 +1311,7 @@ msgstr ""
 "generalmente uno más alto de lo que cabría esperar, porque incluye la "
 "referencia (temporal) como argumento para :func:`getrefcount`."
 
-#: ../Doc/library/sys.rst:658
+#: ../Doc/library/sys.rst:672
 msgid ""
 "Return the current value of the recursion limit, the maximum depth of the "
 "Python interpreter stack.  This limit prevents infinite recursion from "
@@ -1304,7 +1323,7 @@ msgstr ""
 "infinita cause un desbordamiento de la pila C y bloquee Python. Se puede "
 "configurar mediante :func:`setrecursionlimit`."
 
-#: ../Doc/library/sys.rst:666
+#: ../Doc/library/sys.rst:680
 msgid ""
 "Return the size of an object in bytes. The object can be any type of object. "
 "All built-in objects will return correct results, but this does not have to "
@@ -1315,7 +1334,7 @@ msgstr ""
 "pero esto no tiene por qué ser cierto para las extensiones de terceros, ya "
 "que es una implementación específica."
 
-#: ../Doc/library/sys.rst:671
+#: ../Doc/library/sys.rst:685
 msgid ""
 "Only the memory consumption directly attributed to the object is accounted "
 "for, not the memory consumption of objects it refers to."
@@ -1323,7 +1342,7 @@ msgstr ""
 "Solo se tiene en cuenta el consumo de memoria atribuido directamente al "
 "objeto, no el consumo de memoria de los objetos a los que se refiere."
 
-#: ../Doc/library/sys.rst:674
+#: ../Doc/library/sys.rst:688
 msgid ""
 "If given, *default* will be returned if the object does not provide means to "
 "retrieve the size.  Otherwise a :exc:`TypeError` will be raised."
@@ -1332,7 +1351,7 @@ msgstr ""
 "los medios para recuperar el tamaño. De lo contrario, se generará un :exc:"
 "`TypeError`."
 
-#: ../Doc/library/sys.rst:677
+#: ../Doc/library/sys.rst:691
 msgid ""
 ":func:`getsizeof` calls the object's ``__sizeof__`` method and adds an "
 "additional garbage collector overhead if the object is managed by the "
@@ -1342,7 +1361,7 @@ msgstr ""
 "sobrecarga adicional del recolector de basura si el objeto es administrado "
 "por el recolector de basura."
 
-#: ../Doc/library/sys.rst:681
+#: ../Doc/library/sys.rst:695
 msgid ""
 "See `recursive sizeof recipe <https://code.activestate.com/recipes/577504>`_ "
 "for an example of using :func:`getsizeof` recursively to find the size of "
@@ -1352,7 +1371,7 @@ msgstr ""
 "recipes/577504>`_ para ver un ejemplo del uso de :func:`getsizeof` de forma "
 "recursiva para encontrar el tamaño de los contenedores y todo su contenido."
 
-#: ../Doc/library/sys.rst:687
+#: ../Doc/library/sys.rst:701
 msgid ""
 "Return the interpreter's \"thread switch interval\"; see :func:"
 "`setswitchinterval`."
@@ -1360,7 +1379,7 @@ msgstr ""
 "Retorna el \"intervalo de cambio de hilo\" del intérprete; ver :func:"
 "`setswitchinterval`."
 
-#: ../Doc/library/sys.rst:695
+#: ../Doc/library/sys.rst:709
 msgid ""
 "Return a frame object from the call stack.  If optional integer *depth* is "
 "given, return the frame object that many calls below the top of the stack.  "
@@ -1374,14 +1393,14 @@ msgstr ""
 "de llamadas, se lanza :exc:`ValueError`. El valor predeterminado de *depth* "
 "es cero, lo que retorna el marco en la parte superior de la pila de llamadas."
 
-#: ../Doc/library/sys.rst:701
+#: ../Doc/library/sys.rst:714
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``sys._getframe`` with no "
 "arguments."
 msgstr ""
 "Lanza un :ref:`auditing event <auditing>` ``sys._getframe`` sin argumentos."
 
-#: ../Doc/library/sys.rst:704
+#: ../Doc/library/sys.rst:718
 msgid ""
 "This function should be used for internal and specialized purposes only. It "
 "is not guaranteed to exist in all implementations of Python."
@@ -1390,18 +1409,18 @@ msgstr ""
 "especializados. No se garantiza que exista en todas las implementaciones de "
 "Python."
 
-#: ../Doc/library/sys.rst:714
+#: ../Doc/library/sys.rst:728
 msgid "Get the profiler function as set by :func:`setprofile`."
 msgstr ""
 "Obtiene la función de generador de perfiles establecida por :func:"
 "`setprofile`."
 
-#: ../Doc/library/sys.rst:723
+#: ../Doc/library/sys.rst:737
 msgid "Get the trace function as set by :func:`settrace`."
 msgstr ""
 "Obtiene la función de seguimiento (*trace*) establecida por :func:`settrace`."
 
-#: ../Doc/library/sys.rst:727
+#: ../Doc/library/sys.rst:741
 msgid ""
 "The :func:`gettrace` function is intended only for implementing debuggers, "
 "profilers, coverage tools and the like.  Its behavior is part of the "
@@ -1414,7 +1433,7 @@ msgstr ""
 "del lenguaje y, por lo tanto, es posible que no esté disponible en todas las "
 "implementaciones de Python."
 
-#: ../Doc/library/sys.rst:735
+#: ../Doc/library/sys.rst:749
 msgid ""
 "Return a named tuple describing the Windows version currently running.  The "
 "named elements are *major*, *minor*, *build*, *platform*, *service_pack*, "
@@ -1436,47 +1455,47 @@ msgstr ""
 "compatibilidad con versiones anteriores, solo los primeros 5 elementos se "
 "pueden recuperar mediante la indexación."
 
-#: ../Doc/library/sys.rst:746
+#: ../Doc/library/sys.rst:760
 msgid "*platform* will be :const:`2 (VER_PLATFORM_WIN32_NT)`."
 msgstr "*platform* será :const:`2 (VER_PLATFORM_WIN32_NT)`."
 
-#: ../Doc/library/sys.rst:748
+#: ../Doc/library/sys.rst:762
 msgid "*product_type* may be one of the following values:"
 msgstr "*product_type* puede ser uno de los siguientes valores:"
 
-#: ../Doc/library/sys.rst:751
+#: ../Doc/library/sys.rst:765
 msgid "Constant"
 msgstr "Constante"
 
-#: ../Doc/library/sys.rst:751
+#: ../Doc/library/sys.rst:765
 msgid "Meaning"
 msgstr "Significado"
 
-#: ../Doc/library/sys.rst:753
+#: ../Doc/library/sys.rst:767
 msgid ":const:`1 (VER_NT_WORKSTATION)`"
 msgstr ":const:`1 (VER_NT_WORKSTATION)`"
 
-#: ../Doc/library/sys.rst:753
+#: ../Doc/library/sys.rst:767
 msgid "The system is a workstation."
 msgstr "El sistema es una estación de trabajo."
 
-#: ../Doc/library/sys.rst:755
+#: ../Doc/library/sys.rst:769
 msgid ":const:`2 (VER_NT_DOMAIN_CONTROLLER)`"
 msgstr ":const:`2 (VER_NT_DOMAIN_CONTROLLER)`"
 
-#: ../Doc/library/sys.rst:755
+#: ../Doc/library/sys.rst:769
 msgid "The system is a domain controller."
 msgstr "El sistema es un controlador de dominio."
 
-#: ../Doc/library/sys.rst:758
+#: ../Doc/library/sys.rst:772
 msgid ":const:`3 (VER_NT_SERVER)`"
 msgstr ":const:`3 (VER_NT_SERVER)`"
 
-#: ../Doc/library/sys.rst:758
+#: ../Doc/library/sys.rst:772
 msgid "The system is a server, but not a domain controller."
 msgstr "El sistema es un servidor, pero no un controlador de dominio."
 
-#: ../Doc/library/sys.rst:762
+#: ../Doc/library/sys.rst:776
 msgid ""
 "This function wraps the Win32 :c:func:`GetVersionEx` function; see the "
 "Microsoft documentation on :c:func:`OSVERSIONINFOEX` for more information "
@@ -1486,7 +1505,7 @@ msgstr ""
 "documentación de Microsoft en :c:func:`OSVERSIONINFOEX` para obtener más "
 "información sobre estos campos."
 
-#: ../Doc/library/sys.rst:766
+#: ../Doc/library/sys.rst:780
 msgid ""
 "*platform_version* returns the accurate major version, minor version and "
 "build number of the current operating system, rather than the version that "
@@ -1498,7 +1517,7 @@ msgstr ""
 "versión que se está emulando para el proceso. Está diseñado para usarse en "
 "el registro en lugar de para la detección de características."
 
-#: ../Doc/library/sys.rst:773
+#: ../Doc/library/sys.rst:787
 msgid ""
 "Changed to a named tuple and added *service_pack_minor*, "
 "*service_pack_major*, *suite_mask*, and *product_type*."
@@ -1506,11 +1525,11 @@ msgstr ""
 "Cambiada a una tupla con nombre y agregado *service_pack_minor*, "
 "*service_pack_major*, *suite_mask*, y *product_type*."
 
-#: ../Doc/library/sys.rst:777
+#: ../Doc/library/sys.rst:791
 msgid "Added *platform_version*"
 msgstr "Agregado *platform_version*"
 
-#: ../Doc/library/sys.rst:783
+#: ../Doc/library/sys.rst:797
 msgid ""
 "Returns an *asyncgen_hooks* object, which is similar to a :class:"
 "`~collections.namedtuple` of the form `(firstiter, finalizer)`, where "
@@ -1526,11 +1545,11 @@ msgstr ""
 "programar la finalización de un generador asíncrono mediante un bucle de "
 "eventos."
 
-#: ../Doc/library/sys.rst:790
+#: ../Doc/library/sys.rst:804
 msgid "See :pep:`525` for more details."
 msgstr "Ver :pep:`525` para más detalles."
 
-#: ../Doc/library/sys.rst:794 ../Doc/library/sys.rst:1395
+#: ../Doc/library/sys.rst:808 ../Doc/library/sys.rst:1416
 msgid ""
 "This function has been added on a provisional basis (see :pep:`411` for "
 "details.)"
@@ -1538,7 +1557,7 @@ msgstr ""
 "Esta función se ha añadido de forma provisional (consulte :pep:`411` para "
 "obtener más detalles)."
 
-#: ../Doc/library/sys.rst:800
+#: ../Doc/library/sys.rst:814
 msgid ""
 "Get the current coroutine origin tracking depth, as set by :func:"
 "`set_coroutine_origin_tracking_depth`."
@@ -1546,7 +1565,7 @@ msgstr ""
 "Obtiene la profundidad de seguimiento del origen de la co-rutina actual, "
 "según lo establecido por :func:`set_coroutine_origin_tracking_depth`."
 
-#: ../Doc/library/sys.rst:806 ../Doc/library/sys.rst:1416
+#: ../Doc/library/sys.rst:820 ../Doc/library/sys.rst:1437
 msgid ""
 "This function has been added on a provisional basis (see :pep:`411` for "
 "details.)  Use it only for debugging purposes."
@@ -1554,7 +1573,7 @@ msgstr ""
 "Esta función se ha añadido de forma provisional (consulte :pep:`411` para "
 "obtener más detalles). Úsela sólo para fines de depuración."
 
-#: ../Doc/library/sys.rst:812
+#: ../Doc/library/sys.rst:826
 msgid ""
 "A :term:`named tuple` giving parameters of the numeric hash implementation.  "
 "For more details about hashing of numeric types, see :ref:`numeric-hash`."
@@ -1563,75 +1582,75 @@ msgstr ""
 "numérico. Para obtener más detalles sobre el hash de tipos numéricos, "
 "consulte :ref:`numeric-hash`."
 
-#: ../Doc/library/sys.rst:819
+#: ../Doc/library/sys.rst:833
 msgid ":const:`width`"
 msgstr ":const:`width`"
 
-#: ../Doc/library/sys.rst:819
+#: ../Doc/library/sys.rst:833
 msgid "width in bits used for hash values"
 msgstr "ancho en bits usado para valores hash"
 
-#: ../Doc/library/sys.rst:821
+#: ../Doc/library/sys.rst:835
 msgid ":const:`modulus`"
 msgstr ":const:`modulus`"
 
-#: ../Doc/library/sys.rst:821
+#: ../Doc/library/sys.rst:835
 msgid "prime modulus P used for numeric hash scheme"
 msgstr "primer módulo P utilizado para el esquema de hash numérico"
 
-#: ../Doc/library/sys.rst:823
+#: ../Doc/library/sys.rst:837
 msgid ":const:`inf`"
 msgstr ":const:`inf`"
 
-#: ../Doc/library/sys.rst:823
+#: ../Doc/library/sys.rst:837
 msgid "hash value returned for a positive infinity"
 msgstr "valor hash retornado para un infinito positivo"
 
-#: ../Doc/library/sys.rst:825
+#: ../Doc/library/sys.rst:839
 msgid ":const:`nan`"
 msgstr ":const:`nan`"
 
-#: ../Doc/library/sys.rst:825
+#: ../Doc/library/sys.rst:839
 msgid "hash value returned for a nan"
 msgstr "valor hash retornado para un nan"
 
-#: ../Doc/library/sys.rst:827
+#: ../Doc/library/sys.rst:841
 msgid ":const:`imag`"
 msgstr ":const:`imag`"
 
-#: ../Doc/library/sys.rst:827
+#: ../Doc/library/sys.rst:841
 msgid "multiplier used for the imaginary part of a complex number"
 msgstr "multiplicador utilizado para la parte imaginaria de un número complejo"
 
-#: ../Doc/library/sys.rst:830
+#: ../Doc/library/sys.rst:844
 msgid ":const:`algorithm`"
 msgstr ":const:`algorithm`"
 
-#: ../Doc/library/sys.rst:830
+#: ../Doc/library/sys.rst:844
 msgid "name of the algorithm for hashing of str, bytes, and memoryview"
 msgstr "nombre del algoritmo para el hash de str, bytes y memoryview"
 
-#: ../Doc/library/sys.rst:833
+#: ../Doc/library/sys.rst:847
 msgid ":const:`hash_bits`"
 msgstr ":const:`hash_bits`"
 
-#: ../Doc/library/sys.rst:833
+#: ../Doc/library/sys.rst:847
 msgid "internal output size of the hash algorithm"
 msgstr "tamaño de salida interno del algoritmo hash"
 
-#: ../Doc/library/sys.rst:835
+#: ../Doc/library/sys.rst:849
 msgid ":const:`seed_bits`"
 msgstr ":const:`seed_bits`"
 
-#: ../Doc/library/sys.rst:835
+#: ../Doc/library/sys.rst:849
 msgid "size of the seed key of the hash algorithm"
 msgstr "tamaño de la clave semilla del algoritmo hash"
 
-#: ../Doc/library/sys.rst:841
+#: ../Doc/library/sys.rst:855
 msgid "Added *algorithm*, *hash_bits* and *seed_bits*"
 msgstr "Agregado *algoritmo*, *hash_bits* y *seed_bits*"
 
-#: ../Doc/library/sys.rst:847
+#: ../Doc/library/sys.rst:861
 msgid ""
 "The version number encoded as a single integer.  This is guaranteed to "
 "increase with each version, including proper support for non-production "
@@ -1643,7 +1662,7 @@ msgstr ""
 "no son de producción. Por ejemplo, para probar que el intérprete de Python "
 "es al menos la versión 1.5.2, use::"
 
-#: ../Doc/library/sys.rst:858
+#: ../Doc/library/sys.rst:872
 msgid ""
 "This is called ``hexversion`` since it only really looks meaningful when "
 "viewed as the result of passing it to the built-in :func:`hex` function.  "
@@ -1655,12 +1674,12 @@ msgstr ""
 "`hex`. El :term:`named tuple` :data:`sys.version_info` puede usarse para una "
 "codificación más amigable para los humanos de la misma información."
 
-#: ../Doc/library/sys.rst:863
+#: ../Doc/library/sys.rst:877
 msgid "More details of ``hexversion`` can be found at :ref:`apiabiversion`."
 msgstr ""
 "Se pueden encontrar más detalles de ``hexversion`` en :ref:`apiabiversion`."
 
-#: ../Doc/library/sys.rst:868
+#: ../Doc/library/sys.rst:882
 msgid ""
 "An object containing information about the implementation of the currently "
 "running Python interpreter.  The following attributes are required to exist "
@@ -1670,7 +1689,7 @@ msgstr ""
 "Python en ejecución. Los siguientes atributos deben existir en todas las "
 "implementaciones de Python."
 
-#: ../Doc/library/sys.rst:872
+#: ../Doc/library/sys.rst:886
 msgid ""
 "*name* is the implementation's identifier, e.g. ``'cpython'``.  The actual "
 "string is defined by the Python implementation, but it is guaranteed to be "
@@ -1680,7 +1699,7 @@ msgstr ""
 "La cadena de caracteres real está definida por la implementación de Python, "
 "pero se garantiza que estará en minúsculas."
 
-#: ../Doc/library/sys.rst:876
+#: ../Doc/library/sys.rst:890
 msgid ""
 "*version* is a named tuple, in the same format as :data:`sys.version_info`.  "
 "It represents the version of the Python *implementation*.  This has a "
@@ -1701,7 +1720,7 @@ msgstr ""
 "'final', 0)``. Para CPython tienen el mismo valor, ya que es la "
 "implementación de referencia."
 
-#: ../Doc/library/sys.rst:886
+#: ../Doc/library/sys.rst:900
 msgid ""
 "*hexversion* is the implementation version in hexadecimal format, like :data:"
 "`sys.hexversion`."
@@ -1709,7 +1728,7 @@ msgstr ""
 "*hexversion* es la versión de implementación en formato hexadecimal, como :"
 "data:`sys.hexversion`."
 
-#: ../Doc/library/sys.rst:889
+#: ../Doc/library/sys.rst:903
 msgid ""
 "*cache_tag* is the tag used by the import machinery in the filenames of "
 "cached modules.  By convention, it would be a composite of the "
@@ -1724,7 +1743,7 @@ msgstr ""
 "otro valor si corresponde. Si ``cache_tag`` está configurado como ``None``, "
 "indica que el almacenamiento en caché del módulo debe estar deshabilitado."
 
-#: ../Doc/library/sys.rst:896
+#: ../Doc/library/sys.rst:910
 msgid ""
 ":data:`sys.implementation` may contain additional attributes specific to the "
 "Python implementation.  These non-standard attributes must start with an "
@@ -1741,7 +1760,7 @@ msgstr ""
 "cambiar entre las versiones del lenguaje Python). Consulte :pep:`421` para "
 "obtener más información."
 
-#: ../Doc/library/sys.rst:907
+#: ../Doc/library/sys.rst:921
 msgid ""
 "The addition of new required attributes must go through the normal PEP "
 "process. See :pep:`421` for more information."
@@ -1749,7 +1768,7 @@ msgstr ""
 "La adición de nuevos atributos obligatorios debe pasar por el proceso normal "
 "de PEP. Consulte :pep:`421` para obtener más información."
 
-#: ../Doc/library/sys.rst:912
+#: ../Doc/library/sys.rst:926
 msgid ""
 "A :term:`named tuple` that holds information about Python's internal "
 "representation of integers.  The attributes are read only."
@@ -1757,19 +1776,19 @@ msgstr ""
 "Un :term:`named tuple` que contiene información sobre la representación "
 "interna de Python de los enteros. Los atributos son de solo lectura."
 
-#: ../Doc/library/sys.rst:918 ../Doc/library/sys.rst:1519
+#: ../Doc/library/sys.rst:932 ../Doc/library/sys.rst:1546
 msgid "Attribute"
 msgstr "Atributo"
 
-#: ../Doc/library/sys.rst:918 ../Doc/library/sys.rst:1519
+#: ../Doc/library/sys.rst:932 ../Doc/library/sys.rst:1546
 msgid "Explanation"
 msgstr "Explicación"
 
-#: ../Doc/library/sys.rst:920
+#: ../Doc/library/sys.rst:934
 msgid ":const:`bits_per_digit`"
 msgstr ":const:`bits_per_digit`"
 
-#: ../Doc/library/sys.rst:920
+#: ../Doc/library/sys.rst:934
 msgid ""
 "number of bits held in each digit.  Python integers are stored internally in "
 "base ``2**int_info.bits_per_digit``"
@@ -1777,15 +1796,15 @@ msgstr ""
 "número de bits retenidos en cada dígito. Los enteros de Python se almacenan "
 "internamente en la base ``2**int_info.bits_per_digit``"
 
-#: ../Doc/library/sys.rst:924
+#: ../Doc/library/sys.rst:938
 msgid ":const:`sizeof_digit`"
 msgstr ":const:`sizeof_digit`"
 
-#: ../Doc/library/sys.rst:924
+#: ../Doc/library/sys.rst:938
 msgid "size in bytes of the C type used to represent a digit"
 msgstr "tamaño en bytes del tipo C utilizado para representar un dígito"
 
-#: ../Doc/library/sys.rst:933
+#: ../Doc/library/sys.rst:947
 msgid ""
 "When this attribute exists, its value is automatically called (with no "
 "arguments) when the interpreter is launched in :ref:`interactive mode <tut-"
@@ -1799,6 +1818,7 @@ msgstr ""
 "`PYTHONSTARTUP`, para que pueda establecer este enlace allí. El módulo :mod:"
 "`site` :ref:`establece este <rlcompleter-config>`."
 
+#: ../Doc/library/sys.rst:953
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``cpython.run_interactivehook`` "
 "with argument ``hook``."
@@ -1806,7 +1826,7 @@ msgstr ""
 "Lanza un :ref:`auditing event <auditing>` ``cpython.run_interactivehook`` "
 "con el argumento ``hook``."
 
-#: ../Doc/library/sys.rst:941
+#: ../Doc/library/sys.rst:955
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``cpython.run_interactivehook`` "
 "with the hook object as the argument when the hook is called on startup."
@@ -1815,7 +1835,7 @@ msgstr ""
 "con el objeto gancho (*hook*) como argumento cuando se llama al gancho en el "
 "inicio."
 
-#: ../Doc/library/sys.rst:950
+#: ../Doc/library/sys.rst:964
 msgid ""
 "Enter *string* in the table of \"interned\" strings and return the interned "
 "string -- which is *string* itself or a copy. Interning strings is useful to "
@@ -1837,7 +1857,7 @@ msgstr ""
 "diccionarios utilizados para contener los atributos de módulo, clase o "
 "instancia tienen claves internas."
 
-#: ../Doc/library/sys.rst:958
+#: ../Doc/library/sys.rst:972
 msgid ""
 "Interned strings are not immortal; you must keep a reference to the return "
 "value of :func:`intern` around to benefit from it."
@@ -1845,7 +1865,7 @@ msgstr ""
 "Las cadenas de caracteres internas no son inmortales; debe mantener una "
 "referencia al valor de retorno de :func:`intern` para beneficiarse de él."
 
-#: ../Doc/library/sys.rst:964
+#: ../Doc/library/sys.rst:978
 msgid ""
 "Return :const:`True` if the Python interpreter is :term:`shutting down "
 "<interpreter shutdown>`, :const:`False` otherwise."
@@ -1853,7 +1873,7 @@ msgstr ""
 "Retorna :const:`True` si el intérprete de Python es :term:`shutting down "
 "<interpreter shutdown>`, :const:`False` en caso contrario."
 
-#: ../Doc/library/sys.rst:974
+#: ../Doc/library/sys.rst:988
 msgid ""
 "These three variables are not always defined; they are set when an exception "
 "is not handled and the interpreter prints an error message and a stack "
@@ -1871,7 +1891,7 @@ msgstr ""
 "típico es ``import pdb; pdb.pm()`` para ingresar al depurador post-mortem; "
 "consulte módulo :mod:`pdb` para obtener más información)."
 
-#: ../Doc/library/sys.rst:982
+#: ../Doc/library/sys.rst:996
 msgid ""
 "The meaning of the variables is the same as that of the return values from :"
 "func:`exc_info` above."
@@ -1879,7 +1899,7 @@ msgstr ""
 "El significado de las variables es el mismo que el de los valores retornados "
 "de :func:`exc_info` arriba."
 
-#: ../Doc/library/sys.rst:988
+#: ../Doc/library/sys.rst:1002
 msgid ""
 "An integer giving the maximum value a variable of type :c:type:`Py_ssize_t` "
 "can take.  It's usually ``2**31 - 1`` on a 32-bit platform and ``2**63 - 1`` "
@@ -1889,7 +1909,7 @@ msgstr ""
 "type:`Py_ssize_t`. Suele ser ``2**31 - 1`` en una plataforma de 32 bits y "
 "``2** 63 - 1`` en una plataforma de 64 bits."
 
-#: ../Doc/library/sys.rst:995
+#: ../Doc/library/sys.rst:1009
 msgid ""
 "An integer giving the value of the largest Unicode code point, i.e. "
 "``1114111`` (``0x10FFFF`` in hexadecimal)."
@@ -1897,7 +1917,7 @@ msgstr ""
 "Un número entero que da el valor del punto de código Unicode más grande, es "
 "decir, ``1114111`` (``0x10FFFF`` en hexadecimal)."
 
-#: ../Doc/library/sys.rst:998
+#: ../Doc/library/sys.rst:1012
 msgid ""
 "Before :pep:`393`, ``sys.maxunicode`` used to be either ``0xFFFF`` or "
 "``0x10FFFF``, depending on the configuration option that specified whether "
@@ -1907,7 +1927,7 @@ msgstr ""
 "dependiendo de la opción de configuración que especificaba si los caracteres "
 "Unicode se almacenaban como UCS-2 o UCS-4."
 
-#: ../Doc/library/sys.rst:1006
+#: ../Doc/library/sys.rst:1020
 msgid ""
 "A list of :term:`meta path finder` objects that have their :meth:`~importlib."
 "abc.MetaPathFinder.find_spec` methods called to see if one of the objects "
@@ -1927,11 +1947,11 @@ msgstr ""
 "attr:`__path__` se pasa como segundo argumento. El método retorna :term:"
 "`module spec`, o ``None`` si no se puede encontrar el módulo."
 
-#: ../Doc/library/sys.rst:1018
+#: ../Doc/library/sys.rst:1032
 msgid ":class:`importlib.abc.MetaPathFinder`"
 msgstr ":class:`importlib.abc.MetaPathFinder`"
 
-#: ../Doc/library/sys.rst:1018
+#: ../Doc/library/sys.rst:1032
 msgid ""
 "The abstract base class defining the interface of finder objects on :data:"
 "`meta_path`."
@@ -1939,11 +1959,11 @@ msgstr ""
 "La clase base abstracta que define la interfaz de los objetos del buscador "
 "en :data:`meta_path`."
 
-#: ../Doc/library/sys.rst:1022
+#: ../Doc/library/sys.rst:1036
 msgid ":class:`importlib.machinery.ModuleSpec`"
 msgstr ":class:`importlib.machinery.ModuleSpec`"
 
-#: ../Doc/library/sys.rst:1021
+#: ../Doc/library/sys.rst:1035
 msgid ""
 "The concrete class which :meth:`~importlib.abc.MetaPathFinder.find_spec` "
 "should return instances of."
@@ -1951,7 +1971,7 @@ msgstr ""
 "La clase concreta que :meth:`~importlib.abc.MetaPathFinder.find_spec` "
 "debería retornar instancias de."
 
-#: ../Doc/library/sys.rst:1027
+#: ../Doc/library/sys.rst:1041
 msgid ""
 ":term:`Module specs <module spec>` were introduced in Python 3.4, by :pep:"
 "`451`. Earlier versions of Python looked for a method called :meth:"
@@ -1965,7 +1985,7 @@ msgstr ""
 "llama como una alternativa si una entrada :data:`meta_path` no tiene un "
 "método :meth:`~importlib.abc.MetaPathFinder.find_spec`."
 
-#: ../Doc/library/sys.rst:1035
+#: ../Doc/library/sys.rst:1049
 msgid ""
 "This is a dictionary that maps module names to modules which have already "
 "been loaded.  This can be manipulated to force reloading of modules and "
@@ -1979,7 +1999,7 @@ msgstr ""
 "necesariamente funcionará como se esperaba y eliminar elementos esenciales "
 "del diccionario puede hacer que Python falle."
 
-#: ../Doc/library/sys.rst:1045
+#: ../Doc/library/sys.rst:1059
 msgid ""
 "A list of strings that specifies the search path for modules. Initialized "
 "from the environment variable :envvar:`PYTHONPATH`, plus an installation-"
@@ -1989,7 +2009,7 @@ msgstr ""
 "módulos. Inicializado desde la variable de entorno :envvar:`PYTHONPATH`, más "
 "un valor predeterminado que depende de la instalación."
 
-#: ../Doc/library/sys.rst:1049
+#: ../Doc/library/sys.rst:1063
 msgid ""
 "As initialized upon program startup, the first item of this list, "
 "``path[0]``, is the directory containing the script that was used to invoke "
@@ -2010,7 +2030,7 @@ msgstr ""
 "del script se inserta *antes* de las entradas insertadas como resultado de :"
 "envvar:`PYTHONPATH`."
 
-#: ../Doc/library/sys.rst:1057
+#: ../Doc/library/sys.rst:1071
 msgid ""
 "A program is free to modify this list for its own purposes.  Only strings "
 "and bytes should be added to :data:`sys.path`; all other data types are "
@@ -2020,7 +2040,7 @@ msgstr ""
 "deben agregar cadenas de caracteres y bytes a :data:`sys.path`; todos los "
 "demás tipos de datos se ignoran durante la importación."
 
-#: ../Doc/library/sys.rst:1063
+#: ../Doc/library/sys.rst:1077
 msgid ""
 "Module :mod:`site` This describes how to use .pth files to extend :data:`sys."
 "path`."
@@ -2028,7 +2048,7 @@ msgstr ""
 "Módulo :mod:`site` Esto describe cómo usar archivos .pth para extender :data:"
 "`sys.path`."
 
-#: ../Doc/library/sys.rst:1069
+#: ../Doc/library/sys.rst:1083
 msgid ""
 "A list of callables that take a path argument to try to create a :term:"
 "`finder` for the path. If a finder can be created, it is to be returned by "
@@ -2038,11 +2058,11 @@ msgstr ""
 "un :term:`finder` para la ruta. Si se puede crear un buscador, el invocable "
 "debe retornar; de lo contrario, lanza :exc:`ImportError`."
 
-#: ../Doc/library/sys.rst:1073 ../Doc/library/sys.rst:1084
+#: ../Doc/library/sys.rst:1087 ../Doc/library/sys.rst:1098
 msgid "Originally specified in :pep:`302`."
 msgstr "Especificado originalmente en :pep:`302`."
 
-#: ../Doc/library/sys.rst:1078
+#: ../Doc/library/sys.rst:1092
 msgid ""
 "A dictionary acting as a cache for :term:`finder` objects. The keys are "
 "paths that have been passed to :data:`sys.path_hooks` and the values are the "
@@ -2055,7 +2075,7 @@ msgstr ""
 "válida pero no se encuentra ningún buscador en :data:`sys.path_hooks`, "
 "entonces se almacena ``None``."
 
-#: ../Doc/library/sys.rst:1086
+#: ../Doc/library/sys.rst:1100
 msgid ""
 "``None`` is stored instead of :class:`imp.NullImporter` when no finder is "
 "found."
@@ -2063,7 +2083,7 @@ msgstr ""
 "``None`` se almacena en lugar de :class:`imp.NullImporter` cuando no se "
 "encuentra ningún buscador."
 
-#: ../Doc/library/sys.rst:1093
+#: ../Doc/library/sys.rst:1107
 msgid ""
 "This string contains a platform identifier that can be used to append "
 "platform-specific components to :data:`sys.path`, for instance."
@@ -2072,7 +2092,7 @@ msgstr ""
 "puede usar para agregar componentes específicos de la plataforma a :data:"
 "`sys.path`, por ejemplo."
 
-#: ../Doc/library/sys.rst:1096
+#: ../Doc/library/sys.rst:1110
 msgid ""
 "For Unix systems, except on Linux and AIX, this is the lowercased OS name as "
 "returned by ``uname -s`` with the first part of the version as returned by "
@@ -2087,59 +2107,59 @@ msgstr ""
 "menos que desee probar una versión específica del sistema, se recomienda "
 "utilizar el siguiente idioma:"
 
-#: ../Doc/library/sys.rst:1109
+#: ../Doc/library/sys.rst:1123
 msgid "For other systems, the values are:"
 msgstr "Para otros sistemas, los valores son:"
 
-#: ../Doc/library/sys.rst:1112
+#: ../Doc/library/sys.rst:1126
 msgid "System"
 msgstr "Sistema"
 
-#: ../Doc/library/sys.rst:1112
+#: ../Doc/library/sys.rst:1126
 msgid "``platform`` value"
 msgstr "valor ``platform``"
 
-#: ../Doc/library/sys.rst:1114
+#: ../Doc/library/sys.rst:1128
 msgid "AIX"
 msgstr "AIX"
 
-#: ../Doc/library/sys.rst:1114
+#: ../Doc/library/sys.rst:1128
 msgid "``'aix'``"
 msgstr "``'aix'``"
 
-#: ../Doc/library/sys.rst:1115
+#: ../Doc/library/sys.rst:1129
 msgid "Linux"
 msgstr "Linux"
 
-#: ../Doc/library/sys.rst:1115
+#: ../Doc/library/sys.rst:1129
 msgid "``'linux'``"
 msgstr "``'linux'``"
 
-#: ../Doc/library/sys.rst:1116
+#: ../Doc/library/sys.rst:1130
 msgid "Windows"
 msgstr "Windows"
 
-#: ../Doc/library/sys.rst:1116
+#: ../Doc/library/sys.rst:1130
 msgid "``'win32'``"
 msgstr "``'win32'``"
 
-#: ../Doc/library/sys.rst:1117
+#: ../Doc/library/sys.rst:1131
 msgid "Windows/Cygwin"
 msgstr "Windows/Cygwin"
 
-#: ../Doc/library/sys.rst:1117
+#: ../Doc/library/sys.rst:1131
 msgid "``'cygwin'``"
 msgstr "``'cygwin'``"
 
-#: ../Doc/library/sys.rst:1118
+#: ../Doc/library/sys.rst:1132
 msgid "macOS"
 msgstr "macOS"
 
-#: ../Doc/library/sys.rst:1118
+#: ../Doc/library/sys.rst:1132
 msgid "``'darwin'``"
 msgstr "``'darwin'``"
 
-#: ../Doc/library/sys.rst:1121
+#: ../Doc/library/sys.rst:1135
 msgid ""
 "On Linux, :attr:`sys.platform` doesn't contain the major version anymore. It "
 "is always ``'linux'``, instead of ``'linux2'`` or ``'linux3'``.  Since older "
@@ -2151,7 +2171,7 @@ msgstr ""
 "versiones anteriores de Python incluyen el número de versión, se recomienda "
 "utilizar siempre el idioma ``startswith`` presentado anteriormente."
 
-#: ../Doc/library/sys.rst:1127
+#: ../Doc/library/sys.rst:1141
 msgid ""
 "On AIX, :attr:`sys.platform` doesn't contain the major version anymore. It "
 "is always ``'aix'``, instead of ``'aix5'`` or ``'aix7'``.  Since older "
@@ -2163,7 +2183,7 @@ msgstr ""
 "anteriores de Python incluyen el número de versión, se recomienda utilizar "
 "siempre el idioma ``startswith`` presentado anteriormente."
 
-#: ../Doc/library/sys.rst:1135
+#: ../Doc/library/sys.rst:1149
 msgid ""
 ":attr:`os.name` has a coarser granularity.  :func:`os.uname` gives system-"
 "dependent version information."
@@ -2171,7 +2191,7 @@ msgstr ""
 ":attr:`os.name` tiene una granularidad más gruesa. :func:`os.uname` "
 "proporciona información de versión dependiente del sistema."
 
-#: ../Doc/library/sys.rst:1138
+#: ../Doc/library/sys.rst:1152
 msgid ""
 "The :mod:`platform` module provides detailed checks for the system's "
 "identity."
@@ -2179,7 +2199,45 @@ msgstr ""
 "El módulo :mod:`platform` proporciona comprobaciones detalladas de la "
 "identidad del sistema."
 
-#: ../Doc/library/sys.rst:1144
+#: ../Doc/library/sys.rst:1158
+msgid ""
+"Name of the platform-specific library directory. It is used to build the "
+"path of standard library and the paths of installed extension modules."
+msgstr ""
+
+#: ../Doc/library/sys.rst:1161
+msgid ""
+"It is equal to ``\"lib\"`` on most platforms. On Fedora and SuSE, it is "
+"equal to ``\"lib64\"`` on 64-bit platforms which gives the following ``sys."
+"path`` paths (where ``X.Y`` is the Python ``major.minor`` version):"
+msgstr ""
+
+#: ../Doc/library/sys.rst:1165
+msgid ""
+"``/usr/lib64/pythonX.Y/``: Standard library (like ``os.py`` of the :mod:`os` "
+"module)"
+msgstr ""
+
+#: ../Doc/library/sys.rst:1167
+msgid ""
+"``/usr/lib64/pythonX.Y/lib-dynload/``: C extension modules of the standard "
+"library (like the :mod:`errno` module, the exact filename is platform "
+"specific)"
+msgstr ""
+
+#: ../Doc/library/sys.rst:1170
+msgid ""
+"``/usr/lib/pythonX.Y/site-packages/`` (always use ``lib``, not :data:`sys."
+"platlibdir`): Third-party modules"
+msgstr ""
+
+#: ../Doc/library/sys.rst:1172
+msgid ""
+"``/usr/lib64/pythonX.Y/site-packages/``: C extension modules of third-party "
+"packages"
+msgstr ""
+
+#: ../Doc/library/sys.rst:1180
 msgid ""
 "A string giving the site-specific directory prefix where the platform "
 "independent Python files are installed; by default, this is the string ``'/"
@@ -2201,7 +2259,7 @@ msgstr ""
 "almacenan en :file:`{prefix}/include/python{XY}`, donde *XY* es el número de "
 "versión de Python, por ejemplo, ``3.2``."
 
-#: ../Doc/library/sys.rst:1153
+#: ../Doc/library/sys.rst:1189
 msgid ""
 "If a :ref:`virtual environment <venv-def>` is in effect, this value will be "
 "changed in ``site.py`` to point to the virtual environment. The value for "
@@ -2212,7 +2270,7 @@ msgstr ""
 "instalación de Python seguirá estando disponible a través de :data:"
 "`base_prefix`."
 
-#: ../Doc/library/sys.rst:1168
+#: ../Doc/library/sys.rst:1204
 msgid ""
 "Strings specifying the primary and secondary prompt of the interpreter.  "
 "These are only defined if the interpreter is in interactive mode.  Their "
@@ -2229,36 +2287,7 @@ msgstr ""
 "para leer un nuevo comando interactivo; esto se puede utilizar para "
 "implementar un mensaje dinámico."
 
-#: ../Doc/library/sys.rst:1178
-msgid ""
-"Set the interpreter's \"check interval\".  This integer value determines how "
-"often the interpreter checks for periodic things such as thread switches and "
-"signal handlers.  The default is ``100``, meaning the check is performed "
-"every 100 Python virtual instructions. Setting it to a larger value may "
-"increase performance for programs using threads.  Setting it to a value "
-"``<=`` 0 checks every virtual instruction, maximizing responsiveness as well "
-"as overhead."
-msgstr ""
-"Configure el \"intervalo de verificación\" del intérprete. Este valor entero "
-"determina la frecuencia con la que el intérprete comprueba cosas periódicas "
-"como cambios de hilo y manejadores de señales. El valor predeterminado es "
-"``100``, lo que significa que la verificación se realiza cada 100 "
-"instrucciones virtuales de Python. Establecerlo en un valor mayor puede "
-"aumentar el rendimiento de los programas que utilizan subprocesos. "
-"Establecerlo en un valor ``<=`` 0 verifica cada instrucción virtual, "
-"maximizando la capacidad de respuesta y la sobrecarga."
-
-#: ../Doc/library/sys.rst:1185
-msgid ""
-"This function doesn't have an effect anymore, as the internal logic for "
-"thread switching and asynchronous tasks has been rewritten.  Use :func:"
-"`setswitchinterval` instead."
-msgstr ""
-"Esta función ya no tiene ningún efecto, ya que se ha reescrito la lógica "
-"interna para el cambio de hilo y las tareas asincrónicas. Utilice :func:"
-"`setswitchinterval` en su lugar."
-
-#: ../Doc/library/sys.rst:1193
+#: ../Doc/library/sys.rst:1214
 msgid ""
 "Set the flags used by the interpreter for :c:func:`dlopen` calls, such as "
 "when the interpreter loads extension modules.  Among other things, this will "
@@ -2277,7 +2306,7 @@ msgstr ""
 "pueden encontrar en el módulo :mod:`os` (constantes ``RTLD_xxx``, por "
 "ejemplo :data:`os.RTLD_LAZY`)."
 
-#: ../Doc/library/sys.rst:1209
+#: ../Doc/library/sys.rst:1230
 msgid ""
 "Set the system's profile function, which allows you to implement a Python "
 "source code profiler in Python.  See chapter :ref:`profile` for more "
@@ -2305,7 +2334,7 @@ msgstr ""
 "retorno no se usa, por lo que simplemente puede retornar ``None``. Un error "
 "en la función del perfil provocará su desarmado."
 
-#: ../Doc/library/sys.rst:1220
+#: ../Doc/library/sys.rst:1241
 msgid ""
 "Profile functions should have three arguments: *frame*, *event*, and *arg*. "
 "*frame* is the current stack frame.  *event* is a string: ``'call'``, "
@@ -2317,22 +2346,22 @@ msgstr ""
 "caracteres:  ``'call'``, ``'return'``, ``'c_call'``, ``'c_return'``, o "
 "``'c_exception'``. *arg* depende del tipo de evento."
 
-#: ../Doc/library/sys.rst:1226
+#: ../Doc/library/sys.rst:1246
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``sys.setprofile`` with no "
 "arguments."
 msgstr ""
 "Lanza un :ref:`auditing event <auditing>` ``sys.setprofile`` sin argumentos."
 
-#: ../Doc/library/sys.rst:1227 ../Doc/library/sys.rst:1308
+#: ../Doc/library/sys.rst:1248 ../Doc/library/sys.rst:1329
 msgid "The events have the following meaning:"
 msgstr "Los eventos tienen el siguiente significado:"
 
-#: ../Doc/library/sys.rst:1231 ../Doc/library/sys.rst:1313
+#: ../Doc/library/sys.rst:1252 ../Doc/library/sys.rst:1334
 msgid "``'call'``"
 msgstr "``'call'``"
 
-#: ../Doc/library/sys.rst:1230
+#: ../Doc/library/sys.rst:1251
 msgid ""
 "A function is called (or some other code block entered).  The profile "
 "function is called; *arg* is ``None``."
@@ -2340,11 +2369,11 @@ msgstr ""
 "Se llama a una función (o se ingresa algún otro bloque de código). Se llama "
 "a la función de perfil; *arg* es ``None``."
 
-#: ../Doc/library/sys.rst:1236 ../Doc/library/sys.rst:1328
+#: ../Doc/library/sys.rst:1257 ../Doc/library/sys.rst:1349
 msgid "``'return'``"
 msgstr "``'return'``"
 
-#: ../Doc/library/sys.rst:1234
+#: ../Doc/library/sys.rst:1255
 msgid ""
 "A function (or other code block) is about to return.  The profile function "
 "is called; *arg* is the value that will be returned, or ``None`` if the "
@@ -2354,11 +2383,11 @@ msgstr ""
 "la función de perfil; *arg* es el valor que se retornará, o ``None`` si el "
 "evento es causado por una excepción."
 
-#: ../Doc/library/sys.rst:1240
+#: ../Doc/library/sys.rst:1261
 msgid "``'c_call'``"
 msgstr "``'c_call'``"
 
-#: ../Doc/library/sys.rst:1239
+#: ../Doc/library/sys.rst:1260
 msgid ""
 "A C function is about to be called.  This may be an extension function or a "
 "built-in.  *arg* is the C function object."
@@ -2366,24 +2395,24 @@ msgstr ""
 "Una función C está a punto de ser llamada. Esta puede ser una función de "
 "extensión o una incorporada. *arg* es el objeto de función de C."
 
-#: ../Doc/library/sys.rst:1243
+#: ../Doc/library/sys.rst:1264
 msgid "``'c_return'``"
 msgstr "``'c_return'``"
 
-#: ../Doc/library/sys.rst:1243
+#: ../Doc/library/sys.rst:1264
 msgid "A C function has returned. *arg* is the C function object."
 msgstr "Ha vuelto una función C. *arg* es el objeto de función de C."
 
-#: ../Doc/library/sys.rst:1245
+#: ../Doc/library/sys.rst:1266
 msgid "``'c_exception'``"
 msgstr "``'c_exception'``"
 
-#: ../Doc/library/sys.rst:1246
+#: ../Doc/library/sys.rst:1267
 msgid "A C function has raised an exception.  *arg* is the C function object."
 msgstr ""
 "Una función C ha generado una excepción. *arg* es el objeto de función de C."
 
-#: ../Doc/library/sys.rst:1250
+#: ../Doc/library/sys.rst:1271
 msgid ""
 "Set the maximum depth of the Python interpreter stack to *limit*.  This "
 "limit prevents infinite recursion from causing an overflow of the C stack "
@@ -2393,7 +2422,7 @@ msgstr ""
 "*limit*. Este límite evita que la recursividad infinita cause un "
 "desbordamiento de la pila C y bloquee Python."
 
-#: ../Doc/library/sys.rst:1254
+#: ../Doc/library/sys.rst:1275
 msgid ""
 "The highest possible limit is platform-dependent.  A user may need to set "
 "the limit higher when they have a program that requires deep recursion and a "
@@ -2406,7 +2435,7 @@ msgstr ""
 "alto. Esto debe hacerse con cuidado, ya que un límite demasiado alto puede "
 "provocar un accidente."
 
-#: ../Doc/library/sys.rst:1259
+#: ../Doc/library/sys.rst:1280
 msgid ""
 "If the new limit is too low at the current recursion depth, a :exc:"
 "`RecursionError` exception is raised."
@@ -2414,7 +2443,7 @@ msgstr ""
 "Si el nuevo límite es demasiado bajo en la profundidad de recursividad "
 "actual, se genera una excepción :exc:`RecursionError`."
 
-#: ../Doc/library/sys.rst:1262
+#: ../Doc/library/sys.rst:1283
 msgid ""
 "A :exc:`RecursionError` exception is now raised if the new limit is too low "
 "at the current recursion depth."
@@ -2422,7 +2451,7 @@ msgstr ""
 "A la excepción :exc:`RecursionError` ahora se lanza si el nuevo límite es "
 "demasiado bajo en la profundidad de recursión actual."
 
-#: ../Doc/library/sys.rst:1269
+#: ../Doc/library/sys.rst:1290
 msgid ""
 "Set the interpreter's thread switch interval (in seconds).  This floating-"
 "point value determines the ideal duration of the \"timeslices\" allocated to "
@@ -2440,7 +2469,7 @@ msgstr ""
 "Además, qué hilo se programa al final del intervalo es decisión del sistema "
 "operativo. El intérprete no tiene su propio programador."
 
-#: ../Doc/library/sys.rst:1286
+#: ../Doc/library/sys.rst:1307
 msgid ""
 "Set the system's trace function, which allows you to implement a Python "
 "source code debugger in Python.  The function is thread-specific; for a "
@@ -2454,7 +2483,7 @@ msgstr ""
 "una función de seguimiento usando :func:`settrace` para cada subproceso que "
 "se depura o use :func:`threading.settrace`."
 
-#: ../Doc/library/sys.rst:1291
+#: ../Doc/library/sys.rst:1312
 msgid ""
 "Trace functions should have three arguments: *frame*, *event*, and *arg*. "
 "*frame* is the current stack frame.  *event* is a string: ``'call'``, "
@@ -2466,7 +2495,7 @@ msgstr ""
 "caracteres: ``'call'``, ``'line'``, ``'return'``, ``'exception'`` or "
 "``'opcode'``. *arg* depende del tipo de evento."
 
-#: ../Doc/library/sys.rst:1296
+#: ../Doc/library/sys.rst:1317
 msgid ""
 "The trace function is invoked (with *event* set to ``'call'``) whenever a "
 "new local scope is entered; it should return a reference to a local trace "
@@ -2478,7 +2507,7 @@ msgstr ""
 "función de rastreo local que se usará para el nuevo alcance, o ``None`` si "
 "no se debe rastrear el alcance."
 
-#: ../Doc/library/sys.rst:1301
+#: ../Doc/library/sys.rst:1322
 msgid ""
 "The local trace function should return a reference to itself (or to another "
 "function for further tracing in that scope), or ``None`` to turn off tracing "
@@ -2488,7 +2517,7 @@ msgstr ""
 "otra función para realizar un seguimiento adicional en ese ámbito), o "
 "``None`` para desactivar el seguimiento en ese ámbito."
 
-#: ../Doc/library/sys.rst:1305
+#: ../Doc/library/sys.rst:1326
 msgid ""
 "If there is any error occurred in the trace function, it will be unset, just "
 "like ``settrace(None)`` is called."
@@ -2496,7 +2525,7 @@ msgstr ""
 "Si se produce algún error en la función de seguimiento, se desarmará, al "
 "igual que se llama a ``settrace(None)``."
 
-#: ../Doc/library/sys.rst:1311
+#: ../Doc/library/sys.rst:1332
 msgid ""
 "A function is called (or some other code block entered).  The global trace "
 "function is called; *arg* is ``None``; the return value specifies the local "
@@ -2506,11 +2535,11 @@ msgstr ""
 "a la función de rastreo global; *arg* es ``None``; el valor de retorno "
 "especifica la función de rastreo local."
 
-#: ../Doc/library/sys.rst:1322
+#: ../Doc/library/sys.rst:1343
 msgid "``'line'``"
 msgstr "``'line'``"
 
-#: ../Doc/library/sys.rst:1316
+#: ../Doc/library/sys.rst:1337
 msgid ""
 "The interpreter is about to execute a new line of code or re-execute the "
 "condition of a loop.  The local trace function is called; *arg* is ``None``; "
@@ -2527,7 +2556,7 @@ msgstr ""
 "deshabilitar para un marco estableciendo :attr:`f_trace_lines` to :const:"
 "`False` en ese marco."
 
-#: ../Doc/library/sys.rst:1325
+#: ../Doc/library/sys.rst:1346
 msgid ""
 "A function (or other code block) is about to return.  The local trace "
 "function is called; *arg* is the value that will be returned, or ``None`` if "
@@ -2539,11 +2568,11 @@ msgstr ""
 "si el evento es causado por una excepción. Se ignora el valor de retorno de "
 "la función de seguimiento."
 
-#: ../Doc/library/sys.rst:1333
+#: ../Doc/library/sys.rst:1354
 msgid "``'exception'``"
 msgstr "``'exception'``"
 
-#: ../Doc/library/sys.rst:1331
+#: ../Doc/library/sys.rst:1352
 msgid ""
 "An exception has occurred.  The local trace function is called; *arg* is a "
 "tuple ``(exception, value, traceback)``; the return value specifies the new "
@@ -2553,11 +2582,11 @@ msgstr ""
 "una tupla ``(exception, value, traceback)``; el valor de retorno especifica "
 "la nueva función de rastreo local."
 
-#: ../Doc/library/sys.rst:1341
+#: ../Doc/library/sys.rst:1362
 msgid "``'opcode'``"
 msgstr "``'opcode'``"
 
-#: ../Doc/library/sys.rst:1336
+#: ../Doc/library/sys.rst:1357
 msgid ""
 "The interpreter is about to execute a new opcode (see :mod:`dis` for opcode "
 "details).  The local trace function is called; *arg* is ``None``; the return "
@@ -2572,7 +2601,7 @@ msgstr ""
 "de forma predeterminada: deben solicitarse explícitamente configurando :attr:"
 "`f_trace_opcodes` en :const:`True` en el marco."
 
-#: ../Doc/library/sys.rst:1343
+#: ../Doc/library/sys.rst:1364
 msgid ""
 "Note that as an exception is propagated down the chain of callers, an "
 "``'exception'`` event is generated at each level."
@@ -2580,7 +2609,7 @@ msgstr ""
 "Tenga en cuenta que como una excepción se propaga a lo largo de la cadena de "
 "llamadas de funciones, se lanza un evento de ``'excepción'`` en cada nivel."
 
-#: ../Doc/library/sys.rst:1346
+#: ../Doc/library/sys.rst:1367
 msgid ""
 "For more fine-grained usage, it's possible to set a trace function by "
 "assigning ``frame.f_trace = tracefunc`` explicitly, rather than relying on "
@@ -2605,20 +2634,20 @@ msgstr ""
 "sobrecarga baja que simplemente retorna ``None`` para deshabilitarse "
 "inmediatamente en cada cuadro)."
 
-#: ../Doc/library/sys.rst:1357
+#: ../Doc/library/sys.rst:1378
 msgid "For more information on code and frame objects, refer to :ref:`types`."
 msgstr ""
 "Para obtener más información sobre los objetos de código y marco, consulte :"
 "ref:`types`."
 
-#: ../Doc/library/sys.rst:1360
+#: ../Doc/library/sys.rst:1380
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``sys.settrace`` with no "
 "arguments."
 msgstr ""
 "Lanza un :ref:`auditing event <auditing>` ``sys.settrace`` sin argumentos."
 
-#: ../Doc/library/sys.rst:1363
+#: ../Doc/library/sys.rst:1384
 msgid ""
 "The :func:`settrace` function is intended only for implementing debuggers, "
 "profilers, coverage tools and the like.  Its behavior is part of the "
@@ -2631,7 +2660,7 @@ msgstr ""
 "parte de la definición del lenguaje y, por lo tanto, es posible que no esté "
 "disponible en todas las implementaciones de Python."
 
-#: ../Doc/library/sys.rst:1370
+#: ../Doc/library/sys.rst:1391
 msgid ""
 "``'opcode'`` event type added; :attr:`f_trace_lines` and :attr:"
 "`f_trace_opcodes` attributes added to frames"
@@ -2639,7 +2668,7 @@ msgstr ""
 "Se agregó el tipo de evento ``'opcode'``; atributos :attr:`f_trace_lines` y :"
 "attr:`f_trace_opcodes` agregados a los marcos (*frames*)"
 
-#: ../Doc/library/sys.rst:1375
+#: ../Doc/library/sys.rst:1396
 msgid ""
 "Accepts two optional keyword arguments which are callables that accept an :"
 "term:`asynchronous generator iterator` as an argument. The *firstiter* "
@@ -2653,7 +2682,7 @@ msgstr ""
 "por primera vez. Se llamará al *finalizer* cuando un generador asincrónico "
 "esté a punto de ser recolectado como basura."
 
-#: ../Doc/library/sys.rst:1382
+#: ../Doc/library/sys.rst:1402
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``sys."
 "set_asyncgen_hooks_firstiter`` with no arguments."
@@ -2661,7 +2690,7 @@ msgstr ""
 "Lanza un :ref:`auditing event <auditing>` ``sys."
 "set_asyncgen_hooks_firstiter`` sin argumentos."
 
-#: ../Doc/library/sys.rst:1384
+#: ../Doc/library/sys.rst:1404
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``sys."
 "set_asyncgen_hooks_finalizer`` with no arguments."
@@ -2669,7 +2698,7 @@ msgstr ""
 "Lanza un :ref:`auditing event <auditing>` ``sys."
 "set_asyncgen_hooks_finalizer`` sin argumentos."
 
-#: ../Doc/library/sys.rst:1385
+#: ../Doc/library/sys.rst:1406
 msgid ""
 "Two auditing events are raised because the underlying API consists of two "
 "calls, each of which must raise its own event."
@@ -2677,7 +2706,7 @@ msgstr ""
 "Se lanzan dos eventos de auditoría porque la API subyacente consta de dos "
 "llamadas, cada una de las cuales debe generar su propio evento."
 
-#: ../Doc/library/sys.rst:1388
+#: ../Doc/library/sys.rst:1409
 msgid ""
 "See :pep:`525` for more details, and for a reference example of a "
 "*finalizer* method see the implementation of ``asyncio.Loop."
@@ -2687,7 +2716,7 @@ msgstr ""
 "método *finalizer* ver la implementación de ``asyncio.Loop."
 "shutdown_asyncgens`` en :source:`Lib/asyncio/base_events.py`"
 
-#: ../Doc/library/sys.rst:1400
+#: ../Doc/library/sys.rst:1421
 msgid ""
 "Allows enabling or disabling coroutine origin tracking. When enabled, the "
 "``cr_origin`` attribute on coroutine objects will contain a tuple of "
@@ -2702,7 +2731,7 @@ msgstr ""
 "corrutina, con la llamada más reciente primero. Cuando esté deshabilitado, "
 "``cr_origin`` será None."
 
-#: ../Doc/library/sys.rst:1407
+#: ../Doc/library/sys.rst:1428
 msgid ""
 "To enable, pass a *depth* value greater than zero; this sets the number of "
 "frames whose information will be captured. To disable, pass set *depth* to "
@@ -2712,11 +2741,11 @@ msgstr ""
 "número de fotogramas cuya información será capturada. Para deshabilitar, "
 "pase set *depth* a cero."
 
-#: ../Doc/library/sys.rst:1411
+#: ../Doc/library/sys.rst:1432
 msgid "This setting is thread-specific."
 msgstr "Esta configuración es específica de cada hilo."
 
-#: ../Doc/library/sys.rst:1421
+#: ../Doc/library/sys.rst:1442
 msgid ""
 "Changes the default filesystem encoding and errors mode to 'mbcs' and "
 "'replace' respectively, for consistency with versions of Python prior to 3.6."
@@ -2725,7 +2754,7 @@ msgstr ""
 "errores a 'mbcs' y 'replace' respectivamente, para mantener la coherencia "
 "con las versiones de Python anteriores a la 3.6."
 
-#: ../Doc/library/sys.rst:1424
+#: ../Doc/library/sys.rst:1445
 msgid ""
 "This is equivalent to defining the :envvar:`PYTHONLEGACYWINDOWSFSENCODING` "
 "environment variable before launching Python."
@@ -2733,11 +2762,11 @@ msgstr ""
 "Esto es equivalente a definir la variable de entorno :envvar:"
 "`PYTHONLEGACYWINDOWSFSENCODING` antes de iniciar Python."
 
-#: ../Doc/library/sys.rst:1429
+#: ../Doc/library/sys.rst:1450
 msgid "See :pep:`529` for more details."
 msgstr "Consulte :pep:`529` para obtener más detalles."
 
-#: ../Doc/library/sys.rst:1436
+#: ../Doc/library/sys.rst:1457
 msgid ""
 ":term:`File objects <file object>` used by the interpreter for standard "
 "input, output and errors:"
@@ -2745,7 +2774,7 @@ msgstr ""
 ":term:`Objetos de archivo <file object>` utilizado por el intérprete para "
 "entradas, salidas y errores estándar:"
 
-#: ../Doc/library/sys.rst:1439
+#: ../Doc/library/sys.rst:1460
 msgid ""
 "``stdin`` is used for all interactive input (including calls to :func:"
 "`input`);"
@@ -2753,7 +2782,7 @@ msgstr ""
 "``stdin`` se usa para todas las entradas interactivas (incluidas las "
 "llamadas a :func:`input`);"
 
-#: ../Doc/library/sys.rst:1441
+#: ../Doc/library/sys.rst:1462
 msgid ""
 "``stdout`` is used for the output of :func:`print` and :term:`expression` "
 "statements and for the prompts of :func:`input`;"
@@ -2761,13 +2790,13 @@ msgstr ""
 "``stdout`` se usa para la salida de :func:`print` y :term:`expression` y "
 "para las solicitudes de :func:`input`;"
 
-#: ../Doc/library/sys.rst:1443
+#: ../Doc/library/sys.rst:1464
 msgid "The interpreter's own prompts and its error messages go to ``stderr``."
 msgstr ""
 "Las propias indicaciones del intérprete y sus mensajes de error van a "
 "``stderr``."
 
-#: ../Doc/library/sys.rst:1445
+#: ../Doc/library/sys.rst:1466
 msgid ""
 "These streams are regular :term:`text files <text file>` like those returned "
 "by the :func:`open` function.  Their parameters are chosen as follows:"
@@ -2776,7 +2805,7 @@ msgstr ""
 "retornados por la función :func:`open`. Sus parámetros se eligen de la "
 "siguiente manera:"
 
-#: ../Doc/library/sys.rst:1449
+#: ../Doc/library/sys.rst:1470
 msgid ""
 "The character encoding is platform-dependent.  Non-Windows platforms use the "
 "locale encoding (see :meth:`locale.getpreferredencoding()`)."
@@ -2785,7 +2814,7 @@ msgstr ""
 "no son de Windows utilizan la codificación local (consulte :meth:`locale."
 "getpreferredencoding()`)."
 
-#: ../Doc/library/sys.rst:1453
+#: ../Doc/library/sys.rst:1474
 msgid ""
 "On Windows, UTF-8 is used for the console device.  Non-character devices "
 "such as disk files and pipes use the system locale encoding (i.e. the ANSI "
@@ -2805,7 +2834,7 @@ msgstr ""
 "codificación de la configuración regional del sistema si el proceso no se "
 "adjunta inicialmente a una consola."
 
-#: ../Doc/library/sys.rst:1462
+#: ../Doc/library/sys.rst:1483
 msgid ""
 "The special behaviour of the console can be overridden by setting the "
 "environment variable PYTHONLEGACYWINDOWSSTDIO before starting Python. In "
@@ -2816,7 +2845,7 @@ msgstr ""
 "caso, las páginas de códigos de la consola se utilizan como para cualquier "
 "otro dispositivo de caracteres."
 
-#: ../Doc/library/sys.rst:1467
+#: ../Doc/library/sys.rst:1488
 msgid ""
 "Under all platforms, you can override the character encoding by setting the :"
 "envvar:`PYTHONIOENCODING` environment variable before starting Python or by "
@@ -2831,18 +2860,21 @@ msgstr ""
 "consola de Windows, esto solo se aplica cuando :envvar:"
 "`PYTHONLEGACYWINDOWSSTDIO` también está configurado."
 
-#: ../Doc/library/sys.rst:1474
+#: ../Doc/library/sys.rst:1495
 msgid ""
-"When interactive, ``stdout`` and ``stderr`` streams are line-buffered. "
-"Otherwise, they are block-buffered like regular text files.  You can "
-"override this value with the :option:`-u` command-line option."
+"When interactive, the ``stdout`` stream is line-buffered. Otherwise, it is "
+"block-buffered like regular text files.  The ``stderr`` stream is line-"
+"buffered in both cases.  You can make both streams unbuffered by passing "
+"the :option:`-u` command-line option or setting the :envvar:"
+"`PYTHONUNBUFFERED` environment variable."
 msgstr ""
-"Cuando son interactivas, las secuencias ``stdout`` y ``stderr`` tienen búfer "
-"de línea. De lo contrario, se almacenan en búfer en bloques como archivos de "
-"texto normales. Puede anular este valor con la opción de línea de comandos :"
-"option:`-u`."
 
-#: ../Doc/library/sys.rst:1480
+#: ../Doc/library/sys.rst:1501
+msgid ""
+"Non-interactive ``stderr`` is now line-buffered instead of fully buffered."
+msgstr ""
+
+#: ../Doc/library/sys.rst:1507
 msgid ""
 "To write or read binary data from/to the standard streams, use the "
 "underlying binary :data:`~io.TextIOBase.buffer` object.  For example, to "
@@ -2852,7 +2884,7 @@ msgstr ""
 "objeto binario subyacente :data:`~io.TextIOBase.buffer`. Por ejemplo, para "
 "escribir bytes en :data:`stdout`, use ``sys.stdout.buffer.write(b'abc')``."
 
-#: ../Doc/library/sys.rst:1484
+#: ../Doc/library/sys.rst:1511
 msgid ""
 "However, if you are writing a library (and do not control in which context "
 "its code will be executed), be aware that the standard streams may be "
@@ -2864,7 +2896,7 @@ msgstr ""
 "estándar pueden reemplazarse con objetos similares a archivos como :class:"
 "`io.StringIO` que no admiten el atributo :attr:`~io.BufferedIOBase.buffer`."
 
-#: ../Doc/library/sys.rst:1494
+#: ../Doc/library/sys.rst:1521
 msgid ""
 "These objects contain the original values of ``stdin``, ``stderr`` and "
 "``stdout`` at the start of the program.  They are used during finalization, "
@@ -2876,7 +2908,7 @@ msgstr ""
 "podrían ser útiles para imprimir en el flujo estándar real sin importar si "
 "el objeto ``sys.std*`` ha sido redirigido."
 
-#: ../Doc/library/sys.rst:1499
+#: ../Doc/library/sys.rst:1526
 msgid ""
 "It can also be used to restore the actual files to known working file "
 "objects in case they have been overwritten with a broken object.  However, "
@@ -2889,7 +2921,7 @@ msgstr ""
 "explícitamente la secuencia anterior antes de reemplazarla y restaurar el "
 "objeto guardado."
 
-#: ../Doc/library/sys.rst:1505
+#: ../Doc/library/sys.rst:1532
 msgid ""
 "Under some conditions ``stdin``, ``stdout`` and ``stderr`` as well as the "
 "original values ``__stdin__``, ``__stdout__`` and ``__stderr__`` can be "
@@ -2902,59 +2934,59 @@ msgstr ""
 "conectadas a una consola y las aplicaciones Python que comienzan con :"
 "program:`pythonw`."
 
-#: ../Doc/library/sys.rst:1513
+#: ../Doc/library/sys.rst:1540
 msgid ""
 "A :term:`named tuple` holding information about the thread implementation."
 msgstr ""
 "Un :term:`named tuple` que contiene información sobre la implementación del "
 "hilo."
 
-#: ../Doc/library/sys.rst:1521
+#: ../Doc/library/sys.rst:1548
 msgid ":const:`name`"
 msgstr ":const:`name`"
 
-#: ../Doc/library/sys.rst:1521
+#: ../Doc/library/sys.rst:1548
 msgid "Name of the thread implementation:"
 msgstr "Nombre de la implementación de hilos (*thread implementation*):"
 
-#: ../Doc/library/sys.rst:1523
+#: ../Doc/library/sys.rst:1550
 msgid "``'nt'``: Windows threads"
 msgstr "``'nt'``: hilos de Windows"
 
-#: ../Doc/library/sys.rst:1524
+#: ../Doc/library/sys.rst:1551
 msgid "``'pthread'``: POSIX threads"
 msgstr "``'pthread'``: hilos de POSIX"
 
-#: ../Doc/library/sys.rst:1525
+#: ../Doc/library/sys.rst:1552
 msgid "``'solaris'``: Solaris threads"
 msgstr "``'solaris'``: hilos de Solaris"
 
-#: ../Doc/library/sys.rst:1527
+#: ../Doc/library/sys.rst:1554
 msgid ":const:`lock`"
 msgstr ":const:`lock`"
 
-#: ../Doc/library/sys.rst:1527
+#: ../Doc/library/sys.rst:1554
 msgid "Name of the lock implementation:"
 msgstr "Nombre de la implementación de bloqueo (*lock implementation*):"
 
-#: ../Doc/library/sys.rst:1529
+#: ../Doc/library/sys.rst:1556
 msgid "``'semaphore'``: a lock uses a semaphore"
 msgstr "``'semaphore'``: un bloqueo que utiliza un semáforo"
 
-#: ../Doc/library/sys.rst:1530
+#: ../Doc/library/sys.rst:1557
 msgid "``'mutex+cond'``: a lock uses a mutex and a condition variable"
 msgstr ""
 "``'mutex+cond'``: un bloqueo que utiliza un mutex y una variable de condición"
 
-#: ../Doc/library/sys.rst:1532
+#: ../Doc/library/sys.rst:1559
 msgid "``None`` if this information is unknown"
 msgstr "``None`` si esta información es desconocida"
 
-#: ../Doc/library/sys.rst:1534
+#: ../Doc/library/sys.rst:1561
 msgid ":const:`version`"
 msgstr ":const:`version`"
 
-#: ../Doc/library/sys.rst:1534
+#: ../Doc/library/sys.rst:1561
 msgid ""
 "Name and version of the thread library. It is a string, or ``None`` if this "
 "information is unknown."
@@ -2962,7 +2994,7 @@ msgstr ""
 "Nombre y versión de la biblioteca de subprocesos. Es una cadena de "
 "caracteres, o ``None`` si se desconoce esta información."
 
-#: ../Doc/library/sys.rst:1543
+#: ../Doc/library/sys.rst:1570
 msgid ""
 "When this variable is set to an integer value, it determines the maximum "
 "number of levels of traceback information printed when an unhandled "
@@ -2976,11 +3008,11 @@ msgstr ""
 "establece en ``0`` o menos, toda la información de rastreo se suprime y solo "
 "se imprimen el tipo y el valor de excepción."
 
-#: ../Doc/library/sys.rst:1551
+#: ../Doc/library/sys.rst:1578
 msgid "Handle an unraisable exception."
 msgstr "Maneja una excepción que no se puede lanzar."
 
-#: ../Doc/library/sys.rst:1553
+#: ../Doc/library/sys.rst:1580
 msgid ""
 "Called when an exception has occurred but there is no way for Python to "
 "handle it. For example, when a destructor raises an exception or during "
@@ -2990,32 +3022,32 @@ msgstr ""
 "Python la maneje. Por ejemplo, cuando un destructor lanza una excepción o "
 "durante la recolección de basura (:func:`gc.collect`)."
 
-#: ../Doc/library/sys.rst:1557
+#: ../Doc/library/sys.rst:1584
 msgid "The *unraisable* argument has the following attributes:"
 msgstr ""
 "El argumento *unraisable* (no lanzable) tiene los siguientes atributos:"
 
-#: ../Doc/library/sys.rst:1559
+#: ../Doc/library/sys.rst:1586
 msgid "*exc_type*: Exception type."
 msgstr "*exc_type*: Tipo de excepción."
 
-#: ../Doc/library/sys.rst:1560
+#: ../Doc/library/sys.rst:1587
 msgid "*exc_value*: Exception value, can be ``None``."
 msgstr "*exc_value*: Valor de excepción, puede ser ``None``."
 
-#: ../Doc/library/sys.rst:1561
+#: ../Doc/library/sys.rst:1588
 msgid "*exc_traceback*: Exception traceback, can be ``None``."
 msgstr "*exc_traceback*: Rastreo de excepción, puede ser ``None``."
 
-#: ../Doc/library/sys.rst:1562
+#: ../Doc/library/sys.rst:1589
 msgid "*err_msg*: Error message, can be ``None``."
 msgstr "*err_msg*: Mensaje de error, puede ser ``None``."
 
-#: ../Doc/library/sys.rst:1563
+#: ../Doc/library/sys.rst:1590
 msgid "*object*: Object causing the exception, can be ``None``."
 msgstr "*objeto*: Objeto que causa la excepción, puede ser ``None``."
 
-#: ../Doc/library/sys.rst:1565
+#: ../Doc/library/sys.rst:1592
 msgid ""
 "The default hook formats *err_msg* and *object* as: ``f'{err_msg}: {object!"
 "r}'``; use \"Exception ignored in\" error message if *err_msg* is ``None``."
@@ -3024,7 +3056,7 @@ msgstr ""
 "``f'{err_msg}:{object!R}'``; use el mensaje de error \"Excepción ignorada en"
 "\" si *err_msg* es ``None``."
 
-#: ../Doc/library/sys.rst:1569
+#: ../Doc/library/sys.rst:1596
 msgid ""
 ":func:`sys.unraisablehook` can be overridden to control how unraisable "
 "exceptions are handled."
@@ -3032,7 +3064,7 @@ msgstr ""
 ":func:`sys.unraisablehook` se puede anular para controlar cómo se manejan "
 "las excepciones que no se pueden evaluar."
 
-#: ../Doc/library/sys.rst:1572
+#: ../Doc/library/sys.rst:1599
 msgid ""
 "Storing *exc_value* using a custom hook can create a reference cycle. It "
 "should be cleared explicitly to break the reference cycle when the exception "
@@ -3042,7 +3074,7 @@ msgstr ""
 "referencia. Debe borrarse explícitamente para romper el ciclo de referencia "
 "cuando la excepción ya no sea necesaria."
 
-#: ../Doc/library/sys.rst:1576
+#: ../Doc/library/sys.rst:1603
 msgid ""
 "Storing *object* using a custom hook can resurrect it if it is set to an "
 "object which is being finalized. Avoid storing *object* after the custom "
@@ -3053,11 +3085,20 @@ msgstr ""
 "después de que se complete el gancho personalizado para evitar resucitar "
 "objetos."
 
-#: ../Doc/library/sys.rst:1580
+#: ../Doc/library/sys.rst:1607
 msgid "See also :func:`excepthook` which handles uncaught exceptions."
 msgstr "Véase también :func:`excepthook` que maneja excepciones no capturadas."
 
-#: ../Doc/library/sys.rst:1584
+#: ../Doc/library/sys.rst:1609
+#, fuzzy
+msgid ""
+"Raises an :ref:`auditing event <auditing>` ``sys.unraisablehook`` with "
+"arguments ``hook``, ``unraisable``."
+msgstr ""
+"Lanza un :ref:`auditing event <auditing>` ``cpython.run_interactivehook`` "
+"con el argumento ``hook``."
+
+#: ../Doc/library/sys.rst:1611
 msgid ""
 "Raise an auditing event ``sys.unraisablehook`` with arguments ``hook``, "
 "``unraisable`` when an exception that cannot be handled occurs. The "
@@ -3069,7 +3110,7 @@ msgstr ""
 "objeto ``no lanzable`` es el mismo que se pasará al gancho. Si no se ha "
 "colocado ningún gancho, ``hook`` puede ser ``None``."
 
-#: ../Doc/library/sys.rst:1593
+#: ../Doc/library/sys.rst:1620
 msgid ""
 "A string containing the version number of the Python interpreter plus "
 "additional information on the build number and compiler used.  This string "
@@ -3084,7 +3125,7 @@ msgstr ""
 "data:`version_info` y las funciones proporcionadas por el módulo :mod:"
 "`platform`."
 
-#: ../Doc/library/sys.rst:1602
+#: ../Doc/library/sys.rst:1629
 msgid ""
 "The C API version for this interpreter.  Programmers may find this useful "
 "when debugging version conflicts between Python and extension modules."
@@ -3093,7 +3134,7 @@ msgstr ""
 "esto útil al depurar conflictos de versiones entre Python y módulos de "
 "extensión."
 
-#: ../Doc/library/sys.rst:1608
+#: ../Doc/library/sys.rst:1635
 msgid ""
 "A tuple containing the five components of the version number: *major*, "
 "*minor*, *micro*, *releaselevel*, and *serial*.  All values except "
@@ -3112,11 +3153,11 @@ msgstr ""
 "version_info[0]`` es equivalente a ``sys.version_info.major`` y así "
 "sucesivamente."
 
-#: ../Doc/library/sys.rst:1616
+#: ../Doc/library/sys.rst:1643
 msgid "Added named component attributes."
 msgstr "Se agregaron atributos de componentes con nombre."
 
-#: ../Doc/library/sys.rst:1621
+#: ../Doc/library/sys.rst:1648
 msgid ""
 "This is an implementation detail of the warnings framework; do not modify "
 "this value.  Refer to the :mod:`warnings` module for more information on the "
@@ -3126,7 +3167,7 @@ msgstr ""
 "este valor. Consulte el módulo :mod:`warnings` para obtener más información "
 "sobre el marco de advertencias."
 
-#: ../Doc/library/sys.rst:1628
+#: ../Doc/library/sys.rst:1655
 msgid ""
 "The version number used to form registry keys on Windows platforms. This is "
 "stored as string resource 1000 in the Python DLL.  The value is normally the "
@@ -3141,7 +3182,7 @@ msgstr ""
 "modificación de este valor no tiene ningún efecto sobre las claves de "
 "registro que utiliza Python."
 
-#: ../Doc/library/sys.rst:1639
+#: ../Doc/library/sys.rst:1666
 msgid ""
 "A dictionary of the various implementation-specific flags passed through "
 "the :option:`-X` command-line option.  Option names are either mapped to "
@@ -3152,7 +3193,7 @@ msgstr ""
 "opciones se asignan a sus valores, si se dan explícitamente, o a :const:"
 "`True`. Ejemplo:"
 
-#: ../Doc/library/sys.rst:1655
+#: ../Doc/library/sys.rst:1682
 msgid ""
 "This is a CPython-specific way of accessing options passed through :option:`-"
 "X`.  Other implementations may export them through other means, or not at "
@@ -3162,11 +3203,11 @@ msgstr ""
 "pasan a través de :option:`-X`. Otras implementaciones pueden exportarlos a "
 "través de otros medios, o no exportarlos."
 
-#: ../Doc/library/sys.rst:1663
+#: ../Doc/library/sys.rst:1690
 msgid "Citations"
 msgstr "Citas"
 
-#: ../Doc/library/sys.rst:1664
+#: ../Doc/library/sys.rst:1691
 msgid ""
 "ISO/IEC 9899:1999.  \"Programming languages -- C.\"  A public draft of this "
 "standard is available at http://www.open-std.org/jtc1/sc22/wg14/www/docs/"
@@ -3175,3 +3216,73 @@ msgstr ""
 "*ISO/IEC 9899:1999.  \"Programming languages -- C.\"  A public draft of this "
 "standard is available at http://www.open-std.org/jtc1/sc22/wg14/www/docs/"
 "n1256.pdf*\\ ."
+
+#~ msgid ""
+#~ "Raise an auditing event with any active hooks. The event name is a string "
+#~ "identifying the event and its associated schema, which is the number and "
+#~ "types of arguments. The schema for a given event is considered public and "
+#~ "stable API and should not be modified between releases."
+#~ msgstr ""
+#~ "Lanza un evento de auditoría con cualquier gancho activo. El nombre del "
+#~ "evento es una cadena que identifica el evento y su esquema asociado, que "
+#~ "es el número y los tipos de argumentos. El esquema de un evento "
+#~ "determinado se considera una API pública y estable y no debe modificarse "
+#~ "entre versiones."
+
+#~ msgid ""
+#~ "This function will raise the first exception raised by any hook. In "
+#~ "general, these errors should not be handled and should terminate the "
+#~ "process as quickly as possible."
+#~ msgstr ""
+#~ "Esta función lanzará la primera excepción generada por cualquier gancho. "
+#~ "En general, estos errores no deben manejarse y deben terminar el proceso "
+#~ "lo más rápido posible."
+
+#~ msgid ":option:`-X` ``dev``"
+#~ msgstr ":option:`-X` ``dev``"
+
+#~ msgid ""
+#~ "Return the interpreter's \"check interval\"; see :func:`setcheckinterval`."
+#~ msgstr ""
+#~ "Retorna el \"intervalo de verificación\" del intérprete; ver :func:"
+#~ "`setcheckinterval`."
+
+#~ msgid "Use :func:`getswitchinterval` instead."
+#~ msgstr "Use :func:`getswitchinterval` en su lugar."
+
+#~ msgid ""
+#~ "Set the interpreter's \"check interval\".  This integer value determines "
+#~ "how often the interpreter checks for periodic things such as thread "
+#~ "switches and signal handlers.  The default is ``100``, meaning the check "
+#~ "is performed every 100 Python virtual instructions. Setting it to a "
+#~ "larger value may increase performance for programs using threads.  "
+#~ "Setting it to a value ``<=`` 0 checks every virtual instruction, "
+#~ "maximizing responsiveness as well as overhead."
+#~ msgstr ""
+#~ "Configure el \"intervalo de verificación\" del intérprete. Este valor "
+#~ "entero determina la frecuencia con la que el intérprete comprueba cosas "
+#~ "periódicas como cambios de hilo y manejadores de señales. El valor "
+#~ "predeterminado es ``100``, lo que significa que la verificación se "
+#~ "realiza cada 100 instrucciones virtuales de Python. Establecerlo en un "
+#~ "valor mayor puede aumentar el rendimiento de los programas que utilizan "
+#~ "subprocesos. Establecerlo en un valor ``<=`` 0 verifica cada instrucción "
+#~ "virtual, maximizando la capacidad de respuesta y la sobrecarga."
+
+#~ msgid ""
+#~ "This function doesn't have an effect anymore, as the internal logic for "
+#~ "thread switching and asynchronous tasks has been rewritten.  Use :func:"
+#~ "`setswitchinterval` instead."
+#~ msgstr ""
+#~ "Esta función ya no tiene ningún efecto, ya que se ha reescrito la lógica "
+#~ "interna para el cambio de hilo y las tareas asincrónicas. Utilice :func:"
+#~ "`setswitchinterval` en su lugar."
+
+#~ msgid ""
+#~ "When interactive, ``stdout`` and ``stderr`` streams are line-buffered. "
+#~ "Otherwise, they are block-buffered like regular text files.  You can "
+#~ "override this value with the :option:`-u` command-line option."
+#~ msgstr ""
+#~ "Cuando son interactivas, las secuencias ``stdout`` y ``stderr`` tienen "
+#~ "búfer de línea. De lo contrario, se almacenan en búfer en bloques como "
+#~ "archivos de texto normales. Puede anular este valor con la opción de "
+#~ "línea de comandos :option:`-u`."

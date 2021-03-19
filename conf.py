@@ -18,7 +18,7 @@ sys.path.append(os.path.abspath('cpython/Doc/tools/extensions'))
 sys.path.append(os.path.abspath('cpython/Doc/includes'))
 
 # Import all the Sphinx settings from cpython
-sys.path.append(os.path.abspath('cpython/Doc'))
+sys.path.insert(0, os.path.abspath('cpython/Doc'))
 from conf import *
 
 # Call patchlevel with the proper path to get the version from
@@ -39,11 +39,26 @@ os.system('ln -nfs `pwd` cpython/locales/es/LC_MESSAGES')
 html_short_title = f'Documentación {release}'
 html_title = f'Documentación de Python en Español -- {release}'
 
-exclude_patterns = [
+
+# Extend settings from upstream
+_exclude_patterns = [
     # This file is not included and it not marked as :orphan:
-    'distutils/_setuptools_disclaimer.rst',
-    'README.rst',
+    '*/distutils/_setuptools_disclaimer.rst',
 ]
+if 'exclude_patterns' in globals():
+    exclude_patterns += _exclude_patterns
+else:
+    exclude_patterns  = _exclude_patterns
+
+_extensions = [
+    'sphinx_tabs.tabs',
+    'sphinxemoji.sphinxemoji',
+]
+if 'extensions' in globals():
+    extensions += _extensions
+else:
+    extensions = _extensions
+
 
 if not os.environ.get('SPHINX_GETTEXT') == 'True':
     # Override all the files from ``.overrides`` directory
@@ -68,12 +83,6 @@ latex_documents = [
     ('contents', 'python-docs-es.tex', u'Documentación de Python en Español',
      _stdauthor, 'manual'),
 ]
-
-extensions.extend([
-    'sphinx_tabs.tabs',
-    'sphinxemoji.sphinxemoji',
-])
-
 
 def setup(app):
 
