@@ -13,6 +13,15 @@ PO_DIR = os.path.abspath(
     ))
 
 
+
+DELIMITERS = ("``", "*")
+
+def has_delimiters(x):
+    for d in DELIMITERS:
+        if d in x:
+            return True
+    return False
+
 def main():
     files_with_differences = collections.defaultdict(list)
 
@@ -25,11 +34,11 @@ def main():
             words = []
             wordsid = wordsstr = list()
 
-            if '*' in entry.msgid or '``' in entry.msgid:
-                wordsid = [word for word in entry.msgid.split() if '*' in word or '``' in word]
+            if has_delimiters(entry.msgid):
+                wordsid = [word for word in entry.msgid.split() if has_delimiter(word)]
 
-            if '*' in entry.msgstr or '``' in entry.msgstr:
-                wordsstr = [word for word in entry.msgstr.split() if '*' in word or '``' in word]
+            if has_delimiters(entry.msgstr):
+                wordsstr = [word for word in entry.msgstr.split() if has_delimiter(word)]
 
             if len(wordsid) != len(wordsstr):
                 key = pofilename.replace(PO_DIR, '')
