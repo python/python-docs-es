@@ -52,7 +52,7 @@ Fuentes recomendadas
 
   https://www.linguee.es/
 
-Diccionario y traductor multilíngue con millones de traducciones indexadas. De los creadores
+  Diccionario y traductor multilíngue con millones de traducciones indexadas. De los creadores
   de DeepL
 
   :Fundéu BBVA - Fundación para el español urgente:
@@ -77,154 +77,180 @@ Términos y bigramas
 Dividimos esta sección en dos partes, los términos que se traducen y los que mantenemos el original.
 Éstas son las palabras que hemos coordinado hasta el momento:
 
-     auditing event
-       evento de auditoría ``library/tempfile`` and many others
 
-     awaitable
-       aguardable ``glossary``
+.. glossary::
 
-     slash and backslash
-      barra y barra invertida ``c-api``,``tutorial``,``library/functions.po``
+   auditing event
+     evento de auditoría ``library/tempfile`` and many others
 
-     built-in
-       incorporada ``glossary.po``
+   awaitable
+     aguardable ``glossary``
 
-     built-in exceptions
-       excepciones predefinidas ``tutorial/errors.po``
+   slash and backslash
+     barra y barra invertida ``c-api``, ``tutorial``, ``library/functions.po``
 
-     bytecodes
-       queda igual ``glossary.po``
+   built-in
+     incorporada ``glossary.po``
 
-     callable
-       invocable ``glossary.po``, ``library/functions.po``
+   built-in exceptions
+     excepciones predefinidas ``tutorial/errors.po``
 
-       Nota: en ocasiones es mejora mantener callable, especialmente cuando se refiere directamente
-       a la anotación de typing Callable
+   bytecodes
+     queda igual ``glossary.po``
+  
+   callable
+     invocable ``glossary.po``, ``library/functions.po``
 
-     checksum
-       suma de comprobación ``howto/clinic.po``
+     Nota: en ocasiones es mejora mantener callable, especialmente cuando se refiere directamente
+     a la anotación de typing Callable.
 
-     code object
-       objeto código ``c-api``, ``library/functions.po``
+   checksum
+     suma de comprobación ``howto/clinic.po``
 
-     context manager
-       gestor de contexto
+   code object
+     objeto código ``c-api``, ``library/functions.po``
 
-     deallocated
-       desalojable ``glossary.po``
+   context manager
+     gestor de contexto
 
-     docstring
-       docstring. ``library/idle.po``
+   deallocated
+     desalojable ``glossary.po``
 
-     key
-       clave
+   docstring
+     docstring. ``library/idle.po``
 
-     keyword argument
-       argumento por palabra clave / argumento de palabra clave
+   key
+     clave
 
-     handler
-       gestor ``tutorial/errors.po``
+   keyword argument
+     argumento por palabra clave / argumento de palabra clave
 
-     handle exception
-       gestionar [una] excepción. ``tutorial/inputoutput.po``
-       gestionar excepciones
+     host
+       host  ``library/smtplib.po``
+       Significado: máquina conectada a una red que provee de servicios
+
+     hostname
+       hostname  ``library/smtplib.po``
+       Significado: nombre de la máquina conectada a una red que provee de servicios
 
      i. e.
        en otras palabras. ``library/sqlite3.po``
+     handler
+       gestor ``tutorial/errors.po``
 
-     in-place, in place
-       in situ. Aunque estrictamente no es español, su uso es generalizado.
+   handle exception
+     gestionar [una] excepción. ``tutorial/inputoutput.po``
+     gestionar excepciones
 
-     library
-       biblioteca. ``library/sqlite3.po``
+   i. e.
+     en otras palabras. ``library/sqlite3.po``
 
-     list comprehension / list comprehensions
-       lista por comprensión / listas por comprensión.
+   in-place, in place
+     in situ. Aunque estrictamente no es español, su uso es generalizado.
 
-     locale
-       Configuración regional. ``library/functions.po`` and others
+   library
+     biblioteca. ``library/sqlite3.po``
 
-     helper function
-       función auxiliar  ``library/typing.po``
+   list comprehension / list comprehensions
+     lista por comprensión / listas por comprensión.
 
-     loop
-       bucle ``tutorial/controlflow.po``
+   locale
+     Configuración regional. ``library/functions.po`` and others
 
-     mapping
-       mapeo ``glossary.po``
+   helper function
+     función auxiliar  ``library/typing.po``
 
-     named tuple.
-       tupla nombrada ``glossary.po``
+   loop
+     bucle ``tutorial/controlflow.po``
 
-     overload, overloading
-       sobrecargar, sobrecarga
+   mapping
+     mapeo ``glossary.po``
 
-     override, overriding
-       sobreescribir, sobreescritura
+   named tuple.
+     tupla nombrada ``glossary.po``
 
-     path
-       ruta ``glossary.po``
+   overload, overloading
+     sobrecargar, sobrecarga
 
-     pythonic
-       *pythónico*
+   override, overriding
+     sobreescribir, sobreescritura
 
-       idiomático
+   path
+     ruta ``glossary.po``
 
-       Estes dos términos son próximos en el contexto que se usan, utilizar complementariamente
-       según el contexto. Referencia: https://docs.python-guide.org/writing/style/
+   pythonic
+     *pythónico*
 
-     raise
-       lanzar, lanza. (referido a excepciones)  ``library/functions.po``, ``c-api``
+     idiomático
 
-     release
-       version ``HOWTO``
+     Estes dos términos son próximos en el contexto que se usan, utilizar complementariamente
+     según el contexto. Referencia: https://docs.python-guide.org/writing/style/
 
-     return / returns
-       retorna / retornar ``library/sqlite3.po``
+   raise
+     lanzar, lanza. (referido a excepciones)  ``library/functions.po``, ``c-api``
 
-     return type
-       tipo de retorno ``library/typing.po``
-       tipo retornado
-       tipo devuelto
-       Nota: en algunos contextos es mejor usar el participio (retornado/devuelto), se prefiere
-       retornado por semejanza con el original inglés "return".
+   release
+     version ``HOWTO``
+     
+   return / returns
+     retorna / retornar ``library/sqlite3.po``
 
-     runtime
-       tiempo de ejecución  ``tutorial/classes.po``
+   return type
+     tipo de retorno ``library/typing.po``
+     tipo retornado
+     tipo devuelto
+     Nota: en algunos contextos es mejor usar el participio (retornado/devuelto), se prefiere
+     retornado por semejanza con el original inglés "return".
 
-     slice
-      segmento ``datamodel.po``
+   runtime
+     tiempo de ejecución ``tutorial/classes.po``
+       
+   slice
+    segmento ``datamodel.po``
 
-     slicing
-      segmentación ``datamodel.po``
+   slicing
+    segmentación ``datamodel.po``
+   
+   statement
+    sentencia ``smtplib.po``
 
-     static type checker
-       Validador estático de tipos
-       Notas: mantener la mayúscula, usar validación cuando se refiera a la acción y no al agente.
+   static type checker
+    Validador estático de tipos
+    Notas: mantener la mayúscula, usar validación cuando se refiera a la acción y no al agente.
 
-     string
-      cadena de caracteres ``datamodel.po``
+   static type checker
+     Validador estático de tipos
+     Notas: mantener la mayúscula, usar validación cuando se refiera a la acción y no al agente.
 
-     strings
-      cadenas de caracteres ``datamodel.po``
+   string
+    cadena de caracteres ``datamodel.po``
 
-     third-party
-       de terceros ``library/typing.po``
+   strings
+    cadenas de caracteres ``datamodel.po``
 
-     type hint
-       indicador de tipo  ``library/typing.po``
+   third-party
+     de terceros ``library/typing.po``
+     
+   timeout
+     timeout  ``library/smtplib.po``
+     Significado: tiempo de espera para establecer/reintentar una conexión de red
+   
+   type hint
+     indicador de tipo  ``library/typing.po``
+      
+   type hint
+     indicador de tipo ``library/typing.po``
 
-     type annotation  ``library/typing.po``
-       anotación de tipo
-         Nota: úsese como sinónimo de *type hint*, aunque en el texto se sobreentiende que anotación
-         es algo accesorio, un comentario, y type hint implica que el Validador hará comprobaciones
+   type annotation
+     anotación de tipo ``library/typing.po``
+     Nota: úsese como sinónimo de *type hint*, aunque en el texto se sobreentiende que anotación
+     es algo accesorio, un comentario, y type hint implica que el Validador hará comprobaciones
+   
+   underscore
+     guión bajo ``glossary.po``
 
-     underscore
-       guión bajo ``glossary.po``
-
-     widget
-       widget ``library/tkinter``
-
+   widget
+     widget ``library/tkinter``
 
 
 Términos que no se traducen
