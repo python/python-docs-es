@@ -1,0 +1,38 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - 3.*
+  pull_request:
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Preparar Python v3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Sincronizar con CPython
+        run: |
+          git submodule sync
+          git submodule update --init --force cpython
+      - name: Instalar dependencias
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y hunspell hunspell-es gettext
+          python -m pip install -r requirements.txt
+          pip list
+          pospell --version
+          powrap --version
+      - name: Powrap
+        run: powrap --check --quiet **/*.po
+      - name: Pospell
+        run: |
+          python scripts/create_dict.py
+          pospell -p dict.txt -l es_ES **/*.po
+      - name: Construir documentación
+        run: PYTHONWARNINGS=ignore::FutureWarning sphinx-build -j auto -W --keep-going -b html -d cpython/Doc/_build/doctree -D language=es . cpython/Doc/_build/html

@@ -3,34 +3,38 @@
 # Maintained by the python-doc-es workteam.
 # docs-es@python.org /
 # https://mail.python.org/mailman3/lists/docs-es.python.org/
-# Check https://github.com/PyCampES/python-docs-es/blob/3.8/TRANSLATORS to
+# Check https://github.com/python/python-docs-es/blob/3.8/TRANSLATORS to
 # get the list of volunteers
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-05 12:54+0200\n"
+"POT-Creation-Date: 2021-03-19 11:16+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
+"Language: es\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: ../Doc/library/signal.rst:2
 msgid ":mod:`signal` --- Set handlers for asynchronous events"
-msgstr ""
+msgstr ":mod:`signal` --- Establece gestores para eventos asíncronos"
 
 #: ../Doc/library/signal.rst:9
 msgid "This module provides mechanisms to use signal handlers in Python."
 msgstr ""
+"Este módulo proporciona mecanismos para usar gestores de señales en Python."
 
 #: ../Doc/library/signal.rst:13
 msgid "General rules"
-msgstr ""
+msgstr "Reglas generales"
 
 #: ../Doc/library/signal.rst:15
 msgid ""
@@ -41,6 +45,12 @@ msgid ""
 "translated into a :exc:`KeyboardInterrupt` exception if the parent process "
 "has not changed it."
 msgstr ""
+"La función :func:`signal.signal` permite definir gestores personalizados que "
+"serán ejecutados cuando una señal es recibida. Un pequeño número de gestores "
+"por defecto son instalados: :const:`SIGPIPE` es ignorada (por lo que los "
+"errores de escritura en tuberías y sockets se pueden informar como "
+"excepciones ordinarias de Python) y :const:`SIGINT` es trasladada en una "
+"excepción :exc:`KeyboardInterrupt` si el proceso padre no lo ha cambiado."
 
 #: ../Doc/library/signal.rst:22
 msgid ""
@@ -49,10 +59,15 @@ msgid ""
 "underlying implementation), with the exception of the handler for :const:"
 "`SIGCHLD`, which follows the underlying implementation."
 msgstr ""
+"El gestor para una señal en particular, una vez establecido, continua "
+"instalado hasta que se resetea explícitamente (Python emula el estilo de "
+"interfaz BSD independientemente de la implementación subyacente), con la "
+"excepción del gestor para :const:`SIGCHLD`, que sigue la implementación "
+"subyacente."
 
 #: ../Doc/library/signal.rst:29
 msgid "Execution of Python signal handlers"
-msgstr ""
+msgstr "Ejecución de los gestores de señales de Python"
 
 #: ../Doc/library/signal.rst:31
 msgid ""
@@ -62,6 +77,12 @@ msgid ""
 "handler at a later point(for example at the next :term:`bytecode` "
 "instruction). This has consequences:"
 msgstr ""
+"Un gestor de señales de Python no se ejecuta dentro del gestor de señales de "
+"bajo nivel (C). En vez de eso, el gestor de señales de bajo nivel establece "
+"una señal que le dice al :term:`virtual machine` que ejecute la "
+"correspondiente señal del gestor de Python en una posición posterior (por "
+"ejemplo en la próxima instrucción :term:`bytecode`). Esto tiene "
+"consecuencias:"
 
 #: ../Doc/library/signal.rst:37
 msgid ""
@@ -72,6 +93,12 @@ msgid ""
 "onwards, you can use the :mod:`faulthandler` module to report on synchronous "
 "errors."
 msgstr ""
+"Tiene poco sentido detectar errores sincrónicos como :const:`SIGFPE` o :"
+"const:`SIGSEGV` que son causados por una operación no válida en código C. "
+"Python retornará desde el gestor de señales a código C, que es probable que "
+"extienda la misma señal otra vez, ocasionando que Python se cuelgue "
+"aparentente. Desde Python 3.3 en adelante, puedes usar el módulo :mod:"
+"`faulthandler` para reportar errores síncronos."
 
 #: ../Doc/library/signal.rst:44
 msgid ""
@@ -80,26 +107,40 @@ msgid ""
 "arbitrary amount of time, regardless of any signals received.  The Python "
 "signal handlers will be called when the calculation finishes."
 msgstr ""
+"Un cálculo de larga duración implementado exclusivamente en C (como una "
+"coincidencia de expresiones regulares en un gran cuerpo de texto) puede "
+"funcionar interrumpidamente durante una cantidad arbitraria de tiempo, "
+"independientemente de las señales recibidas. Los gestores de señales de "
+"Python serán llamados cuando el cálculo finalice."
 
 #: ../Doc/library/signal.rst:54
 msgid "Signals and threads"
-msgstr ""
+msgstr "Señales e hilos"
 
 #: ../Doc/library/signal.rst:56
 msgid ""
-"Python signal handlers are always executed in the main Python thread, even "
-"if the signal was received in another thread.  This means that signals can't "
-"be used as a means of inter-thread communication.  You can use the "
-"synchronization primitives from the :mod:`threading` module instead."
+"Python signal handlers are always executed in the main Python thread of the "
+"main interpreter, even if the signal was received in another thread.  This "
+"means that signals can't be used as a means of inter-thread communication.  "
+"You can use the synchronization primitives from the :mod:`threading` module "
+"instead."
 msgstr ""
+"Los gestores de señales de Python se ejecutan siempre en el hilo principal "
+"de Python, incluso si la señal fue recibida desde otro hilo. Esto significa "
+"que las señales no pueden ser usadas como un medio de comunicación entre "
+"hilos. Puedes usar las primitivas de sincronización desde el módulo :mod:"
+"`threading` en su lugar."
 
 #: ../Doc/library/signal.rst:61
-msgid "Besides, only the main thread is allowed to set a new signal handler."
+msgid ""
+"Besides, only the main thread of the main interpreter is allowed to set a "
+"new signal handler."
 msgstr ""
+"Además, solo el hilo principal puede configurar un nuevo gestor de señal."
 
 #: ../Doc/library/signal.rst:65
 msgid "Module contents"
-msgstr ""
+msgstr "Contenidos del módulo"
 
 #: ../Doc/library/signal.rst:67
 msgid ""
@@ -109,10 +150,16 @@ msgid ""
 "`getsignal`, :func:`pthread_sigmask`, :func:`sigpending` and :func:`sigwait` "
 "functions return human-readable :class:`enums <enum.IntEnum>`."
 msgstr ""
+"señal (SIG*), gestor (:const:`SIG_DFL`, :const:`SIG_IGN`) y 'sigmask' (:"
+"const:`SIG_BLOCK`, :const:`SIG_UNBLOCK`, :const:`SIG_SETMASK`) las clases "
+"relacionadas abajo se cambian en las funciones :class:`enums <enum."
+"IntEnum>`. :func:`getsignal`, :func:`pthread_sigmask`, :func:`sigpending` y :"
+"func:`sigwait` que retornan :class:`enums <enum.IntEnum>` que pueden ser "
+"leídas por humanos."
 
 #: ../Doc/library/signal.rst:77
 msgid "The variables defined in the :mod:`signal` module are:"
-msgstr ""
+msgstr "Las variables definidas en el módulo :mod:`signal` son:"
 
 #: ../Doc/library/signal.rst:82
 msgid ""
@@ -121,117 +168,128 @@ msgid ""
 "default action for :const:`SIGQUIT` is to dump core and exit, while the "
 "default action for :const:`SIGCHLD` is to simply ignore it."
 msgstr ""
+"Ésta es una de las dos opciones estándar de manejo de señales; simplemente "
+"realizará la función predeterminada para la señal. Por ejemplo, en la "
+"mayoría de los sistemas, la acción predeterminada para :const:`SIGQUIT` es "
+"volcar el núcleo y salir, mientras que la acción predeterminada para :const:"
+"`SIGCHLD` es simplemente ignorarlo."
 
 #: ../Doc/library/signal.rst:90
 msgid ""
 "This is another standard signal handler, which will simply ignore the given "
 "signal."
 msgstr ""
+"Este es otro manejador de señales estándar, que simplemente ignorará la "
+"señal dada."
 
 #: ../Doc/library/signal.rst:96
 msgid "Abort signal from :manpage:`abort(3)`."
-msgstr ""
+msgstr "Abortar señal de :manpage:`abort(3)`."
 
 #: ../Doc/library/signal.rst:100
 msgid "Timer signal from :manpage:`alarm(2)`."
-msgstr ""
+msgstr "Señal de temporizador de :manpage:`alarm(2)`."
 
 #: ../Doc/library/signal.rst:102 ../Doc/library/signal.rst:114
-#: ../Doc/library/signal.rst:130 ../Doc/library/signal.rst:144
-#: ../Doc/library/signal.rst:162 ../Doc/library/signal.rst:170
-#: ../Doc/library/signal.rst:184 ../Doc/library/signal.rst:190
-#: ../Doc/library/signal.rst:196 ../Doc/library/signal.rst:434
-#: ../Doc/library/signal.rst:441
+#: ../Doc/library/signal.rst:120 ../Doc/library/signal.rst:130
+#: ../Doc/library/signal.rst:144 ../Doc/library/signal.rst:162
+#: ../Doc/library/signal.rst:170 ../Doc/library/signal.rst:184
+#: ../Doc/library/signal.rst:190 ../Doc/library/signal.rst:196
+#: ../Doc/library/signal.rst:447 ../Doc/library/signal.rst:454
 msgid ":ref:`Availability <availability>`: Unix."
-msgstr ""
+msgstr ":ref:`Availability <availability>`: Unix."
 
 #: ../Doc/library/signal.rst:106
 msgid "Interrupt from keyboard (CTRL + BREAK)."
-msgstr ""
+msgstr "Interrumpir desde el teclado (CTRL + BREAK)."
 
-#: ../Doc/library/signal.rst:108 ../Doc/library/signal.rst:120
-#: ../Doc/library/signal.rst:215 ../Doc/library/signal.rst:225
+#: ../Doc/library/signal.rst:108 ../Doc/library/signal.rst:215
+#: ../Doc/library/signal.rst:225
 msgid ":ref:`Availability <availability>`: Windows."
-msgstr ""
+msgstr ":ref:`Availability <availability>`: Windows."
 
 #: ../Doc/library/signal.rst:112
 msgid "Bus error (bad memory access)."
-msgstr ""
+msgstr "Error de bus (mal acceso a la memoria)."
 
 #: ../Doc/library/signal.rst:118
 msgid "Child process stopped or terminated."
-msgstr ""
+msgstr "El proceso hijo se detuvo o terminó."
 
 #: ../Doc/library/signal.rst:124
 msgid "Alias to :data:`SIGCHLD`."
-msgstr ""
+msgstr "Alias para :data:`SIGCHLD`."
 
 #: ../Doc/library/signal.rst:128
 msgid "Continue the process if it is currently stopped"
-msgstr ""
+msgstr "Continuar el proceso si está detenido actualmente"
 
 #: ../Doc/library/signal.rst:134
 msgid "Floating-point exception. For example, division by zero."
-msgstr ""
+msgstr "Excepción de coma flotante. Por ejemplo, división por cero."
 
 #: ../Doc/library/signal.rst:137
 msgid ""
 ":exc:`ZeroDivisionError` is raised when the second argument of a division or "
 "modulo operation is zero."
 msgstr ""
+":exc:`ZeroDivisionError` se genera cuando el segundo argumento de una "
+"operación de división o módulo es cero."
 
 #: ../Doc/library/signal.rst:142
 msgid ""
 "Hangup detected on controlling terminal or death of controlling process."
 msgstr ""
+"Se detectó un bloqueo en el terminal de control o muerte del proceso de "
+"control."
 
 #: ../Doc/library/signal.rst:148
 msgid "Illegal instruction."
-msgstr ""
+msgstr "Instrucción ilegal."
 
 #: ../Doc/library/signal.rst:152
 msgid "Interrupt from keyboard (CTRL + C)."
-msgstr ""
+msgstr "Interrumpir desde el teclado (CTRL + C)."
 
 #: ../Doc/library/signal.rst:154
 msgid "Default action is to raise :exc:`KeyboardInterrupt`."
-msgstr ""
+msgstr "La acción predeterminada es generar :exc:`KeyboardInterrupt`."
 
 #: ../Doc/library/signal.rst:158
 msgid "Kill signal."
-msgstr ""
+msgstr "Señal de muerte."
 
 #: ../Doc/library/signal.rst:160
 msgid "It cannot be caught, blocked, or ignored."
-msgstr ""
+msgstr "No se puede detectar, bloquear ni ignorar."
 
 #: ../Doc/library/signal.rst:166
 msgid "Broken pipe: write to pipe with no readers."
-msgstr ""
+msgstr "Tubería rota: escriba en la tubería sin lectores."
 
 #: ../Doc/library/signal.rst:168
 msgid "Default action is to ignore the signal."
-msgstr ""
+msgstr "La acción predeterminada es ignorar la señal."
 
 #: ../Doc/library/signal.rst:174
 msgid "Segmentation fault: invalid memory reference."
-msgstr ""
+msgstr "Fallo de segmentación: referencia de memoria no válida."
 
 #: ../Doc/library/signal.rst:178
 msgid "Termination signal."
-msgstr ""
+msgstr "Señal de terminación."
 
 #: ../Doc/library/signal.rst:182
 msgid "User-defined signal 1."
-msgstr ""
+msgstr "Señal definida por el usuario 1."
 
 #: ../Doc/library/signal.rst:188
 msgid "User-defined signal 2."
-msgstr ""
+msgstr "Señal definida por el usuario 2."
 
 #: ../Doc/library/signal.rst:194
 msgid "Window resize signal."
-msgstr ""
+msgstr "Señal de cambio de tamaño de ventana."
 
 #: ../Doc/library/signal.rst:200
 msgid ""
@@ -243,34 +301,51 @@ msgid ""
 "`signal(7)`). Note that not all systems define the same set of signal names; "
 "only those names defined by the system are defined by this module."
 msgstr ""
+"Todos los números de señal se definen simbólicamente. Por ejemplo, la señal "
+"de colgar se define como :const:`signal.SIGHUP`; los nombres de las "
+"variables son idénticos a los nombres utilizados en los programas C, como se "
+"encuentran en ``<signal.h>``. La página de manual de Unix para ':c:func:"
+"`signal`' enumera las señales existentes (en algunos sistemas esto es :"
+"manpage:`signal(2) `, en otros la lista está en :manpage:`signal(7)` ). "
+"Tenga en cuenta que no todos los sistemas definen el mismo conjunto de "
+"nombres de señales; Este módulo solo define los nombres definidos por el "
+"sistema."
 
 #: ../Doc/library/signal.rst:211
 msgid ""
 "The signal corresponding to the :kbd:`Ctrl+C` keystroke event. This signal "
 "can only be used with :func:`os.kill`."
 msgstr ""
+"La señal correspondiente al evento de pulsación de tecla :kbd:`Ctrl + C`. "
+"Esta señal solo se puede utilizar con :func:`os.kill`."
 
 #: ../Doc/library/signal.rst:221
 msgid ""
 "The signal corresponding to the :kbd:`Ctrl+Break` keystroke event. This "
 "signal can only be used with :func:`os.kill`."
 msgstr ""
+"La señal correspondiente al evento de pulsación de tecla :kbd:`Ctrl + "
+"Break`. Esta señal solo se puede utilizar con :func:`os.kill`."
 
 #: ../Doc/library/signal.rst:231
 msgid "One more than the number of the highest signal number."
-msgstr ""
+msgstr "Uno más que el número de señal más alto."
 
 #: ../Doc/library/signal.rst:236
 msgid ""
 "Decrements interval timer in real time, and delivers :const:`SIGALRM` upon "
 "expiration."
 msgstr ""
+"Reduce el temporizador de intervalo en tiempo real y entrega :const:"
+"`SIGALRM` al vencimiento."
 
 #: ../Doc/library/signal.rst:242
 msgid ""
 "Decrements interval timer only when the process is executing, and delivers "
 "SIGVTALRM upon expiration."
 msgstr ""
+"Disminuye el temporizador de intervalo solo cuando el proceso se está "
+"ejecutando y entrega SIGVTALRM al vencimiento."
 
 #: ../Doc/library/signal.rst:248
 msgid ""
@@ -279,28 +354,39 @@ msgid ""
 "timer is usually used to profile the time spent by the application in user "
 "and kernel space. SIGPROF is delivered upon expiration."
 msgstr ""
+"Disminuye el temporizador de intervalo tanto cuando se ejecuta el proceso "
+"como cuando el sistema se está ejecutando en nombre del proceso. Junto con "
+"ITIMER_VIRTUAL, este temporizador generalmente se usa para perfilar el "
+"tiempo que pasa la aplicación en el espacio del usuario y del kernel. "
+"SIGPROF se entrega al vencimiento."
 
 #: ../Doc/library/signal.rst:256
 msgid ""
 "A possible value for the *how* parameter to :func:`pthread_sigmask` "
 "indicating that signals are to be blocked."
 msgstr ""
+"Un valor posible para el parámetro *how* para :func:`pthread_sigmask` que "
+"indica que las señales deben bloquearse."
 
 #: ../Doc/library/signal.rst:263
 msgid ""
 "A possible value for the *how* parameter to :func:`pthread_sigmask` "
 "indicating that signals are to be unblocked."
 msgstr ""
+"Un valor posible para el parámetro *how* para :func:`pthread_sigmask` que "
+"indica que las señales deben desbloquearse."
 
 #: ../Doc/library/signal.rst:270
 msgid ""
 "A possible value for the *how* parameter to :func:`pthread_sigmask` "
 "indicating that the signal mask is to be replaced."
 msgstr ""
+"Un valor posible para el parámetro *how* para :func:`pthread_sigmask` que "
+"indica que la máscara de señal debe ser reemplazada."
 
 #: ../Doc/library/signal.rst:276
 msgid "The :mod:`signal` module defines one exception:"
-msgstr ""
+msgstr "El módulo :mod:`signal` define una excepción:"
 
 #: ../Doc/library/signal.rst:280
 msgid ""
@@ -309,16 +395,22 @@ msgid ""
 "or a negative time is passed to :func:`setitimer`. This error is a subtype "
 "of :exc:`OSError`."
 msgstr ""
+"Se genera para señalar un error de la implementación subyacente :func:"
+"`setitimer` o :func:`getitimer`. Espere este error si se pasa un "
+"temporizador de intervalo no válido o un tiempo negativo a :func:"
+"`setitimer`. Este error es un subtipo de :exc:`OSError`."
 
 #: ../Doc/library/signal.rst:285
 msgid ""
 "This error used to be a subtype of :exc:`IOError`, which is now an alias of :"
 "exc:`OSError`."
 msgstr ""
+"Este error solía ser un subtipo de :exc:`IOError`, que ahora es un alias de :"
+"exc:`OSError`."
 
 #: ../Doc/library/signal.rst:290
 msgid "The :mod:`signal` module defines the following functions:"
-msgstr ""
+msgstr "El módulo :mod:`signal` define las siguientes funciones:"
 
 #: ../Doc/library/signal.rst:295
 msgid ""
@@ -330,12 +422,21 @@ msgid ""
 "alarm is canceled.  If the return value is zero, no alarm is currently "
 "scheduled."
 msgstr ""
+"Si *time* es distinto de cero, esta función solicita que se envíe una señal :"
+"const:`SIGALRM` al proceso en *time* segundos. Se cancela cualquier alarma "
+"programada previamente (solo se puede programar una alarma en cualquier "
+"momento). El valor retornado es entonces el número de segundos antes de que "
+"se entregara cualquier alarma previamente configurada. Si *time* es cero, no "
+"se programa ninguna alarma y se cancela cualquier alarma programada. Si el "
+"valor de retorno es cero, no hay ninguna alarma programada actualmente."
 
 #: ../Doc/library/signal.rst:303
 msgid ""
 ":ref:`Availability <availability>`: Unix.  See the man page :manpage:"
 "`alarm(2)` for further information."
 msgstr ""
+":ref:`Disponibilidad <availability>`: Unix. Consulte la página de manual :"
+"manpage:`alarm(2)` para obtener más información."
 
 #: ../Doc/library/signal.rst:308
 msgid ""
@@ -347,6 +448,13 @@ msgid ""
 "previously in use, and ``None`` means that the previous signal handler was "
 "not installed from Python."
 msgstr ""
+"Retorna el manejador de señales actual para la señal *signalnum*. El valor "
+"retornado puede ser un objeto de Python invocable o uno de los valores "
+"especiales :const:`signal.SIG_IGN`, :const:`signal.SIG_DFL` o :const:`None`. "
+"Aquí, :const:`signal.SIG_IGN` significa que la señal fue previamente "
+"ignorada, :const:`signal.SIG_DFL` significa que la forma predeterminada de "
+"manejar la señal estaba en uso anteriormente, y el gestor de señales no se "
+"instaló desde Python."
 
 #: ../Doc/library/signal.rst:319
 msgid ""
@@ -354,6 +462,9 @@ msgid ""
 "\", \"Segmentation fault\", etc. Returns :const:`None` if the signal is not "
 "recognized."
 msgstr ""
+"Retorna la descripción del sistema de la señal *signalnum*, como "
+"\"Interrupción\", \"Fallo de segmentación\", etc. Retorna :const:`None` si "
+"no se reconoce la señal."
 
 #: ../Doc/library/signal.rst:328
 msgid ""
@@ -361,128 +472,191 @@ msgid ""
 "than ``range(1, NSIG)`` if some signals are reserved by the system for "
 "internal use."
 msgstr ""
+"Retorna el conjunto de números de señal válidos en esta plataforma. Esto "
+"puede ser menor que ``rango(1, NSIG)`` si el sistema reserva algunas señales "
+"para uso interno."
 
 #: ../Doc/library/signal.rst:337
 msgid ""
 "Cause the process to sleep until a signal is received; the appropriate "
 "handler will then be called.  Returns nothing."
 msgstr ""
+"Hacer que el proceso duerma hasta que se reciba una señal; entonces se "
+"llamará al manejador apropiado. No retorna nada."
 
 #: ../Doc/library/signal.rst:342
 msgid ""
 ":ref:`Availability <availability>`: Unix.  See the man page :manpage:"
 "`signal(2)` for further information."
 msgstr ""
+":ref:`Disponibilidad <availability>`: Unix. Consulte la página man :manpage:"
+"`signal(2)` para obtener más información."
 
 #: ../Doc/library/signal.rst:343
 msgid ""
 "See also :func:`sigwait`, :func:`sigwaitinfo`, :func:`sigtimedwait` and :"
 "func:`sigpending`."
 msgstr ""
+"Vea también :func:`sigwait`, :func:`sigwaitinfo`, :func:`sigtimedwait` y :"
+"func:`sigpending`."
 
 #: ../Doc/library/signal.rst:349
 msgid "Sends a signal to the calling process. Returns nothing."
-msgstr ""
+msgstr "Envía una señal al proceso de llamada. No retorna nada."
 
 #: ../Doc/library/signal.rst:356
+msgid ""
+"Send signal *sig* to the process referred to by file descriptor *pidfd*. "
+"Python does not currently support the *siginfo* parameter; it must be "
+"``None``.  The *flags* argument is provided for future extensions; no flag "
+"values are currently defined."
+msgstr ""
+
+#: ../Doc/library/signal.rst:361
+msgid "See the :manpage:`pidfd_send_signal(2)` man page for more information."
+msgstr ""
+
+#: ../Doc/library/signal.rst:363
+msgid ":ref:`Availability <availability>`: Linux 5.1+"
+msgstr ""
+
+#: ../Doc/library/signal.rst:369
 msgid ""
 "Send the signal *signalnum* to the thread *thread_id*, another thread in the "
 "same process as the caller.  The target thread can be executing any code "
 "(Python or not).  However, if the target thread is executing the Python "
 "interpreter, the Python signal handlers will be :ref:`executed by the main "
-"thread <signals-and-threads>`.  Therefore, the only point of sending a "
-"signal to a particular Python thread would be to force a running system call "
-"to fail with :exc:`InterruptedError`."
+"thread of the main interpreter <signals-and-threads>`.  Therefore, the only "
+"point of sending a signal to a particular Python thread would be to force a "
+"running system call to fail with :exc:`InterruptedError`."
 msgstr ""
+"Envíe la señal *signalnum* al hilo *thread_id*, otro hilo en el mismo "
+"proceso que el llamador. El hilo de destino puede ejecutar cualquier código "
+"(Python o no). Sin embargo, si el hilo de destino está ejecutando el "
+"intérprete de Python, los manejadores de señales de Python serán :ref:"
+"`ejecutados por el hilo principal <signals-and-threads>`. Por lo tanto, el "
+"único punto de enviar una señal a un hilo de Python en particular sería "
+"forzar que una llamada al sistema en ejecución falle con :exc:"
+"`InterruptedError`."
 
-#: ../Doc/library/signal.rst:364
+#: ../Doc/library/signal.rst:377
 msgid ""
 "Use :func:`threading.get_ident()` or the :attr:`~threading.Thread.ident` "
 "attribute of :class:`threading.Thread` objects to get a suitable value for "
 "*thread_id*."
 msgstr ""
+"Utilice :func:`threading.get_ident()` o el atributo :attr:`~threading.Thread."
+"ident` de los objetos :class:`threading.Thread` para obtener un valor "
+"adecuado para *thread_id*."
 
-#: ../Doc/library/signal.rst:368
+#: ../Doc/library/signal.rst:381
 msgid ""
 "If *signalnum* is 0, then no signal is sent, but error checking is still "
 "performed; this can be used to check if the target thread is still running."
 msgstr ""
+"Si *signalnum* es 0, no se envía ninguna señal, pero se sigue realizando la "
+"comprobación de errores; esto se puede usar para verificar si el hilo de "
+"destino aún se está ejecutando."
 
-#: ../Doc/library/signal.rst:372
+#: ../Doc/library/signal.rst:384
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``signal.pthread_kill`` with "
 "arguments ``thread_id``, ``signalnum``."
 msgstr ""
+"Genera un :ref:`evento de auditoría <auditing>` ``signal.pthread_kill`` con "
+"argumentos ``thread_id``, ``signalnum``."
 
-#: ../Doc/library/signal.rst:375
+#: ../Doc/library/signal.rst:388
 msgid ""
 ":ref:`Availability <availability>`: Unix.  See the man page :manpage:"
 "`pthread_kill(3)` for further information."
 msgstr ""
+":ref:`Disponibilidad <availability>`: Unix. Consulte la página del manual :"
+"manpage:`pthread_kill(3)` para obtener más información."
 
-#: ../Doc/library/signal.rst:376
+#: ../Doc/library/signal.rst:389
 msgid "See also :func:`os.kill`."
-msgstr ""
+msgstr "Vea también :func:`os.kill`."
 
-#: ../Doc/library/signal.rst:383
+#: ../Doc/library/signal.rst:396
 msgid ""
 "Fetch and/or change the signal mask of the calling thread.  The signal mask "
 "is the set of signals whose delivery is currently blocked for the caller. "
 "Return the old signal mask as a set of signals."
 msgstr ""
+"Busca o cambia la máscara de señal del hilo de llamada. La máscara de señal "
+"es el conjunto de señales cuya entrega está actualmente bloqueada para la "
+"persona que llama. Retorna la máscara de señal anterior como un conjunto de "
+"señales."
 
-#: ../Doc/library/signal.rst:387
+#: ../Doc/library/signal.rst:400
 msgid ""
 "The behavior of the call is dependent on the value of *how*, as follows."
 msgstr ""
+"El comportamiento de la llamada depende del valor de *how*, como sigue."
 
-#: ../Doc/library/signal.rst:389
+#: ../Doc/library/signal.rst:402
 msgid ""
 ":data:`SIG_BLOCK`: The set of blocked signals is the union of the current "
 "set and the *mask* argument."
 msgstr ""
+":data:`SIG_BLOCK`: El conjunto de señales bloqueadas es la unión del "
+"conjunto actual y el argumento *mask*."
 
-#: ../Doc/library/signal.rst:391
+#: ../Doc/library/signal.rst:404
 msgid ""
 ":data:`SIG_UNBLOCK`: The signals in *mask* are removed from the current set "
 "of blocked signals.  It is permissible to attempt to unblock a signal which "
 "is not blocked."
 msgstr ""
+":data:`SIG_UNBLOCK`: Las señales en *mask* se eliminan del conjunto actual "
+"de señales bloqueadas. Está permitido intentar desbloquear una señal que no "
+"esté bloqueada."
 
-#: ../Doc/library/signal.rst:394
+#: ../Doc/library/signal.rst:407
 msgid ""
 ":data:`SIG_SETMASK`: The set of blocked signals is set to the *mask* "
 "argument."
 msgstr ""
+":data:`SIG_SETMASK`: El conjunto de señales bloqueadas se establece en el "
+"argumento *mask*."
 
-#: ../Doc/library/signal.rst:397
+#: ../Doc/library/signal.rst:410
 msgid ""
 "*mask* is a set of signal numbers (e.g. {:const:`signal.SIGINT`, :const:"
 "`signal.SIGTERM`}). Use :func:`~signal.valid_signals` for a full mask "
 "including all signals."
 msgstr ""
+"*mask* es un conjunto de números de señales (por ejemplo, {:const:`signal."
+"SIGINT`, :const:`signal.SIGTERM`}). Utilice :func:`~signal.valid_signals` "
+"para una máscara completa que incluya todas las señales."
 
-#: ../Doc/library/signal.rst:401
+#: ../Doc/library/signal.rst:414
 msgid ""
 "For example, ``signal.pthread_sigmask(signal.SIG_BLOCK, [])`` reads the "
 "signal mask of the calling thread."
 msgstr ""
+"Por ejemplo, ``signal.pthread_sigmask(signal.SIG_BLOCK, [])`` lee la máscara "
+"de señal del hilo de llamada."
 
-#: ../Doc/library/signal.rst:404
+#: ../Doc/library/signal.rst:417
 msgid ":data:`SIGKILL` and :data:`SIGSTOP` cannot be blocked."
-msgstr ""
+msgstr ":data:`SIGKILL` y :data:`SIGSTOP` no se pueden bloquear."
 
-#: ../Doc/library/signal.rst:408
+#: ../Doc/library/signal.rst:421
 msgid ""
 ":ref:`Availability <availability>`: Unix.  See the man page :manpage:"
 "`sigprocmask(3)` and :manpage:`pthread_sigmask(3)` for further information."
 msgstr ""
+":ref:`Disponibilidad <availability>`: Unix. Consulte la página de manual :"
+"manpage:`sigprocmask(3)` y :manpage:`pthread_sigmask(3)` para obtener más "
+"información."
 
-#: ../Doc/library/signal.rst:409
+#: ../Doc/library/signal.rst:422
 msgid "See also :func:`pause`, :func:`sigpending` and :func:`sigwait`."
-msgstr ""
+msgstr "Vea también :func:`pause`, :func:`sigpending` y :func:`sigwait`."
 
-#: ../Doc/library/signal.rst:416
+#: ../Doc/library/signal.rst:429
 msgid ""
 "Sets given interval timer (one of :const:`signal.ITIMER_REAL`, :const:"
 "`signal.ITIMER_VIRTUAL` or :const:`signal.ITIMER_PROF`) specified by *which* "
@@ -491,60 +665,92 @@ msgid ""
 "interval timer specified by *which* can be cleared by setting *seconds* to "
 "zero."
 msgstr ""
+"Establece el temporizador de intervalo dado (uno de :const:`signal."
+"ITIMER_REAL`, :const:`signal.ITIMER_VIRTUAL` o :const:`signal.ITIMER_PROF`) "
+"especificado por *which* disparar después de *seconds* (se acepta el números "
+"de punto flotante, diferente de :func:`alarm`) y luego cada *interval* "
+"segundos (si *interval* es distinto de cero). El temporizador de intervalo "
+"especificado por *which* se puede borrar estableciendo *seconds* en cero."
 
-#: ../Doc/library/signal.rst:423
+#: ../Doc/library/signal.rst:436
 msgid ""
 "When an interval timer fires, a signal is sent to the process. The signal "
 "sent is dependent on the timer being used; :const:`signal.ITIMER_REAL` will "
 "deliver :const:`SIGALRM`, :const:`signal.ITIMER_VIRTUAL` sends :const:"
 "`SIGVTALRM`, and :const:`signal.ITIMER_PROF` will deliver :const:`SIGPROF`."
 msgstr ""
+"Cuando se dispara un temporizador de intervalos, se envía una señal al "
+"proceso. La señal enviada depende del temporizador que se utilice; :const:"
+"`signal.ITIMER_REAL` entregará :const:`SIGALRM`, :const:`signal."
+"ITIMER_VIRTUAL` envía :const:`SIGVTALRM`, y :const:`signal.ITIMER_PROF` "
+"entregará :const:`SIGPROF`."
 
-#: ../Doc/library/signal.rst:429
+#: ../Doc/library/signal.rst:442
 msgid "The old values are returned as a tuple: (delay, interval)."
-msgstr ""
+msgstr "Los valores antiguos se retornan como una tupla: (retraso, intervalo)."
 
-#: ../Doc/library/signal.rst:431
+#: ../Doc/library/signal.rst:444
 msgid ""
 "Attempting to pass an invalid interval timer will cause an :exc:"
 "`ItimerError`."
 msgstr ""
+"Si intenta pasar un temporizador de intervalo no válido, se producirá un :"
+"exc:`ItimerError`."
 
-#: ../Doc/library/signal.rst:439
+#: ../Doc/library/signal.rst:452
 msgid "Returns current value of a given interval timer specified by *which*."
 msgstr ""
+"Retorna el valor actual de un temporizador de intervalo dado especificado "
+"por *which*."
 
-#: ../Doc/library/signal.rst:446
+#: ../Doc/library/signal.rst:459
 msgid ""
 "Set the wakeup file descriptor to *fd*.  When a signal is received, the "
 "signal number is written as a single byte into the fd.  This can be used by "
 "a library to wakeup a poll or select call, allowing the signal to be fully "
 "processed."
 msgstr ""
+"Establezca el descriptor del archivo de activación en *fd*. Cuando se recibe "
+"una señal, el número de la señal se escribe como un solo byte en el fd. Esto "
+"puede ser utilizado por una biblioteca para despertar una encuesta o "
+"seleccionar una llamada, permitiendo que la señal se procese por completo."
 
-#: ../Doc/library/signal.rst:451
+#: ../Doc/library/signal.rst:464
 msgid ""
 "The old wakeup fd is returned (or -1 if file descriptor wakeup was not "
 "enabled).  If *fd* is -1, file descriptor wakeup is disabled. If not -1, "
 "*fd* must be non-blocking.  It is up to the library to remove any bytes from "
 "*fd* before calling poll or select again."
 msgstr ""
+"Se retorna el antiguo fd de activación (o -1 si la activación del descriptor "
+"de archivo no estaba habilitada). Si *fd* es -1, la activación del "
+"descriptor de archivo está deshabilitada. Si no es -1, *fd* debe ser sin "
+"bloqueo. Depende de la biblioteca eliminar los bytes de *fd* antes de llamar "
+"a poll o seleccionar nuevamente."
 
-#: ../Doc/library/signal.rst:456 ../Doc/library/signal.rst:509
+#: ../Doc/library/signal.rst:469 ../Doc/library/signal.rst:523
 msgid ""
-"When threads are enabled, this function can only be called from the main "
-"thread; attempting to call it from other threads will cause a :exc:"
-"`ValueError` exception to be raised."
+"When threads are enabled, this function can only be called from :ref:`the "
+"main thread of the main interpreter <signals-and-threads>`; attempting to "
+"call it from other threads will cause a :exc:`ValueError` exception to be "
+"raised."
 msgstr ""
+"Cuando los hilos están habilitados, esta función solo se puede llamar desde :"
+"ref:`el subproceso principal del intérprete principal <signals-and-"
+"threads>`; intentar llamarlo desde otros hilos hará que se lance una "
+"excepción :exc:`ValueError`."
 
-#: ../Doc/library/signal.rst:460
+#: ../Doc/library/signal.rst:474
 msgid ""
 "There are two common ways to use this function. In both approaches, you use "
 "the fd to wake up when a signal arrives, but then they differ in how they "
 "determine *which* signal or signals have arrived."
 msgstr ""
+"Hay dos formas habituales de utilizar esta función. En ambos enfoques, usa "
+"el fd para despertarse cuando llega una señal, pero luego difieren en cómo "
+"determinan *which* señal o señales han llegado."
 
-#: ../Doc/library/signal.rst:465
+#: ../Doc/library/signal.rst:479
 msgid ""
 "In the first approach, we read the data out of the fd's buffer, and the byte "
 "values give you the signal numbers. This is simple, but in rare cases it can "
@@ -554,8 +760,16 @@ msgid ""
 "you should set ``warn_on_full_buffer=True``, which will at least cause a "
 "warning to be printed to stderr when signals are lost."
 msgstr ""
+"En el primer enfoque, leemos los datos del búfer de fd, y los valores de "
+"bytes le dan los números de señal. Esto es simple, pero en casos raros puede "
+"surgir un problema: generalmente el fd tendrá una cantidad limitada de "
+"espacio en el búfer, y si llegan demasiadas señales demasiado rápido, "
+"entonces el búfer puede llenarse y algunas señales pueden perderse. Si usa "
+"este enfoque, entonces debe configurar ``warn_on_full_buffer = True``, que "
+"al menos causará que se imprima una advertencia en stderr cuando se pierdan "
+"las señales."
 
-#: ../Doc/library/signal.rst:474
+#: ../Doc/library/signal.rst:488
 msgid ""
 "In the second approach, we use the wakeup fd *only* for wakeups, and ignore "
 "the actual byte values. In this case, all we care about is whether the fd's "
@@ -564,36 +778,51 @@ msgid ""
 "``warn_on_full_buffer=False``, so that your users are not confused by "
 "spurious warning messages."
 msgstr ""
+"En el segundo enfoque, usamos el wakeup fd *solo* para wakeups e ignoramos "
+"los valores de bytes reales. En este caso, lo único que nos importa es si el "
+"búfer de fd está vacío o no; un búfer lleno no indica ningún problema. Si "
+"utiliza este enfoque, debe configurar ``warn_on_full_buffer = False``, para "
+"que sus usuarios no se confundan con mensajes de advertencia falsos."
 
-#: ../Doc/library/signal.rst:481
+#: ../Doc/library/signal.rst:495
 msgid "On Windows, the function now also supports socket handles."
-msgstr ""
+msgstr "En Windows, la función ahora también admite identificadores de socket."
 
-#: ../Doc/library/signal.rst:484
+#: ../Doc/library/signal.rst:498
 msgid "Added ``warn_on_full_buffer`` parameter."
-msgstr ""
+msgstr "Se agregó el parámetro ``warn_on_full_buffer``."
 
-#: ../Doc/library/signal.rst:489
+#: ../Doc/library/signal.rst:503
 msgid ""
 "Change system call restart behaviour: if *flag* is :const:`False`, system "
 "calls will be restarted when interrupted by signal *signalnum*, otherwise "
 "system calls will be interrupted.  Returns nothing."
 msgstr ""
+"Cambiar el comportamiento de reinicio de la llamada al sistema: si *flag* "
+"es :const:`False`, las llamadas al sistema se reiniciarán cuando las "
+"interrumpa la señal *signalnum*, de lo contrario, las llamadas al sistema se "
+"interrumpirán. No retorna nada."
 
-#: ../Doc/library/signal.rst:495
+#: ../Doc/library/signal.rst:509
 msgid ""
 ":ref:`Availability <availability>`: Unix.  See the man page :manpage:"
 "`siginterrupt(3)` for further information."
 msgstr ""
+":ref:`Disponibilidad <availability>`: Unix. Consulte la página man :manpage:"
+"`siginterrupt(3)` para obtener más información."
 
-#: ../Doc/library/signal.rst:496
+#: ../Doc/library/signal.rst:510
 msgid ""
 "Note that installing a signal handler with :func:`signal` will reset the "
 "restart behaviour to interruptible by implicitly calling :c:func:"
 "`siginterrupt` with a true *flag* value for the given signal."
 msgstr ""
+"Tenga en cuenta que la instalación de un gestor de señales con :func:"
+"`signal` restablecerá el comportamiento de reinicio a interrumpible llamando "
+"implícitamente a :c:func:`siginterrupt` con un valor de *flag* verdadero "
+"para la señal dada."
 
-#: ../Doc/library/signal.rst:503
+#: ../Doc/library/signal.rst:517
 msgid ""
 "Set the handler for signal *signalnum* to the function *handler*.  *handler* "
 "can be a callable Python object taking two arguments (see below), or one of "
@@ -602,16 +831,27 @@ msgid ""
 "`getsignal` above).  (See the Unix man page :manpage:`signal(2)` for further "
 "information.)"
 msgstr ""
+"Establece el gestor de la señal *signalnum* en la función *handler* "
+"(manejador). *handler* puede ser un objeto de Python invocable que toma dos "
+"argumentos (ver más abajo), o uno de los valores especiales :const:`signal."
+"SIG_IGN` o :const:`signal.SIG_DFL`. Se retornará el manejador de señales "
+"anterior (vea la descripción de :func:`getsignal` arriba). (Consulte la "
+"página del manual de Unix :manpage:`signal(2)` para obtener más información)."
 
-#: ../Doc/library/signal.rst:513
+#: ../Doc/library/signal.rst:528
 msgid ""
 "The *handler* is called with two arguments: the signal number and the "
 "current stack frame (``None`` or a frame object; for a description of frame "
 "objects, see the :ref:`description in the type hierarchy <frame-objects>` or "
 "see the attribute descriptions in the :mod:`inspect` module)."
 msgstr ""
+"El *handler* se llama con dos argumentos: el número de señal y el marco de "
+"pila actual (``None`` o un objeto marco; para obtener una descripción de los "
+"objetos marco, consulte la descripción :ref:`en la jerarquía de tipos <frame-"
+"objects>` o vea las descripciones de los atributos en el módulo :mod:"
+"`inspect`)."
 
-#: ../Doc/library/signal.rst:518
+#: ../Doc/library/signal.rst:533
 msgid ""
 "On Windows, :func:`signal` can only be called with :const:`SIGABRT`, :const:"
 "`SIGFPE`, :const:`SIGILL`, :const:`SIGINT`, :const:`SIGSEGV`, :const:"
@@ -620,45 +860,64 @@ msgid ""
 "an :exc:`AttributeError` will be raised if a signal name is not defined as "
 "``SIG*`` module level constant."
 msgstr ""
+"En Windows, :func:`signal` solo se puede llamar con :const:`SIGABRT`, :const:"
+"`SIGFPE`, :const:`SIGILL`, :const:`SIGINT`, :const:`SIGSEGV`, :const:"
+"`SIGTERM`, o :const:`SIGBREAK`. A :exc:`ValueError` se generará en cualquier "
+"otro caso. Tenga en cuenta que no todos los sistemas definen el mismo "
+"conjunto de nombres de señales; un :exc:`AttributeError` se lanzará si un "
+"nombre de señal no está definido como constante de nivel de módulo ``SIG*``."
 
-#: ../Doc/library/signal.rst:529
+#: ../Doc/library/signal.rst:544
 msgid ""
 "Examine the set of signals that are pending for delivery to the calling "
 "thread (i.e., the signals which have been raised while blocked).  Return the "
 "set of the pending signals."
 msgstr ""
+"Examine el conjunto de señales que están pendientes de entrega al hilo de "
+"llamada (es decir, las señales que se han generado mientras estaban "
+"bloqueadas). Retorna el conjunto de señales pendientes."
 
-#: ../Doc/library/signal.rst:535
+#: ../Doc/library/signal.rst:550
 msgid ""
 ":ref:`Availability <availability>`: Unix.  See the man page :manpage:"
 "`sigpending(2)` for further information."
 msgstr ""
+":ref:`Disponibilidad <availability>`: Unix. Consulte la página de manual :"
+"manpage:`sigpending(2)` para obtener más información."
 
-#: ../Doc/library/signal.rst:536
+#: ../Doc/library/signal.rst:551
 msgid "See also :func:`pause`, :func:`pthread_sigmask` and :func:`sigwait`."
-msgstr ""
+msgstr "Vea también :func:`pause`, :func:`pthread_sigmask` y :func:`sigwait`."
 
-#: ../Doc/library/signal.rst:543
+#: ../Doc/library/signal.rst:558
 msgid ""
 "Suspend execution of the calling thread until the delivery of one of the "
 "signals specified in the signal set *sigset*.  The function accepts the "
 "signal (removes it from the pending list of signals), and returns the signal "
 "number."
 msgstr ""
+"Suspende la ejecución del hilo de llamada hasta la entrega de una de las "
+"señales especificadas en el conjunto de señales *sigset*. La función acepta "
+"la señal (la elimina de la lista pendiente de señales) y retorna el número "
+"de señal."
 
-#: ../Doc/library/signal.rst:549
+#: ../Doc/library/signal.rst:564
 msgid ""
 ":ref:`Availability <availability>`: Unix.  See the man page :manpage:"
 "`sigwait(3)` for further information."
 msgstr ""
+":ref:`Disponibilidad <availability>`: Unix. Consulte la página man :manpage:"
+"`sigwait(3)` para obtener más información."
 
-#: ../Doc/library/signal.rst:550
+#: ../Doc/library/signal.rst:565
 msgid ""
 "See also :func:`pause`, :func:`pthread_sigmask`, :func:`sigpending`, :func:"
 "`sigwaitinfo` and :func:`sigtimedwait`."
 msgstr ""
+"Vea también :func:`pause`, :func:`pthread_sigmask`, :func:`sigpending`, :"
+"func:`sigwaitinfo` y :func:`sigtimedwait`."
 
-#: ../Doc/library/signal.rst:558
+#: ../Doc/library/signal.rst:573
 msgid ""
 "Suspend execution of the calling thread until the delivery of one of the "
 "signals specified in the signal set *sigset*.  The function accepts the "
@@ -668,61 +927,86 @@ msgid ""
 "handler is not called for the delivered signal. The function raises an :exc:"
 "`InterruptedError` if it is interrupted by a signal that is not in *sigset*."
 msgstr ""
+"Suspende la ejecución del hilo de llamada hasta la entrega de una de las "
+"señales especificadas en el conjunto de señales *sigset*. La función acepta "
+"la señal y la elimina de la lista de señales pendientes. Si una de las "
+"señales en *sigset* ya está pendiente para el hilo de llamada, la función "
+"regresará inmediatamente con información sobre esa señal. No se llama al "
+"gestor de señales para la señal enviada. La función genera un :exc:"
+"`InterruptedError` si es interrumpida por una señal que no está en *sigset*."
 
-#: ../Doc/library/signal.rst:567
+#: ../Doc/library/signal.rst:582
 msgid ""
 "The return value is an object representing the data contained in the :c:type:"
 "`siginfo_t` structure, namely: :attr:`si_signo`, :attr:`si_code`, :attr:"
 "`si_errno`, :attr:`si_pid`, :attr:`si_uid`, :attr:`si_status`, :attr:"
 "`si_band`."
 msgstr ""
+"El valor de retorno es un objeto que representa los datos contenidos en la "
+"estructura :c:type:`siginfo_t`, a saber: :attr:`si_signo`, :attr:`si_code`, :"
+"attr:`si_errno`, :attr:`si_pid`, :attr:`si_uid`, :attr:`si_status`, :attr:"
+"`si_band`."
 
-#: ../Doc/library/signal.rst:574
+#: ../Doc/library/signal.rst:589
 msgid ""
 ":ref:`Availability <availability>`: Unix.  See the man page :manpage:"
 "`sigwaitinfo(2)` for further information."
 msgstr ""
+":ref:`Disponibilidad <availability>`: Unix. Consulte la página man :manpage:"
+"`sigwaitinfo(2)` para obtener más información."
 
-#: ../Doc/library/signal.rst:575
+#: ../Doc/library/signal.rst:590
 msgid "See also :func:`pause`, :func:`sigwait` and :func:`sigtimedwait`."
-msgstr ""
+msgstr "Vea también :func:`pause`, :func:`sigwait` y :func:`sigtimedwait`."
 
-#: ../Doc/library/signal.rst:579
+#: ../Doc/library/signal.rst:594
 msgid ""
 "The function is now retried if interrupted by a signal not in *sigset* and "
 "the signal handler does not raise an exception (see :pep:`475` for the "
 "rationale)."
 msgstr ""
+"La función ahora se vuelve a intentar si es interrumpida por una señal que "
+"no está en *sigset* y el manejador de señales no genera una excepción (ver :"
+"pep:`475` para la justificación)."
 
-#: ../Doc/library/signal.rst:587
+#: ../Doc/library/signal.rst:602
 msgid ""
 "Like :func:`sigwaitinfo`, but takes an additional *timeout* argument "
 "specifying a timeout. If *timeout* is specified as :const:`0`, a poll is "
 "performed. Returns :const:`None` if a timeout occurs."
 msgstr ""
+"Como :func:`sigwaitinfo`, pero toma un argumento *timeout* adicional que "
+"especifica un tiempo de espera. Si *timeout* se especifica como :const:`0`, "
+"se realiza una encuesta. Retorna :const:`None` si se agota el tiempo de "
+"espera."
 
-#: ../Doc/library/signal.rst:593
+#: ../Doc/library/signal.rst:608
 msgid ""
 ":ref:`Availability <availability>`: Unix.  See the man page :manpage:"
 "`sigtimedwait(2)` for further information."
 msgstr ""
+":ref:`Disponibilidad <availability>`: Unix. Consulte la página de manual :"
+"manpage:`sigtimedwait(2)` para obtener más información."
 
-#: ../Doc/library/signal.rst:594
+#: ../Doc/library/signal.rst:609
 msgid "See also :func:`pause`, :func:`sigwait` and :func:`sigwaitinfo`."
-msgstr ""
+msgstr "Vea también :func:`pause`, :func:`sigwait` y :func:`sigwaitinfo`."
 
-#: ../Doc/library/signal.rst:598
+#: ../Doc/library/signal.rst:613
 msgid ""
 "The function is now retried with the recomputed *timeout* if interrupted by "
 "a signal not in *sigset* and the signal handler does not raise an exception "
 "(see :pep:`475` for the rationale)."
 msgstr ""
+"La función ahora se reintenta con el *timeout* recalculado si se interrumpe "
+"por una señal que no está en *sigset* y el manejador de señales no genera "
+"una excepción (ver :pep:`475` para la justificación)."
 
-#: ../Doc/library/signal.rst:607
+#: ../Doc/library/signal.rst:622
 msgid "Example"
-msgstr ""
+msgstr "Ejemplo"
 
-#: ../Doc/library/signal.rst:609
+#: ../Doc/library/signal.rst:624
 msgid ""
 "Here is a minimal example program. It uses the :func:`alarm` function to "
 "limit the time spent waiting to open a file; this is useful if the file is "
@@ -731,12 +1015,19 @@ msgid ""
 "alarm before opening the file; if the operation takes too long, the alarm "
 "signal will be sent, and the handler raises an exception. ::"
 msgstr ""
+"Aquí hay un programa de ejemplo mínimo. Utiliza la función :func:`alarm` "
+"para limitar el tiempo de espera para abrir un archivo; esto es útil si el "
+"archivo es para un dispositivo serial que puede no estar encendido, lo que "
+"normalmente haría que :func:`os.open` se cuelgue indefinidamente. La "
+"solución es configurar una alarma de 5 segundos antes de abrir el archivo; "
+"si la operación lleva demasiado tiempo, se enviará la señal de alarma y el "
+"gestor genera una excepción. ::"
 
-#: ../Doc/library/signal.rst:632
+#: ../Doc/library/signal.rst:647
 msgid "Note on SIGPIPE"
-msgstr ""
+msgstr "Nota sobre SIGPIPE"
 
-#: ../Doc/library/signal.rst:634
+#: ../Doc/library/signal.rst:649
 msgid ""
 "Piping output of your program to tools like :manpage:`head(1)` will cause a :"
 "const:`SIGPIPE` signal to be sent to your process when the receiver of its "
@@ -744,11 +1035,21 @@ msgid ""
 "`BrokenPipeError: [Errno 32] Broken pipe`.  To handle this case, wrap your "
 "entry point to catch this exception as follows::"
 msgstr ""
+"Canalizar la salida de su programa a herramientas como :manpage:`head(1)` "
+"hará que se envíe una señal :const:`SIGPIPE` a su proceso cuando el receptor "
+"de su salida estándar se cierre antes. Esto da como resultado una excepción "
+"como :code:`BrokenPipeError: [Errno 32] Broken pipe`. Para manejar este "
+"caso, envuelva su punto de entrada para detectar esta excepción de la "
+"siguiente manera:"
 
-#: ../Doc/library/signal.rst:661
+#: ../Doc/library/signal.rst:676
 msgid ""
 "Do not set :const:`SIGPIPE`'s disposition to :const:`SIG_DFL` in order to "
 "avoid :exc:`BrokenPipeError`.  Doing that would cause your program to exit "
 "unexpectedly also whenever any socket connection is interrupted while your "
 "program is still writing to it."
 msgstr ""
+"No establezca la disposición de :const:`SIGPIPE` a :const:`SIG_DFL` para "
+"evitar :exc:`BrokenPipeError`. Si lo hace, su programa se cerrará "
+"inesperadamente también cuando se interrumpa cualquier conexión de socket "
+"mientras su programa todavía está escribiendo en él."
