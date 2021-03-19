@@ -18,7 +18,7 @@ sys.path.append(os.path.abspath('cpython/Doc/tools/extensions'))
 sys.path.append(os.path.abspath('cpython/Doc/includes'))
 
 # Import all the Sphinx settings from cpython
-sys.path.append(os.path.abspath('cpython/Doc'))
+sys.path.insert(0, os.path.abspath('cpython/Doc'))
 from conf import *
 
 # Call patchlevel with the proper path to get the version from
