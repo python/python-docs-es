@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-19 11:16+0100\n"
-"PO-Revision-Date: 2021-04-02 11:58+0200\n"
+"PO-Revision-Date: 2021-04-10 18:50+0200\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -515,6 +515,8 @@ msgid ""
 ":ref:`Availability <availability>`: not available with LibreSSL and OpenSSL "
 "> 1.1.0."
 msgstr ""
+":ref:`Disponibilidad <availability>`: no disponible con LibreSSL y OpenSSL > "
+"1.1.0."
 
 #: ../Doc/library/ssl.rst:343
 msgid ""
@@ -523,14 +525,20 @@ msgid ""
 "string (so you can always use :const:`0.0`).  See :rfc:`1750` for more "
 "information on sources of entropy."
 msgstr ""
+"Mezcla los *bytes* dados en el generador de números pseudoaleatorios de SSL. "
+"El parámetro *entropy* (un flotante) es un límite inferior de la entropía "
+"contenida en la cadena de caracteres (por lo que siempre se puede utilizar :"
+"const:`0.0`). Véase :rfc:`1750` para mas información sobre las fuentes de "
+"entropía."
 
 #: ../Doc/library/ssl.rst:348
+#, fuzzy
 msgid "Writable :term:`bytes-like object` is now accepted."
-msgstr ""
+msgstr "Ahora se acepta `bytes-like object` editables."
 
 #: ../Doc/library/ssl.rst:352
 msgid "Certificate handling"
-msgstr ""
+msgstr "Gestión de certificados"
 
 #: ../Doc/library/ssl.rst:360
 msgid ""
@@ -541,12 +549,20 @@ msgid ""
 "suitable for checking the identity of servers in various SSL-based protocols "
 "such as FTPS, IMAPS, POPS and others."
 msgstr ""
+"Verifica que *cert* (en formato decodificado tal y como es retornado por :"
+"meth:`SSLSocket.getpeercert`) coincide con el *hostname* dado. Las reglas "
+"aplicadas son las de comprobación de la identidad de los servidores HTTPS, "
+"como se indica en :rfc:`2818`, :rfc:`5280` y :rfc:`6125`. Además de HTTPS, "
+"esta función debería ser adecuada para comprobar la identidad de servidores "
+"en varios protocolos basados en SSL como FTPS, IMAPS, POPS y otros."
 
 #: ../Doc/library/ssl.rst:367
 msgid ""
 ":exc:`CertificateError` is raised on failure. On success, the function "
 "returns nothing::"
 msgstr ""
+":exc:`CertificateError` es lanzado en caso de error. En caso de éxito, la "
+"función no retorna nada::"
 
 #: ../Doc/library/ssl.rst:380
 msgid ""
@@ -556,24 +572,37 @@ msgid ""
 "as ``www*.xn--pthon-kva.org`` are still supported, but ``x*.python.org`` no "
 "longer matches ``xn--tda.python.org``."
 msgstr ""
+"La función ahora sigue :rfc:`6125` sección 6.4.3 y no soporta múltiples "
+"caracteres comodín (por ejemplo ``*.*.com`` o ``*a*.example.org``) ni "
+"tampoco un carácter comodín dentro de un fragmento de un nombre de dominio "
+"internacionalizado (IDN). Etiquetas A de IDN tales como ``www*.xn--pthon-kva."
+"org`` son todavía soportadas, pero ``x*.python.org`` ya no corresponde con "
+"``xn--tda.python.org``."
 
 #: ../Doc/library/ssl.rst:387
 msgid ""
 "Matching of IP addresses, when present in the subjectAltName field of the "
 "certificate, is now supported."
 msgstr ""
+"Ahora se admite la coincidencia de direcciones IP cuando están presentes en "
+"el campo subjectAltName del certificado."
 
 #: ../Doc/library/ssl.rst:391
 msgid ""
 "The function is no longer used to TLS connections. Hostname matching is now "
 "performed by OpenSSL."
 msgstr ""
+"La función ya no se utiliza para las conexiones TLS. La coincidencia de "
+"hostname es ahora realizada por OpenSSL.  "
 
 #: ../Doc/library/ssl.rst:395
 msgid ""
 "Allow wildcard when it is the leftmost and the only character in that "
 "segment. Partial wildcards like ``www*.example.com`` are no longer supported."
 msgstr ""
+"Se permite el carácter comodín cuando es el carácter más a la izquierda y el "
+"único en ese segmento. Ya no se admiten comodines parciales como ``www*."
+"example.com`` ."
 
 #: ../Doc/library/ssl.rst:403
 #, python-format
@@ -582,14 +611,18 @@ msgid ""
 "representing the \"notBefore\" or \"notAfter\" date from a certificate in ``"
 "\"%b %d %H:%M:%S %Y %Z\"`` strptime format (C locale)."
 msgstr ""
+"Retorna el tiempo en segundos desde la Época, dada la cadena de caracteres "
+"``cert_time`` que representa la fecha \"notBefore\" o \"notAfter\" de un "
+"certificado en formato strptime ``\"%b %d %H:%M:%S %Y %Z\"`` (C locale)."
 
 #: ../Doc/library/ssl.rst:408
 msgid "Here's an example:"
-msgstr ""
+msgstr "He aquí un ejemplo:"
 
 #: ../Doc/library/ssl.rst:420
 msgid "\"notBefore\" or \"notAfter\" dates must use GMT (:rfc:`5280`)."
 msgstr ""
+"Las fechas \"notBefore\" o \"notAfter\" deben utilizar GMT (:rfc:`5280`)."
 
 #: ../Doc/library/ssl.rst:422
 msgid ""
@@ -597,6 +630,10 @@ msgid ""
 "the input string. Local timezone was used previously. Return an integer (no "
 "fractions of a second in the input format)"
 msgstr ""
+"Interpreta la hora de entrada como una hora en UTC según lo especificado por "
+"la zona horaria 'GMT' en la cadena de caracteres de entrada. Anteriormente "
+"se utilizaba la zona horaria local. Devuelve un número entero (sin "
+"fracciones de segundo en el formato de entrada)"
 
 #: ../Doc/library/ssl.rst:430
 msgid ""
@@ -610,28 +647,43 @@ msgid ""
 "against that set of root certificates, and will fail if the validation "
 "attempt fails."
 msgstr ""
+"Dada la dirección ``addr`` de un servidor protegido con SSL, como un par "
+"(*hostname*, *port-number*), obtiene el certificado del servidor, y lo "
+"retorna como una cadena de caracteres codificada en PEM. Si se especifica "
+"``ssl_version``, utiliza esta versión del protocolo SSL para intentar "
+"conectarse al servidor. Si se especifica ``ca_certs``, debe ser un archivo "
+"que contenga una lista de certificados raíz, con el mismo formato que se "
+"utiliza para el mismo parámetro en :meth:`SSLContext.wrap_socket`. La "
+"llamada intentará validar el certificado del servidor contra ese conjunto de "
+"certificados raíz, y fallará si el intento de validación falla."
 
 #: ../Doc/library/ssl.rst:440
 msgid "This function is now IPv6-compatible."
-msgstr ""
+msgstr "Esta función es ahora compatible IPv6."
 
 #: ../Doc/library/ssl.rst:443
 msgid ""
 "The default *ssl_version* is changed from :data:`PROTOCOL_SSLv3` to :data:"
 "`PROTOCOL_TLS` for maximum compatibility with modern servers."
 msgstr ""
+"La *ssl_version* por defecto se cambia de :data:`PROTOCOL_SSLv3` a :data:"
+"`PROTOCOL_TLS` para una máxima compatibilidad con los servidores modernos."
 
 #: ../Doc/library/ssl.rst:449
 msgid ""
 "Given a certificate as a DER-encoded blob of bytes, returns a PEM-encoded "
 "string version of the same certificate."
 msgstr ""
+"Dado un certificado como blob de bytes codificado en DER, devuelve una "
+"versión de cadena de caracteres codificada en PEM del mismo certificado."
 
 #: ../Doc/library/ssl.rst:454
 msgid ""
 "Given a certificate as an ASCII PEM string, returns a DER-encoded sequence "
 "of bytes for that same certificate."
 msgstr ""
+"Dado un certificado como cadena de caracteres ASCII PEM, devuelve una "
+"secuencia de bytes codificada con DER para ese mismo certificado."
 
 #: ../Doc/library/ssl.rst:459
 msgid ""
@@ -639,44 +691,61 @@ msgid ""
 "paths are the same as used by :meth:`SSLContext.set_default_verify_paths`. "
 "The return value is a :term:`named tuple` ``DefaultVerifyPaths``:"
 msgstr ""
+"Retorna una tupla con nombre con las rutas por defecto de cafile y capath de "
+"OpenSSL. Las rutas son las mismas que las usadas por :meth:`SSLContext."
+"set_default_verify_paths`. El valor de retorno es una :term:`named tuple` "
+"``DefaultVerifyPaths``:"
 
 #: ../Doc/library/ssl.rst:464
 msgid ""
 ":attr:`cafile` - resolved path to cafile or ``None`` if the file doesn't "
 "exist,"
 msgstr ""
+":attr:`cafile` - ruta resuelta a cafile o ``None`` si el archivo no existe,"
 
 #: ../Doc/library/ssl.rst:465
 msgid ""
 ":attr:`capath` - resolved path to capath or ``None`` if the directory "
 "doesn't exist,"
 msgstr ""
+":attr:`capath` - ruta resuelta a capath o ``None`` si el directorio no "
+"existe,"
 
 #: ../Doc/library/ssl.rst:466
 msgid ""
 ":attr:`openssl_cafile_env` - OpenSSL's environment key that points to a "
 "cafile,"
 msgstr ""
+":attr:`openssl_cafile_env` - clave de entorno de OpenSSL que apunta a un "
+"cafile,"
 
+# Como traducir "hard coded path" ?
+# "ruta hardcodeada" ?
+# "ruta preseteada" ?
+# "ruta predefinida" ?
 #: ../Doc/library/ssl.rst:467
 msgid ":attr:`openssl_cafile` - hard coded path to a cafile,"
-msgstr ""
+msgstr ":attr:`openssl_cafile` - ruta escrita en duro a un cafile,"
 
 #: ../Doc/library/ssl.rst:468
 msgid ""
 ":attr:`openssl_capath_env` - OpenSSL's environment key that points to a "
 "capath,"
 msgstr ""
+":attr:`openssl_capath_env` - clave de entorno de OpenSSL que apunta a un "
+"capath,"
 
 #: ../Doc/library/ssl.rst:469
 msgid ":attr:`openssl_capath` - hard coded path to a capath directory"
-msgstr ""
+msgstr ":attr:`openssl_capath` - ruta escrita en duro a un directorio capath"
 
 #: ../Doc/library/ssl.rst:473
 msgid ""
 ":ref:`Availability <availability>`: LibreSSL ignores the environment vars :"
 "attr:`openssl_cafile_env` and :attr:`openssl_capath_env`."
 msgstr ""
+":ref:`Disponibilidad <availability>`: LibreSSL ignora las variables de "
+"entorno :attr:`openssl_cafile_env` y :attr:`openssl_capath_env`."
 
 #: ../Doc/library/ssl.rst:478
 msgid ""
@@ -684,6 +753,10 @@ msgid ""
 "one of ``CA``, ``ROOT`` or ``MY``. Windows may provide additional cert "
 "stores, too."
 msgstr ""
+"Recupera los certificados del almacén de certificados del sistema de "
+"Windows. *store_name* puede ser uno de los siguientes: ``CA``, ``ROOT`` o "
+"``MY``. Windows también puede proporcionar almacenes de certificados "
+"adicionales."
 
 #: ../Doc/library/ssl.rst:482
 msgid ""
@@ -693,21 +766,30 @@ msgid ""
 "data. Trust specifies the purpose of the certificate as a set of OIDS or "
 "exactly ``True`` if the certificate is trustworthy for all purposes."
 msgstr ""
+"La función devuelve una lista de tuplas (cert_bytes, encoding_type, trust). "
+"El encoding_type especifica la codificación de cert_bytes. Es :const:"
+"`x509_asn` para datos X.509 ASN.1 o :const:`pkcs_7_asn` para datos PKCS#7 "
+"ASN.1. Trust especifica el propósito del certificado como un conjunto de "
+"OIDS o exactamente ``True`` si el certificado es de confianza para todos los "
+"propósitos."
 
 #: ../Doc/library/ssl.rst:489 ../Doc/library/ssl.rst:1577
 #: ../Doc/library/ssl.rst:1892
 msgid "Example::"
-msgstr ""
+msgstr "Ejemplo::"
 
 #: ../Doc/library/ssl.rst:496 ../Doc/library/ssl.rst:511
 msgid ":ref:`Availability <availability>`: Windows."
-msgstr ""
+msgstr ":ref:`Disponibilidad <availability>`: Windows."
 
 #: ../Doc/library/ssl.rst:501
 msgid ""
 "Retrieve CRLs from Windows' system cert store. *store_name* may be one of "
 "``CA``, ``ROOT`` or ``MY``. Windows may provide additional cert stores, too."
 msgstr ""
+"Obtiene CRLs del almacén de certificados del sistema de Windows. "
+"*store_name* puede ser uno de los siguientes: ``CA``, ``ROOT`` o ``MY``. "
+"Windows también puede proporcionar almacenes de certificados adicionales."
 
 #: ../Doc/library/ssl.rst:505
 msgid ""
@@ -715,6 +797,10 @@ msgid ""
 "The encoding_type specifies the encoding of cert_bytes. It is either :const:"
 "`x509_asn` for X.509 ASN.1 data or :const:`pkcs_7_asn` for PKCS#7 ASN.1 data."
 msgstr ""
+"La función devuelve una lista de tuplas (cert_bytes, encoding_type, trust). "
+"El encoding_type especifica la codificación de cert_bytes. Es :const:"
+"`x509_asn` para datos X.509 ASN.1 o :const:`pkcs_7_asn` para datos PKCS#7 "
+"ASN.1."
 
 #: ../Doc/library/ssl.rst:519
 msgid ""
@@ -723,6 +809,10 @@ msgid ""
 "which wraps the underlying socket in an SSL context.  ``sock`` must be a :"
 "data:`~socket.SOCK_STREAM` socket; other socket types are unsupported."
 msgstr ""
+"Toma una instancia ``sock`` de :class:`socket.socket`, y devuelve una "
+"instancia de :class:`ssl.SSLSocket`, un subtipo de :class:`socket.socket`, "
+"que envuelve el socket de base en un contexto SSL. ``sock`` debe ser un "
+"socket :data:`~socket.SOCK_STREAM`; otros tipos de socket no son compatibles."
 
 #: ../Doc/library/ssl.rst:524
 msgid ""
@@ -732,6 +822,11 @@ msgid ""
 "values are passed to :meth:`SSLContext.load_cert_chain`, :meth:`SSLContext."
 "load_verify_locations`, and :meth:`SSLContext.set_ciphers`."
 msgstr ""
+"Internamente, la función crea un :class:`SSLContext` con un protocolo "
+"*ssl_version* y :attr:`SSLContext.options` establecido a *cert_reqs*. Si los "
+"parámetros *keyfile*, *certfile*, *ca_certs* o *ciphers* son establecidos, "
+"entonces los valores son pasados a :meth:`SSLContext.load_cert_chain`, :meth:"
+"`SSLContext.load_verify_locations`, y :meth:`SSLContext.set_ciphers`."
 
 #: ../Doc/library/ssl.rst:531
 msgid ""
@@ -739,6 +834,9 @@ msgid ""
 "*suppress_ragged_eofs* have the same meaning as :meth:`SSLContext."
 "wrap_socket`."
 msgstr ""
+"Los argumentos *server_side*, *do_handshake_on_connect*, y "
+"*supress_ragged_eofs* tienen el mismo significado que :meth:`SSLContext."
+"wrap_socket`."
 
 #: ../Doc/library/ssl.rst:537
 msgid ""
@@ -747,17 +845,24 @@ msgid ""
 "limited and creates an insecure client socket without server name indication "
 "or hostname matching."
 msgstr ""
+"Desde Python 3.2 y 2.7.9, se recomienda usar :meth:`SSLContext.wrap_socket` "
+"en lugar de :func:`wrap_socket`. La función de alto nivel tiene limitaciones "
+"y crea un socket cliente no seguro sin indicación de nombre de servidor ni "
+"hostname matching."
 
 #: ../Doc/library/ssl.rst:543
 msgid "Constants"
-msgstr ""
+msgstr "Constantes"
 
 #: ../Doc/library/ssl.rst:545
 msgid ""
 "All constants are now :class:`enum.IntEnum` or :class:`enum.IntFlag` "
 "collections."
 msgstr ""
+"Todas las constantes son ahora colecciones :class:`enum.IntEnum` o :class:"
+"`enum.IntFlag`."
 
+# "handshake" en inglés me parece aceptable.
 #: ../Doc/library/ssl.rst:551
 msgid ""
 "Possible value for :attr:`SSLContext.verify_mode`, or the ``cert_reqs`` "
@@ -766,16 +871,25 @@ msgid ""
 "accepted.  Validation errors, such as untrusted or expired cert, are ignored "
 "and do not abort the TLS/SSL handshake."
 msgstr ""
+"Valor posible para :attr:`SSLContext.verify_mode`, o el parámetro "
+"``cert_reqs`` de :func:`wrap_socket`. A excepción de :const:"
+"`PROTOCOL_TLS_CLIENT`, es el modo por defecto. Con sockets del lado del "
+"cliente, se acepta casi cualquier certificado. Errores de validación, como "
+"certificado no confiable o caducado, son ignorados y no abortan el handshake "
+"TLS/SSL."
 
 #: ../Doc/library/ssl.rst:557
 msgid ""
 "In server mode, no certificate is requested from the client, so the client "
 "does not send any for client cert authentication."
 msgstr ""
+"En modo servidor, no se solicita ningún certificado al cliente, por lo que "
+"el cliente no envía ninguno para la autenticación del certificado del "
+"cliente."
 
 #: ../Doc/library/ssl.rst:560 ../Doc/library/ssl.rst:2317
 msgid "See the discussion of :ref:`ssl-security` below."
-msgstr ""
+msgstr "Vea la discusión sobre :ref:`ssl-security` más abajo."
 
 #: ../Doc/library/ssl.rst:564
 msgid ""
@@ -784,6 +898,11 @@ msgid ""
 "has the same meaning as :const:`CERT_REQUIRED`. It is recommended to use :"
 "const:`CERT_REQUIRED` for client-side sockets instead."
 msgstr ""
+"Valor posible para :attr:`SSLContext.verify_mode`, o el parámetro "
+"``cert_reqs`` de :func:`wrap_socket`. En modo cliente, :const:"
+"`CERT_OPTIONAL` tiene el mismo significado que :const:`CERT_REQUIRED`. Se "
+"recomienda usar en su lugar :const:`CERT_REQUIRED` para sockets del lado del "
+"cliente."
 
 #: ../Doc/library/ssl.rst:569
 msgid ""
@@ -793,6 +912,11 @@ msgid ""
 "certificate, it is verified.  Any verification error immediately aborts the "
 "TLS handshake."
 msgstr ""
+"En el modo servidor, se envía una solicitud de certificado de cliente al "
+"cliente. El cliente puede ignorar la solicitud o enviar un certificado para "
+"realizar la autenticación de certificado de cliente TLS. Si el cliente opta "
+"por enviar un certificado, éste se verifica. Cualquier error de verificación "
+"aborta inmediatamente el handshake TLS."
 
 #: ../Doc/library/ssl.rst:575 ../Doc/library/ssl.rst:595
 msgid ""
@@ -800,6 +924,9 @@ msgid ""
 "either to :meth:`SSLContext.load_verify_locations` or as a value of the "
 "``ca_certs`` parameter to :func:`wrap_socket`."
 msgstr ""
+"El uso de esta configuración requiere que se pase un conjunto válido de "
+"certificados de CA, ya sea a :meth:`SSLContext.load_verify_locations` o como "
+"valor del parámetro ``ca_certs`` de :func:`wrap_socket`."
 
 #: ../Doc/library/ssl.rst:581
 msgid ""
@@ -813,6 +940,15 @@ msgid ""
 "const:`CERT_REQUIRED` and enables :attr:`~SSLContext.check_hostname` by "
 "default."
 msgstr ""
+"Valor posible para :attr:`SSLContext.verify_mode`, o el parámetro "
+"``cert_reqs`` de :func:`wrap_socket`. En este modo, se requieren "
+"certificados del otro lado de la conexión del socket; se lanzará un :class:"
+"`SSLError` si no se proporciona ningún certificado, o si su validación "
+"falla. Este modo **no** es suficiente para verificar un certificado en modo "
+"cliente, ya que no coincide con los hostnames. :attr:`~SSLContext."
+"check_hostname` debe estar activado también para verificar la autenticidad "
+"de un certificado. :const:`PROTOCOL_TLS_CLIENT` utiliza :const:"
+"`CERT_REQUIRED` y activa :attr:`~SSLContext.check_hostname` por defecto."
 
 #: ../Doc/library/ssl.rst:591
 msgid ""
@@ -820,10 +956,14 @@ msgid ""
 "authentication.  A client certificate request is sent to the client and the "
 "client must provide a valid and trusted certificate."
 msgstr ""
+"Con socket servidor, este modo proporciona una autenticación obligatoria de "
+"certificado de cliente TLS. Se envía una solicitud de certificado de cliente "
+"al cliente y el cliente debe proporcionar un certificado válido y de "
+"confianza."
 
 #: ../Doc/library/ssl.rst:601
 msgid ":class:`enum.IntEnum` collection of CERT_* constants."
-msgstr ""
+msgstr "Colección :class:`enum.IntEnum` de constantes CERT_*."
 
 #: ../Doc/library/ssl.rst:607
 msgid ""
@@ -831,6 +971,9 @@ msgid ""
 "certificate revocation lists (CRLs) are not checked. By default OpenSSL does "
 "neither require nor verify CRLs."
 msgstr ""
+"Valor posible para :attr:`SSLContext.verify_flags`. En este modo, las listas "
+"de revocación de certificado (CRLs) no son vérificadas. Por defecto OpenSSL "
+"no requiere ni verifica CRLs."
 
 #: ../Doc/library/ssl.rst:615
 msgid ""
@@ -840,18 +983,29 @@ msgid ""
 "ancestor CA). If no proper CRL has been loaded with :attr:`SSLContext."
 "load_verify_locations`, validation will fail."
 msgstr ""
+"Valor posible para :attr:`SSLContext.verify_flags`. En este modo, sólo el "
+"certificado de pares es verificado pero ninguno de los certificados CA "
+"intermedios. El modo requiere una CRL válida que esté firmada por el emisor "
+"del certificado de pares (su CA antecesora directa). Si no se ha cargado una "
+"CRL adecuada con :attr:`SSLContext.load_verify_locations`, la validación "
+"fallará."
 
 #: ../Doc/library/ssl.rst:625
 msgid ""
 "Possible value for :attr:`SSLContext.verify_flags`. In this mode, CRLs of "
 "all certificates in the peer cert chain are checked."
 msgstr ""
+"Valor posible para :attr:`SSLContext.verify_flags`. En este modo, las CRLs "
+"de todos los certificados en la cadena de certificado de pares son "
+"verificadas."
 
 #: ../Doc/library/ssl.rst:632
 msgid ""
 "Possible value for :attr:`SSLContext.verify_flags` to disable workarounds "
 "for broken X.509 certificates."
 msgstr ""
+"Valor posible para :attr:`SSLContext.verify_flags` para desactivar "
+"soluciones alternativas para certificados X.509 rotos."
 
 #: ../Doc/library/ssl.rst:639
 msgid ""
@@ -859,10 +1013,13 @@ msgid ""
 "prefer trusted certificates when building the trust chain to validate a "
 "certificate. This flag is enabled by default."
 msgstr ""
+"Valor posible para :attr:`SSLContext.verify_flags`. Indica a OpenSSL de "
+"preferir certificados de confianza al construir la cadena de confianza para "
+"validar un certificado. Esta opción está activada por defecto."
 
 #: ../Doc/library/ssl.rst:647
 msgid ":class:`enum.IntFlag` collection of VERIFY_* constants."
-msgstr ""
+msgstr "Colección :class:`enum.IntFlag` de constantes VERIFY_*."
 
 #: ../Doc/library/ssl.rst:653
 msgid ""
@@ -870,6 +1027,9 @@ msgid ""
 "support. Despite the name, this option can select both \"SSL\" and \"TLS\" "
 "protocols."
 msgstr ""
+"Selecciona la versión mas alta del protocolo soportada tanto por el cliente "
+"como por el servidor. A pesar de su nombre, esta opción puede seleccionar "
+"ambos protocolos \"SSL\" y \"TLS\"."
 
 #: ../Doc/library/ssl.rst:660
 msgid ""
@@ -878,52 +1038,65 @@ msgid ""
 "enables :data:`CERT_REQUIRED` and :attr:`~SSLContext.check_hostname` by "
 "default."
 msgstr ""
+"Negocia automáticamente la versión más alta del protocolo como :data:"
+"`PROTOCOL_TLS`, pero sólo soporta conexiones :class:`SSLSocket` del lado del "
+"cliente. El protocolo activa :data:`CERT_REQUIRED` y :attr:`~SSLContext."
+"check_hostname` por defecto."
 
 #: ../Doc/library/ssl.rst:669
 msgid ""
 "Auto-negotiate the highest protocol version like :data:`PROTOCOL_TLS`, but "
 "only support server-side :class:`SSLSocket` connections."
 msgstr ""
+"Negocia automáticamente la versión más alta del protocolo como :data:"
+"`PROTOCOL_TLS`, pero sólo soporta conexiones :class:`SSLSocket` del lado del "
+"servidor."
 
 #: ../Doc/library/ssl.rst:676
 msgid "Alias for :data:`PROTOCOL_TLS`."
-msgstr ""
+msgstr "Alias para :data:`PROTOCOL_TLS`."
 
 #: ../Doc/library/ssl.rst:680
 msgid "Use :data:`PROTOCOL_TLS` instead."
-msgstr ""
+msgstr "Utilice en su lugar :data:`PROTOCOL_TLS`."
 
 #: ../Doc/library/ssl.rst:684
 msgid "Selects SSL version 2 as the channel encryption protocol."
 msgstr ""
+"Selecciona la versión 2 de SSL como protocolo de encriptación del canal."
 
 #: ../Doc/library/ssl.rst:686
 msgid ""
 "This protocol is not available if OpenSSL is compiled with the "
 "``OPENSSL_NO_SSL2`` flag."
 msgstr ""
+"Este protocolo no está disponible si OpenSSL fue compilada con la opción "
+"``OPENSSL_NO_SSL2``."
 
 #: ../Doc/library/ssl.rst:691
 msgid "SSL version 2 is insecure.  Its use is highly discouraged."
-msgstr ""
+msgstr "La versión 2 de SSL es insegura. Su uso es muy desaconsejado."
 
 #: ../Doc/library/ssl.rst:695
 msgid "OpenSSL has removed support for SSLv2."
-msgstr ""
+msgstr "OpenSSL a eliminado el soporte para SSLv2."
 
 #: ../Doc/library/ssl.rst:699
 msgid "Selects SSL version 3 as the channel encryption protocol."
 msgstr ""
+"Selecciona la versión 3 de SSL como protocolo de encriptación del canal."
 
 #: ../Doc/library/ssl.rst:701
 msgid ""
 "This protocol is not be available if OpenSSL is compiled with the "
 "``OPENSSL_NO_SSLv3`` flag."
 msgstr ""
+"Este protocolo no está disponible si OpenSSL fue compilada con la opción "
+"``OPENSSL_NO_SSLv3``."
 
 #: ../Doc/library/ssl.rst:706
 msgid "SSL version 3 is insecure.  Its use is highly discouraged."
-msgstr ""
+msgstr "La versión 3 de SSL es insegura. Su uso es muy desaconsejado."
 
 #: ../Doc/library/ssl.rst:710 ../Doc/library/ssl.rst:719
 #: ../Doc/library/ssl.rst:731 ../Doc/library/ssl.rst:744
@@ -931,16 +1104,22 @@ msgid ""
 "OpenSSL has deprecated all version specific protocols. Use the default "
 "protocol :data:`PROTOCOL_TLS` with flags like :data:`OP_NO_SSLv3` instead."
 msgstr ""
+"OpenSSL a dejado obsoletas todos los protocolos de versiones específicas. "
+"Utilice en su lugar el protocolo por defecto :data:`PROTOCOL_TLS` con "
+"opciones como :data:`OP_NO_SSLv3`."
 
 #: ../Doc/library/ssl.rst:715
 msgid "Selects TLS version 1.0 as the channel encryption protocol."
 msgstr ""
+"Selecciona la versión 1.0 de TLS como protocolo de encriptación del canal."
 
 #: ../Doc/library/ssl.rst:724
 msgid ""
 "Selects TLS version 1.1 as the channel encryption protocol. Available only "
 "with openssl version 1.0.1+."
 msgstr ""
+"Selecciona la versión 1.1 de TLS como protocolo de encriptación del canal. "
+"Disponible sólo con openssl en versión 1.0.1+."
 
 #: ../Doc/library/ssl.rst:736
 msgid ""
@@ -948,6 +1127,10 @@ msgid ""
 "modern version, and probably the best choice for maximum protection, if both "
 "sides can speak it.  Available only with openssl version 1.0.1+."
 msgstr ""
+"Selecciona la versión 1.2 de TLS como protocolo de encriptación del canal. "
+"Esta es la versión mas moderna, y probablemente la mejor alternativa para "
+"máxima protección, si ambos lados pueden utilizarla. Disponible sólo con "
+"openssl en versión 1.0.1+."
 
 #: ../Doc/library/ssl.rst:749
 msgid ""
@@ -955,6 +1138,10 @@ msgid ""
 "This option is set by default.  It does not necessarily set the same flags "
 "as OpenSSL's ``SSL_OP_ALL`` constant."
 msgstr ""
+"Activa soluciones alternativas para varios errores presentes en otras "
+"implementaciones SSL. Esta opción esta activada por defecto. No "
+"necesariamente activa las mismas opciones como la constante ``SSL_OP_ALL`` "
+"de OpenSSL."
 
 #: ../Doc/library/ssl.rst:757
 msgid ""
@@ -962,10 +1149,12 @@ msgid ""
 "with :const:`PROTOCOL_TLS`.  It prevents the peers from choosing SSLv2 as "
 "the protocol version."
 msgstr ""
+"Evita una conexión SSLv2. Esta opción sólo es aplicable junto con :const:"
+"`PROTOCOL_TLS`. Evita que los pares elijan SSLv2 como versión del protocolo."
 
 #: ../Doc/library/ssl.rst:765
 msgid "SSLv2 is deprecated"
-msgstr ""
+msgstr "SSLv2 es obsoleto."
 
 #: ../Doc/library/ssl.rst:770
 msgid ""
@@ -973,10 +1162,12 @@ msgid ""
 "with :const:`PROTOCOL_TLS`.  It prevents the peers from choosing SSLv3 as "
 "the protocol version."
 msgstr ""
+"Evita una conexión SSLv3. Esta opción sólo es aplicable junto con :const:"
+"`PROTOCOL_TLS`. Evita que los pares elijan SSLv3 como versión del protocolo."
 
 #: ../Doc/library/ssl.rst:778
 msgid "SSLv3 is deprecated"
-msgstr ""
+msgstr "SSLv3 es obsoleto."
 
 #: ../Doc/library/ssl.rst:782
 msgid ""
@@ -984,12 +1175,16 @@ msgid ""
 "with :const:`PROTOCOL_TLS`.  It prevents the peers from choosing TLSv1 as "
 "the protocol version."
 msgstr ""
+"Evita una conexión TLSv1. Esta opción sólo es aplicable junto con :const:"
+"`PROTOCOL_TLS`. Evita que los pares elijan TLSv1 como versión del protocolo."
 
 #: ../Doc/library/ssl.rst:788
 msgid ""
 "The option is deprecated since OpenSSL 1.1.0, use the new :attr:`SSLContext."
 "minimum_version` and :attr:`SSLContext.maximum_version` instead."
 msgstr ""
+"Esta opción es obsoleta desde OpenSSL 1.1.0, utilice en su lugar los nuevos :"
+"attr:`SSLContext.minimum_version` y :attr:`SSLContext.maximum_version`."
 
 #: ../Doc/library/ssl.rst:795
 msgid ""
@@ -997,10 +1192,13 @@ msgid ""
 "with :const:`PROTOCOL_TLS`. It prevents the peers from choosing TLSv1.1 as "
 "the protocol version. Available only with openssl version 1.0.1+."
 msgstr ""
+"Evita una conexión TLSv1.1. Esta opción sólo es aplicable junto con :const:"
+"`PROTOCOL_TLS`. Evita que los pares elijan TLSv1.1 como versión del "
+"protocolo. Disponible sólo con openssl en versión 1.0.1+."
 
 #: ../Doc/library/ssl.rst:801 ../Doc/library/ssl.rst:812
 msgid "The option is deprecated since OpenSSL 1.1.0."
-msgstr ""
+msgstr "Esta opción es obsoleta desde OpenSSL 1.1.0."
 
 #: ../Doc/library/ssl.rst:806
 msgid ""
@@ -1008,6 +1206,9 @@ msgid ""
 "with :const:`PROTOCOL_TLS`. It prevents the peers from choosing TLSv1.2 as "
 "the protocol version. Available only with openssl version 1.0.1+."
 msgstr ""
+"Evita una conexión TLSv1.2. Esta opción sólo es aplicable junto con :const:"
+"`PROTOCOL_TLS`. Evita que los pares elijan TLSv1.2 como versión del "
+"protocolo. Disponible sólo con openssl en versión 1.0.1+."
 
 #: ../Doc/library/ssl.rst:817
 msgid ""
@@ -1017,28 +1218,40 @@ msgid ""
 "Python has been compiled against an older version of OpenSSL, the flag "
 "defaults to *0*."
 msgstr ""
+"Evita una conexión TLSv1.3. Esta opción sólo es aplicable junto con :const:"
+"`PROTOCOL_TLS`. Evita que los pares elijan TLSv1.3 como versión del "
+"protocolo. TLS 1.3 está disponible con OpenSSL 1.1.1 o superior. Cuando "
+"Python es compilado contra una versión mas antigua de OpenSSL, la opción "
+"vale *0* por defecto."
 
 #: ../Doc/library/ssl.rst:825
 msgid ""
 "The option is deprecated since OpenSSL 1.1.0. It was added to 2.7.15, 3.6.3 "
 "and 3.7.0 for backwards compatibility with OpenSSL 1.0.2."
 msgstr ""
+"Esta opción es obsoleta desde OpenSSL 1.1.0. Ha sido agregada a 2.7.15, "
+"3.6.3 y 3.7.0 por retro-compatibilidad con OpenSSL 1.0.2."
 
 #: ../Doc/library/ssl.rst:831
 msgid ""
 "Disable all renegotiation in TLSv1.2 and earlier. Do not send HelloRequest "
 "messages, and ignore renegotiation requests via ClientHello."
 msgstr ""
+"Desactiva toda re-negociación en TLSv1.2 y anteriores. No envía mensajes "
+"HelloRequest e ignora solicitudes de re-negociación vía ClientHello."
 
 #: ../Doc/library/ssl.rst:834
 msgid "This option is only available with OpenSSL 1.1.0h and later."
-msgstr ""
+msgstr "Esta opción sólo está disponible con OpenSSL 1.1.0h y posteriores."
 
 #: ../Doc/library/ssl.rst:840
 msgid ""
 "Use the server's cipher ordering preference, rather than the client's. This "
 "option has no effect on client sockets and SSLv2 server sockets."
 msgstr ""
+"Utiliza la preferencia de ordenación de cifrado del servidor, en lugar de la "
+"del cliente. Esta opción no tiene efecto en los sockets del cliente ni en "
+"los sockets del servidor SSLv2."
 
 #: ../Doc/library/ssl.rst:847
 msgid ""
@@ -1046,6 +1259,9 @@ msgid ""
 "forward secrecy but requires more computational resources. This option only "
 "applies to server sockets."
 msgstr ""
+"Evita la reutilización de la misma clave DH para distintas sesiones SSL. "
+"Esto mejora el secreto hacia adelante pero requiere más recursos "
+"computacionales. Esta opción sólo se aplica a los sockets del servidor."
 
 #: ../Doc/library/ssl.rst:855
 msgid ""
@@ -1053,46 +1269,58 @@ msgid ""
 "improves forward secrecy but requires more computational resources. This "
 "option only applies to server sockets."
 msgstr ""
+"Evita la reutilización de la misma clave ECDH para distintas sesiones SSL. "
+"Esto mejora el secreto hacia adelante pero requiere más recursos "
+"computacionales. Esta opción sólo se aplica a los sockets del servidor."
 
 #: ../Doc/library/ssl.rst:863
 msgid ""
 "Send dummy Change Cipher Spec (CCS) messages in TLS 1.3 handshake to make a "
 "TLS 1.3 connection look more like a TLS 1.2 connection."
 msgstr ""
+"Enviar mensajes Change Cipher Spec (CCS) ficticios en el handshake de TLS "
+"1.3 para que una conexión TLS 1.3 se parezca más a una conexión TLS 1.2."
 
 #: ../Doc/library/ssl.rst:866
 msgid "This option is only available with OpenSSL 1.1.1 and later."
-msgstr ""
+msgstr "Esta opción sólo está disponible con OpenSSL 1.1.1 y posteriores."
 
 #: ../Doc/library/ssl.rst:872
 msgid ""
 "Disable compression on the SSL channel.  This is useful if the application "
 "protocol supports its own compression scheme."
 msgstr ""
+"Desactivar la compresión en el canal SSL. Esto es útil si el protocolo de la "
+"aplicación soporta su propio esquema de compresión."
 
 #: ../Doc/library/ssl.rst:875
 msgid "This option is only available with OpenSSL 1.0.0 and later."
-msgstr ""
+msgstr "Esta opción sólo está disponible con OpenSSL 1.0.0 y posteriores."
 
 #: ../Doc/library/ssl.rst:881
 msgid ":class:`enum.IntFlag` collection of OP_* constants."
-msgstr ""
+msgstr "Colección :class:`enum.IntFlag` de constantes OP_*."
 
 #: ../Doc/library/ssl.rst:885
 msgid "Prevent client side from requesting a session ticket."
-msgstr ""
+msgstr "Evita que el lado del cliente solicite un ticket de sesión."
 
 #: ../Doc/library/ssl.rst:891
 msgid ""
 "Whether the OpenSSL library has built-in support for the *Application-Layer "
 "Protocol Negotiation* TLS extension as described in :rfc:`7301`."
 msgstr ""
+"Si la biblioteca OpenSSL tiene soporte incorporado para la extensión TLS "
+"*Application-Layer Protocol Negotiation* como se describe en :rfc:`7301`."
 
 #: ../Doc/library/ssl.rst:898
 msgid ""
 "Whether the OpenSSL library has built-in support not checking subject common "
 "name and :attr:`SSLContext.hostname_checks_common_name` is writeable."
 msgstr ""
+"Si la biblioteca OpenSSL tiene soporte incorporado para no comprobar el "
+"nombre común del sujeto y :attr:`SSLContext.hostname_checks_common_name` es "
+"modificable."
 
 #: ../Doc/library/ssl.rst:906
 msgid ""
@@ -1100,12 +1328,18 @@ msgid ""
 "based Diffie-Hellman key exchange.  This should be true unless the feature "
 "was explicitly disabled by the distributor."
 msgstr ""
+"Si la biblioteca OpenSSL tiene soporte incorporado para el intercambio de "
+"claves Diffie-Hellman basado en Elliptic Curve. Esto debería ser cierto a "
+"menos que la función haya sido desactivada explícitamente por el "
+"distribuidor."
 
 #: ../Doc/library/ssl.rst:914
 msgid ""
 "Whether the OpenSSL library has built-in support for the *Server Name "
 "Indication* extension (as defined in :rfc:`6066`)."
 msgstr ""
+"Si la biblioteca OpenSSL tiene soporte incorporado para la extensión *Server "
+"Name Indication* (como se define en :rfc:`6066`)."
 
 #: ../Doc/library/ssl.rst:921
 msgid ""
@@ -1115,36 +1349,47 @@ msgid ""
 "When true, you can use the :meth:`SSLContext.set_npn_protocols` method to "
 "advertise which protocols you want to support."
 msgstr ""
+"Si la biblioteca OpenSSL tiene soporte incorporado para *Next Protocol "
+"Negotiation* como se describe en `Application Layer Protocol Negotiation "
+"<https://en.wikipedia.org/wiki/Application-Layer_Protocol_Negotiation>`_. "
+"Cuando es verdadero, puede utilizar el método :meth:`SSLContext."
+"set_npn_protocols` para anunciar los protocolos que desea soportar."
 
 #: ../Doc/library/ssl.rst:931
 msgid ""
 "Whether the OpenSSL library has built-in support for the SSL 2.0 protocol."
 msgstr ""
+"Si la biblioteca OpenSSL tiene soporte incorporado para el protocolo SSL 2.0."
 
 #: ../Doc/library/ssl.rst:937
 msgid ""
 "Whether the OpenSSL library has built-in support for the SSL 3.0 protocol."
 msgstr ""
+"Si la biblioteca OpenSSL tiene soporte incorporado para el protocolo SSL 3.0."
 
 #: ../Doc/library/ssl.rst:943
 msgid ""
 "Whether the OpenSSL library has built-in support for the TLS 1.0 protocol."
 msgstr ""
+"Si la biblioteca OpenSSL tiene soporte incorporado para el protocolo TLS 1.0."
 
 #: ../Doc/library/ssl.rst:949
 msgid ""
 "Whether the OpenSSL library has built-in support for the TLS 1.1 protocol."
 msgstr ""
+"Si la biblioteca OpenSSL tiene soporte incorporado para el protocolo TLS 1.1."
 
 #: ../Doc/library/ssl.rst:955
 msgid ""
 "Whether the OpenSSL library has built-in support for the TLS 1.2 protocol."
 msgstr ""
+"Si la biblioteca OpenSSL tiene soporte incorporado para el protocolo TLS 1.2."
 
 #: ../Doc/library/ssl.rst:961
 msgid ""
 "Whether the OpenSSL library has built-in support for the TLS 1.3 protocol."
 msgstr ""
+"Si la biblioteca OpenSSL tiene soporte incorporado para el protocolo TLS 1.3."
 
 #: ../Doc/library/ssl.rst:967
 msgid ""
