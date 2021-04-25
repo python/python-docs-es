@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-19 11:16+0100\n"
-"PO-Revision-Date: 2021-04-24 23:31+0200\n"
+"PO-Revision-Date: 2021-04-25 23:19+0200\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3181,14 +3181,17 @@ msgid ""
 "verification fails.  This attribute must be one of :data:`CERT_NONE`, :data:"
 "`CERT_OPTIONAL` or :data:`CERT_REQUIRED`."
 msgstr ""
+"Si se intenta verificar los certificados de otros pares y cómo comportarse "
+"si la verificación falla. Este atributo debe ser uno de los siguientes: :"
+"data:`CERT_NONE`, :data:`CERT_OPTIONAL` o :data:`CERT_REQUIRED`."
 
 #: ../Doc/library/ssl.rst:2056
 msgid ":attr:`SSLContext.verify_mode` returns :class:`VerifyMode` enum:"
-msgstr ""
+msgstr ":attr:`SSLContext.verify_mode` retorna :class:`VerifyMode` enum:"
 
 #: ../Doc/library/ssl.rst:2069
 msgid "Certificates"
-msgstr ""
+msgstr "Certificados"
 
 #: ../Doc/library/ssl.rst:2071
 msgid ""
@@ -3200,6 +3203,14 @@ msgid ""
 "if you encrypt a message with one of the parts, you can decrypt it with the "
 "other part, and **only** with the other part."
 msgstr ""
+"En general, los certificados forman parte de un sistema de clave pública/"
+"clave privada. En este sistema, a cada *principal* (que puede ser una "
+"máquina, una persona o una organización) se le asigna una clave de cifrado "
+"única de dos partes. Una parte de la clave es pública y se llama *clave "
+"pública*; la otra parte se mantiene en secreto y se llama *clave privada*. "
+"Las dos partes están relacionadas, en el sentido de que si se cifra un "
+"mensaje con una de las partes, se puede descifrar con la otra parte, y "
+"**sólo** con la otra parte."
 
 #: ../Doc/library/ssl.rst:2079
 msgid ""
@@ -3214,6 +3225,16 @@ msgid ""
 "information about the time period over which it is valid.  This is expressed "
 "as two fields, called \"notBefore\" and \"notAfter\"."
 msgstr ""
+"Un certificado contiene información sobre dos sujetos. Contiene el nombre de "
+"un *sujeto*, y la clave pública del sujeto. También contiene una declaración "
+"de un segundo titular, el *emisor*, de que el sujeto es quien dice ser, y de "
+"que ésta es efectivamente la clave pública del sujeto. La declaración del "
+"emisor está firmada con su clave privada, que sólo el emisor conoce. Sin "
+"embargo, cualquiera puede verificar la declaración del emisor encontrando la "
+"clave pública del emisor, descifrando la declaración con ella y comparándola "
+"con el resto de la información del certificado. El certificado también "
+"contiene información sobre el periodo de tiempo en el que es válido. Esto se "
+"expresa en dos campos, llamados \"notBefore\" y \"notAfter\"."
 
 #: ../Doc/library/ssl.rst:2089
 msgid ""
@@ -3227,6 +3248,16 @@ msgid ""
 "does usually need to provide sets of certificates to allow this process to "
 "take place."
 msgstr ""
+"En el uso de certificados en Python, un cliente o servidor puede utilizar un "
+"certificado para demostrar quién es. El otro lado de una conexión de red "
+"también puede ser requerido para producir un certificado, y ese certificado "
+"puede ser validado a la satisfacción del cliente o servidor que requiere "
+"dicha validación. El intento de conexión puede configurarse para que lance "
+"una excepción si la validación falla. La validación se realiza "
+"automáticamente, por el subyacente framework OpenSSL; la aplicación no "
+"necesita preocuparse de su mecánica. Sin embargo, la aplicación normalmente "
+"necesita proporcionar conjuntos de certificados para permitir que este "
+"proceso tenga lugar."
 
 #: ../Doc/library/ssl.rst:2099
 msgid ""
@@ -3234,10 +3265,13 @@ msgid ""
 "\" (see :rfc:`1422`), which is a base-64 encoded form wrapped with a header "
 "line and a footer line::"
 msgstr ""
+"Python utiliza archivos para contener certificados. Deben ser formateados "
+"como \"PEM\" (ver :rfc:`1422`), que es una forma codificada en base-64 "
+"envuelta con una línea de cabecera y una línea de pie de página::"
 
 #: ../Doc/library/ssl.rst:2108
 msgid "Certificate chains"
-msgstr ""
+msgstr "Cadenas de certificados"
 
 #: ../Doc/library/ssl.rst:2110
 msgid ""
@@ -3254,10 +3288,23 @@ msgid ""
 "authority that signed our server certificate, to the root certificate of the "
 "agency which issued the certification authority's certificate::"
 msgstr ""
+"Los archivos de Python que contienen certificados pueden contener una "
+"secuencia de certificados, a veces llamada *cadena de certificados*. Esta "
+"cadena debería empezar con el certificado específico para el principal que "
+"\"es\" el cliente o servidor, y luego el certificado para el emisor de ese "
+"certificado, y luego el certificado para el emisor de *ese* certificado, y "
+"así sucesivamente hasta llegar a un certificado que es *auto-firmado*, es "
+"decir, un certificado que tiene el mismo sujeto y emisor, a veces llamado "
+"*certificado raíz*. Los certificados sólo deben concatenarse en el archivo "
+"de certificados. Por ejemplo, supongamos que tenemos una cadena de tres "
+"certificados, desde el certificado de nuestro servidor al certificado de la "
+"autoridad de certificación que firmó nuestro certificado del servidor, hasta "
+"el certificado raíz de la agencia que emitió el certificado de la autoridad "
+"de certificación::"
 
 #: ../Doc/library/ssl.rst:2134
 msgid "CA certificates"
-msgstr ""
+msgstr "Certificados CA"
 
 #: ../Doc/library/ssl.rst:2136
 msgid ""
@@ -3270,10 +3317,18 @@ msgid ""
 "load_default_certs`, this is done automatically with :func:`."
 "create_default_context`."
 msgstr ""
+"Si se requiere la validación del certificado del otro lado de la conexión, "
+"se necesita proporcionar un archivo \"CA certs\", con las cadenas de "
+"certificados para cada emisor en el que se está dispuesto a confiar. De "
+"nuevo, este archivo sólo contiene estas cadenas concatenadas. Para la "
+"validación, Python utilizará la primera cadena que encuentre en el archivo "
+"que coincida. El archivo de certificados de la plataforma se puede utilizar "
+"llamando a :meth:`SSLContext.load_default_certs`, esto se hace "
+"automáticamente con :func:`.create_default_context`."
 
 #: ../Doc/library/ssl.rst:2145
 msgid "Combined key and certificate"
-msgstr ""
+msgstr "Clave y certificado combinados"
 
 #: ../Doc/library/ssl.rst:2147
 msgid ""
@@ -3283,10 +3338,15 @@ msgid ""
 "with the certificate, it should come before the first certificate in the "
 "certificate chain::"
 msgstr ""
+"A menudo la clave privada se almacena en el mismo archivo que el "
+"certificado; en este caso, sólo es necesario pasar el parámetro ``certfile`` "
+"a :meth:`SSLContext.load_cert_chain` y :func:`wrap_socket`. Si la clave "
+"privada se almacena con el certificado, debe ir antes del primer certificado "
+"de la cadena de certificados::"
 
 #: ../Doc/library/ssl.rst:2161
 msgid "Self-signed certificates"
-msgstr ""
+msgstr "Certificados auto-firmados"
 
 #: ../Doc/library/ssl.rst:2163
 msgid ""
@@ -3297,6 +3357,12 @@ msgid ""
 "signed certificate.  The simplest way to do this is with the OpenSSL "
 "package, using something like the following::"
 msgstr ""
+"Si va a crear un servidor que proporcione servicios de conexión encriptada "
+"SSL, necesitará adquirir un certificado para ese servicio. Hay muchas formas "
+"de adquirir los certificados adecuados, como comprar uno a una autoridad de "
+"certificación. Otra práctica común es generar un certificado auto-firmado. "
+"La forma más sencilla de hacerlo es con el paquete OpenSSL, utilizando algo "
+"como lo siguiente"
 
 #: ../Doc/library/ssl.rst:2192
 msgid ""
@@ -3304,36 +3370,47 @@ msgid ""
 "certificate, and no one else will have it in their cache of known (and "
 "trusted) root certificates."
 msgstr ""
+"La desventaja de un certificado auto-firmado es que es su propio certificado "
+"raíz, y nadie más lo tendrá en su caché de certificados raíz conocidos (y de "
+"confianza)."
 
 #: ../Doc/library/ssl.rst:2198
 msgid "Examples"
-msgstr ""
+msgstr "Ejemplos"
 
 #: ../Doc/library/ssl.rst:2201
 msgid "Testing for SSL support"
-msgstr ""
+msgstr "Pruebas de compatibilidad con SSL"
 
 #: ../Doc/library/ssl.rst:2203
 msgid ""
 "To test for the presence of SSL support in a Python installation, user code "
 "should use the following idiom::"
 msgstr ""
+"Para comprobar la presencia de soporte SSL en una instalación de Python, el "
+"código del usuario debe utilizar el siguiente modismo::"
 
 #: ../Doc/library/ssl.rst:2214
 msgid "Client-side operation"
-msgstr ""
+msgstr "Operación del lado del cliente"
 
 #: ../Doc/library/ssl.rst:2216
 msgid ""
 "This example creates a SSL context with the recommended security settings "
 "for client sockets, including automatic certificate verification::"
 msgstr ""
+"Este ejemplo crea un contexto SSL con la configuración de seguridad "
+"recomendada para los sockets del cliente, incluyendo la verificación "
+"automática de certificados::"
 
 #: ../Doc/library/ssl.rst:2221
 msgid ""
 "If you prefer to tune security settings yourself, you might create a context "
 "from scratch (but beware that you might not get the settings right)::"
 msgstr ""
+"Si prefieres ajustar la configuración de seguridad tú mismo, puedes crear un "
+"contexto desde cero (pero ten en cuenta que podrías no acertar con la "
+"configuración)::"
 
 #: ../Doc/library/ssl.rst:2228
 msgid ""
@@ -3341,6 +3418,9 @@ msgid ""
 "certificates in ``/etc/ssl/certs/ca-bundle.crt``; if not, you'll get an "
 "error and have to adjust the location)"
 msgstr ""
+"(este fragmento asume que tu sistema operativo coloca un paquete de todos "
+"los certificados CA en ``/etc/ssl/certs/ca-bundle.crt``; si no es así, "
+"obtendrá un error y tendrá que ajustar la ubicación)"
 
 #: ../Doc/library/ssl.rst:2232
 msgid ""
@@ -3349,6 +3429,11 @@ msgid ""
 "to :data:`CERT_REQUIRED` and :attr:`~SSLContext.check_hostname` is set to "
 "``True``. All other protocols create SSL contexts with insecure defaults."
 msgstr ""
+"El protocolo :data:`PROTOCOL_TLS_CLIENT` configura el contexto para la "
+"validación de certificados y la verificación del hostname. :attr:"
+"`~SSLContext.verify_mode` se establece en :data:`CERT_REQUIRED` y :attr:"
+"`~SSLContext.check_hostname` se establece en ``True``. Todos los demás "
+"protocolos crean contextos SSL con valores predeterminados inseguros."
 
 #: ../Doc/library/ssl.rst:2237
 msgid ""
@@ -3358,26 +3443,36 @@ msgid ""
 "certificates, checks the signature for correctness, and verifies other "
 "properties like validity and identity of the hostname::"
 msgstr ""
+"Cuando se utiliza el contexto para conectarse a un servidor, :const:"
+"`CERT_REQUIRED` y :attr:`~SSLContext.check_hostname` validan el certificado "
+"del servidor: se asegura de que el certificado del servidor se ha firmado "
+"con uno de los certificados de la CA, se comprueba que la firma es correcta "
+"y se verifican otras propiedades como la validez y la identidad del "
+"hostname::"
 
 #: ../Doc/library/ssl.rst:2247
 msgid "You may then fetch the certificate::"
-msgstr ""
+msgstr "A continuación, puede obtener el certificado::"
 
 #: ../Doc/library/ssl.rst:2251
 msgid ""
 "Visual inspection shows that the certificate does identify the desired "
 "service (that is, the HTTPS host ``www.python.org``)::"
 msgstr ""
+"La inspección visual muestra que el certificado sí identifica el servicio "
+"deseado (es decir, el host HTTPS ``www.python.org``)::"
 
 #: ../Doc/library/ssl.rst:2294
 msgid ""
 "Now the SSL channel is established and the certificate verified, you can "
 "proceed to talk with the server::"
 msgstr ""
+"Ahora que se ha establecido el canal SSL y se ha verificado el certificado, "
+"se puede proceder a hablar con el servidor::"
 
 #: ../Doc/library/ssl.rst:2321
 msgid "Server-side operation"
-msgstr ""
+msgstr "Operación del lado del servidor"
 
 #: ../Doc/library/ssl.rst:2323
 msgid ""
@@ -3387,6 +3482,12 @@ msgid ""
 "you'll open a socket, bind it to a port, call :meth:`listen` on it, and "
 "start waiting for clients to connect::"
 msgstr ""
+"Para el funcionamiento del servidor, normalmente necesitarás tener un "
+"certificado de servidor y una clave privada, cada uno en un archivo. Primero "
+"crearás un contexto que contenga la clave y el certificado, para que los "
+"clientes puedan comprobar tu autenticidad. Entonces abrirás un socket, lo "
+"enlazarás a un puerto, llamarás a :meth:`listen` en él, y empezarás a "
+"esperar a que los clientes se conecten::"
 
 #: ../Doc/library/ssl.rst:2338
 msgid ""
@@ -3394,12 +3495,18 @@ msgid ""
 "new socket from the other end, and use the context's :meth:`SSLContext."
 "wrap_socket` method to create a server-side SSL socket for the connection::"
 msgstr ""
+"Cuando un cliente se conecta, llamarás a :meth:`accept` en el socket para "
+"obtener el nuevo socket del otro extremo, y utilizarás el método :meth:"
+"`SSLContext.wrap_socket` del contexto para crear un socket SSL del lado del "
+"servidor para la conexión::"
 
 #: ../Doc/library/ssl.rst:2351
 msgid ""
 "Then you'll read data from the ``connstream`` and do something with it till "
 "you are finished with the client (or the client is finished with you)::"
 msgstr ""
+"Entonces leerás los datos del ``connstream`` y harás algo con ellos hasta "
+"que hayas terminado con el cliente (o el cliente haya terminado contigo)::"
 
 #: ../Doc/library/ssl.rst:2365
 msgid ""
@@ -3408,10 +3515,14 @@ msgid ""
 "put the sockets in :ref:`non-blocking mode <ssl-nonblocking>` and use an "
 "event loop)."
 msgstr ""
+"Y volver a escuchar nuevas conexiones de clientes (por supuesto, un servidor "
+"real probablemente manejaría cada conexión de cliente en un hilo separado, o "
+"pondría los sockets en modo :ref:`no-bloqueo <ssl-nonblocking>` y usaría un "
+"bucle de eventos)."
 
 #: ../Doc/library/ssl.rst:2373
 msgid "Notes on non-blocking sockets"
-msgstr ""
+msgstr "Notas sobre los sockets no bloqueantes"
 
 #: ../Doc/library/ssl.rst:2375
 msgid ""
@@ -3419,6 +3530,9 @@ msgid ""
 "mode. When working with non-blocking sockets, there are thus several things "
 "you need to be aware of:"
 msgstr ""
+"Los sockets SSL se comportan de forma ligeramente diferente a los sockets "
+"normales en modo no bloqueante. Cuando se trabaja con sockets no "
+"bloqueantes, hay varias cosas que hay que tener en cuenta:"
 
 #: ../Doc/library/ssl.rst:2379
 msgid ""
@@ -3431,12 +3545,24 @@ msgid ""
 "underlying socket first, and attempts to *read* from the SSL socket may "
 "require a prior *write* to the underlying socket."
 msgstr ""
+"La mayoría de los métodos de :class:`SSLSocket` lanzarán :exc:"
+"`SSLWantWriteError` o :exc:`SSLWantReadError` en lugar de :exc:"
+"`BlockingIOError` si una operación de E/S se bloquea. :exc:"
+"`SSLWantReadError` se lanzará si es necesaria una operación de lectura en el "
+"socket subyacente, y :exc:`SSLWantWriteError` para una operación de "
+"escritura en el socket subyacente. Tenga en cuenta que los intentos de "
+"*escribir* en un socket SSL pueden requerir *leer* del socket subyacente "
+"primero, y los intentos de *leer* del socket SSL pueden requerir una "
+"*escritura* previa en el socket subyacente."
 
 #: ../Doc/library/ssl.rst:2391
 msgid ""
 "In earlier Python versions, the :meth:`!SSLSocket.send` method returned zero "
 "instead of raising :exc:`SSLWantWriteError` or :exc:`SSLWantReadError`."
 msgstr ""
+"En versiones anteriores de Python, el método :meth:`!SSLSocket.send` "
+"devolvía cero en lugar de lanzar :exc:`SSLWantWriteError` o :exc:"
+"`SSLWantReadError`."
 
 #: ../Doc/library/ssl.rst:2395
 msgid ""
@@ -3447,6 +3573,12 @@ msgid ""
 "and :meth:`SSLSocket.send` failures, and retry after another call to :func:"
 "`~select.select`."
 msgstr ""
+"Llamar a :func:`~select.select` le indica que se puede leer (o escribir) en "
+"el socket a nivel del SO, pero no implica que haya suficientes datos en la "
+"capa superior SSL. Por ejemplo, puede que sólo haya llegado una parte de una "
+"trama SSL. Por lo tanto, debe estar preparado para manejar los fallos de :"
+"meth:`SSLSocket.recv` y :meth:`SSLSocket.send`, y re-intentar después de "
+"otra llamada a :func:`~select.select`."
 
 #: ../Doc/library/ssl.rst:2402
 msgid ""
@@ -3456,12 +3588,19 @@ msgid ""
 "potentially available data, and then only block on a :func:`~select.select` "
 "call if still necessary."
 msgstr ""
+"Por el contrario, dado que la capa SSL tiene su propia estructura, un socket "
+"SSL puede tener datos disponibles para leer sin que :func:`~select.select` "
+"lo sepa. Por lo tanto, debería llamar primero a :meth:`SSLSocket.recv` para "
+"drenar cualquier dato potencialmente disponible, y luego sólo bloquear en "
+"una llamada a :func:`~select.select` si todavía es necesario."
 
 #: ../Doc/library/ssl.rst:2408
 msgid ""
 "(of course, similar provisions apply when using other primitives such as :"
 "func:`~select.poll`, or those in the :mod:`selectors` module)"
 msgstr ""
+"(por supuesto, se aplican disposiciones similares cuando se utilizan otras "
+"primitivas como :func:`~select.poll`, o las del módulo :mod:`selectors`)"
 
 #: ../Doc/library/ssl.rst:2411
 msgid ""
@@ -3470,6 +3609,10 @@ msgid ""
 "is a synopsis using :func:`~select.select` to wait for the socket's "
 "readiness::"
 msgstr ""
+"El handshake SSL en sí mismo será no bloqueante: el método :meth:`SSLSocket."
+"do_handshake` tiene que ser re-intentado hasta que regrese con éxito. Aquí "
+"hay una sinopsis usando :func:`~select.select` para esperar la "
+"disponibilidad del socket::"
 
 #: ../Doc/library/ssl.rst:2427
 msgid ""
@@ -3479,10 +3622,15 @@ msgid ""
 "`SSLWantReadError` and :exc:`BlockingIOError` exceptions. It runs the SSL "
 "handshake asynchronously as well."
 msgstr ""
+"El módulo :mod:`asyncio` soporta :ref:`sockets SSL no bloqueantes <ssl-"
+"nonblocking>` y proporciona una API de alto nivel. Busca eventos usando el "
+"módulo :mod:`selectors` y maneja las excepciones :exc:`SSLWantWriteError`, :"
+"exc:`SSLWantReadError` y :exc:`BlockingIOError`. También ejecuta el "
+"handshake SSL de forma asíncrona."
 
 #: ../Doc/library/ssl.rst:2436
 msgid "Memory BIO Support"
-msgstr ""
+msgstr "Soporte de memoria BIO"
 
 #: ../Doc/library/ssl.rst:2440
 msgid ""
@@ -3490,14 +3638,17 @@ msgid ""
 "`SSLSocket` class has provided two related but distinct areas of "
 "functionality:"
 msgstr ""
+"Desde que se introdujo el módulo SSL en Python 2.6, la clase :class:"
+"`SSLSocket` ha proporcionado dos áreas de funcionalidad relacionadas pero "
+"distintas:"
 
 #: ../Doc/library/ssl.rst:2443
 msgid "SSL protocol handling"
-msgstr ""
+msgstr "Manejo del protocolo SSL"
 
 #: ../Doc/library/ssl.rst:2444
 msgid "Network IO"
-msgstr ""
+msgstr "E/S de red"
 
 #: ../Doc/library/ssl.rst:2446
 msgid ""
@@ -3506,6 +3657,10 @@ msgid ""
 "used as a drop-in replacement for a regular socket, making it very easy to "
 "add SSL support to an existing application."
 msgstr ""
+"La API de E/S de red es idéntica a la proporcionada por :class:`socket."
+"socket`, de la que también hereda :class:`SSLSocket`. Esto permite que un "
+"socket SSL sea utilizado como un reemplazo de un socket normal, haciendo que "
+"sea muy fácil añadir soporte SSL a una aplicación existente."
 
 #: ../Doc/library/ssl.rst:2451
 msgid ""
@@ -3518,6 +3673,15 @@ msgid ""
 "this purpose, a reduced scope variant of :class:`SSLSocket` called :class:"
 "`SSLObject` is provided."
 msgstr ""
+"La combinación del manejo del protocolo SSL y la E/S de red suele funcionar "
+"bien, pero hay algunos casos en los que no es así. Un ejemplo son los "
+"frameworks de E/S asíncronos que quieren utilizar un modelo de "
+"multiplexación de E/S diferente al modelo \"selección/consulta de un "
+"descriptor de archivo\" (basado en la preparación) que es asumido por :class:"
+"`socket.socket` y por las rutinas internas de E/S de socket de OpenSSL. Esto "
+"es principalmente relevante para plataformas como Windows donde este modelo "
+"no es eficiente. Para este propósito, se proporciona una variante de ámbito "
+"reducido de :class:`SSLSocket` llamada :class:`SSLObject`."
 
 #: ../Doc/library/ssl.rst:2462
 msgid ""
@@ -3526,6 +3690,10 @@ msgid ""
 "typically used by framework authors that want to implement asynchronous IO "
 "for SSL through memory buffers."
 msgstr ""
+"Una variante de alcance reducido de :class:`SSLSocket` que representa una "
+"instancia del protocolo SSL que no contiene ningún método de E/S de red. "
+"Esta clase suele ser utilizada por los autores de frameworks que quieren "
+"implementar E/S asíncrona para SSL a través de buffers de memoria."
 
 #: ../Doc/library/ssl.rst:2467
 msgid ""
@@ -3534,6 +3702,11 @@ msgid ""
 "but does not provide any network IO itself. IO needs to be performed through "
 "separate \"BIO\" objects which are OpenSSL's IO abstraction layer."
 msgstr ""
+"Esta clase implementa una interfaz sobre un objeto SSL de bajo nivel como el "
+"implementado por OpenSSL. Este objeto captura el estado de una conexión SSL "
+"pero no proporciona ninguna E/S de red en sí misma. La E/S debe realizarse a "
+"través de objetos \"BIO\" separados que son la capa de abstracción de E/S de "
+"OpenSSL."
 
 #: ../Doc/library/ssl.rst:2472
 msgid ""
@@ -3543,10 +3716,16 @@ msgid ""
 "*incoming* BIO is used to pass data from Python to the SSL protocol "
 "instance, while the *outgoing* BIO is used to pass data the other way around."
 msgstr ""
+"Esta clase no tiene un constructor público. Se debe crear una instancia :"
+"class:`SSLObject` utilizando el método :meth:`~SSLContext.wrap_bio`. Este "
+"método creará la instancia :class:`SSLObject` y la vinculará a un par de "
+"BIOs. El BIO *de entrada* se utiliza para pasar los datos de Python a la "
+"instancia del protocolo SSL, mientras que el BIO *de salida* se utiliza para "
+"pasar los datos a la inversa."
 
 #: ../Doc/library/ssl.rst:2479
 msgid "The following methods are available:"
-msgstr ""
+msgstr "Los siguientes métodos son disponibles:"
 
 #: ../Doc/library/ssl.rst:2481
 msgid ":attr:`~SSLSocket.context`"
@@ -3629,18 +3808,24 @@ msgid ""
 "When compared to :class:`SSLSocket`, this object lacks the following "
 "features:"
 msgstr ""
+"En comparación con :class:`SSLSocket`, este objeto carece de las siguientes "
+"características:"
 
 #: ../Doc/library/ssl.rst:2504
 msgid ""
 "Any form of network IO; ``recv()`` and ``send()`` read and write only to the "
 "underlying :class:`MemoryBIO` buffers."
 msgstr ""
+"Cualquier forma de E/S de red; ``recv()`` y ``send()`` leen y escriben sólo "
+"en los buffers subyacentes de :class:`MemoryBIO`."
 
 #: ../Doc/library/ssl.rst:2507
 msgid ""
 "There is no *do_handshake_on_connect* machinery. You must always manually "
 "call :meth:`~SSLSocket.do_handshake` to start the handshake."
 msgstr ""
+"No existe la maquinaria *do_handshake_on_connect*. Siempre hay que llamar "
+"manualmente a :meth:`~SSLSocket.do_handshake` para iniciar el handshake."
 
 #: ../Doc/library/ssl.rst:2510
 msgid ""
@@ -3648,12 +3833,18 @@ msgid ""
 "that are in violation of the protocol are reported via the :exc:"
 "`SSLEOFError` exception."
 msgstr ""
+"No hay manejo de *suppress_ragged_eofs*. Todas las condiciones de fin de "
+"archivo que violan el protocolo se reportan a través de la excepción :exc:"
+"`SSLEOFError`."
 
 #: ../Doc/library/ssl.rst:2514
 msgid ""
 "The method :meth:`~SSLSocket.unwrap` call does not return anything, unlike "
 "for an SSL socket where it returns the underlying socket."
 msgstr ""
+"La llamada al método :meth:`~SSLSocket.unwrap` no devuelve nada, a "
+"diferencia de lo que ocurre con un socket SSL, que devuelve el socket "
+"subyacente."
 
 #: ../Doc/library/ssl.rst:2517
 msgid ""
@@ -3661,10 +3852,13 @@ msgid ""
 "set_servername_callback` will get an :class:`SSLObject` instance instead of "
 "a :class:`SSLSocket` instance as its first parameter."
 msgstr ""
+"La función callback *server_name_callback* pasada a :meth:`SSLContext."
+"set_servername_callback` obtendrá una instancia de :class:`SSLObject` en "
+"lugar de una instancia de :class:`SSLSocket` como primer parámetro."
 
 #: ../Doc/library/ssl.rst:2521
 msgid "Some notes related to the use of :class:`SSLObject`:"
-msgstr ""
+msgstr "Algunas notas relacionadas con el uso de :class:`SSLObject`:"
 
 #: ../Doc/library/ssl.rst:2523
 msgid ""
@@ -3672,6 +3866,10 @@ msgid ""
 "This means that for example :meth:`~SSLSocket.read` will raise an :exc:"
 "`SSLWantReadError` if it needs more data than the incoming BIO has available."
 msgstr ""
+"Toda la E/S en un :class:`SSLObject` es :ref:`non-blocking <ssl-"
+"nonblocking>`. Esto significa que, por ejemplo, :meth:`~SSLSocket.read` "
+"lanzará un :exc:`SSLWantReadError` si necesita más datos de los que la BIO "
+"entrante tiene disponibles."
 
 #: ../Doc/library/ssl.rst:2528
 msgid ""
@@ -3679,6 +3877,9 @@ msgid ""
 "`~SSLContext.wrap_socket`. An :class:`SSLObject` is always created via an :"
 "class:`SSLContext`."
 msgstr ""
+"No hay una llamada a nivel de módulo ``wrap_bio()`` como la que hay para :"
+"meth:`~SSLContext.wrap_socket`. Un :class:`SSLObject` siempre se crea a "
+"través de un :class:`SSLContext`."
 
 #: ../Doc/library/ssl.rst:2532
 msgid ""
@@ -3686,6 +3887,9 @@ msgid ""
 "wrap_bio`. In earlier versions, it was possible to create instances "
 "directly. This was never documented or officially supported."
 msgstr ""
+"Las instancias :class:`SSLObject` deben crearse con :meth:`~SSLContext."
+"wrap_bio`. En versiones anteriores, era posible crear instancias "
+"directamente. Esto nunca fue documentado ni soportado oficialmente."
 
 #: ../Doc/library/ssl.rst:2538
 msgid ""
@@ -3693,40 +3897,54 @@ msgid ""
 "class :class:`MemoryBIO` provides a memory buffer that can be used for this "
 "purpose.  It wraps an OpenSSL memory BIO (Basic IO) object:"
 msgstr ""
+"Un SSLObject se comunica con el mundo exterior utilizando buffers de "
+"memoria. La clase :class:`MemoryBIO` proporciona un buffer de memoria que "
+"puede ser utilizado para este propósito. Envuelve un objeto BIO (Basic IO) "
+"de memoria de OpenSSL:"
 
 #: ../Doc/library/ssl.rst:2544
 msgid ""
 "A memory buffer that can be used to pass data between Python and an SSL "
 "protocol instance."
 msgstr ""
+"Un buffer de memoria que se puede utilizar para pasar datos entre Python y "
+"una instancia del protocolo SSL."
 
 #: ../Doc/library/ssl.rst:2549
 msgid "Return the number of bytes currently in the memory buffer."
-msgstr ""
+msgstr "Retorna el número de bytes actualmente en la memoria buffer."
 
 #: ../Doc/library/ssl.rst:2553
 msgid ""
 "A boolean indicating whether the memory BIO is current at the end-of-file "
 "position."
 msgstr ""
+"Un booleano que indica si la memoria BIO es actual en la posición de fin de "
+"archivo."
 
 #: ../Doc/library/ssl.rst:2558
 msgid ""
 "Read up to *n* bytes from the memory buffer. If *n* is not specified or "
 "negative, all bytes are returned."
 msgstr ""
+"Lee hasta *n* bytes del buffer de memoria. Si *n* no se especifica o es "
+"negativo, se devuelven todos los bytes."
 
 #: ../Doc/library/ssl.rst:2563
 msgid ""
 "Write the bytes from *buf* to the memory BIO. The *buf* argument must be an "
 "object supporting the buffer protocol."
 msgstr ""
+"Escribe los bytes de *buf* en la memoria BIO. El argumento *buf* debe ser un "
+"objeto que soporte el protocolo de buffer."
 
 #: ../Doc/library/ssl.rst:2566
 msgid ""
 "The return value is the number of bytes written, which is always equal to "
 "the length of *buf*."
 msgstr ""
+"El valor de retorno es el número de bytes escritos, que siempre es igual a "
+"la longitud de *buf*."
 
 #: ../Doc/library/ssl.rst:2571
 msgid ""
@@ -3734,6 +3952,10 @@ msgid ""
 "is illegal to call :meth:`~MemoryBIO.write`. The attribute :attr:`eof` will "
 "become true after all data currently in the buffer has been read."
 msgstr ""
+"Escribe un marcador EOF en la memoria BIO. Después de llamar a este método, "
+"es ilegal llamar a :meth:`~MemoryBIO.write`. El atributo :attr:`eof` se "
+"convertirá en verdadero después de que se hayan leído todos los datos que "
+"hay actualmente en el buffer."
 
 #: ../Doc/library/ssl.rst:2577
 msgid "SSL session"
