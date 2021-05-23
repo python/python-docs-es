@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2021-04-24 16:16-0300\n"
+"PO-Revision-Date: 2021-05-23 18:58-0300\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -424,7 +424,7 @@ msgstr ""
 
 #: ../Doc/whatsnew/2.6.rst:248
 msgid "PEP 343: The 'with' statement"
-msgstr "PEP 343: La declaración *'with'*"
+msgstr "PEP 343: La sentencia *'with'*"
 
 #: ../Doc/whatsnew/2.6.rst:250
 msgid ""
@@ -436,6 +436,14 @@ msgid ""
 "from the \"What's New in Python 2.5\" document; if you're familiar with the "
 "':keyword:`!with`' statement from Python 2.5, you can skip this section."
 msgstr ""
+"La versión anterior, Python 2.5, agregó la instrucción ':keyword:`with`' "
+"como una característica opcional, para ser habilitada por una directiva "
+"``from __future__ import with_statement``. En 2.6, la instrucción ya no "
+"necesita estar habilitada especialmente; esto significa que ahora :keyword:`!"
+"with` es siempre una palabra clave. El resto de esta sección es una copia de "
+"la sección correspondiente del documento \"Qué hay de nuevo en Python 2.5\"; "
+"si está familiarizado con la declaración ':keyword:`!with`' de Python 2.5, "
+"puede omitir esta sección."
 
 #: ../Doc/whatsnew/2.6.rst:259
 msgid ""
@@ -445,12 +453,19 @@ msgid ""
 "next section, I'll examine the implementation details and show how to write "
 "objects for use with this statement."
 msgstr ""
+"La sentencia ':keyword:`with`' resuelve el código que anteriormente usaría "
+"bloques `try...finally`` para garantizar que el código de limpieza se "
+"ejecute. En esta sección, discutiré como se usará comúnmente la declaración. "
+"En la siguiente sección, examinaré los detalles de la implementación y "
+"mostraré cómo escribir objetos para usar con esta declaración."
 
 #: ../Doc/whatsnew/2.6.rst:265
 msgid ""
 "The ':keyword:`with`' statement is a control-flow structure whose basic "
 "structure is::"
 msgstr ""
+"La sentencia ':keyword:`with`' es una estructura de control de flujo cuya "
+"estructura básica es::"
 
 #: ../Doc/whatsnew/2.6.rst:271
 msgid ""
@@ -458,6 +473,9 @@ msgid ""
 "the context management protocol (that is, has :meth:`__enter__` and :meth:"
 "`__exit__` methods)."
 msgstr ""
+"La expresión se evalúa y debe dar como resultado un objeto que admita el "
+"protocolo de administración de contexto (es decir, tiene los métodos :meth:"
+"`__enter__` y :meth:`__exit__`)."
 
 #: ../Doc/whatsnew/2.6.rst:275
 msgid ""
@@ -466,6 +484,11 @@ msgid ""
 "the name *variable*, if given.  (Note carefully that *variable* is *not* "
 "assigned the result of *expression*.)"
 msgstr ""
+"El objeto :meth:`__enter__` se llama antes de que se ejecute *with-block* y, "
+"por lo tanto, se puede ejecutar código de configuración. También, si se "
+"proporciona, puede retornar un valor que esté vinculado al nombre "
+"*variable*. (Tenga en cuenta que a la *variable* *no* se le asigna el "
+"resultado de la *expression*)."
 
 #: ../Doc/whatsnew/2.6.rst:280
 msgid ""
@@ -473,6 +496,9 @@ msgid ""
 "`__exit__` method is called, even if the block raised an exception, and can "
 "therefore run clean-up code."
 msgstr ""
+"Una vez finalizada la ejecución de *with-block*, se llama al método :meth:"
+"`__exit__` del objeto, incluso si el bloque generó una excepción y, por lo "
+"tanto, puede ejecutar código de limpieza."
 
 #: ../Doc/whatsnew/2.6.rst:284
 msgid ""
@@ -480,6 +506,9 @@ msgid ""
 "can be used with the ':keyword:`with`' statement. File objects are one "
 "example::"
 msgstr ""
+"Algunos objetos estándar de Python ahora admiten el protocolo de "
+"administración de contexto y se pueden usar con la sentencia ':keyword:"
+"`with`'. Los objetos de archivo son un ejemplo::"
 
 #: ../Doc/whatsnew/2.6.rst:292
 msgid ""
@@ -487,24 +516,33 @@ msgid ""
 "automatically closed, even if the :keyword:`for` loop raised an exception "
 "part-way through the block."
 msgstr ""
+"Después de que se haya ejecutado esta sentencia, el objeto de archivo en *f* "
+"se habrá cerrado automáticamente, incluso si el bucle :keyword:`for` generó "
+"una excepción en la mitad del bloque."
 
 #: ../Doc/whatsnew/2.6.rst:298
 msgid ""
 "In this case, *f* is the same object created by :func:`open`, because :meth:"
 "`file.__enter__` returns *self*."
 msgstr ""
+"En este caso, *f* es el mismo objeto creado por :func:`open`, porque :meth:"
+"`file.__enter__` retorna *self*."
 
 #: ../Doc/whatsnew/2.6.rst:301
 msgid ""
 "The :mod:`threading` module's locks and condition variables  also support "
 "the ':keyword:`with`' statement::"
 msgstr ""
+"Los *locks* y las condiciones variables del módulo :mod:`threading` también "
+"admiten la sentencia ':keyword:`with`'::"
 
 #: ../Doc/whatsnew/2.6.rst:309
 msgid ""
 "The lock is acquired before the block is executed and always released once  "
 "the block is complete."
 msgstr ""
+"El *lock* se adquiere antes de que se ejecute el bloque y siempre se libera "
+"una vez que este se completa."
 
 #: ../Doc/whatsnew/2.6.rst:312
 msgid ""
@@ -512,10 +550,13 @@ msgid ""
 "to save and restore the current decimal context, which encapsulates the "
 "desired precision and rounding characteristics for computations::"
 msgstr ""
+"La función :func:`localcontext` en el módulo :mod:`decimal` facilita guardar "
+"y restaurar el contexto decimal actual, que encapsula la precisión deseada y "
+"las características de redondeo para los cálculos::"
 
 #: ../Doc/whatsnew/2.6.rst:331
 msgid "Writing Context Managers"
-msgstr ""
+msgstr "Escribiendo gestores de contexto"
 
 #: ../Doc/whatsnew/2.6.rst:333
 msgid ""
@@ -525,10 +566,16 @@ msgid ""
 "if you like.  Authors of new objects will need to understand the details of "
 "the underlying implementation and should keep reading."
 msgstr ""
+"Por detrás, la sentencia ':keyword:`with`' es bastante complicada. La "
+"mayoría de las personas solo usarán ':keyword:`!with`' en compañía de "
+"objetos existentes y no necesitan conocer estos detalles, por lo que puede "
+"omitir el resto de esta sección si lo desea. Los autores de nuevos objetos "
+"deberán comprender los detalles de la implementación subyacente y deben "
+"seguir leyendo."
 
 #: ../Doc/whatsnew/2.6.rst:339
 msgid "A high-level explanation of the context management protocol is:"
-msgstr ""
+msgstr "Una explicación de alto nivel del protocolo de gestor de contexto es:"
 
 #: ../Doc/whatsnew/2.6.rst:341
 msgid ""
@@ -766,7 +813,7 @@ msgstr ""
 
 #: ../Doc/whatsnew/2.6.rst:561
 msgid "PEP 371: The ``multiprocessing`` Package"
-msgstr ""
+msgstr "PEP 371: El paquete ``multiprocessing``"
 
 #: ../Doc/whatsnew/2.6.rst:563
 msgid ""
@@ -819,7 +866,7 @@ msgstr ""
 
 #: ../Doc/whatsnew/2.6.rst:642
 msgid "This produces the following output::"
-msgstr ""
+msgstr "Esto produce la siguiente salida::"
 
 #: ../Doc/whatsnew/2.6.rst:651
 msgid ""
