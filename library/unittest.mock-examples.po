@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2021-03-09 16:14-0300\n"
+"PO-Revision-Date: 2021-05-26 15:40-0400\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Last-Translator: Francisco Mora <francisco.m.collao@gmail.com>\n"
 "Language: es\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 2.4.3\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: ../Doc/library/unittest.mock-examples.rst:2
@@ -531,6 +531,11 @@ msgid ""
 "decorators are applied). This means from the bottom up, so in the example "
 "above the mock for ``test_module.ClassName2`` is passed in first."
 msgstr ""
+"Al anidar decoradores de parches, los mocks se pasan a la función decorada "
+"en el mismo orden en que se aplicaron (el orden normal *Python* que se "
+"aplican los decoradores). Esto significa de abajo hacia arriba, así que en "
+"el ejemplo anterior el simulacro de ``test_module.ClassName2`` se pasa "
+"primero."
 
 #: ../Doc/library/unittest.mock-examples.rst:463
 msgid ""
@@ -538,18 +543,26 @@ msgid ""
 "during a scope and restoring the dictionary to its original state when the "
 "test ends:"
 msgstr ""
+"También está :func:`patch.dict` para establecer valores en un diccionario "
+"solo durante un ámbito y restaurar el diccionario a su estado original "
+"cuando finaliza la prueba:"
 
 #: ../Doc/library/unittest.mock-examples.rst:474
 msgid ""
 "``patch``, ``patch.object`` and ``patch.dict`` can all be used as context "
 "managers."
 msgstr ""
+"``patch``, ``patch.object`` and ``patch.dict`` se pueden utilizar como "
+"gestores de contexto."
 
 #: ../Doc/library/unittest.mock-examples.rst:476
 msgid ""
 "Where you use :func:`patch` to create a mock for you, you can get a "
 "reference to the mock using the \"as\" form of the with statement:"
 msgstr ""
+"Donde utilice :func:`patch` para crear un simulacro para usted, puede "
+"obtener una referencia al simulacro utilizando la forma \"as\" de la "
+"instrucción with:"
 
 #: ../Doc/library/unittest.mock-examples.rst:491
 msgid ""
@@ -557,18 +570,24 @@ msgid ""
 "as class decorators. When used in this way it is the same as applying the "
 "decorator individually to every method whose name starts with \"test\"."
 msgstr ""
+"Como alternativa ``patch``, ``patch.object`` and ``patch.dict`` se pueden "
+"utilizar como decoradores de clase. Cuando se utiliza de esta manera es lo "
+"mismo que aplicar el decorador individualmente a cada método cuyo nombre "
+"comienza con \"test\"."
 
 #: ../Doc/library/unittest.mock-examples.rst:499
 msgid "Further Examples"
-msgstr ""
+msgstr "Otros Ejemplos"
 
 #: ../Doc/library/unittest.mock-examples.rst:502
 msgid "Here are some more examples for some slightly more advanced scenarios."
 msgstr ""
+"Estos son algunos ejemplos más para algunos escenarios ligeramente más "
+"avanzados."
 
 #: ../Doc/library/unittest.mock-examples.rst:506
 msgid "Mocking chained calls"
-msgstr ""
+msgstr "Mocking de llamadas encadenadas"
 
 #: ../Doc/library/unittest.mock-examples.rst:508
 msgid ""
@@ -577,12 +596,18 @@ msgid ""
 "for the first time, or you fetch its ``return_value`` before it has been "
 "called, a new :class:`Mock` is created."
 msgstr ""
+"Mocking de las llamadas encadenadas es en realidad sencillo con mock una vez "
+"que entiende el atributo :attr:`~Mock.return_value` . Cuando se llama a un "
+"mock por primera vez, o se obtiene su ``return_value`` antes de que se "
+"llame, se crea un nuevo :class:`Mock`."
 
 #: ../Doc/library/unittest.mock-examples.rst:513
 msgid ""
 "This means that you can see how the object returned from a call to a mocked "
 "object has been used by interrogating the ``return_value`` mock:"
 msgstr ""
+"Esto significa que puede ver cómo se ha utilizado el objeto devuelto de una "
+"llamada a un objeto simulado interrogando el simulado ``return_value``:"
 
 #: ../Doc/library/unittest.mock-examples.rst:521
 msgid ""
@@ -590,10 +615,15 @@ msgid ""
 "chained calls. Of course another alternative is writing your code in a more "
 "testable way in the first place..."
 msgstr ""
+"Desde aquí es un paso simple para configurar y luego hacer aserciones sobre "
+"llamadas encadenadas. Por supuesto, otra alternativa es escribir su código "
+"de una manera más comprobable en primer lugar..."
 
 #: ../Doc/library/unittest.mock-examples.rst:525
 msgid "So, suppose we have some code that looks a little bit like this:"
 msgstr ""
+"Por lo tanto, supongamos que tenemos algún código que se ve un poco como "
+"este:"
 
 #: ../Doc/library/unittest.mock-examples.rst:534
 msgid ""
@@ -601,6 +631,9 @@ msgid ""
 "``method()``? Specifically, we want to test that the code section ``# more "
 "code`` uses the response object in the correct way."
 msgstr ""
+"Suponiendo que ``BackendProvider`` ya está bien probado, ¿cómo probamos "
+"``method()``? En concreto, queremos probar que la sección de código ``# more "
+"code`` usa el objeto de respuesta de la manera correcta."
 
 #: ../Doc/library/unittest.mock-examples.rst:538
 msgid ""
@@ -611,6 +644,13 @@ msgid ""
 "assume the object it returns is 'file-like', so we'll ensure that our "
 "response object uses the builtin :func:`open` as its ``spec``."
 msgstr ""
+"A medida que esta cadena de llamadas se realiza a partir de un atributo de "
+"instancia, podemos parchear el atributo ``backend`` en una instancia de "
+"``Something``. En este caso en particular sólo estamos interesados en el "
+"valor devuelto de la llamada final a ``start_call`` por lo que no tenemos "
+"mucha configuración que hacer. Supongamos que el objeto que devuelve es "
+"'similar a un archivo', por lo que nos aseguraremos de que nuestro objeto de "
+"respuesta utilice el compilado :func:`open` as its ``spec``."
 
 #: ../Doc/library/unittest.mock-examples.rst:545
 msgid ""
@@ -618,18 +658,28 @@ msgid ""
 "response object for it. To set the response as the return value for that "
 "final ``start_call`` we could do this::"
 msgstr ""
+"Para ello creamos una instancia mock como nuestro back-end simulado y "
+"creamos un objeto de respuesta mock para ella. Para establecer la respuesta "
+"como el valor devuelto de ese ``start_call`` final podríamos hacer lo "
+"siguiente::"
 
 #: ../Doc/library/unittest.mock-examples.rst:551
 msgid ""
 "We can do that in a slightly nicer way using the :meth:`~Mock."
 "configure_mock` method to directly set the return value for us::"
 msgstr ""
+"Podemos hacerlo de una manera un poco mejor usando el método :meth:`~Mock."
+"configure_mock` para establecer directamente el valor devuelto para "
+"nosotros::"
 
+# No estoy seguro de la traducción monkey patch sea correcta.
 #: ../Doc/library/unittest.mock-examples.rst:560
 msgid ""
 "With these we monkey patch the \"mock backend\" in place and can make the "
 "real call::"
 msgstr ""
+"Con estos parche de mono el \"backend simulado\" en su lugar y puede hacer "
+"la llamada real::"
 
 #: ../Doc/library/unittest.mock-examples.rst:566
 msgid ""
@@ -638,10 +688,15 @@ msgid ""
 "be several entries in ``mock_calls``. We can use :meth:`call.call_list` to "
 "create this list of calls for us::"
 msgstr ""
+"Usando :attr:`~Mock.mock_calls` podemos comprobar la llamada encadenada con "
+"una sola afirmación. Una llamada encadenada es varias llamadas en una línea "
+"de código, por lo que habrá varias entradas en ``mock_calls``. Podemos usar :"
+"meth:`call.call_list` para crear esta lista de llamadas para nosotros::"
 
+# No estoy seguro de la traducción sea correcta.
 #: ../Doc/library/unittest.mock-examples.rst:577
 msgid "Partial mocking"
-msgstr ""
+msgstr "Mocking parcial"
 
 #: ../Doc/library/unittest.mock-examples.rst:579
 msgid ""
@@ -651,6 +706,11 @@ msgid ""
 "in C, and so I couldn't just monkey-patch out the static :meth:`date.today` "
 "method."
 msgstr ""
+"En algunas pruebas quería un mock de una llamada a :meth:`datetime.date."
+"today` para devolver una fecha conocida, pero no quería evitar que el código "
+"sometido a prueba creara nuevos objetos de fecha. Desafortunadamente :class:"
+"`datetime.date` está escrito en C, por lo que no podía simplemente parchear "
+"mono el método estático :meth:`date.today` ."
 
 #: ../Doc/library/unittest.mock-examples.rst:584
 msgid ""
@@ -658,6 +718,9 @@ msgid ""
 "date class with a mock, but passing through calls to the constructor to the "
 "real class (and returning real instances)."
 msgstr ""
+"Encontré una forma sencilla de hacer esto que implicaba ajustar eficazmente "
+"la clase date con un mock, pero pasar llamadas al constructor a la clase "
+"real (y devolver instancias reales)."
 
 #: ../Doc/library/unittest.mock-examples.rst:588
 msgid ""
@@ -673,6 +736,9 @@ msgid ""
 "Note that we don't patch :class:`datetime.date` globally, we patch ``date`` "
 "in the module that *uses* it. See :ref:`where to patch <where-to-patch>`."
 msgstr ""
+"Tenga en cuenta que no parcheamos :class:`datetime.date` globalmente, "
+"parcheamos ``date`` en el módulo que *uses*. Consulte :ref:`where to patch "
+"<where-to-patch>`."
 
 #: ../Doc/library/unittest.mock-examples.rst:605
 msgid ""
@@ -681,12 +747,20 @@ msgid ""
 "find yourself having to calculate an expected result using exactly the same "
 "algorithm as the code under test, which is a classic testing anti-pattern."
 msgstr ""
+"Cuando ``date.today()`` se llama fecha conocida, pero llama a la "
+"``date(...)`` El constructor todavía devuelve fechas normales. Sin esto, "
+"puede encontrarse teniendo que calcular un resultado esperado utilizando "
+"exactamente el mismo algoritmo que el código en prueba, que es un anti-"
+"patrón de prueba clásico."
 
 #: ../Doc/library/unittest.mock-examples.rst:610
 msgid ""
 "Calls to the date constructor are recorded in the ``mock_date`` attributes "
 "(``call_count`` and friends) which may also be useful for your tests."
 msgstr ""
+"Las llamadas al constructor de fecha se registran en los atributos "
+"``mock_date`` (``call_count`` y amigos) que también pueden ser útiles para "
+"las pruebas."
 
 #: ../Doc/library/unittest.mock-examples.rst:613
 msgid ""
@@ -694,16 +768,22 @@ msgid ""
 "is discussed in `this blog entry <https://williambert.online/2011/07/how-to-"
 "unit-testing-in-django-with-mocking-and-patching/>`_."
 msgstr ""
+"Una forma alternativa de tratar con fechas de mock, u otras clases "
+"integradas, se discute en `esta entrada de blog <https://williambert."
+"online/2011/07/how-to-unit-testing-in-django-with-mocking-and-patching/>`_."
 
 #: ../Doc/library/unittest.mock-examples.rst:619
 msgid "Mocking a Generator Method"
-msgstr ""
+msgstr "Mocking de un Método Generador"
 
 #: ../Doc/library/unittest.mock-examples.rst:621
 msgid ""
 "A Python generator is a function or method that uses the :keyword:`yield` "
 "statement to return a series of values when iterated over [#]_."
 msgstr ""
+"Un generador de Python es una función o método que utiliza la instrucción :"
+"keyword:`yield` para devolver una serie de valores cuando se itera sobre "
+"[#]_."
 
 #: ../Doc/library/unittest.mock-examples.rst:624
 msgid ""
