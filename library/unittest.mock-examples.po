@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2021-06-09 10:58-0400\n"
+"PO-Revision-Date: 2021-06-14 12:52-0400\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1240,6 +1240,11 @@ msgid ""
 "components.html>`_. Having this applied to attributes too actually causes "
 "errors."
 msgstr ""
+"A veces esto es inconveniente. Por ejemplo, `un usuario <https://code.google."
+"com/archive/p/mock/issues/105>`_ está creando subclases de mock para crear "
+"un `Twisted adaptor <https://twistedmatrix.com/documents/11.0.0/api/twisted."
+"python.components.html>`_. Tener esto aplicado a los atributos también puede "
+"causar errores en realidad."
 
 #: ../Doc/library/unittest.mock-examples.rst:1080
 msgid ""
@@ -1249,17 +1254,27 @@ msgid ""
 "signature is that it takes arbitrary keyword arguments (``**kwargs``) which "
 "are then passed onto the mock constructor:"
 msgstr ""
+"``Mock`` (en todos sus sabores) utiliza un método llamado "
+"``_get_child_mock`` para crear estos \"sub-mocks\" para atributos y valores "
+"devueltos. Puede evitar que la subclase se utilice para los atributos "
+"invalidando este método. La firma es que toma argumentos de palabra clave "
+"arbitrarios (``**kwargs``) que luego se pasan al constructor ficticio:"
 
+# No estoy seguro si es la mejor traducción.
 #: ../Doc/library/unittest.mock-examples.rst:1097
 msgid ""
 "An exception to this rule are the non-callable mocks. Attributes use the "
 "callable variant because otherwise non-callable mocks couldn't have callable "
 "methods."
 msgstr ""
+"Una excepción a esta regla son los mock no invocables. Los atributos usan la "
+"variante a la que se puede llamar porque, de lo contrario, los simulacros a "
+"los que no se puede llamar no podrían tener métodos a los que se puede "
+"llamar."
 
 #: ../Doc/library/unittest.mock-examples.rst:1103
 msgid "Mocking imports with patch.dict"
-msgstr ""
+msgstr "Importaciones de Mocking con patch.dict"
 
 #: ../Doc/library/unittest.mock-examples.rst:1105
 msgid ""
@@ -1267,6 +1282,10 @@ msgid ""
 "inside a function. These are harder to mock because they aren't using an "
 "object from the module namespace that we can patch out."
 msgstr ""
+"Una situación en la que un mocking puede ser difícil es cuando tiene una "
+"importación local dentro de una función. Estos son más difíciles de simular "
+"porque no están usando un objeto del espacio de nombres del módulo que "
+"podamemos revisar."
 
 #: ../Doc/library/unittest.mock-examples.rst:1109
 msgid ""
@@ -1277,6 +1296,13 @@ msgid ""
 "unconditional local import (store the module as a class or module attribute "
 "and only do the import on first use)."
 msgstr ""
+"Por lo general, deben evitarse las importaciones locales. A veces se hacen "
+"para evitar dependencias circulares, para las que hay *generalmente* una "
+"manera mucho mejor de resolver el problema (refactorizar el código) o para "
+"evitar \"costos iniciales\" retrasando la importación. Esto también se puede "
+"resolver de mejores maneras que una importación local incondicional "
+"(almacenar el módulo como una clase o atributo de módulo y solo hacer la "
+"importación en el primer uso)."
 
 #: ../Doc/library/unittest.mock-examples.rst:1116
 msgid ""
@@ -1287,6 +1313,13 @@ msgid ""
 "in `sys.modules`, so usually when you import something you get a module "
 "back. This need not be the case however."
 msgstr ""
+"Aparte de eso, hay una manera de usar ``mock`` para afectar los resultados "
+"de una importación. La importación obtiene un *objeto* del diccionario :data:"
+"`sys.modules`. Tenga en cuenta que obtiene un *objeto*, que no tiene por qué "
+"ser un módulo. La importación de un módulo por primera vez da como resultado "
+"que un objeto de módulo se coloque en `sys.modules`, por lo que normalmente "
+"cuando importa algo, recupera un módulo. Sin embargo, este no tiene por qué "
+"ser el caso."
 
 #: ../Doc/library/unittest.mock-examples.rst:1123
 msgid ""
@@ -1296,28 +1329,42 @@ msgid ""
 "the with statement body is complete or ``patcher.stop()`` is called) then "
 "whatever was there previously will be restored safely."
 msgstr ""
+"Esto significa que puede usar :func:`patch.dict` para *temporalmente* poner "
+"un mock en su lugar sobre :data:`sys.modules`. Cualquier importación "
+"mientras este parche está activo recuperará el mock. Cuando el parche está "
+"completo (la función decorada sale, el cuerpo de la instrucción with está "
+"completo o se llama a ``patcher.stop()``) entonces lo que había "
+"anteriormente se restaurará de forma segura."
 
 #: ../Doc/library/unittest.mock-examples.rst:1129
 msgid "Here's an example that mocks out the 'fooble' module."
-msgstr ""
+msgstr "Aquí hay un ejemplo de mock del módulo 'fooble'."
 
+# No estoy seguro si es la traducción correcta,
 #: ../Doc/library/unittest.mock-examples.rst:1141
 msgid ""
 "As you can see the ``import fooble`` succeeds, but on exit there is no "
 "'fooble' left in :data:`sys.modules`."
 msgstr ""
+"Como puede ver, el ``import fooble`` tiene éxito, pero al salir no queda "
+"ningún 'fooble' en :data:`sys.modules`."
 
 #: ../Doc/library/unittest.mock-examples.rst:1144
 msgid "This also works for the ``from module import name`` form:"
-msgstr ""
+msgstr "Esto también funciona para el formulario ``from module import name``:"
 
 #: ../Doc/library/unittest.mock-examples.rst:1154
 msgid "With slightly more work you can also mock package imports:"
 msgstr ""
+"Con un poco más de trabajo también puede simular las importaciones de "
+"paquetes:"
 
+# No estoy seguro si es la traducción correcta.
 #: ../Doc/library/unittest.mock-examples.rst:1167
 msgid "Tracking order of calls and less verbose call assertions"
 msgstr ""
+"Seguimiento del orden de las llamadas y de las aserciones de llamadas menos "
+"detalladas"
 
 #: ../Doc/library/unittest.mock-examples.rst:1169
 msgid ""
@@ -1326,6 +1373,11 @@ msgid ""
 "doesn't allow you to track the order of calls between separate mock objects, "
 "however we can use :attr:`~Mock.mock_calls` to achieve the same effect."
 msgstr ""
+"La clase :class:`Mock` le permite realizar un seguimiento del *orden* de las "
+"llamadas a métodos en sus objetos mock a través del atributo :attr:`~Mock."
+"method_calls`. Esto no le permite rastrear el orden de las llamadas entre "
+"objetos simulados separados, sin embargo, podemos usar :attr:`~Mock."
+"mock_calls` para lograr el mismo efecto."
 
 #: ../Doc/library/unittest.mock-examples.rst:1174
 msgid ""
@@ -1334,12 +1386,20 @@ msgid ""
 "separate mocks from a parent one. Calls to those child mock will then all be "
 "recorded, in order, in the ``mock_calls`` of the parent:"
 msgstr ""
+"Debido a que los mocks rastrean las llamadas a mocks secundarios en "
+"``mock_calls``, y el acceso a un atributo arbitrario de un mock crea un mock "
+"secundario, podemos crear nuestros mocks separados de uno primario. Las "
+"llamadas a esos mocks hijos se grabarán, en orden, en el ``mock_calls`` del "
+"padre:"
 
+# no estoy seguro si es la traducción correcta,
 #: ../Doc/library/unittest.mock-examples.rst:1191
 msgid ""
 "We can then assert about the calls, including the order, by comparing with "
 "the ``mock_calls`` attribute on the manager mock:"
 msgstr ""
+"A continuación, podemos realizar afirmaciones sobre las llamadas, incluido "
+"el orden, comparando con el atributo ``mock_calls`` en el mock administrador:"
 
 #: ../Doc/library/unittest.mock-examples.rst:1198
 msgid ""
@@ -1347,6 +1407,10 @@ msgid ""
 "attach them to a manager mock using the :meth:`~Mock.attach_mock` method. "
 "After attaching calls will be recorded in ``mock_calls`` of the manager. ::"
 msgstr ""
+"Si ``patch`` está creando y poniendo en su lugar, sus mocks, puede "
+"adjuntarlos a un mock administrador usando el método :meth:`~Mock."
+"attach_mock` . Después de adjuntar las llamadas se registrarán en "
+"``mock_calls`` del administrador. ::"
 
 #: ../Doc/library/unittest.mock-examples.rst:1217
 msgid ""
@@ -1356,12 +1420,19 @@ msgid ""
 "data:`call` object). If that sequence of calls are in :attr:`~Mock."
 "mock_calls` then the assert succeeds."
 msgstr ""
+"Si se han realizado muchas llamadas, pero solo está interesado en una "
+"secuencia particular de ellas, entonces una alternativa es usar el método :"
+"meth:`~Mock.assert_has_calls` . Esto toma una lista de llamadas (construidas "
+"con el objeto :data:`call`). Si esa secuencia de llamadas sobre :attr:`~Mock."
+"mock_calls`, la aserción se realiza correctamente."
 
 #: ../Doc/library/unittest.mock-examples.rst:1231
 msgid ""
 "Even though the chained call ``m.one().two().three()`` aren't the only calls "
 "that have been made to the mock, the assert still succeeds."
 msgstr ""
+"Aunque la llamada encadenada ``m.one().two().three()`` no son las únicas "
+"llamadas que se han realizado al mock, la aserción aún tiene éxito."
 
 #: ../Doc/library/unittest.mock-examples.rst:1234
 msgid ""
@@ -1370,17 +1441,24 @@ msgid ""
 "about the order. In this case you can pass ``any_order=True`` to "
 "``assert_has_calls``:"
 msgstr ""
+"A veces, un mock puede tener varias llamadas, y solo le interesa afirmar "
+"sobre *algunas* de esas llamadas. Puede que ni siquiera importe el pedido. "
+"En este caso, puede pasar ``any_order=True`` a ``assert_has_calls``:"
 
 #: ../Doc/library/unittest.mock-examples.rst:1246
 msgid "More complex argument matching"
-msgstr ""
+msgstr "Coincidencia de argumentos más compleja"
 
 #: ../Doc/library/unittest.mock-examples.rst:1248
 msgid ""
 "Using the same basic concept as :data:`ANY` we can implement matchers to do "
 "more complex assertions on objects used as arguments to mocks."
 msgstr ""
+"Usando el mismo concepto básico que :data:`ANY` podemos implementar "
+"comparadores para hacer afirmaciones más complejas en objetos usados como "
+"argumentos para mocks."
 
+# No estoy seguro si es la mejor traducción.
 #: ../Doc/library/unittest.mock-examples.rst:1251
 msgid ""
 "Suppose we expect some object to be passed to a mock that by default "
@@ -1390,28 +1468,42 @@ msgid ""
 "attributes of this object then we can create a matcher that will check these "
 "attributes for us."
 msgstr ""
+"Supongamos que esperamos que algún objeto se pase a un mock que, por "
+"defecto, se compara igual en función de la identidad del objeto (que es el "
+"valor predeterminado de Python para las clases definidas por el usuario). "
+"Para usar :meth:`~Mock.assert_called_with` tendríamos que pasar exactamente "
+"el mismo objeto. Si solo estamos interesados en algunos de los atributos de "
+"este objeto, podemos crear un comparador que verifique estos atributos por "
+"nosotros."
 
 #: ../Doc/library/unittest.mock-examples.rst:1258
 msgid ""
 "You can see in this example how a 'standard' call to ``assert_called_with`` "
 "isn't sufficient:"
 msgstr ""
+"Puede ver en este ejemplo cómo una llamada 'estándar' a "
+"``assert_called_with`` no es suficiente:"
 
 #: ../Doc/library/unittest.mock-examples.rst:1273
 msgid ""
 "A comparison function for our ``Foo`` class might look something like this:"
 msgstr ""
+"Una función de comparación para nuestra clase ``Foo`` podría verse así:"
 
 #: ../Doc/library/unittest.mock-examples.rst:1285
 msgid ""
 "And a matcher object that can use comparison functions like this for its "
 "equality operation would look something like this:"
 msgstr ""
+"Y un objeto comparador que puede usar funciones de comparación como esta "
+"para su operación de igualdad se vería así:"
 
+# No estoy seguro si es la mejor traducción.
 #: ../Doc/library/unittest.mock-examples.rst:1296
 msgid "Putting all this together:"
-msgstr ""
+msgstr "Poniendo todo esto junto:"
 
+# No estoy seguro si es la mejor traducción.
 #: ../Doc/library/unittest.mock-examples.rst:1301
 msgid ""
 "The ``Matcher`` is instantiated with our compare function and the ``Foo`` "
@@ -1421,12 +1513,20 @@ msgid ""
 "``assert_called_with`` passes, and if they don't an :exc:`AssertionError` is "
 "raised:"
 msgstr ""
+"El ``Matcher`` es instanciado con nuestra función de comparación y el objeto "
+"``Foo`` con el que queremos comparar. En ``assert_called_with`` se llamará "
+"al método de igualdad ``Matcher``, que compara el objeto con el que se llamó "
+"al mock con el que creamos nuestro matcher. Si coinciden, entonces pasa "
+"``assert_called_with``, y si no lo hacen, se generará un :exc:"
+"`AssertionError`:"
 
 #: ../Doc/library/unittest.mock-examples.rst:1314
 msgid ""
 "With a bit of tweaking you could have the comparison function raise the :exc:"
 "`AssertionError` directly and provide a more useful failure message."
 msgstr ""
+"Con un poco de ajuste, podría hacer que la función de comparación genere el :"
+"exc:`AssertionError` directamente y proporcione un mensaje de falla más útil."
 
 #: ../Doc/library/unittest.mock-examples.rst:1317
 msgid ""
@@ -1436,3 +1536,9 @@ msgid ""
 "integration.match_equality <https://pyhamcrest.readthedocs.io/en/release-1.8/"
 "integration/#module-hamcrest.library.integration.match_equality>`_)."
 msgstr ""
+"A partir de la versión 1.5, la biblioteca de pruebas de Python `PyHamcrest "
+"<https://pyhamcrest.readthedocs.io/>` _ proporciona una funcionalidad "
+"similar, que puede ser útil aquí, en la forma de su comparador de igualdad "
+"(`hamcrest.library.integration. match_equality <https://pyhamcrest."
+"readthedocs.io/en/release-1.8/integration/#module-hamcrest.library."
+"integration.match_equality> `_)."
