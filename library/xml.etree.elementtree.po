@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-19 11:16+0100\n"
-"PO-Revision-Date: 2021-06-22 15:41+0200\n"
+"PO-Revision-Date: 2021-07-17 23:42+0200\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1434,6 +1434,12 @@ msgid ""
 "whose tag equals *tag* are returned from the iterator.  If the tree "
 "structure is modified during iteration, the result is undefined."
 msgstr ""
+"Crea un árbol :term:`iterator` con el elemento actual como raíz. El iterador "
+"itera sobre este elemento y todos los elementos por debajo de él, en orden "
+"de documento (profundidad primero). Si *tag* no es ``None`` o ``'*'``, sólo "
+"los elementos cuya etiqueta es igual a *tag* son devueltos por el iterador. "
+"Si la estructura del árbol se modifica durante la iteración, el resultado es "
+"indefinido."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1001
 msgid ""
@@ -1442,18 +1448,27 @@ msgid ""
 "order. *namespaces* is an optional mapping from namespace prefix to full "
 "name."
 msgstr ""
+"Encuentra todos los subelementos que coinciden, por nombre de etiqueta o :"
+"ref:`ruta <elementtree-xpath>`. Devuelve un iterable con todos los elementos "
+"coincidentes en el orden del documento. *namespaces* es un mapeo opcional "
+"del prefijo del espacio de nombres al nombre completo."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1012
 msgid ""
 "Creates a text iterator.  The iterator loops over this element and all "
 "subelements, in document order, and returns all inner text."
 msgstr ""
+"Crea un iterador de texto. El iterador hace un bucle sobre este elemento y "
+"todos los subelementos, en el orden del documento, y devuelve todo el texto "
+"interior."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1020
 msgid ""
 "Creates a new element object of the same type as this element.  Do not call "
 "this method, use the :func:`SubElement` factory function instead."
 msgstr ""
+"Crea un nuevo objeto elemento del mismo tipo que este elemento. No llame a "
+"este método, utilice la función de fábrica :func:`SubElement` en su lugar."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1026
 msgid ""
@@ -1461,6 +1476,9 @@ msgid ""
 "method compares elements based on the instance identity, not on tag value or "
 "contents."
 msgstr ""
+"Elimina el *subelement* del elemento. A diferencia de los métodos find\\*, "
+"este método compara los elementos basándose en la identidad de la instancia, "
+"no en el valor de la etiqueta o el contenido."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1030
 msgid ""
@@ -1468,6 +1486,9 @@ msgid ""
 "for working with subelements: :meth:`~object.__delitem__`, :meth:`~object."
 "__getitem__`, :meth:`~object.__setitem__`, :meth:`~object.__len__`."
 msgstr ""
+"Los objetos :class:`Element` también soportan los siguientes métodos de tipo "
+"secuencia para trabajar con subelementos: :meth:`~object.__delitem__`, :meth:"
+"`~object.__getitem__`, :meth:`~object.__setitem__`, :meth:`~object.__len__`."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1035
 msgid ""
@@ -1475,6 +1496,9 @@ msgid ""
 "will change in future versions.  Use specific ``len(elem)`` or ``elem is "
 "None`` test instead. ::"
 msgstr ""
+"Precaución: Los elementos que no tengan subelementos serán evaluados como "
+"``False``. Este comportamiento cambiará en futuras versiones. Utiliza en su "
+"lugar el test específico ``len(elem)`` o ``elem is None``. ::"
 
 #: ../Doc/library/xml.etree.elementtree.rst:1047
 msgid ""
@@ -1484,6 +1508,12 @@ msgid ""
 "reordering was removed in Python 3.8 to preserve the order in which "
 "attributes were originally parsed or created by user code."
 msgstr ""
+"Antes de Python 3.8, el orden de serialización de los atributos XML de los "
+"elementos se hacía predecible artificialmente ordenando los atributos por su "
+"nombre. Basado en el ordenamiento ahora garantizado de los diccionarios, "
+"este reordenamiento arbitrario fue eliminado en Python 3.8 para preservar el "
+"orden en que los atributos fueron originalmente analizados o creados por el "
+"código del usuario."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1053
 msgid ""
@@ -1495,6 +1525,14 @@ msgid ""
 "signing or test data sets, canonical serialisation is available with the :"
 "func:`canonicalize` function."
 msgstr ""
+"En general, el código del usuario debería intentar no depender de un orden "
+"específico de los atributos, dado que el `XML Information Set <https://www."
+"w3.org/TR/xml-infoset/>`_ excluye explícitamente el orden de los atributos "
+"para transmitir información. El código debe estar preparado para hacer "
+"frente a cualquier orden en la entrada. En los casos en los que se requiere "
+"una salida XML determinista, por ejemplo, para la firma criptográfica o los "
+"conjuntos de datos de prueba, la serialización canónica está disponible con "
+"la función :func:`canonicalize`."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1061
 msgid ""
@@ -1505,10 +1543,17 @@ msgid ""
 "like the following can be applied prior to serialisation to enforce an order "
 "independently from the Element creation::"
 msgstr ""
+"En los casos en los que la salida canónica no es aplicable, pero un orden de "
+"atributos específico sigue siendo deseable en la salida, el código debe "
+"tratar de crear los atributos directamente en el orden deseado, para evitar "
+"desajustes perceptivos para los lectores del código. En los casos en que "
+"esto es difícil de lograr, una receta como la siguiente se puede aplicar "
+"antes de la serialización para hacer cumplir un orden independientemente de "
+"la creación de elementos::"
 
 #: ../Doc/library/xml.etree.elementtree.rst:1081
 msgid "ElementTree Objects"
-msgstr ""
+msgstr "Objetos ElementTree"
 
 #: ../Doc/library/xml.etree.elementtree.rst:1086
 msgid ""
@@ -1516,12 +1561,17 @@ msgid ""
 "hierarchy, and adds some extra support for serialization to and from "
 "standard XML."
 msgstr ""
+"Clase envoltorio de un ElementTree. Esta clase representa una jerarquía de "
+"elementos completa, y añade algún soporte extra para la serialización hacia "
+"y desde XML estándar."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1090
 msgid ""
 "*element* is the root element.  The tree is initialized with the contents of "
 "the XML *file* if given."
 msgstr ""
+"*element* es el elemento raíz. El árbol se inicializa con el contenido del "
+"*file* XML si se da."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1096
 msgid ""
@@ -1529,22 +1579,25 @@ msgid ""
 "of the tree, and replaces it with the given element.  Use with care.  "
 "*element* is an element instance."
 msgstr ""
+"Reemplaza el elemento raíz de este árbol. Esto descarta el contenido actual "
+"del árbol, y lo reemplaza con el elemento dado. Utilícelo con cuidado. "
+"*element* es una instancia de elemento."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1103
 msgid "Same as :meth:`Element.find`, starting at the root of the tree."
-msgstr ""
+msgstr "Igual que :meth:`Element.find`, empezando por la raíz del árbol."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1108
 msgid "Same as :meth:`Element.findall`, starting at the root of the tree."
-msgstr ""
+msgstr "Igual que :meth:`Element.findall`, empezando por la raíz del árbol."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1113
 msgid "Same as :meth:`Element.findtext`, starting at the root of the tree."
-msgstr ""
+msgstr "Igual que :meth:`Element.findtext`, empezando por la raíz del árbol."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1118
 msgid "Returns the root element for this tree."
-msgstr ""
+msgstr "Retorna el elemento raíz de este árbol."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1123
 msgid ""
@@ -1552,10 +1605,13 @@ msgid ""
 "loops over all elements in this tree, in section order.  *tag* is the tag to "
 "look for (default is to return all elements)."
 msgstr ""
+"Crea y devuelve un iterador de árbol para el elemento raíz. El iterador "
+"recorre todos los elementos de este árbol, en orden de sección. *tag* es la "
+"etiqueta a buscar (por defecto devuelve todos los elementos)."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1130
 msgid "Same as :meth:`Element.iterfind`, starting at the root of the tree."
-msgstr ""
+msgstr "Igual que :meth:`Element.iterfind`, empezando por la raíz del árbol."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1137
 msgid ""
@@ -1564,6 +1620,10 @@ msgid ""
 "not given, the standard :class:`XMLParser` parser is used.  Returns the "
 "section root element."
 msgstr ""
+"Carga una sección XML externa en este árbol de elementos. *source* es un "
+"nombre de archivo o un objeto :term:`file`. *parser* es una instancia "
+"opcional del analizador. Si no se da, se utiliza el analizador estándar :"
+"class:`XMLParser`. Devuelve el elemento raíz de la sección."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1147
 msgid ""
@@ -1579,6 +1639,17 @@ msgid ""
 "default), they are emitted as a single self-closed tag, otherwise they are "
 "emitted as a pair of start/end tags."
 msgstr ""
+"Escribe el árbol de elementos en un archivo, como XML. *file* es un nombre "
+"de archivo, o un :term:`file object` abierto para escritura. *encoding* [1]_ "
+"es la codificación de salida (por defecto es US-ASCII). *xml_declaration* "
+"controla si se debe añadir una declaración XML al archivo. Utilice ``False`` "
+"para nunca, ``True`` para siempre, ``None`` para sólo si no es US-ASCII o "
+"UTF-8 o Unicode (por defecto es ``None``). *default_namespace* establece el "
+"espacio de nombres XML por defecto (para \"xmlns\"). *method* es ``\"xml"
+"\"``, ``\"html\"`` o ``\"text\"`` (por defecto es ``\"xml\"``). El parámetro "
+"*short_empty_elements* controla el formato de los elementos sin contenido. "
+"Si es ``True`` (por defecto), se emiten como una sola etiqueta autocerrada, "
+"de lo contrario se emiten como un par de etiquetas de inicio/fin."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1161
 msgid ""
@@ -1588,12 +1659,20 @@ msgid ""
 "conflict with the type of *file* if it's an open :term:`file object`; make "
 "sure you do not try to write a string to a binary stream and vice versa."
 msgstr ""
+"La salida es una cadena de caracteres (:class:`str`) o binaria (:class:"
+"`bytes`). Esto es controlado por el argumento *encoding*. Si *encoding* es "
+"``unicode``, la salida es una cadena de caracteres; en caso contrario, es "
+"binaria. Tenga en cuenta que esto puede entrar en conflicto con el tipo de "
+"*file* si es un :term:`file object` abierto; asegúrese de no intentar "
+"escribir una cadena en un flujo binario y viceversa."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1171
 msgid ""
 "The :meth:`write` method now preserves the attribute order specified by the "
 "user."
 msgstr ""
+"El método :meth:`write` ahora conserva el orden de los atributos "
+"especificado por el usuario."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1176
 msgid "This is the XML file that is going to be manipulated::"
