@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-19 11:16+0100\n"
-"PO-Revision-Date: 2021-07-17 23:42+0200\n"
+"PO-Revision-Date: 2021-07-18 20:04+0200\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1621,7 +1621,7 @@ msgid ""
 "section root element."
 msgstr ""
 "Carga una sección XML externa en este árbol de elementos. *source* es un "
-"nombre de archivo o un objeto :term:`file`. *parser* es una instancia "
+"nombre de archivo o un :term:`file object`. *parser* es una instancia "
 "opcional del analizador. Si no se da, se utiliza el analizador estándar :"
 "class:`XMLParser`. Devuelve el elemento raíz de la sección."
 
@@ -1676,17 +1676,19 @@ msgstr ""
 
 #: ../Doc/library/xml.etree.elementtree.rst:1176
 msgid "This is the XML file that is going to be manipulated::"
-msgstr ""
+msgstr "Este es el archivo XML que será manipulado::"
 
 #: ../Doc/library/xml.etree.elementtree.rst:1188
 msgid ""
 "Example of changing the attribute \"target\" of every link in first "
 "paragraph::"
 msgstr ""
+"Ejemplo de cambio del atributo \"target\" de cada enlace en el primer "
+"párrafo::"
 
 #: ../Doc/library/xml.etree.elementtree.rst:1207
 msgid "QName Objects"
-msgstr ""
+msgstr "Objetos QName"
 
 #: ../Doc/library/xml.etree.elementtree.rst:1212
 msgid ""
@@ -1697,10 +1699,17 @@ msgid ""
 "interpreted as a URI, and this argument is interpreted as a local name. :"
 "class:`QName` instances are opaque."
 msgstr ""
+"QName wrapper. Se puede utilizar para envolver un valor de atributo QName, "
+"con el fin de obtener un manejo adecuado del espacio de nombres en la "
+"salida. *text_or_uri* es una cadena de caracteres que contiene el valor "
+"QName, en la forma {uri}local, o, si se da el argumento tag, la parte URI de "
+"un QName. Si se da *tag*, el primer argumento se interpreta como un URI, y "
+"este argumento se interpreta como un nombre local. Las instancias de :class:"
+"`QName` son opacas."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1224
 msgid "TreeBuilder Objects"
-msgstr ""
+msgstr "Objetos TreeBuilder"
 
 #: ../Doc/library/xml.etree.elementtree.rst:1230
 msgid ""
@@ -1709,6 +1718,11 @@ msgid ""
 "structure.  You can use this class to build an element structure using a "
 "custom XML parser, or a parser for some other XML-like format."
 msgstr ""
+"Constructor genérico de estructuras de elementos. Este constructor convierte "
+"una secuencia de llamadas a los métodos start, data, end, comment y pi en "
+"una estructura de elementos bien formada. Puedes utilizar esta clase para "
+"construir una estructura de elementos utilizando un analizador XML "
+"personalizado, o un analizador para algún otro formato similar a XML."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1235
 msgid ""
@@ -1716,6 +1730,9 @@ msgid ""
 "arguments: a tag and a dict of attributes.  It is expected to return a new "
 "element instance."
 msgstr ""
+"*element_factory*, cuando se da, debe ser un callable que acepta dos "
+"argumentos posicionales: una etiqueta y un diccionario de atributos. Se "
+"espera que devuelva una nueva instancia de elemento."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1239
 msgid ""
@@ -1726,48 +1743,70 @@ msgid ""
 "comments/pis will be inserted into the tree if they appear within the root "
 "element (but not outside of it)."
 msgstr ""
+"Las funciones *comment_factory* y *pi_factory*, cuando se dan, deben "
+"comportarse como las funciones :func:`Comment` y :func:"
+"`ProcessingInstruction` para crear comentarios e instrucciones de "
+"procesamiento. Si no se dan, se utilizarán las fábricas por defecto. Cuando "
+"*insert_comments* y/o *insert_pis* es verdadero, los comentarios/pis se "
+"insertarán en el árbol si aparecen dentro del elemento raíz (pero no fuera "
+"de él)."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1248
 msgid ""
 "Flushes the builder buffers, and returns the toplevel document element.  "
 "Returns an :class:`Element` instance."
 msgstr ""
+"Vacía los buffers del constructor y devuelve el elemento del documento de "
+"nivel superior. Devuelve una instancia de :class:`Element`."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1254
 msgid ""
 "Adds text to the current element.  *data* is a string.  This should be "
 "either a bytestring, or a Unicode string."
 msgstr ""
+"Añade texto al elemento actual. *data* es una cadena. Debe ser una cadena de "
+"bytes o una cadena Unicode."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1260
 msgid ""
 "Closes the current element.  *tag* is the element name.  Returns the closed "
 "element."
 msgstr ""
+"Cierra el elemento actual. *tag* es el nombre del elemento. Devuelve el "
+"elemento cerrado."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1266
 msgid ""
 "Opens a new element.  *tag* is the element name.  *attrs* is a dictionary "
 "containing element attributes.  Returns the opened element."
 msgstr ""
+"Abre un nuevo elemento. *tag* es el nombre del elemento. *attrs* es un "
+"diccionario que contiene los atributos del elemento. Devuelve el elemento "
+"abierto."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1272
 msgid ""
 "Creates a comment with the given *text*.  If ``insert_comments`` is true, "
 "this will also add it to the tree."
 msgstr ""
+"Crea un comentario con el *texto* dado. Si ``insert_comments`` es verdadero, "
+"esto también lo añadirá al árbol."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1280
 msgid ""
 "Creates a comment with the given *target* name and *text*.  If "
 "``insert_pis`` is true, this will also add it to the tree."
 msgstr ""
+"Crea un comentario con el nombre *target* y el *texto* dados. Si "
+"``insert_pis`` es verdadero, esto también lo añadirá al árbol."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1286
 msgid ""
 "In addition, a custom :class:`TreeBuilder` object can provide the following "
 "methods:"
 msgstr ""
+"Además, un objeto :class:`TreeBuilder` personalizado puede proporcionar los "
+"siguientes métodos:"
 
 #: ../Doc/library/xml.etree.elementtree.rst:1291
 msgid ""
@@ -1775,6 +1814,9 @@ msgid ""
 "public identifier.  *system* is the system identifier.  This method does not "
 "exist on the default :class:`TreeBuilder` class."
 msgstr ""
+"Maneja una declaración de doctype. *name* es el nombre del doctype. *pubid* "
+"es el identificador público. *system* es el identificador del sistema. Este "
+"método no existe en la clase por defecto :class:`TreeBuilder`."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1299
 msgid ""
@@ -1783,6 +1825,11 @@ msgid ""
 "is ``''`` for the default namespace and the declared namespace prefix name "
 "otherwise.  *uri* is the namespace URI."
 msgstr ""
+"Se llama cada vez que el analizador encuentra una nueva declaración de "
+"espacio de nombres, antes de la llamada de retorno ``start()`` para el "
+"elemento de apertura que lo define. *prefix* es ``''`` para el espacio de "
+"nombres por defecto y el nombre del prefijo del espacio de nombres declarado "
+"en caso contrario. *uri* es el URI del espacio de nombres."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1308
 msgid ""
@@ -1790,6 +1837,9 @@ msgid ""
 "namespace prefix mapping, with the name of the *prefix* that went out of "
 "scope."
 msgstr ""
+"Se llama después de la llamada de retorno ``end()`` de un elemento que "
+"declaró un mapeo de prefijo de espacio de nombres, con el nombre del "
+"*prefijo* que salió del ámbito."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1320
 msgid ""
@@ -1798,10 +1848,14 @@ msgid ""
 "tree but translates the callback events directly into a serialised form "
 "using the *write* function."
 msgstr ""
+"Un escritor `C14N 2.0 <https://www.w3.org/TR/xml-c14n2/>`_. Los argumentos "
+"son los mismos que para la función :func:`canonicalize`. Esta clase no "
+"construye un árbol, sino que traduce los eventos de devolución de llamada "
+"directamente a una forma serializada utilizando la función *write*."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1331
 msgid "XMLParser Objects"
-msgstr ""
+msgstr "Objetos XMLParser"
 
 #: ../Doc/library/xml.etree.elementtree.rst:1336
 msgid ""
@@ -1813,12 +1867,21 @@ msgid ""
 "*encoding* [1]_ is given, the value overrides the encoding specified in the "
 "XML file."
 msgstr ""
+"Esta clase es el bloque de construcción de bajo nivel del módulo. Utiliza :"
+"mod:`xml.parsers.expat` para un análisis eficiente de XML basado en eventos. "
+"Puede ser alimentada con datos XML de forma incremental con el método :meth:"
+"`feed`, y los eventos de análisis se traducen en una API push - invocando "
+"callbacks en el objeto *target*. Si se omite *target*, se utiliza la clase "
+"estándar :class:`TreeBuilder`. Si se da *encoding* [1]_, el valor anula la "
+"codificación especificada en el archivo XML."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1344
 msgid ""
 "Parameters are now :ref:`keyword-only <keyword-only_parameter>`. The *html* "
 "argument no longer supported."
 msgstr ""
+"Los parámetros son ahora :ref:`keyword-only <keyword-only_parameter>`. El "
+"argumento *html* ya no se admite."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1351
 msgid ""
@@ -1826,10 +1889,15 @@ msgid ""
 "``close()`` method of the *target* passed during construction; by default, "
 "this is the toplevel document element."
 msgstr ""
+"Finaliza la alimentación de datos al analizador. Devuelve el resultado de "
+"llamar al método ``close()`` del *target* pasado durante la construcción; "
+"por defecto, es el elemento del documento de nivel superior."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1358
 msgid "Feeds data to the parser.  *data* is encoded data."
 msgstr ""
+"Introduce los datos en el analizador sintáctico. *data* son datos "
+"codificados."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1360
 msgid ""
@@ -1841,10 +1909,18 @@ msgid ""
 "building a tree structure. This is an example of counting the maximum depth "
 "of an XML file::"
 msgstr ""
+":meth:`XMLParser.feed` llama al método ``start(tag, attrs_dict)`` de "
+"*target* para cada etiqueta de apertura, a su método ``end(tag)`` para cada "
+"etiqueta de cierre, y los datos son procesados por el método ``data(data)``. "
+"Para más métodos de callback soportados, véase la clase :class:"
+"`TreeBuilder`. :meth:`XMLParser.close` llama al método ``close()`` de "
+"*target*. :class:`XMLParser` puede utilizarse no sólo para construir una "
+"estructura de árbol. Este es un ejemplo de contar la profundidad máxima de "
+"un archivo XML::"
 
 #: ../Doc/library/xml.etree.elementtree.rst:1404
 msgid "XMLPullParser Objects"
-msgstr ""
+msgstr "Objetos XMLPullParser"
 
 #: ../Doc/library/xml.etree.elementtree.rst:1408
 msgid ""
@@ -1857,10 +1933,19 @@ msgid ""
 "\"ns\" events are used to get detailed namespace information).  If *events* "
 "is omitted, only ``\"end\"`` events are reported."
 msgstr ""
+"Un analizador sintáctico pull adecuado para aplicaciones no bloqueantes. Su "
+"API de entrada es similar a la de :class:`XMLParser`, pero en lugar de "
+"enviar llamadas a un objetivo de devolución de llamada, :class:"
+"`XMLPullParser` recoge una lista interna de eventos de análisis y permite al "
+"usuario leer de ella. *events* son una secuencia de eventos a reportar. Los "
+"eventos soportados son las cadenas ``\"start\"``, ``\"end\"``, ``\"comment"
+"\"``, ``\"pi\"``, ``\"start-ns\"`` y ``\"end-ns\"`` (los eventos \"ns\" se "
+"utilizan para obtener información detallada del espacio de nombres). Si se "
+"omite *events*, sólo se informará de los eventos ``\"end\"``."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1419
 msgid "Feed the given bytes data to the parser."
-msgstr ""
+msgstr "Introduce los datos de los bytes dados en el analizador."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1423
 msgid ""
@@ -1869,6 +1954,10 @@ msgid ""
 "yet retrieved when the parser is closed can still be read with :meth:"
 "`read_events`."
 msgstr ""
+"Señala al analizador que el flujo de datos ha terminado. A diferencia de :"
+"meth:`XMLParser.close`, este método siempre devuelve :const:`None`. "
+"Cualquier evento que no haya sido recuperado cuando el analizador se cierra "
+"puede ser leído con :meth:`read_events`."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1430
 msgid ""
@@ -1878,24 +1967,32 @@ msgid ""
 "*elem* is the encountered :class:`Element` object, or other context value as "
 "follows."
 msgstr ""
+"Devuelve un iterador sobre los eventos que se han encontrado en los datos "
+"alimentados al analizador. El iterador devuelve pares ``(event, elem)``, "
+"donde *event* es una cadena que representa el tipo de evento (por ejemplo, ``"
+"\"fin\"``) y *elem* es el objeto :class:`Element` encontrado, u otro valor "
+"de contexto como el siguiente."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1436
 msgid "``start``, ``end``: the current Element."
-msgstr ""
+msgstr "``start``, ``end``: el Element actual."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1437
 msgid "``comment``, ``pi``: the current comment / processing instruction"
 msgstr ""
+"``comment``, ``pi``: el comentario / la instrucción de procesamiento actual"
 
 #: ../Doc/library/xml.etree.elementtree.rst:1438
 msgid ""
 "``start-ns``: a tuple ``(prefix, uri)`` naming the declared namespace "
 "mapping."
 msgstr ""
+"``start-ns``: una tupla ``(prefix, uri)`` que nombra el mapeo del espacio de "
+"nombres declarado."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1440
 msgid "``end-ns``: :const:`None` (this may change in a future version)"
-msgstr ""
+msgstr "``end-ns``: :const:`None` (esto puede cambiar en una versión futura)"
 
 #: ../Doc/library/xml.etree.elementtree.rst:1442
 msgid ""
@@ -1905,6 +2002,11 @@ msgid ""
 "over iterators obtained from :meth:`read_events` will have unpredictable "
 "results."
 msgstr ""
+"Los eventos proporcionados en una llamada anterior a :meth:`read_events` no "
+"serán devueltos de nuevo. Los eventos se consumen de la cola interna sólo "
+"cuando se recuperan del iterador, por lo que múltiples lectores iterando en "
+"paralelo sobre iteradores obtenidos de :meth:`read_events` tendrán "
+"resultados impredecibles."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1450
 msgid ""
@@ -1914,10 +2016,15 @@ msgid ""
 "that point.  The same applies to the element children; they may or may not "
 "be present."
 msgstr ""
+":class:`XMLPullParser` sólo garantiza que ha visto el carácter \">\" de una "
+"etiqueta de inicio cuando emite un evento \"start\", por lo que los "
+"atributos están definidos, pero el contenido de los atributos text y tail "
+"está indefinido en ese momento. Lo mismo ocurre con los hijos del elemento; "
+"pueden estar presentes o no."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1465
 msgid "Exceptions"
-msgstr ""
+msgstr "Excepciones"
 
 #: ../Doc/library/xml.etree.elementtree.rst:1469
 msgid ""
@@ -1926,21 +2033,30 @@ msgid ""
 "will contain a user-friendly error message.  In addition, it will have the "
 "following attributes available:"
 msgstr ""
+"Error de análisis de XML, lanzado por los distintos métodos de análisis de "
+"este módulo cuando el análisis falla. La representación de cadena de una "
+"instancia de esta excepción contendrá un mensaje de error fácil de usar. "
+"Además, tendrá los siguientes atributos disponibles:"
 
 #: ../Doc/library/xml.etree.elementtree.rst:1476
 msgid ""
 "A numeric error code from the expat parser. See the documentation of :mod:"
 "`xml.parsers.expat` for the list of error codes and their meanings."
 msgstr ""
+"Un código de error numérico del analizador sintáctico expat. Consulte la "
+"documentación de :mod:`xml.parsers.expat` para ver la lista de códigos de "
+"error y sus significados."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1481
 msgid ""
 "A tuple of *line*, *column* numbers, specifying where the error occurred."
 msgstr ""
+"Una tupla de números de *line*, *column*, que especifica dónde se produjo el "
+"error."
 
 #: ../Doc/library/xml.etree.elementtree.rst:1484
 msgid "Footnotes"
-msgstr ""
+msgstr "Notas al pie de página"
 
 #: ../Doc/library/xml.etree.elementtree.rst:1485
 msgid ""
@@ -1949,3 +2065,7 @@ msgid ""
 "https://www.w3.org/TR/2006/REC-xml11-20060816/#NT-EncodingDecl and https://"
 "www.iana.org/assignments/character-sets/character-sets.xhtml."
 msgstr ""
+"La cadena de codificación incluida en la salida XML debe ajustarse a los "
+"estándares adecuados. Por ejemplo, \"UTF-8\" es válido, pero \"UTF8\" no lo "
+"es. Consulte https://www.w3.org/TR/2006/REC-xml11-20060816/#NT-EncodingDecl "
+"y https://www.iana.org/assignments/character-sets/character-sets.xhtml."
