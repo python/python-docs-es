@@ -1,5 +1,11 @@
 :orphan:
 
+..
+  esta opción quita los errores de la forma
+  WARNING: duplicate term description of X, other instance in translation-memory
+
+:undoc-members:
+
 =======================
  Memoria de traducción
 =======================
