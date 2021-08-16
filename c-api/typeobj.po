@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-19 11:16+0100\n"
-"PO-Revision-Date: 2020-05-19 00:16+0200\n"
+"PO-Revision-Date: 2021-08-01 20:07+0200\n"
 "Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
 "Language: es\n"
 "Language-Team: python-doc-es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
+"X-Generator: Poedit 3.0\n"
 
 #: ../Doc/c-api/typeobj.rst:6
 msgid "Type Objects"
@@ -581,14 +582,12 @@ msgid "__del__"
 msgstr "__del__"
 
 #: ../Doc/c-api/typeobj.rst:148
-#, fuzzy
 msgid ":c:member:`~PyTypeObject.tp_vectorcall`"
-msgstr ":c:member:`~PyTypeObject.tp_vectorcall_offset`"
+msgstr ":c:member:`~PyTypeObject.tp_vectorcall`"
 
 #: ../Doc/c-api/typeobj.rst:148
-#, fuzzy
 msgid ":c:type:`vectorcallfunc`"
-msgstr ":c:type:`allocfunc`"
+msgstr ":c:type:`vectorcallfunc`"
 
 #: ../Doc/c-api/typeobj.rst:152
 msgid ""
@@ -1555,43 +1554,38 @@ msgstr ""
 "Para evitar punteros colgantes, la forma recomendada de lograr esto es:"
 
 #: ../Doc/c-api/typeobj.rst:682
-#, fuzzy
 msgid ""
 "An optional offset to a per-instance function that implements calling the "
 "object using the :ref:`vectorcall protocol <vectorcall>`, a more efficient "
 "alternative of the simpler :c:member:`~PyTypeObject.tp_call`."
 msgstr ""
 "Un desplazamiento opcional a una función por instancia que implementa la "
-"llamada al objeto usando el protocolo *vectorcall*, una alternativa más "
-"eficiente del más simple :c:member:`~PyTypeObject.tp_call`."
+"llamada al objeto usando :ref:`vectorcall protocol <vectorcall>`, una "
+"alternativa más eficiente del simple :c:member:`~PyTypeObject.tp_call`."
 
 #: ../Doc/c-api/typeobj.rst:687
-#, fuzzy
 msgid ""
 "This field is only used if the flag :const:`Py_TPFLAGS_HAVE_VECTORCALL` is "
 "set. If so, this must be a positive integer containing the offset in the "
 "instance of a :c:type:`vectorcallfunc` pointer."
 msgstr ""
-"Este campo solo se usa si se establece el indicador :const:"
-"`_Py_TPFLAGS_HAVE_VECTORCALL`. Si es así, debe ser un número entero positivo "
-"que contenga el desplazamiento en la instancia de un puntero a :c:type:"
-"`vectorcallfunc`. La firma es la misma que para :c:func:"
-"`_PyObject_Vectorcall`::"
+"Este campo solo se usa si se establece el flag :const:"
+"`Py_TPFLAGS_HAVE_VECTORCALL`. Si es así, debe ser un entero positivo que "
+"contenga el desplazamiento en la instancia de un puntero :c:type:"
+"`vectorcallfunc`."
 
 #: ../Doc/c-api/typeobj.rst:691
-#, fuzzy
 msgid ""
 "The *vectorcallfunc* pointer may be ``NULL``, in which case the instance "
 "behaves as if :const:`Py_TPFLAGS_HAVE_VECTORCALL` was not set: calling the "
 "instance falls back to :c:member:`~PyTypeObject.tp_call`."
 msgstr ""
-"El puntero *vectorcallfunc* puede ser cero, en cuyo caso la instancia se "
-"comporta como si :const:`_Py_TPFLAGS_HAVE_VECTORCALL` no se hubiera "
-"establecido: la llamada de la instancia recae en :c:member:`~PyTypeObject."
+"El puntero *vectorcallfunc* puede ser ``NULL``, en cuyo caso la instancia se "
+"comporta como si :const:`Py_TPFLAGS_HAVE_VECTORCALL` no estuviera "
+"configurado: llamar a la instancia vuelve a :c:member:`~PyTypeObject."
 "tp_call`."
 
 #: ../Doc/c-api/typeobj.rst:695
-#, fuzzy
 msgid ""
 "Any class that sets ``Py_TPFLAGS_HAVE_VECTORCALL`` must also set :c:member:"
 "`~PyTypeObject.tp_call` and make sure its behaviour is consistent with the "
@@ -1601,20 +1595,19 @@ msgstr ""
 "Cualquier clase que establezca ``_Py_TPFLAGS_HAVE_VECTORCALL`` también debe "
 "establecer :c:member:`~PyTypeObject.tp_call` y asegurarse de que su "
 "comportamiento sea coherente con la función *vectorcallfunc*. Esto se puede "
-"hacer configurando *tp_call* en ``PyVectorcall_Call``:"
+"hacer configurando *tp_call* en :c:func:`PyVectorcall_Call`."
 
 #: ../Doc/c-api/typeobj.rst:702
-#, fuzzy
 msgid ""
 "It is not recommended for :ref:`heap types <heap-types>` to implement the "
 "vectorcall protocol. When a user sets :attr:`__call__` in Python code, only "
 "*tp_call* is updated, likely making it inconsistent with the vectorcall "
 "function."
 msgstr ""
-"No se recomienda para :ref:`tipos montículo <heap-types>` para implementar "
-"el protocolo *vectorcall*. Cuando un usuario establece ``__call__`` en el "
-"código Python, solo se actualiza ``tp_call``, posiblemente haciendo que sea "
-"inconsistente con la función *vectorcall*."
+"No se recomienda para :ref:`tipos de pila <heap-types>` para implementar el "
+"protocolo vectorcall. Cuando un usuario establece :attr:`__call__` en código "
+"Python, solo se actualiza *tp_call*, lo que probablemente lo haga "
+"inconsistente con la función vectorcall."
 
 #: ../Doc/c-api/typeobj.rst:709
 msgid ""
@@ -1631,6 +1624,8 @@ msgid ""
 "Before version 3.8, this slot was named ``tp_print``. In Python 2.x, it was "
 "used for printing to a file. In Python 3.0 to 3.7, it was unused."
 msgstr ""
+"Antes de la versión 3.8, este slot se llamaba ``tp_print``. En Python 2.x, "
+"se usó para imprimir en un archivo. En Python 3.0 a 3.7, no se usó."
 
 #: ../Doc/c-api/typeobj.rst:721
 msgid ""
@@ -1640,6 +1635,11 @@ msgid ""
 "`PyVectorcall_Call` is explicitly called. This is in particular the case for "
 "`heap types`_ (including subclasses defined in Python)."
 msgstr ""
+"Este campo siempre se hereda. Sin embargo, el flag :const:"
+"`Py_TPFLAGS_HAVE_VECTORCALL` no siempre se hereda. Si no es así, entonces la "
+"subclase no usará :ref:`vectorcall <vectorcall>`, excepto cuando :c:func:"
+"`PyVectorcall_Call` se llame explícitamente. Este es en particular el caso "
+"de los `heap types`_ (incluidas las subclases definidas en Python)."
 
 #: ../Doc/c-api/typeobj.rst:732
 msgid "An optional pointer to the get-attribute-string function."
@@ -2297,14 +2297,14 @@ msgstr ""
 "estructura de tipos."
 
 #: ../Doc/c-api/typeobj.rst:1158
-#, fuzzy
 msgid ""
 "This bit is set when the class implements the :ref:`vectorcall protocol "
 "<vectorcall>`. See :c:member:`~PyTypeObject.tp_vectorcall_offset` for "
 "details."
 msgstr ""
-"Este bit se establece cuando la clase implementa el protocolo *vectorcall*. "
-"Ver :c:member:`~PyTypeObject.tp_vectorcall_offset` para más detalles."
+"Este bit se establece cuando la clase implementa :ref:`protocolo vectorcall "
+"<vectorcall>`. Consulte :c:member:`~PyTypeObject.tp_vectorcall_offset` para "
+"obtener más detalles."
 
 #: ../Doc/c-api/typeobj.rst:1164
 msgid ""
@@ -2312,6 +2312,9 @@ msgid ""
 "tp_call` is also inherited. `Heap types`_ do not inherit "
 "``Py_TPFLAGS_HAVE_VECTORCALL``."
 msgstr ""
+"Este bit se hereda para subtipos *static* si :c:member:`~PyTypeObject."
+"tp_call` también se hereda. `Heap types`_ no heredan "
+"``Py_TPFLAGS_HAVE_VECTORCALL``."
 
 #: ../Doc/c-api/typeobj.rst:1173
 msgid ""
@@ -2426,6 +2429,13 @@ msgid ""
 "``tp_traverse`` of another heap-allocated type (such as a heap-allocated "
 "superclass). If they do not, the type object may not be garbage-collected."
 msgstr ""
+"Los tipos asignados al heap (:const:`Py_TPFLAGS_HEAPTYPE`, como los creados "
+"con :c:func:`PyType_FromSpec` y API similares) contienen una referencia a su "
+"tipo. Por lo tanto, su función transversal debe visitar :c:func:"
+"`Py_TYPE(self) <Py_TYPE>`, o delegar esta responsabilidad llamando a "
+"``tp_traverse`` de otro tipo asignado al heap (como una superclase asignada "
+"al heap). Si no es así, es posible que el objeto de tipo no se recolecte "
+"como basura."
 
 #: ../Doc/c-api/typeobj.rst:1240
 msgid ""
@@ -2433,6 +2443,10 @@ msgid ""
 "``tp_traverse``.  In earlier versions of Python, due to `bug 40217 <https://"
 "bugs.python.org/issue40217>`_, doing this may lead to crashes in subclasses."
 msgstr ""
+"Se espera que los tipos asignados al montón visiten ``Py_TYPE(self)`` en "
+"``tp_traverse``. En versiones anteriores de Python, debido al `bug 40217 "
+"<https://bugs.python.org/issue40217>`_, hacer esto puede provocar fallas en "
+"las subclases."
 
 #: ../Doc/c-api/typeobj.rst:1249
 msgid ""
@@ -2696,7 +2710,6 @@ msgstr ""
 "del tipo no podrán participar en ninguna comparación."
 
 #: ../Doc/c-api/typeobj.rst:1385
-#, fuzzy
 msgid ""
 "If the instances of this type are weakly referenceable, this field is "
 "greater than zero and contains the offset in the instance structure of the "
@@ -2706,12 +2719,12 @@ msgid ""
 "`PyObject*` which is initialized to ``NULL``."
 msgstr ""
 "Si las instancias de este tipo son débilmente referenciables, este campo es "
-"mayor que cero y contiene el desplazamiento en la estructura de instancias "
-"del encabezado de la lista de referencia débil (ignorando el encabezado del "
-"GC, si está presente); este desplazamiento es utilizado por :c:func:"
+"mayor que cero y contiene el desplazamiento en la estructura de instancia "
+"del encabezado de la lista de referencia débil (ignorando el encabezado GC, "
+"si está presente); este desplazamiento es utilizado por :c:func:"
 "`PyObject_ClearWeakRefs` y las funciones :c:func:`PyWeakref_\\*`. La "
-"estructura de la instancia debe incluir un campo de tipo :c:type:`PyObject"
-"\\*` que se inicializa a ``NULL``."
+"estructura de la instancia debe incluir un campo de tipo :c:type:`PyObject*` "
+"que se inicializa en ``NULL``."
 
 #: ../Doc/c-api/typeobj.rst:1392
 msgid ""
@@ -3246,7 +3259,6 @@ msgid "An optional pointer to an instance creation function."
 msgstr "Un puntero opcional a una función de creación de instancias."
 
 #: ../Doc/c-api/typeobj.rst:1718
-#, fuzzy
 msgid ""
 "The *subtype* argument is the type of the object being created; the *args* "
 "and *kwds* arguments represent positional and keyword arguments of the call "
@@ -3254,11 +3266,11 @@ msgid ""
 "member:`~PyTypeObject.tp_new` function is called; it may be a subtype of "
 "that type (but not an unrelated type)."
 msgstr ""
-"El argumento del subtipo es el tipo del objeto que se está creando; los "
+"El argumento *subtype* es el tipo de objeto que se está creando; los "
 "argumentos *args* y *kwds* representan argumentos posicionales y de palabras "
-"clave de la llamada al tipo. Tenga en cuenta que el subtipo no tiene que ser "
-"igual al tipo cuya función :c:member:`~PyTypeObject.tp_new` se llama; puede "
-"ser un subtipo de ese tipo (pero no un tipo no relacionado)."
+"clave de la llamada al tipo. Tenga en cuenta que *subtype* no tiene que ser "
+"igual al tipo cuya función :c:member:`~PyTypeObject.tp_new` es llamada; "
+"puede ser un subtipo de ese tipo (pero no un tipo no relacionado)."
 
 #: ../Doc/c-api/typeobj.rst:1724
 msgid ""
@@ -3493,15 +3505,18 @@ msgid ""
 "If ``tp_vectorcall`` is ``NULL``, the default call implementation using :"
 "attr:`__new__` and :attr:`__init__` is used."
 msgstr ""
+"Función Vectorcall a utilizar para llamadas de este tipo de objeto. En otras "
+"palabras, se usa para implementar :ref:`vectorcall <vectorcall>` para ``type."
+"__call__``. Si ``tp_vectorcall`` es ``NULL``, se usa la implementación de "
+"llamada predeterminada usando :attr:`__new__` y :attr:`__init__`."
 
 #: ../Doc/c-api/typeobj.rst:1913
-#, fuzzy
 msgid "This field is never inherited."
-msgstr "Este campo no se hereda."
+msgstr "Este campo nunca se hereda."
 
 #: ../Doc/c-api/typeobj.rst:1915
 msgid "(the field exists since 3.8 but it's only used since 3.9)"
-msgstr ""
+msgstr "(el campo existe desde 3.8 pero solo se usa desde 3.9)"
 
 #: ../Doc/c-api/typeobj.rst:1918
 msgid ""
