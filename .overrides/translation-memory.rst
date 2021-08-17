@@ -97,6 +97,9 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 
    bytecodes
      queda igual ``glossary.po``
+
+   callback
+     retrollamada ``glossary.po``
   
    callable
      invocable ``glossary.po``, ``library/functions.po``
@@ -125,8 +128,18 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
    keyword argument
      argumento por palabra clave / argumento de palabra clave
 
-   handler
-     gestor ``tutorial/errors.po``
+     host
+       host  ``library/smtplib.po``
+       Significado: máquina conectada a una red que provee de servicios
+
+     hostname
+       hostname  ``library/smtplib.po``
+       Significado: nombre de la máquina conectada a una red que provee de servicios
+
+     i. e.
+       en otras palabras. ``library/sqlite3.po``
+     handler
+       gestor ``tutorial/errors.po``
 
    handle exception
      gestionar [una] excepción. ``tutorial/inputoutput.po``
@@ -181,7 +194,7 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 
    release
      version ``HOWTO``
-
+     
    return / returns
      retorna / retornar ``library/sqlite3.po``
 
@@ -194,12 +207,19 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 
    runtime
      tiempo de ejecución ``tutorial/classes.po``
-
+       
    slice
     segmento ``datamodel.po``
 
    slicing
     segmentación ``datamodel.po``
+   
+   statement
+    sentencia ``smtplib.po``
+
+   static type checker
+    Validador estático de tipos
+    Notas: mantener la mayúscula, usar validación cuando se refiera a la acción y no al agente.
 
    static type checker
      Validador estático de tipos
@@ -213,7 +233,14 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 
    third-party
      de terceros ``library/typing.po``
-
+     
+   timeout
+     timeout  ``library/smtplib.po``
+     Significado: tiempo de espera para establecer/reintentar una conexión de red
+   
+   type hint
+     indicador de tipo  ``library/typing.po``
+      
    type hint
      indicador de tipo ``library/typing.po``
 
@@ -221,13 +248,12 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
      anotación de tipo ``library/typing.po``
      Nota: úsese como sinónimo de *type hint*, aunque en el texto se sobreentiende que anotación
      es algo accesorio, un comentario, y type hint implica que el Validador hará comprobaciones
-
+   
    underscore
      guión bajo ``glossary.po``
 
    widget
      widget ``library/tkinter``
-
 
 
 Términos que no se traducen
