@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-19 11:16+0100\n"
-"PO-Revision-Date: 2020-09-27 12:34+0200\n"
-"Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
+"PO-Revision-Date: 2021-09-01 23:41+0800\n"
+"Last-Translator: Rodrigo Tobar <rtobarc@gmail.com>\n"
 "Language: es\n"
 "Language-Team: python-doc-es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: ../Doc/library/subprocess.rst:2
 msgid ":mod:`subprocess` --- Subprocess management"
@@ -955,12 +956,16 @@ msgid ""
 "value in ``gr_gid`` will be used. If the value is an integer, it will be "
 "passed verbatim. (POSIX only)"
 msgstr ""
+"Si *group* no es ``None``, la llamada a sistema setregid() se hará en el "
+"proceso hijo antes de la ejecución del subproceso. Si el valor proveído es "
+"una cadena de caracteres, será buscado usando :func:`grp.getgrnam()` y el "
+"valor en ``gr_gid`` será usado. Si el valor es un entero, será pasado "
+"literalmente. (solamente POSIX)"
 
 #: ../Doc/library/subprocess.rst:560 ../Doc/library/subprocess.rst:569
 #: ../Doc/library/subprocess.rst:578 ../Doc/library/subprocess.rst:584
-#, fuzzy
 msgid ":ref:`Availability <availability>`: POSIX"
-msgstr ":ref:`Disponibilidad <availability>`: POSIX y Windows."
+msgstr ":ref:`Disponibilidad <availability>`: POSIX"
 
 #: ../Doc/library/subprocess.rst:563
 msgid ""
@@ -970,6 +975,11 @@ msgid ""
 "the values in ``gr_gid`` will be used. Integer values will be passed "
 "verbatim. (POSIX only)"
 msgstr ""
+"Si *extra_groups* no es ``None``, la llamada a sistema setgroups() se hará "
+"en el proceso hijo antes de la ejecución del subproceso. Cadenas de "
+"caracteres proveídas en *extra_groups* serán buscadas usando :func:`grp."
+"getgrnam()` y los valores en ``gr_gid`` serán usados. Valor enteros serán "
+"pasados literalmente. (solamente POSIX)"
 
 #: ../Doc/library/subprocess.rst:572
 msgid ""
@@ -979,15 +989,19 @@ msgid ""
 "value in ``pw_uid`` will be used. If the value is an integer, it will be "
 "passed verbatim. (POSIX only)"
 msgstr ""
+"Si *user* no es ``None``, la llamada a sistema setreuid() se hará en el "
+"proceso hijo antes de la ejecución del subproceso. Si el valor proveído es "
+"una cadena de caracteres, será buscado usando :func:`pwd.getpwnam()` y el "
+"valor en ``pw_uid`` será usado. Si el valor es un entero, será pasado "
+"literalmente. (solamente POSIX)"
 
 #: ../Doc/library/subprocess.rst:581
-#, fuzzy
 msgid ""
 "If *umask* is not negative, the umask() system call will be made in the "
 "child process prior to the execution of the subprocess."
 msgstr ""
-"Si *start_new_session* es verdadero la llamada al sistema *setsid* se hará "
-"en el proceso hijo antes de la ejecución del subproceso (solamente POSIX)."
+"Si *umask* no es negativo, la llamada a sistema umask() se hará en el "
+"proceso hijo antes de la ejecución del subproceso."
 
 #: ../Doc/library/subprocess.rst:587
 msgid ""
@@ -1306,7 +1320,6 @@ msgid "*timeout* was added."
 msgstr "Se añadió *timeout*."
 
 #: ../Doc/library/subprocess.rst:740
-#, fuzzy
 msgid ""
 "Interact with process: Send data to stdin.  Read data from stdout and "
 "stderr, until end-of-file is reached.  Wait for process to terminate and set "
@@ -1315,12 +1328,13 @@ msgid ""
 "should be sent to the child.  If streams were opened in text mode, *input* "
 "must be a string. Otherwise, it must be bytes."
 msgstr ""
-"Interactuar con el proceso: Enviar datos a stdin. Leer datos de stdout y "
-"stderr, hasta encontrar un fin-de-fichero. Esperar a que termine el proceso. "
-"El argumento opcional *input* debe contener los datos que hay que enviar al "
-"proceso hijo o ``None``, si no hay que enviar datos al hijo. Si se abrieron "
-"los flujos en modo texto, *input* ha de ser una cadena. En caso contrario, "
-"debe contener bytes."
+"Interactúa con el proceso: Envía datos a stdin. Lee datos de stdout y stderr "
+"hasta encontrar un fin-de-fichero. Espera a que termine el proceso y escribe "
+"el atributo :attr:`~Popen.returncode`. El argumento opcional *input* debe "
+"contener los datos que hay que enviar al proceso hijo o ``None`` si no hay "
+"que enviar datos al proceso hijo. Si se abrieron los flujos en modo texto, "
+"*input* ha de ser una cadena de caracteres. En caso contrario, debe contener "
+"bytes."
 
 #: ../Doc/library/subprocess.rst:747
 msgid ""
@@ -1377,7 +1391,7 @@ msgstr "Envía la señal *signal* al proceso hijo."
 
 #: ../Doc/library/subprocess.rst:784
 msgid "Do nothing if the process completed."
-msgstr ""
+msgstr "No hace nada si el proceso ya ha terminado."
 
 #: ../Doc/library/subprocess.rst:788
 msgid ""
@@ -1390,24 +1404,22 @@ msgstr ""
 "*creationflags* que incluya `CREATE_NEW_PROCESS_GROUP`."
 
 #: ../Doc/library/subprocess.rst:795
-#, fuzzy
 msgid ""
 "Stop the child. On POSIX OSs the method sends SIGTERM to the child. On "
 "Windows the Win32 API function :c:func:`TerminateProcess` is called to stop "
 "the child."
 msgstr ""
-"Detener el proceso hijo. En SO POSIX, este método envía SIGTERM al proceso "
-"hijo. En Windows se llama a la función :c:func:`TerminateProcess` de la API "
-"de Win32 para detener el proceso hijo."
+"Detiene el proceso hijo. En sistemas operativos POSIX este método envía "
+"SIGTERM al proceso hijo. En Windows se llama a la función :c:func:"
+"`TerminateProcess` de la API de Win32 para detener el proceso hijo."
 
 #: ../Doc/library/subprocess.rst:802
-#, fuzzy
 msgid ""
 "Kills the child. On POSIX OSs the function sends SIGKILL to the child. On "
 "Windows :meth:`kill` is an alias for :meth:`terminate`."
 msgstr ""
-"Mata el proceso hijo. En SO POSIX la función envía SIGKILL al proceso hijo. "
-"En Windows :meth:`kill` es un alias de :meth:`terminate`."
+"Mata el proceso hijo. En sistemas operativos POSIX la función envía SIGKILL "
+"al proceso hijo. En Windows :meth:`kill` es un alias de :meth:`terminate`."
 
 #: ../Doc/library/subprocess.rst:806
 msgid "The following attributes are also available:"
@@ -1908,7 +1920,6 @@ msgid "This is equivalent to::"
 msgstr "Esto equivale a::"
 
 #: ../Doc/library/subprocess.rst:1163
-#, fuzzy
 msgid ""
 "The arguments shown above are merely some common ones. The full function "
 "signature is largely the same as that of :func:`run` - most arguments are "
@@ -1917,10 +1928,13 @@ msgid ""
 "``input=b''`` (or ``input=''``, depending on other arguments) rather than "
 "using the parent's standard input file handle."
 msgstr ""
-"Se muestran algunos argumentos comunes. La signatura completa de la función "
-"es casi la misma que la de :func:`run`. La mayoría de los argumentos se pasa "
-"directamente a esa interfaz. No obstante, no es posible pasar ``input=None`` "
-"para heredar el flujo entrada estándar del padre."
+"Los argumentos mostrados arriba son meramente algunos de los comunes. La "
+"signatura completa de la función es casi la misma que la de :func:`run` - la "
+"mayoría de los argumentos se pasa directamente a esa interfaz. Existe una "
+"diferencia con la interfaz de :func:`run` respecto al comportamiento: pasar "
+"``input=None`` genera el mismo comportamiento que ``input=b''`` (o "
+"``input=''``, dependiendo de otros argumentos) en vez de usar el flujo "
+"entrada estándar del padre."
 
 #: ../Doc/library/subprocess.rst:1170
 msgid ""
@@ -1930,7 +1944,7 @@ msgid ""
 msgstr ""
 "Por omisión, esta función retornará los datos como bytes codificados. La "
 "codificación real de los datos podría depender de la orden invocada, por lo "
-"que la descodificación a texto se deberá hacer al nivel de la aplicación."
+"que la decodificación a texto se deberá hacer al nivel de la aplicación."
 
 #: ../Doc/library/subprocess.rst:1174
 msgid ""
