@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-19 11:16+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2021-09-07 11:42-0500\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.0\n"
 "Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: es_ES\n"
@@ -118,6 +118,17 @@ msgid ""
 "deal with both types of address.  A string or bytes-like object can be used "
 "for either type of address when passing it as an argument."
 msgstr ""
+"La dirección de un socket :const:`AF_UNIX` enlazado a un nodo del sistema de "
+"archivos es representado como una cadena de caracteres, utilizando la "
+"codificación del sistema de archivos y el controlador de errores "
+"``’surrogateescape’``(see :pep:`383`). Una dirección en el espacio de nombre "
+"abstracto de Linux es devuelvo como un :term:`bytes-like object` con un byte "
+"inicial nulo; tenga en cuenta que los sockets en este nombre de espacio "
+"puede comunicarse con sockets normales del sistema de archivos, así que los "
+"programas destinados a correr en Linux podrían necesitar tratar con ambos "
+"tipos de direcciones. Se puede pasar un objeto similar a una cadena de "
+"caracteres o bytes para cualquier tipo de dirección al pasarlo como "
+"argumento."
 
 #: ../Doc/library/socket.rst:59
 msgid ""
@@ -152,6 +163,12 @@ msgid ""
 "you may want to avoid these if you intend to support IPv6 with your Python "
 "programs."
 msgstr ""
+"Para direcciones IPv4, se aceptan dos formas especiales en lugar de una "
+"dirección de host: ``’’`` representa :const:`INADDR_ANY`, que se utiliza "
+"para enlazar a todas las interfaces, y la cadena de caracteres "
+"``’<broadcast>’`` representa :const:`INADDR_BROADCAST`. Este comportamiento "
+"no es compatible con IPv6, por lo tanto, es posible que desee evitarlos sí "
+"tiene la intención de admitir IPv6 con sus programas Python."
 
 #: ../Doc/library/socket.rst:80
 msgid ""
@@ -163,6 +180,13 @@ msgid ""
 "omission of *scope_id* can cause problems in manipulating scoped IPv6 "
 "addresses."
 msgstr ""
+"Para la familia de direcciones :const:`AF_INET6`, se utiliza una ``(host, "
+"port, flowinfo, scope_id)`` de cuatro duplas, donde *flowinfo* y *scope_id* "
+"representan los miembros ``sin6_flowinfo`` y ``sin6_scope_id`` en :const:"
+"`struct sockaddr_in6` en C. Para los métodos de los modulos :mod:`socket`, "
+"*flowinfo* y *scope_id* pueden ser omitidos solo por compatibilidad con "
+"versiones anteriores. Sin embargo la omisión de *scope_id* puede causar "
+"problemas en la manipulación de direcciones IPv6 con ambito."
 
 #: ../Doc/library/socket.rst:87
 #, python-format
@@ -208,18 +232,25 @@ msgid ""
 "*scope* is one of :const:`TIPC_ZONE_SCOPE`, :const:`TIPC_CLUSTER_SCOPE`, "
 "and :const:`TIPC_NODE_SCOPE`."
 msgstr ""
+"*scope* es una de :const:`TIPC_ZONE_SCOPE`, :const:`TIPC_CLUSTER_SCOPE`, y :"
+"const:`TIPC_NODE_SCOPE`."
 
 #: ../Doc/library/socket.rst:104
 msgid ""
 "If *addr_type* is :const:`TIPC_ADDR_NAME`, then *v1* is the server type, "
 "*v2* is the port identifier, and *v3* should be 0."
 msgstr ""
+"Si *addr_type* es :const:`TIPC_ADDR_NAME`, entonces *v1* es el tipo de "
+"servidor, *v2* es el identificador de puerto, y *v3* debe ser 0."
 
 #: ../Doc/library/socket.rst:107
 msgid ""
 "If *addr_type* is :const:`TIPC_ADDR_NAMESEQ`, then *v1* is the server type, "
 "*v2* is the lower port number, and *v3* is the upper port number."
 msgstr ""
+"Si *addr_type* es :const:`TIPC_ADDR_NAMESEQ`, entonces  *v1* es el tipo de "
+"servidor, *v2* es el numero de puerto inferior, y *v3* es el numero de "
+"puerto superior."
 
 #: ../Doc/library/socket.rst:110
 msgid ""
@@ -236,6 +267,11 @@ msgid ""
 "``'can0'``. The network interface name ``''`` can be used to receive packets "
 "from all network interfaces of this family."
 msgstr ""
+"Una dupla ``(interface, )`` es usada para la dirección de familia :const:"
+"`AF_CAN`, donde *interface* es una cadena de caracteres representando a un "
+"nombre de interfaz de red como ``’can0’``. La interfaz de red llamada ``’’`` "
+"puede ser usada para recibir paquetes de todas las interfaces de red de esta "
+"familia."
 
 #: ../Doc/library/socket.rst:118
 msgid ""
@@ -243,6 +279,9 @@ msgid ""
 "tx_addr)`` where both additional parameters are unsigned long integer that "
 "represent a CAN identifier (standard or extended)."
 msgstr ""
+"Protocolo :const:`CAN_ISOTP` requiere una dupla ``(interface, rx_addr, "
+"tx_addr)`` donde ambos tiene parámetros adicionales son enteres largos sin "
+"símbolos que representan una identificador CAN (estándar o extendido)."
 
 #: ../Doc/library/socket.rst:121
 msgid ""
@@ -251,6 +290,11 @@ msgid ""
 "name, a 32-bit unsigned integer representing the Parameter Group Number "
 "(PGN), and an 8-bit integer representing the address."
 msgstr ""
+"Protocolo :const:`CAN_J1939` requiere una dupla ``(interface, name, pgn, "
+"addr)`` donde los parámetros adicionales son números enteros sin signo de 64 "
+"bits representando el nombre ECU, los enteros sin signo de 32-bits "
+"representan el numero de grupo de parametros(PGN), y los enteros de 8-bit "
+"representan la direccion."
 
 #: ../Doc/library/socket.rst:126
 msgid ""
@@ -278,12 +322,16 @@ msgid ""
 ":const:`BTPROTO_L2CAP` accepts ``(bdaddr, psm)`` where ``bdaddr`` is the "
 "Bluetooth address as a string and ``psm`` is an integer."
 msgstr ""
+":const:`BTPROTO_L2CAP` acepta ``(bdaddr, psm)`` donde ``bdaddr`` es la "
+"dirección Bluetooth como una cadena de caracteres y ``psm`` es un entero."
 
 #: ../Doc/library/socket.rst:140
 msgid ""
 ":const:`BTPROTO_RFCOMM` accepts ``(bdaddr, channel)`` where ``bdaddr`` is "
 "the Bluetooth address as a string and ``channel`` is an integer."
 msgstr ""
+":const:`BTPROTO_RFCOMM` acepta ``(bdaddr, channel)`` donde ``bdaddr`` es la "
+"dirección Bluetooth como una cadena de caracteres y ``channel`` es un entero."
 
 #: ../Doc/library/socket.rst:143
 msgid ""
@@ -292,6 +340,10 @@ msgid ""
 "depends on your OS; NetBSD and DragonFlyBSD expect a Bluetooth address while "
 "everything else expects an integer.)"
 msgstr ""
+":const:`BTPROTO_HCI` acepta ``(device_id,)`` donde ``device_id`` es un "
+"numero entero o una cadena de caracteres con la dirección Bluetooth de la "
+"interfaz. (Esto depende de tu OS; NetBSD y DragonFlyBSD supone una dirección "
+"Bluetooth mientras todo lo demás espera un numero cualquier.)"
 
 #: ../Doc/library/socket.rst:148
 msgid "NetBSD and DragonFlyBSD support added."
@@ -303,6 +355,9 @@ msgid ""
 "object containing the Bluetooth address in a string format. (ex. "
 "``b'12:23:34:45:56:67'``) This protocol is not supported under FreeBSD."
 msgstr ""
+":const:`BTPROTO_SCO` acepta ``bdaddr`` donde ``bdaddr`` es un objeto :class:"
+"`bytes` que contiene la dirección Bluetooth en un formato cadena. (ex. "
+"``b’12:23:34:45:56:67’``) este protocolo no es admitido bajo FreeBSD."
 
 #: ../Doc/library/socket.rst:156
 msgid ""
@@ -319,12 +374,17 @@ msgid ""
 "*type* is the algorithm type as string, e.g. ``aead``, ``hash``, "
 "``skcipher`` or ``rng``."
 msgstr ""
+"*type* es el tipo de algoritmos como cadenas de caracteres, e.g. ``aead``, "
+"``hash``, ``skcipher`` o ``rng``."
 
 #: ../Doc/library/socket.rst:163
 msgid ""
 "*name* is the algorithm name and operation mode as string, e.g. ``sha256``, "
 "``hmac(sha256)``, ``cbc(aes)`` or ``drbg_nopr_ctr_aes256``."
 msgstr ""
+"*name* es el nombre del algoritmo y el modo de operación como cadena de "
+"caracteres, e.g. ``sha256``, ``hmac(sha256)``, ``cbc(aes)`` o "
+"``drbg_nopr_ctr_aes256``."
 
 #: ../Doc/library/socket.rst:166
 msgid "*feat* and *mask* are unsigned 32bit integers."
@@ -336,6 +396,9 @@ msgid ""
 "hosts. The sockets are represented as a ``(CID, port)`` tuple where the "
 "context ID or CID and port are integers."
 msgstr ""
+":const:`AF_VSOCK` permite comunicación entre maquinas virtuales y sus hosts. "
+"Los sockets están representando como una tupla ``(CID, port)`` donde el "
+"contexto del ID o CID y el puerto son enteros."
 
 #: ../Doc/library/socket.rst:180
 msgid ""
@@ -343,6 +406,9 @@ msgid ""
 "packets are represented by the tuple ``(ifname, proto[, pkttype[, hatype[, "
 "addr]]])`` where:"
 msgstr ""
+":const:`AF_PACKET` es una interfaz de bajo nivel directamente a los "
+"dispositivos de red. Los paquetes están representados por la dupla "
+"``(ifname, proto[, pkttype[, hatype[, addr]]])`` donde:"
 
 #: ../Doc/library/socket.rst:184
 msgid "*ifname* - String specifying the device name."
@@ -358,42 +424,52 @@ msgstr ""
 
 #: ../Doc/library/socket.rst:187
 msgid "*pkttype* - Optional integer specifying the packet type:"
-msgstr ""
+msgstr "*pkttype* - Entero opcional especificando el tipo de paquete:"
 
 #: ../Doc/library/socket.rst:189
 msgid "``PACKET_HOST`` (the default) - Packet addressed to the local host."
-msgstr ""
+msgstr "``PACKET_HOST`` (por defecto) - Paquetes diseccionado al local host."
 
 #: ../Doc/library/socket.rst:190
 msgid "``PACKET_BROADCAST`` - Physical-layer broadcast packet."
-msgstr ""
+msgstr "``PACKET_BROADCAST`` - Paquete de transmisión de la capa física."
 
 #: ../Doc/library/socket.rst:191
 msgid ""
 "``PACKET_MULTIHOST`` - Packet sent to a physical-layer multicast address."
 msgstr ""
+"``PACKET_MULTIHOST`` - Paquete enviado a una dirección de multidifusión de "
+"capa física."
 
 #: ../Doc/library/socket.rst:192
 msgid ""
 "``PACKET_OTHERHOST`` - Packet to some other host that has been caught by a "
 "device driver in promiscuous mode."
 msgstr ""
+"``PACKET_OTHERHOST`` - Paquete a otro host que haya sido capturado por un "
+"controlador de dispositivo en modo promiscuo."
 
 #: ../Doc/library/socket.rst:194
 msgid ""
 "``PACKET_OUTGOING`` - Packet originating from the local host that is looped "
 "back to a packet socket."
 msgstr ""
+"``PACKET_OUTGOING`` - Paquete originalmente desde el local host que se "
+"enlaza de nuevo a un conector de paquetes."
 
 #: ../Doc/library/socket.rst:196
 msgid "*hatype* - Optional integer specifying the ARP hardware address type."
 msgstr ""
+"*hatype* - Entero opcional que especifica el tipo de dirección de hardware "
+"ARP."
 
 #: ../Doc/library/socket.rst:197
 msgid ""
 "*addr* - Optional bytes-like object specifying the hardware physical "
 "address, whose interpretation depends on the device."
 msgstr ""
+"*addr* - Objeto opcional en forma de bytes que especifica la dirección "
+"física del hardware, cuya interpretación depende del dispositivo."
 
 #: ../Doc/library/socket.rst:200
 msgid ""
@@ -417,6 +493,14 @@ msgid ""
 "UDPLITE_RECV_CSCOV, length)`` will filter out packets which cover too little "
 "of their data. In both cases ``length`` should be in ``range(8, 2**16, 8)``."
 msgstr ""
+":const:`IPPROTO_UDPLITE` es una variante de UDO que te permite especificar "
+"que porción del paquete es cubierta con la suma de comprobación. Esto agrega "
+"dos opciones al socket que pueden cambiar. ``self."
+"setsockopt(IPPROTO_UDPLITE, UDPLITE_SEND_CSCOV, length)`` cambiara que parte "
+"de los paquetes salientes están cubierta por la suma de comprobación y "
+"``self.setsockopt(IPPROTO_UDPLITE, UDPLITE_RECV_CSCOV, length)`` filtrara "
+"los paquetes que permítala cubrir una pequeña parte de tu datos. En ambos "
+"casos ``length`` deben estar en ``range(8, 2**16, 8)``."
 
 #: ../Doc/library/socket.rst:216
 msgid ""
@@ -424,6 +508,9 @@ msgid ""
 "IPPROTO_UDPLITE)`` for IPv4 or ``socket(AF_INET6, SOCK_DGRAM, "
 "IPPROTO_UDPLITE)`` for IPv6."
 msgstr ""
+"Tal socket debe construirse como ``socket(AF_INET, SOCK_DGRAM, "
+"IPPROTO_UDPLITE)`` para IPV4 o `socket(AF_INET6, SOCK_DGRAM, "
+"IPPROTO_UDPLITE)`` para IPV6."
 
 #: ../Doc/library/socket.rst:224
 msgid ""
@@ -484,6 +571,7 @@ msgstr "Un alias en desuso de :exc:`OSError`."
 #: ../Doc/library/socket.rst:254
 msgid "Following :pep:`3151`, this class was made an alias of :exc:`OSError`."
 msgstr ""
+"Siguiendo :pep:`3151`, es clase fue creada como un alias de :exc:`OSError`."
 
 #: ../Doc/library/socket.rst:260
 msgid ""
@@ -505,7 +593,7 @@ msgstr ""
 #: ../Doc/library/socket.rst:268 ../Doc/library/socket.rst:281
 #: ../Doc/library/socket.rst:292
 msgid "This class was made a subclass of :exc:`OSError`."
-msgstr ""
+msgstr "Esta clase fue creada como una subclase de :exc:`OSError`."
 
 #: ../Doc/library/socket.rst:273
 msgid ""
@@ -516,6 +604,13 @@ msgid ""
 "by the :c:func:`gai_strerror` C function.  The numeric *error* value will "
 "match one of the :const:`EAI_\\*` constants defined in this module."
 msgstr ""
+"Una subclase de :exc:`OSError`, esta excepción se genera por errores "
+"relacionados a la dirección por :func:`getaddrinfo` y :func:`getnameinfo`. "
+"El valor de acompañamiento es un par ``(error, string)`` representado un "
+"error devuelve una llamada de librería. *string* representa la descripción "
+"del *error*, como devuelvo la función C :c:func:`gai_strerror`. El valor "
+"numérico *error* coincidiera con una de las constantes :const:`EAI_\\*` "
+"defínalas en este modulo."
 
 #: ../Doc/library/socket.rst:286
 msgid ""
@@ -525,6 +620,12 @@ msgid ""
 "setdefaulttimeout`).  The accompanying value is a string whose value is "
 "currently always \"timed out\"."
 msgstr ""
+"Una subclase de :exc:`OSError`, esta excepción se genera cuando ocurre un "
+"tiempo de espera en un que ha tenido tiempos de espera habilitados a través "
+"de una llamada previa a :meth:`~socket.settimeout` ( o implícitamente "
+"mediante :func:`~socket.setdefaulttimeout`). El valor del acompañamiento es "
+"una cadena de caracteres cuyo valor es actualmente siempre “tiempo de "
+"espera”."
 
 #: ../Doc/library/socket.rst:297
 msgid "Constants"
@@ -535,6 +636,8 @@ msgid ""
 "The AF_* and SOCK_* constants are now :class:`AddressFamily` and :class:"
 "`SocketKind` :class:`.IntEnum` collections."
 msgstr ""
+"Las constantes AF_* y SOCK_* ahora son colecciones: :class:`AddressFamily` "
+"y :class:`SocketKind` :class:`.IntEnum`."
 
 #: ../Doc/library/socket.rst:308
 msgid ""
@@ -543,6 +646,10 @@ msgid ""
 "defined then this protocol is unsupported.  More constants may be available "
 "depending on the system."
 msgstr ""
+"Estas constantes representan la familias de direcciones (y protocolos), "
+"usados para el primer argumento para :func:`.socket`. Si la constante :const:"
+"`AF_UNIX` no esta definida entonces este protocolo no es compatible. Mas "
+"constantes podrían estar disponibles dependiendo del sistema."
 
 #: ../Doc/library/socket.rst:320
 msgid ""
@@ -551,6 +658,10 @@ msgid ""
 "(Only :const:`SOCK_STREAM` and :const:`SOCK_DGRAM` appear to be generally "
 "useful.)"
 msgstr ""
+"Estas constantes representan los tipos de socket, usadas por el segundo "
+"argumento para :func:`.socket`. Mas constante podrían estar disponibles "
+"dependiendo del sistema. ( Solamente :const:`SOCK_STREAM` y :const:"
+"`SOCK_DGRAM` parecen ser útiles en general.)"
 
 #: ../Doc/library/socket.rst:328
 msgid ""
@@ -567,10 +678,12 @@ msgid ""
 "`Secure File Descriptor Handling <http://udrepper.livejournal.com/20407."
 "html>`_ for a more thorough explanation."
 msgstr ""
+"`Secure File Descriptor Handling <http://udrepper.livejournal.com/20407."
+"html>`_ para una explicación más completa."
 
 #: ../Doc/library/socket.rst:338
 msgid ":ref:`Availability <availability>`: Linux >= 2.6.27."
-msgstr ""
+msgstr ":ref:`Availability <availability>`: Linux >= 2.6.27."
 
 #: ../Doc/library/socket.rst:356
 msgid ""
@@ -593,22 +706,28 @@ msgid ""
 "``SO_DOMAIN``, ``SO_PROTOCOL``, ``SO_PEERSEC``, ``SO_PASSSEC``, "
 "``TCP_USER_TIMEOUT``, ``TCP_CONGESTION`` were added."
 msgstr ""
+"``SO_DOMAIN``, ``SO_PROTOCOL``, ``SO_PEERSEC``, ``SO_PASSSEC``, "
+"``TCP_USER_TIMEOUT``, ``TCP_CONGESTION`` han sido agregados."
 
 #: ../Doc/library/socket.rst:367
 msgid ""
 "On Windows, ``TCP_FASTOPEN``, ``TCP_KEEPCNT`` appear if run-time Windows "
 "supports."
 msgstr ""
+"En Windows, ``TCP_FASTOPEN``, ``TCP_KEEPCNT`` aparecen si el tiempo de "
+"ejecución de Windows lo admite."
 
 #: ../Doc/library/socket.rst:371
 msgid "``TCP_NOTSENT_LOWAT`` was added."
-msgstr ""
+msgstr "``TCP_NOTSENT_LOWAT`` ha sido agregada."
 
 #: ../Doc/library/socket.rst:374
 msgid ""
 "On Windows, ``TCP_KEEPIDLE``, ``TCP_KEEPINTVL`` appear if run-time Windows "
 "supports."
 msgstr ""
+"En Windows, ``TCP_KEEPIDLE``, ``TCP_KEEPINTVL`` aparecen si el tiempo de "
+"ejecución de Windows lo admite."
 
 #: ../Doc/library/socket.rst:382 ../Doc/library/socket.rst:449
 #: ../Doc/library/socket.rst:460
@@ -622,7 +741,7 @@ msgstr ""
 #: ../Doc/library/socket.rst:386 ../Doc/library/socket.rst:397
 #: ../Doc/library/socket.rst:432
 msgid ":ref:`Availability <availability>`: Linux >= 2.6.25."
-msgstr ""
+msgstr ":ref:`Availability <availability>`: Linux >= 2.6.25."
 
 #: ../Doc/library/socket.rst:392
 msgid ""
@@ -630,11 +749,16 @@ msgid ""
 "protocol. Broadcast manager constants, documented in the Linux "
 "documentation, are also defined in the socket module."
 msgstr ""
+"CAN_BCM, en la familia de protocolo CAN, es el protocolo del administrador "
+"de difusión (BCM. Las constantes del administrador de difusión, documentada "
+"en la documentación de Linux, también esta definidos en el modulo socket."
 
 #: ../Doc/library/socket.rst:399
 msgid ""
 "The :data:`CAN_BCM_CAN_FD_FRAME` flag is only available on Linux >= 4.8."
 msgstr ""
+"El indicador :data:`CAN_BCM_CAN_FD_FRAME` esta solamente disponible en Linux "
+">= 4.8."
 
 #: ../Doc/library/socket.rst:405
 msgid ""
@@ -653,51 +777,59 @@ msgstr "Esta constante se documenta en la documentación de Linux."
 
 #: ../Doc/library/socket.rst:412
 msgid ":ref:`Availability <availability>`: Linux >= 3.6."
-msgstr ""
+msgstr ":ref:`Availability <availability>`: Linux >= 3.6."
 
 #: ../Doc/library/socket.rst:417
 msgid ""
 "Joins the applied CAN filters such that only CAN frames that match all given "
 "CAN filters are passed to user space."
 msgstr ""
+"Se une a los filtros CAN aplicados de modo que solo las tramas CAN que "
+"coinciden con todos los filtros CAN dados se pasan al espacio del usuario."
 
 #: ../Doc/library/socket.rst:423
 msgid ":ref:`Availability <availability>`: Linux >= 4.1."
-msgstr ""
+msgstr ":ref:`Availability <availability>`: Linux >= 4.1."
 
 #: ../Doc/library/socket.rst:428
 msgid ""
 "CAN_ISOTP, in the CAN protocol family, is the ISO-TP (ISO 15765-2) protocol. "
 "ISO-TP constants, documented in the Linux documentation."
 msgstr ""
+"CAN_ISOTP, en el protocolo de familia CAN, es el protocolo  ISO-TP (ISO "
+"15765-2). Constantes ISO-TP, documentadas en la documentación Linux."
 
 #: ../Doc/library/socket.rst:437
 msgid ""
 "CAN_J1939, in the CAN protocol family, is the SAE J1939 protocol. J1939 "
 "constants, documented in the Linux documentation."
 msgstr ""
+"CAN_J1939, en el protocolo de familias CAN, es el protocolo SAE J1939. "
+"Constantes J1939, documentadas en el documentación Linux."
 
 #: ../Doc/library/socket.rst:441
 msgid ":ref:`Availability <availability>`: Linux >= 5.4."
-msgstr ""
+msgstr ":ref:`Availability <availability>`: Linux >= 5.4."
 
 #: ../Doc/library/socket.rst:452
 msgid ":ref:`Availability <availability>`: Linux >= 2.2."
-msgstr ""
+msgstr ":ref:`Availability <availability>`: Linux >= 2.2."
 
 #: ../Doc/library/socket.rst:464
 msgid ":ref:`Availability <availability>`: Linux >= 2.6.30."
-msgstr ""
+msgstr ":ref:`Availability <availability>`: Linux >= 2.6.30."
 
 #: ../Doc/library/socket.rst:473
 msgid ""
 "Constants for Windows' WSAIoctl(). The constants are used as arguments to "
 "the :meth:`~socket.socket.ioctl` method of socket objects."
 msgstr ""
+"Constantes para Windows’ WSAIoctl(). Las constantes se utiliza como "
+"argumentos al método :meth:`~socket.socket.ioctl` de objetos de sockets."
 
 #: ../Doc/library/socket.rst:476 ../Doc/library/socket.rst:1333
 msgid "``SIO_LOOPBACK_FAST_PATH`` was added."
-msgstr ""
+msgstr "``SIO_LOOPBACK_FAST_PATH`` ha sido agregado."
 
 #: ../Doc/library/socket.rst:482
 msgid ""
@@ -710,11 +842,11 @@ msgstr ""
 
 #: ../Doc/library/socket.rst:489
 msgid "Constants for Linux Kernel cryptography."
-msgstr ""
+msgstr "Constantes para la criptográfica del Kernel de Linux."
 
 #: ../Doc/library/socket.rst:492 ../Doc/library/socket.rst:1633
 msgid ":ref:`Availability <availability>`: Linux >= 2.6.38."
-msgstr ""
+msgstr ":ref:`Availability <availability>`: Linux >= 2.6.38."
 
 #: ../Doc/library/socket.rst:501
 msgid "Constants for Linux host/guest communication."
@@ -722,11 +854,11 @@ msgstr "Constantes para la comunicación host/invitado de Linux."
 
 #: ../Doc/library/socket.rst:504
 msgid ":ref:`Availability <availability>`: Linux >= 4.8."
-msgstr ""
+msgstr ":ref:`Availability <availability>`: Linux >= 4.8."
 
 #: ../Doc/library/socket.rst:510
 msgid ":ref:`Availability <availability>`: BSD, OSX."
-msgstr ""
+msgstr ":ref:`Availability <availability>`: BSD, OSX."
 
 #: ../Doc/library/socket.rst:515
 msgid ""
@@ -742,6 +874,10 @@ msgid ""
 "meanings. For example, :const:`BDADDR_ANY` can be used to indicate any "
 "address when specifying the binding socket with :const:`BTPROTO_RFCOMM`."
 msgstr ""
+"Estas son constantes de cadenas que contienen direcciones Bluetooth con "
+"significados especiales. Por ejemplo :const:`BDADDR_ANY` son usados para "
+"indicar cualquier dirección al especificar el socket vinculante con :const:"
+"`BTPROTO_RFCOMM`."
 
 #: ../Doc/library/socket.rst:530
 msgid ""
@@ -749,16 +885,21 @@ msgid ""
 "NetBSD or DragonFlyBSD. :const:`HCI_TIME_STAMP` and :const:`HCI_DATA_DIR` "
 "are not available for FreeBSD, NetBSD, or DragonFlyBSD."
 msgstr ""
+"Para usar con :const:`BTPROTO_HCI`. :const:`HCI_FILTER` no esta disponible "
+"para NetBSD o DragonFlyBSD. :const:`HCI_TIME_STAMP` y :const:`HCI_DATA_DIR` "
+"no esta disponible para FreeBSD, NetBSD, o DragonFlyBSD."
 
 #: ../Doc/library/socket.rst:537
 msgid ""
 "Constant for Qualcomm's IPC router protocol, used to communicate with "
 "service providing remote processors."
 msgstr ""
+"Constante para el protocolo de enrutador IPC de Qualcomm, que se utiliza "
+"para comunicarse con procesadores remotos que brindan servicios."
 
 #: ../Doc/library/socket.rst:540
 msgid ":ref:`Availability <availability>`: Linux >= 4.7."
-msgstr ""
+msgstr ":ref:`Availability <availability>`: Linux >= 4.7."
 
 #: ../Doc/library/socket.rst:543
 msgid "Functions"
@@ -772,6 +913,7 @@ msgstr "Creación de sockets"
 msgid ""
 "The following functions all create :ref:`socket objects <socket-objects>`."
 msgstr ""
+"Todas las siguientes funciones crean :ref:`socket objects <socket-objects>`."
 
 #: ../Doc/library/socket.rst:553
 msgid ""
@@ -785,6 +927,15 @@ msgid ""
 "of :const:`CAN_RAW`, :const:`CAN_BCM`, :const:`CAN_ISOTP` or :const:"
 "`CAN_J1939`."
 msgstr ""
+"Crear un nuevo socket usando la dirección de familia dada, tipo de socket y "
+"el numero de protocolo. La dirección de familia debería ser :const:`AF_INET` "
+"(por defecto), :const:`AF_INET6`, :const:`AF_UNIX`, :const:`AF_CAN`, :const:"
+"`AF_PACKET`, o :const:`AF_RDS`. El tipo de socket debería ser :const:"
+"`SOCK_STREAM` (por defecto), :const:`SOCK_DGRAM`, :const:`SOCK_RAW` o quizás "
+"una de las otras ``SOCK_``constantes. El numero de protocolo es usualmente "
+"cero o talvez omitirlo o en el caso donde la familia de dirección es :const:"
+"`AF_CAN` el protocolo debería ser uno de :const:`CAN_RAW`, :const:"
+"`CAN_BCM`, :const:`CAN_ISOTP` o :const:`CAN_J1939`."
 
 #: ../Doc/library/socket.rst:563
 msgid ""
@@ -796,17 +947,27 @@ msgid ""
 "`socket.fromfd`, *fileno* will return the same socket and not a duplicate. "
 "This may help close a detached socket using :meth:`socket.close()`."
 msgstr ""
+"Si *fileno* esta especificado, el valor de *family*, *type*, y *proto* son "
+"autodetectados por el descriptor especificado de archivo. La detección "
+"automática se puede anular llamado la función con los argumentos explícitos "
+"*family*, *type*, o *proto*. Esto solamente afecta como Python representa e."
+"g. el valor de retorno de  :meth:`socket.getpeername` pero no del recurso "
+"actual del OS. Diferente a  :func:`socket.fromfd`, *fileno* retornara el "
+"mismo socket y no un duplicado. Esto puede ayudar a cerrar un socket "
+"desconectado usando :meth:`socket.close()`."
 
 #: ../Doc/library/socket.rst:572 ../Doc/library/socket.rst:706
 #: ../Doc/library/socket.rst:1163 ../Doc/library/socket.rst:1250
 msgid "The newly created socket is :ref:`non-inheritable <fd_inheritance>`."
-msgstr ""
+msgstr "El socket recién creado es :ref:`non-inheritable <fd_inheritance>`."
 
 #: ../Doc/library/socket.rst:574
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``socket.__new__`` with arguments "
 "``self``, ``family``, ``type``, ``protocol``."
 msgstr ""
+"Genera un :ref:`auditing event <auditing>` ``socket.__new__`` con los "
+"argumentos ``self``, ``family``, ``type``, ``protocol``."
 
 #: ../Doc/library/socket.rst:576
 msgid "The AF_CAN family was added. The AF_RDS family was added."
@@ -814,7 +975,7 @@ msgstr "Se añadió la familia AF_CAN. Se añadió la familia AF_RDS."
 
 #: ../Doc/library/socket.rst:580
 msgid "The CAN_BCM protocol was added."
-msgstr ""
+msgstr "El protocolo CAN_BCM ha sido agregado."
 
 #: ../Doc/library/socket.rst:583 ../Doc/library/socket.rst:708
 msgid "The returned socket is now non-inheritable."
@@ -822,7 +983,7 @@ msgstr "Los sockets devueltos ahora no son heredables."
 
 #: ../Doc/library/socket.rst:586
 msgid "The CAN_ISOTP protocol was added."
-msgstr ""
+msgstr "El protocolo CAN_ISOTP ha sido agregado."
 
 #: ../Doc/library/socket.rst:589
 msgid ""
@@ -830,16 +991,22 @@ msgid ""
 "to *type* they are cleared, and :attr:`socket.type` will not reflect them.  "
 "They are still passed to the underlying system `socket()` call.  Therefore,"
 msgstr ""
+"Cuando las banderas bit :const:`SOCK_NONBLOCK` or :const:`SOCK_CLOEXEC` esta "
+"aplicados a *type* se borran, y :attr:`socket.type` no reflejan eso. Todavía "
+"se pasan a la llamada `socket ()` del sistema subyacente. Por lo tanto,"
 
 #: ../Doc/library/socket.rst:601
 msgid ""
 "will still create a non-blocking socket on OSes that support "
 "``SOCK_NONBLOCK``, but ``sock.type`` will be set to ``socket.SOCK_STREAM``."
 msgstr ""
+"seguirá creando un socket sin bloqueo en los sistemas operativos que admiten "
+"``SOCK_NONBLOCK``, pero ``sock.type`` se establecerá en ``socket."
+"SOCK_STREAM``."
 
 #: ../Doc/library/socket.rst:605
 msgid "The CAN_J1939 protocol was added."
-msgstr ""
+msgstr "El protocolo CAN_J1939 ha sido agregado."
 
 #: ../Doc/library/socket.rst:610
 msgid ""
@@ -859,6 +1026,8 @@ msgstr ""
 #: ../Doc/library/socket.rst:615
 msgid "The newly created sockets are :ref:`non-inheritable <fd_inheritance>`."
 msgstr ""
+"Los sockets creados recientemente son :ref:`non-inheritable "
+"<fd_inheritance>`."
 
 #: ../Doc/library/socket.rst:617
 msgid ""
@@ -886,6 +1055,13 @@ msgid ""
 "succeeds.  This makes it easy to write clients that are compatible to both "
 "IPv4 and IPv6."
 msgstr ""
+"Conecta con un servicio TCP escuchando una *direccion* Internet ( una tupla "
+"de 2 ``(host, port)``), y devuelve el objeto socket. Este es una función de "
+"nivel superior que :meth:`socket.connect`: si *host* es un nombre de host no "
+"numérico, intentara resolverlo para ambos :data:`AF_INET` y :data:"
+"`AF_INET6`, y luego intenta conectarte a todas las direcciones posibles a la "
+"vez para lograr una conexión exitosa. Esto facilita la escritura de clientes "
+"que sean compatibles con IPv4 e IPv6."
 
 #: ../Doc/library/socket.rst:638
 msgid ""
@@ -893,6 +1069,10 @@ msgid ""
 "instance before attempting to connect.  If no *timeout* is supplied, the "
 "global default timeout setting returned by :func:`getdefaulttimeout` is used."
 msgstr ""
+"Pasando el parámetro opcional *timeout* establece el tiempo de espera dentro "
+"de la instancia del socket. Si no es proporcionado *timeout*, la "
+"configuración de tiempo espera predeterminado global devuelto por :func:"
+"`getdefaulttimeout` es usado."
 
 #: ../Doc/library/socket.rst:643
 msgid ""
@@ -900,10 +1080,14 @@ msgid ""
 "socket to bind to as its source address before connecting.  If host or port "
 "are '' or 0 respectively the OS default behavior will be used."
 msgstr ""
+"Si se suministra, *source_address* debe ser una ''(host, puerto)'' de 2 "
+"tuplas para que el socket se enlace como su dirección de origen antes de "
+"conectarse.  Si el host o el puerto son '' o 0 respectivamente, se utilizará "
+"el comportamiento predeterminado del sistema operativo."
 
 #: ../Doc/library/socket.rst:647
 msgid "*source_address* was added."
-msgstr ""
+msgstr "*source_address* ha sido agregado."
 
 #: ../Doc/library/socket.rst:652
 msgid ""
@@ -920,6 +1104,10 @@ msgid ""
 "reasonable value is chosen. *reuse_port* dictates whether to set the :data:"
 "`SO_REUSEPORT` socket option."
 msgstr ""
+"*familia* debe ser :d ata:'AF_INET' o :d ata:'AF_INET6'. *backlog* es el "
+"tamaño de la cola pasado a :meth:'socket.listen'; cuando ''0'' se elige un "
+"valor razonable predeterminado. *reuse_port* dicta si se debe establecer la "
+"opción de socket :d ata:'SO_REUSEPORT'."
 
 #: ../Doc/library/socket.rst:660
 msgid ""
@@ -950,6 +1138,9 @@ msgid ""
 "immediately reuse previous sockets which were bound on the same *address* "
 "and remained in TIME_WAIT state."
 msgstr ""
+"En plataformas POSIX la opción del socket :data:`SO_REUSEADDR` está "
+"configurado para inmediatamente rehusar los sockets previos que estaban "
+"vinculados la misma *address* y permanecer en estado TIME_WAIT."
 
 #: ../Doc/library/socket.rst:690
 msgid ""
@@ -971,6 +1162,16 @@ msgid ""
 "input or output (such as a server started by the Unix inet daemon).  The "
 "socket is assumed to be in blocking mode."
 msgstr ""
+"Duplique el descriptor de archivo *fd* (un entero devuelto por el método :"
+"meth:'fileno' de un objeto de archivo) y cree un objeto socket a partir del "
+"resultado.  La familia de direcciones, el tipo de socket y el número de "
+"protocolo son como para la función :func:'.socket' anterior. El descriptor "
+"de archivo debe hacer referencia a un socket, pero esto no se comprueba --- "
+"las operaciones posteriores en el objeto pueden fallar si el descriptor de "
+"archivo no es válido. Esta función rara vez se necesita, pero se puede usar "
+"para obtener o establecer opciones de socket en un socket pasado a un "
+"programa como entrada o salida estándar (como un servidor iniciado por el "
+"demonio inet de Unix).  Se supone que el zócalo está en modo de bloqueo."
 
 #: ../Doc/library/socket.rst:714
 msgid ""
@@ -982,13 +1183,15 @@ msgstr ""
 
 #: ../Doc/library/socket.rst:718 ../Doc/library/socket.rst:1759
 msgid ":ref:`Availability <availability>`: Windows."
-msgstr ""
+msgstr ":ref:`Availability <availability>`: Windows."
 
 #: ../Doc/library/socket.rst:724
 msgid ""
 "This is a Python type object that represents the socket object type. It is "
 "the same as ``type(socket(...))``."
 msgstr ""
+"Este es un tipo de objeto Python que representa el tipo de objeto del "
+"socket. Es lo mismo que decir ``type(socket(…))``."
 
 #: ../Doc/library/socket.rst:729
 msgid "Other functions"
@@ -997,6 +1200,8 @@ msgstr "Otras funciones"
 #: ../Doc/library/socket.rst:731
 msgid "The :mod:`socket` module also offers various network-related services:"
 msgstr ""
+"El modulo :mod:`socket` también ofrece varios servicios relacionados con la "
+"red:"
 
 #: ../Doc/library/socket.rst:736
 msgid ""
@@ -1017,6 +1222,13 @@ msgid ""
 "numeric port number or ``None``.  By passing ``None`` as the value of *host* "
 "and *port*, you can pass ``NULL`` to the underlying C API."
 msgstr ""
+"Traduzca el argumento *host*/*port* dentro de una secuencia de 5 duplas que "
+"contiene todo los argumentos necesarios para crear un socket conectado a ese "
+"servicio. *host* es un nombre de dominio, una cadena en representación de "
+"una dirección IPV4/IPV6 o ``None``. *port* es una nombre de una cadena de "
+"servicio como `’http’``, un numero de puerto numérico o ``None``. Pasando "
+"``None`` como el valor del  *host* y *port*, pasando ``NULL`` a la API C "
+"subyacente."
 
 #: ../Doc/library/socket.rst:751
 msgid ""
@@ -1028,6 +1240,13 @@ msgid ""
 "will disable domain name resolution and will raise an error if *host* is a "
 "domain name."
 msgstr ""
+"Los argumentos *family*, *type* y *proto* se puede especificar opcionalmente "
+"para reducir la lista de direcciones devueltas. Pasando cero como un valor "
+"para cada uno de estos argumentos se selecciona la gama completa de "
+"resultados. El argumento *flags* puede ser uno o varios de los argumentos "
+"``AI_*``, y pueden influenciar como los resultados son computados y "
+"devueltos. Por ejemplo, :const:`AI_NUMERICHOST` desactivará la resolución de "
+"nombres de dominio y generará un error sí * host * es un nombre de dominio."
 
 #: ../Doc/library/socket.rst:759
 msgid "The function returns a list of 5-tuples with the following structure:"
@@ -1035,7 +1254,7 @@ msgstr "La función devuelve una lista de 5 tuplas con la siguiente estructura:"
 
 #: ../Doc/library/socket.rst:761
 msgid "``(family, type, proto, canonname, sockaddr)``"
-msgstr ""
+msgstr "``(family, type, proto, canonname, sockaddr)``"
 
 #: ../Doc/library/socket.rst:763
 msgid ""
@@ -1048,12 +1267,23 @@ msgid ""
 "port, flowinfo, scope_id)`` 4-tuple for :const:`AF_INET6`), and is meant to "
 "be passed to the :meth:`socket.connect` method."
 msgstr ""
+"En estas tuplas, *family*, *type*, *proto* son todos enteros y están "
+"destinados a ser pasados por la función :func:`.socket`. *canonname* debe "
+"ser una cadena que representa el nombre canónico del *host* if :const:"
+"`AI_CANONNAME` es parte de el argumento *flags*; de lo contrario *canonname* "
+"estará vacía.  *sockaddr* es un tupla describiendo una dirección de socket, "
+"cuyo formato depende del devuelto *family* (una ``(address, port)`` tupla de "
+"2 para :const:`AF_INET`, una ``(address, port, flowinfo, scope_id)` una "
+"tupla de 4 para  for :const:`AF_INET6`), y está destinado a ser pasado a el "
+"método :meth:`socket.connect`."
 
 #: ../Doc/library/socket.rst:773
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``socket.getaddrinfo`` with "
 "arguments ``host``, ``port``, ``family``, ``type``, ``protocol``."
 msgstr ""
+"Genera un :ref:`auditing event <auditing>` ``socket.getaddrinfo`` con los "
+"argumentos ``host``, ``port``, ``family``, ``type``, ``protocol``."
 
 #: ../Doc/library/socket.rst:775
 msgid ""
@@ -1076,6 +1306,8 @@ msgid ""
 "for IPv6 multicast addresses, string representing an address will not "
 "contain ``%scope_id`` part."
 msgstr ""
+"para direcciones de multidifusión IPv6, la cadena que representa una "
+"dirección no contendrá partes ``%scope_id``."
 
 #: ../Doc/library/socket.rst:794
 msgid ""
@@ -1086,6 +1318,13 @@ msgid ""
 "is selected.  In case no fully qualified domain name is available, the "
 "hostname as returned by :func:`gethostname` is returned."
 msgstr ""
+"Devuelve un nombre de dominio completo para *name*. Si *name* es omitido o "
+"vacío, este se interpretará como el local host. Para buscar el nombre de "
+"dominio completo el nombre de host devuelto por :func:`gethostbyaddr` esta "
+"marcado, siguiendo por el alias para el host, si esta disponible. Se "
+"selecciona el primer nombre que incluye un punto. En caso de que el nombre "
+"de dominio completo no este disponible, se devuelve el nombre de host como "
+"lo devuelve :func:`gethostname`."
 
 #: ../Doc/library/socket.rst:804
 msgid ""
@@ -1096,6 +1335,12 @@ msgid ""
 "resolution, and :func:`getaddrinfo` should be used instead for IPv4/v6 dual "
 "stack support."
 msgstr ""
+"Traduce un nombre de host a un formato de dirección IPV4. La dirección IPV4 "
+"es devuelvo como una cadena, como ``’100.50.200.5’``. Si el nombre de host "
+"es una dirección IPV4 en sí, se devuelve sin cambios. Observa :func:"
+"`gethostbyname_ex` para una interfaz mas completa. :func:`gethostbyname` no "
+"soporta la resolución de nombres IPV6, y :func:`getaddrinfo` debe utilizarse "
+"en su lugar para compatibilidad con doble pila IPv4/v6."
 
 #: ../Doc/library/socket.rst:810 ../Doc/library/socket.rst:824
 msgid ""
@@ -1116,6 +1361,15 @@ msgid ""
 "IPv6 name resolution, and :func:`getaddrinfo` should be used instead for "
 "IPv4/v6 dual stack support."
 msgstr ""
+"Traducir un nombre de host al formato de dirección IPv4, interfaz extendida. "
+"Devuelva un triple ''(hostname, aliaslist, ipaddrlist)'' donde *hostname* es "
+"el nombre de host principal que responde al *ip_address* dado, *aliaslist* "
+"es una lista (posiblemente vacía) de nombres de host alternativos para la "
+"misma dirección, y *ipaddrlist* es una lista de direcciones IPv4 para la "
+"misma interfaz en el mismo host (a menudo, pero no siempre, una sola "
+"dirección). :func:'gethostbyname_ex' no admite la resolución de nombres "
+"IPv6, y :func:'getaddrinfo' debe usarse en su lugar para la compatibilidad "
+"con la pila dual IPv4/v6."
 
 #: ../Doc/library/socket.rst:829
 msgid ""
@@ -1130,12 +1384,16 @@ msgid ""
 "Raises an :ref:`auditing event <auditing>` ``socket.gethostname`` with no "
 "arguments."
 msgstr ""
+"Plantea un :ref:`auditing event <auditing>` ``socket.gethostname``sin "
+"argumentos."
 
 #: ../Doc/library/socket.rst:834
 msgid ""
 "Note: :func:`gethostname` doesn't always return the fully qualified domain "
 "name; use :func:`getfqdn` for that."
 msgstr ""
+"Recuerda: :func:`gethostname` no siempre devuelve el nombre de dominio "
+"completo, usa :func:`getfqdn` para eso."
 
 #: ../Doc/library/socket.rst:840
 msgid ""
@@ -1147,12 +1405,21 @@ msgid ""
 "qualified domain name, use the function :func:`getfqdn`. :func:"
 "`gethostbyaddr` supports both IPv4 and IPv6."
 msgstr ""
+"Devuelve un triple ``(hostname, aliaslist, ipaddrlist)`` donde *hostname* es "
+"el nombre del host primario respondiendo de la misma *ip_address*, "
+"*aliaslist* es una (posiblemente vacía) lista de nombres de hosts "
+"alternativa, y *ipaddrlist* es una lista de direcciones IPV4/IPV6 para la "
+"misma interfaz y en el mismo host ( lo más probable es que contenga solo una "
+"dirección ). Para encontrar el nombre de dominio completo, use la función :"
+"func:`getfqdn`. :func:`gethostbyaddr` admite tanto IPv4 como IPv6."
 
 #: ../Doc/library/socket.rst:848
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``socket.gethostbyaddr`` with "
 "argument ``ip_address``."
 msgstr ""
+"Generar un :ref:`auditing event <auditing>` ``socket.gethostbyaddr`` con los "
+"argumentos ``ip_address``."
 
 #: ../Doc/library/socket.rst:853
 msgid ""
@@ -1161,6 +1428,11 @@ msgid ""
 "qualified domain name or numeric address representation in *host*.  "
 "Similarly, *port* can contain a string port name or a numeric port number."
 msgstr ""
+"Traduce una dirección de socket  *sockaddr* dentro de una tupla de 2  "
+"``(host, port)``. Dependiendo de la configuraciones de *flags*, el resultado "
+"puede contener un nombre de dominio completo o una representación numérica "
+"de la dirección en *host*. Similar, *port* puede contener un nombre de "
+"puerto de cadena o un numero de puerto numérico."
 
 #: ../Doc/library/socket.rst:858
 #, python-format
@@ -1176,12 +1448,16 @@ msgstr ""
 msgid ""
 "For more information about *flags* you can consult :manpage:`getnameinfo(3)`."
 msgstr ""
+"Para mas información sobre *flags* pueden consultar :manpage:"
+"`getnameinfo(3)`."
 
 #: ../Doc/library/socket.rst:863
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``socket.getnameinfo`` with "
 "argument ``sockaddr``."
 msgstr ""
+"Plantea un :ref:`auditing event <auditing>` ``socket.getnameinfo`` con el "
+"argumento ``sockaddr``."
 
 #: ../Doc/library/socket.rst:867
 msgid ""
@@ -1204,12 +1480,18 @@ msgid ""
 "that service.  The optional protocol name, if given, should be ``'tcp'`` or "
 "``'udp'``, otherwise any protocol will match."
 msgstr ""
+"Traduzca un nombre de servicio de Internet y el nombre del protocolo para un "
+"numero de puerto para ese servicio. El nombre del protocolo opcional, si se "
+"da, podría ser `’tcp’`` o ``’udp’``, de lo contrario, cualquier protocolo "
+"coincidirá."
 
 #: ../Doc/library/socket.rst:880
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``socket.getservbyname`` with "
 "arguments ``servicename``, ``protocolname``."
 msgstr ""
+"Genera un :ref:`auditing event <auditing>` ``socket.getservbyname`` con los "
+"argumentos ``servicename``, ``protocolname``."
 
 #: ../Doc/library/socket.rst:885
 msgid ""
@@ -1227,6 +1509,8 @@ msgid ""
 "Raises an :ref:`auditing event <auditing>` ``socket.getservbyport`` with "
 "arguments ``port``, ``protocolname``."
 msgstr ""
+"Levantar un :ref:`auditing event <auditing>` ``socket.getservbyport`` con "
+"los argumentos ``port``, ``protocolname``."
 
 #: ../Doc/library/socket.rst:894
 msgid ""
@@ -1257,6 +1541,10 @@ msgid ""
 "silent truncation feature is deprecated, and will raise an exception in "
 "future versions of Python."
 msgstr ""
+"In caso *x* no encaje en un entero sin signo de 16 bits, pero encaja en un "
+"entero positivo C, esto es silenciosamente truncado en un entero sin signo "
+"de 16 bits. Esta característica de truncamiento silenciosa esta obsoleta, y "
+"generara una excepción en versiones futuras de Python."
 
 #: ../Doc/library/socket.rst:914
 msgid ""
@@ -1289,12 +1577,21 @@ msgid ""
 "in_addr`, which is the C type for the 32-bit packed binary this function "
 "returns."
 msgstr ""
+"Convierte una dirección IPV4 desde el formato de cadena de cuatro puntos "
+"(por ejemplo, ‘123.45.67.89’) a formato binario empaquetado de 32 bits, como "
+"un objeto de bytes de cuatro caracteres de longitud. Esto es usado cuando al "
+"convertir un programa que usa la librería estándar C y necesita objetos de "
+"tipo  :c:type:`struct in_addr`, que es el tipo C para el binario empaquetado "
+"de 32 bits que devuelve esta función."
 
 #: ../Doc/library/socket.rst:940
 msgid ""
 ":func:`inet_aton` also accepts strings with less than three dots; see the "
 "Unix manual page :manpage:`inet(3)` for details."
 msgstr ""
+"Ademas :func:`inet_aton`acepta cadena de caracteres con menos de tres "
+"puntos, observar la pagina del manual Unix :manpage:`inet(3)` para mas "
+"detalles."
 
 #: ../Doc/library/socket.rst:943
 msgid ""
@@ -1302,12 +1599,17 @@ msgid ""
 "`OSError` will be raised. Note that exactly what is valid depends on the "
 "underlying C implementation of :c:func:`inet_aton`."
 msgstr ""
+"Si la cadena de dirección IPv4 pasó a esta función es invalido, :exc:"
+"`OSError` se levantara. Tenga en cuenta que exactamente lo que es valido "
+"depende de la implementación C de :c:func:`inet_aton`."
 
 #: ../Doc/library/socket.rst:947
 msgid ""
 ":func:`inet_aton` does not support IPv6, and :func:`inet_pton` should be "
 "used instead for IPv4/v6 dual stack support."
 msgstr ""
+":func:`inet_aton` no admite IPV6, y :func:`inet_pton` deberían utilizarse en "
+"su lugar para compatibilidad con doble pilas IPV4/v6."
 
 #: ../Doc/library/socket.rst:953
 msgid ""
@@ -1318,6 +1620,12 @@ msgid ""
 "which is the C type for the 32-bit packed binary data this function takes as "
 "an argument."
 msgstr ""
+"Convierte una dirección IPV4 empaquetada de 32 bits (un :term:`bytes-like "
+"object` cuatro bytes de longitud) a su representación estándar de cadena de "
+"cuatro puntos con puntos ( por ejemplo ‘123.45.67.89’). Es usado cuando "
+"convertimos con un programa que usa la librería estándar C y necesita "
+"objetos de tipo :c:type:`struct in_addr`, porque este es el tipo C para los "
+"datos binarios empaquetados de 32 bits, esta función toma como argumento."
 
 #: ../Doc/library/socket.rst:960
 msgid ""
@@ -1326,6 +1634,10 @@ msgid ""
 "IPv6, and :func:`inet_ntop` should be used instead for IPv4/v6 dual stack "
 "support."
 msgstr ""
+"Si la secuencia de byte paso a esta función no es exactamente 4 bytes en "
+"longitud  :exc:`OSError` podría generar :func:`inet_ntoa` no soporta    "
+"IPV6, y :func:`inet_ntop` debe utilizarse en su lugar para compatibilidad "
+"con doble pila IPv4 / v6."
 
 #: ../Doc/library/socket.rst:971
 msgid ""
@@ -1334,6 +1646,10 @@ msgid ""
 "protocol calls for an object of type :c:type:`struct in_addr` (similar to :"
 "func:`inet_aton`) or :c:type:`struct in6_addr`."
 msgstr ""
+"Convierte una dirección IP desde su formato de cadena especifico de la "
+"familia a un empaquetado, formato binario :func:`inet_pton` es usado cuando "
+"una librería o protocolo de red llamado desde un objeto de tipo  :c:type:"
+"`struct in_addr` (similar a func:`inet_aton`) o :c:type:`struct in6_addr`."
 
 #: ../Doc/library/socket.rst:976
 msgid ""
@@ -1343,11 +1659,18 @@ msgid ""
 "the value of *address_family* and the underlying implementation of :c:func:"
 "`inet_pton`."
 msgstr ""
+"Valores soportados para *address_family* están actualmente :const:`AF_INET` "
+"y :const:`AF_INET6`. Si la cadena de dirección IP *ip_string* no es válida, :"
+"exc:`OSError` la genera. Tenga en cuenta que exactamente lo que es válido "
+"depende tanto del valor de *address_family* como de la implementación "
+"subyacente de :c:func:`inet_pton`."
 
 #: ../Doc/library/socket.rst:983 ../Doc/library/socket.rst:1003
 msgid ""
 ":ref:`Availability <availability>`: Unix (maybe not all platforms), Windows."
 msgstr ""
+":ref:`Availability <availability>`: Unix(Talvez no todas las plataformas), "
+"Windows."
 
 #: ../Doc/library/socket.rst:984 ../Doc/library/socket.rst:1004
 msgid "Windows support added"
@@ -1361,6 +1684,12 @@ msgid ""
 "library or network protocol returns an object of type :c:type:`struct "
 "in_addr` (similar to :func:`inet_ntoa`) or :c:type:`struct in6_addr`."
 msgstr ""
+"Convierte una dirección IP empaquetada ( un :term:`bytes-like object` de "
+"algún numero de bytes) a su representación de cadena estándar, específica de "
+"la familia (por ejemplo ``’7.10.0.5’`` o ``’5aef:2b::8’``). :func:"
+"`inet_ntop` es usado cuando una librería o protocolo de red devuelve un "
+"objeto de tipo :c:type:`struct in_addr` (similar para :func:`inet_ntoa`) o :"
+"c:type:`struct in6_addr`."
 
 #: ../Doc/library/socket.rst:997
 msgid ""
@@ -1369,6 +1698,11 @@ msgid ""
 "for the specified address family, :exc:`ValueError` will be raised. :exc:"
 "`OSError` is raised for errors from the call to :func:`inet_ntop`."
 msgstr ""
+"Valores soportados para *address_family* están disponibles :const:`AF_INET` "
+"y :const:`AF_INET6`. Si los objetos de bytes *packed_ip* no es la longitud "
+"correcta para la familia de direcciones especifica, :exc:`ValueError` podría "
+"generar. :exc:`OSError` es generara para errores desde la llamada a :func:"
+"`inet_ntop`."
 
 #: ../Doc/library/socket.rst:1019
 msgid ""
@@ -1380,6 +1714,13 @@ msgid ""
 "the last in the buffer.  Raises :exc:`OverflowError` if *length* is outside "
 "the permissible range of values."
 msgstr ""
+"Devuelve la longitud total, sin relleno de arrastre, de un elemento de datos "
+"auxiliares con datos asociados del *length*. Este valor se puede utilizar a "
+"menudo como tamaño de búfer para :meth:`~socket.recvmsg` para recibir un "
+"solo valor de datos auxiliares, pero :rfc:`3542` requiere aplicaciones "
+"portadles para usar func:`CMSG_SPACE` y así incluir espacio para el relleno, "
+"incluso cuando el elemento será el último en el búfer. Genera  :exc:"
+"`OverflowError` si *length* está fuera del rango de valores permitido."
 
 #: ../Doc/library/socket.rst:1029 ../Doc/library/socket.rst:1050
 #: ../Doc/library/socket.rst:1469 ../Doc/library/socket.rst:1511
@@ -1387,6 +1728,8 @@ msgstr ""
 msgid ""
 ":ref:`Availability <availability>`: most Unix platforms, possibly others."
 msgstr ""
+":ref:`Availability <availability>`: la mayoría de plataformas Unix, "
+"posiblemente otras."
 
 #: ../Doc/library/socket.rst:1035
 msgid ""
@@ -1397,6 +1740,12 @@ msgid ""
 "Raises :exc:`OverflowError` if *length* is outside the permissible range of "
 "values."
 msgstr ""
+"Devuelve el tamaño del buffer necesita de :meth:`~socket.recvmsg` para "
+"recibir un elemento de datos auxiliares con datos asociados de el *length* "
+"dado, junto con cualquier relleno final. El espacio de buffer necesita "
+"recibir múltiples elementos es la suma de los valores de :func:`CMSG_SPACE` "
+"para los datos asociados con la longitudes. Genera :exc:`OverflowError` si "
+"*length* está fuera del rango de valores permitido."
 
 #: ../Doc/library/socket.rst:1043
 msgid ""
@@ -1417,6 +1766,10 @@ msgid ""
 "value of ``None`` indicates that new socket objects have no timeout. When "
 "the socket module is first imported, the default is ``None``."
 msgstr ""
+"Devuelve el tiempo de espera por defecto en segundos (flotante) para los "
+"objetos de un nuevo socket. Un valor de ``None`` indicada que los objetos "
+"del nuevo socket no tiene un tiempo de espera. Cuando el modulo socket es "
+"importado primero, por defecto es ``None``."
 
 #: ../Doc/library/socket.rst:1063
 msgid ""
@@ -1424,22 +1777,30 @@ msgid ""
 "socket module is first imported, the default is ``None``.  See :meth:"
 "`~socket.settimeout` for possible values and their respective meanings."
 msgstr ""
+"Selecciona el tiempo de espera por defecto en segundo (flotante ) para los "
+"objetos nuevos del socket. Cuando el modulo socket es importado primero, el "
+"valor por defecto es ``None``. Observar :meth:`~socket.settimeout` para "
+"posible valores y sus respectivos significados."
 
 #: ../Doc/library/socket.rst:1071
 msgid ""
 "Set the machine's hostname to *name*.  This will raise an :exc:`OSError` if "
 "you don't have enough rights."
 msgstr ""
+"Establezca el nombre de host de la maquina en *name*. Esto genera un  :exc:"
+"`OSError` si no tiene suficientes derechos."
 
 #: ../Doc/library/socket.rst:1074
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``socket.sethostname`` with "
 "argument ``name``."
 msgstr ""
+"Plantea un :ref:`auditing event <auditing>` ``socket.sethostname`` con el "
+"argumento ``name``."
 
 #: ../Doc/library/socket.rst:1077
 msgid ":ref:`Availability <availability>`: Unix."
-msgstr ""
+msgstr ":ref:`Availability <availability>`: Unix."
 
 #: ../Doc/library/socket.rst:1083
 msgid ""
@@ -1453,7 +1814,7 @@ msgstr ""
 #: ../Doc/library/socket.rst:1088 ../Doc/library/socket.rst:1115
 #: ../Doc/library/socket.rst:1132
 msgid ":ref:`Availability <availability>`: Unix, Windows."
-msgstr ""
+msgstr ":ref:`Availability <availability>`: Unix, Windows."
 
 #: ../Doc/library/socket.rst:1091 ../Doc/library/socket.rst:1118
 #: ../Doc/library/socket.rst:1135
@@ -1465,28 +1826,32 @@ msgid ""
 "On Windows network interfaces have different names in different contexts "
 "(all names are examples):"
 msgstr ""
+"In Windows las interfaces de redes tienen diferentes nombres en diferentes "
+"contextos (todos los nombres son ejemplos):"
 
 #: ../Doc/library/socket.rst:1099
 msgid "UUID: ``{FB605B73-AAC2-49A6-9A2F-25416AEA0573}``"
-msgstr ""
+msgstr "UUID: ``{FB605B73-AAC2-49A6-9A2F-25416AEA0573}``"
 
 #: ../Doc/library/socket.rst:1100
 msgid "name: ``ethernet_32770``"
-msgstr ""
+msgstr "nombre: ``ethernet_32770``"
 
 #: ../Doc/library/socket.rst:1101
 msgid "friendly name: ``vEthernet (nat)``"
-msgstr ""
+msgstr "nombre amigable: ``vEthernet (nat)``"
 
 #: ../Doc/library/socket.rst:1102
 msgid "description: ``Hyper-V Virtual Ethernet Adapter``"
-msgstr ""
+msgstr "descripcion: ``Hyper-V Virtual Ethernet Adapter``"
 
 #: ../Doc/library/socket.rst:1104
 msgid ""
 "This function returns names of the second form from the list, "
 "``ethernet_32770`` in this example case."
 msgstr ""
+"Esta función devuelve los nombres del segundo formulario de la lista, en "
+"este caso de ejemplo ``ethernet_32770``."
 
 #: ../Doc/library/socket.rst:1110
 msgid ""
@@ -1500,6 +1865,7 @@ msgstr ""
 #: ../Doc/library/socket.rst:1122 ../Doc/library/socket.rst:1139
 msgid "\"Interface name\" is a name as documented in :func:`if_nameindex`."
 msgstr ""
+"“Interface name” es un nombre como se documenta en :func:`if_nameindex`."
 
 #: ../Doc/library/socket.rst:1127
 msgid ""
@@ -1518,12 +1884,18 @@ msgid ""
 "Socket objects have the following methods.  Except for :meth:`~socket."
 "makefile`, these correspond to Unix system calls applicable to sockets."
 msgstr ""
+"Los objetos socket tienen los siguientes métodos. Excepto para :meth:"
+"`~socket.makefile`, esto corresponde al sistema de llamadas Unix para "
+"sockets."
 
 #: ../Doc/library/socket.rst:1151
 msgid ""
 "Support for the :term:`context manager` protocol was added.  Exiting the "
 "context manager is equivalent to calling :meth:`~socket.close`."
 msgstr ""
+"Soporte para el protocolo :term:`context manager` ha sido agregado. Salir "
+"del administrador de contexto es equivalente para el llamado :meth:`~socket."
+"close`."
 
 #: ../Doc/library/socket.rst:1158
 msgid ""
@@ -1533,6 +1905,11 @@ msgid ""
 "and *address* is the address bound to the socket on the other end of the "
 "connection."
 msgstr ""
+"Acepta una conexión. El socket debe estar vinculado a una dirección y estar "
+"escuchando las conexiones. El valor de retorno es par ``(conn, address)`` "
+"cuando *conn* es un *new* objeto socket usado para enviar y recibir "
+"información en la conexión, y *address* es la dirección vinculada al socket "
+"en final de la conexión."
 
 #: ../Doc/library/socket.rst:1165 ../Doc/library/socket.rst:1252
 msgid "The socket is now non-inheritable."
@@ -1557,12 +1934,16 @@ msgid ""
 "Bind the socket to *address*.  The socket must not already be bound. (The "
 "format of *address* depends on the address family --- see above.)"
 msgstr ""
+"Enlazar el socket a *address*. El zócalo no debe estar ya unido. (El formato "
+"de *address* depende de la familia de direcciones, consulte más arriba)."
 
 #: ../Doc/library/socket.rst:1179
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``socket.bind`` with arguments "
 "``self``, ``address``."
 msgstr ""
+"Generar un :ref:`auditing event <auditing>` ``socket.getaddrinfo`` con los "
+"argumentos ``host``, ``port``, ``family``, ``type``, ``protocol``."
 
 #: ../Doc/library/socket.rst:1183
 msgid ""
@@ -1572,6 +1953,11 @@ msgid ""
 "fail. The remote end will receive no more data (after queued data is "
 "flushed)."
 msgstr ""
+"Marque el socket cerrado. El recurso del sistema subyacente (e.g. un "
+"descriptor de archivo) también se cierra cuando todos los objetos de archivo "
+"de :meth:`makefile()` están cerrados. Una vez que eso suceda, todas las "
+"operaciones futuras en el objeto socket fallarán. El extremo remoto no "
+"recibirá más datos (después de que se vacíen los datos en cola)."
 
 #: ../Doc/library/socket.rst:1189
 msgid ""
@@ -1631,6 +2017,8 @@ msgid ""
 "Raises an :ref:`auditing event <auditing>` ``socket.connect`` with arguments "
 "``self``, ``address``."
 msgstr ""
+"Genera un :ref:`auditing event <auditing>` ``socket.connect`` con los "
+"argumentos ``self``, ``address``."
 
 #: ../Doc/library/socket.rst:1219
 msgid ""
@@ -1654,6 +2042,12 @@ msgid ""
 "of the :c:data:`errno` variable.  This is useful to support, for example, "
 "asynchronous connects."
 msgstr ""
+"Como `connect(address)``, pero devuelve un indicador de error en lugar de "
+"generar una excepción para los errores devueltos por la llamada de nivel C :"
+"c:func:`connect` (otros problemas, como “host no encontrado”, aún pueden "
+"generar excepciones). El indicador de error es ``0`` si la operación tuvo "
+"éxito, caso contrario es el valor de la variable :c:data:`errno`. Esto es "
+"útil para admitir, por ejemplo, conexiones asincrónicas."
 
 #: ../Doc/library/socket.rst:1239
 msgid ""
@@ -1674,6 +2068,8 @@ msgid ""
 "Return the socket's file descriptor (a small integer), or -1 on failure. "
 "This is useful with :func:`select.select`."
 msgstr ""
+"Devuelve un archivo descriptor del socket (un entero pequeño), o -1 si "
+"falla. Esto es útil con :func:`select.select`."
 
 #: ../Doc/library/socket.rst:1261
 msgid ""
@@ -1681,6 +2077,9 @@ msgid ""
 "a file descriptor can be used (such as :func:`os.fdopen`).  Unix does not "
 "have this limitation."
 msgstr ""
+"Sobre Windows el pequeño entero devuelto por este método no puede ser usado "
+"donde un descriptor de un archivo pueda ser usado (como una :func:`os."
+"fdopen`). Unix no tiene esta limitacion."
 
 #: ../Doc/library/socket.rst:1267
 msgid ""
@@ -1688,6 +2087,9 @@ msgid ""
 "descriptor or socket's handle: ``True`` if the socket can be inherited in "
 "child processes, ``False`` if it cannot."
 msgstr ""
+"Selecciona el  :ref:`inheritable flag <fd_inheritance>` de el descriptor del "
+"archivo del socket o el controlador del socket: ``True`` si el socket puede "
+"ser heredada en procesos secundarios, ``False`` si falla."
 
 #: ../Doc/library/socket.rst:1276
 msgid ""
@@ -1696,6 +2098,10 @@ msgid ""
 "format of the address returned depends on the address family --- see "
 "above.)  On some systems this function is not supported."
 msgstr ""
+"Devuelve la dirección remota a la que esta conectado el socket. Esto es útil "
+"para averiguar el número de puerto de un socket IPv4/v6 remoto, por ejemplo. "
+"(El formato de la dirección devuelta depende de la familia de direcciones, "
+"consulte más arriba). En algunos sistemas, esta función no es compatible."
 
 #: ../Doc/library/socket.rst:1284
 msgid ""
@@ -1703,6 +2109,10 @@ msgid ""
 "of an IPv4/v6 socket, for instance. (The format of the address returned "
 "depends on the address family --- see above.)"
 msgstr ""
+"Devuelve la dirección del propio socket. Esto es útil para buscar afuera el "
+"numero de puerto de un socket IPv4/IPv6, por ejemplo. (El formato de la "
+"dirección devuelta depende de la familia de direcciones, consulte más "
+"arriba)."
 
 #: ../Doc/library/socket.rst:1291
 msgid ""
@@ -1734,7 +2144,7 @@ msgstr ""
 
 #: ../Doc/library/socket.rst:1306
 msgid "This is equivalent to checking ``socket.gettimeout() == 0``."
-msgstr ""
+msgstr "Esto es equivalente a comprobar ``socket.gettimeout() == 0``."
 
 #: ../Doc/library/socket.rst:1313
 msgid ""
@@ -1742,6 +2152,10 @@ msgid ""
 "``None`` if no timeout is set.  This reflects the last call to :meth:"
 "`setblocking` or :meth:`settimeout`."
 msgstr ""
+"Devuelve el tiempo de espera en segundos (flotante) asociado con las "
+"operaciones del socket, o ``None`` si el tiempo de espera no es "
+"seleccionado. Esto refleja la ultima llamada al :meth:`setblocking` o :meth:"
+"`settimeout`."
 
 #: ../Doc/library/socket.rst
 msgid "platform"
@@ -1757,18 +2171,27 @@ msgid ""
 "interface.  Please refer to the `Win32 documentation <https://msdn.microsoft."
 "com/en-us/library/ms741621%28VS.85%29.aspx>`_ for more information."
 msgstr ""
+"El método :meth:`ioctl` es una interfaz limitada para el sistema de "
+"interfaces WSAIoctl. Por favor refiérase a `Win32 documentation <https://"
+"msdn.microsoft.com/en-us/library/ms741621%28VS.85%29.aspx>`_ para mas "
+"información."
 
 #: ../Doc/library/socket.rst:1327
 msgid ""
 "On other platforms, the generic :func:`fcntl.fcntl` and :func:`fcntl.ioctl` "
 "functions may be used; they accept a socket object as their first argument."
 msgstr ""
+"En otras plataformas, las funciones genéricas :func:`fcntl.fcntl` y :func:"
+"`fcntl.ioctl` podrian ser usadas; ellas aceptan un objeto socket como su "
+"primer argumento."
 
 #: ../Doc/library/socket.rst:1330
 msgid ""
 "Currently only the following control codes are supported: ``SIO_RCVALL``, "
 "``SIO_KEEPALIVE_VALS``, and ``SIO_LOOPBACK_FAST_PATH``."
 msgstr ""
+"Actualmente solo el siguiente cóntrol de códigos están soportados: "
+"``SIO_RCVALL``, ``SIO_KEEPALIVE_VALS``, y ``SIO_LOOPBACK_FAST_PATH``."
 
 #: ../Doc/library/socket.rst:1338
 msgid ""
@@ -1777,6 +2200,10 @@ msgid ""
 "unaccepted connections that the system will allow before refusing new "
 "connections. If not specified, a default reasonable value is chosen."
 msgstr ""
+"Habilitar un servidor para aceptar conexiones. Si *backlog* es especifico, "
+"debe ser al menos 0 (si es menor, se establece en 0); especifica el número "
+"de conexiones no aceptadas que permitirá el sistema antes de rechazar nuevas "
+"conexiones. Si no se especifica, se elige un valor razonable predeterminado."
 
 #: ../Doc/library/socket.rst:1343
 msgid "The *backlog* parameter is now optional."
@@ -1790,6 +2217,11 @@ msgid ""
 "except the only supported *mode* values are ``'r'`` (default), ``'w'`` and "
 "``'b'``."
 msgstr ""
+"Devuelve un :term:`file object` asociado con el socket. El tipo exacto "
+"devuelto depende de los argumentos dados a :meth:`makefile`. Estos "
+"argumentos se interpretan de la misma forma que la función :func:`open`, "
+"excepto que los únicos valores de *mode* admitidos son ``’r’`` (default), "
+"``’w’`` and ``’b’``."
 
 #: ../Doc/library/socket.rst:1356
 msgid ""
@@ -1853,6 +2285,12 @@ msgid ""
 "*flags*; it defaults to zero. (The format of *address* depends on the "
 "address family --- see above.)"
 msgstr ""
+"Recibir datos desde el socket. El valor de retorno es un par ``(bytes, "
+"address)`` donde *bytes* es un objeto de bytes representado los datos "
+"recibidos y *address* es la dirección de el socket enviando los datos. "
+"Observar la pagina del manual Unix :manpage:`recv(2)` para el significado "
+"del argumento opcional *flags*; por defecto es cero. (El formato de "
+"*address* depende de la familia de direcciones, consulte más arriba)."
 
 #: ../Doc/library/socket.rst:1402
 #, python-format
@@ -1861,6 +2299,9 @@ msgid ""
 "%scope_id`` part anymore. In order to get full IPv6 address use :func:"
 "`getnameinfo`."
 msgstr ""
+"Para direcciones IPv6 de multidifusión, el primer elemento de *address* ya "
+"no contiene la parte ``%scope_id``. Para obtener la dirección IPV6 completa, "
+"use :func:`getnameinfo`."
 
 #: ../Doc/library/socket.rst:1409
 msgid ""
@@ -1895,6 +2336,18 @@ msgid ""
 "receiving socket is unconnected, *address* is the address of the sending "
 "socket, if available; otherwise, its value is unspecified."
 msgstr ""
+"El valor de retorno es una tupla de 4: ``(data, ancdata, msg_flags, "
+"address)``. El valor *data* es un objeto :class:`bytes` que contiene los "
+"datos no auxiliares recibidos. El valor *ancdata* es una lista de cero o mas "
+"tuplas ``(cmsg_level, cmsg_type, cmsg_data)`` representado los datos "
+"auxiliares (control de mensajes) recibidos: *cmsg_level* y *cmsg_type* son "
+"enteros especificando el nivel de protocolo y tipo específico de protocolo "
+"respectivamente, y *cmsg_data* es un objeto class:`bytes` sosteniendo los "
+"datos asociados. El valor *msg_flags* es el OR bit a bit de varios "
+"indicadores que indican condiciones en el mensaje recibido; consulte la "
+"documentación de su sistema para obtener más detalles. Si la toma de "
+"recepción no está conectada, *address* es la dirección de el socket enviado, "
+"si está disponible; de lo contrario, su valor no se especifica."
 
 #: ../Doc/library/socket.rst:1433
 msgid ""
@@ -1908,6 +2361,16 @@ msgid ""
 "after the system call returns, it will first attempt to close any file "
 "descriptors received via this mechanism."
 msgstr ""
+"En algunos sistemas, :meth:`sendmsg` y :meth:`recvmsg` se puede utilizar "
+"para pasar descriptores de archivos entre procesos a través de un socket :"
+"const:`AF_UNIX` Cuando se utiliza esta función (a menudo se limita a "
+"sockets :const:`SOCK_STREAM`), :meth:`recvmsg`devolverá, en sus datos "
+"auxiliares, elementos del formulario ``(socket.SOL_SOCKET, socket."
+"SCM_RIGHTS, fds)``, donde *fds* es un objeto :class:`bytes` representado el "
+"nuevo descriptor de archivos como una matriz binaria de la C nativa :c:type:"
+"`int` type. Si :meth:`recvmsg` genera un excepción después del retorno de la "
+"llamada del sistema, primero intentará cerrar cualquier descriptor de "
+"archivo recibido a través de este mecanismo."
 
 #: ../Doc/library/socket.rst:1444
 msgid ""
@@ -1931,6 +2394,11 @@ msgid ""
 "conditions such as unrelated control messages being received).  See also :"
 "meth:`sendmsg`. ::"
 msgstr ""
+"En sistemas donde soporta el mecanismo :const:`SCM_RIGHTS`, la siguiente "
+"función recibirá un descriptor de archivos *maxfds*, devolviendo el mensaje "
+"de datos y un lista que contiene los descriptores (mientras se ignoran las "
+"condiciones inesperadas, como la recepción de mensajes de control no "
+"relacionados). Ver también :meth:`sendmsg`. ::"
 
 #: ../Doc/library/socket.rst:1480
 msgid ""
@@ -1962,6 +2430,10 @@ msgid ""
 "into the buffers, and *ancdata*, *msg_flags* and *address* are the same as "
 "for :meth:`recvmsg`."
 msgstr ""
+"El valor de retorno es tupla de 4: ``(nbytes, ancdata, msg_flags, "
+"address)``, donde *nbytes* es el numero total de bytes de datos no "
+"auxiliares escrito dentro de los bufetes, y *ancdata*, *msg_flags* y "
+"*address* son lo mismo que para :meth:`recvmsg`."
 
 #: ../Doc/library/socket.rst:1496
 msgid "Example::"
@@ -1992,6 +2464,12 @@ msgid ""
 "bytes received.  See the Unix manual page :manpage:`recv(2)` for the meaning "
 "of the optional argument *flags*; it defaults to zero."
 msgstr ""
+"Recibe hasta bytes *nbytes* desde el socket, almacenar los datos en un búfer "
+"en lugar de crear una nueva cadena de bytes. Si *nbytes* no esta "
+"especificado (o 0), recibir hasta el tamaño disponible en el búfer dado. "
+"Devuelve el número de bytes recibidos. Ver la página del manual de Unix :"
+"manpage:`recv(2)` para el significado del argumento opcional *flags*; por "
+"defecto es cero."
 
 #: ../Doc/library/socket.rst:1536
 msgid ""
@@ -2055,6 +2533,8 @@ msgid ""
 "Raises an :ref:`auditing event <auditing>` ``socket.sendto`` with arguments "
 "``self``, ``address``."
 msgstr ""
+"Genera un :ref:`auditing event <auditing>` ``socket.sendto`` con los "
+"argumentos ``self``, ``address``."
 
 #: ../Doc/library/socket.rst:1587
 msgid ""
@@ -2099,12 +2579,17 @@ msgid ""
 "const:`AF_UNIX` socket, on systems which support the :const:`SCM_RIGHTS` "
 "mechanism.  See also :meth:`recvmsg`. ::"
 msgstr ""
+"La siguiente función envía la lista de descriptores de archivos *fds* sobre "
+"un socket :const:`AF_UNIX`, estos sistemas puedes soportar el mecanismo :"
+"const:`SCM_RIGHTS`. Observa también :meth:`recvmsg`. ::"
 
 #: ../Doc/library/socket.rst:1618
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``socket.sendmsg`` with arguments "
 "``self``, ``address``."
 msgstr ""
+"Genera un :ref:`auditing event <auditing>` ``socket.sendmsg`` con los "
+"argumentos ``self``, ``address``."
 
 #: ../Doc/library/socket.rst:1629
 msgid ""
@@ -2112,6 +2597,9 @@ msgid ""
 "Set mode, IV, AEAD associated data length and flags for :const:`AF_ALG` "
 "socket."
 msgstr ""
+"Versión especializada de :meth:`~socket.sendmsg` para el socket :const:"
+"`AF_ALG`. Modo de ajuste, IV, longitud de datos asociados a AEAD y banderas "
+"para el socket :const:`AF_ALG`."
 
 #: ../Doc/library/socket.rst:1638
 msgid ""
@@ -2119,28 +2607,41 @@ msgid ""
 "*fds* parameter is a sequence of file descriptors. Consult :meth:`sendmsg` "
 "for the documentation of these parameters."
 msgstr ""
+"Envía la lista de descriptores de archivos *fds* sobre un socket :const:"
+"`AF_UNIX`. Los parámetros *fds* es una secuencia de descriptores de "
+"archivos. Consultar :meth:`sendmsg` para la documentación de dichos "
+"parametros."
 
 #: ../Doc/library/socket.rst:1643
 msgid ""
 ":ref:`Availability <availability>`: Unix supporting :meth:`~socket.sendmsg` "
 "and :const:`SCM_RIGHTS` mechanism."
 msgstr ""
+":ref:`Availability <availability>`: Soporte para Unix :meth:`~socket."
+"sendmsg` con el mecanismo :const:`SCM_RIGHTS`."
 
 #: ../Doc/library/socket.rst:1648
 msgid ""
 "Receive up to *maxfds* file descriptors. Return ``(msg, list(fds), flags, "
 "addr)``. Consult :meth:`recvmsg` for the documentation of these parameters."
 msgstr ""
+"Recibe hasta *maxfds* descriptores de archivos. Devuelve ``(msg, list(fds), "
+"flags, addr)``. Consulta :meth:`recvmsg` para la documentación de estos "
+"parámetros."
 
 #: ../Doc/library/socket.rst:1652
 msgid ""
 ":ref:`Availability <availability>`: Unix supporting :meth:`~socket.recvmsg` "
 "and :const:`SCM_RIGHTS` mechanism."
 msgstr ""
+":ref:`Availability <availability>`: Soporte para Unix :meth:`~socket."
+"recvmsg` y el mecanismo :const:`SCM_RIGHTS`."
 
 #: ../Doc/library/socket.rst:1657
 msgid "Any truncated integers at the end of the list of file descriptors."
 msgstr ""
+"Cualquier número entero truncado al final de la lista de descriptores de "
+"archivo."
 
 #: ../Doc/library/socket.rst:1661
 msgid ""
@@ -2173,6 +2674,8 @@ msgid ""
 "Set the :ref:`inheritable flag <fd_inheritance>` of the socket's file "
 "descriptor or socket's handle."
 msgstr ""
+"Seleccionar el :ref:`inheritable flag <fd_inheritance>` descriptor del "
+"archivo del socket o el controlador del socket."
 
 #: ../Doc/library/socket.rst:1685
 msgid ""
@@ -2187,20 +2690,24 @@ msgstr ""
 msgid ""
 "This method is a shorthand for certain :meth:`~socket.settimeout` calls:"
 msgstr ""
+"El método es una abreviatura para ciertas llamadas :meth:`~socket."
+"settimeout`:"
 
 #: ../Doc/library/socket.rst:1690
 msgid "``sock.setblocking(True)`` is equivalent to ``sock.settimeout(None)``"
-msgstr ""
+msgstr "``sock.setblocking(True)`` es equivalente a ``sock.settimeout(None)``"
 
 #: ../Doc/library/socket.rst:1692
 msgid "``sock.setblocking(False)`` is equivalent to ``sock.settimeout(0.0)``"
-msgstr ""
+msgstr "``sock.setblocking(False)`` es equivalente a ``sock.settimeout(0.0)``"
 
 #: ../Doc/library/socket.rst:1694
 msgid ""
 "The method no longer applies :const:`SOCK_NONBLOCK` flag on :attr:`socket."
 "type`."
 msgstr ""
+"El método ya no se aplica la marca :const:`SOCK_NONBLOCK` en :attr:`socket."
+"type`."
 
 #: ../Doc/library/socket.rst:1701
 msgid ""
@@ -2211,6 +2718,13 @@ msgid ""
 "operation has completed.  If zero is given, the socket is put in non-"
 "blocking mode. If ``None`` is given, the socket is put in blocking mode."
 msgstr ""
+"Establezca un tiempo de espera para bloquear las operaciones de socket. El "
+"argumento *value* puede ser un número de punto flotante no negativo que "
+"exprese segundos, o ``None``. Si se da un valor distinto de cero, las "
+"operaciones subsiguientes de socket generarán una excepción :exc:`timeout` "
+"si el período de tiempo de espera *value* ha transcurrido antes de que se "
+"complete la operación. Si se da cero, el socket se pone en modo sin bloqueo. "
+"Si se da ``None``, el enchufe se pone en modo de bloqueo."
 
 #: ../Doc/library/socket.rst:1708
 msgid ""
@@ -2225,6 +2739,8 @@ msgid ""
 "The method no longer toggles :const:`SOCK_NONBLOCK` flag on :attr:`socket."
 "type`."
 msgstr ""
+"El método ya no cambia la bandera :const:`SOCK_NONBLOCK` en  :attr:`socket."
+"type`."
 
 #: ../Doc/library/socket.rst:1723
 msgid ""
@@ -2238,6 +2754,16 @@ msgid ""
 "*optlen* argument is required. It's equivalent to call :c:func:`setsockopt` "
 "C function with ``optval=NULL`` and ``optlen=optlen``."
 msgstr ""
+"Establezca el valor de la opción de socket dada (consulte la página de "
+"manual de Unix :manpage:`setsockopt(2)`). Las constantes simbólicas "
+"necesarias se definen en el modulo :mod:`socket` (:const:`SO_\\*` etc.). El "
+"valor puede ser un entero, ``None`` o un :term:`bytes-like object` "
+"representan un buffer. En el último caso, depende de la persona que llama "
+"asegurarse de que la cadena de bytes contenga los bits adecuados (consulte "
+"el módulo integrado opcional :mod:`struct` para una forma de codificar "
+"estructuras C como cadenas de bytes). Cuando *value* se establece en "
+"``None``, el argumento *optlen* es requerido. Esto es equivalente a llamar a "
+"una función C :c:func:`setsockopt` con ``optval=NULL`` y ``optlen=optlen``."
 
 #: ../Doc/library/socket.rst:1737
 msgid "setsockopt(level, optname, None, optlen: int) form added."
@@ -2250,6 +2776,9 @@ msgid ""
 "further sends are disallowed.  If *how* is :const:`SHUT_RDWR`, further sends "
 "and receives are disallowed."
 msgstr ""
+"Apague una o ambas mitades de la conexión. Si *how* es :const:`SHUT_RD`, más "
+"recibe no se permiten. Si *how* es  :const:`SHUT_WR`, mas recibe no se "
+"permiten. Si *how* es :const:`SHUT_RDWR`, más recibe no se permiten."
 
 #: ../Doc/library/socket.rst:1751
 msgid ""
@@ -2261,6 +2790,13 @@ msgid ""
 "socket since the operating system has already duplicated it for the target "
 "process."
 msgstr ""
+"Duplica un socket y lo prepara para compartirlo con el proceso de destino. "
+"El proceso de destino debe estar provisto de *process_id*. el objeto de "
+"bytes resultante luego se puede pasar al proceso de destino usando alguna "
+"forma de comunicación entre procesos y el socket se puede recrear allí "
+"usando  :func:`fromshare`. Una vez que se ha llamado a este método, es "
+"seguro cerrar el socket ya que el sistema operativo ya lo ha duplicado para "
+"el proceso de destino."
 
 #: ../Doc/library/socket.rst:1763
 msgid ""
@@ -2275,6 +2811,8 @@ msgid ""
 "Socket objects also have these (read-only) attributes that correspond to the "
 "values given to the :class:`~socket.socket` constructor."
 msgstr ""
+"Los objetos de socket también tienen estos atributos (de solo lectura) que "
+"corresponden a los valores dados al constructor :class:`~socket.socket`."
 
 #: ../Doc/library/socket.rst:1772
 msgid "The socket family."
@@ -2329,6 +2867,9 @@ msgid ""
 "timeout specified for the socket (they raise a :exc:`timeout` exception) or "
 "if the system returns an error."
 msgstr ""
+"En *timeout mode*, las operaciones fallan si no se puede completan el tiempo "
+"de espera especifico para el socket ( ellos levanta una excepción :exc:"
+"`timeout`) o si el sistema devuelve un error."
 
 #: ../Doc/library/socket.rst:1808
 msgid ""
@@ -2368,7 +2909,7 @@ msgstr ""
 
 #: ../Doc/library/socket.rst:1825
 msgid "Timeouts and the ``accept`` method"
-msgstr ""
+msgstr "Tiempos de espera y el método ``accept``"
 
 #: ../Doc/library/socket.rst:1827
 msgid ""
@@ -2376,12 +2917,18 @@ msgid ""
 "meth:`~socket.accept` method inherit that timeout.  Otherwise, the behaviour "
 "depends on settings of the listening socket:"
 msgstr ""
+"Si :func:`getdefaulttimeout` no es una :const:`None`, los sockets devuelto "
+"por el método :meth:`~socket.accept` heredan ese tiempo de espera. De lo "
+"contrario, el comportamiento depende de la configuración de la toma de "
+"escucha:"
 
 #: ../Doc/library/socket.rst:1831
 msgid ""
 "if the listening socket is in *blocking mode* or in *timeout mode*, the "
 "socket returned by :meth:`~socket.accept` is in *blocking mode*;"
 msgstr ""
+"si los sockets están escuchando en *blocking mode* o en el *timeout mode*, "
+"el socket devuelve el :meth:`~socket.accept` en un *blocking mode*;"
 
 #: ../Doc/library/socket.rst:1834
 msgid ""
@@ -2390,6 +2937,10 @@ msgid ""
 "operating system-dependent.  If you want to ensure cross-platform behaviour, "
 "it is recommended you manually override this setting."
 msgstr ""
+"si los sockets están escuchando en *non-blocking mode*, ya sea el socket "
+"devuelto por :meth:`~socket.accept` es un modo de bloqueo o no bloque "
+"depende del sistema operativo. Si desea garantizar un comportamiento "
+"multiplataforma, se recomienda que se anule manualmente esta configuración."
 
 #: ../Doc/library/socket.rst:1843
 msgid "Example"
@@ -2407,6 +2958,16 @@ msgid ""
 "sendall`/:meth:`~socket.recv` on the socket it is listening on but on the "
 "new socket returned by :meth:`~socket.accept`."
 msgstr ""
+"Aquí están cuatro programas mínimos usando el protocolo TCP/IP: un servidor "
+"que hace eco de todos los datos que reciban de vuelta ( Servicio a un solo "
+"cliente), y un cliente usando esto. Recuerde que un servidor debe llevar a "
+"cabo la secuencia :func:`.socket`, :meth:`~socket.bind`, :meth:`~socket."
+"listen`, :meth:`~socket.accept` (posiblemente repitiendo la :meth:`~socket."
+"accept` para un servicio mas que un cliente), mientras un cliente solamente "
+"necesita la secuencia :func:`.socket`, :meth:`~socket.connect`. También "
+"recuerde que el servidor no :meth:`~socket.sendall`/:meth:`~socket.recv` en "
+"el socket esta escuchando pero en el nuevo socket devuelto por :meth:"
+"`~socket.accept`."
 
 #: ../Doc/library/socket.rst:1855
 msgid "The first two examples support IPv4 only. ::"
@@ -2485,6 +3046,8 @@ msgid ""
 "There is a :mod:`socket` flag to set, in order to prevent this, :data:"
 "`socket.SO_REUSEADDR`::"
 msgstr ""
+"Este es una bandera mod:`socket` para establecer, en orden para prevenir "
+"esto, :data:`socket.SO_REUSEADDR`::"
 
 #: ../Doc/library/socket.rst:2048
 msgid ""
@@ -2507,12 +3070,16 @@ msgid ""
 "*An Introductory 4.3BSD Interprocess Communication Tutorial*, by Stuart "
 "Sechrest"
 msgstr ""
+"*An Introductory 4.3BSD Interprocess Communication Tutorial*, por Stuart "
+"Sechrest"
 
 #: ../Doc/library/socket.rst:2058
 msgid ""
 "*An Advanced 4.3BSD Interprocess Communication Tutorial*, by Samuel J.  "
 "Leffler et al,"
 msgstr ""
+"*An Advanced 4.3BSD Interprocess Communication Tutorial*, por Samuel J.  "
+"Leffler et al,"
 
 #: ../Doc/library/socket.rst:2061
 msgid ""
@@ -2524,3 +3091,11 @@ msgid ""
 "readers may want to refer to :rfc:`3493` titled Basic Socket Interface "
 "Extensions for IPv6."
 msgstr ""
+"ambos en el manual del programador de Unix, documentos suplementarios 1 "
+"( secciones  PS1:7 y PS1:8). La plataforma especifica material de referencia "
+"para las diversas llamadas al sistema también son una valiosa fuente de "
+"información en los detalles de la semántica del socket. Para Unix, "
+"referencia a las paginas del manual, para Windows, observa la especificación "
+"WinSock (o Winsock 2). Para APIS listas IPV6, los lectores pueden querer "
+"referirse al titulado Extensiones básicas de interfaz de socket para IPv6 :"
+"rfc:`3493` ."
