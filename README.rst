@@ -20,31 +20,21 @@ Por favor, consulta para saber más detalles.
 Spanish Translation of the Python Documentation
 ===============================================
 
-How to Contribute
------------------
-
-We have a guide that will help you to contribute at: https://python-docs-es.readthedocs.io/page/CONTRIBUTING.html.
-Please, check the details there.
 
 
 Documentation Contribution Agreement
 ------------------------------------
+NOTA PARA LA LICENCIA DE LAS TRADUCCIONES: la documentación de Python se 
+mantiene gracias a una red global de traductores. Colocando este proyecto en
+Transifex, Github, y otros lugares públicos, así como invitándole a participar,
+proponemos un acuerdo en el que facilitará sus mejoras a la documentación de Python
+o para la  PSF bajo la una licencia CC0
+(disponible en
+https://creativecommons.org/publicdomain/zero/1.0/legalcode.es). A cambio,
+usted puede publicamente reclamar el crédito por la parte de la traducción
+que usted haya contribuido y si su traducción es aceptada por la PSF, 
+usted puede (aunque no está obligado) enviar un parche incluyendo una anotación apropiada
+en el archivo  Misc/ACKS or TRANSLATORS. Aunque nada en este Acuerdo de Contribución a la Documentación obliga a la PSF
+a incorporar su contribución de texto, su participación en la comunidad Python es muy bienvenida y apreciada.
 
-NOTE REGARDING THE LICENSE FOR TRANSLATIONS: Python's documentation is
-maintained using a global network of volunteers. By posting this
-project on Transifex, Github, and other public places, and inviting
-you to participate, we are proposing an agreement that you will
-provide your improvements to Python's documentation or the translation
-of Python's documentation for the PSF's use under the CC0 license
-(available at
-https://creativecommons.org/publicdomain/zero/1.0/legalcode). In
-return, you may publicly claim credit for the portion of the
-translation you contributed and if your translation is accepted by the
-PSF, you may (but are not required to) submit a patch including an
-appropriate annotation in the Misc/ACKS or TRANSLATORS file. Although
-nothing in this Documentation Contribution Agreement obligates the PSF
-to incorporate your textual contribution, your participation in the
-Python community is welcomed and appreciated.
-
-You signify acceptance of this agreement by submitting your work to
-the PSF for inclusion in the documentation.
+Enviando su trabajo, usted voluntariamente acepta que la PSF incluya su trabajo en la documentación.
