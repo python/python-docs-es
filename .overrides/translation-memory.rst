@@ -97,6 +97,9 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 
    bytecodes
      queda igual ``glossary.po``
+
+   callback
+     retrollamada ``glossary.po``
   
    callable
      invocable ``glossary.po``, ``library/functions.po``

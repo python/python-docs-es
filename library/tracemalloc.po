@@ -6,21 +6,21 @@
 # Check https://github.com/python/python-docs-es/blob/3.8/TRANSLATORS to get
 # the list of volunteers
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-19 11:16+0100\n"
-"PO-Revision-Date: 2020-10-03 21:38-0300\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2021-08-30 21:01+0800\n"
+"Last-Translator: Rodrigo Tobar <rtobarc@gmail.com>\n"
 "Language: es\n"
 "Language-Team: python-doc-es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: ../Doc/library/tracemalloc.rst:2
 msgid ":mod:`tracemalloc` --- Trace memory allocations"
@@ -201,6 +201,7 @@ msgstr ""
 #: ../Doc/library/tracemalloc.rst:253
 msgid "Record the current and peak size of all traced memory blocks"
 msgstr ""
+"Graba los tamaños actual y máximo de todos los bloques de memoria rastreados"
 
 #: ../Doc/library/tracemalloc.rst:255
 msgid ""
@@ -210,6 +211,11 @@ msgid ""
 "observe the small memory usage after the sum is computed as well as the peak "
 "memory usage during the computations::"
 msgstr ""
+"El siguiente código calcula dos sumas como ``0 + 1 + 2 + ...`` de forma "
+"ineficiente, creando una lista con estos números. Esta lista consume mucha "
+"memoria de forma temporal. Podemos usar :func:`get_traced_memory` y :func:"
+"`reset_peak` para observar el pequeño uso de memoria después de que la suma "
+"es calculada, así como también el uso máximo de memoria durante el cálculo:"
 
 #: ../Doc/library/tracemalloc.rst:280 ../Doc/library/tracemalloc.rst:759
 msgid "Output::"
@@ -226,6 +232,14 @@ msgid ""
 "we could optimise (by removing the unnecessary call to :class:`list`, and "
 "writing ``sum(range(...))``)."
 msgstr ""
+"El uso de :func:`reset_peak` asegura que podemos registrar precisamente el "
+"uso máximo de memoria durante el cálculo de ``small_sum``, incluso si es "
+"mucho menor al máximo total desde la llamada a :func:`start`. Sin la llamada "
+"a :func:`reset_peak`, ``second_peak`` seguiría siendo el uso máximo de "
+"memoria del cálculo de ``large_sum`` (es decir, igual a ``first_peak``). En "
+"este caso ambos máximos son mucho mayores al uso final de memoria, lo que "
+"sugiere que podemos optimizar (removiendo la llamada innecesaria a :class:"
+"`list`, y escribiendo ``sum(range(...))``)."
 
 #: ../Doc/library/tracemalloc.rst:295
 msgid "API"
@@ -249,7 +263,7 @@ msgid ""
 "class:`Traceback` instance, or ``None`` if the :mod:`tracemalloc` module is "
 "not tracing memory allocations or did not trace the allocation of the object."
 msgstr ""
-"Obtén el rastreo de donde el objeto de Python fue asignado. Retorna una "
+"Obtiene el rastreo de donde el objeto de Python fue asignado. Retorna una "
 "instancia :class:`Traceback` o ``None`` si el módulo :mod:`tracemalloc` no "
 "esta rastreando ninguna asignación de memoria o no rastreó la asignación del "
 "objeto."
@@ -262,7 +276,7 @@ msgstr ""
 #: ../Doc/library/tracemalloc.rst:319
 msgid "Get the maximum number of frames stored in the traceback of a trace."
 msgstr ""
-"Obtén el número máximo de cuadros guardados en el seguimiento de un rastro."
+"Obtiene el número máximo de cuadros guardados en el seguimiento de un rastro."
 
 #: ../Doc/library/tracemalloc.rst:321
 msgid ""
@@ -281,28 +295,25 @@ msgid ""
 "Get the current size and peak size of memory blocks traced by the :mod:"
 "`tracemalloc` module as a tuple: ``(current: int, peak: int)``."
 msgstr ""
-"Obtén el tamaño actual y tamaño pico de los bloques de memorias rastreados "
+"Obtiene el tamaño actual y tamaño pico de los bloques de memorias rastreados "
 "por el módulo :mod:`tracemalloc` como una tupla: ``(current: int, peak: "
 "int)``."
 
 #: ../Doc/library/tracemalloc.rst:335
-#, fuzzy
 msgid ""
 "Set the peak size of memory blocks traced by the :mod:`tracemalloc` module "
 "to the current size."
 msgstr ""
-"Obtén el tamaño actual y tamaño pico de los bloques de memorias rastreados "
-"por el módulo :mod:`tracemalloc` como una tupla: ``(current: int, peak: "
-"int)``."
+"Establece el tamaño máximo de los bloques de memorias rastreados por el "
+"módulo :mod:`tracemalloc` al tamaño actual."
 
 #: ../Doc/library/tracemalloc.rst:338
-#, fuzzy
 msgid ""
 "Do nothing if the :mod:`tracemalloc` module is not tracing memory "
 "allocations."
 msgstr ""
-"Si el módulo :mod:`tracemalloc` esta rastreando asignaciones de memoria de "
-"Python retorna ``True`` sino retorna ``False``."
+"No realiza ninguna acción si el módulo :mod:`tracemalloc` no está rastreando "
+"asignaciones de memoria."
 
 #: ../Doc/library/tracemalloc.rst:341
 msgid ""
@@ -311,19 +322,24 @@ msgid ""
 "`take_snapshot` before a call to :func:`reset_peak` can be meaningfully "
 "compared to snapshots taken after the call."
 msgstr ""
+"Esta función sólo modifica el valor guardado para el uso máximo de memoria, "
+"y no modifica o borra ningún rastreo, no como :func:`clear_traces`.  "
+"Capturas tomadas con :func:`take_snapshot` antes de una llamada a :func:"
+"`reset_peak` pueden ser comparadas significativamente con capturas hechas "
+"después de la llamada."
 
 #: ../Doc/library/tracemalloc.rst:346
-#, fuzzy
 msgid "See also :func:`get_traced_memory`."
-msgstr "Mira también la función :func:`stop`."
+msgstr "Mira también la función :func:`get_traced_memory`."
 
 #: ../Doc/library/tracemalloc.rst:353
 msgid ""
 "Get the memory usage in bytes of the :mod:`tracemalloc` module used to store "
 "traces of memory blocks. Return an :class:`int`."
 msgstr ""
-"Obtén el uso de la memoria en bytes desde el modulo :mod:`tracemalloc` usado "
-"para guardar rastreos de bloques de memoria. Retorna una clase :class:`int`."
+"Obtiene el uso de la memoria en bytes desde el modulo :mod:`tracemalloc` "
+"usado para guardar rastreos de bloques de memoria. Retorna una clase :class:"
+"`int`."
 
 #: ../Doc/library/tracemalloc.rst:360
 msgid ""
@@ -355,6 +371,8 @@ msgid ""
 "You can still read the original number of total frames that composed the "
 "traceback by looking at the :attr:`Traceback.total_nframe` attribute."
 msgstr ""
+"El número original de cuadros totales que componen el seguimiento observando "
+"el atributo :attr:`Traceback.total_nframe`."
 
 #: ../Doc/library/tracemalloc.rst:376
 msgid ""
@@ -395,15 +413,14 @@ msgstr ""
 "`get_traceback_limit`."
 
 #: ../Doc/library/tracemalloc.rst:394
-#, fuzzy
 msgid ""
 "Stop tracing Python memory allocations: uninstall hooks on Python memory "
 "allocators. Also clears all previously collected traces of memory blocks "
 "allocated by Python."
 msgstr ""
-"Detén el rastreo de las asignaciones de memoria de Python: desinstala los "
-"*hooks*. También limpia todos los rastros de memoria recolectados por los "
-"bloques de memoria asignados por Python."
+"Detiene el rastreo de las asignaciones de memoria de Python: desinstala los "
+"*hooks*. También limpia todos los rastros de memoria recolectados acerca de "
+"los bloques de memoria asignados por Python."
 
 #: ../Doc/library/tracemalloc.rst:398
 msgid ""
@@ -950,6 +967,11 @@ msgid ""
 "total_nframe` attribute. That allows to know if a traceback has been "
 "truncated by the traceback limit."
 msgstr ""
+"Cuando se toma una captura, los seguimientos de los rastreos se limitan a  :"
+"func:`get_traceback_limit` cuadros. Ver la función  :func:`take_snapshot`. "
+"El número original de cuadros del seguimiento se guarda en el atributo :attr:"
+"`Traceback.total_nframe`. Esto permite saber si un seguimiento fue truncado "
+"por el límite de seguimientos."
 
 #: ../Doc/library/tracemalloc.rst:726
 msgid ""
@@ -972,10 +994,12 @@ msgid ""
 "Total number of frames that composed the traceback before truncation. This "
 "attribute can be set to ``None`` if the information is not available."
 msgstr ""
+"Número total de cuadros que componen el seguimiento antes de ser truncado. "
+"Este atributo puede ser ``None`` si no hay información disponible."
 
 #: ../Doc/library/tracemalloc.rst:738
 msgid "The :attr:`Traceback.total_nframe` attribute was added."
-msgstr ""
+msgstr "El atributo :attr:`Traceback.total_nframe` fue añadido."
 
 #: ../Doc/library/tracemalloc.rst:743
 msgid ""
