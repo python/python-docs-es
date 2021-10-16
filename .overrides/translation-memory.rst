@@ -78,7 +78,7 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 Éstas son las palabras que hemos coordinado hasta el momento:
 
 
-.. glossary::
+.. .. glossary::
 
    auditing event
      evento de auditoría ``library/tempfile`` and many others
