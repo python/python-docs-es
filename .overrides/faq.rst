@@ -205,9 +205,9 @@ repositorio principal de la traducción). Se hace de la siguiente manera::
 
 Luego nos vamos a nuestra rama local, confirmamos e impactamos esos cambios::
 
-    git checkout 3.9
-    git merge upstream/3.9
-    git push origin 3.9
+    git checkout 3.10
+    git merge upstream/3.10
+    git push origin 3.10
 
 ¡Eso es todo!
 
