@@ -1,10 +1,5 @@
 :orphan:
 
-..
-  esta opción quita los errores de la forma
-  WARNING: duplicate term description of X, other instance in translation-memory
-:undoc-members:
-
 =======================
  Memoria de traducción
 =======================
@@ -82,8 +77,6 @@ Términos y bigramas
 Dividimos esta sección en dos partes, los términos que se traducen y los que mantenemos el original.
 Éstas son las palabras que hemos coordinado hasta el momento:
 
-
-.. glossary::
 
    auditing event
      evento de auditoría ``library/tempfile`` and many others
@@ -226,10 +219,6 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
     Validador estático de tipos
     Notas: mantener la mayúscula, usar validación cuando se refiera a la acción y no al agente.
 
-   static type checker
-     Validador estático de tipos
-     Notas: mantener la mayúscula, usar validación cuando se refiera a la acción y no al agente.
-
    string
     cadena de caracteres ``datamodel.po``
 
@@ -242,9 +231,6 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
    timeout
      timeout  ``library/smtplib.po``
      Significado: tiempo de espera para establecer/reintentar una conexión de red
-
-   type hint
-     indicador de tipo  ``library/typing.po``
 
    type hint
      indicador de tipo ``library/typing.po``
