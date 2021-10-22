@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-16 21:42+0200\n"
-"PO-Revision-Date: 2021-08-02 01:22+0200\n"
+"PO-Revision-Date: 2021-10-22 08:58-0300\n"
 "Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
 "Language: es\n"
 "Language-Team: python-doc-es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: ../Doc/c-api/memory.rst:8
 msgid "Memory Management"
@@ -173,7 +174,7 @@ msgstr ""
 
 #: ../Doc/c-api/memory.rst:96
 msgid "Allocator Domains"
-msgstr ""
+msgstr "Dominios del asignador"
 
 #: ../Doc/c-api/memory.rst:98
 msgid ""
@@ -190,10 +191,23 @@ msgid ""
 "allocating Python objects or the memory returned by :c:func:"
 "`PyObject_Malloc` for allocating memory for buffers."
 msgstr ""
+"Todas las funciones de asignación pertenecen a uno de los tres \"dominios\" "
+"diferentes (ver también :c:type:`PyMemAllocatorDomain`). Estos dominios "
+"representan diferentes estrategias de asignación y están optimizados para "
+"diferentes propósitos. Los detalles específicos sobre cómo cada dominio "
+"asigna memoria o qué funciones internas llama cada dominio se considera un "
+"detalle de implementación, pero para fines de depuración, se puede encontrar "
+"una tabla simplificada en :ref:`here <default-memory-allocators>`. No existe "
+"un requisito estricto para usar la memoria devuelta por las funciones de "
+"asignación que pertenecen a un dominio dado solo para los propósitos "
+"sugeridos por ese dominio (aunque esta es la práctica recomendada). Por "
+"ejemplo, se podría usar la memoria devuelta por :c:func:`PyMem_RawMalloc` "
+"para asignar objetos Python o la memoria devuelta por :c:func:"
+"`PyObject_Malloc` para asignar memoria para búferes."
 
 #: ../Doc/c-api/memory.rst:110
 msgid "The three allocation domains are:"
-msgstr ""
+msgstr "Los tres dominios de asignación son:"
 
 #: ../Doc/c-api/memory.rst:112
 msgid ""
@@ -202,6 +216,10 @@ msgid ""
 "allocator can operate without the :term:`GIL`. The memory is requested "
 "directly to the system."
 msgstr ""
+"Dominio sin formato: destinado a asignar memoria para búferes de memoria de "
+"uso general donde la asignación *debe* ir al asignador del sistema o donde "
+"el asignador puede operar sin el :term:`GIL`. La memoria se solicita "
+"directamente al sistema."
 
 #: ../Doc/c-api/memory.rst:117
 msgid ""
@@ -209,12 +227,18 @@ msgid ""
 "general-purpose memory buffers where the allocation must be performed with "
 "the :term:`GIL` held. The memory is taken from the Python private heap."
 msgstr ""
+"Dominio \"Mem\": destinado a asignar memoria para búferes de Python y "
+"búferes de memoria de propósito general donde la asignación debe realizarse "
+"con el :term:`GIL` retenido. La memoria se toma del montículo privado de "
+"Python."
 
 #: ../Doc/c-api/memory.rst:121
 msgid ""
 "Object domain: intended for allocating memory belonging to Python objects. "
 "The memory is taken from the Python private heap."
 msgstr ""
+"Dominio de objeto: destinado a asignar memoria perteneciente a objetos de "
+"Python. La memoria se toma del montículo privado de Python."
 
 #: ../Doc/c-api/memory.rst:124
 msgid ""
@@ -223,6 +247,10 @@ msgid ""
 "must be used. For example, :c:func:`PyMem_Free` must be used to free memory "
 "allocated using :c:func:`PyMem_Malloc`."
 msgstr ""
+"Cuando se libera memoria previamente asignada por las funciones de "
+"asignación que pertenecen a un dominio dado, se deben utilizar las funciones "
+"de desasignación específicas coincidentes. Por ejemplo, :c:func:`PyMem_Free` "
+"debe usarse para liberar memoria asignada usando :c:func:`PyMem_Malloc`."
 
 #: ../Doc/c-api/memory.rst:129
 msgid "Raw Memory Interface"
@@ -531,6 +559,10 @@ msgid ""
 "functions in this domain by the methods described in the :ref:`Customize "
 "Memory Allocators <customize-memory-allocators>` section."
 msgstr ""
+"No hay garantía de que la memoria devuelta por estos asignadores se pueda "
+"convertir con éxito en un objeto Python al interceptar las funciones de "
+"asignación en este dominio mediante los métodos descritos en la sección :ref:"
+"`Personalizar Asignadores de Memoria <customize-memory-allocators>`."
 
 #: ../Doc/c-api/memory.rst:313
 msgid ""
@@ -682,33 +714,35 @@ msgid "Legend:"
 msgstr "Leyenda:"
 
 #: ../Doc/c-api/memory.rst:388
-#, fuzzy
 msgid "Name: value for :envvar:`PYTHONMALLOC` environment variable."
-msgstr "Nombre: valor para variable de entorno :envvar:`PYTHONMALLOC`"
+msgstr "Nombre: valor para variable de entorno :envvar:`PYTHONMALLOC`."
 
 #: ../Doc/c-api/memory.rst:389
-#, fuzzy
 msgid ""
 "``malloc``: system allocators from the standard C library, C functions: :c:"
 "func:`malloc`, :c:func:`calloc`, :c:func:`realloc` and :c:func:`free`."
 msgstr ""
 "``malloc``: asignadores del sistema de la biblioteca C estándar, funciones "
-"C: :c:func:`malloc`, :c:func:`calloc`, :c:func:`realloc` y :c:func:`free`"
+"C: :c:func:`malloc`, :c:func:`calloc`, :c:func:`realloc` y :c:func:`free`."
 
 #: ../Doc/c-api/memory.rst:391
-#, fuzzy
 msgid "``pymalloc``: :ref:`pymalloc memory allocator <pymalloc>`."
-msgstr "``pymalloc``: :ref:`asignador de memoria pymalloc <pymalloc>`"
+msgstr "``pymalloc``: :ref:`asignador de memoria pymalloc <pymalloc>`."
 
+# debug hooks se deja como enlaces de depuración ya que en traducciones anteriores se dejó como enlaces
 #: ../Doc/c-api/memory.rst:392
 msgid ""
 "\"+ debug\": with :ref:`debug hooks on the Python memory allocators <pymem-"
 "debug-hooks>`."
 msgstr ""
+"\"+ debug\": con :ref:`enlaces de depuración en los asignadores de memoria "
+"de Python <pymem-debug-hooks>`."
 
 #: ../Doc/c-api/memory.rst:394
 msgid "\"Debug build\": :ref:`Python build in debug mode <debug-build>`."
 msgstr ""
+"\"Debug build\": :ref:`Compilación de Python en modo de depuración <debug-"
+"build>`."
 
 #: ../Doc/c-api/memory.rst:399
 msgid "Customize Memory Allocators"
@@ -876,14 +910,16 @@ msgid ""
 "Setup :ref:`debug hooks in the Python memory allocators <pymem-debug-hooks>` "
 "to detect memory errors."
 msgstr ""
+"Configuración :ref:`enlaces de depuración en los asignadores de memoria de "
+"Python <pymem-debug-hooks>` para detectar errores de memoria."
 
 #: ../Doc/c-api/memory.rst:489
-#, fuzzy
 msgid "Debug hooks on the Python memory allocators"
 msgstr ""
-"Configurar ganchos para detectar errores en las funciones del asignador de "
-"memoria de Python."
+"Configurar enlaces para detectar errores en las funciones del asignador de "
+"memoria de Python"
 
+# "debug hooks" como se traduciría
 #: ../Doc/c-api/memory.rst:491
 msgid ""
 "When :ref:`Python is built in debug mode <debug-build>`, the :c:func:"
@@ -891,19 +927,29 @@ msgid ""
 "preinitialization <c-preinit>` to setup debug hooks on Python memory "
 "allocators to detect memory errors."
 msgstr ""
+"Cuando :ref:`Python está construido en modo de depuración <debug-build>`, la "
+"función :c:func:`PyMem_SetupDebugHooks` se llama en :ref:`Preinicialización "
+"de Python <c-preinit>` para configurar los enlaces de depuración en Python "
+"asignadores de memoria para detectar errores de memoria."
 
 #: ../Doc/c-api/memory.rst:496
 msgid ""
 "The :envvar:`PYTHONMALLOC` environment variable can be used to install debug "
 "hooks on a Python compiled in release mode (ex: ``PYTHONMALLOC=debug``)."
 msgstr ""
+"La variable de entorno :envvar:`PYTHONMALLOC` se puede utilizar para "
+"instalar enlaces de depuración en un Python compilado en modo de lanzamiento "
+"(por ejemplo: ``PYTHONMALLOC=debug``)."
 
 #: ../Doc/c-api/memory.rst:499
 msgid ""
 "The :c:func:`PyMem_SetupDebugHooks` function can be used to set debug hooks "
 "after calling :c:func:`PyMem_SetAllocator`."
 msgstr ""
+"La función :c:func:`PyMem_SetupDebugHooks` se puede utilizar para establecer "
+"enlaces de depuración después de llamar a :c:func:`PyMem_SetAllocator`."
 
+# hooks como se traduce?
 #: ../Doc/c-api/memory.rst:502
 msgid ""
 "These debug hooks fill dynamically allocated memory blocks with special, "
@@ -913,34 +959,37 @@ msgid ""
 "bytes\" filled with the byte ``0xFD`` (``PYMEM_FORBIDDENBYTE``). Strings of "
 "these bytes are unlikely to be valid addresses, floats, or ASCII strings."
 msgstr ""
+"Estos enlaces de depuración llenan bloques de memoria asignados "
+"dinámicamente con patrones de bits especiales y reconocibles. La memoria "
+"recién asignada se llena con el byte ``0xCD`` (``PYMEM_CLEANBYTE``), la "
+"memoria liberada se llena con el byte ``0xDD`` (``PYMEM_DEADBYTE``). Los "
+"bloques de memoria están rodeados por \"bytes prohibidos\" rellenos con el "
+"byte ``0xFD`` (``PYMEM_FORBIDDENBYTE``). Es poco probable que las cadenas de "
+"estos bytes sean direcciones válidas, flotantes o cadenas ASCII."
 
 #: ../Doc/c-api/memory.rst:509
 msgid "Runtime checks:"
 msgstr "Verificaciones de tiempo de ejecución:"
 
 #: ../Doc/c-api/memory.rst:511
-#, fuzzy
 msgid ""
 "Detect API violations. For example, detect if :c:func:`PyObject_Free` is "
 "called on a memory block allocated by :c:func:`PyMem_Malloc`."
 msgstr ""
 "Detecte violaciones de API, por ejemplo: :c:func:`PyObject_Free` llamado en "
-"un búfer asignado por :c:func:`PyMem_Malloc`"
+"un búfer asignado por :c:func:`PyMem_Malloc`."
 
 #: ../Doc/c-api/memory.rst:513
-#, fuzzy
 msgid "Detect write before the start of the buffer (buffer underflow)."
 msgstr ""
 "Detectar escritura antes del inicio del búfer (desbordamiento del búfer)"
 
 #: ../Doc/c-api/memory.rst:514
-#, fuzzy
 msgid "Detect write after the end of the buffer (buffer overflow)."
 msgstr ""
 "Detectar escritura después del final del búfer (desbordamiento del búfer)"
 
 #: ../Doc/c-api/memory.rst:515
-#, fuzzy
 msgid ""
 "Check that the :term:`GIL <global interpreter lock>` is held when allocator "
 "functions of :c:data:`PYMEM_DOMAIN_OBJ` (ex: :c:func:`PyObject_Malloc`) and :"
@@ -949,7 +998,7 @@ msgstr ""
 "Comprueba que :term:`GIL <global interpreter lock>` se mantiene cuando las "
 "funciones del asignador de :c:data:`PYMEM_DOMAIN_OBJ` (ej: :c:func:"
 "`PyObject_Malloc`) y dominios :c:data:`PYMEM_DOMAIN_MEM` (por ejemplo: :c:"
-"func:`PyMem_Malloc`) se llaman"
+"func:`PyMem_Malloc`) se llaman."
 
 #: ../Doc/c-api/memory.rst:520
 msgid ""
@@ -972,48 +1021,58 @@ msgid ""
 "+j)`` exclusive; note that the treatment of negative indices differs from a "
 "Python slice):"
 msgstr ""
+"Sea *S*=``sizeof(size_t)``. Se agregan ``2*S`` bytes en cada extremo de cada "
+"bloque de *N* bytes solicitados. El diseño de la memoria es así, donde p "
+"representa la dirección devuelta por una función similar a malloc o realloc "
+"(``p[i:j]`` significa el segmento de bytes de ``*(p+i)`` inclusive hasta "
+"``*(p+j)`` exclusivo; tenga en cuenta que el tratamiento de los índices "
+"negativos difiere de un segmento de Python):"
 
 #: ../Doc/c-api/memory.rst:532
 msgid "``p[-2*S:-S]``"
-msgstr ""
+msgstr "``p[-2*S:-S]``"
 
 #: ../Doc/c-api/memory.rst:532
 msgid ""
 "Number of bytes originally asked for.  This is a size_t, big-endian (easier "
 "to read in a memory dump)."
 msgstr ""
+"Número de bytes solicitados originalmente. Este es un size_t, big-endian "
+"(más fácil de leer en un volcado de memoria)."
 
 #: ../Doc/c-api/memory.rst:539
 msgid "``p[-S]``"
-msgstr ""
+msgstr "``p[-S]``"
 
 #: ../Doc/c-api/memory.rst:535
 msgid "API identifier (ASCII character):"
-msgstr ""
+msgstr "Identificador de API (carácter ASCII):"
 
 #: ../Doc/c-api/memory.rst:537
 msgid "``'r'`` for :c:data:`PYMEM_DOMAIN_RAW`."
-msgstr ""
+msgstr "``'r'`` para :c:data:`PYMEM_DOMAIN_RAW`."
 
 #: ../Doc/c-api/memory.rst:538
 msgid "``'m'`` for :c:data:`PYMEM_DOMAIN_MEM`."
-msgstr ""
+msgstr "``'m'`` para :c:data:`PYMEM_DOMAIN_MEM`."
 
 #: ../Doc/c-api/memory.rst:539
 msgid "``'o'`` for :c:data:`PYMEM_DOMAIN_OBJ`."
-msgstr ""
+msgstr "``'o'`` para :c:data:`PYMEM_DOMAIN_OBJ`."
 
 #: ../Doc/c-api/memory.rst:542
 msgid "``p[-S+1:0]``"
-msgstr ""
+msgstr "``p[-S+1:0]``"
 
 #: ../Doc/c-api/memory.rst:542
 msgid "Copies of PYMEM_FORBIDDENBYTE.  Used to catch under- writes and reads."
 msgstr ""
+"Copias de PYMEM_FORBIDDENBYTE. Se utiliza para detectar suscripciones y "
+"lecturas."
 
 #: ../Doc/c-api/memory.rst:551
 msgid "``p[0:N]``"
-msgstr ""
+msgstr "``p[0:N]``"
 
 #: ../Doc/c-api/memory.rst:545
 msgid ""
@@ -1025,24 +1084,36 @@ msgid ""
 "like function is called requesting a smaller memory block, the excess old "
 "bytes are also filled with PYMEM_DEADBYTE."
 msgstr ""
+"La memoria solicitada, llena de copias de PYMEM_CLEANBYTE, utilizada para "
+"capturar la referencia a la memoria no inicializada. Cuando se llama a una "
+"función similar a realloc solicitando un bloque de memoria más grande, los "
+"nuevos bytes en exceso también se llenan con PYMEM_CLEANBYTE. Cuando se "
+"llama a una función de tipo free, se sobrescriben con PYMEM_DEADBYTE, para "
+"captar la referencia a la memoria liberada. Cuando se llama a una función "
+"similar a la realloc solicitando un bloque de memoria más pequeño, los bytes "
+"antiguos sobrantes también se llenan con PYMEM_DEADBYTE."
 
 #: ../Doc/c-api/memory.rst:554
 msgid "``p[N:N+S]``"
-msgstr ""
+msgstr "``p[N:N+S]``"
 
 #: ../Doc/c-api/memory.rst:554
 msgid "Copies of PYMEM_FORBIDDENBYTE.  Used to catch over- writes and reads."
 msgstr ""
+"Copias de PYMEM_FORBIDDENBYTE. Se utiliza para detectar sobrescrituras y "
+"lecturas."
 
 #: ../Doc/c-api/memory.rst:565
 msgid "``p[N+S:N+2*S]``"
-msgstr ""
+msgstr "``p[N+S:N+2*S]``"
 
 #: ../Doc/c-api/memory.rst:557
 msgid ""
 "Only used if the ``PYMEM_DEBUG_SERIALNO`` macro is defined (not defined by "
 "default)."
 msgstr ""
+"Solo se utiliza si la macro ``PYMEM_DEBUG_SERIALNO`` está definida (no "
+"definida por defecto)."
 
 #: ../Doc/c-api/memory.rst:560
 msgid ""
@@ -1053,6 +1124,13 @@ msgid ""
 "function bumpserialno() in obmalloc.c is the only place the serial number is "
 "incremented, and exists so you can set such a breakpoint easily."
 msgstr ""
+"Un número de serie, incrementado en 1 en cada llamada a una función similar "
+"a malloc o realloc. Big-endian ``size_t``. Si se detecta \"mala memoria\" "
+"más tarde, el número de serie ofrece una excelente manera de establecer un "
+"punto de interrupción en la siguiente ejecución, para capturar el instante "
+"en el que se pasó este bloque. La función estática bumpserialno() en "
+"obmalloc.c es el único lugar donde se incrementa el número de serie, y "
+"existe para que pueda establecer un punto de interrupción fácilmente."
 
 #: ../Doc/c-api/memory.rst:567
 msgid ""
@@ -1066,6 +1144,15 @@ msgid ""
 "memory is getting used) or PYMEM_CLEANBYTE (meaning uninitialized memory is "
 "getting used)."
 msgstr ""
+"Una función de tipo realloc o de tipo free primero verifica que los bytes "
+"PYMEM_FORBIDDENBYTE en cada extremo estén intactos. Si se han modificado, la "
+"salida de diagnóstico se escribe en stderr y el programa se aborta mediante "
+"Py_FatalError(). El otro modo de falla principal es provocar un error de "
+"memoria cuando un programa lee uno de los patrones de bits especiales e "
+"intenta usarlo como una dirección. Si ingresa a un depurador y observa el "
+"objeto, es probable que vea que está completamente lleno de PYMEM_DEADBYTE "
+"(lo que significa que se está usando la memoria liberada) o PYMEM_CLEANBYTE "
+"(que significa que se está usando la memoria no inicializada)."
 
 #: ../Doc/c-api/memory.rst:576
 msgid ""
@@ -1075,6 +1162,12 @@ msgid ""
 "debug hooks now also check if the GIL is held when functions of :c:data:"
 "`PYMEM_DOMAIN_OBJ` and :c:data:`PYMEM_DOMAIN_MEM` domains are called."
 msgstr ""
+"La función :c:func:`PyMem_SetupDebugHooks` ahora también funciona en Python "
+"compilado en modo de lanzamiento. En caso de error, los enlaces de "
+"depuración ahora usan :mod:`tracemalloc` para obtener el rastreo donde se "
+"asignó un bloque de memoria. Los enlaces de depuración ahora también "
+"comprueban si el GIL se mantiene cuando se llaman las funciones de :c:data:"
+"`PYMEM_DOMAIN_OBJ` y :c:data:`PYMEM_DOMAIN_MEM` dominios."
 
 #: ../Doc/c-api/memory.rst:584
 msgid ""
@@ -1083,6 +1176,10 @@ msgid ""
 "``0xDD`` and ``0xFD`` to use the same values than Windows CRT debug "
 "``malloc()`` and ``free()``."
 msgstr ""
+"Los patrones de bytes ``0xCB`` (``PYMEM_CLEANBYTE``), ``0xDB`` "
+"(``PYMEM_DEADBYTE``) y ``0xFB`` (``PYMEM_FORBIDDENBYTE``) se han reemplazado "
+"por ``0xCD``, ``0xDD`` y ``0xFD`` para usar los mismos valores que la "
+"depuración de Windows CRT ``malloc()`` y ``free()``."
 
 #: ../Doc/c-api/memory.rst:594
 msgid "The pymalloc allocator"
@@ -1134,6 +1231,10 @@ msgid ""
 "without-pymalloc` option. It can also be disabled at runtime using the :"
 "envvar:`PYTHONMALLOC` environment variable (ex: ``PYTHONMALLOC=malloc``)."
 msgstr ""
+"Este asignador está deshabilitado si Python está configurado con la opción :"
+"opción:`--without-pymalloc`. También se puede deshabilitar en tiempo de "
+"ejecución usando la variable de entorno :envvar:`PYTHONMALLOC` (por ejemplo: "
+"``PYTHONMALLOC=malloc``)."
 
 #: ../Doc/c-api/memory.rst:616
 msgid "Customize pymalloc Arena Allocator"
