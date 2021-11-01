@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-19 11:16+0100\n"
-"PO-Revision-Date: 2020-05-18 14:17+0200\n"
+"POT-Creation-Date: 2021-10-16 21:42+0200\n"
+"PO-Revision-Date: 2021-08-02 01:28+0200\n"
 "Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
 "Language: es\n"
 "Language-Team: python-doc-es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.8.0\n"
+"Generated-By: Babel 2.9.1\n"
 
 #: ../Doc/c-api/intro.rst:8
 msgid "Introduction"
@@ -235,6 +235,11 @@ msgid ""
 "possible values are covered in ``case`` statements.  Use this in places "
 "where you might be tempted to put an ``assert(0)`` or ``abort()`` call."
 msgstr ""
+"Use esto cuando tenga una ruta de código a la que no se pueda acceder por "
+"diseño. Por ejemplo, en la cláusula ``default:`` en una declaración "
+"``switch`` para la cual todos los valores posibles están cubiertos en "
+"declaraciones ``case``. Use esto en lugares donde podría tener la tentación "
+"de poner una llamada ``assert(0)`` o ``abort()``."
 
 #: ../Doc/c-api/intro.rst:115
 msgid ""
@@ -242,12 +247,18 @@ msgid ""
 "avoids a warning about unreachable code.  For example, the macro is "
 "implemented with ``__builtin_unreachable()`` on GCC in release mode."
 msgstr ""
+"En el modo de lanzamiento, la macro ayuda al compilador a optimizar el "
+"código y evita una advertencia sobre el código inalcanzable. Por ejemplo, la "
+"macro se implementa con ``__builtin_unreachable()`` en GCC en modo de "
+"lanzamiento."
 
 #: ../Doc/c-api/intro.rst:119
 msgid ""
 "A use for ``Py_UNREACHABLE()`` is following a call a function that never "
 "returns but that is not declared :c:macro:`_Py_NO_RETURN`."
 msgstr ""
+"Un uso de ``Py_UNREACHABLE()`` es seguir una llamada a una función que nunca "
+"retorna pero que no está declarada :c:macro:`_Py_NO_RETURN`."
 
 #: ../Doc/c-api/intro.rst:122
 msgid ""
@@ -257,6 +268,12 @@ msgid ""
 "case, it's better to report the error to the caller.  If the error cannot be "
 "reported to caller, :c:func:`Py_FatalError` can be used."
 msgstr ""
+"Si una ruta de código es un código muy poco probable pero se puede acceder "
+"en casos excepcionales, esta macro no debe utilizarse. Por ejemplo, en "
+"condiciones de poca memoria o si una llamada al sistema retorna un valor "
+"fuera del rango esperado. En este caso, es mejor informar el error a la "
+"persona que llama. Si no se puede informar del error a la persona que llama, "
+"se puede utilizar :c:func:`Py_FatalError`."
 
 #: ../Doc/c-api/intro.rst:132
 msgid "Return the absolute value of ``x``."
@@ -358,10 +375,9 @@ msgstr ""
 
 #: ../Doc/c-api/intro.rst:227
 msgid "Objects, Types and Reference Counts"
-msgstr "Objetos, Tipos y Conteos de Referencias"
+msgstr "Objetos, tipos y conteos de referencias"
 
 #: ../Doc/c-api/intro.rst:231
-#, fuzzy
 msgid ""
 "Most Python/C API functions have one or more arguments as well as a return "
 "value of type :c:type:`PyObject*`.  This type is a pointer to an opaque data "
@@ -376,7 +392,7 @@ msgid ""
 "objects."
 msgstr ""
 "La mayoría de las funciones de Python/C API tienen uno o más argumentos, así "
-"como un valor de retorno de tipo :c:type:`PyObject\\*`. Este tipo es un "
+"como un valor de retorno de tipo :c:type:`PyObject*`. Este tipo es un "
 "puntero a un tipo de datos opaco que representa un objeto arbitrario de "
 "Python. Dado que todos los tipos de objetos Python son tratados de la misma "
 "manera por el lenguaje Python en la mayoría de las situaciones (por ejemplo, "
@@ -384,7 +400,7 @@ msgstr ""
 "estén representados por un solo tipo C. Casi todos los objetos de Python "
 "viven en el montículo (*heap*): nunca declaras una variable automática o "
 "estática de tipo :c:type:`PyObject`, solo se pueden declarar variables de "
-"puntero de tipo :c:type:`PyObject\\*`. La única excepción son los objetos "
+"puntero de tipo :c:type:`PyObject*`. La única excepción son los objetos "
 "tipo; como nunca deben desasignarse, son típicamente objetos estáticos :c:"
 "type:`PyTypeObject`."
 
@@ -540,6 +556,7 @@ msgid "Reference Count Details"
 msgstr "Detalles del conteo de referencia"
 
 #: ../Doc/c-api/intro.rst:318
+#, fuzzy
 msgid ""
 "The reference count behavior of functions in the Python/C API is best  "
 "explained in terms of *ownership of references*.  Ownership pertains to "
@@ -552,8 +569,8 @@ msgid ""
 "passing on this responsibility (usually to its caller). When a function "
 "passes ownership of a reference on to its caller, the caller is said to "
 "receive a *new* reference.  When no ownership is transferred, the caller is "
-"said to *borrow* the reference. Nothing needs to be done for a borrowed "
-"reference."
+"said to *borrow* the reference. Nothing needs to be done for a :term:"
+"`borrowed reference`."
 msgstr ""
 "El comportamiento del conteo de referencias de funciones en la API de Python/"
 "C se explica mejor en términos de *propiedad de las referencias*. La "
@@ -728,7 +745,6 @@ msgid "Types"
 msgstr "Tipos"
 
 #: ../Doc/c-api/intro.rst:497
-#, fuzzy
 msgid ""
 "There are few other data types that play a significant role in  the Python/C "
 "API; most are simple C types such as :c:type:`int`,  :c:type:`long`, :c:type:"
@@ -740,7 +756,7 @@ msgid ""
 msgstr ""
 "Hay algunos otros tipos de datos que juegan un papel importante en la API de "
 "Python/C; la mayoría son tipos C simples como :c:type:`int`, :c:type:"
-"`long`, :c:type:`double` y :c:type:`char\\*`. Algunos tipos de estructura se "
+"`long`, :c:type:`double` y :c:type:`char*`. Algunos tipos de estructura se "
 "usan para describir tablas estáticas que se usan para enumerar las funciones "
 "exportadas por un módulo o los atributos de datos de un nuevo tipo de "
 "objeto, y otro se usa para describir el valor de un número complejo. Estos "
@@ -1078,13 +1094,15 @@ msgstr ""
 "las compilaciones más utilizadas se describirán en el resto de esta sección."
 
 #: ../Doc/c-api/intro.rst:744
+#, fuzzy
 msgid ""
 "Compiling the interpreter with the :c:macro:`Py_DEBUG` macro defined "
-"produces what is generally meant by \"a debug build\" of Python. :c:macro:"
-"`Py_DEBUG` is enabled in the Unix build by adding ``--with-pydebug`` to the :"
-"file:`./configure` command.  It is also implied by the presence of the not-"
-"Python-specific :c:macro:`_DEBUG` macro.  When :c:macro:`Py_DEBUG` is "
-"enabled in the Unix build, compiler optimization is disabled."
+"produces what is generally meant by :ref:`a debug build of Python <debug-"
+"build>`. :c:macro:`Py_DEBUG` is enabled in the Unix build by adding :option:"
+"`--with-pydebug` to the :file:`./configure` command. It is also implied by "
+"the presence of the not-Python-specific :c:macro:`_DEBUG` macro.  When :c:"
+"macro:`Py_DEBUG` is enabled in the Unix build, compiler optimization is "
+"disabled."
 msgstr ""
 "Compilar el intérprete con el macro :c:macro:`Py_DEBUG` definido produce lo "
 "que generalmente se entiende por \"una compilación de depuración\" de "
@@ -1094,83 +1112,24 @@ msgstr ""
 "macro:`Py_DEBUG` está habilitado en la compilación de Unix, la optimización "
 "del compilador está deshabilitada."
 
-#: ../Doc/c-api/intro.rst:751
+#: ../Doc/c-api/intro.rst:752
+#, fuzzy
 msgid ""
-"In addition to the reference count debugging described below, the following "
-"extra checks are performed:"
+"In addition to the reference count debugging described below, extra checks "
+"are performed, see :ref:`Python Debug Build <debug-build>`."
 msgstr ""
 "Además de la depuración del recuento de referencia que se describe a "
 "continuación, se realizan las siguientes verificaciones adicionales:"
 
-#: ../Doc/c-api/intro.rst:754
-msgid "Extra checks are added to the object allocator."
-msgstr "Se agregan comprobaciones adicionales al asignador de objetos."
-
-#: ../Doc/c-api/intro.rst:756
-msgid "Extra checks are added to the parser and compiler."
-msgstr "Se agregan verificaciones adicionales al analizador y compilador."
-
-#: ../Doc/c-api/intro.rst:758
+#: ../Doc/c-api/intro.rst:755
+#, fuzzy
 msgid ""
-"Downcasts from wide types to narrow types are checked for loss of "
-"information."
-msgstr ""
-"Las conversiones de tipos hacia abajo (*downcasting*) de tipos anchos a "
-"tipos estrechos se comprueban por pérdida de información."
-
-#: ../Doc/c-api/intro.rst:760
-msgid ""
-"A number of assertions are added to the dictionary and set implementations. "
-"In addition, the set object acquires a :meth:`test_c_api` method."
-msgstr ""
-"Se agregan varias aserciones al diccionario y se establecen "
-"implementaciones. Además, el objeto set adquiere un método :meth:"
-"`test_c_api`."
-
-#: ../Doc/c-api/intro.rst:763
-msgid "Sanity checks of the input arguments are added to frame creation."
-msgstr ""
-"Las comprobaciones de cordura (*sanity checks*) de los argumentos de entrada "
-"se agregan a la creación del marco."
-
-#: ../Doc/c-api/intro.rst:765
-msgid ""
-"The storage for ints is initialized with a known invalid pattern to catch "
-"reference to uninitialized digits."
-msgstr ""
-"El almacenamiento para *ints* se inicializa con un patrón no válido conocido "
-"para capturar referencias a dígitos no inicializados."
-
-#: ../Doc/c-api/intro.rst:768
-msgid ""
-"Low-level tracing and extra exception checking are added to the runtime "
-"virtual machine."
-msgstr ""
-"El seguimiento de bajo nivel y la comprobación de excepciones adicionales se "
-"agregan a la máquina virtual en tiempo de ejecución."
-
-#: ../Doc/c-api/intro.rst:771
-msgid "Extra checks are added to the memory arena implementation."
-msgstr ""
-"Se agregan verificaciones adicionales a la implementación de la arena de "
-"memoria."
-
-#: ../Doc/c-api/intro.rst:773
-msgid "Extra debugging is added to the thread module."
-msgstr "Se agrega depuración adicional al módulo de hilos."
-
-#: ../Doc/c-api/intro.rst:775
-msgid "There may be additional checks not mentioned here."
-msgstr "Puede haber controles adicionales no mencionados aquí."
-
-#: ../Doc/c-api/intro.rst:777
-msgid ""
-"Defining :c:macro:`Py_TRACE_REFS` enables reference tracing.  When defined, "
-"a circular doubly linked list of active objects is maintained by adding two "
+"Defining :c:macro:`Py_TRACE_REFS` enables reference tracing (see the :option:"
+"`configure --with-trace-refs option <--with-trace-refs>`). When defined, a "
+"circular doubly linked list of active objects is maintained by adding two "
 "extra fields to every :c:type:`PyObject`.  Total allocations are tracked as "
 "well.  Upon exit, all existing references are printed.  (In interactive mode "
-"this happens after every statement run by the interpreter.)  Implied by :c:"
-"macro:`Py_DEBUG`."
+"this happens after every statement run by the interpreter.)"
 msgstr ""
 "Definiendo :c:macro:`Py_TRACE_REFS` habilita el rastreo de referencias. "
 "Cuando se define, se mantiene una lista circular doblemente vinculada de "
@@ -1180,7 +1139,7 @@ msgstr ""
 "después de cada declaración ejecutada por el intérprete). Implicado por :c:"
 "macro:`Py_DEBUG`."
 
-#: ../Doc/c-api/intro.rst:783
+#: ../Doc/c-api/intro.rst:762
 msgid ""
 "Please refer to :file:`Misc/SpecialBuilds.txt` in the Python source "
 "distribution for more detailed information."
@@ -1200,3 +1159,55 @@ msgstr ""
 #~ "la cual todos los valores posibles están cubiertos en las declaraciones "
 #~ "``case``. Use esto en lugares donde podría sentirse tentado a poner una "
 #~ "llamada ``assert(0)`` o ``abort()``."
+
+#~ msgid "Extra checks are added to the object allocator."
+#~ msgstr "Se agregan comprobaciones adicionales al asignador de objetos."
+
+#~ msgid "Extra checks are added to the parser and compiler."
+#~ msgstr "Se agregan verificaciones adicionales al analizador y compilador."
+
+#~ msgid ""
+#~ "Downcasts from wide types to narrow types are checked for loss of "
+#~ "information."
+#~ msgstr ""
+#~ "Las conversiones de tipos hacia abajo (*downcasting*) de tipos anchos a "
+#~ "tipos estrechos se comprueban por pérdida de información."
+
+#~ msgid ""
+#~ "A number of assertions are added to the dictionary and set "
+#~ "implementations. In addition, the set object acquires a :meth:"
+#~ "`test_c_api` method."
+#~ msgstr ""
+#~ "Se agregan varias aserciones al diccionario y se establecen "
+#~ "implementaciones. Además, el objeto set adquiere un método :meth:"
+#~ "`test_c_api`."
+
+#~ msgid "Sanity checks of the input arguments are added to frame creation."
+#~ msgstr ""
+#~ "Las comprobaciones de cordura (*sanity checks*) de los argumentos de "
+#~ "entrada se agregan a la creación del marco."
+
+#~ msgid ""
+#~ "The storage for ints is initialized with a known invalid pattern to catch "
+#~ "reference to uninitialized digits."
+#~ msgstr ""
+#~ "El almacenamiento para *ints* se inicializa con un patrón no válido "
+#~ "conocido para capturar referencias a dígitos no inicializados."
+
+#~ msgid ""
+#~ "Low-level tracing and extra exception checking are added to the runtime "
+#~ "virtual machine."
+#~ msgstr ""
+#~ "El seguimiento de bajo nivel y la comprobación de excepciones adicionales "
+#~ "se agregan a la máquina virtual en tiempo de ejecución."
+
+#~ msgid "Extra checks are added to the memory arena implementation."
+#~ msgstr ""
+#~ "Se agregan verificaciones adicionales a la implementación de la arena de "
+#~ "memoria."
+
+#~ msgid "Extra debugging is added to the thread module."
+#~ msgstr "Se agrega depuración adicional al módulo de hilos."
+
+#~ msgid "There may be additional checks not mentioned here."
+#~ msgstr "Puede haber controles adicionales no mencionados aquí."

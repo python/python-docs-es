@@ -78,8 +78,6 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 Éstas son las palabras que hemos coordinado hasta el momento:
 
 
-.. glossary::
-
    auditing event
      evento de auditoría ``library/tempfile`` and many others
 
@@ -97,7 +95,10 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 
    bytecodes
      queda igual ``glossary.po``
-  
+
+   callback
+     retrollamada ``glossary.po``
+
    callable
      invocable ``glossary.po``, ``library/functions.po``
 
@@ -191,7 +192,7 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 
    release
      version ``HOWTO``
-     
+
    return / returns
      retorna / retornar ``library/sqlite3.po``
 
@@ -204,23 +205,19 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 
    runtime
      tiempo de ejecución ``tutorial/classes.po``
-       
+
    slice
     segmento ``datamodel.po``
 
    slicing
     segmentación ``datamodel.po``
-   
+
    statement
     sentencia ``smtplib.po``
 
    static type checker
     Validador estático de tipos
     Notas: mantener la mayúscula, usar validación cuando se refiera a la acción y no al agente.
-
-   static type checker
-     Validador estático de tipos
-     Notas: mantener la mayúscula, usar validación cuando se refiera a la acción y no al agente.
 
    string
     cadena de caracteres ``datamodel.po``
@@ -230,14 +227,11 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 
    third-party
      de terceros ``library/typing.po``
-     
+
    timeout
      timeout  ``library/smtplib.po``
      Significado: tiempo de espera para establecer/reintentar una conexión de red
-   
-   type hint
-     indicador de tipo  ``library/typing.po``
-      
+
    type hint
      indicador de tipo ``library/typing.po``
 
@@ -245,7 +239,7 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
      anotación de tipo ``library/typing.po``
      Nota: úsese como sinónimo de *type hint*, aunque en el texto se sobreentiende que anotación
      es algo accesorio, un comentario, y type hint implica que el Validador hará comprobaciones
-   
+
    underscore
      guión bajo ``glossary.po``
 

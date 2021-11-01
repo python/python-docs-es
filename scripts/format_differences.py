@@ -35,10 +35,10 @@ def main():
             wordsid = wordsstr = list()
 
             if has_delimiters(entry.msgid):
-                wordsid = [word for word in entry.msgid.split() if has_delimiter(word)]
+                wordsid = [word for word in entry.msgid.split() if has_delimiters(word)]
 
             if has_delimiters(entry.msgstr):
-                wordsstr = [word for word in entry.msgstr.split() if has_delimiter(word)]
+                wordsstr = [word for word in entry.msgstr.split() if has_delimiters(word)]
 
             if len(wordsid) != len(wordsstr):
                 key = pofilename.replace(PO_DIR, '')
