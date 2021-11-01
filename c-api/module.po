@@ -337,6 +337,11 @@ msgid ""
 "collector is not involved and :c:member:`~PyModuleDef.m_free` is called "
 "directly."
 msgstr ""
+"Tal como :c:member:`PyTypeObject.tp_clear`, esta función no *siempre* es "
+"llamada antes de la designación de un módulo. Por ejemplo, cuando el "
+"recuento de referencias está  listo para determinar que un objeto no se usa "
+"más, la recolección de basura cíclica no se involucra y se llama a :c:member:"
+"`~PyModuleDef.m_free` directamente."
 
 #: ../Doc/c-api/module.rst:235
 msgid ""
@@ -714,34 +719,44 @@ msgstr ""
 msgid ""
 "On success, return ``0``. On error, raise an exception and return ``-1``."
 msgstr ""
+"En caso de éxito, retorna ``0``. En caso de error, lanza una excepción y "
+"retorna ``-1``."
 
 #: ../Doc/c-api/module.rst:454
 msgid ""
 "Return ``NULL`` if *value* is ``NULL``. It must be called with an exception "
 "raised in this case."
 msgstr ""
+"Retorna ``NULL`` si *value* es ``NULL``. Debe llamarse lanzando una "
+"excepción en este caso."
 
 #: ../Doc/c-api/module.rst:457 ../Doc/c-api/module.rst:506
 msgid "Example usage::"
-msgstr ""
+msgstr "Ejemplo de uso ::"
 
 #: ../Doc/c-api/module.rst:471 ../Doc/c-api/module.rst:524
 msgid ""
 "The example can also be written without checking explicitly if *obj* is "
 "``NULL``::"
 msgstr ""
+"El ejemplo puede también ser escrito sin verificar explicitamente si *obj* "
+"es ``NULL``::"
 
 #: ../Doc/c-api/module.rst:483 ../Doc/c-api/module.rst:540
 msgid ""
 "Note that ``Py_XDECREF()`` should be used instead of ``Py_DECREF()`` in this "
 "case, since *obj* can be ``NULL``."
 msgstr ""
+"Note que ``Py_XDECREF()`` debería ser usado en vez de ``Py_DECREF()`` en "
+"este caso, ya que *obj* puede ser ``NULL``."
 
 #: ../Doc/c-api/module.rst:491
 msgid ""
 "Similar to :c:func:`PyModule_AddObjectRef`, but steals a reference to "
 "*value* on success (if it returns ``0``)."
 msgstr ""
+"Similar a :c:func:`PyModule_AddObjectRef`, pero roba una referencia a "
+"*value* en caso de éxito (en este caso retorna ``0``)."
 
 #: ../Doc/c-api/module.rst:494
 msgid ""
@@ -749,6 +764,9 @@ msgid ""
 "easy to introduce reference leaks by misusing the :c:func:"
 "`PyModule_AddObject` function."
 msgstr ""
+"Se recomienda la nueva función :c:func:`PyModule_AddObjectRef`, ya que es "
+"sencillo introducir fugas de referencias por un uso incorrecto de la "
+"función :c:func:`PyModule_AddObject`."
 
 #: ../Doc/c-api/module.rst:500
 msgid ""
