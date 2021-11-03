@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-16 21:42+0200\n"
-"PO-Revision-Date: 2021-10-11 14:39+0200\n"
+"PO-Revision-Date: 2021-11-03 10:54-0500\n"
 "Last-Translator: Diego Cristóbal Herreros\n"
 "Language: es\n"
 "Language-Team: python-doc-es\n"
@@ -53,16 +53,14 @@ msgstr ""
 "flag ``m`` para pymalloc ha sido eliminado)."
 
 #: ../Doc/library/sys.rst:28
-#, fuzzy
 msgid ""
 "Append the callable *hook* to the list of active auditing hooks for the "
 "current (sub)interpreter."
 msgstr ""
 "Agrega el *hook* invocable a la lista de enlaces de inspección activos para "
-"el intérprete actual."
+"el (sub)intérprete actual."
 
 #: ../Doc/library/sys.rst:31
-#, fuzzy
 msgid ""
 "When an auditing event is raised through the :func:`sys.audit` function, "
 "each hook will be called in the order it was added with the event name and "
@@ -72,18 +70,19 @@ msgid ""
 "terminate the process entirely."
 msgstr ""
 "Cuando se genera un evento de auditoría a través de la función :func:`sys."
-"audit`, cada gancho será llamado en el orden en que se agregó con el nombre "
-"del evento y la tupla de argumentos. Los ganchos nativos agregados por :c:"
-"func:`PySys_AddAuditHook` se llaman primero, seguidos de los ganchos "
-"agregados en el intérprete actual."
+"audit`, cada hook será llamado en el orden en que se agregó con el nombre "
+"del evento y la tupla de argumentos. Los hooks nativos agregados por :c:func:"
+"`PySys_AddAuditHook` se llaman primero, seguidos de los hookd agregados en "
+"el (sub)intérprete actual. Los hooks pueden registrar un evento, lanzar una "
+"excepción para abortar la operación, o terminar el proceso completamente."
 
 #: ../Doc/library/sys.rst:38
-#, fuzzy
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``sys.addaudithook`` with no "
 "arguments."
 msgstr ""
-"Lanza un :ref:`auditing event <auditing>` ``sys.setprofile`` sin argumentos."
+"Lanza un :ref:`auditing event <auditing>` ``sys.addaudithook`` sin "
+"argumentos."
 
 #: ../Doc/library/sys.rst:40
 msgid ""
@@ -93,15 +92,21 @@ msgid ""
 "and the exception suppressed. As a result, callers cannot assume that their "
 "hook has been added unless they control all existing hooks."
 msgstr ""
+"Llamar :func: :`sys.addaudithook` levantara por si mismo un evento de "
+"auditoria llamado ``sys.addaudithook`` sin argumentos. Si uno de los hooks "
+"existentes levanta un excepción derivada de :class:`RuntimeError`, el nuevo "
+"hook no será agregado y la excepción será suprimida. Como resultado, los que "
+"llaman no podrán asumir que el hook a sido agregado a menos que ellos "
+"controlen todos los hooks existentes."
 
 #: ../Doc/library/sys.rst:47
-#, fuzzy
 msgid ""
 "See the :ref:`audit events table <audit-events>` for all events raised by "
 "CPython, and :pep:`578` for the original design discussion."
 msgstr ""
 "Consulte la :ref:`tabla de eventos de auditoría <audit-events>` para todos "
-"los eventos lanzados por CPython."
+"los eventos lanzados por CPython, y :pep:`578` para discussion del diseño "
+"original."
 
 #: ../Doc/library/sys.rst:54
 msgid ""
@@ -149,7 +154,7 @@ msgstr ""
 
 #: ../Doc/library/sys.rst:75
 msgid "See also :data:`sys.orig_argv`."
-msgstr ""
+msgstr "También ver :data:`sys.orig_argv`."
 
 #: ../Doc/library/sys.rst:78
 msgid ""
@@ -278,20 +283,19 @@ msgstr ""
 "primero)."
 
 #: ../Doc/library/sys.rst:156
-#, fuzzy
 msgid ""
 "A tuple of strings containing the names of all modules that are compiled "
 "into this Python interpreter.  (This information is not available in any "
 "other way --- ``modules.keys()`` only lists the imported modules.)"
 msgstr ""
-"Una tupla de cadenas de caracteres que proporciona los nombres de todos los "
+"Una tupla de cadenas de caracteres que contiene los nombres de todos los "
 "módulos que se compilan en este intérprete de Python. (Esta información no "
 "está disponible de ninguna otra manera --- ``modules.keys()`` solo enumera "
 "los módulos importados.)"
 
 #: ../Doc/library/sys.rst:160
 msgid "See also the :attr:`sys.stdlib_module_names` list."
-msgstr ""
+msgstr "También ver la lista :attr:`sys.stdlib_module_names`."
 
 #: ../Doc/library/sys.rst:165
 msgid ""
@@ -369,18 +373,21 @@ msgid ""
 "called. If a thread is not currently handling an exception, it is not "
 "included in the result dictionary."
 msgstr ""
+"Retorna un diccionario que mapea el identificador de cada hilo a la "
+"excepción mas alta actualmente activa en ese hilo en el tiempo que la "
+"función fue llamada. Si un hilo no esta manejando una excepción en el "
+"momento, no se incluye en el resultado del diccionario."
 
 #: ../Doc/library/sys.rst:208
 msgid "This is most useful for statistical profiling."
-msgstr ""
+msgstr "Esto es más útil para la elaboración de perfiles estadísticos."
 
 #: ../Doc/library/sys.rst:212
-#, fuzzy
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``sys._current_exceptions`` with "
 "no arguments."
 msgstr ""
-"Lanza un :ref:`auditing event <auditing>` ``sys._current_frames`` sin "
+"Lanza un :ref:`auditing event <auditing>` ``sys._current_exceptions`` sin "
 "argumentos."
 
 #: ../Doc/library/sys.rst:216
@@ -462,14 +469,14 @@ msgstr ""
 "de memoria de CPython."
 
 #: ../Doc/library/sys.rst:253
-#, fuzzy
 msgid ""
 "If Python is `built in debug mode <debug-build>` (:option:`configure --with-"
 "pydebug option <--with-pydebug>`), it also performs some expensive internal "
 "consistency checks."
 msgstr ""
-"Si Python está configurado --with-pydebug, también realiza algunas "
-"comprobaciones de consistencia internas costosas."
+"Si Python está en `modo de debug por defecto <debug-build>` (:option:"
+"`configure --with-pydebug option <--with-pydebug>`), también desarrolla "
+"algunos cheques de consistencia interna costosos."
 
 #: ../Doc/library/sys.rst:261
 msgid ""
@@ -937,9 +944,8 @@ msgid ":const:`utf8_mode`"
 msgstr ":const:`utf8_mode`"
 
 #: ../Doc/library/sys.rst:482
-#, fuzzy
 msgid ":option:`-X utf8 <-X>`"
-msgstr ":option:`-X` ``utf8``"
+msgstr ":option:`-X utf8 <-X>`"
 
 #: ../Doc/library/sys.rst:485
 msgid "Added ``quiet`` attribute for the new :option:`-q` flag."
@@ -959,14 +965,14 @@ msgstr ""
 "Agregado el atributo ``isolated`` para  el flag :option:`-I` ``isolated``."
 
 #: ../Doc/library/sys.rst:497
-#, fuzzy
 msgid ""
 "Added the ``dev_mode`` attribute for the new :ref:`Python Development Mode "
 "<devmode>` and the ``utf8_mode`` attribute for the new  :option:`-X` "
 "``utf8`` flag."
 msgstr ""
-"Se agregó el atributo ``dev_mode`` para el nuevo flag :option:`-X` ``dev`` y "
-"el atributo ``utf8_mode`` para la nueva :option:`-X` ``utf8``."
+"Se agregó el atributo ``dev_mode`` para el nuevo :ref:`Modo de Desarrollo de "
+"Python <devmode>` y el atributo ``utf8_mode`` para la bandera :option:`-X` "
+"``utf8``."
 
 #: ../Doc/library/sys.rst:505
 msgid ""
@@ -1270,6 +1276,12 @@ msgid ""
 "filenames. The filesystem error handler is returned from :func:"
 "`getfilesystemencoding`."
 msgstr ""
+"Obtener la :term:`codificación de sistema de archivos < filesystem encoding "
+"and error handler>`: La codificación usada con el :term:`gestor de errores "
+"de sistema de archivos <filesystem encoding and error handler>` para "
+"convertir nombres de archivos en Unicode a nombres de archivos en bytes. El "
+"gestor de errores del sistema de archivos es retornado desde :func:"
+"`getfilesystemencoding`."
 
 #: ../Doc/library/sys.rst:639
 msgid ""
@@ -1278,6 +1290,11 @@ msgid ""
 "accepting or returning filenames should support either str or bytes and "
 "internally convert to the system's preferred representation."
 msgstr ""
+"Para la mejor compatibilidad, str debe ser usado por nombres de archivos en "
+"todos los casos, aunque representar nombres de archivos en bytes también es "
+"soportado. Funciones que acepta o retornan nombres de archivos deben "
+"soportar tanto str como bytes e internamente convertir el valor a "
+"representación preferida por el sistema."
 
 #: ../Doc/library/sys.rst:644 ../Doc/library/sys.rst:672
 msgid ""
@@ -1294,6 +1311,10 @@ msgid ""
 "filesystem_encoding` and :c:member:`~PyConfig.filesystem_errors` members of :"
 "c:type:`PyConfig`."
 msgstr ""
+"El :term:`gestor de error y codificación del sistema de archivos` está "
+"configurado en el inicio de Python por la función :c:func:`PyConfig_Read`: "
+"ver :c:member:`~PyConfig.filesystem_encoding` y :c:member:`~PyConfig."
+"filesystem_errors` que son miembros de :c:type:`PyConfig`."
 
 #: ../Doc/library/sys.rst:652
 msgid ":func:`getfilesystemencoding` result cannot be ``None`` anymore."
@@ -1312,6 +1333,8 @@ msgstr ""
 msgid ""
 "Return ``'utf-8'`` if the :ref:`Python UTF-8 Mode <utf8-mode>` is enabled."
 msgstr ""
+"Retorna ``'utf-8'`` si :ref:`Modo UTF-8 de Python <utf8-mode>` esta "
+"habilitado."
 
 #: ../Doc/library/sys.rst:666
 msgid ""
@@ -1321,6 +1344,12 @@ msgid ""
 "filenames and bytes filenames. The filesystem encoding is returned from :"
 "func:`getfilesystemencoding`."
 msgstr ""
+"Obtener la :term:`codificación de sistema de archivos < filesystem encoding "
+"and error handler>`: La codificación usada con el :term:`gestor de errores "
+"de sistema de archivos <filesystem encoding and error handler>` para "
+"convertir nombres de archivos en Unicode a nombres de archivos en bytes. El "
+"gestor de errores del sistema de archivos es retornado desde :func:"
+"`getfilesystemencoding`."
 
 #: ../Doc/library/sys.rst:684
 msgid ""
@@ -1533,6 +1562,10 @@ msgid ""
 "emulated for the process. It is intended for use in logging rather than for "
 "feature detection."
 msgstr ""
+"*platform_version* devuelve la versión principal, la versión secundaria y el "
+"número de compilación del sistema operativo actual, en lugar de la versión "
+"que se está emulando para el proceso. Está diseñado para su uso en el "
+"registro en lugar de para la detección de características."
 
 #: ../Doc/library/sys.rst:805
 msgid ""
@@ -1540,6 +1573,9 @@ msgid ""
 "different version than the OS version. Please use :mod:`platform` module for "
 "achieving accurate OS version."
 msgstr ""
+"*platform_version* deriva la versión desde kernel32.dll que puede ser de una "
+"versión diferente a la versión de SO. Por favor usar el módulo kernel32.dll "
+"para obtener una versión de SO precisa."
 
 #: ../Doc/library/sys.rst:811
 msgid ""
@@ -1636,7 +1672,7 @@ msgstr ":const:`nan`"
 
 #: ../Doc/library/sys.rst:863
 msgid "(this attribute is no longer used)"
-msgstr ""
+msgstr "(este atributo ya no se encuentra en uso)"
 
 #: ../Doc/library/sys.rst:865
 msgid ":const:`imag`"
@@ -2010,7 +2046,6 @@ msgstr ""
 "método :meth:`~importlib.abc.MetaPathFinder.find_spec`."
 
 #: ../Doc/library/sys.rst:1073
-#, fuzzy
 msgid ""
 "This is a dictionary that maps module names to modules which have already "
 "been loaded.  This can be manipulated to force reloading of modules and "
@@ -2025,17 +2060,22 @@ msgstr ""
 "que ya se han cargado. Esto se puede manipular para forzar la recarga de "
 "módulos y otros trucos. Sin embargo, reemplazar el diccionario no "
 "necesariamente funcionará como se esperaba y eliminar elementos esenciales "
-"del diccionario puede hacer que Python falle."
+"del diccionario puede hacer que Python falle. Si se desea iterar sobre el "
+"diccionario global se debe usar ``sys.modules.copy()`` o ``tuple(sys."
+"modules)`` para evitar excepciones porque el tamaño podría cambia durante la "
+"iteración como un efecto secundario de código o actividades en otros hilos."
 
 #: ../Doc/library/sys.rst:1085
 msgid ""
 "The list of the original command line arguments passed to the Python "
 "executable."
 msgstr ""
+"La lista de los argumentos originales de la línea de comando que son pasados "
+"al ejecutable de Python."
 
 #: ../Doc/library/sys.rst:1088
 msgid "See also :data:`sys.argv`."
-msgstr ""
+msgstr "También ver :data:`sys.argv`."
 
 #: ../Doc/library/sys.rst:1097
 msgid ""
@@ -2799,14 +2839,13 @@ msgid "This setting is thread-specific."
 msgstr "Esta configuración es específica de cada hilo."
 
 #: ../Doc/library/sys.rst:1480
-#, fuzzy
 msgid ""
 "Changes the :term:`filesystem encoding and error handler` to 'mbcs' and "
 "'replace' respectively, for consistency with versions of Python prior to 3.6."
 msgstr ""
-"Cambia la codificación predeterminada del sistema de archivos y el modo de "
-"errores a 'mbcs' y 'replace' respectivamente, para mantener la coherencia "
-"con las versiones de Python anteriores a la 3.6."
+"Cambia la :term:`codificación del sistema de archivos y manejo de errores` a "
+"'mbcs' y 'replace' respectivamente, para mantener la coherencia con las "
+"versiones de Python anteriores a la 3.6."
 
 #: ../Doc/library/sys.rst:1484
 msgid ""
@@ -2821,6 +2860,8 @@ msgid ""
 "See also :func:`sys.getfilesystemencoding` and :func:`sys."
 "getfilesystemencodeerrors`."
 msgstr ""
+"También ver :func:`sys.getfilesystemencoding` y :func:`sys."
+"getfilesystemencodeerrors`."
 
 #: ../Doc/library/sys.rst:1492
 msgid "See :pep:`529` for more details."
@@ -2870,9 +2911,10 @@ msgid ""
 "The encoding and error handling are is initialized from :c:member:`PyConfig."
 "stdio_encoding` and :c:member:`PyConfig.stdio_errors`."
 msgstr ""
+"La codificación y manejo de error son inicializado desde :c:member:`PyConfig."
+"stdio_encoding`  y :c:member:`PyConfig.stdio_errors`."
 
 #: ../Doc/library/sys.rst:1515
-#, fuzzy
 msgid ""
 "On Windows, UTF-8 is used for the console device.  Non-character devices "
 "such as disk files and pipes use the system locale encoding (i.e. the ANSI "
@@ -2884,13 +2926,13 @@ msgid ""
 msgstr ""
 "En Windows, se usa UTF-8 para el dispositivo de consola. Los dispositivos "
 "que no son caracteres, como archivos de disco y tuberías, utilizan la "
-"codificación de la configuración regional del sistema (es decir, la página "
-"de códigos ANSI). Los dispositivos de caracteres que no son de consola, como "
-"NUL (es decir, donde ``isatty()`` retorna ``True``) utilizan el valor de las "
-"páginas de códigos de entrada y salida de la consola al inicio, "
-"respectivamente para stdin y stdout/stderr. Este valor predeterminado es la "
-"codificación de la configuración regional del sistema si el proceso no se "
-"adjunta inicialmente a una consola."
+"codificación de la configuración regional del sistema (por ejemplo, la "
+"página de códigos ANSI). Los dispositivos de caracteres que no son de "
+"consola, como NUL (es decir, donde ``isatty()`` retorna ``True``) utilizan "
+"el valor de las páginas de códigos de entrada y salida de la consola al "
+"inicio, respectivamente para stdin y stdout/stderr. Esto pasa por defecto al "
+"sistema de :term:`codificación local` si el proceso no esta inicialmente "
+"acoplado a una consola."
 
 #: ../Doc/library/sys.rst:1524
 msgid ""
@@ -3004,6 +3046,8 @@ msgstr ""
 msgid ""
 "A frozenset of strings containing the names of standard library modules."
 msgstr ""
+"Un fronzenset de strings que contiene los nombres de los módulos de la "
+"librería estándar."
 
 #: ../Doc/library/sys.rst:1583
 msgid ""
@@ -3012,6 +3056,11 @@ msgid ""
 "kinds are listed: pure Python, built-in, frozen and extension modules. Test "
 "modules are excluded."
 msgstr ""
+"Es lo mismo para todas las plataformas. Módulos que no están disponibles en "
+"algunas plataformas y deshabilitados durante la construcción de Python "
+"también son listados. Todos los tipos de modulo son listados: Python puro, "
+"incorporados, congelados y módulos de extensión. Módulos de prueba son "
+"excluidos."
 
 #: ../Doc/library/sys.rst:1588
 msgid ""
@@ -3020,10 +3069,13 @@ msgid ""
 "``email.mime`` sub-package and the ``email.message`` sub-module are not "
 "listed."
 msgstr ""
+"Para paquete, solo el principal es listado; sub-paquetes y sub-módulos no "
+"son listados. Por ejemplo, el paquete ``email`` es listado, pero el sub-"
+"paquete ``email.mime`` y el sub-módulo ``email.message`` no es listado."
 
 #: ../Doc/library/sys.rst:1593
 msgid "See also the :attr:`sys.builtin_module_names` list."
-msgstr ""
+msgstr "También ver la lista :attr:`sys.builtin_module_names`."
 
 #: ../Doc/library/sys.rst:1600
 msgid ""
@@ -3180,13 +3232,12 @@ msgid "See also :func:`excepthook` which handles uncaught exceptions."
 msgstr "Véase también :func:`excepthook` que maneja excepciones no capturadas."
 
 #: ../Doc/library/sys.rst:1669
-#, fuzzy
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``sys.unraisablehook`` with "
 "arguments ``hook``, ``unraisable``."
 msgstr ""
-"Lanza un :ref:`auditing event <auditing>` ``cpython.run_interactivehook`` "
-"con el argumento ``hook``."
+"Lanza un :ref:`auditing event <auditing>` ``sys.unraisablehook`` con los "
+"argumentos ``hook``, ``unraisable``.."
 
 #: ../Doc/library/sys.rst:1671
 msgid ""
