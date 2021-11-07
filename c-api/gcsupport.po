@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-16 21:42+0200\n"
-"PO-Revision-Date: 2021-08-02 01:45+0200\n"
+"PO-Revision-Date: 2021-10-26 08:09+0200\n"
 "Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
 "Language: es\n"
 "Language-Team: python-doc-es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
+"X-Generator: Poedit 3.0\n"
 
 #: ../Doc/c-api/gcsupport.rst:6
 msgid "Supporting Cyclic Garbage Collection"
@@ -92,6 +93,9 @@ msgid ""
 "c:member:`~PyTypeObject.tp_traverse` handler or explicitly use one from its "
 "subclass or subclasses."
 msgstr ""
+"Si un tipo añade el Py_TPFLAGS_HAVE_GC, entonces *must* implementar al menos "
+"un manejado :c:member:`~PyTypeObject.tp_traverse` o usar explícitamente uno "
+"de su subclase o subclases."
 
 #: ../Doc/c-api/gcsupport.rst:41
 msgid ""
@@ -103,6 +107,13 @@ msgid ""
 "implements the garbage collector protocol and the child class does *not* "
 "include the :const:`Py_TPFLAGS_HAVE_GC` flag."
 msgstr ""
+"Al llamar a :c:func:`PyType_Ready` o alguna de las APIs que indirectamente "
+"lo llaman como :c:func:`PyType_FromSpecWithBases` o :c:func:"
+"`PyType_FromSpec` el intérprete automáticamente llenara los campos :c:member:"
+"`~PyTypeObject.tp_flags`, :c:member:`~PyTypeObject.tp_traverse` y :c:member:"
+"`~PyTypeObject.tp_clear` si el tipo si el tipo hereda de una clase que "
+"implementa el protocolo del recolector de basura y la clase secundaria *no* "
+"incluye el *flag* :const:`Py_TPFLAGS_HAVE_GC`."
 
 #: ../Doc/c-api/gcsupport.rst:51
 msgid ""
@@ -338,19 +349,24 @@ msgstr ""
 
 #: ../Doc/c-api/gcsupport.rst:191
 msgid "Controlling the Garbage Collector State"
-msgstr ""
+msgstr "Controlar el estado del recolector de basura"
 
 #: ../Doc/c-api/gcsupport.rst:193
 msgid ""
 "The C-API provides the following functions for controlling garbage "
 "collection runs."
 msgstr ""
+"La C-API proporciona las siguientes funciones para controlar las ejecuciones "
+"de recolección de basura."
 
 #: ../Doc/c-api/gcsupport.rst:198
 msgid ""
 "Perform a full garbage collection, if the garbage collector is enabled. "
 "(Note that :func:`gc.collect` runs it unconditionally.)"
 msgstr ""
+"Realiza una recolección de basura completa, si el recolector de basura está "
+"habilitado. (Tenga en cuenta que :func:`gc.collect` lo ejecuta "
+"incondicionalmente)."
 
 #: ../Doc/c-api/gcsupport.rst:201
 msgid ""
@@ -359,21 +375,32 @@ msgid ""
 "returns ``0`` immediately. Errors during garbage collection are passed to :"
 "data:`sys.unraisablehook`. This function does not raise exceptions."
 msgstr ""
+"Retorna el número de objetos recolectados e inalcanzables que no se pueden "
+"recolectar. Si el recolector de basura está deshabilitado o ya está "
+"recolectando, retorna ``0`` inmediatamente. Los errores durante la "
+"recolección de basura se pasan a :data:`sys.unraisablehook`. Esta función no "
+"genera excepciones."
 
 #: ../Doc/c-api/gcsupport.rst:211
 msgid ""
 "Enable the garbage collector: similar to :func:`gc.enable`. Returns the "
 "previous state, 0 for disabled and 1 for enabled."
 msgstr ""
+"Habilita el recolector de basura: similar a :func:`gc.enable`. Retorna el "
+"estado anterior, 0 para deshabilitado y 1 para habilitado."
 
 #: ../Doc/c-api/gcsupport.rst:219
 msgid ""
 "Disable the garbage collector: similar to :func:`gc.disable`. Returns the "
 "previous state, 0 for disabled and 1 for enabled."
 msgstr ""
+"Deshabilita el recolector de basura: similar a :func:`gc.disable`. Retorna "
+"el estado anterior, 0 para deshabilitado y 1 para habilitado."
 
 #: ../Doc/c-api/gcsupport.rst:227
 msgid ""
 "Query the state of the garbage collector: similar to :func:`gc.isenabled`. "
 "Returns the current state, 0 for disabled and 1 for enabled."
 msgstr ""
+"Consulta el estado del recolector de basura: similar a :func:`gc.isenabled`. "
+"Retorna el estado actual, 0 para deshabilitado y 1 para habilitado."
