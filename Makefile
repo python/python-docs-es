@@ -96,17 +96,3 @@ spell: venv
 .PHONY: wrap
 wrap: venv
 	$(VENV)/bin/powrap **/*.po
-
-.PHONY: dict_dups
-SHELL:=/bin/bash
-.ONESHELL:
-dict_dups:
-	if [[ $$(cat dict| sort | uniq -dc) ]]; then
-		echo -e "\n #######################\n"
-		echo "duplicated lines in the dict file"
-		sort dict | uniq -dc |sort -h
-		exit 1
-	else
-		echo "no duplicated lines"
-		exit 0
-	fi
