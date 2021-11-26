@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-16 21:42+0200\n"
-"PO-Revision-Date: 2020-08-15 22:56+0200\n"
+"PO-Revision-Date: 2021-11-26 15:23+0100\n"
 "Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
 "Language: es\n"
 "Language-Team: python-doc-es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
+"X-Generator: Poedit 3.0\n"
 
 #: ../Doc/howto/clinic.rst:5
 msgid "Argument Clinic How-To"
@@ -2295,9 +2296,8 @@ msgstr ""
 "``self_converter`` pero sobrescribiendo el miembro `` type``:"
 
 #: ../Doc/howto/clinic.rst:1210
-#, fuzzy
 msgid "Using a \"defining class\" converter"
-msgstr "Usando un convertidor de retorno"
+msgstr "Usando un convertidor de \"clase definitoria\" (*defining class*)"
 
 #: ../Doc/howto/clinic.rst:1212
 msgid ""
@@ -2308,24 +2308,36 @@ msgid ""
 "`PyType_GetModuleState` on the defining class to fetch the module state, for "
 "example from a module method."
 msgstr ""
+"Argument Clinic facilita el acceso a la clase definitoria de un método. Esto "
+"es útil para :ref:`heap type <heap-types>` métodos que necesitan obtener el "
+"estado del nivel del módulo. Utilice :c:func:`PyType_FromModuleAndSpec` para "
+"asociar un nuevo tipo de pila con un módulo. Ahora puede usar :c:func:"
+"`PyType_GetModuleState` en la clase de definición para obtener el estado del "
+"módulo, por ejemplo, de un método de módulo."
 
 #: ../Doc/howto/clinic.rst:1218
 msgid ""
 "Example from ``Modules/zlibmodule.c``.  First, ``defining_class`` is added "
 "to the clinic input::"
 msgstr ""
+"Ejemplo de ``Modules/zlibmodule.c``. Primero, se agrega ``definition_class`` "
+"a la entrada de la clínica::"
 
 #: ../Doc/howto/clinic.rst:1230
 msgid ""
 "After running the Argument Clinic tool, the following function signature is "
 "generated::"
 msgstr ""
+"Después de ejecutar la herramienta Argument Clinic, se genera la siguiente "
+"firma de función::"
 
 #: ../Doc/howto/clinic.rst:1240
 msgid ""
 "The following code can now use ``PyType_GetModuleState(cls)`` to fetch the "
 "module state::"
 msgstr ""
+"El siguiente código ahora puede usar ``PyType_GetModuleState(cls)`` para "
+"obtener el estado del módulo::"
 
 #: ../Doc/howto/clinic.rst:1246
 msgid ""
@@ -2334,12 +2346,18 @@ msgid ""
 "The argument will be of type ``PyTypeObject *``.  The argument will not "
 "appear in the ``__text_signature__``."
 msgstr ""
+"Cada método solo puede tener un argumento usando este convertidor, y debe "
+"aparecer después de ``self`` o, si no se usa ``self``, como primer "
+"argumento. El argumento será de tipo ``PyTypeObject *``. El argumento no "
+"aparecerá en el ``__text_signature__``."
 
 #: ../Doc/howto/clinic.rst:1251
 msgid ""
 "The ``defining_class`` converter is not compatible with ``__init__`` and "
 "``__new__`` methods, which cannot use the ``METH_METHOD`` convention."
 msgstr ""
+"El convertidor ``definition_class`` no es compatible con los métodos "
+"``__init__`` y ``__new__``, que no pueden usar la convención ``METH_METHOD``."
 
 #: ../Doc/howto/clinic.rst:1254
 msgid ""
@@ -2349,10 +2367,15 @@ msgid ""
 "state.  Example from the ``setattro`` slot method in ``Modules/_threadmodule."
 "c``::"
 msgstr ""
+"No es posible usar ``defining_class`` con métodos de ranura (*slot*). Para "
+"obtener el estado del módulo de dichos métodos, use "
+"``_PyType_GetModuleByDef`` para buscar el módulo y luego :c:func:"
+"`PyModule_GetState` para buscar el estado del módulo. Ejemplo del método de "
+"ranura ``setattro`` en ``Modules/_threadmodule.c``:"
 
 #: ../Doc/howto/clinic.rst:1269
 msgid "See also :pep:`573`."
-msgstr ""
+msgstr "Vea también :pep:`573`."
 
 #: ../Doc/howto/clinic.rst:1273
 msgid "Writing a custom converter"
