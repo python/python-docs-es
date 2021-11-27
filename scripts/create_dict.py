@@ -25,10 +25,6 @@ for filename in Path("dictionaries").glob("*.txt"):
 # Remove empty string, from empty lines
 entries.remove("")
 
-# Read main 'dict'
-with open("dict", "r") as f:
-    entries.update(set(i.rstrip() for i in f.readlines()))
-
 # Write the 'dict.txt' file
 with open("dict.txt", "w") as f:
     for e in entries:
