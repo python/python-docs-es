@@ -89,8 +89,7 @@ progress: venv
 
 .PHONY: spell
 spell: venv
-	$(VENV)/bin/python scripts/create_dict.py
-	$(VENV)/bin/pospell -p dict.txt -l es_ES **/*.po
+	$(VENV)/bin/python scripts/check_spell.py
 
 
 .PHONY: wrap
