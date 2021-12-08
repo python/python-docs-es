@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-19 11:16+0100\n"
-"PO-Revision-Date: 2021-08-02 01:45+0200\n"
+"POT-Creation-Date: 2021-10-16 21:42+0200\n"
+"PO-Revision-Date: 2021-10-26 08:09+0200\n"
 "Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
 "Language: es\n"
 "Language-Team: python-doc-es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.8.0\n"
+"Generated-By: Babel 2.9.1\n"
 "X-Generator: Poedit 3.0\n"
 
 #: ../Doc/c-api/gcsupport.rst:6
@@ -87,7 +87,35 @@ msgstr ""
 "Una vez que se inicializan todos los campos que pueden contener referencias "
 "a otros contenedores, debe llamar a :c:func:`PyObject_GC_Track`."
 
-#: ../Doc/c-api/gcsupport.rst:39
+#: ../Doc/c-api/gcsupport.rst:37
+msgid ""
+"If a type adds the Py_TPFLAGS_HAVE_GC, then it *must* implement at least a :"
+"c:member:`~PyTypeObject.tp_traverse` handler or explicitly use one from its "
+"subclass or subclasses."
+msgstr ""
+"Si un tipo añade el Py_TPFLAGS_HAVE_GC, entonces *must* implementar al menos "
+"un manejado :c:member:`~PyTypeObject.tp_traverse` o usar explícitamente uno "
+"de su subclase o subclases."
+
+#: ../Doc/c-api/gcsupport.rst:41
+msgid ""
+"When calling :c:func:`PyType_Ready` or some of the APIs that indirectly call "
+"it like :c:func:`PyType_FromSpecWithBases` or :c:func:`PyType_FromSpec` the "
+"interpreter will automatically populate the :c:member:`~PyTypeObject."
+"tp_flags`, :c:member:`~PyTypeObject.tp_traverse` and :c:member:"
+"`~PyTypeObject.tp_clear` fields if the type inherits from a class that "
+"implements the garbage collector protocol and the child class does *not* "
+"include the :const:`Py_TPFLAGS_HAVE_GC` flag."
+msgstr ""
+"Al llamar a :c:func:`PyType_Ready` o alguna de las APIs que indirectamente "
+"lo llaman como :c:func:`PyType_FromSpecWithBases` o :c:func:"
+"`PyType_FromSpec` el intérprete automáticamente llenara los campos :c:member:"
+"`~PyTypeObject.tp_flags`, :c:member:`~PyTypeObject.tp_traverse` y :c:member:"
+"`~PyTypeObject.tp_clear` si el tipo si el tipo hereda de una clase que "
+"implementa el protocolo del recolector de basura y la clase secundaria *no* "
+"incluye el *flag* :const:`Py_TPFLAGS_HAVE_GC`."
+
+#: ../Doc/c-api/gcsupport.rst:51
 msgid ""
 "Analogous to :c:func:`PyObject_New` but for container objects with the :"
 "const:`Py_TPFLAGS_HAVE_GC` flag set."
@@ -95,7 +123,7 @@ msgstr ""
 "Análogo a :c:func:`PyObject_New` pero para objetos de contenedor con el "
 "*flag* :const:`Py_TPFLAGS_HAVE_GC` establecido."
 
-#: ../Doc/c-api/gcsupport.rst:45
+#: ../Doc/c-api/gcsupport.rst:57
 msgid ""
 "Analogous to :c:func:`PyObject_NewVar` but for container objects with the :"
 "const:`Py_TPFLAGS_HAVE_GC` flag set."
@@ -103,7 +131,7 @@ msgstr ""
 "Análogo a :c:func:`PyObject_NewVar` pero para objetos de contenedor con el "
 "*flag* :const:`Py_TPFLAGS_HAVE_GC` establecido."
 
-#: ../Doc/c-api/gcsupport.rst:51
+#: ../Doc/c-api/gcsupport.rst:63
 msgid ""
 "Resize an object allocated by :c:func:`PyObject_NewVar`.  Returns the "
 "resized object or ``NULL`` on failure.  *op* must not be tracked by the "
@@ -113,7 +141,7 @@ msgstr ""
 "Retorna el objeto redimensionado o ``NULL`` en caso de falla. *op* aún no "
 "debe ser rastreado por el recolector de basura."
 
-#: ../Doc/c-api/gcsupport.rst:57
+#: ../Doc/c-api/gcsupport.rst:69
 msgid ""
 "Adds the object *op* to the set of container objects tracked by the "
 "collector.  The collector can run at unexpected times so objects must be "
@@ -128,7 +156,7 @@ msgstr ""
 "por :c:member:`~PyTypeObject.tp_traverse` se vuelven válidos, generalmente "
 "cerca del final del constructor."
 
-#: ../Doc/c-api/gcsupport.rst:66
+#: ../Doc/c-api/gcsupport.rst:78
 msgid ""
 "Returns non-zero if the object implements the garbage collector protocol, "
 "otherwise returns 0."
@@ -136,7 +164,7 @@ msgstr ""
 "Retorna un valor distinto de cero si el objeto implementa el protocolo del "
 "recolector de basura; de lo contrario, retorna 0."
 
-#: ../Doc/c-api/gcsupport.rst:69
+#: ../Doc/c-api/gcsupport.rst:81
 msgid ""
 "The object cannot be tracked by the garbage collector if this function "
 "returns 0."
@@ -144,7 +172,7 @@ msgstr ""
 "El recolector de basura no puede rastrear el objeto si esta función retorna "
 "0."
 
-#: ../Doc/c-api/gcsupport.rst:74
+#: ../Doc/c-api/gcsupport.rst:86
 msgid ""
 "Returns 1 if the object type of *op* implements the GC protocol and *op* is "
 "being currently tracked by the garbage collector and 0 otherwise."
@@ -152,11 +180,11 @@ msgstr ""
 "Retorna 1 si el tipo de objeto de *op* implementa el protocolo GC y el "
 "recolector de basura está rastreando *op* y 0 en caso contrario."
 
-#: ../Doc/c-api/gcsupport.rst:77
+#: ../Doc/c-api/gcsupport.rst:89
 msgid "This is analogous to the Python function :func:`gc.is_tracked`."
 msgstr "Esto es análogo a la función de Python :func:`gc.is_tracked`."
 
-#: ../Doc/c-api/gcsupport.rst:84
+#: ../Doc/c-api/gcsupport.rst:96
 msgid ""
 "Returns 1 if the object type of *op* implements the GC protocol and *op* has "
 "been already finalized by the garbage collector and 0 otherwise."
@@ -164,11 +192,11 @@ msgstr ""
 "Retorna 1 si el tipo de objeto de *op* implementa el protocolo GC y *op* ya "
 "ha sido finalizado por el recolector de basura y 0 en caso contrario."
 
-#: ../Doc/c-api/gcsupport.rst:87
+#: ../Doc/c-api/gcsupport.rst:99
 msgid "This is analogous to the Python function :func:`gc.is_finalized`."
 msgstr "Esto es análogo a la función de Python :func:`gc.is_finalized`."
 
-#: ../Doc/c-api/gcsupport.rst:91
+#: ../Doc/c-api/gcsupport.rst:103
 msgid ""
 "Similarly, the deallocator for the object must conform to a similar pair of "
 "rules:"
@@ -176,7 +204,7 @@ msgstr ""
 "Del mismo modo, el desasignador (*deallocator*) para el objeto debe cumplir "
 "con un par similar de reglas:"
 
-#: ../Doc/c-api/gcsupport.rst:94
+#: ../Doc/c-api/gcsupport.rst:106
 msgid ""
 "Before fields which refer to other containers are invalidated, :c:func:"
 "`PyObject_GC_UnTrack` must be called."
@@ -184,14 +212,14 @@ msgstr ""
 "Antes de invalidar los campos que se refieren a otros contenedores, debe "
 "llamarse :c:func:`PyObject_GC_UnTrack`."
 
-#: ../Doc/c-api/gcsupport.rst:97
+#: ../Doc/c-api/gcsupport.rst:109
 msgid ""
 "The object's memory must be deallocated using :c:func:`PyObject_GC_Del`."
 msgstr ""
 "La memoria del objeto debe ser desasignada (*deallocated*) usando :c:func:"
 "`PyObject_GC_Del`."
 
-#: ../Doc/c-api/gcsupport.rst:102
+#: ../Doc/c-api/gcsupport.rst:114
 msgid ""
 "Releases memory allocated to an object using :c:func:`PyObject_GC_New` or :c:"
 "func:`PyObject_GC_NewVar`."
@@ -199,7 +227,7 @@ msgstr ""
 "Libera memoria asignada a un objeto usando :c:func:`PyObject_GC_New` o :c:"
 "func:`PyObject_GC_NewVar`."
 
-#: ../Doc/c-api/gcsupport.rst:108
+#: ../Doc/c-api/gcsupport.rst:120
 msgid ""
 "Remove the object *op* from the set of container objects tracked by the "
 "collector.  Note that :c:func:`PyObject_GC_Track` can be called again on "
@@ -216,7 +244,7 @@ msgstr ""
 "cualquiera de los campos utilizados por el manejador :c:member:"
 "`~PyTypeObject.tp_traverse` no sea válido."
 
-#: ../Doc/c-api/gcsupport.rst:117
+#: ../Doc/c-api/gcsupport.rst:129
 msgid ""
 "The :c:func:`_PyObject_GC_TRACK` and :c:func:`_PyObject_GC_UNTRACK` macros "
 "have been removed from the public C API."
@@ -224,7 +252,7 @@ msgstr ""
 "Los macros :c:func:`_PyObject_GC_TRACK` y :c:func:`_PyObject_GC_UNTRACK` se "
 "han eliminado de la API pública de C."
 
-#: ../Doc/c-api/gcsupport.rst:120
+#: ../Doc/c-api/gcsupport.rst:132
 msgid ""
 "The :c:member:`~PyTypeObject.tp_traverse` handler accepts a function "
 "parameter of this type:"
@@ -232,7 +260,7 @@ msgstr ""
 "El manejador :c:member:`~PyTypeObject.tp_traverse` acepta un parámetro de "
 "función de este tipo:"
 
-#: ../Doc/c-api/gcsupport.rst:125
+#: ../Doc/c-api/gcsupport.rst:137
 msgid ""
 "Type of the visitor function passed to the :c:member:`~PyTypeObject."
 "tp_traverse` handler. The function should be called with an object to "
@@ -248,7 +276,7 @@ msgstr ""
 "funciones visitantes para implementar la detección de basura cíclica; No se "
 "espera que los usuarios necesiten escribir sus propias funciones visitante."
 
-#: ../Doc/c-api/gcsupport.rst:132
+#: ../Doc/c-api/gcsupport.rst:144
 msgid ""
 "The :c:member:`~PyTypeObject.tp_traverse` handler must have the following "
 "type:"
@@ -256,7 +284,7 @@ msgstr ""
 "El manejador :c:member:`~PyTypeObject.tp_traverse` debe tener el siguiente "
 "tipo:"
 
-#: ../Doc/c-api/gcsupport.rst:137
+#: ../Doc/c-api/gcsupport.rst:149
 msgid ""
 "Traversal function for a container object.  Implementations must call the "
 "*visit* function for each object directly contained by *self*, with the "
@@ -272,7 +300,7 @@ msgstr ""
 "de objeto ``NULL``. Si *visit* retorna un valor distinto de cero, ese valor "
 "debe retornarse inmediatamente."
 
-#: ../Doc/c-api/gcsupport.rst:144
+#: ../Doc/c-api/gcsupport.rst:156
 msgid ""
 "To simplify writing :c:member:`~PyTypeObject.tp_traverse` handlers, a :c:"
 "func:`Py_VISIT` macro is provided.  In order to use this macro, the :c:"
@@ -284,7 +312,7 @@ msgstr ""
 "macro, la implementación :c:member:`~PyTypeObject.tp_traverse` debe nombrar "
 "sus argumentos exactamente *visit* y *arg*:"
 
-#: ../Doc/c-api/gcsupport.rst:151
+#: ../Doc/c-api/gcsupport.rst:163
 msgid ""
 "If *o* is not ``NULL``, call the *visit* callback, with arguments *o* and "
 "*arg*.  If *visit* returns a non-zero value, then return it. Using this "
@@ -295,7 +323,7 @@ msgstr ""
 "cero, lo retorna. Usando este macro, los manejadores :c:member:"
 "`~PyTypeObject.tp_traverse` tienen el siguiente aspecto:"
 
-#: ../Doc/c-api/gcsupport.rst:164
+#: ../Doc/c-api/gcsupport.rst:176
 msgid ""
 "The :c:member:`~PyTypeObject.tp_clear` handler must be of the :c:type:"
 "`inquiry` type, or ``NULL`` if the object is immutable."
@@ -303,7 +331,7 @@ msgstr ""
 "El manejador :c:member:`~PyTypeObject.tp_clear` debe ser del tipo :c:type:"
 "`query`, o ``NULL`` si el objeto es inmutable."
 
-#: ../Doc/c-api/gcsupport.rst:170
+#: ../Doc/c-api/gcsupport.rst:182
 msgid ""
 "Drop references that may have created reference cycles.  Immutable objects "
 "do not have to define this method since they can never directly create "
@@ -318,3 +346,61 @@ msgstr ""
 "debe ser válido después de llamar a este método (no solo llame a :c:func:"
 "`Py_DECREF` en una referencia). El recolector de basura llamará a este "
 "método si detecta que este objeto está involucrado en un ciclo de referencia."
+
+#: ../Doc/c-api/gcsupport.rst:191
+msgid "Controlling the Garbage Collector State"
+msgstr "Controlar el estado del recolector de basura"
+
+#: ../Doc/c-api/gcsupport.rst:193
+msgid ""
+"The C-API provides the following functions for controlling garbage "
+"collection runs."
+msgstr ""
+"La C-API proporciona las siguientes funciones para controlar las ejecuciones "
+"de recolección de basura."
+
+#: ../Doc/c-api/gcsupport.rst:198
+msgid ""
+"Perform a full garbage collection, if the garbage collector is enabled. "
+"(Note that :func:`gc.collect` runs it unconditionally.)"
+msgstr ""
+"Realiza una recolección de basura completa, si el recolector de basura está "
+"habilitado. (Tenga en cuenta que :func:`gc.collect` lo ejecuta "
+"incondicionalmente)."
+
+#: ../Doc/c-api/gcsupport.rst:201
+msgid ""
+"Returns the number of collected + unreachable objects which cannot be "
+"collected. If the garbage collector is disabled or already collecting, "
+"returns ``0`` immediately. Errors during garbage collection are passed to :"
+"data:`sys.unraisablehook`. This function does not raise exceptions."
+msgstr ""
+"Retorna el número de objetos recolectados e inalcanzables que no se pueden "
+"recolectar. Si el recolector de basura está deshabilitado o ya está "
+"recolectando, retorna ``0`` inmediatamente. Los errores durante la "
+"recolección de basura se pasan a :data:`sys.unraisablehook`. Esta función no "
+"genera excepciones."
+
+#: ../Doc/c-api/gcsupport.rst:211
+msgid ""
+"Enable the garbage collector: similar to :func:`gc.enable`. Returns the "
+"previous state, 0 for disabled and 1 for enabled."
+msgstr ""
+"Habilita el recolector de basura: similar a :func:`gc.enable`. Retorna el "
+"estado anterior, 0 para deshabilitado y 1 para habilitado."
+
+#: ../Doc/c-api/gcsupport.rst:219
+msgid ""
+"Disable the garbage collector: similar to :func:`gc.disable`. Returns the "
+"previous state, 0 for disabled and 1 for enabled."
+msgstr ""
+"Deshabilita el recolector de basura: similar a :func:`gc.disable`. Retorna "
+"el estado anterior, 0 para deshabilitado y 1 para habilitado."
+
+#: ../Doc/c-api/gcsupport.rst:227
+msgid ""
+"Query the state of the garbage collector: similar to :func:`gc.isenabled`. "
+"Returns the current state, 0 for disabled and 1 for enabled."
+msgstr ""
+"Consulta el estado del recolector de basura: similar a :func:`gc.isenabled`. "
+"Retorna el estado actual, 0 para deshabilitado y 1 para habilitado."

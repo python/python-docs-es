@@ -6,21 +6,21 @@
 # Check https://github.com/python/python-docs-es/blob/3.8/TRANSLATORS to get
 # the list of volunteers
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-19 11:16+0100\n"
-"PO-Revision-Date: 2020-10-03 21:38-0300\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2021-10-16 21:42+0200\n"
+"PO-Revision-Date: 2021-10-25 16:02-0300\n"
+"Last-Translator: Rodrigo Tobar <rtobarc@gmail.com>\n"
 "Language: es\n"
 "Language-Team: python-doc-es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.8.0\n"
+"Generated-By: Babel 2.9.1\n"
+"X-Generator: Poedit 3.0\n"
 
 #: ../Doc/library/tracemalloc.rst:2
 msgid ":mod:`tracemalloc` --- Trace memory allocations"
@@ -142,7 +142,7 @@ msgstr ""
 "de bytes y constantes), y que eso es ```4428KiB`` más de lo que ha sido "
 "cargado antes de los test, cuando la anterior captura de pantalla fue "
 "tomada. De manera similar, el modulo :mod:`linecache` ha almacenado en "
-"caché``940 KiB`` del código fuente de Python para formatear  los "
+"caché``940 KiB`` del código fuente de Python para formatear los "
 "seguimientos, todo desde la captura instantánea."
 
 #: ../Doc/library/tracemalloc.rst:115
@@ -183,7 +183,8 @@ msgstr ""
 "Se puede ver que la mayor parte de la memoria fue asignada en el módulo :mod:"
 "`importlib` para cargar datos (códigos de bytes y constantes) desde módulos "
 "``870.1 KiB``. El rastreo esta donde el módulo :mod:`importlib` cargó datos "
-"más recientemente: en la linea ``import pdb`` el módulo :mod:`doctest`."
+"más recientemente: en la linea ``import pdb`` el módulo :mod:`doctest`. El "
+"rastreo puede cambiar si se carga un nuevo módulo."
 
 #: ../Doc/library/tracemalloc.rst:186
 msgid "Pretty top"
@@ -196,11 +197,12 @@ msgid ""
 msgstr ""
 "Codifica para configurar las 10 líneas que asignan gran parte de la memoria "
 "con una salida ``bonita``, ignorando los archivos``<frozen importlib."
-"_bootstrap>`` y ``<unkownn>``:"
+"_bootstrap>`` y ``<unkownn>``::"
 
 #: ../Doc/library/tracemalloc.rst:253
 msgid "Record the current and peak size of all traced memory blocks"
 msgstr ""
+"Graba los tamaños actual y máximo de todos los bloques de memoria rastreados"
 
 #: ../Doc/library/tracemalloc.rst:255
 msgid ""
@@ -210,6 +212,11 @@ msgid ""
 "observe the small memory usage after the sum is computed as well as the peak "
 "memory usage during the computations::"
 msgstr ""
+"El siguiente código calcula dos sumas como ``0 + 1 + 2 + ...`` de forma "
+"ineficiente, creando una lista con estos números. Esta lista consume mucha "
+"memoria de forma temporal. Podemos usar :func:`get_traced_memory` y :func:"
+"`reset_peak` para observar el pequeño uso de memoria después de que la suma "
+"es calculada, así como también el uso máximo de memoria durante el cálculo:"
 
 #: ../Doc/library/tracemalloc.rst:280 ../Doc/library/tracemalloc.rst:759
 msgid "Output::"
@@ -226,6 +233,14 @@ msgid ""
 "we could optimise (by removing the unnecessary call to :class:`list`, and "
 "writing ``sum(range(...))``)."
 msgstr ""
+"El uso de :func:`reset_peak` asegura que podemos registrar precisamente el "
+"uso máximo de memoria durante el cálculo de ``small_sum``, incluso si es "
+"mucho menor al máximo total desde la llamada a :func:`start`. Sin la llamada "
+"a :func:`reset_peak`, ``second_peak`` seguiría siendo el uso máximo de "
+"memoria del cálculo de ``large_sum`` (es decir, igual a ``first_peak``). En "
+"este caso ambos máximos son mucho mayores al uso final de memoria, lo que "
+"sugiere que podemos optimizar (removiendo la llamada innecesaria a :class:"
+"`list`, y escribiendo ``sum(range(...))``)."
 
 #: ../Doc/library/tracemalloc.rst:295
 msgid "API"
@@ -249,7 +264,7 @@ msgid ""
 "class:`Traceback` instance, or ``None`` if the :mod:`tracemalloc` module is "
 "not tracing memory allocations or did not trace the allocation of the object."
 msgstr ""
-"Obtén el rastreo de donde el objeto de Python fue asignado. Retorna una "
+"Obtiene el rastreo de donde el objeto de Python fue asignado. Retorna una "
 "instancia :class:`Traceback` o ``None`` si el módulo :mod:`tracemalloc` no "
 "esta rastreando ninguna asignación de memoria o no rastreó la asignación del "
 "objeto."
@@ -262,7 +277,7 @@ msgstr ""
 #: ../Doc/library/tracemalloc.rst:319
 msgid "Get the maximum number of frames stored in the traceback of a trace."
 msgstr ""
-"Obtén el número máximo de cuadros guardados en el seguimiento de un rastro."
+"Obtiene el número máximo de cuadros guardados en el seguimiento de un rastro."
 
 #: ../Doc/library/tracemalloc.rst:321
 msgid ""
@@ -281,28 +296,25 @@ msgid ""
 "Get the current size and peak size of memory blocks traced by the :mod:"
 "`tracemalloc` module as a tuple: ``(current: int, peak: int)``."
 msgstr ""
-"Obtén el tamaño actual y tamaño pico de los bloques de memorias rastreados "
+"Obtiene el tamaño actual y tamaño pico de los bloques de memorias rastreados "
 "por el módulo :mod:`tracemalloc` como una tupla: ``(current: int, peak: "
 "int)``."
 
 #: ../Doc/library/tracemalloc.rst:335
-#, fuzzy
 msgid ""
 "Set the peak size of memory blocks traced by the :mod:`tracemalloc` module "
 "to the current size."
 msgstr ""
-"Obtén el tamaño actual y tamaño pico de los bloques de memorias rastreados "
-"por el módulo :mod:`tracemalloc` como una tupla: ``(current: int, peak: "
-"int)``."
+"Establece el tamaño máximo de los bloques de memorias rastreados por el "
+"módulo :mod:`tracemalloc` al tamaño actual."
 
 #: ../Doc/library/tracemalloc.rst:338
-#, fuzzy
 msgid ""
 "Do nothing if the :mod:`tracemalloc` module is not tracing memory "
 "allocations."
 msgstr ""
-"Si el módulo :mod:`tracemalloc` esta rastreando asignaciones de memoria de "
-"Python retorna ``True`` sino retorna ``False``."
+"No realiza ninguna acción si el módulo :mod:`tracemalloc` no está rastreando "
+"asignaciones de memoria."
 
 #: ../Doc/library/tracemalloc.rst:341
 msgid ""
@@ -311,19 +323,24 @@ msgid ""
 "`take_snapshot` before a call to :func:`reset_peak` can be meaningfully "
 "compared to snapshots taken after the call."
 msgstr ""
+"Esta función sólo modifica el valor guardado para el uso máximo de memoria, "
+"y no modifica o borra ningún rastreo, no como :func:`clear_traces`. Capturas "
+"tomadas con :func:`take_snapshot` antes de una llamada a :func:`reset_peak` "
+"pueden ser comparadas significativamente con capturas hechas después de la "
+"llamada."
 
 #: ../Doc/library/tracemalloc.rst:346
-#, fuzzy
 msgid "See also :func:`get_traced_memory`."
-msgstr "Mira también la función :func:`stop`."
+msgstr "Mira también la función :func:`get_traced_memory`."
 
 #: ../Doc/library/tracemalloc.rst:353
 msgid ""
 "Get the memory usage in bytes of the :mod:`tracemalloc` module used to store "
 "traces of memory blocks. Return an :class:`int`."
 msgstr ""
-"Obtén el uso de la memoria en bytes desde el modulo :mod:`tracemalloc` usado "
-"para guardar rastreos de bloques de memoria. Retorna una clase :class:`int`."
+"Obtiene el uso de la memoria en bytes desde el modulo :mod:`tracemalloc` "
+"usado para guardar rastreos de bloques de memoria. Retorna una clase :class:"
+"`int`."
 
 #: ../Doc/library/tracemalloc.rst:360
 msgid ""
@@ -355,6 +372,8 @@ msgid ""
 "You can still read the original number of total frames that composed the "
 "traceback by looking at the :attr:`Traceback.total_nframe` attribute."
 msgstr ""
+"El número original de cuadros totales que componen el seguimiento observando "
+"el atributo :attr:`Traceback.total_nframe`."
 
 #: ../Doc/library/tracemalloc.rst:376
 msgid ""
@@ -395,15 +414,14 @@ msgstr ""
 "`get_traceback_limit`."
 
 #: ../Doc/library/tracemalloc.rst:394
-#, fuzzy
 msgid ""
 "Stop tracing Python memory allocations: uninstall hooks on Python memory "
 "allocators. Also clears all previously collected traces of memory blocks "
 "allocated by Python."
 msgstr ""
-"Detén el rastreo de las asignaciones de memoria de Python: desinstala los "
-"*hooks*. También limpia todos los rastros de memoria recolectados por los "
-"bloques de memoria asignados por Python."
+"Detiene el rastreo de las asignaciones de memoria de Python: desinstala los "
+"*hooks*. También limpia todos los rastros de memoria recolectados acerca de "
+"los bloques de memoria asignados por Python."
 
 #: ../Doc/library/tracemalloc.rst:398
 msgid ""
@@ -426,8 +444,8 @@ msgid ""
 "Take a snapshot of traces of memory blocks allocated by Python. Return a "
 "new :class:`Snapshot` instance."
 msgstr ""
-"Toma una captura instantánea  de los bloques de memoria asignados por "
-"Python. Retorna una nueva instancia de la clase :class:`Snapshot`."
+"Toma una captura instantánea de los bloques de memoria asignados por Python. "
+"Retorna una nueva instancia de la clase :class:`Snapshot`."
 
 #: ../Doc/library/tracemalloc.rst:410
 msgid ""
@@ -467,7 +485,7 @@ msgstr "Filtro de dominio"
 msgid "Filter traces of memory blocks by their address space (domain)."
 msgstr ""
 "Filtra los rastros de los bloques de memoria por su espacio de dirección "
-"(dominio)"
+"(dominio)."
 
 #: ../Doc/library/tracemalloc.rst:433
 msgid ""
@@ -529,7 +547,7 @@ msgstr ""
 
 #: ../Doc/library/tracemalloc.rst:461
 msgid "``Filter(False, \"<unknown>\")`` excludes empty tracebacks"
-msgstr "``Filter(False, \"<unknown>\")``  excluye los seguimientos vacíos"
+msgstr "``Filter(False, \"<unknown>\")`` excluye los seguimientos vacíos"
 
 #: ../Doc/library/tracemalloc.rst:464
 msgid "The ``'.pyo'`` file extension is no longer replaced with ``'.py'``."
@@ -549,7 +567,7 @@ msgid ""
 "Python. C extensions can use other domains to trace other resources."
 msgstr ""
 "tracemalloc usa el dominio ``0`` para rastrear las asignaciones de memoria "
-"hechas por Python.  Las extensiones C pueden usar otros dominios para "
+"hechas por Python. Las extensiones C pueden usar otros dominios para "
 "rastrear otros recursos."
 
 #: ../Doc/library/tracemalloc.rst:480
@@ -559,7 +577,7 @@ msgid ""
 "`lineno`."
 msgstr ""
 "Si *inclusive* es ``True`` (incluye), solo relaciona los bloques de memoria "
-"asignados en un archivo con el nombre  coincidiendo con el atributo :attr:"
+"asignados en un archivo con el nombre coincidiendo con el atributo :attr:"
 "`filename_pattern` en el número de línea del atributo :attr:`lineno`."
 
 #: ../Doc/library/tracemalloc.rst:484
@@ -577,7 +595,7 @@ msgid ""
 "Line number (``int``) of the filter. If *lineno* is ``None``, the filter "
 "matches any line number."
 msgstr ""
-"El número de linea (``int``)  del filtro. Si *lineno* es ``None``, el filtro "
+"El número de linea (``int``) del filtro. Si *lineno* es ``None``, el filtro "
 "se relaciona con cualquier número de linea."
 
 #: ../Doc/library/tracemalloc.rst:495
@@ -591,7 +609,7 @@ msgid ""
 "*all_frames* is ``False``, only the most recent frame is checked."
 msgstr ""
 "Si *all_frames* es ``True``, todos los cuadros de los rastreos son "
-"chequeados. Si  *all_frames* es ``False``, solo el cuadro mas reciente es "
+"chequeados. Si *all_frames* es ``False``, solo el cuadro mas reciente es "
 "chequeado."
 
 #: ../Doc/library/tracemalloc.rst:502
@@ -600,7 +618,7 @@ msgid ""
 "`get_traceback_limit` function and :attr:`Snapshot.traceback_limit` "
 "attribute."
 msgstr ""
-"El atributo no tiene efecto si el limite de rastreo es ``1``. Mira la "
+"El atributo no tiene efecto si el limite de rastreo es ``1``.  Mira la "
 "función :func:`get_traceback_limit` y el atributo :attr:`Snapshot."
 "traceback_limit`."
 
@@ -646,7 +664,7 @@ msgid ""
 "Compute the differences with an old snapshot. Get statistics as a sorted "
 "list of :class:`StatisticDiff` instances grouped by *key_type*."
 msgstr ""
-"Calcula las diferencias con una vieja captura instantánea.  Obtiene las "
+"Calcula las diferencias con una vieja captura instantánea. Obtiene las "
 "estadísticas en una lista ordenada de instancias de la clase :class:"
 "`StatisticDiff` agrupadas por *key_type*."
 
@@ -687,7 +705,7 @@ msgid ""
 msgstr ""
 "Crea una nueva instancia de clase :class:`Snapshot` con una secuencia de :"
 "attr:`traces` filtrados, *filters* es una lista de las instancias de :class:"
-"`DomainFilter` y :class:`Filter`. Si *filters* es una lista vacía, retorna "
+"`DomainFilter` y :class:`Filter`.  Si *filters* es una lista vacía, retorna "
 "una nueva instancia de clase :class:`Snapshot` con una copia de los rastreos."
 
 #: ../Doc/library/tracemalloc.rst:562
@@ -825,7 +843,7 @@ msgstr "Número de bloques de memoria (``int``)."
 
 #: ../Doc/library/tracemalloc.rst:631
 msgid "Total size of memory blocks in bytes (``int``)."
-msgstr "El tamaño total de los bloques de memoria en bytes  (``int``)."
+msgstr "El tamaño total de los bloques de memoria en bytes (``int``)."
 
 #: ../Doc/library/tracemalloc.rst:635 ../Doc/library/tracemalloc.rst:704
 msgid ""
@@ -859,7 +877,7 @@ msgid ""
 "Number of memory blocks in the new snapshot (``int``): ``0`` if the memory "
 "blocks have been released in the new snapshot."
 msgstr ""
-"El número de bloques de memoria en la nueva captura de pantalla  (``int``): "
+"El número de bloques de memoria en la nueva captura de pantalla (``int``): "
 "``0`` si los bloques de memoria han sido liberados en la nueva captura "
 "instantánea."
 
@@ -879,7 +897,7 @@ msgid ""
 "the memory blocks have been released in the new snapshot."
 msgstr ""
 "El tamaño total de los bloques de memoria en bytes en la nueva captura "
-"instantánea  (``int``): ``0`` si el bloque de memoria ha sido liberado en la "
+"instantánea (``int``): ``0`` si el bloque de memoria ha sido liberado en la "
 "nueva captura instantánea."
 
 #: ../Doc/library/tracemalloc.rst:668
@@ -918,7 +936,7 @@ msgstr ""
 
 #: ../Doc/library/tracemalloc.rst:700
 msgid "Size of the memory block in bytes (``int``)."
-msgstr "Tamaño de un bloque de memoria en bytes  (``int``)."
+msgstr "Tamaño de un bloque de memoria en bytes (``int``)."
 
 #: ../Doc/library/tracemalloc.rst:709
 msgid "Traceback"
@@ -950,6 +968,11 @@ msgid ""
 "total_nframe` attribute. That allows to know if a traceback has been "
 "truncated by the traceback limit."
 msgstr ""
+"Cuando se toma una captura, los seguimientos de los rastreos se limitan a :"
+"func:`get_traceback_limit` cuadros. Ver la función :func:`take_snapshot`. El "
+"número original de cuadros del seguimiento se guarda en el atributo :attr:"
+"`Traceback.total_nframe`. Esto permite saber si un seguimiento fue truncado "
+"por el límite de seguimientos."
 
 #: ../Doc/library/tracemalloc.rst:726
 msgid ""
@@ -972,26 +995,29 @@ msgid ""
 "Total number of frames that composed the traceback before truncation. This "
 "attribute can be set to ``None`` if the information is not available."
 msgstr ""
+"Número total de cuadros que componen el seguimiento antes de ser truncado. "
+"Este atributo puede ser ``None`` si no hay información disponible."
 
 #: ../Doc/library/tracemalloc.rst:738
 msgid "The :attr:`Traceback.total_nframe` attribute was added."
-msgstr ""
+msgstr "El atributo :attr:`Traceback.total_nframe` fue añadido."
 
 #: ../Doc/library/tracemalloc.rst:743
 msgid ""
-"Format the traceback as a list of lines with newlines. Use the :mod:"
-"`linecache` module to retrieve lines from the source code. If *limit* is "
-"set, format the *limit* most recent frames if *limit* is positive. "
-"Otherwise, format the ``abs(limit)`` oldest frames. If *most_recent_first* "
-"is ``True``, the order of the formatted frames is reversed, returning the "
-"most recent frame first instead of last."
+"Format the traceback as a list of lines. Use the :mod:`linecache` module to "
+"retrieve lines from the source code. If *limit* is set, format the *limit* "
+"most recent frames if *limit* is positive. Otherwise, format the "
+"``abs(limit)`` oldest frames. If *most_recent_first* is ``True``, the order "
+"of the formatted frames is reversed, returning the most recent frame first "
+"instead of last."
 msgstr ""
-"Formatea el seguimiento como una lista de líneas con nuevas líneas. Usa el "
-"módulo :mod:`linecache` para obtener líneas del código fuente. Si se "
-"establece *limit*, si *limit* es positivo: formatea el cuadro mas reciente. "
-"Si no, formatea los ``abs(limit)`` cuadros más antiguos. Si "
-"*most_recent_first* es ``True``, el orden de los cuadros formateados es "
-"invertido, retornando primero el cuadro más reciente en vez del último."
+"Formatea el seguimiento como una lista de líneas. Usa el módulo :mod:"
+"`linecache` para recuperar líneas del código fuente. Si se configura el "
+"límite, formatea los cuadros más recientes de los límites, si límite es "
+"positivo. De otra manera, formatea los cuadros más antiguos de "
+"``abs(limit)``. Si *most_recent_first* es ``True``, se invierte el orden de "
+"los cuadros formateados, devolviendo el cuadro más reciente en lugar del "
+"último."
 
 #: ../Doc/library/tracemalloc.rst:750
 msgid ""
@@ -999,7 +1025,7 @@ msgid ""
 "format` does not include newlines."
 msgstr ""
 "Similar a la función :func:`traceback.format_tb`, excepto por el método :"
-"meth:`.format`  que no incluye nuevas líneas."
+"meth:`.format` que no incluye nuevas líneas."
 
 #: ../Doc/library/tracemalloc.rst:753
 msgid "Example::"
@@ -1012,3 +1038,18 @@ msgstr "Ejemplo::"
 #~ "Cuando se toma una captura instantánea, los seguimientos de los rastros "
 #~ "son limitados a :func:`get_traceback_limit`  cuadros. Mira la función :"
 #~ "func:`take_snapshot`."
+
+#~ msgid ""
+#~ "Format the traceback as a list of lines with newlines. Use the :mod:"
+#~ "`linecache` module to retrieve lines from the source code. If *limit* is "
+#~ "set, format the *limit* most recent frames if *limit* is positive. "
+#~ "Otherwise, format the ``abs(limit)`` oldest frames. If "
+#~ "*most_recent_first* is ``True``, the order of the formatted frames is "
+#~ "reversed, returning the most recent frame first instead of last."
+#~ msgstr ""
+#~ "Formatea el seguimiento como una lista de líneas con nuevas líneas. Usa "
+#~ "el módulo :mod:`linecache` para obtener líneas del código fuente. Si se "
+#~ "establece *limit*, si *limit* es positivo: formatea el cuadro mas "
+#~ "reciente. Si no, formatea los ``abs(limit)`` cuadros más antiguos. Si "
+#~ "*most_recent_first* es ``True``, el orden de los cuadros formateados es "
+#~ "invertido, retornando primero el cuadro más reciente en vez del último."

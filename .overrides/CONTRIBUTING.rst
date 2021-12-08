@@ -64,11 +64,11 @@ Antes de comenzar
 
 #. Selecciona un :ref:`archivo para traducir <que-archivo-traducir>`.
 
-#. Verifica que estás en la rama principal del repositorio, **3.9** (esto es muy
+#. Verifica que estás en la rama principal del repositorio, **3.10** (esto es muy
    importante para evitar crear una nueva rama a partir de una traducción
    anterior)::
 
-     git checkout 3.9
+     git checkout 3.10
 
 #. Crea una rama nueva en base al artículo en el que vayas a trabajar.  Por
    ejemplo, si vas a trabajar en el archivo ``library/glosario.po``, usa un nombre
@@ -161,9 +161,6 @@ A tener en cuenta
   ejemplo un artículo a Wikipedia). En caso de que no haya una traducción del
   artículo en Wikipedia deja el título sin traducir.
 
-* Tenemos una :doc:`Memoria de Traducción <translation-memory>`, que usamos para tener
-  consistencia con algunos términos.
-
 * Si tienes una **duda sobre una palabra o término**, escríbelo como mejor suene
   para vos y marca ese párrafo como "Need work" / "Necesita trabajo" en
   *poedit*. Además, escribe un comentario explicando cuál es el termino en ese
@@ -202,6 +199,16 @@ Allí debería haber uno que diga ``docs/readthedocs.org:python-docs-es`` y al l
 
 Haciendo click en ese link verás una versión de la documentación completa que incluirá todos tus cambios.
 Tendrás que navegar hasta el archivo que hayas cambiado para ver cómo se visualiza luego del build.
+
+
+Memoria de traducción
+---------------------
+
+Tenemos una :doc:`Memoria de Traducción <translation-memory>`, que usamos para tener consistencia con algunos
+términos. 
+Si tienes alguna duda respecto a cómo traducir alguna palabra no te olvides de revisar este contenido.
+Del mismo modo, si luego de trabajar sobre un término *complicado* llegas a un acuerdo con otros colaboradores: 
+no se olviden de agregarlo.
 
 
 .. _repositorio: https://github.com/python/python-docs-es

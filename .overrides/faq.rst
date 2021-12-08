@@ -26,8 +26,7 @@ pospell. Pospell puede ser instalada en tu entorno de Python empleando pip
 Una vez instalado, para chequear el fichero .po sobre el que estás trabajando,
 ejecuta desde el directorio principal del repo::
 
-    python scripts/create_dict.py  # para crear el archivo 'dict.txt'
-    pospell -p dict.txt -l es_ES path/tu_fichero.po
+    python scripts/check_spell.py path/tu_fichero.po
 
 pospell emplea la herramienta de diccionarios hunspell. Si pospell falla dando
 como error que no tiene hunspell instalado, lo puedes instalar así:
@@ -205,9 +204,9 @@ repositorio principal de la traducción). Se hace de la siguiente manera::
 
 Luego nos vamos a nuestra rama local, confirmamos e impactamos esos cambios::
 
-    git checkout 3.9
-    git merge upstream/3.9
-    git push origin 3.9
+    git checkout 3.10
+    git merge upstream/3.10
+    git push origin 3.10
 
 ¡Eso es todo!
 
