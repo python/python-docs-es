@@ -3,24 +3,24 @@
 # Maintained by the python-doc-es workteam.
 # docs-es@python.org /
 # https://mail.python.org/mailman3/lists/docs-es.python.org/
-# Check https://github.com/PyCampES/python-docs-es/blob/3.8/TRANSLATORS to
+# Check https://github.com/python/python-docs-es/blob/3.8/TRANSLATORS to
 # get the list of volunteers
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: 2020-05-21 23:31+0200\n"
-"Language-Team: python-doc-es\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.8.0\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
+"POT-Creation-Date: 2021-10-16 21:42+0200\n"
+"PO-Revision-Date: 2021-10-26 20:21+0200\n"
+"Last-Translator: Diego Cristóbal Herreros <diecristher@gmail.com>\n"
 "Language: es\n"
-"X-Generator: Poedit 2.3\n"
+"Language-Team: python-doc-es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+"X-Generator: Poedit 3.0\n"
 
 #: ../Doc/c-api/sys.rst:6
 msgid "Operating System Utilities"
@@ -194,13 +194,35 @@ msgstr ""
 "directamente! :c:type:`PyOS_sighandler_t` es un alias *typedef* para :c:type:"
 "`void (\\*)(int)`."
 
-#: ../Doc/c-api/sys.rst:121
+#: ../Doc/c-api/sys.rst:122
 msgid ""
-"Decode a byte string from the locale encoding with the :ref:`surrogateescape "
-"error handler <surrogateescape>`: undecodable bytes are decoded as "
-"characters in range U+DC80..U+DCFF. If a byte sequence can be decoded as a "
-"surrogate character, escape the bytes using the surrogateescape error "
-"handler instead of decoding them."
+"This function should not be called directly: use the :c:type:`PyConfig` API "
+"with the :c:func:`PyConfig_SetBytesString` function which ensures that :ref:"
+"`Python is preinitialized <c-preinit>`."
+msgstr ""
+"Esta función no debe llamarse directamente: utilice la API :c:type:"
+"`PyConfig` con la función :c:func:`PyConfig_SetBytesString` que asegura que :"
+"ref:`Python está preinicializado <c-preinit>`."
+
+#: ../Doc/c-api/sys.rst:126 ../Doc/c-api/sys.rst:193
+msgid ""
+"This function must not be called before :ref:`Python is preinitialized <c-"
+"preinit>` and so that the LC_CTYPE locale is properly configured: see the :c:"
+"func:`Py_PreInitialize` function."
+msgstr ""
+"Esta función no debe llamarse antes de que :ref:`Python esté preinicializado "
+"<c-preinit>` y para que la configuración local LC_CTYPE esté correctamente "
+"configurada: véase la función :c:func:`Py_PreInitialize`."
+
+#: ../Doc/c-api/sys.rst:130
+#, fuzzy
+msgid ""
+"Decode a byte string from the :term:`filesystem encoding and error handler`. "
+"If the error handler is :ref:`surrogateescape error handler "
+"<surrogateescape>`, undecodable bytes are decoded as characters in range U"
+"+DC80..U+DCFF; and if a byte sequence can be decoded as a surrogate "
+"character, the bytes are escaped using the surrogateescape error handler "
+"instead of decoding them."
 msgstr ""
 "Decodifica una cadena de bytes de la codificación de configuración regional "
 "con :ref:`controlador de error de subrogateescape <surrogateescape>`: los "
@@ -209,40 +231,7 @@ msgstr ""
 "sustituto, escape los bytes usando el controlador de error de escape "
 "sustituto en lugar de decodificarlos."
 
-#: ../Doc/c-api/sys.rst:127 ../Doc/c-api/sys.rst:173
-msgid "Encoding, highest priority to lowest priority:"
-msgstr "Codificación, de máxima prioridad a menor prioridad:"
-
-#: ../Doc/c-api/sys.rst:129 ../Doc/c-api/sys.rst:175
-msgid "``UTF-8`` on macOS, Android, and VxWorks;"
-msgstr "`` UTF-8`` en macOS, Android y VxWorks;"
-
-#: ../Doc/c-api/sys.rst:130 ../Doc/c-api/sys.rst:176
-msgid ""
-"``UTF-8`` on Windows if :c:data:`Py_LegacyWindowsFSEncodingFlag` is zero;"
-msgstr ""
-"``UTF-8`` en Windows si :c:data:`Py_LegacyWindowsFSEncodingFlag` es cero;"
-
-#: ../Doc/c-api/sys.rst:131 ../Doc/c-api/sys.rst:177
-msgid "``UTF-8`` if the Python UTF-8 mode is enabled;"
-msgstr "`` UTF-8`` si el modo Python UTF-8 está habilitado;"
-
-#: ../Doc/c-api/sys.rst:132 ../Doc/c-api/sys.rst:178
-msgid ""
-"``ASCII`` if the ``LC_CTYPE`` locale is ``\"C\"``, ``nl_langinfo(CODESET)`` "
-"returns the ``ASCII`` encoding (or an alias), and :c:func:`mbstowcs` and :c:"
-"func:`wcstombs` functions uses the ``ISO-8859-1`` encoding."
-msgstr ""
-"``ASCII`` si la configuración regional ``LC_CTYPE`` es ``\"C\"``, "
-"``nl_langinfo (CODESET)`` retorna la codificación ``ASCII`` (o un alias) y "
-"las funciones :c:func:`mbstowcs` y :c:func:`wcstombs` utilizan la "
-"codificación ``ISO-8859-1``."
-
-#: ../Doc/c-api/sys.rst:136 ../Doc/c-api/sys.rst:182
-msgid "the current locale encoding."
-msgstr "la codificación de la configuración regional actual."
-
-#: ../Doc/c-api/sys.rst:138
+#: ../Doc/c-api/sys.rst:137
 msgid ""
 "Return a pointer to a newly allocated wide character string, use :c:func:"
 "`PyMem_RawFree` to free the memory. If size is not ``NULL``, write the "
@@ -253,7 +242,7 @@ msgstr ""
 "``NULL``, escribe el número de caracteres anchos excluyendo el carácter nulo "
 "en ``*size``"
 
-#: ../Doc/c-api/sys.rst:142
+#: ../Doc/c-api/sys.rst:141
 msgid ""
 "Return ``NULL`` on decoding error or memory allocation error. If *size* is "
 "not ``NULL``, ``*size`` is set to ``(size_t)-1`` on memory error or set to "
@@ -264,14 +253,24 @@ msgstr ""
 "en caso de error de memoria o en ``(size_t) -2`` en caso de error de "
 "decodificación."
 
-#: ../Doc/c-api/sys.rst:146
+#: ../Doc/c-api/sys.rst:145 ../Doc/c-api/sys.rst:185
+msgid ""
+"The :term:`filesystem encoding and error handler` are selected by :c:func:"
+"`PyConfig_Read`: see :c:member:`~PyConfig.filesystem_encoding` and :c:member:"
+"`~PyConfig.filesystem_errors` members of :c:type:`PyConfig`."
+msgstr ""
+"El :term:`filesystem encoding and error handler` son seleccionados por :c:"
+"func:`PyConfig_Read`: ver :c:member:`~PyConfig.filesystem_encoding` y :c:"
+"member:`~PyConfig.filesystem_errors` que pertenecen a :c:type:`PyConfig`."
+
+#: ../Doc/c-api/sys.rst:149
 msgid ""
 "Decoding errors should never happen, unless there is a bug in the C library."
 msgstr ""
 "Los errores de decodificación nunca deberían ocurrir, a menos que haya un "
 "error en la biblioteca C."
 
-#: ../Doc/c-api/sys.rst:149
+#: ../Doc/c-api/sys.rst:152
 msgid ""
 "Use the :c:func:`Py_EncodeLocale` function to encode the character string "
 "back to a byte string."
@@ -279,7 +278,7 @@ msgstr ""
 "Utilice la función :c:func:`Py_EncodeLocale` para codificar la cadena de "
 "caracteres en una cadena de bytes."
 
-#: ../Doc/c-api/sys.rst:154
+#: ../Doc/c-api/sys.rst:157
 msgid ""
 "The :c:func:`PyUnicode_DecodeFSDefaultAndSize` and :c:func:"
 "`PyUnicode_DecodeLocaleAndSize` functions."
@@ -287,11 +286,14 @@ msgstr ""
 "Las funciones :c:func:`PyUnicode_DecodeFSDefaultAndSize` y :c:func:"
 "`PyUnicode_DecodeLocaleAndSize`."
 
-#: ../Doc/c-api/sys.rst:159 ../Doc/c-api/sys.rst:203
-msgid "The function now uses the UTF-8 encoding in the UTF-8 mode."
-msgstr "La función ahora usa la codificación UTF-8 en el modo UTF-8."
+#: ../Doc/c-api/sys.rst:162 ../Doc/c-api/sys.rst:204
+#, fuzzy
+msgid ""
+"The function now uses the UTF-8 encoding in the :ref:`Python UTF-8 Mode "
+"<utf8-mode>`."
+msgstr "La función utiliza la codificación UTF-8 en el modo Python UTF-8."
 
-#: ../Doc/c-api/sys.rst:162 ../Doc/c-api/sys.rst:206
+#: ../Doc/c-api/sys.rst:166 ../Doc/c-api/sys.rst:208
 msgid ""
 "The function now uses the UTF-8 encoding on Windows if :c:data:"
 "`Py_LegacyWindowsFSEncodingFlag` is zero;"
@@ -299,22 +301,19 @@ msgstr ""
 "La función ahora usa la codificación UTF-8 en Windows si :c:data:"
 "`Py_LegacyWindowsFSEncodingFlag` es cero;"
 
-#: ../Doc/c-api/sys.rst:169
+#: ../Doc/c-api/sys.rst:173
 msgid ""
-"Encode a wide character string to the locale encoding with the :ref:"
-"`surrogateescape error handler <surrogateescape>`: surrogate characters in "
-"the range U+DC80..U+DCFF are converted to bytes 0x80..0xFF."
+"Encode a wide character string to the :term:`filesystem encoding and error "
+"handler`. If the error handler is :ref:`surrogateescape error handler "
+"<surrogateescape>`, surrogate characters in the range U+DC80..U+DCFF are "
+"converted to bytes 0x80..0xFF."
 msgstr ""
-"Codifica una cadena de caracteres anchos en la codificación de configuración "
-"regional con :ref:`controlador de error de surrogateescape "
-"<surrogateescape>`: los caracteres sustitutos en el rango U+DC80..U+DCFF se "
-"convierten en bytes 0x80..0xFF."
+"Codifica una cadena de caracteres amplios según el término :term:`filesystem "
+"encoding and error handler`. Si el gestor de errores es :ref:"
+"`surrogateescape error handler <surrogateescape>`, los caracteres "
+"sustituidos en el rango U+DC80..U+DCFF se convierten en bytes 0x80..0xFF."
 
-#: ../Doc/c-api/sys.rst:184
-msgid "The function uses the UTF-8 encoding in the Python UTF-8 mode."
-msgstr "La función utiliza la codificación UTF-8 en el modo Python UTF-8."
-
-#: ../Doc/c-api/sys.rst:186
+#: ../Doc/c-api/sys.rst:178
 msgid ""
 "Return a pointer to a newly allocated byte string, use :c:func:`PyMem_Free` "
 "to free the memory. Return ``NULL`` on encoding error or memory allocation "
@@ -324,7 +323,7 @@ msgstr ""
 "`PyMem_Free` para liberar la memoria. Retorna ``NULL`` en el error de "
 "codificación o error de asignación de memoria"
 
-#: ../Doc/c-api/sys.rst:190
+#: ../Doc/c-api/sys.rst:182
 msgid ""
 "If error_pos is not ``NULL``, ``*error_pos`` is set to ``(size_t)-1`` on "
 "success,  or set to the index of the invalid character on encoding error."
@@ -333,7 +332,7 @@ msgstr ""
 "en caso de éxito, o se establece en el índice del carácter no válido en el "
 "error de codificación."
 
-#: ../Doc/c-api/sys.rst:193
+#: ../Doc/c-api/sys.rst:189
 msgid ""
 "Use the :c:func:`Py_DecodeLocale` function to decode the bytes string back "
 "to a wide character string."
@@ -341,7 +340,7 @@ msgstr ""
 "Use la función :c:func:`Py_DecodeLocale` para decodificar la cadena de bytes "
 "en una cadena de caracteres anchos."
 
-#: ../Doc/c-api/sys.rst:198
+#: ../Doc/c-api/sys.rst:199
 msgid ""
 "The :c:func:`PyUnicode_EncodeFSDefault` and :c:func:`PyUnicode_EncodeLocale` "
 "functions."
@@ -349,11 +348,11 @@ msgstr ""
 "Las funciones :c:func:`PyUnicode_EncodeFSDefault` y :c:func:"
 "`PyUnicode_EncodeLocale`."
 
-#: ../Doc/c-api/sys.rst:214
+#: ../Doc/c-api/sys.rst:216
 msgid "System Functions"
 msgstr "Funciones del Sistema"
 
-#: ../Doc/c-api/sys.rst:216
+#: ../Doc/c-api/sys.rst:218
 msgid ""
 "These are utility functions that make functionality from the :mod:`sys` "
 "module accessible to C code.  They all work with the current interpreter "
@@ -365,7 +364,7 @@ msgstr ""
 "del módulo :mod:`sys` del subproceso actual del intérprete, que está "
 "contenido en la estructura interna del estado del subproceso."
 
-#: ../Doc/c-api/sys.rst:222
+#: ../Doc/c-api/sys.rst:224
 msgid ""
 "Return the object *name* from the :mod:`sys` module or ``NULL`` if it does "
 "not exist, without setting an exception."
@@ -373,7 +372,7 @@ msgstr ""
 "Retorna el objeto *name* del módulo :mod:`sys` o ``NULL`` si no existe, sin "
 "establecer una excepción."
 
-#: ../Doc/c-api/sys.rst:227
+#: ../Doc/c-api/sys.rst:229
 msgid ""
 "Set *name* in the :mod:`sys` module to *v* unless *v* is ``NULL``, in which "
 "case *name* is deleted from the sys module. Returns ``0`` on success, ``-1`` "
@@ -383,7 +382,7 @@ msgstr ""
 "``NULL``, en cuyo caso *name* se elimina del módulo *sys*. Retorna ``0`` en "
 "caso de éxito, ``-1`` en caso de error."
 
-#: ../Doc/c-api/sys.rst:233
+#: ../Doc/c-api/sys.rst:235
 msgid ""
 "Reset :data:`sys.warnoptions` to an empty list. This function may be called "
 "prior to :c:func:`Py_Initialize`."
@@ -391,7 +390,7 @@ msgstr ""
 "Restablece :data:`sys.warnoptions` a una lista vacía. Esta función puede "
 "llamarse antes de :c:func:`Py_Initialize`."
 
-#: ../Doc/c-api/sys.rst:238
+#: ../Doc/c-api/sys.rst:240
 msgid ""
 "Append *s* to :data:`sys.warnoptions`. This function must be called prior "
 "to :c:func:`Py_Initialize` in order to affect the warnings filter list."
@@ -399,11 +398,11 @@ msgstr ""
 "Agrega *s* a :data:`sys.warnoptions`. Esta función debe llamarse antes de :c:"
 "func:`Py_Initialize` para afectar la lista de filtros de advertencias."
 
-#: ../Doc/c-api/sys.rst:243
+#: ../Doc/c-api/sys.rst:245
 msgid "Append *unicode* to :data:`sys.warnoptions`."
 msgstr "Agrega *unicode* a :data:`sys.warnoptions`."
 
-#: ../Doc/c-api/sys.rst:245
+#: ../Doc/c-api/sys.rst:247
 msgid ""
 "Note: this function is not currently usable from outside the CPython "
 "implementation, as it must be called prior to the implicit import of :mod:"
@@ -417,7 +416,7 @@ msgstr ""
 "efectiva, pero no se puede llamar hasta que se haya inicializado suficiente "
 "tiempo de ejecución para permitir la creación de objetos Unicode."
 
-#: ../Doc/c-api/sys.rst:253
+#: ../Doc/c-api/sys.rst:255
 msgid ""
 "Set :data:`sys.path` to a list object of paths found in *path* which should "
 "be a list of paths separated with the platform's search path delimiter (``:"
@@ -427,7 +426,7 @@ msgstr ""
 "*path*, que debería ser una lista de rutas separadas con el delimitador de "
 "ruta de búsqueda de la plataforma (``:`` en Unix, ``;`` en Windows )"
 
-#: ../Doc/c-api/sys.rst:259
+#: ../Doc/c-api/sys.rst:261
 msgid ""
 "Write the output string described by *format* to :data:`sys.stdout`.  No "
 "exceptions are raised, even if truncation occurs (see below)."
@@ -436,7 +435,7 @@ msgstr ""
 "`sys.stdout`. No se lanzan excepciones, incluso si se produce el "
 "truncamiento (ver más abajo)."
 
-#: ../Doc/c-api/sys.rst:262
+#: ../Doc/c-api/sys.rst:264
 #, python-format
 msgid ""
 "*format* should limit the total size of the formatted output string to 1000 "
@@ -456,7 +455,7 @@ msgstr ""
 "tenga cuidado con \"%f\", que puede imprimir cientos de dígitos para números "
 "muy grandes."
 
-#: ../Doc/c-api/sys.rst:270
+#: ../Doc/c-api/sys.rst:272
 msgid ""
 "If a problem occurs, or :data:`sys.stdout` is unset, the formatted message "
 "is written to the real (C level) *stdout*."
@@ -464,7 +463,7 @@ msgstr ""
 "Si ocurre un problema, o :data:`sys.stdout` no está configurado, el mensaje "
 "formateado se escribe en el real (nivel C) *stdout*."
 
-#: ../Doc/c-api/sys.rst:275
+#: ../Doc/c-api/sys.rst:277
 msgid ""
 "As :c:func:`PySys_WriteStdout`, but write to :data:`sys.stderr` or *stderr* "
 "instead."
@@ -472,7 +471,7 @@ msgstr ""
 "Como :c:func:`PySys_WriteStdout`, pero escribe a :data:`sys.stderr` o "
 "*stderr* en su lugar."
 
-#: ../Doc/c-api/sys.rst:280
+#: ../Doc/c-api/sys.rst:282
 msgid ""
 "Function similar to PySys_WriteStdout() but format the message using :c:func:"
 "`PyUnicode_FromFormatV` and don't truncate the message to an arbitrary "
@@ -482,7 +481,7 @@ msgstr ""
 "func:`PyUnicode_FromFormatV` y no trunca el mensaje a una longitud "
 "arbitraria."
 
-#: ../Doc/c-api/sys.rst:288
+#: ../Doc/c-api/sys.rst:290
 msgid ""
 "As :c:func:`PySys_FormatStdout`, but write to :data:`sys.stderr` or *stderr* "
 "instead."
@@ -490,7 +489,7 @@ msgstr ""
 "Como :c:func:`PySys_FormatStdout`, pero escribe a :data:`sys.stderr` o "
 "*stderr* en su lugar."
 
-#: ../Doc/c-api/sys.rst:295
+#: ../Doc/c-api/sys.rst:297
 msgid ""
 "Parse *s* as a set of :option:`-X` options and add them to the current "
 "options mapping as returned by :c:func:`PySys_GetXOptions`. This function "
@@ -501,7 +500,7 @@ msgstr ""
 "`PySys_GetXOptions`. Esta función puede llamarse antes de :c:func:"
 "`Py_Initialize`."
 
-#: ../Doc/c-api/sys.rst:303
+#: ../Doc/c-api/sys.rst:305
 msgid ""
 "Return the current dictionary of :option:`-X` options, similarly to :data:"
 "`sys._xoptions`.  On error, ``NULL`` is returned and an exception is set."
@@ -510,7 +509,7 @@ msgstr ""
 "data:`sys._xoptions`. En caso de error, se retorna ``NULL`` y se establece "
 "una excepción."
 
-#: ../Doc/c-api/sys.rst:312
+#: ../Doc/c-api/sys.rst:314
 msgid ""
 "Raise an auditing event with any active hooks. Return zero for success and "
 "non-zero with an exception set on failure."
@@ -518,7 +517,7 @@ msgstr ""
 "Lanza un evento de auditoría con cualquier gancho activo. Retorna cero para "
 "el éxito y no cero con una excepción establecida en caso de error."
 
-#: ../Doc/c-api/sys.rst:315
+#: ../Doc/c-api/sys.rst:317
 msgid ""
 "If any hooks have been added, *format* and other arguments will be used to "
 "construct a tuple to pass. Apart from ``N``, the same format characters as "
@@ -536,7 +535,7 @@ msgstr ""
 "no hay forma de saber si se consumirán argumentos para esta función, su uso "
 "puede causar fugas de referencia)."
 
-#: ../Doc/c-api/sys.rst:323
+#: ../Doc/c-api/sys.rst:325
 msgid ""
 "Note that ``#`` format characters should always be treated as "
 "``Py_ssize_t``, regardless of whether ``PY_SSIZE_T_CLEAN`` was defined."
@@ -545,11 +544,11 @@ msgstr ""
 "como ``Py_ssize_t``, independientemente de si se definió "
 "``PY_SSIZE_T_CLEAN``."
 
-#: ../Doc/c-api/sys.rst:326
+#: ../Doc/c-api/sys.rst:328
 msgid ":func:`sys.audit` performs the same function from Python code."
 msgstr ":func:`sys.audit` realiza la misma función del código Python."
 
-#: ../Doc/c-api/sys.rst:332
+#: ../Doc/c-api/sys.rst:334
 msgid ""
 "Require ``Py_ssize_t`` for ``#`` format characters. Previously, an "
 "unavoidable deprecation warning was raised."
@@ -557,7 +556,7 @@ msgstr ""
 "Requiere ``Py_ssize_t`` para los caracteres de formato ``#``. Anteriormente, "
 "se lanza una advertencia de deprecación inevitable."
 
-#: ../Doc/c-api/sys.rst:338
+#: ../Doc/c-api/sys.rst:340
 msgid ""
 "Append the callable *hook* to the list of active auditing hooks. Return zero "
 "for success and non-zero on failure. If the runtime has been initialized, "
@@ -570,7 +569,7 @@ msgstr ""
 "fallo. Los ganchos agregados a través de esta API se llaman para todos los "
 "intérpretes creados por el tiempo de ejecución."
 
-#: ../Doc/c-api/sys.rst:344
+#: ../Doc/c-api/sys.rst:346
 msgid ""
 "The *userData* pointer is passed into the hook function. Since hook "
 "functions may be called from different runtimes, this pointer should not "
@@ -580,7 +579,7 @@ msgstr ""
 "enlace pueden llamarse desde diferentes tiempos de ejecución, este puntero "
 "no debe referirse directamente al estado de Python."
 
-#: ../Doc/c-api/sys.rst:348
+#: ../Doc/c-api/sys.rst:350
 msgid ""
 "This function is safe to call before :c:func:`Py_Initialize`. When called "
 "after runtime initialization, existing audit hooks are notified and may "
@@ -593,7 +592,7 @@ msgstr ""
 "al generar un error subclasificado de :class:`Excepción` (otros errores no "
 "se silenciarán)."
 
-#: ../Doc/c-api/sys.rst:353
+#: ../Doc/c-api/sys.rst:355
 msgid ""
 "The hook function is of type :c:type:`int (*)(const char *event, PyObject "
 "*args, void *userData)`, where *args* is guaranteed to be a :c:type:"
@@ -605,7 +604,7 @@ msgstr ""
 "type:`PyTupleObject`. La función gancho siempre se llama con el GIL en poder "
 "del intérprete de Python que lanzó el evento."
 
-#: ../Doc/c-api/sys.rst:358
+#: ../Doc/c-api/sys.rst:360
 msgid ""
 "See :pep:`578` for a detailed description of auditing.  Functions in the "
 "runtime and standard library that raise events are listed in the :ref:`audit "
@@ -616,6 +615,7 @@ msgstr ""
 "enumeran en :ref:`table de eventos de auditoria <audit-events>`. Los "
 "detalles se encuentran en la documentación de cada función."
 
+#: ../Doc/c-api/sys.rst:365
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``sys.addaudithook`` with no "
 "arguments."
@@ -623,7 +623,7 @@ msgstr ""
 "Lanza un :ref:`evento de auditoria <auditing>` ``sys.addaudithook`` sin "
 "argumentos."
 
-#: ../Doc/c-api/sys.rst:365
+#: ../Doc/c-api/sys.rst:367
 msgid ""
 "If the interpreter is initialized, this function raises a auditing event "
 "``sys.addaudithook`` with no arguments. If any existing hooks raise an "
@@ -638,11 +638,11 @@ msgstr ""
 "asumir que su gancho ha sido agregado a menos que controlen todos los "
 "ganchos existentes."
 
-#: ../Doc/c-api/sys.rst:377
+#: ../Doc/c-api/sys.rst:379
 msgid "Process Control"
 msgstr "Control de procesos"
 
-#: ../Doc/c-api/sys.rst:384
+#: ../Doc/c-api/sys.rst:386
 msgid ""
 "Print a fatal error message and kill the process.  No cleanup is performed. "
 "This function should only be invoked when a condition is detected that would "
@@ -658,7 +658,21 @@ msgstr ""
 "la función de biblioteca C estándar :c:func:`abort` que intentará producir "
 "un archivo :file:`core`."
 
-#: ../Doc/c-api/sys.rst:398
+#: ../Doc/c-api/sys.rst:393
+msgid ""
+"The ``Py_FatalError()`` function is replaced with a macro which logs "
+"automatically the name of the current function, unless the "
+"``Py_LIMITED_API`` macro is defined."
+msgstr ""
+"La función ``Py_FatalError()`` se reemplaza con una macro que registra "
+"automáticamente el nombre de la función actual, a menos que se defina la "
+"macro ``Py_LIMITED_API``."
+
+#: ../Doc/c-api/sys.rst:397
+msgid "Log the function name automatically."
+msgstr "Registra el nombre de la función automáticamente."
+
+#: ../Doc/c-api/sys.rst:407
 msgid ""
 "Exit the current process.  This calls :c:func:`Py_FinalizeEx` and then calls "
 "the standard C library function ``exit(status)``.  If :c:func:"
@@ -668,11 +682,11 @@ msgstr ""
 "la función estándar de la biblioteca C ``exit(status)``. Si :c:func:"
 "`Py_FinalizeEx` indica un error, el estado de salida se establece en 120."
 
-#: ../Doc/c-api/sys.rst:402
+#: ../Doc/c-api/sys.rst:411
 msgid "Errors from finalization no longer ignored."
 msgstr "Los errores de finalización ya no se ignoran."
 
-#: ../Doc/c-api/sys.rst:412
+#: ../Doc/c-api/sys.rst:421
 msgid ""
 "Register a cleanup function to be called by :c:func:`Py_FinalizeEx`.  The "
 "cleanup function will be called with no arguments and should return no "
@@ -691,3 +705,44 @@ msgstr ""
 "primero. Cada función de limpieza se llamará como máximo una vez. Dado que "
 "la finalización interna de Python se habrá completado antes de la función de "
 "limpieza, *func* no debería llamar a las API de Python."
+
+#~ msgid "Encoding, highest priority to lowest priority:"
+#~ msgstr "Codificación, de máxima prioridad a menor prioridad:"
+
+#~ msgid "``UTF-8`` on macOS, Android, and VxWorks;"
+#~ msgstr "`` UTF-8`` en macOS, Android y VxWorks;"
+
+#~ msgid ""
+#~ "``UTF-8`` on Windows if :c:data:`Py_LegacyWindowsFSEncodingFlag` is zero;"
+#~ msgstr ""
+#~ "``UTF-8`` en Windows si :c:data:`Py_LegacyWindowsFSEncodingFlag` es cero;"
+
+#~ msgid "``UTF-8`` if the Python UTF-8 mode is enabled;"
+#~ msgstr "`` UTF-8`` si el modo Python UTF-8 está habilitado;"
+
+#~ msgid ""
+#~ "``ASCII`` if the ``LC_CTYPE`` locale is ``\"C\"``, "
+#~ "``nl_langinfo(CODESET)`` returns the ``ASCII`` encoding (or an alias), "
+#~ "and :c:func:`mbstowcs` and :c:func:`wcstombs` functions uses the "
+#~ "``ISO-8859-1`` encoding."
+#~ msgstr ""
+#~ "``ASCII`` si la configuración regional ``LC_CTYPE`` es ``\"C\"``, "
+#~ "``nl_langinfo (CODESET)`` retorna la codificación ``ASCII`` (o un alias) "
+#~ "y las funciones :c:func:`mbstowcs` y :c:func:`wcstombs` utilizan la "
+#~ "codificación ``ISO-8859-1``."
+
+#~ msgid "the current locale encoding."
+#~ msgstr "la codificación de la configuración regional actual."
+
+#~ msgid "The function now uses the UTF-8 encoding in the UTF-8 mode."
+#~ msgstr "La función ahora usa la codificación UTF-8 en el modo UTF-8."
+
+#~ msgid ""
+#~ "Encode a wide character string to the locale encoding with the :ref:"
+#~ "`surrogateescape error handler <surrogateescape>`: surrogate characters "
+#~ "in the range U+DC80..U+DCFF are converted to bytes 0x80..0xFF."
+#~ msgstr ""
+#~ "Codifica una cadena de caracteres anchos en la codificación de "
+#~ "configuración regional con :ref:`controlador de error de surrogateescape "
+#~ "<surrogateescape>`: los caracteres sustitutos en el rango U+DC80..U+DCFF "
+#~ "se convierten en bytes 0x80..0xFF."

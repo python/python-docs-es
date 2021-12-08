@@ -1,39 +1,44 @@
 # Copyright (C) 2001-2020, Python Software Foundation
 # This file is distributed under the same license as the Python package.
-# Maintained by the python-doc-es workteam. 
+# Maintained by the python-doc-es workteam.
 # docs-es@python.org / https://mail.python.org/mailman3/lists/docs-es.python.org/
-# Check https://github.com/PyCampES/python-docs-es/blob/3.8/TRANSLATORS to get the list of volunteers
+# Check https://github.com/python/python-docs-es/blob/3.8/TRANSLATORS to get the list of volunteers
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-06 11:59-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2021-08-04 13:58+0200\n"
 "Language-Team: python-doc-es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
+"Language: es\n"
+"X-Generator: Poedit 3.0\n"
 
 #: ../Doc/library/asynchat.rst:2
 msgid ":mod:`asynchat` --- Asynchronous socket command/response handler"
 msgstr ""
+":mod:`asynchat` --- Gestor de comandos/respuestas en *sockets* asíncronos"
 
 #: ../Doc/library/asynchat.rst:10
 msgid "**Source code:** :source:`Lib/asynchat.py`"
-msgstr ""
+msgstr "**Código fuente:** :source:`Lib/asynchat.py`"
 
 #: ../Doc/library/asynchat.rst:12
 msgid "Please use :mod:`asyncio` instead."
-msgstr ""
+msgstr "Usar :mod:`asyncio` en su lugar."
 
 #: ../Doc/library/asynchat.rst:19
 msgid ""
 "This module exists for backwards compatibility only.  For new code we "
 "recommend using :mod:`asyncio`."
 msgstr ""
+"Este módulo existe únicamente por motivos de retrocompatibilidad. Para nuevo "
+"código, es recomendable usar :mod:`asyncio`."
 
 #: ../Doc/library/asynchat.rst:22
 msgid ""
@@ -49,6 +54,17 @@ msgid ""
 "class:`asynchat.async_chat` channel objects as it receives incoming "
 "connection requests."
 msgstr ""
+"Este módulo se construye en la infraestructura de :mod:`asyncore`, "
+"simplificando los clientes y servidores asíncronos y facilitando la gestión "
+"de protocolos cuyos elementos son terminados por cadenas de texto "
+"arbitrarias, o que son de longitud variable. :mod:`asynchat` define la clase "
+"abstracta :class:`async_chat` de la que se debe heredar, implementado los "
+"métodos :meth:`collect_incoming_data` y :meth:`found_terminator`. Utiliza el "
+"mismo bucle asíncrono que :mod:`asyncore`, y los dos tipos de canal, :class:"
+"`asyncore.dispatcher` y :class:`asynchat.async_chat`, se pueden mezclar "
+"libremente en el mapa de canal. Normalmente un canal de servidor :class:"
+"`asyncore.dispatcher` genera nuevos objetos de canal :class:`asynchat."
+"async_chat`, al recibir peticiones de conexión entrantes."
 
 #: ../Doc/library/asynchat.rst:37
 msgid ""
@@ -58,6 +74,11 @@ msgid ""
 "methods. The :class:`asyncore.dispatcher` methods can be used, although not "
 "all make sense in a message/response context."
 msgstr ""
+"Esta clase es una subclase abstracta de :class:`asyncore.dispatcher`. Para "
+"el uso práctico del código se debe heredar :class:`async_chat`, definiendo "
+"los métodos significativos :meth:`collect_incoming_data` y :meth:"
+"`found_terminator`. Los métodos de :class:`asyncore.dispatcher` se pueden "
+"utilizar, aunque no todos tienen sentido en un contexto de mensaje/respuesta."
 
 #: ../Doc/library/asynchat.rst:44
 msgid ""
@@ -67,20 +88,28 @@ msgid ""
 "`async_chat` object's methods are called by the event-processing framework "
 "with no action on the part of the programmer."
 msgstr ""
+"Al igual que :class:`asyncore.dispatcher`, :class:`async_chat` define una "
+"serie de eventos generados por un análisis sobre las condiciones de "
+"_socket_, tras una llamada a :c:func:`select`. Una vez que el bucle de "
+"_polling_ haya sido iniciado, los métodos de los objetos :class:`async_chat` "
+"son llamados por el _framework_ que procesa los eventos, sin que tengamos "
+"que programar ninguna acción a mayores."
 
 #: ../Doc/library/asynchat.rst:50
 msgid ""
 "Two class attributes can be modified, to improve performance, or possibly "
 "even to conserve memory."
 msgstr ""
+"Se pueden modificar dos atributos de clase, para mejorar el rendimiento o "
+"incluso hasta para ahorrar memoria."
 
 #: ../Doc/library/asynchat.rst:56
 msgid "The asynchronous input buffer size (default ``4096``)."
-msgstr ""
+msgstr "El tamaño del _buffer_ de entrada asíncrona (por defecto ``4096``)."
 
 #: ../Doc/library/asynchat.rst:61
 msgid "The asynchronous output buffer size (default ``4096``)."
-msgstr ""
+msgstr "El tamaño del _buffer_ de salida asíncrona (por defecto ``4096``)."
 
 #: ../Doc/library/asynchat.rst:63
 msgid ""
@@ -96,6 +125,18 @@ msgid ""
 "recognize the end of, or an important breakpoint in, an incoming "
 "transmission from the remote endpoint."
 msgstr ""
+"Al contrario que :class:`asyncore.dispatcher`, :class:`async_chat` permite "
+"definir una cola :abbr:`FIFO (first-in, first-out)` de productores "
+"(*producers*). Un productor necesita tener un solo método, :meth:`more`, que "
+"debe devolver los datos que se vayan a transmitir en el canal. Cuando el "
+"método :meth:`more` devuelve un objeto bytes vacío, significa que el "
+"productor ya se ha agotado (por ejemplo, que no contiene más datos). En este "
+"punto, el objeto :class:`async_chat` elimina el productor de la cola y "
+"empieza a usar el siguiente productor, si existiese. Cuando la cola de "
+"productores está vacía, el método :meth:`handle_write` no hace nada. El "
+"método :meth:`set_terminator` de los objetos de canal se utiliza para "
+"describir cómo reconocer, en una transmisión entrante desde el punto remoto, "
+"el final de esta transmisión o un punto de ruptura importante en la misma."
 
 #: ../Doc/library/asynchat.rst:76
 msgid ""
@@ -104,12 +145,18 @@ msgid ""
 "data that the channel receives asynchronously. The methods are described "
 "below."
 msgstr ""
+"Para construir una subclase funcional de :class:`async_chat`, los métodos de "
+"entrada :meth:`collect_incoming_data` and :meth:`found_terminator` deben "
+"tratar los datos que el canal recibe asíncronamente. Los métodos se "
+"describen a continuación."
 
 #: ../Doc/library/asynchat.rst:84
 msgid ""
 "Pushes a ``None`` on to the producer queue. When this producer is popped off "
 "the queue it causes the channel to be closed."
 msgstr ""
+"Añade un ``None`` en la cola de productores. Cuando este productor se extrae "
+"de la cola, hace que el canal se cierre."
 
 #: ../Doc/library/asynchat.rst:90
 msgid ""
@@ -117,12 +164,17 @@ msgid ""
 "default method, which must be overridden, raises a :exc:"
 "`NotImplementedError` exception."
 msgstr ""
+"Llamado con *data*, conteniendo una cantidad arbitraria de datos recibidos. "
+"El método por defecto, que debe ser reemplazado, lanza una excepción :exc:"
+"`NotImplementedError`."
 
 #: ../Doc/library/asynchat.rst:97
 msgid ""
 "In emergencies this method will discard any data held in the input and/or "
 "output buffers and the producer queue."
 msgstr ""
+"En situaciones de emergencia, este método descarta cualquier dato albergado "
+"en los búfers de entrada y/o salida y en la cola del productor."
 
 #: ../Doc/library/asynchat.rst:103
 msgid ""
@@ -131,10 +183,15 @@ msgid ""
 "raises a :exc:`NotImplementedError` exception. The buffered input data "
 "should be available via an instance attribute."
 msgstr ""
+"Llamado cuando el flujo de datos de entrada coincide con la condición de "
+"finalización establecida por :meth:`set_terminator`. El método por defecto, "
+"que debe ser reemplazado, lanza una excepción :exc:`NotImplementedError`. "
+"Los datos de entrada en búfer deberían estar disponibles a través de un "
+"atributo de instancia."
 
 #: ../Doc/library/asynchat.rst:111
 msgid "Returns the current terminator for the channel."
-msgstr ""
+msgstr "Retorna el terminador actual del canal."
 
 #: ../Doc/library/asynchat.rst:116
 msgid ""
@@ -143,6 +200,10 @@ msgid ""
 "although it is possible to use your own producers in more complex schemes to "
 "implement encryption and chunking, for example."
 msgstr ""
+"Añade datos en la cola del canal para asegurarse de su transmisión. Esto es "
+"todo lo que se necesita hacer para que el canal envíe los datos a la red, "
+"aunque es posible usar productores personalizados en esquemas más complejos "
+"para implementar características como encriptación o fragmentación."
 
 #: ../Doc/library/asynchat.rst:124
 msgid ""
@@ -151,6 +212,10 @@ msgid ""
 "channel will consume this producer's data by calling its :meth:`more` method "
 "and send the data to the remote endpoint."
 msgstr ""
+"Obtiene un objeto productor y lo añade a la cola de productores asociada al "
+"canal. Cuando todos los productores añadidos actualmente han sido agotados, "
+"el canal consumirá los datos de este productor llamando al método :meth:"
+"`more`, y enviando los datos al punto remoto."
 
 #: ../Doc/library/asynchat.rst:132
 msgid ""
@@ -158,52 +223,63 @@ msgid ""
 "may be any of three types of value, corresponding to three different ways to "
 "handle incoming protocol data."
 msgstr ""
+"Establece la condición de finalización que será reconocida en este canal. "
+"``term`` puede ser uno de los tres tipos de valores posibles, "
+"correspondientes a tres formas diferentes de tratar los datos de protocolo "
+"entrantes."
 
 #: ../Doc/library/asynchat.rst:137
 msgid "term"
-msgstr ""
+msgstr "término"
 
 #: ../Doc/library/asynchat.rst:137
 msgid "Description"
-msgstr ""
+msgstr "Descripción"
 
 #: ../Doc/library/asynchat.rst:139
 msgid "*string*"
-msgstr ""
+msgstr "*string*"
 
 #: ../Doc/library/asynchat.rst:139
 msgid ""
 "Will call :meth:`found_terminator` when the string is found in the input "
 "stream"
 msgstr ""
+"Llamará a :meth:`found_terminator` cuando la cadena de caracteres se "
+"encuentre en el flujo de datos de entrada"
 
 #: ../Doc/library/asynchat.rst:142
 msgid "*integer*"
-msgstr ""
+msgstr "*integer*"
 
 #: ../Doc/library/asynchat.rst:142
 msgid ""
 "Will call :meth:`found_terminator` when the indicated number of characters "
 "have been received"
 msgstr ""
+"Llamará a :meth:`found_terminator` cuando el número de caracteres indicado "
+"se haya recibido"
 
 #: ../Doc/library/asynchat.rst:146
 msgid "``None``"
-msgstr ""
+msgstr "``None``"
 
 #: ../Doc/library/asynchat.rst:146
 msgid "The channel continues to collect data forever"
-msgstr ""
+msgstr "El canal continúa recopilando datos indefinidamente"
 
 #: ../Doc/library/asynchat.rst:150
 msgid ""
 "Note that any data following the terminator will be available for reading by "
 "the channel after :meth:`found_terminator` is called."
 msgstr ""
+"Téngase en cuenta que cualquier dato posterior al terminador estará "
+"disponible para ser leído por el canal después de llamar a :meth:"
+"`found_terminator`."
 
 #: ../Doc/library/asynchat.rst:157
 msgid "asynchat Example"
-msgstr ""
+msgstr "Ejemplo de asynchat"
 
 #: ../Doc/library/asynchat.rst:159
 msgid ""
@@ -214,6 +290,12 @@ msgid ""
 "end of the HTTP headers, and a flag indicates that the headers are being "
 "read."
 msgstr ""
+"El siguiente ejemplo parcial muestra cómo se pueden leer peticiones HTTP "
+"con :class:`async_chat`. Un servidor web podría crear un objeto :class:"
+"`http_request_handler` para cada conexión de cliente entrante. Téngase en "
+"cuenta que, inicialmente, el terminador del canal está configurado para "
+"detectar la línea vacía presente al final de las cabeceras HTTP, y una "
+"bandera indica que las cabeceras se están leyendo."
 
 #: ../Doc/library/asynchat.rst:166
 msgid ""
@@ -222,6 +304,10 @@ msgid ""
 "`` header is used to set a numeric terminator to read the right amount of "
 "data from the channel."
 msgstr ""
+"Una vez que las cabeceras se hayan leído, si la petición es de tipo POST (lo "
+"cual indica que hay más datos disponibles en el flujo de entrada), la "
+"cabecera ``Content-Length:`` se utiliza para establecer un terminador "
+"numérico para leer la cantidad de datos correcta en el canal."
 
 #: ../Doc/library/asynchat.rst:171
 msgid ""
@@ -229,3 +315,7 @@ msgid ""
 "marshalled, after setting the channel terminator to ``None`` to ensure that "
 "any extraneous data sent by the web client are ignored. ::"
 msgstr ""
+"El método :meth:`handle_request` se llama una vez todas las entradas "
+"relevantes han sido serializadas (*marshalled*), tras establecer el "
+"terminador del canal a ``None`` para asegurarse de que cualquier dato "
+"extraño enviado por el cliente web es ignorado. ::"

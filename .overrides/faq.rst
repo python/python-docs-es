@@ -26,7 +26,7 @@ pospell. Pospell puede ser instalada en tu entorno de Python empleando pip
 Una vez instalado, para chequear el fichero .po sobre el que estás trabajando,
 ejecuta desde el directorio principal del repo::
 
-    pospell -p dict -l es_AR -l es_ES path/tu_fichero.po
+    python scripts/check_spell.py path/tu_fichero.po
 
 pospell emplea la herramienta de diccionarios hunspell. Si pospell falla dando
 como error que no tiene hunspell instalado, lo puedes instalar así:
@@ -192,23 +192,49 @@ Y luego accediendo a http://localhost:8000/
 .. _mantener-actualizada:
 
 ¿Cómo actualizar mi copia local del repositorio?
----------------------------------------------------------
+------------------------------------------------
 
-Es recomendable mantener actualizada nuestra copia local para evitar 
-posibles conflictos entre los archivos que trabajamos y la última versión disponible 
-en el repositorio remoto. 
-Primero, necesitamos bajar los cambios de *upstream* (es el nombre que asignamos al 
+Es recomendable mantener actualizada nuestra copia local para evitar
+posibles conflictos entre los archivos que trabajamos y la última versión disponible
+en el repositorio remoto.
+Primero, necesitamos bajar los cambios de *upstream* (es el nombre que asignamos al
 repositorio principal de la traducción). Se hace de la siguiente manera::
 
     git fetch upstream
 
 Luego nos vamos a nuestra rama local, confirmamos e impactamos esos cambios::
 
-    git checkout 3.8
-    git merge upstream/3.8
-    git push origin 3.8 
+    git checkout 3.10
+    git merge upstream/3.10
+    git push origin 3.10
 
 ¡Eso es todo!
+
+
+¿Son importantes los dobles espacios en el original?
+----------------------------------------------------
+
+No.
+
+En realidad, no tienen ningún efecto. Sphinx se da cuenta automáticamente de esto y simplemente
+deja un solo espacio en la versión final. Así que, no te preocupes si ves dos espacios juntos.
+
+Si estás interesada en saber más sobré "¿Por qué se usan dobles espacios?" puedes leer este artículo:
+`How Many Spaces Should Be After a Period? <https://www.instructionalsolutions.com/blog/one-space-vs-two-after-period>`_
+
+
+¿Puedo agregar "estilo de código" a los nombres de las funciones/métodos/clases/etc?
+------------------------------------------------------------------------------------
+
+No.
+
+Si aparece el nombre de una función (por ejemplo, "IncrementalParser") en el original y no tiene ningún estilo asociado
+(no está en cursiva, ni en negrita ni en estilo de código), aunque sientas la tentación de ponerla como
+``IncrementalParser``, no debes hacerlo.
+
+En principio, no debemos cambiar el formato de estas palabras. Si está con asteriscos, lo dejamos con asteriscos.
+Si está con backticks, lo dejamos con los backticks, etc. Si realmente crees que es un error y debería
+estar con un formato distinto, debes reportarlo en el repositorio de CPython.
 
 
 ¿Tienen una lista de correo?

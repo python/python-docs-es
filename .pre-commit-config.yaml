@@ -1,11 +1,13 @@
 repos:
 -   repo: https://github.com/JulienPalard/powrap
-    rev: master
+    rev: v0.4.0
     hooks:
     -   id: powrap
-# This one requires package ``hunspell-es_es`` in Archlinux
--   repo: https://github.com/humitos/pospell
-    rev: pre-commit
+-   repo: local
     hooks:
-    -   id: pospell
-        args: ['--personal-dict', 'dict', '--modified', '--language', 'es_ES', '--language', 'es_AR']
+    -   id: check-spell
+        name: Check spelling
+        entry: python ./scripts/check_spell.py
+        language: python
+        additional_dependencies: ['pospell>=1.1']
+        files: \.po$

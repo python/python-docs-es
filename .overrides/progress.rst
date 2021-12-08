@@ -10,7 +10,7 @@ y otras estadísticas.
 
 .. note::
 
-   Estas listas se actualiza automáticamente cuando Pull Requests se *mergean* a la rama ``3.8``.
+   Estas listas se actualiza automáticamente cuando Pull Requests se *mergean* a la rama ``3.10``.
 
 
 En progreso

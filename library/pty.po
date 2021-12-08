@@ -3,30 +3,31 @@
 # Maintained by the python-doc-es workteam.
 # docs-es@python.org /
 # https://mail.python.org/mailman3/lists/docs-es.python.org/
-# Check https://github.com/PyCampES/python-docs-es/blob/3.8/TRANSLATORS to
+# Check https://github.com/python/python-docs-es/blob/3.8/TRANSLATORS to
 # get the list of volunteers
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2021-10-16 21:42+0200\n"
+"PO-Revision-Date: 2021-08-04 21:47+0200\n"
+"Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
+"Language: es\n"
 "Language-Team: python-doc-es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.8.0\n"
+"Generated-By: Babel 2.9.1\n"
 
 #: ../Doc/library/pty.rst:2
 msgid ":mod:`pty` --- Pseudo-terminal utilities"
-msgstr ""
+msgstr ":mod:`pty` --- Utilidades para Pseudo-terminal"
 
 #: ../Doc/library/pty.rst:11
 msgid "**Source code:** :source:`Lib/pty.py`"
-msgstr ""
+msgstr "**Código Fuente:** :source:`Lib/pty.py`"
 
 #: ../Doc/library/pty.rst:15
 msgid ""
@@ -34,17 +35,24 @@ msgid ""
 "concept: starting another process and being able to write to and read from "
 "its controlling terminal programmatically."
 msgstr ""
+"El módulo :mod:`pty` define las operaciones para manejar el concepto de "
+"pseudo-terminal: iniciar otro proceso para poder escribir y leer desde su "
+"propia terminal mediante programación."
 
 #: ../Doc/library/pty.rst:19
+#, fuzzy
 msgid ""
-"Because pseudo-terminal handling is highly platform dependent, there is code "
-"to do it only for Linux. (The Linux code is supposed to work on other "
-"platforms, but hasn't been tested yet.)"
+"Pseudo-terminal handling is highly platform dependent. This code is mainly "
+"tested on Linux, FreeBSD, and macOS (it is supposed to work on other POSIX "
+"platforms but it's not been thoroughly tested)."
 msgstr ""
+"Debido a que el manejo de una pseudo-terminal depende en gran medida de la "
+"plataforma, este código es solo para Linux (se supone que el código de Linux "
+"funciona para otras plataformas, pero este aún no se ha probado)"
 
 #: ../Doc/library/pty.rst:23
 msgid "The :mod:`pty` module defines the following functions:"
-msgstr ""
+msgstr "El modulo :mod:`pty` define las siguientes funciones:"
 
 #: ../Doc/library/pty.rst:28
 msgid ""
@@ -54,6 +62,12 @@ msgid ""
 "a file descriptor connected to the child's controlling terminal (and also to "
 "the child's standard input and output)."
 msgstr ""
+"Bifurcación. Conectar en su propia terminal (terminal hijo) una pseudo-"
+"terminal. El valor de retorno es ``(pid, fd)``. Tener en cuenta que la "
+"terminal hijo tiene como valor *pid* 0 y *fd* es *invalid*. El valor de "
+"retorno del padre es el *pid* del hijo, y *fd* es un descriptor de archivo "
+"conectado a la terminal hijo (también a la salida y entrada estándar de la "
+"terminal hijo)"
 
 #: ../Doc/library/pty.rst:37
 msgid ""
@@ -61,6 +75,10 @@ msgid ""
 "emulation code for generic Unix systems. Return a pair of file descriptors "
 "``(master, slave)``, for the master and the slave end, respectively."
 msgstr ""
+"Abre un nuevo par de pseudo-terminales, usando :func:`os.openpty`, o código "
+"de emulación para sistemas genéricos de Unix. Retorna un par de descriptores "
+"de archivo ``(master, slave)``, para el *master* y el *slave* "
+"respectivamente."
 
 #: ../Doc/library/pty.rst:44
 msgid ""
@@ -70,16 +88,32 @@ msgid ""
 "spawned behind the pty will eventually terminate, and when it does *spawn* "
 "will return."
 msgstr ""
+"Genera un proceso conectado a su terminal con el io estándar del proceso "
+"actual. Esto se usa a frecuentemente para confundir programas que insisten "
+"en leer desde la terminal de control. Se espera que el proceso generado "
+"detrás de pty sea finalizado y cuando lo haga *spawn* se retornará."
 
 #: ../Doc/library/pty.rst:50
 msgid ""
-"The functions *master_read* and *stdin_read* are passed a file descriptor "
-"which they should read from, and they should always return a byte string. In "
-"order to force spawn to return before the child process exits an :exc:"
-"`OSError` should be thrown."
+"A loop copies STDIN of the current process to the child and data received "
+"from the child to STDOUT of the current process. It is not signaled to the "
+"child if STDIN of the current process closes down."
 msgstr ""
 
-#: ../Doc/library/pty.rst:55
+#: ../Doc/library/pty.rst:54
+#, fuzzy
+msgid ""
+"The functions *master_read* and *stdin_read* are passed a file descriptor "
+"which they should read from, and they should always return a byte string. In "
+"order to force spawn to return before the child process exits an empty byte "
+"array should be returned to signal end of file."
+msgstr ""
+"Las funciones *master_read* y *stdin_read* se les envía como parámetro un "
+"descriptor de archivo y siempre deben retornar una cadena de bytes. A fin de "
+"que se obligue a *spawn* a retornar antes que el proceso hijo salga se debe "
+"lanzar un :exc:`OSError`."
+
+#: ../Doc/library/pty.rst:59
 msgid ""
 "The default implementation for both functions will read and return up to "
 "1024 bytes each time the function is called. The *master_read* callback is "
@@ -87,8 +121,13 @@ msgid ""
 "child process, and *stdin_read* is passed file descriptor 0, to read from "
 "the parent process's standard input."
 msgstr ""
+"La implementación predeterminada para ambas funciones retornará hasta 1024 "
+"bytes cada vez que se llamen. El dato retornado de *master_read* se pasa al "
+"descriptor de archivo maestro para leer la salida del proceso hijo, y "
+"*stdin_read* pasa el descriptor de archivo 0, para leer desde la entrada del "
+"proceso padre."
 
-#: ../Doc/library/pty.rst:61
+#: ../Doc/library/pty.rst:65
 msgid ""
 "Returning an empty byte string from either callback is interpreted as an end-"
 "of-file (EOF) condition, and that callback will not be called after that. If "
@@ -97,34 +136,66 @@ msgid ""
 "quit without any input, *spawn* will then loop forever. If *master_read* "
 "signals EOF the same behavior results (on linux at least)."
 msgstr ""
+"Retornando una cadena de bytes vacía de cualquier llamado es interpretado "
+"como una condición de fin de archivo (EOF), y el llamado no se realizará "
+"después de eso. Si *stdin_read* retorna EOF la terminal de control ya no "
+"puede comunicarse con el proceso padre o el proceso hijo. A menos que el "
+"proceso hijo se cierre sin ninguna entrada *spawn* se repetirá para siempre. "
+"Si *master_read* retorna EOF se produce el mismo comportamiento (al menos en "
+"Linux)"
 
-#: ../Doc/library/pty.rst:68
+#: ../Doc/library/pty.rst:72
 msgid ""
-"If both callbacks signal EOF then *spawn* will probably never return, unless "
-"*select* throws an error on your platform when passed three empty lists. "
-"This is a bug, documented in `issue 26228 <https://bugs.python.org/"
-"issue26228>`_."
+"Return the exit status value from :func:`os.waitpid` on the child process."
 msgstr ""
+"Retorna el valor del estado de salida de :func:`os.waitpid` en el proceso "
+"hijo."
 
-#: ../Doc/library/pty.rst:73
+#: ../Doc/library/pty.rst:74
+msgid ""
+":func:`waitstatus_to_exitcode` can be used to convert the exit status into "
+"an exit code."
+msgstr ""
+":func:`waitstatus_to_exitcode` se puede utilizar para convertir el estado de "
+"salida en un código de salida."
+
+#: ../Doc/library/pty.rst:77
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``pty.spawn`` with argument "
 "``argv``."
 msgstr ""
+"Lanza un :ref:`evento de auditoria <auditing>` ``pty.spawn``  con el "
+"argumento ``argv``."
 
-#: ../Doc/library/pty.rst:74
+#: ../Doc/library/pty.rst:79
 msgid ""
 ":func:`spawn` now returns the status value from :func:`os.waitpid` on the "
 "child process."
 msgstr ""
+":func:`spawn` ahora retorna el valor de estado de  :func:`os.waitpid` para "
+"los procesos hijos."
 
-#: ../Doc/library/pty.rst:79
+#: ../Doc/library/pty.rst:84
 msgid "Example"
-msgstr ""
+msgstr "Ejemplo"
 
-#: ../Doc/library/pty.rst:83
+#: ../Doc/library/pty.rst:88
 msgid ""
 "The following program acts like the Unix command :manpage:`script(1)`, using "
 "a pseudo-terminal to record all input and output of a terminal session in a "
 "\"typescript\". ::"
 msgstr ""
+"El siguiente programa actúa como el comando de Unix :manpage:`script(1)`, "
+"usando una pseudo-terminal para registrar todas las entradas y salidas de "
+"una sesión en \"typescript\". ::"
+
+#~ msgid ""
+#~ "If both callbacks signal EOF then *spawn* will probably never return, "
+#~ "unless *select* throws an error on your platform when passed three empty "
+#~ "lists. This is a bug, documented in `issue 26228 <https://bugs.python.org/"
+#~ "issue26228>`_."
+#~ msgstr ""
+#~ "Si ambas retrollamadas retornan EOF entonces  *spawn* probablemente nunca "
+#~ "retorne algo, a menos que *select* entregue un error en su plataforma "
+#~ "cuando pasan tres listas vacías. Esto es un error documentado en `issue "
+#~ "26228 <https://bugs.python.org/issue26228>`_."

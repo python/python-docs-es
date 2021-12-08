@@ -3,30 +3,31 @@
 # Maintained by the python-doc-es workteam.
 # docs-es@python.org /
 # https://mail.python.org/mailman3/lists/docs-es.python.org/
-# Check https://github.com/PyCampES/python-docs-es/blob/3.8/TRANSLATORS to
+# Check https://github.com/python/python-docs-es/blob/3.8/TRANSLATORS to
 # get the list of volunteers
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-05 12:54+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2021-10-16 21:42+0200\n"
+"PO-Revision-Date: 2021-08-07 21:20+0200\n"
+"Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
+"Language: es\n"
 "Language-Team: python-doc-es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.8.0\n"
+"Generated-By: Babel 2.9.1\n"
 
 #: ../Doc/library/glob.rst:2
 msgid ":mod:`glob` --- Unix style pathname pattern expansion"
-msgstr ""
+msgstr ":mod:`glob` --- Expansión del patrón de nombres de ruta de estilo Unix"
 
 #: ../Doc/library/glob.rst:7
 msgid "**Source code:** :source:`Lib/glob.py`"
-msgstr ""
+msgstr "**Código fuente:** :source:`Lib/glob.py`"
 
 #: ../Doc/library/glob.rst:21
 msgid ""
@@ -40,16 +41,29 @@ msgid ""
 "as special cases. (For tilde and shell variable expansion, use :func:`os."
 "path.expanduser` and :func:`os.path.expandvars`.)"
 msgstr ""
+"El módulo :mod:`glob` encuentra todos los nombres de rutas que se asemejan a "
+"un patrón especificado de acuerdo a las reglas que se siguen en una terminal "
+"Unix, aunque los resultados se retornan con un orden arbitrario.  No se "
+"realiza expansión de virgulilla (*tilde (\"~\") expansion* en inglés) pero "
+"``*``, ``?`` y caracteres de rango expresados mediante ``[]`` serán "
+"emparejados correctamente.  Esto se realiza usando las funciones :func:`os."
+"scandir` y :func:`fnmatch.fnmatch` de forma concertada sin invocar, "
+"realmente, a una *subshell*.  Nótese que, a diferencia de :func:`fnmatch."
+"fnmatch`, :mod:`glob` trata a los nombres de ficheros que comienzan con  (``."
+"``) como casos especiales. (Para la expansión de virgulilla o variable de "
+"terminal, usa :func:`os.path.expanduser` y :func:`os.path.expandvars`.)"
 
 #: ../Doc/library/glob.rst:31
 msgid ""
 "For a literal match, wrap the meta-characters in brackets. For example, "
 "``'[?]'`` matches the character ``'?'``."
 msgstr ""
+"Para una coincidencia literal, envuelve los meta-caracteres en corchetes. "
+"Por ejemplo, ``'[?]'`` empareja el caracter ``'?'``."
 
 #: ../Doc/library/glob.rst:36
 msgid "The :mod:`pathlib` module offers high-level path objects."
-msgstr ""
+msgstr "El módulo :mod:`pathlib` ofrece objetos ruta de alto nivel."
 
 #: ../Doc/library/glob.rst:41
 msgid ""
@@ -58,40 +72,88 @@ msgid ""
 "absolute (like :file:`/usr/src/Python-1.5/Makefile`) or relative (like :file:"
 "`../../Tools/\\*/\\*.gif`), and can contain shell-style wildcards. Broken "
 "symlinks are included in the results (as in the shell). Whether or not the "
-"results are sorted depends on the file system."
+"results are sorted depends on the file system.  If a file that satisfies "
+"conditions is removed or added during the call of this function, whether a "
+"path name for that file be included is unspecified."
+msgstr ""
+"Retorna una lista posiblemente vacía de nombres de ruta que coincidan con "
+"*pathname*, que debe ser una cadena de caracteres que contenga una "
+"especificación de ruta. *pathname* puede ser absoluto (como :file:`/usr/src/"
+"Python-1.5/Makefile`) o relativo (como :file:`../../Tools/\\*/\\*.gif`) y "
+"puede contener wildcards de estilo shell. Los enlaces simbólicos rotos se "
+"incluyen en los resultados (como en el shell). La clasificación de los "
+"resultados depende del sistema de archivos. Si un archivo que cumple las "
+"condiciones se elimina o se agrega durante la llamada de esta función, no se "
+"especifica si se incluirá un nombre de ruta para ese archivo."
+
+#: ../Doc/library/glob.rst:50
+msgid ""
+"If *root_dir* is not ``None``, it should be a :term:`path-like object` "
+"specifying the root directory for searching.  It has the same effect on :"
+"func:`glob` as changing the current directory before calling it.  If "
+"*pathname* is relative, the result will contain paths relative to *root_dir*."
 msgstr ""
 
-#: ../Doc/library/glob.rst:51
+#: ../Doc/library/glob.rst:56
+msgid ""
+"This function can support :ref:`paths relative to directory descriptors "
+"<dir_fd>` with the *dir_fd* parameter."
+msgstr ""
+
+#: ../Doc/library/glob.rst:62
 msgid ""
 "If *recursive* is true, the pattern \"``**``\" will match any files and zero "
 "or more directories, subdirectories and symbolic links to directories. If "
 "the pattern is followed by an :data:`os.sep` or :data:`os.altsep` then files "
 "will not match."
 msgstr ""
+"Si *recursive* es verdadero, el patrón \"``**``\" coincidirá con cualquier "
+"fichero y cero o más directorios, subdirectorios y enlaces simbólicos a "
+"directorios.  Si el patrón va seguido de un :data:`os.sep` o :data:`os."
+"altsep` los ficheros no coincidirán."
 
-#: ../Doc/library/glob.rst:57 ../Doc/library/glob.rst:71
+#: ../Doc/library/glob.rst:67 ../Doc/library/glob.rst:86
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``glob.glob`` with arguments "
 "``pathname``, ``recursive``."
 msgstr ""
+"Lanza un :ref:`evento de auditoría <auditing>` ``glob.glob`` con los "
+"argumentos ``pathname``, ``recursive``."
 
-#: ../Doc/library/glob.rst:59
+#: ../Doc/library/glob.rst:68 ../Doc/library/glob.rst:87
+#, fuzzy
+msgid ""
+"Raises an :ref:`auditing event <auditing>` ``glob.glob/2`` with arguments "
+"``pathname``, ``recursive``, ``root_dir``, ``dir_fd``."
+msgstr ""
+"Lanza un :ref:`evento de auditoría <auditing>` ``glob.glob`` con los "
+"argumentos ``pathname``, ``recursive``."
+
+#: ../Doc/library/glob.rst:71
 msgid ""
 "Using the \"``**``\" pattern in large directory trees may consume an "
 "inordinate amount of time."
 msgstr ""
+"El uso del patrón \"``**``\" en árboles de directorios grandes podría "
+"consumir una cantidad de tiempo excesiva."
 
-#: ../Doc/library/glob.rst:62
+#: ../Doc/library/glob.rst:74 ../Doc/library/glob.rst:89
 msgid "Support for recursive globs using \"``**``\"."
+msgstr "Soporte para globs recursivos usando \"``**``\"."
+
+#: ../Doc/library/glob.rst:77 ../Doc/library/glob.rst:92
+msgid "Added the *root_dir* and *dir_fd* parameters."
 msgstr ""
 
-#: ../Doc/library/glob.rst:68
+#: ../Doc/library/glob.rst:83
 msgid ""
 "Return an :term:`iterator` which yields the same values as :func:`glob` "
 "without actually storing them all simultaneously."
 msgstr ""
+"Retorna un :term:`iterador` el cual produce los mismos valores que :func:"
+"`glob` sin necesidad de almacenarlos todos de forma simultánea."
 
-#: ../Doc/library/glob.rst:76
+#: ../Doc/library/glob.rst:98
 msgid ""
 "Escape all special characters (``'?'``, ``'*'`` and ``'['``). This is useful "
 "if you want to match an arbitrary literal string that may have special "
@@ -99,8 +161,13 @@ msgid ""
 "escaped, e.g. on Windows ``escape('//?/c:/Quo vadis?.txt')`` returns ``'//?/"
 "c:/Quo vadis[?].txt'``."
 msgstr ""
+"Escapa todos los caracteres especiales (``'?'``, ``'*'`` y ``'['``). Esto es "
+"útil si deseas coincidir una cadena de caracteres literal arbitraria que "
+"podría contener caracteres especiales.  Los caracteres especiales en "
+"unidades compartidas/UNC no se eluden, e.g. en Windows ``escape('//?/c:/Quo "
+"vadis?.txt')`` retorna ``'//?/c:/Quo vadis[?].txt'``."
 
-#: ../Doc/library/glob.rst:85
+#: ../Doc/library/glob.rst:107
 msgid ""
 "For example, consider a directory containing the following files: :file:`1."
 "gif`, :file:`2.txt`, :file:`card.gif` and a subdirectory :file:`sub` which "
@@ -108,18 +175,26 @@ msgid ""
 "following results.  Notice how any leading components of the path are "
 "preserved. ::"
 msgstr ""
+"Por ejemplo, considera un directorio que contenga los siguientes ficheros: :"
+"file:`1.gif`, :file:`2.txt`, :file:`card.gif` y un subdirectorio :file:`sub` "
+"el cual contenga solo el fichero :file:`3.txt`.  :func:`glob` producirá los "
+"siguientes resultados.  Nótese como se preservará cualquier componente "
+"inicial de la ruta. ::"
 
-#: ../Doc/library/glob.rst:103
+#: ../Doc/library/glob.rst:125
 msgid ""
 "If the directory contains files starting with ``.`` they won't be matched by "
 "default. For example, consider a directory containing :file:`card.gif` and :"
 "file:`.card.gif`::"
 msgstr ""
+"Si un directorio contiene ficheros que comienzan con ``.`` no coincidirá por "
+"defecto. Por ejemplo, considera un directorio que contiene :file:`card.gif` "
+"y :file:`.card.gif`::"
 
-#: ../Doc/library/glob.rst:115
+#: ../Doc/library/glob.rst:137
 msgid "Module :mod:`fnmatch`"
-msgstr ""
+msgstr "Módulo :mod:`fnmatch`"
 
-#: ../Doc/library/glob.rst:116
+#: ../Doc/library/glob.rst:138
 msgid "Shell-style filename (not path) expansion"
-msgstr ""
+msgstr "Expansión de nombre de fichero (no de ruta) al estilo de la terminal"
