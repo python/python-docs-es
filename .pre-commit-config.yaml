@@ -5,13 +5,9 @@ repos:
     -   id: powrap
 -   repo: local
     hooks:
-    -   id: merge-dicts
-        name: merge-dicts
-        entry: python ./scripts/create_dict.py
+    -   id: check-spell
+        name: Check spelling
+        entry: python ./scripts/check_spell.py
         language: python
-# This one requires package ``hunspell-es_es`` in Archlinux
--   repo: https://github.com/AFPy/pospell
-    rev: v1.0.12
-    hooks:
-    -   id: pospell
-        args: ['--personal-dict', 'dict.txt', '--language', 'es_ES', '--language', 'es_AR']
+        additional_dependencies: ['pospell>=1.1']
+        files: \.po$
