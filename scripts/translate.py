@@ -15,6 +15,41 @@ except ImportError:
     print("Error: This util script needs `deep_translator` to be installed")
     sys.exit(1)
 
+_patterns = [
+    ":c:func:`[^`]+`",
+    ":c:type:`[^`]+`",
+    ":c:macro:`[^`]+`",
+    ":c:member:`[^`]+`",
+    ":c:data:`[^`]+`",
+    ":py:data:`[^`]+`",
+    ":py:mod:`[^`]+`",
+    ":func:`[^`]+`",
+    ":mod:`[^`]+`",
+    ":ref:`[^`]+`",
+    ":class:`[^`]+`",
+    ":pep:`[^`]+`",
+    ":data:`[^`]+`",
+    ":exc:`[^`]+`",
+    ":term:`[^`]+`",
+    ":meth:`[^`]+`",
+    ":envvar:`[^`]+`",
+    ":file:`[^`]+`",
+    ":attr:`[^`]+`",
+    ":const:`[^`]+`",
+    ":issue:`[^`]+`",
+    ":opcode:`[^`]+`",
+    ":option:`[^`]+`",
+    ":keyword:`[^`]+`",
+    ":RFC:`[^`]+`",
+    ":doc:`[^`]+`",
+    "``[^`]+``",
+    "`[^`]+`__",
+    "`[^`]+`_",
+    "\*\*.+\*\*",  # bold text between **
+    "\*.+\*",  # italic text between *
+]
+
+_exps = [re.compile(e) for e in _patterns]
 
 def protect_sphinx_directives(s: str) -> Tuple[dict, str]:
     """
@@ -25,44 +60,11 @@ def protect_sphinx_directives(s: str) -> Tuple[dict, str]:
         dictionary containing all the placeholder text as keys
         and the correct value.
     """
-    exps = [
-        ":c:func:`[^`]+`",
-        ":c:type:`[^`]+`",
-        ":c:macro:`[^`]+`",
-        ":c:member:`[^`]+`",
-        ":c:data:`[^`]+`",
-        ":py:data:`[^`]+`",
-        ":py:mod:`[^`]+`",
-        ":func:`[^`]+`",
-        ":mod:`[^`]+`",
-        ":ref:`[^`]+`",
-        ":class:`[^`]+`",
-        ":pep:`[^`]+`",
-        ":data:`[^`]+`",
-        ":exc:`[^`]+`",
-        ":term:`[^`]+`",
-        ":meth:`[^`]+`",
-        ":envvar:`[^`]+`",
-        ":file:`[^`]+`",
-        ":attr:`[^`]+`",
-        ":const:`[^`]+`",
-        ":issue:`[^`]+`",
-        ":opcode:`[^`]+`",
-        ":option:`[^`]+`",
-        ":keyword:`[^`]+`",
-        ":RFC:`[^`]+`",
-        ":doc:`[^`]+`",
-        "``[^`]+``",
-        "`[^`]+`__",
-        "`[^`]+`_",
-        "\*\*.+\*\*",  # bold text between **
-        "\*.+\*",  # italic text between *
-    ]
 
     i = 0
     d: Dict[str, str] = {}
-    for exp in exps:
-        matches = re.findall(exp, s)
+    for exp in _exps:
+        matches = exp.findall(s)
         if DEBUG:
             print(exp, matches)
         for match in matches:
@@ -95,7 +97,7 @@ if __name__ == "__main__":
     po = polib.pofile(filename)
     translator = GoogleTranslator(source="en", target="es")
 
-    for i, entry in enumerate(po):
+    for entry in po:
         # If the entry has already a translation, skip.
         if SKIP_TRANSLATED_ENTRIES and entry.msgstr:
             continue
@@ -113,6 +115,8 @@ if __name__ == "__main__":
         real_text = undo_sphinx_directives_protection(placeholders, translated_text)
         print("ES|", real_text)
 
-        # Replace the po file translated entry, and save
+        # Replace the po file translated entry
         entry.msgstr = real_text
-        po.save()
+
+    # Save the file after all the entries are translated
+    po.save()
