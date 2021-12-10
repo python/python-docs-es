@@ -39,6 +39,7 @@ _patterns = [
     ":issue:`[^`]+`",
     ":opcode:`[^`]+`",
     ":option:`[^`]+`",
+    ":program:`[^`]+`",
     ":keyword:`[^`]+`",
     ":RFC:`[^`]+`",
     ":doc:`[^`]+`",
