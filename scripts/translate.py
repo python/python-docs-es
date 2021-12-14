@@ -47,8 +47,8 @@ _patterns = [
     "``[^`]+``",
     "`[^`]+`__",
     "`[^`]+`_",
-    "\*\*.+\*\*",  # bold text between **
-    "\*.+\*",  # italic text between *
+    "\*\*[^\*]+\*\*",  # bold text between **
+    "\*[^\*]+\*",  # italic text between *
 ]
 
 _exps = [re.compile(e) for e in _patterns]
