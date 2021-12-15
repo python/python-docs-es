@@ -13,8 +13,8 @@ msgstr ""
 "POT-Creation-Date: 2021-10-16 21:42+0200\n"
 "PO-Revision-Date: 2020-07-27 18:51-0400\n"
 "Last-Translator: Douglas Cueva <dougcueva@gmail.com>\n"
-"Language: io\n"
 "Language-Team: python-doc-es\n"
+"Language: io\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -201,7 +201,7 @@ msgstr ""
 
 #: ../Doc/library/io.rst:112
 msgid "Text Encoding"
-msgstr ""
+msgstr "Codificación de texto"
 
 #: ../Doc/library/io.rst:114
 msgid ""
@@ -209,6 +209,9 @@ msgid ""
 "specific (:func:`locale.getpreferredencoding(False) <locale."
 "getpreferredencoding>`)."
 msgstr ""
+"La codificación predeterminada de :class:`TextIOWrapper` y :func:`open` es "
+"específica de la configuración regional (:func:`locale."
+"getpreferredencoding(False) <locale.getpreferredencoding>`)."
 
 #: ../Doc/library/io.rst:117
 msgid ""
@@ -217,12 +220,20 @@ msgid ""
 "platforms use UTF-8 locale by default. This causes bugs because the locale "
 "encoding is not UTF-8 for most Windows users. For example::"
 msgstr ""
+"Sin embargo, muchos desarrolladores olvidan especificar la codificación al "
+"abrir archivos de texto codificados en UTF-8 (por ejemplo, JSON, TOML, "
+"Markdown, etc.) ya que la mayoría de las plataformas Unix usan la "
+"configuración regional UTF-8 de forma predeterminada. Esto causa errores "
+"porque la codificación local no es UTF-8 para la mayoría de los usuarios de "
+"Windows. Por ejemplo::"
 
 #: ../Doc/library/io.rst:126
 msgid ""
 "Additionally, while there is no concrete plan as of yet, Python may change "
 "the default text file encoding to UTF-8 in the future."
 msgstr ""
+"Además, aunque todavía no hay un plan concreto, Python puede cambiar la "
+"codificación predeterminada del archivo de texto a UTF-8 en el futuro."
 
 #: ../Doc/library/io.rst:129
 msgid ""
@@ -231,6 +242,11 @@ msgid ""
 "``encoding=\"utf-8\"``. To use the current locale encoding, ``encoding="
 "\"locale\"`` is supported in Python 3.10."
 msgstr ""
+"En consecuencia, se recomienda encarecidamente que especifique la "
+"codificación explícitamente al abrir archivos de texto. Si desea utilizar "
+"UTF-8, pase ``encoding=\"utf-8\"``. Para usar la codificación de la "
+"configuración regional actual, ``encoding=\"locale\"`` es compatible con "
+"Python 3.10."
 
 #: ../Doc/library/io.rst:134
 msgid ""
@@ -238,14 +254,18 @@ msgid ""
 "files using the default locale encoding, you can enable the UTF-8 mode. See :"
 "ref:`UTF-8 mode on Windows <win-utf8-mode>`."
 msgstr ""
+"Cuando necesite ejecutar código existente en Windows que intente abrir "
+"archivos UTF-8 utilizando la codificación de configuración regional "
+"predeterminada, puede habilitar el modo UTF-8. Ver :ref:`UTF-8 mode on "
+"Windows <win-utf8-mode>`."
 
 #: ../Doc/library/io.rst:141
 msgid "Opt-in EncodingWarning"
-msgstr ""
+msgstr "EncodingWarning opcional"
 
 #: ../Doc/library/io.rst:143
 msgid "See :pep:`597` for more details."
-msgstr ""
+msgstr "Consulte :pep:`597` para obtener más detalles."
 
 #: ../Doc/library/io.rst:146
 msgid ""
@@ -254,6 +274,11 @@ msgid ""
 "`PYTHONWARNDEFAULTENCODING` environment variable, which will emit an :exc:"
 "`EncodingWarning` when the default encoding is used."
 msgstr ""
+"Para encontrar dónde se usa la codificación de configuración regional "
+"predeterminada, puede habilitar la opción de línea de comando ``-X "
+"warn_default_encoding`` o establecer la variable de entorno :envvar:"
+"`PYTHONWARNDEFAULTENCODING`, que emitirá un :exc:`EncodingWarning` cuando se "
+"use la codificación predeterminada."
 
 #: ../Doc/library/io.rst:151
 msgid ""
@@ -263,6 +288,11 @@ msgid ""
 "`EncodingWarning` if they don't pass an ``encoding``. However, please "
 "consider using UTF-8 by default (i.e. ``encoding=\"utf-8\"``) for new APIs."
 msgstr ""
+"Si está proporcionando una API que usa :func:`open` o :class:`TextIOWrapper` "
+"y pasa ``encoding=None`` como parámetro, puede usar :func:`text_encoding` "
+"para que las personas que llaman a la API emitan un :exc:`EncodingWarning` "
+"si no pasan un ``encoding``. Sin embargo, considere usar UTF-8 de forma "
+"predeterminada (es decir, ``encoding=\"utf-8\"``) para las nuevas API."
 
 #: ../Doc/library/io.rst:160
 msgid "High-level Module Interface"
@@ -332,12 +362,16 @@ msgid ""
 "This is a helper function for callables that use :func:`open` or :class:"
 "`TextIOWrapper` and have an ``encoding=None`` parameter."
 msgstr ""
+"Esta es una función auxiliar para personas que llaman que usan :func:`open` "
+"o :class:`TextIOWrapper` y tienen un parámetro ``encoding=None``."
 
 #: ../Doc/library/io.rst:201
 msgid ""
 "This function returns *encoding* if it is not ``None`` and ``\"locale\"`` if "
 "*encoding* is ``None``."
 msgstr ""
+"Esta función retorna *encoding* si no es ``None`` y ``\"locale\"`` si "
+"*encoding* es ``None``."
 
 #: ../Doc/library/io.rst:204
 msgid ""
@@ -345,16 +379,21 @@ msgid ""
 "warn_default_encoding <sys.flags>` is true and *encoding* is None. "
 "*stacklevel* specifies where the warning is emitted. For example::"
 msgstr ""
+"Esta función emite un :class:`EncodingWarning` si :data:`sys.flags."
+"warn_default_encoding <sys.flags>` es verdadero y *encoding* es None. "
+"*stacklevel* especifica dónde se emite la advertencia. Por ejemplo::"
 
 #: ../Doc/library/io.rst:214
 msgid ""
 "In this example, an :class:`EncodingWarning` is emitted for the caller of "
 "``read_text()``."
 msgstr ""
+"En este ejemplo, se emite un :class:`EncodingWarning` para el llamador de "
+"``read_text()``."
 
 #: ../Doc/library/io.rst:217
 msgid "See :ref:`io-text-encoding` for more information."
-msgstr ""
+msgstr "Consulte :ref:`io-text-encoding` para obtener más información."
 
 #: ../Doc/library/io.rst:224
 msgid ""
@@ -446,9 +485,16 @@ msgid ""
 "interface to seekable streams. Another :class:`BufferedIOBase` subclass, :"
 "class:`BytesIO`, is a stream of in-memory bytes."
 msgstr ""
+"El :class:`BufferedIOBase` ABC amplía :class:`IOBase`. Se ocupa del "
+"almacenamiento en búfer en un flujo binario sin procesar (:class:"
+"`RawIOBase`). Sus subclases, :class:`BufferedWriter`, :class:"
+"`BufferedReader` y :class:`BufferedRWPair` almacenan en búfer flujos "
+"binarios sin procesar que se pueden leer, escribir y leer y escribir, "
+"respectivamente. :class:`BufferedRandom` proporciona una interfaz almacenada "
+"en búfer para flujos buscables. Otra subclase :class:`BufferedIOBase`, :"
+"class:`BytesIO`, es un flujo de bytes en memoria."
 
 #: ../Doc/library/io.rst:273
-#, fuzzy
 msgid ""
 "The :class:`TextIOBase` ABC extends :class:`IOBase`.  It deals with streams "
 "whose bytes represent text, and handles encoding and decoding to and from "
@@ -457,11 +503,11 @@ msgid ""
 "Finally, :class:`StringIO` is an in-memory stream for text."
 msgstr ""
 "El :class:`TextIOBase` ABC, otra subclasificación de :class:`IOBase`, trata "
-"con los *streams* cuyos *bytes* representan texto, y maneja la codificación "
-"y descodificación para cadenas de caracteres y de estos mismos. :class:"
-"`TextIOWrapper`, que extiende a este, es un interfaz textual almacenado un "
-"*stream* sin formato amortiguado (:class:`BufferedIOBase`). Finalmente, :"
-"class:`StringIO`  es una *stream* en memoria para texto."
+"con los streams cuyos bytes representan texto, y maneja la codificación y "
+"decodificación para cadenas de caracteres y de estos mismos. :class:"
+"`TextIOWrapper`, que extiende :class:`TextIOBase`, es un interfaz textual "
+"almacenado un *stream* sin formato amortiguado (:class:`BufferedIOBase`). "
+"Finalmente, :class:`StringIO`  es una stream en memoria para texto."
 
 #: ../Doc/library/io.rst:279
 msgid ""
@@ -729,6 +775,8 @@ msgstr ""
 msgid ""
 "*hint* values of ``0`` or less, as well as ``None``, are treated as no hint."
 msgstr ""
+"Los valores *hint* de ``0`` o menos, así como ``None``, se tratan como sin "
+"pista."
 
 #: ../Doc/library/io.rst:397
 msgid ""
@@ -847,35 +895,33 @@ msgstr ""
 "meth:`~IOBase.close`."
 
 #: ../Doc/library/io.rst:464
-#, fuzzy
 msgid ""
 "Base class for raw binary streams.  It inherits :class:`IOBase`.  There is "
 "no public constructor."
 msgstr ""
-"Clase base para binarios de tipo E/S sin formato. Hereda la clase :class:"
-"`IOBase`. No hay constructor público."
+"Clase base para flujos binarios sin procesar. Hereda :class:`IOBase`. No hay "
+"ningún constructor público."
 
 #: ../Doc/library/io.rst:467
-#, fuzzy
 msgid ""
 "Raw binary streams typically provide low-level access to an underlying OS "
 "device or API, and do not try to encapsulate it in high-level primitives "
 "(this functionality is done at a higher-level in buffered binary streams and "
 "text streams, described later in this page)."
 msgstr ""
-"E/S binario sin formato proporciona acceso de nivel bajo a algún dispositivo "
-"del sistema operativo o API, y no intenta de encapsular primitivos de alto "
-"nivel (esta función se le deja a E/S de tipo búfer y E/S de tipo texto; esto "
-"se describe más adelante)."
+"Los flujos binarios sin procesar generalmente brindan acceso de bajo nivel a "
+"un dispositivo OS subyacente o API, y no intentan encapsularlos en "
+"primitivas de alto nivel (esta funcionalidad se realiza en un nivel superior "
+"en flujos binarios almacenados en búfer y flujos de texto, que se describen "
+"más adelante en esta página)."
 
 #: ../Doc/library/io.rst:472
-#, fuzzy
 msgid ""
 ":class:`RawIOBase` provides these methods in addition to those from :class:"
 "`IOBase`:"
 msgstr ""
-":class:`StringIO` provee este método además de los de :class:`TextIOBase` y "
-"sus padres:"
+":class:`RawIOBase` proporciona estos métodos además de los de :class:"
+"`IOBase`:"
 
 #: ../Doc/library/io.rst:477
 msgid ""
@@ -996,13 +1042,12 @@ msgstr ""
 "como hacen las clases :class:`BufferedWriter` y :class:`BufferedReader`."
 
 #: ../Doc/library/io.rst:537
-#, fuzzy
 msgid ""
 ":class:`BufferedIOBase` provides or overrides these data attributes and "
 "methods in addition to those from :class:`IOBase`:"
 msgstr ""
-":class:`TextIOBase` provee o anula estos atributos y métodos de datos además "
-"de los de :class:`IOBase`:"
+":class:`BufferedIOBase` proporciona o anula estos atributos y métodos de "
+"datos además de los de :class:`IOBase`:"
 
 #: ../Doc/library/io.rst:542
 msgid ""
@@ -1162,6 +1207,8 @@ msgid ""
 "A raw binary stream representing an OS-level file containing bytes data.  It "
 "inherits :class:`RawIOBase`."
 msgstr ""
+"Una secuencia binaria sin procesar que representa un archivo de nivel de "
+"sistema operativo que contiene datos en bytes. Hereda :class:`RawIOBase`."
 
 #: ../Doc/library/io.rst:634
 msgid "The *name* can be one of two things:"
@@ -1250,13 +1297,12 @@ msgid "The file is now non-inheritable."
 msgstr "El archivo ahora no es heredable."
 
 #: ../Doc/library/io.rst:673
-#, fuzzy
 msgid ""
 ":class:`FileIO` provides these data attributes in addition to those from :"
 "class:`RawIOBase` and :class:`IOBase`:"
 msgstr ""
-":class:`BytesIO` provee o anula estos métodos además de los de :class:"
-"`BufferedIOBase` y :class:`IOBase`:"
+":class:`FileIO` proporciona estos atributos de datos además de los de :class:"
+"`RawIOBase` y :class:`IOBase`:"
 
 #: ../Doc/library/io.rst:678
 msgid "The mode as given in the constructor."
@@ -1283,15 +1329,14 @@ msgstr ""
 "un dispositivo E/S que a un E/S sin formato."
 
 #: ../Doc/library/io.rst:694
-#, fuzzy
 msgid ""
 "A binary stream using an in-memory bytes buffer.  It inherits :class:"
 "`BufferedIOBase`.  The buffer is discarded when the :meth:`~IOBase.close` "
 "method is called."
 msgstr ""
-"Una implementación de *stream* usando búferes de *bytes* en memoria. Hereda :"
-"class:`BufferedIOBase`.  El búfer está descartado cuando se llama al método :"
-"meth:`~IOBase.close`."
+"Una secuencia binaria que utiliza un búfer de bytes en memoria. Hereda :"
+"class:`BufferedIOBase`. El búfer se descarta cuando se llama al método :meth:"
+"`~IOBase.close`."
 
 #: ../Doc/library/io.rst:698
 msgid ""
@@ -1349,14 +1394,14 @@ msgstr ""
 "readinto`."
 
 #: ../Doc/library/io.rst:742
-#, fuzzy
 msgid ""
 "A buffered binary stream providing higher-level access to a readable, non "
 "seekable :class:`RawIOBase` raw binary stream.  It inherits :class:"
 "`BufferedIOBase`."
 msgstr ""
-"Una secuencia de texto almacenado sobre un *stream* binario :class:"
-"`BufferedIOBase`. Hereda :class:`TextIOBase`."
+"Una secuencia binaria almacenada en búfer que proporciona acceso de nivel "
+"superior a una secuencia binaria sin procesar :class:`RawIOBase` legible y "
+"no buscable. Hereda :class:`BufferedIOBase`."
 
 #: ../Doc/library/io.rst:746
 msgid ""
@@ -1364,6 +1409,10 @@ msgid ""
 "from the underlying raw stream, and kept in an internal buffer. The buffered "
 "data can then be returned directly on subsequent reads."
 msgstr ""
+"Al leer datos de este objeto, es posible que se solicite una mayor cantidad "
+"de datos del flujo sin procesar subyacente y se mantenga en un búfer "
+"interno. Los datos almacenados en búfer se pueden retornar directamente en "
+"lecturas posteriores."
 
 #: ../Doc/library/io.rst:750
 msgid ""
@@ -1413,27 +1462,24 @@ msgstr ""
 "de un *stream* sin formato."
 
 #: ../Doc/library/io.rst:780
-#, fuzzy
 msgid ""
 "A buffered binary stream providing higher-level access to a writeable, non "
 "seekable :class:`RawIOBase` raw binary stream.  It inherits :class:"
 "`BufferedIOBase`."
 msgstr ""
-"Una secuencia de texto almacenado sobre un *stream* binario :class:"
-"`BufferedIOBase`. Hereda :class:`TextIOBase`."
+"Un flujo binario almacenado en búfer que proporciona acceso de nivel "
+"superior a un flujo binario sin formato :class:`RawIOBase` que se puede "
+"escribir y no se puede buscar. Hereda :class:`BufferedIOBase`."
 
 #: ../Doc/library/io.rst:784
-#, fuzzy
 msgid ""
 "When writing to this object, data is normally placed into an internal "
 "buffer.  The buffer will be written out to the underlying :class:`RawIOBase` "
 "object under various conditions, including:"
 msgstr ""
-"Un búfer que proporciona un nivel alto de acceso a un objeto  :class:"
-"`RawIOBase` grabable y secuencial. Hereda :class:`BufferedIOBase`. Al "
-"escribir a este objeto, los datos normalmente se colocan en un búfer "
-"interno. El búfer se escribirá en el objeto :class:`RawIOBase` subyacente "
-"bajo varias condiciones, incluyendo:"
+"Al escribir en este objeto, los datos normalmente se colocan en un búfer "
+"interno. El búfer se escribirá en el objeto :class:`RawIOBase` subyacente en "
+"varias condiciones, que incluyen:"
 
 #: ../Doc/library/io.rst:788
 msgid "when the buffer gets too small for all pending data;"
@@ -1493,14 +1539,14 @@ msgstr ""
 "formato bloquea."
 
 #: ../Doc/library/io.rst:815
-#, fuzzy
 msgid ""
 "A buffered binary stream providing higher-level access to a seekable :class:"
 "`RawIOBase` raw binary stream.  It inherits :class:`BufferedReader` and :"
 "class:`BufferedWriter`."
 msgstr ""
-"Una interfaz búfer para *streams* de acceso aleatorio. Hereda :class:"
-"`BufferedReader` y :class:`BufferedWriter`."
+"Un flujo binario almacenado en búfer que proporciona acceso de nivel "
+"superior a un flujo binario sin formato :class:`RawIOBase` que se puede "
+"buscar. Hereda :class:`BufferedReader` y :class:`BufferedWriter`."
 
 #: ../Doc/library/io.rst:819
 msgid ""
@@ -1528,6 +1574,9 @@ msgid ""
 "class:`RawIOBase` raw binary streams---one readable, the other writeable. It "
 "inherits :class:`BufferedIOBase`."
 msgstr ""
+"Un flujo binario almacenado en búfer que proporciona acceso de nivel "
+"superior a dos flujos binarios sin procesar :class:`RawIOBase` no buscables, "
+"uno legible y el otro escribible. Hereda :class:`BufferedIOBase`."
 
 #: ../Doc/library/io.rst:834
 msgid ""
@@ -1560,15 +1609,14 @@ msgstr ""
 "escribible; usa :class:`BufferedRandom` en su lugar."
 
 #: ../Doc/library/io.rst:854
-#, fuzzy
 msgid ""
 "Base class for text streams.  This class provides a character and line based "
 "interface to stream I/O.  It inherits :class:`IOBase`.  There is no public "
 "constructor."
 msgstr ""
-"Clase base para los *streams* de tipo texto. Esta clase proporciona una "
-"interfaz basada en caracteres y líneas para transmitir E/S. Hereda :class:"
-"`IOBase`. No hay constructor público."
+"Clase base para flujos de texto. Esta clase proporciona una interfaz basada "
+"en caracteres y líneas para transmitir E / S. Hereda :class:`IOBase`. No hay "
+"ningún constructor público."
 
 #: ../Doc/library/io.rst:858
 msgid ""
@@ -1714,16 +1762,15 @@ msgstr ""
 "caracteres grabadas."
 
 #: ../Doc/library/io.rst:944
-#, fuzzy
 msgid ""
 "A buffered text stream providing higher-level access to a :class:"
 "`BufferedIOBase` buffered binary stream.  It inherits :class:`TextIOBase`."
 msgstr ""
-"Una secuencia de texto almacenado sobre un *stream* binario :class:"
-"`BufferedIOBase`. Hereda :class:`TextIOBase`."
+"Un flujo de texto almacenado en búfer que proporciona acceso de nivel "
+"superior a un flujo binario almacenado en búfer :class:`BufferedIOBase`. "
+"Hereda :class:`TextIOBase`."
 
 #: ../Doc/library/io.rst:948
-#, fuzzy
 msgid ""
 "*encoding* gives the name of the encoding that the stream will be decoded or "
 "encoded with.  It defaults to :func:`locale.getpreferredencoding(False) "
@@ -1731,9 +1778,12 @@ msgid ""
 "specify the current locale's encoding explicitly. See :ref:`io-text-"
 "encoding` for more information."
 msgstr ""
-"*encoding* da el nombre de la codificación con que el *stream* será "
-"codificada o descodificado. Se da al valor predeterminado :func:`locale."
-"getpreferredencoding(False) <locale.getpreferredencoding>`."
+"*encoding* proporciona el nombre de la codificación con la que se "
+"decodificará o codificará el flujo. Su valor predeterminado es :func:`locale."
+"getpreferredencoding(False) <locale.getpreferredencoding>`. ``encoding="
+"\"locale\"`` se puede utilizar para especificar explícitamente la "
+"codificación de la configuración regional actual. Consulte :ref:`io-text-"
+"encoding` para obtener más información."
 
 #: ../Doc/library/io.rst:954
 msgid ""
@@ -1773,7 +1823,6 @@ msgstr ""
 "siguiente manera:"
 
 #: ../Doc/library/io.rst:973
-#, fuzzy
 msgid ""
 "When reading input from the stream, if *newline* is ``None``, :term:"
 "`universal newlines` mode is enabled.  Lines in the input can end in "
@@ -1784,14 +1833,14 @@ msgid ""
 "lines are only terminated by the given string, and the line ending is "
 "returned to the caller untranslated."
 msgstr ""
-"Al leer la entrada del *stream*, si *newline* es ``None``, el modo :term:"
-"`universal newlines` está habilitada. Líneas en la entrada pueden terminar "
-"en ``'\\n'``, ``'\\r'``, o ``'\\r\\n'``, y estos son traducidos a ``'\\n'`` "
-"antes de ser retornados al llamador. Si es ``''``, se habilita el modo "
-"universal de nuevas líneas, pero las terminaciones de líneas son retornados "
-"al llamador sin traducir. Si tiene cualquiera de los otros valores legales, "
-"líneas de ingreso son terminadas por la cadena de caracteres dada, y la "
-"línea final se retorna al llamado sin traducir."
+"Al leer la entrada de la secuencia, si *newline* es ``None``, el modo :term:"
+"`universal newlines` está habilitado. Las líneas de la entrada pueden "
+"terminar en ``'\\n'``, ``'\\r'`` o ``'\\r\\n'``, y se traducen a ``'\\n'`` "
+"antes de retornarse al llamador. Si *newline* es ``''``, el modo de salto de "
+"línea universal está habilitado, pero los finales de línea se retornan a la "
+"persona que llama sin traducir. Si *newline* tiene alguno de los otros "
+"valores legales, las líneas de entrada solo terminan con la cadena dada y la "
+"línea final se retorna al llamador sin traducir."
 
 #: ../Doc/library/io.rst:982
 msgid ""
@@ -1848,15 +1897,16 @@ msgstr ""
 msgid ""
 "The *encoding* argument now supports the ``\"locale\"`` dummy encoding name."
 msgstr ""
+"El argumento *encoding* ahora admite el nombre de codificación ficticia ``"
+"\"locale\"``."
 
 #: ../Doc/library/io.rst:1007
-#, fuzzy
 msgid ""
 ":class:`TextIOWrapper` provides these data attributes and methods in "
 "addition to those from :class:`TextIOBase` and :class:`IOBase`:"
 msgstr ""
-":class:`TextIOBase` provee o anula estos atributos y métodos de datos además "
-"de los de :class:`IOBase`:"
+":class:`TextIOWrapper` proporciona estos atributos y métodos de datos además "
+"de los de :class:`TextIOBase` y :class:`IOBase`:"
 
 #: ../Doc/library/io.rst:1012
 msgid "Whether line buffering is enabled."
@@ -1905,14 +1955,15 @@ msgid ""
 "A text stream using an in-memory text buffer.  It inherits :class:"
 "`TextIOBase`."
 msgstr ""
+"Una secuencia de texto que utiliza un búfer de texto en memoria. Hereda :"
+"class:`TextIOBase`."
 
 #: ../Doc/library/io.rst:1046
-#, fuzzy
 msgid ""
 "The text buffer is discarded when the :meth:`~IOBase.close` method is called."
 msgstr ""
-"Un *stream* en memoria para E/S de tipo texto. El búfer de tipo texto es "
-"descartado cuando se llama al método :meth:`~IOBase.close`."
+"El búfer de texto se descarta cuando se llama al método :meth:`~IOBase."
+"close`."
 
 #: ../Doc/library/io.rst:1049
 msgid ""
@@ -1931,15 +1982,17 @@ msgid ""
 "that when writing output to the stream, if *newline* is ``None``, newlines "
 "are written as ``\\n`` on all platforms."
 msgstr ""
+"El argumento *newline* funciona como el de la clase :class:`TextIOWrapper`, "
+"excepto que cuando escribe al flujo de salida, si *newline* es ``None``, se "
+"escriben líneas nuevas como ``\\n`` en todas las plataformas"
 
 #: ../Doc/library/io.rst:1058
-#, fuzzy
 msgid ""
 ":class:`StringIO` provides this method in addition to those from :class:"
 "`TextIOBase` and :class:`IOBase`:"
 msgstr ""
-":class:`StringIO` provee este método además de los de :class:`TextIOBase` y "
-"sus padres:"
+":class:`StringIO` proporciona este método además de los de :class:"
+"`TextIOBase` y :class:`IOBase`:"
 
 #: ../Doc/library/io.rst:1063
 msgid ""
@@ -2073,122 +2126,13 @@ msgstr ""
 "diferente entrando un objeto búfer."
 
 #: ../Doc/library/io.rst:1148
-#, fuzzy
 msgid ""
 "The above implicitly extends to text files, since the :func:`open()` "
 "function will wrap a buffered object inside a :class:`TextIOWrapper`.  This "
 "includes standard streams and therefore affects the built-in :func:`print()` "
 "function as well."
 msgstr ""
-"Lo de arriba de forma implícita extiende a los archivos de tipo texto ya que "
-"la función :func:`open()` envolverá un objeto almacenado en un :class:"
-"`TextIOWrapper`. Esto incluye *streams* estándar y por ende afecta la "
-"función :func:`print()` también."
-
-#~ msgid ""
-#~ "The :class:`BufferedIOBase` ABC deals with buffering on a raw byte stream "
-#~ "(:class:`RawIOBase`).  Its subclasses, :class:`BufferedWriter`, :class:"
-#~ "`BufferedReader`, and :class:`BufferedRWPair` buffer streams that are "
-#~ "readable, writable, and both readable and writable.  :class:"
-#~ "`BufferedRandom` provides a buffered interface to random access streams.  "
-#~ "Another :class:`BufferedIOBase` subclass, :class:`BytesIO`, is a stream "
-#~ "of in-memory bytes."
-#~ msgstr ""
-#~ "La :class:`BufferedIOBase` ABC maneja el búfer en un *stream* de *bytes* "
-#~ "sin formato (:class:`RawIOBase`). Sus subclasificaciones, :class:"
-#~ "`BufferedWriter`, :class:`BufferedReader`, y :class:`BufferedRWPair` "
-#~ "*streams* de búfer que son legible, grabable, y ambos legible y "
-#~ "grabable.  :class:`BufferedRandom` provee un interfaz búfer a *streams* "
-#~ "de acceso aleatorio. Otra subclasificación :class:`BufferedIOBase`, :"
-#~ "class:`BytesIO`, es un *stream* de *bytes* en memoria."
-
-#~ msgid ""
-#~ "In addition to the attributes and methods from :class:`IOBase`, :class:"
-#~ "`RawIOBase` provides the following methods:"
-#~ msgstr ""
-#~ "Además de los atributos y métodos de :class:`IOBase`, la clase :class:"
-#~ "`RawIOBase` proporciona los siguientes métodos:"
-
-#~ msgid ""
-#~ ":class:`BufferedIOBase` provides or overrides these methods and attribute "
-#~ "in addition to those from :class:`IOBase`:"
-#~ msgstr ""
-#~ ":class:`BufferedIOBase` provee o anula estos métodos y atributos en "
-#~ "adición a los de :class:`IOBase`:"
-
-#~ msgid ""
-#~ ":class:`FileIO` represents an OS-level file containing bytes data. It "
-#~ "implements the :class:`RawIOBase` interface (and therefore the :class:"
-#~ "`IOBase` interface, too)."
-#~ msgstr ""
-#~ ":class:`FileIO` representa un archivo de nivel OS conteniendo datos en "
-#~ "*bytes*. Implementa la interfaz :class:`RawIOBase` (y por ende también la "
-#~ "interfaz :class:`IOBase`)."
-
-#~ msgid ""
-#~ "In addition to the attributes and methods from :class:`IOBase` and :class:"
-#~ "`RawIOBase`, :class:`FileIO` provides the following data attributes:"
-#~ msgstr ""
-#~ "Además de los atributos y métodos de las clases :class:`IOBase` y :class:"
-#~ "`RawIOBase`, :class:`FileIO`, estos proveen los siguientes atributos:"
-
-#~ msgid ""
-#~ "A buffer providing higher-level access to a readable, sequential :class:"
-#~ "`RawIOBase` object.  It inherits :class:`BufferedIOBase`. When reading "
-#~ "data from this object, a larger amount of data may be requested from the "
-#~ "underlying raw stream, and kept in an internal buffer. The buffered data "
-#~ "can then be returned directly on subsequent reads."
-#~ msgstr ""
-#~ "Un búfer dando un nivel de alto acceso a un objeto  :class:`RawIOBase` "
-#~ "legible y secuencial. Hereda :class:`BufferedIOBase`. Al leer datos de "
-#~ "este objeto se puede solicitar una mayor cantidad de datos del *stream* "
-#~ "sin formato subyacente, y mantener el búfer interno. Los datos que han "
-#~ "pasado por el proceso de búfer pueden ser retornados directamente en "
-#~ "lecturas posteriores."
-
-#~ msgid ""
-#~ "A buffered I/O object combining two unidirectional :class:`RawIOBase` "
-#~ "objects -- one readable, the other writeable -- into a single "
-#~ "bidirectional endpoint.  It inherits :class:`BufferedIOBase`."
-#~ msgstr ""
-#~ "Un objeto búfer E/S combinando dos objetos :class:`RawIOBase` "
-#~ "unidireccionales -- uno legible y el otro escribible -- a un punto final "
-#~ "singular bidireccional. Hereda :class:`BufferedIOBase`."
-
-#~ msgid ""
-#~ ":class:`TextIOWrapper` provides these members in addition to those of :"
-#~ "class:`TextIOBase` and its parents:"
-#~ msgstr ""
-#~ ":class:`TextIOWrapper` provee estos miembros además de las de :class:"
-#~ "`TextIOBase` y sus padres:"
-
-#~ msgid ""
-#~ "The *newline* argument works like that of :class:`TextIOWrapper`. The "
-#~ "default is to consider only ``\\n`` characters as ends of lines and to do "
-#~ "no newline translation.  If *newline* is set to ``None``, newlines are "
-#~ "written as ``\\n`` on all platforms, but universal newline decoding is "
-#~ "still performed when reading."
-#~ msgstr ""
-#~ "El argumento *newline* funciona como :class:`TextIOWrapper`. El valor "
-#~ "dado es considerado solamente como caracteres ``\\n`` al final de las "
-#~ "lineas y no hacen ninguna traducción de nuevas lineas. Si *newline* está "
-#~ "configurado con ``None``, nuevas lineas son escritas como ``\\n`` en "
-#~ "todas las plataformas, pero descodificación universal de las nuevas "
-#~ "lineas todavía se realiza cuando se lee."
-
-#~ msgid "In-memory streams"
-#~ msgstr "*Streams* en memoria"
-
-#~ msgid ""
-#~ "It is also possible to use a :class:`str` or :term:`bytes-like object` as "
-#~ "a file for both reading and writing.  For strings :class:`StringIO` can "
-#~ "be used like a file opened in text mode.  :class:`BytesIO` can be used "
-#~ "like a file opened in binary mode.  Both provide full read-write "
-#~ "capabilities with random access."
-#~ msgstr ""
-#~ "Es posible usar un :class:`str` o :term:`bytes-like object` como un "
-#~ "archivo para lectura y escritura. Para cadena de caracteres :class:"
-#~ "`StringIO` pueden ser usados como un archivo abierto en modo texto. :"
-#~ "class:`BytesIO` puede ser usado como un archivo abierto in modo binario. "
-#~ "Ambos proveen completa capacidad para lectura y escritura con acceso "
-#~ "aleatorio."
+"Lo anterior se extiende implícitamente a los archivos de texto, ya que la "
+"función :func:`open()` envolverá un objeto almacenado en búfer dentro de un :"
+"class:`TextIOWrapper`. Esto incluye transmisiones estándar y, por lo tanto, "
+"también afecta a la función :func:`print()` incorporada."
