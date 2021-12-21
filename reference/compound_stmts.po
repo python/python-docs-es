@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-16 21:42+0200\n"
-"PO-Revision-Date: 2021-11-17 10:19-0300\n"
-"Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
+"PO-Revision-Date: 2021-12-20 22:05-0300\n"
+"Last-Translator: Marco Richetta <marcorichetta@gmail.com>\n"
 "Language: es_AR\n"
 "Language-Team: python-doc-es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -678,7 +678,6 @@ msgstr ""
 
 # Se utilizó valor de búsqueda para traducir *subject value* basándose en la traducción francesa *champ de recherche*.
 #: ../Doc/reference/compound_stmts.rst:542
-#, fuzzy
 msgid ""
 "Pattern matching takes a pattern as input (following ``case``) and a subject "
 "value (following ``match``).  The pattern (which may contain subpatterns) is "
@@ -766,26 +765,41 @@ msgid ""
 "dependent on implementation and may vary.  This is an intentional decision "
 "made to allow different implementations to add optimizations."
 msgstr ""
+"Durante las coincidencias de patrones fallidas, algunos subpatrones pueden "
+"tener éxito.  No confíe en que los enlaces se realicen para una coincidencia "
+"fallida.  Por el contrario, no confíe en que las variables permanezcan sin "
+"cambios después de una coincidencia fallida.  El comportamiento exacto "
+"depende de la implementación y puede variar.  Esta es una decisión "
+"intencional para permitir que diferentes implementaciones añadan "
+"optimizaciones."
 
 #: ../Doc/reference/compound_stmts.rst:585
 msgid ""
 "If the pattern succeeds, the corresponding guard (if present) is evaluated. "
 "In this case all name bindings are guaranteed to have happened."
 msgstr ""
+"Si el patrón es exitoso, se evalúa la protección correspondiente (si está "
+"presente). En este caso se garantiza que todos los enlaces de nombres han "
+"ocurrido."
 
 #: ../Doc/reference/compound_stmts.rst:588
 msgid ""
 "If the guard evaluates as true or is missing, the ``block`` inside "
 "``case_block`` is executed."
 msgstr ""
+"Si la protección se evalúa como verdadera o no existe, se ejecuta el "
+"``block`` dentro de ``case_block``."
 
 #: ../Doc/reference/compound_stmts.rst:591
 msgid "Otherwise, the next ``case_block`` is attempted as described above."
 msgstr ""
+"En caso contrario, se intenta con el siguiente ``case_block`` como se ha "
+"descrito anteriormente."
 
 #: ../Doc/reference/compound_stmts.rst:593
 msgid "If there are no further case blocks, the match statement is completed."
 msgstr ""
+"Si no hay más bloques de casos, la declaración de coincidencia se completa."
 
 #: ../Doc/reference/compound_stmts.rst:597
 msgid ""
@@ -793,20 +807,26 @@ msgid ""
 "on implementation, the interpreter may cache values or use other "
 "optimizations which skip repeated evaluations."
 msgstr ""
+"Por lo general, los usuarios no deben confiar en que se evalúe un patrón.  "
+"Dependiendo de la implementación, el intérprete puede almacenar en caché los "
+"valores o utilizar otras optimizaciones que omitan las evaluaciones "
+"repetidas."
 
 #: ../Doc/reference/compound_stmts.rst:601
 msgid "A sample match statement::"
-msgstr ""
+msgstr "Un ejemplo de declaración de coincidencia::"
 
 #: ../Doc/reference/compound_stmts.rst:617
 msgid ""
 "In this case, ``if flag`` is a guard.  Read more about that in the next "
 "section."
 msgstr ""
+"En este caso, ``if flag`` es una protección.  Lea más sobre eso en la "
+"siguiente sección."
 
 #: ../Doc/reference/compound_stmts.rst:620
 msgid "Guards"
-msgstr ""
+msgstr "Protecciones"
 
 #: ../Doc/reference/compound_stmts.rst:627
 msgid ""
@@ -814,10 +834,14 @@ msgid ""
 "``case`` block to execute.  It takes the form: :keyword:`if` followed by an "
 "expression."
 msgstr ""
+"Una ``guard`` (que es parte del ``case``) debe ser exitosa para que el "
+"código dentro de ``case`` sea ejecutado.  Toma la forma: :keyword:`if` "
+"seguida de una expresión."
 
 #: ../Doc/reference/compound_stmts.rst:632
 msgid "The logical flow of a ``case`` block with a ``guard`` follows:"
 msgstr ""
+"El flujo lógico de un bloque ``case`` con una ``guard`` es el siguiente:"
 
 #: ../Doc/reference/compound_stmts.rst:634
 msgid ""
@@ -825,27 +849,35 @@ msgid ""
 "failed, the ``guard`` is not evaluated and the next ``case`` block is "
 "checked."
 msgstr ""
+"Se comprueba que el patrón del bloque ``case`` fue exitoso.  Si el patrón "
+"falló, el ``guard`` no se evalúa y se comprueba el siguiente bloque ``case``."
 
 #: ../Doc/reference/compound_stmts.rst:638
 msgid "If the pattern succeeded, evaluate the ``guard``."
-msgstr ""
+msgstr "Si el patrón tuvo éxito, se evalúa el ``guard``."
 
 #: ../Doc/reference/compound_stmts.rst:640
 msgid ""
 "If the ``guard`` condition evaluates as true, the case block is selected."
 msgstr ""
+"Si la condición del ``guard`` es verdadera, se selecciona el bloque de ese "
+"caso."
 
 #: ../Doc/reference/compound_stmts.rst:643
 msgid ""
 "If the ``guard`` condition evaluates as false, the case block is not "
 "selected."
 msgstr ""
+"Si la condición del ``guard`` es falsa, el bloque de ese caso no es "
+"seleccionado."
 
 #: ../Doc/reference/compound_stmts.rst:646
 msgid ""
 "If the ``guard`` raises an exception during evaluation, the exception "
 "bubbles up."
 msgstr ""
+"Si el ``guard`` genera una excepción durante la evaluación, se levanta la "
+"excepción."
 
 #: ../Doc/reference/compound_stmts.rst:649
 msgid ""
@@ -855,16 +887,25 @@ msgid ""
 "evaluation must happen in order.) Guard evaluation must stop once a case "
 "block is selected."
 msgstr ""
+"Se permite que las protecciones tengan efectos secundarios, ya que son "
+"expresiones.  La evaluación de la protección debe ir desde el primer al "
+"último bloque de casos, uno a la vez, saltando los bloques de casos cuyo(s) "
+"patrón(es) no tenga(n) éxito. (Es decir, la evaluación de las protecciones "
+"debe realizarse en orden.) La evaluación de las protecciones debe detenerse "
+"una vez que se selecciona un bloque de casos."
 
 #: ../Doc/reference/compound_stmts.rst:659
 msgid "Irrefutable Case Blocks"
-msgstr ""
+msgstr "Bloques de Casos Irrefutables"
 
 #: ../Doc/reference/compound_stmts.rst:663
 msgid ""
 "An irrefutable case block is a match-all case block.  A match statement may "
 "have at most one irrefutable case block, and it must be last."
 msgstr ""
+"Un bloque de casos irrefutable es un bloque de casos que coincide con todo.  "
+"Una declaración de coincidencia puede tener como máximo un bloque de casos "
+"irrefutable, y debe ser el último."
 
 #: ../Doc/reference/compound_stmts.rst:666
 msgid ""
@@ -873,46 +914,53 @@ msgid ""
 "syntax alone that it will always succeed.  Only the following patterns are "
 "irrefutable:"
 msgstr ""
+"Un bloque de casos se considera irrefutable si no tiene protección y su "
+"patrón es irrefutable.  Un patrón se considera irrefutable si podemos "
+"demostrar, sólo por su sintaxis, que siempre tendrá éxito.  Sólo los "
+"siguientes patrones son irrefutables:"
 
 #: ../Doc/reference/compound_stmts.rst:671
 msgid ":ref:`as-patterns` whose left-hand side is irrefutable"
-msgstr ""
+msgstr ":ref:`as-patterns` cuyo lado izquierdo es irrefutable"
 
 #: ../Doc/reference/compound_stmts.rst:673
 msgid ":ref:`or-patterns` containing at least one irrefutable pattern"
-msgstr ""
+msgstr ":ref:`or-patterns` que contienen al menos un patrón irrefutable"
 
 #: ../Doc/reference/compound_stmts.rst:675
 msgid ":ref:`capture-patterns`"
-msgstr ""
+msgstr ":ref:`capture-patterns`"
 
 #: ../Doc/reference/compound_stmts.rst:677
 msgid ":ref:`wildcard-patterns`"
-msgstr ""
+msgstr ":ref:`wildcard-patterns`"
 
 #: ../Doc/reference/compound_stmts.rst:679
 msgid "parenthesized irrefutable patterns"
-msgstr ""
+msgstr "patrones irrefutables entre paréntesis"
 
 #: ../Doc/reference/compound_stmts.rst:683
 msgid "Patterns"
-msgstr ""
+msgstr "Patrones"
 
 #: ../Doc/reference/compound_stmts.rst:690
 msgid "This section uses grammar notations beyond standard EBNF:"
 msgstr ""
+"Esta sección utiliza notaciones gramaticales más allá del estándar EBNF:"
 
 #: ../Doc/reference/compound_stmts.rst:692
 msgid "the notation ``SEP.RULE+`` is shorthand for ``RULE (SEP RULE)*``"
-msgstr ""
+msgstr "la notación ``SEP.RULE+`` es la abreviación de ``RULE (SEP RULE)*``"
 
 #: ../Doc/reference/compound_stmts.rst:694
 msgid "the notation ``!RULE`` is shorthand for a negative lookahead assertion"
 msgstr ""
+"la notación ``!RULE`` es la abreviación de una aserción de anticipación "
+"negativa"
 
 #: ../Doc/reference/compound_stmts.rst:697
 msgid "The top-level syntax for ``patterns`` is:"
-msgstr ""
+msgstr "La sintaxis de nivel superior para ``patrones`` es:"
 
 #: ../Doc/reference/compound_stmts.rst:711
 msgid ""
