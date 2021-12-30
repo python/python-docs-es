@@ -13,12 +13,12 @@ msgstr ""
 "POT-Creation-Date: 2021-10-16 21:42+0200\n"
 "PO-Revision-Date: 2021-08-07 18:27+0200\n"
 "Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
-"Language: es\n"
 "Language-Team: python-doc-es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: ../Doc/library/exceptions.rst:4
@@ -67,7 +67,7 @@ msgid ""
 "that there is nothing to prevent user code from raising an inappropriate "
 "error."
 msgstr ""
-"El código de usuario puede generar excepciones predefinidas. Esto puede ser "
+"El código de usuario puede lanzar excepciones predefinidas. Esto puede ser "
 "usado para probar un gestor de excepciones o para notificar una condición de "
 "error \"igual\" a la situación en la cual el intérprete lance la misma "
 "excepción; pero tenga en cuenta que no hay nada que impida que el código del "
@@ -103,20 +103,18 @@ msgstr ""
 "excepciones de origen y la excepción final."
 
 #: ../Doc/library/exceptions.rst:43
-#, fuzzy
 msgid ""
 "When raising a new exception (rather than using a bare ``raise`` to re-raise "
 "the exception currently being handled), the implicit exception context can "
 "be supplemented with an explicit cause by using :keyword:`from<raise>` with :"
 "keyword:`raise`::"
 msgstr ""
-"Al lanzar una nueva excepción (en lugar de usar solamente ``raise`` para "
-"relanzar la excepción que se esta manejando actualmente), el contexto de "
-"excepción implícito se puede complementar con una causa explicita mediante :"
-"keyword:`from` con :keyword:`raise`::"
+"Al lanzar una nueva excepción (en lugar de usar un ``raise`` simple para "
+"volver a lanzar la excepción que se está manejando actualmente), el contexto "
+"de excepción implícita se puede complementar con una causa explícita usando :"
+"keyword:`from<raise>` con :keyword:`raise` ::"
 
 #: ../Doc/library/exceptions.rst:50
-#, fuzzy
 msgid ""
 "The expression following :keyword:`from<raise>` must be an exception or "
 "``None``. It will be set as :attr:`__cause__` on the raised exception. "
@@ -127,14 +125,14 @@ msgid ""
 "while leaving the old exception available in :attr:`__context__` for "
 "introspection when debugging."
 msgstr ""
-"La siguiente expresión :keyword:`from` tiene que ser una excepción o "
-"``None``. Se establecerá como :attr:`__cause__` en la excepción planteada. "
-"Ajustando :attr:`__cause__` también establece implícitamente el atributo :"
-"attr:`__suppress_context__` a verdadero (*True*), de modo que el uso de la "
-"``generacion new_exc from None`` reemplaza eficazmente la antigua excepción "
-"con la nueva para fines de visualización (por ejemplo, convertir :exc:"
-"`KeyError` a :exc:`AttributeError`), dejando la antigua excepción disponible "
-"en :attr:`__context__` para introspección al depurar."
+"La expresión que sigue a :keyword:`from<raise>` debe ser una excepción o "
+"``None``. Se establecerá como :attr:`__cause__` en la excepción generada. La "
+"configuración de :attr:`__cause__` también establece implícitamente el "
+"atributo :attr:`__suppress_context__` en ``True``, de modo que el uso de "
+"``raise new_exc from None`` reemplaza efectivamente la excepción anterior "
+"con la nueva para fines de visualización (por ejemplo, conversión de :exc:"
+"`KeyError` a :exc:`AttributeError`), dejando la excepción anterior "
+"disponible en :attr:`__context__` para introspección durante la depuración."
 
 #: ../Doc/library/exceptions.rst:59
 msgid ""
@@ -211,6 +209,15 @@ msgid ""
 "happened to the traceback of the original ``SomeException`` had we allowed "
 "it to propagate to the caller. ::"
 msgstr ""
+"Este método establece *tb* como el nuevo rastreo para la excepción y retorna "
+"el objeto de excepción. Se usaba con más frecuencia antes de que las "
+"características de encadenamiento de excepciones de :pep:`3134` estuvieran "
+"disponibles. El siguiente ejemplo muestra cómo podemos convertir una "
+"instancia de ``SomeException`` en una instancia de ``OtherException`` "
+"mientras se conserva el rastreo. Una vez generado, el marco actual se "
+"inserta en el rastreo del ``OtherException``, como habría sucedido con el "
+"rastreo del ``SomeException`` original si hubiéramos permitido que se "
+"propagara al llamador. ::"
 
 #: ../Doc/library/exceptions.rst:110
 msgid ""
@@ -247,7 +254,7 @@ msgid ""
 msgstr ""
 "La clase base para las excepciones que se generan cuando una clave o índice "
 "utilizado en un mapa o secuencia que no es válido: :exc:`IndexError`, :exc:"
-"`KeyError`. Esto se puede generar directamente por :func:`codecs.lookup`."
+"`KeyError`. Esto se puede lanzar directamente por :func:`codecs.lookup`."
 
 #: ../Doc/library/exceptions.rst:135
 msgid "Concrete exceptions"
@@ -281,11 +288,14 @@ msgid ""
 "attribute that was attempted to be accessed and the object that was accessed "
 "for said attribute, respectively."
 msgstr ""
+"Los atributos :attr:`name` y :attr:`obj` se pueden configurar utilizando "
+"argumentos de solo palabras clave para el constructor. Cuando se establecen, "
+"representan el nombre del atributo al que se intentó acceder y el objeto al "
+"que se accedió para dicho atributo, respectivamente."
 
 #: ../Doc/library/exceptions.rst:157
-#, fuzzy
 msgid "Added the :attr:`name` and :attr:`obj` attributes."
-msgstr "Se han añadido los atributos :attr:`name` y :attr:`path`."
+msgstr "Se agregaron los atributos :attr:`name` y :attr:`obj`."
 
 #: ../Doc/library/exceptions.rst:162
 msgid ""
@@ -413,22 +423,18 @@ msgstr ""
 "incluye el nombre que no se pudo encontrar."
 
 #: ../Doc/library/exceptions.rst:245
-#, fuzzy
 msgid ""
 "The :attr:`name` attribute can be set using a keyword-only argument to the "
 "constructor. When set it represent the name of the variable that was "
 "attempted to be accessed."
 msgstr ""
-"Los atributos :attr:`name` y :attr:`path` solo se pueden establecer "
-"utilizando argumentos de palabra clave en el constructor. Cuando se "
-"establece, representan el nombre del módulo que se intentó importar y la "
-"ruta de acceso a cualquier archivo que desencadenó la excepción, "
-"respectivamente."
+"El atributo :attr:`name` se puede establecer utilizando un argumento de solo "
+"palabra clave para el constructor. Cuando se establece, representa el nombre "
+"de la variable a la que se intentó acceder."
 
 #: ../Doc/library/exceptions.rst:249
-#, fuzzy
 msgid "Added the :attr:`name` attribute."
-msgstr "Se han añadido los atributos :attr:`name` y :attr:`path`."
+msgstr "Se agregó el atributo :attr:`name`."
 
 #: ../Doc/library/exceptions.rst:255
 msgid ""
@@ -438,7 +444,7 @@ msgid ""
 "developed to indicate that the real implementation still needs to be added."
 msgstr ""
 "Esta excepción se deriva de :exc:`RuntimeError`. En las clases base "
-"definidas por el usuario, los métodos abstractos deberían generar esta "
+"definidas por el usuario, los métodos abstractos deberían lanzar esta "
 "excepción cuando requieren clases derivadas para anular el método, o "
 "mientras se desarrolla la clase para indicar que la implementación real aún "
 "necesita ser agregada."
@@ -563,17 +569,16 @@ msgstr ""
 "`OSError`, y el constructor puede retornar una subclase."
 
 #: ../Doc/library/exceptions.rst:332
-#, fuzzy
 msgid ""
 "The :attr:`filename` attribute is now the original file name passed to the "
 "function, instead of the name encoded to or decoded from the :term:"
 "`filesystem encoding and error handler`. Also, the *filename2* constructor "
 "argument and attribute was added."
 msgstr ""
-"El atributo :attr:`filename` es ahora el nombre del archivo original pasado "
-"a la función, en lugar del nombre codificado o descodificado de la "
-"codificación del sistema de archivos. Además, se agregó el argumento "
-"constructor ``filename2`` y el atributo."
+"El atributo :attr:`filename` es ahora el nombre de archivo original pasado a "
+"la función, en lugar del nombre codificado o decodificado desde :term:"
+"`filesystem encoding and error handler`. Además, se agregaron el argumento y "
+"atributo del constructor *filename2*."
 
 #: ../Doc/library/exceptions.rst:341
 msgid ""
@@ -697,20 +702,19 @@ msgid ""
 "Must be raised by :meth:`__anext__` method of an :term:`asynchronous "
 "iterator` object to stop the iteration."
 msgstr ""
-"Se debe generar mediante :meth:`__anext__` de un objeto :term:`asynchronous "
+"Se debe lanzar mediante :meth:`__anext__` de un objeto :term:`asynchronous "
 "iterator` para detener la iteración."
 
 #: ../Doc/library/exceptions.rst:414
-#, fuzzy
 msgid ""
 "Raised when the parser encounters a syntax error.  This may occur in an :"
 "keyword:`import` statement, in a call to the built-in functions :func:"
 "`compile`, :func:`exec`, or :func:`eval`, or when reading the initial script "
 "or standard input (also interactively)."
 msgstr ""
-"Se genera cuando el analizador (parser) encuentra un error de sintaxis. Esto "
-"puede ocurrir en una declaración :keyword:`import`, en una llamada a las "
-"funciones predefinidas :func:`exec` o :func:`eval`, o al leer el script "
+"Se genera cuando el analizador encuentra un error de sintaxis. Esto puede "
+"ocurrir en una instrucción :keyword:`import`, en una llamada a las funciones "
+"integradas :func:`compile`, :func:`exec` o :func:`eval`, o al leer el script "
 "inicial o la entrada estándar (también de forma interactiva)."
 
 #: ../Doc/library/exceptions.rst:420
@@ -718,38 +722,49 @@ msgid ""
 "The :func:`str` of the exception instance returns only the error message. "
 "Details is a tuple whose members are also available as separate attributes."
 msgstr ""
+"El :func:`str` de la instancia de excepción retorna solo el mensaje de "
+"error. Detalles es una tupla cuyos miembros también están disponibles como "
+"atributos separados."
 
 #: ../Doc/library/exceptions.rst:425
 msgid "The name of the file the syntax error occurred in."
-msgstr ""
+msgstr "El nombre del archivo en el que se produjo el error de sintaxis."
 
 #: ../Doc/library/exceptions.rst:429
 msgid ""
 "Which line number in the file the error occurred in. This is 1-indexed: the "
 "first line in the file has a ``lineno`` of 1."
 msgstr ""
+"En qué número de línea del archivo se produjo el error. Tiene un índice 1: "
+"la primera línea del archivo tiene un ``lineno`` de 1."
 
 #: ../Doc/library/exceptions.rst:434
 msgid ""
 "The column in the line where the error occurred. This is 1-indexed: the "
 "first character in the line has an ``offset`` of 1."
 msgstr ""
+"La columna de la línea donde ocurrió el error. Está indexado a 1: el primer "
+"carácter de la línea tiene un ``offset`` de 1."
 
 #: ../Doc/library/exceptions.rst:439
 msgid "The source code text involved in the error."
-msgstr ""
+msgstr "El texto del código fuente involucrado en el error."
 
 #: ../Doc/library/exceptions.rst:443
 msgid ""
 "Which line number in the file the error occurred ends in. This is 1-indexed: "
 "the first line in the file has a ``lineno`` of 1."
 msgstr ""
+"En qué número de línea del archivo termina el error. Está indexado a 1: la "
+"primera línea del archivo tiene un ``lineno`` de 1."
 
 #: ../Doc/library/exceptions.rst:448
 msgid ""
 "The column in the end line where the error occurred finishes. This is 1-"
 "indexed: the first character in the line has an ``offset`` of 1."
 msgstr ""
+"Finaliza la columna de la línea final donde ocurrió el error. Está indexado "
+"a 1: el primer carácter de la línea tiene un ``offset`` de 1."
 
 #: ../Doc/library/exceptions.rst:451
 msgid ""
@@ -758,11 +773,15 @@ msgid ""
 "expression.  For example, compiling f'Bad {a b} field' results in this args "
 "attribute: ('f-string: ...', ('', 1, 2, '(a b)\\n', 1, 5))."
 msgstr ""
+"Para errores en los campos de cadena f, el mensaje tiene el prefijo \"cadena "
+"f:\" y las compensaciones son compensaciones en un texto construido a partir "
+"de la expresión de reemplazo. Por ejemplo, compilar f'Bad {ab} field 'da "
+"como resultado este atributo args: (' f-string: ... ', (' ', 1, 2,' (ab) \\ "
+"n ', 1, 5)) ."
 
 #: ../Doc/library/exceptions.rst:456
-#, fuzzy
 msgid "Added the :attr:`end_lineno` and :attr:`end_offset` attributes."
-msgstr "Se han añadido los atributos :attr:`name` y :attr:`path`."
+msgstr "Se agregaron los atributos :attr:`end_lineno` y :attr:`end_offset`."
 
 #: ../Doc/library/exceptions.rst:461
 msgid ""
@@ -869,11 +888,11 @@ msgid ""
 "object is meant to support a given operation but has not yet provided an "
 "implementation, :exc:`NotImplementedError` is the proper exception to raise."
 msgstr ""
-"El código de usuario puede generar esta excepción para indicar que un "
-"intento de operación en un objeto no es compatible y no debe serlo. Si un "
-"objeto está destinado a soportar una operación dada pero aún no ha "
-"proporcionado una implementación, :exc:`NotImplementedError` es la excepción "
-"adecuada para generar."
+"El código de usuario puede lanzar esta excepción para indicar que un intento "
+"de operación en un objeto no es compatible y no debe serlo. Si un objeto "
+"está destinado a soportar una operación dada pero aún no ha proporcionado "
+"una implementación, :exc:`NotImplementedError` es la excepción adecuada para "
+"lanzar."
 
 #: ../Doc/library/exceptions.rst:520
 msgid ""
@@ -1120,7 +1139,7 @@ msgid ""
 "rationale), instead of raising :exc:`InterruptedError`."
 msgstr ""
 "Python ahora vuelve a intentar las llamadas del sistema cuando una señal "
-"interrumpe un *syscall*, excepto si el gestor señala generar una excepción "
+"interrumpe un *syscall*, excepto si el gestor de señales lanza una excepción "
 "(ver :pep:`475` para la justificación), en lugar de lanzar :exc:"
 "`InterruptedError`."
 
@@ -1139,6 +1158,11 @@ msgid ""
 "be raised if an operation attempts to open or traverse a non-directory file "
 "as if it were a directory. Corresponds to :c:data:`errno` ``ENOTDIR``."
 msgstr ""
+"Se genera cuando se solicita una operación de directorio (como :func:`os."
+"listdir`) en algo que no es un directorio. En la mayoría de las plataformas "
+"POSIX, también se puede lanzar si una operación intenta abrir o recorrer un "
+"archivo que no es de directorio como si fuera un directorio. Corresponde a :"
+"c:data:`errno` ``ENOTDIR``."
 
 #: ../Doc/library/exceptions.rst:701
 msgid ""
@@ -1217,7 +1241,7 @@ msgstr ""
 
 #: ../Doc/library/exceptions.rst:751 ../Doc/library/exceptions.rst:767
 msgid "The deprecation policy is described in :pep:`387`."
-msgstr ""
+msgstr "La política de obsolescencia se describe en :pep:`387`."
 
 #: ../Doc/library/exceptions.rst:756
 msgid ""
@@ -1277,13 +1301,12 @@ msgid "Base class for warnings related to Unicode."
 msgstr "Clase base para advertencias relacionadas con Unicode."
 
 #: ../Doc/library/exceptions.rst:801
-#, fuzzy
 msgid "Base class for warnings related to encodings."
-msgstr "Clase base para advertencias relacionadas con Unicode."
+msgstr "Clase base para advertencias relacionadas con codificaciones."
 
 #: ../Doc/library/exceptions.rst:803
 msgid "See :ref:`io-encoding-warning` for details."
-msgstr ""
+msgstr "Consulte :ref:`io-encoding-warning` para obtener más detalles."
 
 #: ../Doc/library/exceptions.rst:810
 msgid ""
@@ -1303,38 +1326,3 @@ msgstr "Jerarquía de excepción"
 #: ../Doc/library/exceptions.rst:827
 msgid "The class hierarchy for built-in exceptions is:"
 msgstr "La jerarquía de clases para las excepciones incorporadas es:"
-
-#~ msgid ""
-#~ "Base class for warnings related to resource usage. Ignored by the default "
-#~ "warning filters."
-#~ msgstr ""
-#~ "Clase base para advertencias relacionadas con el uso de recursos. "
-#~ "Ignorado por los filtros de advertencia predeterminados."
-
-#~ msgid ""
-#~ "This method sets *tb* as the new traceback for the exception and returns "
-#~ "the exception object.  It is usually used in exception handling code like "
-#~ "this::"
-#~ msgstr ""
-#~ "Este método establece ``tb`` como el nuevo ``traceback`` para la "
-#~ "excepción y retorna el objeto de excepción. Normalmente se utiliza en "
-#~ "código de control de excepciones como este::"
-
-#~ msgid ""
-#~ "Instances of this class have attributes :attr:`filename`, :attr:"
-#~ "`lineno`, :attr:`offset` and :attr:`text` for easier access to the "
-#~ "details.  :func:`str` of the exception instance returns only the message."
-#~ msgstr ""
-#~ "Las instancias de esta clase tienen atributos :attr:`filename`, :attr:"
-#~ "`lineno`, :attr:`offset` y :attr:`text` para facilitar el acceso a los "
-#~ "detalles. :func:`str` de la instancia de excepción retorna solo el "
-#~ "mensaje."
-
-#~ msgid ""
-#~ "Raised when a directory operation (such as :func:`os.listdir`) is "
-#~ "requested on something which is not a directory. Corresponds to :c:data:"
-#~ "`errno` ``ENOTDIR``."
-#~ msgstr ""
-#~ "Se genera cuando se solicita una operación de directorio (como :func:`os."
-#~ "listdir`) en algo que no es un directorio. Corresponde a :c:data:`errno` "
-#~ "``ENOTDIR``."
