@@ -13,12 +13,12 @@ msgstr ""
 "POT-Creation-Date: 2021-10-16 21:42+0200\n"
 "PO-Revision-Date: 2021-08-02 19:31+0200\n"
 "Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
-"Language: es\n"
 "Language-Team: python-doc-es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: ../Doc/reference/expressions.rst:6
@@ -1011,6 +1011,16 @@ msgid ""
 "the async generator by calling :meth:`~agen.aclose` method to finalize the "
 "generator and ultimately detach it from the event loop."
 msgstr ""
+"Si un generador asincrónico sale temprano por :keyword:`break`, la tarea de "
+"la persona que llama se cancela u otras excepciones, el código de limpieza "
+"asíncrono del generador se ejecutará y posiblemente generará excepciones o "
+"accederá a variables de contexto en un contexto inesperado, tal vez después "
+"de la vida útil de las tareas de las que depende. , o durante el cierre del "
+"ciclo de eventos cuando se llama al gancho de recolección de basura del "
+"generador asíncrono. Para evitar esto, la persona que llama debe cerrar "
+"explícitamente el generador asíncrono llamando al método :meth:`~agen."
+"aclose` para finalizar el generador y finalmente desconectarlo del bucle de "
+"eventos."
 
 #: ../Doc/reference/expressions.rst:658
 msgid ""
@@ -1037,7 +1047,6 @@ msgstr ""
 "cualquier cláusula :keyword:`!finally` pendiente."
 
 #: ../Doc/reference/expressions.rst:669
-#, fuzzy
 msgid ""
 "To take care of finalization upon event loop termination, an event loop "
 "should define a *finalizer* function which takes an asynchronous generator-"
@@ -1049,15 +1058,15 @@ msgid ""
 "implementation of ``asyncio.Loop.shutdown_asyncgens`` in :source:`Lib/"
 "asyncio/base_events.py`."
 msgstr ""
-"Para encargarse de la finalización, un bucle de eventos debe definir una "
-"función *finalizadora* la cual toma un generador-iterador asincrónico y "
-"presumiblemente invoca :meth:`~agen.aclose` y ejecuta la corrutina. Este "
-"*finalizador* puede ser registrado invocando :func:`sys.set_asyncgen_hooks`. "
-"Cuando es iterada por primera vez, un generador-iterador asincrónico "
-"almacenará el *finalizador* registrado para ser invocado en la finalización. "
-"Para un ejemplo de referencia de un método *finalizador* vea la "
-"implementación de ``asyncio.Loop.shutdown_asyncgens`` en :source:`Lib/"
-"asyncio/base_events.py`."
+"Para encargarse de la finalización tras la finalización del ciclo de "
+"eventos, un ciclo de eventos debe definir una función *finalizer* que tome "
+"un generador-iterador asíncrono y presumiblemente llame a :meth:`~agen."
+"aclose` y ejecute la rutina. Este *finalizer* se puede registrar llamando a :"
+"func:`sys.set_asyncgen_hooks`. Cuando se itera por primera vez, un generador-"
+"iterador asíncrono almacenará el *finalizer* registrado para ser llamado al "
+"finalizar. Para obtener un ejemplo de referencia de un método *finalizer*, "
+"consulte la implementación de ``asyncio.Loop.shutdown_asyncgens`` en :source:"
+"`Lib/asyncio/base_events.py`."
 
 #: ../Doc/reference/expressions.rst:678
 msgid ""
@@ -1724,6 +1733,8 @@ msgstr ""
 msgid ""
 "This operation can be customized using the special :meth:`__pow__` method."
 msgstr ""
+"Esta operación se puede personalizar mediante el método especial :meth:"
+"`__pow__`."
 
 #: ../Doc/reference/expressions.rst:1156
 msgid "Unary arithmetic and bitwise operations"
@@ -1736,25 +1747,24 @@ msgstr ""
 "prioridad:"
 
 #: ../Doc/reference/expressions.rst:1173
-#, fuzzy
 msgid ""
 "The unary ``-`` (minus) operator yields the negation of its numeric "
 "argument; the operation can be overridden with the :meth:`__neg__` special "
 "method."
 msgstr ""
 "El operador unario ``-`` (menos) produce la negación de su argumento "
-"numérico."
+"numérico; la operación se puede anular con el método especial :meth:"
+"`__neg__`."
 
 #: ../Doc/reference/expressions.rst:1181
-#, fuzzy
 msgid ""
 "The unary ``+`` (plus) operator yields its numeric argument unchanged; the "
 "operation can be overridden with the :meth:`__pos__` special method."
 msgstr ""
-"El operador unario ``+`` (más) produce su argumento numérico sin cambios."
+"El operador unario ``+`` (más) produce su argumento numérico sin cambios; la "
+"operación se puede anular con el método especial :meth:`__pos__`."
 
 #: ../Doc/reference/expressions.rst:1188
-#, fuzzy
 msgid ""
 "The unary ``~`` (invert) operator yields the bitwise inversion of its "
 "integer argument.  The bitwise inversion of ``x`` is defined as ``-(x+1)``.  "
@@ -1763,7 +1773,8 @@ msgid ""
 msgstr ""
 "El operador unario ``~`` (invertir) produce la inversión bit a bit de su "
 "argumento entero. La inversión bit a bit de ``x`` se define como ``-(x+1)``. "
-"Sólo aplica a números integrales."
+"Solo se aplica a números enteros o a objetos personalizados que anulan el "
+"método especial :meth:`__invert__`."
 
 #: ../Doc/reference/expressions.rst:1197
 msgid ""
@@ -1810,6 +1821,8 @@ msgid ""
 "This operation can be customized using the special :meth:`__mul__` and :meth:"
 "`__rmul__` methods."
 msgstr ""
+"Esta operación se puede personalizar utilizando los métodos especiales :meth:"
+"`__mul__` y :meth:`__rmul__`."
 
 #: ../Doc/reference/expressions.rst:1236
 msgid ""
@@ -1841,6 +1854,8 @@ msgid ""
 "This operation can be customized using the special :meth:`__truediv__` and :"
 "meth:`__floordiv__` methods."
 msgstr ""
+"Esta operación se puede personalizar utilizando los métodos especiales :meth:"
+"`__truediv__` y :meth:`__floordiv__`."
 
 #: ../Doc/reference/expressions.rst:1261
 msgid ""
@@ -1893,6 +1908,8 @@ msgid ""
 "The *modulo* operation can be customized using the special :meth:`__mod__` "
 "method."
 msgstr ""
+"La operación *modulo* se puede personalizar utilizando el método especial :"
+"meth:`__mod__`."
 
 #: ../Doc/reference/expressions.rst:1282
 msgid ""
@@ -1921,6 +1938,8 @@ msgid ""
 "This operation can be customized using the special :meth:`__add__` and :meth:"
 "`__radd__` methods."
 msgstr ""
+"Esta operación se puede personalizar utilizando los métodos especiales :meth:"
+"`__add__` y :meth:`__radd__`."
 
 #: ../Doc/reference/expressions.rst:1304
 msgid ""
@@ -1934,6 +1953,8 @@ msgstr ""
 msgid ""
 "This operation can be customized using the special :meth:`__sub__` method."
 msgstr ""
+"Esta operación se puede personalizar mediante el método especial :meth:"
+"`__sub__`."
 
 #: ../Doc/reference/expressions.rst:1313
 msgid "Shifting operations"
@@ -1960,6 +1981,8 @@ msgid ""
 "This operation can be customized using the special :meth:`__lshift__` and :"
 "meth:`__rshift__` methods."
 msgstr ""
+"Esta operación se puede personalizar utilizando los métodos especiales :meth:"
+"`__lshift__` y :meth:`__rshift__`."
 
 #: ../Doc/reference/expressions.rst:1333
 msgid ""
@@ -1986,26 +2009,30 @@ msgid ""
 "integers or one of them must be a custom object overriding :meth:`__and__` "
 "or :meth:`__rand__` special methods."
 msgstr ""
+"El operador ``&`` produce el AND bit a bit de sus argumentos, que deben ser "
+"números enteros o uno de ellos debe ser un objeto personalizado que anule "
+"los métodos especiales :meth:`__and__` o :meth:`__rand__`."
 
 #: ../Doc/reference/expressions.rst:1364
-#, fuzzy
 msgid ""
 "The ``^`` operator yields the bitwise XOR (exclusive OR) of its arguments, "
 "which must be integers or one of them must be a custom object overriding :"
 "meth:`__xor__` or :meth:`__rxor__` special methods."
 msgstr ""
-"El operador ``^`` produce el XOR (OR exclusivo) bit a bit de sus argumentos, "
-"los cuales deben ser enteros."
+"El operador ``^`` produce el XOR bit a bit (OR exclusivo) de sus argumentos, "
+"que deben ser números enteros o uno de ellos debe ser un objeto "
+"personalizado que anule los métodos especiales :meth:`__xor__` o :meth:"
+"`__rxor__`."
 
 #: ../Doc/reference/expressions.rst:1373
-#, fuzzy
 msgid ""
 "The ``|`` operator yields the bitwise (inclusive) OR of its arguments, which "
 "must be integers or one of them must be a custom object overriding :meth:"
 "`__or__` or :meth:`__ror__` special methods."
 msgstr ""
-"El operador ``|`` produce el OR (inclusivo) bit a bit de sus argumentos, los "
-"cuales deben ser enteros."
+"El operador ``|`` produce el OR bit a bit (inclusive) de sus argumentos, que "
+"deben ser números enteros o uno de ellos debe ser un objeto personalizado "
+"que anule los métodos especiales :meth:`__or__` o :meth:`__ror__`."
 
 #: ../Doc/reference/expressions.rst:1381
 msgid "Comparisons"
@@ -2029,6 +2056,10 @@ msgid ""
 "comparison methods` may return non-boolean values. In this case Python will "
 "call :func:`bool` on such value in boolean contexts."
 msgstr ""
+"Las comparaciones producen valores booleanos: ``True`` o ``False``. "
+"Personalizado: dfn: los `métodos de comparación enriquecidos` pueden "
+"retornar valores no booleanos. En este caso, Python llamará a :func:`bool` "
+"en dicho valor en contextos booleanos."
 
 #: ../Doc/reference/expressions.rst:1409
 msgid ""
@@ -2771,7 +2802,6 @@ msgid "Operator precedence"
 msgstr "Prioridad de operador"
 
 #: ../Doc/reference/expressions.rst:1849
-#, fuzzy
 msgid ""
 "The following table summarizes the operator precedence in Python, from "
 "highest precedence (most binding) to lowest precedence (least binding).  "
@@ -2779,12 +2809,13 @@ msgid ""
 "explicitly given, operators are binary.  Operators in the same box group "
 "left to right (except for exponentiation, which groups from right to left)."
 msgstr ""
-"La siguiente tabla resume la prioridad de operador en Python, desde la "
-"prioridad más baja (menos vinculante) a la prioridad más alta (más "
-"vinculante). Operadores en la misma caja tienen la misma prioridad. A no ser "
-"que la sintaxis sea dada explícitamente, los operadores son binarios. Los "
-"operadores en la misma caja, de izquierda a derecha (excepto para "
-"exponenciación, cuyos grupos de derecha a izquierda)."
+"La siguiente tabla resume la precedencia del operador en Python, desde la "
+"precedencia más alta (más vinculante) hasta la precedencia más baja (menos "
+"vinculante). Los operadores en el mismo cuadro tienen la misma precedencia. "
+"A menos que la sintaxis se proporcione explícitamente, los operadores son "
+"binarios. Los operadores en el mismo cuadro se agrupan de izquierda a "
+"derecha (excepto para la exponenciación, que se agrupa de derecha a "
+"izquierda)."
 
 #: ../Doc/reference/expressions.rst:1855
 msgid ""
