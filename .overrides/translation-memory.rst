@@ -228,6 +228,9 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
    third-party
      de terceros ``library/typing.po``
 
+   thread
+     hilos ``library/threading.po``
+
    timeout
      timeout  ``library/smtplib.po``
      Significado: tiempo de espera para establecer/reintentar una conexión de red
