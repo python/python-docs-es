@@ -114,7 +114,7 @@ realizado para no traducir dos veces lo mismo.  El proceso para traducir un
 archivo es el siguiente:
 
 
-#. Elige cualquier de los que *no están asignados* a otra persona.
+#. Elige cualquiera de los issues que *no están asignados* a otra persona.
 #. Deja un comentario en el issue diciendo que quieres trabajar en él.
 #. Espera a que un administrador te asigne el issue.
 #. ¡Empieza a traducir!
