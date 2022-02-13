@@ -1,0 +1,42 @@
+name: pospell
+on:
+  issue_comment:
+    types:
+      - created
+
+jobs:
+  fix-spell:
+    name: Fix spelling
+    runs-on: ubuntu-latest
+    if: ${{ github.event.comment.body == 'pospell-fix'}}
+    steps:
+      - name: Confirm process
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const {owner, repo} = context.issue
+            github.reactions.createForIssueComment({
+              owner,
+              repo,
+              comment_id: context.payload.comment.id,
+              content: "+1",
+            });
+      - uses: actions/checkout@v2
+      - name: Preparar Python v3.10
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+      - name: Instalar dependencias
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y hunspell hunspell-es gettext
+          python -m pip install -r requirements.txt
+      - name: Powrap
+        run: powrap --quiet **/*.po
+      - name: Pospell
+        run: python scripts/check_spell.py
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          message: "auto: spell check"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
