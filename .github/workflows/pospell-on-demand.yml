@@ -12,15 +12,13 @@ jobs:
     if: ${{ github.event.issue.pull_request && github.event.comment.body == 'pospell-fix' }}
     steps:
       - name: Confirmar ejecucion
-        uses: actions/github-script@v6
-        with:
-          script: |
-            await github.rest.issues.createForIssueComment({
-              context.repo.owner,
-              context.repo.repo,
-              comment_id: context.payload.comment.id,
-              content: "+1",
-            });
+        continue-on-error: true
+        run: |
+          curl ${{github.event.comment.url}}/reactions \
+            -X POST \
+            -d '{"content":"+1"}' \
+            -H "Accept: application/vnd.github.squirrel-girl-preview+json" \
+            -H "Authorization: token ${{github.token}}"
       - uses: actions/checkout@v3
       - name: Preparar Python v3.10
         uses: actions/setup-python@v4
