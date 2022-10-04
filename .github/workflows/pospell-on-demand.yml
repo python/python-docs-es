@@ -2,15 +2,14 @@ name: pospell
 on:
   issue_comment:
     types:
+      - edited
       - created
 
 jobs:
   fix-spell:
     name: Fix spelling
     runs-on: ubuntu-latest
-    if: |
-      github.event.comment.body == 'run-powrap'
-      && github.event.issue.pull_request
+    if: ${{ github.event.issue.pull_request && github.event.comment.body == 'pospell-fix' }}
     steps:
       - name: Confirmar ejecucion
         uses: actions/github-script@v6
