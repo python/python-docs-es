@@ -15,10 +15,9 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const {owner, repo} = context.issue
-            github.reactions.createForIssueComment({
-              owner,
-              repo,
+            await github.rest.issues.createForIssueComment({
+              context.repo.owner,
+              context.repo.repo,
               comment_id: context.payload.comment.id,
               content: "+1",
             });
