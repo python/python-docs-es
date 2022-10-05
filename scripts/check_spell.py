@@ -22,7 +22,9 @@ for filename in Path("dictionaries").glob("*.txt"):
 # Write merged dictionary file
 output_filename = tempfile.mktemp(suffix="_merged_dict.txt")
 with open(output_filename, "w") as f:
-    f.writelines(entries)
+    for e in entries:
+        f.write(e)
+        f.write('\n')
 
 # Run pospell either against all files or the file given on the command line
 po_files = sys.argv[1:]
