@@ -1,4 +1,4 @@
-name: pospell
+name: Ejecuta powrap
 on:
   issue_comment:
     types:
@@ -33,11 +33,7 @@ jobs:
         run: python -m pip install -r requirements.txt
       - name: Ejecutar Powrap
         run: powrap --quiet **/*.po
-      - name: Revisar con Pospell
-        run: python scripts/check_spell.py
-        continue-on-error: true
       - name: Commit & Push changes
-        uses: actions-js/push@master
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          message: "auto: spell check"
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          commit_message: "auto: spell check"
