@@ -20,6 +20,10 @@ jobs:
             -H "Accept: application/vnd.github.squirrel-girl-preview+json" \
             -H "Authorization: token ${{github.token}}"
       - uses: actions/checkout@v3
+      - uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: hunspell hunspell-es gettext
+          version: 1.0
       - name: Preparar Python v3.10
         uses: actions/setup-python@v4
         with:
@@ -27,8 +31,6 @@ jobs:
           cache: "pip"
       - name: Instalar dependencias
         run: |
-          sudo apt-get update
-          sudo apt-get install -y hunspell hunspell-es gettext
           python -m pip install -r requirements.txt
       - name: Ejecutar Powrap
         run: powrap --quiet **/*.po
