@@ -22,11 +22,14 @@ jobs:
       - name: Instalar dependencias
         run: |
           sudo apt-get update
-          sudo apt-get install -y hunspell hunspell-es gettext
+          sudo apt-get install -y hunspell hunspell-es gettext language-pack-es
           python -m pip install -r requirements.txt
           pip list
           pospell --version
           powrap --version
+      - name: TRANSLATORS
+        run: |
+          diff -Naur TRANSLATORS <(LANG=es python scripts/sort.py < TRANSLATORS)
       - name: Powrap
         run: powrap --check --quiet **/*.po
       - name: Pospell
