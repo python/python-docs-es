@@ -8,7 +8,7 @@
 # Configuration
 
 CPYTHON_PATH        := cpython   #Current commit for this upstream repo is setted by the submodule
-BRANCH              := 3.8
+BRANCH              := 3.11
 LANGUAGE_TEAM       := python-docs-es
 LANGUAGE            := es
 
@@ -80,7 +80,7 @@ venv:
 #        Makefile's "serve" target. Run "build" before using this target.
 .PHONY: serve
 serve:
-	$(MAKE) -C $(CPYTHON_WORKDIR)/Doc serve
+	$(MAKE) -C $(CPYTHON_WORKDIR)/Doc htmlview
 
 
 # clean: remove all .mo files and the venv directory that may exist and

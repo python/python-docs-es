@@ -45,6 +45,8 @@ _exclude_patterns = [
     # This file is not included and it's not marked as :orphan:
     'distutils/_setuptools_disclaimer.rst',
     'cpython/Doc/distutils/_setuptools_disclaimer.rst',
+    'cpython/Doc/library/cpython/Doc/includes/wasm-notavail.rst',
+    'cpython/Doc/install/cpython/Doc/distutils/_setuptools_disclaimer.rst'
 ]
 if 'exclude_patterns' in globals():
     exclude_patterns += _exclude_patterns
