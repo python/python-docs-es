@@ -71,7 +71,7 @@ venv:
 #        Makefile's "serve" target. Run "build" before using this target.
 .PHONY: serve
 serve:
-	$(MAKE) -C $(CPYTHON_WORKDIR)/Doc serve
+	$(MAKE) -C $(CPYTHON_WORKDIR)/Doc htmlview
 
 
 # clean: remove all .mo files and the venv directory that may exist and
