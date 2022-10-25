@@ -41,6 +41,15 @@ help:
 #        treated as errors, which is good to skip simple Sphinx syntax mistakes.
 .PHONY: build
 build: setup
+	# FIXME: Relative paths for includes in 'cpython'
+	sed -i -e 's|.. include:: ../includes/wasm-notavail.rst|.. include:: ../../../../includes/wasm-notavail.rst|g' cpython/Doc/**/*.rst
+	sed -i -e 's|.. include:: ../distutils/_setuptools_disclaimer.rst|.. include:: ../../../../distutils/_setuptools_disclaimer.rst|g' cpython/Doc/**/*.rst
+	sed -i -e 's|.. include:: ./_setuptools_disclaimer.rst|.. include:: ../../../_setuptools_disclaimer.rst|g' cpython/Doc/**/*.rst
+	sed -i -e 's|.. include:: token-list.inc|.. include:: ../../../token-list.inc|g' cpython/Doc/**/*.rst
+	sed -i -e 's|.. include:: ../../using/venv-create.inc|.. include:: ../using/venv-create.inc|g' cpython/Doc/**/*.rst
+	sed -i -e 's|.. include:: ../../../using/venv-create.inc|.. include:: ../../using/venv-create.inc|g' cpython/Doc/**/*.rst
+	sed -i -e 's|.. include:: /using/venv-create.inc|.. include:: ../../../../using/venv-create.inc|g' cpython/Doc/**/*.rst
+	# Normal build
 	PYTHONWARNINGS=ignore::FutureWarning $(VENV)/bin/sphinx-build -j auto -W --keep-going -b html -d $(OUTPUT_DOCTREE) -D language=$(LANGUAGE) . $(OUTPUT_HTML) && \
 		echo "Success! Open file://`pwd`/$(OUTPUT_HTML)/index.html, " \
 			"or run 'make serve' to see them in http://localhost:8000";
