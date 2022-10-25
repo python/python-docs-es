@@ -53,7 +53,7 @@ We are currently in branch 3.10, and we want to update the strings from 3.11.
      pip install -r requirements.txt
 
 
-#. Create the .po files from the new source code. This will generate all the .po files for version 3.8::
+#. Create the .po files from the new source code. This will generate all the .po files for version 3.11::
 
      SPHINX_GETTEXT=True sphinx-build -j auto -b gettext -d _build/doctrees . ../python-docs-es-pot
 
@@ -69,8 +69,8 @@ We are currently in branch 3.10, and we want to update the strings from 3.11.
 #. At this point, all the `.po` files will have a different comment on each translation phrase,
    for example::
 
-     -#: ../Doc/whatsnew/3.9.rst:3
-     +#: ../python-docs-es/cpython/Doc/whatsnew/3.9.rst:3
+     -#: ../Doc/whatsnew/3.11.rst:3
+     +#: ../python-docs-es/cpython/Doc/whatsnew/3.11.rst:3
 
    As you can see, it added the path of the local repository, but you can
    remove it from it with this regular expression::
@@ -91,3 +91,11 @@ We are currently in branch 3.10, and we want to update the strings from 3.11.
    you will find many warnings that needs to be fixed before the push
    of the new branch is done. So prepare a cup of any hot beverage
    and fix them.
+
+
+Once the process is completely and you are happy with the results,
+there are a few extra steps to finish the process::
+
+#. Upgrade GitHub Actions to use Python 3.11
+
+#. Update Read the Docs project to use 3.11 in the build and also as default branch/version
