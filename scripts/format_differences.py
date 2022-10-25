@@ -39,8 +39,8 @@ _patterns = [
     "``[^`]+``",
     "`[^`]+`__",
     "`[^`]+`_",
-    "\*\*[^\*]+\*\*",  # bold text between **
-    "\*[^\*]+\*",  # italic text between *
+    r"\*\*[^\*]+\*\*",  # bold text between **
+    r"\*[^\*]+\*",  # italic text between *
 ]
 
 _exps = [re.compile(e) for e in _patterns]
@@ -86,7 +86,7 @@ if __name__ == "__main__":
     else:
         files = [i for i in PO_DIR.glob("**/**/*.po") if not i.is_relative_to(VENV_DIR)]
 
-    for i, pofilename in enumerate(files):
+    for pofilename in files:
         print(f"\n> Processing {pofilename}")
         po = polib.pofile(pofilename)
 
