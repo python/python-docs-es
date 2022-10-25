@@ -1,9 +1,9 @@
-.. image:: https://travis-ci.org/python/python-docs-es.svg?branch=3.10
+.. image:: https://travis-ci.org/python/python-docs-es.svg?branch=3.11
   :target: https://travis-ci.org/python/python-docs-es
   :alt: Build Status
 
-.. image:: https://readthedocs.org/projects/python-docs-es/badge/?version=3.10
-   :target: https://python-docs-es.readthedocs.io/es/3.10/?badge=3.10
+.. image:: https://readthedocs.org/projects/python-docs-es/badge/?version=3.11
+   :target: https://python-docs-es.readthedocs.io/es/3.11/?badge=3.11
    :alt: Documentation Status
 
 
