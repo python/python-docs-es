@@ -8,43 +8,59 @@ We are currently in branch 3.10, and we want to update the strings from 3.11.
 
 #. Make sure you are in a clean state of the branch 3.10
 
-#. Create a new branch
+#. Create a new branch called ``3.11``
 
-#. Fetch the `latest commit of 3.10 branch <https://github.com/python/cpython/commit/69b6b56d857440183e227ca0b10c84bca4239985>`_::
+#. Initialize the submodules::
+
+     git submodule init
+     git submodule update
+
+#. Fetch the `latest commit of 3.11 branch <https://github.com/python/cpython/commit/69b6b56d857440183e227ca0b10c84bca4239985>`_::
 
      cd cpython/
-     git fetch --depth 1 origin 69b6b56d857440183e227ca0b10c84bca4239985
+     git fetch --depth 1 origin b3cafb60afeb2300002af9982d43703435b8302d
 
    .. note:: you could also base the hash on the 'git tag' from the desired
-             version: `git checkout tags/v3.11.0 -b 3.11` considering that
-             `3.11` doesn't exist locally.
+             version: ``git checkout tags/v3.11.0 -b 3.11`` considering that
+             ``3.11`` doesn't exist locally.
 
 #. Checkout that commit locally::
 
      git checkout 69b6b56d857440183e227ca0b10c84bca4239985
 
-#. Update the branch on the `Makefile` and check the `requirements.txt` from
+#. Update the branch on the ``Makefile`` and check the ``requirements.txt`` from
    the cpython repository, to see if upgrades on the modules like sphinx is
    needed.
-
-#. Verify that the docs build with the new versions you changed from
-   `requirements.txt` mainly the sphinx version.
 
 #. Commit the update of the submodule change::
 
      git add cpython
      git commit -m "Update the cpython submodule"
 
-   .. note:: This is important, so the later `make build` step will not reset
+   .. note:: This is important, so the later ``make build`` step will not reset
              the cpython submodule to the previous hash on the old branch.
+
+#. Verify that the docs build with the new versions you changed from
+   ``requirements.txt`` mainly the sphinx version::
+
+     make html
+
+   .. note::
+
+      It may fail the build because there may be files
+      that don't exist anymore in the new branch.
+      If that's the case, just continue with the steps
+      and verify the build later.
 
 #. Clean possible garbage (form previous builds)::
 
      rm -rf _build ../python-docs-es-pot cpython/Doc/CONTRIBUTING.rst cpython/Doc/upgrade-python-version.rst
 
-   .. note: the 'python-docs-es-pot' is a temporary directory that is created
-            in the next step. It's included here because it might be a leftover
-            from previous attempts on your machine.
+   .. note::
+
+      The 'python-docs-es-pot' is a temporary directory that is created
+      in the next step. It's included here because it might be a leftover
+      from previous attempts on your machine.
 
 #. Create a virtual environment and install the dependencies of the project::
 
@@ -59,30 +75,37 @@ We are currently in branch 3.10, and we want to update the strings from 3.11.
 
    .. note::
 
-      In `../python-docs-es-pot` directory, we will have the new .pot files with new strings from 3.11 branch.
+      In ``../python-docs-es-pot`` directory, we will have the new .pot files with new strings from 3.11 branch.
       All these strings will be *untranslated* at this point.
 
 #. Now, we update our translated files form the source language (English) with new strings::
 
      sphinx-intl update --language es --pot-dir ../python-docs-es-pot --locale-dir cpython/locales/
 
-#. At this point, all the `.po` files will have a different comment on each translation phrase,
+#. At this point, all the ``.po`` files will have a different comment on each translation phrase,
    for example::
 
-     -#: ../Doc/whatsnew/3.11.rst:3
-     +#: ../python-docs-es/cpython/Doc/whatsnew/3.11.rst:3
+     -#: ../python-docs-es/cpython/Doc/whatsnew/3.11.rst:3
+     +#: ../Doc/whatsnew/3.11.rst:3
 
    As you can see, it added the path of the local repository, but you can
    remove it from it with this regular expression::
 
      sed -i **/*.po -e "s|python-docs-es/cpython/||g"
 
-   ..note:: if you have your local repository cloned with a different name,
-            please make sure to adapt the expression.
+   .. note::
 
-#. Pass `powrap` to make the column widths consistent::
+      If you have your local repository cloned with a different name,
+      please make sure to adapt the expression.
+
+#. Pass ``powrap`` to make the column widths consistent::
 
      powrap --modified
+
+   .. note::
+
+      Make sure you have installed ``gettext``,
+      since it's required for the previous command.
 
 #. Prepare for fireworks! Now it's time for an initial build::
 
