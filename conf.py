@@ -107,7 +107,7 @@ def setup(app):
         'Ayuda a acercar Python a más personas de habla hispana.'
 
         paragraph = core.publish_doctree(message)[0]
-        banner = nodes.warning(ids=['contributing-banner'])
+        banner = nodes.note(ids=['contributing-banner'])
         banner.append(paragraph)
 
         for document in doctree.traverse(nodes.document):
