@@ -15,7 +15,7 @@ We are currently in branch 3.10, and we want to update the strings from 3.11.
      git submodule init
      git submodule update
 
-#. Fetch the `latest commit of 3.11 branch <https://github.com/python/cpython/commit/69b6b56d857440183e227ca0b10c84bca4239985>`_::
+#. Fetch the `latest commit of 3.11 branch <https://github.com/python/cpython/commit/b3cafb60afeb2300002af9982d43703435b8302d>`_::
 
      cd cpython/
      git fetch --depth 1 origin b3cafb60afeb2300002af9982d43703435b8302d
