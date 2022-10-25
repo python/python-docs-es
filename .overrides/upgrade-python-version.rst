@@ -26,7 +26,7 @@ We are currently in branch 3.10, and we want to update the strings from 3.11.
 
 #. Checkout that commit locally::
 
-     git checkout 69b6b56d857440183e227ca0b10c84bca4239985
+     git checkout b3cafb60afeb2300002af9982d43703435b8302d
 
 #. Update the branch on the ``Makefile`` and check the ``requirements.txt`` from
    the cpython repository, to see if upgrades on the modules like sphinx is
