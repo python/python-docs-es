@@ -44,9 +44,7 @@ html_title = f'Documentación de Python en Español -- {release}'
 _exclude_patterns = [
     # This file is not included and it's not marked as :orphan:
     'distutils/_setuptools_disclaimer.rst',
-    'cpython/Doc/distutils/_setuptools_disclaimer.rst',
-    'cpython/Doc/library/cpython/Doc/includes/wasm-notavail.rst',
-    'cpython/Doc/install/cpython/Doc/distutils/_setuptools_disclaimer.rst'
+    'includes/wasm-notavail.rst',
 ]
 if 'exclude_patterns' in globals():
     exclude_patterns += _exclude_patterns
