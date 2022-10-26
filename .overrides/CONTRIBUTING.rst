@@ -114,7 +114,7 @@ realizado para no traducir dos veces lo mismo.  El proceso para traducir un
 archivo es el siguiente:
 
 
-#. Elige cualquier de los que *no están asignados* a otra persona.
+#. Elige cualquiera de los issues que *no están asignados* a otra persona.
 #. Deja un comentario en el issue diciendo que quieres trabajar en él.
 #. Espera a que un administrador te asigne el issue.
 #. ¡Empieza a traducir!
@@ -161,9 +161,6 @@ A tener en cuenta
   ejemplo un artículo a Wikipedia). En caso de que no haya una traducción del
   artículo en Wikipedia deja el título sin traducir.
 
-* Tenemos una :doc:`Memoria de Traducción <translation-memory>`, que usamos para tener
-  consistencia con algunos términos.
-
 * Si tienes una **duda sobre una palabra o término**, escríbelo como mejor suene
   para vos y marca ese párrafo como "Need work" / "Necesita trabajo" en
   *poedit*. Además, escribe un comentario explicando cuál es el termino en ese
@@ -202,6 +199,16 @@ Allí debería haber uno que diga ``docs/readthedocs.org:python-docs-es`` y al l
 
 Haciendo click en ese link verás una versión de la documentación completa que incluirá todos tus cambios.
 Tendrás que navegar hasta el archivo que hayas cambiado para ver cómo se visualiza luego del build.
+
+
+Memoria de traducción
+---------------------
+
+Tenemos una :doc:`Memoria de Traducción <translation-memory>`, que usamos para tener consistencia con algunos
+términos. 
+Si tienes alguna duda respecto a cómo traducir alguna palabra no te olvides de revisar este contenido.
+Del mismo modo, si luego de trabajar sobre un término *complicado* llegas a un acuerdo con otros colaboradores: 
+no se olviden de agregarlo.
 
 
 .. _repositorio: https://github.com/python/python-docs-es

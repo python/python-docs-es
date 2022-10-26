@@ -11,19 +11,20 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-16 21:42+0200\n"
-"PO-Revision-Date: 2021-08-02 01:21+0200\n"
-"Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
+"PO-Revision-Date: 2021-12-09 10:51+0800\n"
+"Last-Translator: Rodrigo Tobar <rtobarc@gmail.com>\n"
 "Language: es\n"
 "Language-Team: python-doc-es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
+"X-Generator: Poedit 3.0\n"
 
 #: ../Doc/c-api/module.rst:6
 msgid "Module Objects"
-msgstr "Objectos Modulo"
+msgstr "Objetos Modulo"
 
 #: ../Doc/c-api/module.rst:15
 msgid ""
@@ -87,7 +88,7 @@ msgstr ""
 "Retorna el objeto del diccionario que implementa el espacio de nombres de "
 "*module*; este objeto es el mismo que el atributo :attr:`~object.__dict__` "
 "del objeto módulo. Si *module* no es un objeto módulo (o un subtipo de un "
-"objeto de módulo), :exc:`SystemError` se genera y se retorna ``NULL``."
+"objeto de módulo), se lanza :exc:`SystemError` y se retorna ``NULL``."
 
 #: ../Doc/c-api/module.rst:67
 msgid ""
@@ -337,6 +338,11 @@ msgid ""
 "collector is not involved and :c:member:`~PyModuleDef.m_free` is called "
 "directly."
 msgstr ""
+"Tal como :c:member:`PyTypeObject.tp_clear`, esta función no *siempre* es "
+"llamada antes de la designación de un módulo. Por ejemplo, cuando el "
+"recuento de referencias está  listo para determinar que un objeto no se usa "
+"más, la recolección de basura cíclica no se involucra y se llama a :c:member:"
+"`~PyModuleDef.m_free` directamente."
 
 #: ../Doc/c-api/module.rst:235
 msgid ""
@@ -390,7 +396,6 @@ msgstr ""
 "necesita."
 
 #: ../Doc/c-api/module.rst:273
-#, fuzzy
 msgid ""
 "Before it is returned from in the initialization function, the resulting "
 "module object is typically populated using functions like :c:func:"
@@ -398,7 +403,7 @@ msgid ""
 msgstr ""
 "Antes de que se retorne desde la función de inicialización, el objeto del "
 "módulo resultante normalmente se llena utilizando funciones como :c:func:"
-"`PyModule_AddObject`."
+"`PyModule_AddObjectRef`."
 
 #: ../Doc/c-api/module.rst:279
 msgid "Multi-phase initialization"
@@ -701,47 +706,55 @@ msgstr ""
 "funciones para ayudar a inicializar el estado del módulo:"
 
 #: ../Doc/c-api/module.rst:449
-#, fuzzy
 msgid ""
 "Add an object to *module* as *name*.  This is a convenience function which "
 "can be used from the module's initialization function."
 msgstr ""
-"Agrega una constante entera a *module* como *name*. Esta función de "
-"conveniencia se puede usar desde la función de inicialización del módulo. "
-"Retorna ``-1`` en caso de error, ``0`` en caso de éxito."
+"Agrega un objeto a *module* como *name*. Esta es una función de conveniencia "
+"que se puede usar desde la función de inicialización del módulo."
 
 #: ../Doc/c-api/module.rst:452
 msgid ""
 "On success, return ``0``. On error, raise an exception and return ``-1``."
 msgstr ""
+"En caso de éxito, retorna ``0``. En caso de error, lanza una excepción y "
+"retorna ``-1``."
 
 #: ../Doc/c-api/module.rst:454
 msgid ""
 "Return ``NULL`` if *value* is ``NULL``. It must be called with an exception "
 "raised in this case."
 msgstr ""
+"Retorna ``NULL`` si *value* es ``NULL``. Debe llamarse lanzando una "
+"excepción en este caso."
 
 #: ../Doc/c-api/module.rst:457 ../Doc/c-api/module.rst:506
 msgid "Example usage::"
-msgstr ""
+msgstr "Ejemplo de uso ::"
 
 #: ../Doc/c-api/module.rst:471 ../Doc/c-api/module.rst:524
 msgid ""
 "The example can also be written without checking explicitly if *obj* is "
 "``NULL``::"
 msgstr ""
+"El ejemplo puede también ser escrito sin verificar explicitamente si *obj* "
+"es ``NULL``::"
 
 #: ../Doc/c-api/module.rst:483 ../Doc/c-api/module.rst:540
 msgid ""
 "Note that ``Py_XDECREF()`` should be used instead of ``Py_DECREF()`` in this "
 "case, since *obj* can be ``NULL``."
 msgstr ""
+"Note que ``Py_XDECREF()`` debería ser usado en vez de ``Py_DECREF()`` en "
+"este caso, ya que *obj* puede ser ``NULL``."
 
 #: ../Doc/c-api/module.rst:491
 msgid ""
 "Similar to :c:func:`PyModule_AddObjectRef`, but steals a reference to "
 "*value* on success (if it returns ``0``)."
 msgstr ""
+"Similar a :c:func:`PyModule_AddObjectRef`, pero roba una referencia a "
+"*value* en caso de éxito (en este caso retorna ``0``)."
 
 #: ../Doc/c-api/module.rst:494
 msgid ""
@@ -749,6 +762,9 @@ msgid ""
 "easy to introduce reference leaks by misusing the :c:func:"
 "`PyModule_AddObject` function."
 msgstr ""
+"Se recomienda la nueva función :c:func:`PyModule_AddObjectRef`, ya que es "
+"sencillo introducir fugas de referencias por un uso incorrecto de la "
+"función :c:func:`PyModule_AddObject`."
 
 #: ../Doc/c-api/module.rst:500
 msgid ""
@@ -760,14 +776,12 @@ msgstr ""
 "**en caso de éxito**."
 
 #: ../Doc/c-api/module.rst:503
-#, fuzzy
 msgid ""
 "This means that its return value must be checked, and calling code must :c:"
 "func:`Py_DECREF` *value* manually on error."
 msgstr ""
 "Esto significa que su valor de retorno debe ser verificado, y el código de "
-"llamada debe :c:func:`Py_DECREF` *value* manualmente en caso de error. "
-"Ejemplo de uso::"
+"llamada debe :c:func:`Py_DECREF` *value* manualmente en caso de error."
 
 #: ../Doc/c-api/module.rst:546
 msgid ""
@@ -904,50 +918,3 @@ msgid ""
 msgstr ""
 "Elimina el objeto del módulo creado a partir de *def* del estado del "
 "intérprete. Retorna 0 en caso de éxito o -1 en caso de error."
-
-#~ msgid ""
-#~ "A traversal function to call during GC traversal of the module object, or "
-#~ "``NULL`` if not needed. This function may be called before module state "
-#~ "is allocated (:c:func:`PyModule_GetState()` may return `NULL`), and "
-#~ "before the :c:member:`Py_mod_exec` function is executed."
-#~ msgstr ""
-#~ "Una función transversal para llamar durante el recorrido del GC del "
-#~ "objeto del módulo, o ``NULL`` si no es necesario. Se puede llamar a esta "
-#~ "función antes de asignar el estado del módulo (:c:func:"
-#~ "`PyModule_GetState()` puede retornar `NULL`), y antes de que se ejecute "
-#~ "la función :c:member:`Py_mod_exec`."
-
-#~ msgid ""
-#~ "A clear function to call during GC clearing of the module object, or "
-#~ "``NULL`` if not needed. This function may be called before module state "
-#~ "is allocated (:c:func:`PyModule_GetState()` may return `NULL`), and "
-#~ "before the :c:member:`Py_mod_exec` function is executed."
-#~ msgstr ""
-#~ "Una función clara para llamar durante la eliminación de GC del objeto del "
-#~ "módulo, o ``NULL`` si no es necesario. Se puede llamar a esta función "
-#~ "antes de asignar el estado del módulo (:c:func:`PyModule_GetState()` "
-#~ "puede retornar `NULL`), y antes de que se ejecute la función :c:member:"
-#~ "`Py_mod_exec`."
-
-#~ msgid ""
-#~ "A function to call during deallocation of the module object, or ``NULL`` "
-#~ "if not needed. This function may be called before module state is "
-#~ "allocated (:c:func:`PyModule_GetState()` may return `NULL`), and before "
-#~ "the :c:member:`Py_mod_exec` function is executed."
-#~ msgstr ""
-#~ "Una función para llamar durante la desasignación del objeto del módulo, o "
-#~ "``NULL`` si no es necesario. Se puede llamar a esta función antes de "
-#~ "asignar el estado del módulo (:c:func:`PyModule_GetState()` puede "
-#~ "retornar `NULL`), y antes de que se ejecute la función :c:member:"
-#~ "`Py_mod_exec`."
-
-#~ msgid ""
-#~ "Add an object to *module* as *name*.  This is a convenience function "
-#~ "which can be used from the module's initialization function.  This steals "
-#~ "a reference to *value* on success. Return ``-1`` on error, ``0`` on "
-#~ "success."
-#~ msgstr ""
-#~ "Agrega un objeto a *module* como *name*. Esta es una función conveniente "
-#~ "que se puede utilizar desde la función de inicialización del módulo. Esto "
-#~ "roba una referencia al *value* en caso de éxito. Retorna ``-1`` en caso "
-#~ "de error, ``0`` en caso de éxito."

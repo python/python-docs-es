@@ -13,12 +13,12 @@ msgstr ""
 "POT-Creation-Date: 2021-10-16 21:42+0200\n"
 "PO-Revision-Date: 2020-06-24 22:27+0200\n"
 "Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
-"Language: es\n"
 "Language-Team: python-doc-es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: ../Doc/library/contextlib.rst:2
@@ -204,6 +204,8 @@ msgid ""
 "Context managers defined with :func:`asynccontextmanager` can be used either "
 "as decorators or with :keyword:`async with` statements::"
 msgstr ""
+"Los administradores de contexto definidos con :func:`asynccontextmanager` se "
+"pueden utilizar como decoradores o con declaraciones :keyword:`async with`:"
 
 #: ../Doc/library/contextlib.rst:145
 msgid ""
@@ -212,12 +214,19 @@ msgid ""
 "created by :func:`asynccontextmanager` to meet the requirement that context "
 "managers support multiple invocations in order to be used as decorators."
 msgstr ""
+"Cuando se utiliza como decorador, se crea implícitamente una nueva instancia "
+"de generador en cada llamada de función. Esto permite que los "
+"administradores de contexto de otro modo \"únicos\" creados por :func:"
+"`asynccontextmanager` cumplan con el requisito de que los administradores de "
+"contexto admitan múltiples invocaciones para ser utilizados como decoradores."
 
 #: ../Doc/library/contextlib.rst:150
 msgid ""
 "Async context managers created with :func:`asynccontextmanager` can be used "
 "as decorators."
 msgstr ""
+"Los administradores de contexto asíncronos creados con :func:"
+"`asynccontextmanager` se pueden utilizar como decoradores."
 
 #: ../Doc/library/contextlib.rst:157
 msgid ""
@@ -240,13 +249,13 @@ msgstr ""
 "error, se llamará a ``page.close()`` cuando salga el bloque :keyword:`with`."
 
 #: ../Doc/library/contextlib.rst:184
-#, fuzzy
 msgid ""
 "Return an async context manager that calls the ``aclose()`` method of "
 "*thing* upon completion of the block.  This is basically equivalent to::"
 msgstr ""
-"retorna un gestor de contexto que cierra *thing* al completar el bloque. "
-"Esto es básicamente equivalente a::"
+"Retorna un administrador de contexto asíncrono que llama al método "
+"``aclose()`` de *thing* una vez completado el bloque. Esto es básicamente "
+"equivalente a:"
 
 #: ../Doc/library/contextlib.rst:196
 msgid ""
@@ -254,6 +263,9 @@ msgid ""
 "generators when they happen to exit early by :keyword:`break` or an "
 "exception.  For example::"
 msgstr ""
+"Significativamente, ``aclosing()`` admite la limpieza determinista de "
+"generadores asincrónicos cuando salen temprano por :keyword:`break` o una "
+"excepción. Por ejemplo::"
 
 #: ../Doc/library/contextlib.rst:207
 msgid ""
@@ -262,6 +274,11 @@ msgid ""
 "work as expected, and the exit code isn't run after the lifetime of some "
 "task it depends on)."
 msgstr ""
+"Este patrón garantiza que el código de salida asíncrono del generador se "
+"ejecute en el mismo contexto que sus iteraciones (de modo que las "
+"excepciones y las variables de contexto funcionen como se esperaba, y el "
+"código de salida no se ejecute después de la vida útil de alguna tarea de la "
+"que depende)."
 
 #: ../Doc/library/contextlib.rst:219
 msgid ""
@@ -278,30 +295,28 @@ msgid "An example using *enter_result*::"
 msgstr "Un ejemplo usando *enter_result*::"
 
 #: ../Doc/library/contextlib.rst:246
-#, fuzzy
 msgid ""
 "It can also be used as a stand-in for :ref:`asynchronous context managers "
 "<async-context-managers>`::"
 msgstr ""
-"Similar a :func:`~contextlib.contextmanager`, pero crea un :ref:"
-"`administrador de contexto asíncrono <async-context-managers>`."
+"También se puede utilizar como sustituto de :ref:`asynchronous context "
+"managers <async-context-managers>`:"
 
 #: ../Doc/library/contextlib.rst:262
 msgid ":term:`asynchronous context manager` support was added."
-msgstr ""
+msgstr "Se agregó compatibilidad con :term:`asynchronous context manager`."
 
 #: ../Doc/library/contextlib.rst:269
-#, fuzzy
 msgid ""
 "Return a context manager that suppresses any of the specified exceptions if "
 "they occur in the body of a :keyword:`!with` statement and then resumes "
 "execution with the first statement following the end of the :keyword:`!with` "
 "statement."
 msgstr ""
-"Retorna un administrador de contexto que suprima cualquiera de las "
-"excepciones especificadas si se producen en el cuerpo de una instrucción "
-"*with* y luego reanuda la ejecución con la primera instrucción que sigue al "
-"final de la instrucción *with*."
+"Retorna un administrador de contexto que suprime cualquiera de las "
+"excepciones especificadas si ocurren en el cuerpo de una instrucción :"
+"keyword:`!with` y luego reanuda la ejecución con la primera instrucción que "
+"sigue al final de la instrucción :keyword:`!with`."
 
 #: ../Doc/library/contextlib.rst:274
 msgid ""
@@ -345,7 +360,6 @@ msgstr ""
 "cuya salida está programada para stdout."
 
 #: ../Doc/library/contextlib.rst:314
-#, fuzzy
 msgid ""
 "For example, the output of :func:`help` normally is sent to *sys.stdout*. "
 "You can capture that output in a string by redirecting the output to an :"
@@ -355,7 +369,9 @@ msgid ""
 msgstr ""
 "Por ejemplo, la salida de :func:`help` normalmente se envía a *sys.stdout*. "
 "Puede capturar esa salida en una cadena redirigiendo la salida a un objeto :"
-"class:`io.StringIO`::"
+"class:`io.StringIO`. La secuencia de reemplazo se retorna desde el método "
+"``__enter__`` y, por lo tanto, está disponible como destino de la "
+"declaración :keyword:`with`:"
 
 #: ../Doc/library/contextlib.rst:324
 msgid ""
@@ -460,17 +476,14 @@ msgstr ""
 "la declaración explícita :keyword:`!with` dentro de la función."
 
 #: ../Doc/library/contextlib.rst:434
-#, fuzzy
 msgid ""
 "Similar to :class:`ContextDecorator` but only for asynchronous functions."
 msgstr ""
-"Similar a :meth:`enter_context` pero espera un administrador de contexto "
-"asíncrono."
+"Similar a :class:`ContextDecorator` pero solo para funciones asincrónicas."
 
 #: ../Doc/library/contextlib.rst:436
-#, fuzzy
 msgid "Example of ``AsyncContextDecorator``::"
-msgstr "Ejemplo de ``ContextDecorator``::"
+msgstr "Ejemplo de ``AsyncContextDecorator``:"
 
 #: ../Doc/library/contextlib.rst:473
 msgid ""
