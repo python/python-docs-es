@@ -17,6 +17,9 @@ contribución, queremos señalar algunos
 .. note::
 
    Si tienes cualquier duda, puedes enviarnos un email a docs-es@python.org.
+   
+   También puedes unirte a `nuestro canal de Telegram`_ si necesitas ayuda.
+
 
 Antes de comenzar
 -----------------
@@ -180,11 +183,6 @@ A tener en cuenta
 
 * Último pero no menos importante, **divertite y contá con la ayuda de todes**. Te
   esperamos en nuestro chat en telegram. ¡Gracias!
-
-
-.. note::
-
-   También puedes unirte a `nuestro canal de Telegram`_ si necesitas ayuda.
 
 
 Previsualizar los cambios
