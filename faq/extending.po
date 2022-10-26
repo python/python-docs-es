@@ -10,16 +10,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-16 21:42+0200\n"
+"POT-Creation-Date: 2022-10-25 19:47+0200\n"
 "PO-Revision-Date: 2021-08-02 11:16+0200\n"
 "Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
-"Language-Team: python-doc-es\n"
 "Language: es_AR\n"
+"Language-Team: python-doc-es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"Generated-By: Babel 2.9.1\n"
+"Generated-By: Babel 2.10.3\n"
 
 #: ../Doc/faq/extending.rst:3
 msgid "Extending/Embedding FAQ"
@@ -55,10 +55,10 @@ msgstr "¿Puedo crear mis propias funciones en C++?"
 
 #: ../Doc/faq/extending.rst:28
 msgid ""
-"Yes, using the C compatibility features found in C++.  Place ``extern \"C"
-"\" { ... }`` around the Python include files and put ``extern \"C\"`` before "
-"each function that is going to be called by the Python interpreter.  Global "
-"or static C++ objects with constructors are probably not a good idea."
+"Yes, using the C compatibility features found in C++.  Place ``extern "
+"\"C\" { ... }`` around the Python include files and put ``extern \"C\"`` "
+"before each function that is going to be called by the Python interpreter.  "
+"Global or static C++ objects with constructors are probably not a good idea."
 msgstr ""
 "Si, utilizando las características de compatibilidad encontradas en C++. "
 "Coloca ``extern \"C\" { ... }`` alrededor los archivos incluidos Python y "
@@ -79,8 +79,9 @@ msgstr ""
 "dependiendo en que estés tratando de hacer."
 
 #: ../Doc/faq/extending.rst:44
+#, fuzzy
 msgid ""
-"`Cython <http://cython.org>`_ and its relative `Pyrex <https://www.cosc."
+"`Cython <https://cython.org>`_ and its relative `Pyrex <https://www.cosc."
 "canterbury.ac.nz/greg.ewing/python/Pyrex/>`_ are compilers that accept a "
 "slightly modified form of Python and generate the corresponding C code.  "
 "Cython and Pyrex make it possible to write an extension without having to "
@@ -93,12 +94,13 @@ msgstr ""
 "tener que aprender la API de Python C."
 
 #: ../Doc/faq/extending.rst:50
+#, fuzzy
 msgid ""
 "If you need to interface to some C or C++ library for which no Python "
 "extension currently exists, you can try wrapping the library's data types "
-"and functions with a tool such as `SWIG <http://www.swig.org>`_.  `SIP "
-"<https://riverbankcomputing.com/software/sip/intro>`__, `CXX <http://cxx."
-"sourceforge.net/>`_ `Boost <http://www.boost.org/libs/python/doc/index."
+"and functions with a tool such as `SWIG <https://www.swig.org>`_.  `SIP "
+"<https://riverbankcomputing.com/software/sip/intro>`__, `CXX <https://cxx."
+"sourceforge.net/>`_ `Boost <https://www.boost.org/libs/python/doc/index."
 "html>`_, or `Weave <https://github.com/scipy/weave>`_ are also alternatives "
 "for wrapping C++ libraries."
 msgstr ""
@@ -410,11 +412,11 @@ msgstr ""
 msgid "For Debian, run ``apt-get install python-dev``."
 msgstr "Para Debian, corre ``apt-get install python-dev``."
 
-#: ../Doc/faq/extending.rst:259
+#: ../Doc/faq/extending.rst:258
 msgid "How do I tell \"incomplete input\" from \"invalid input\"?"
 msgstr "¿Cómo digo \"entrada incompleta\" desde \"entrada inválida\"?"
 
-#: ../Doc/faq/extending.rst:261
+#: ../Doc/faq/extending.rst:260
 msgid ""
 "Sometimes you want to emulate the Python interactive interpreter's behavior, "
 "where it gives you a continuation prompt when the input is incomplete (e.g. "
@@ -428,7 +430,7 @@ msgstr ""
 "paréntesis o triples comillas), pero te da un mensaje de error de sintaxis "
 "inmediatamente cuando la entrada es invalida."
 
-#: ../Doc/faq/extending.rst:267
+#: ../Doc/faq/extending.rst:266
 msgid ""
 "In Python you can use the :mod:`codeop` module, which approximates the "
 "parser's behavior sufficiently.  IDLE uses this, for example."
@@ -437,7 +439,7 @@ msgstr ""
 "comportamiento del analizador gramatical (*parser*) . IDLE usa esto, por "
 "ejemplo."
 
-#: ../Doc/faq/extending.rst:270
+#: ../Doc/faq/extending.rst:269
 msgid ""
 "The easiest way to do it in C is to call :c:func:`PyRun_InteractiveLoop` "
 "(perhaps in a separate thread) and let the Python interpreter handle the "
@@ -452,37 +454,10 @@ msgstr ""
 "personalizada."
 
 #: ../Doc/faq/extending.rst:276
-msgid ""
-"However sometimes you have to run the embedded Python interpreter in the "
-"same thread as your rest application and you can't allow the :c:func:"
-"`PyRun_InteractiveLoop` to stop while waiting for user input. A solution is "
-"trying to compile the received string with :c:func:`Py_CompileString`. If it "
-"compiles without errors, try to execute the returned code object by calling :"
-"c:func:`PyEval_EvalCode`. Otherwise save the input for later. If the "
-"compilation fails, find out if it's an error or just more input is required "
-"- by extracting the message string from the exception tuple and comparing it "
-"to the string \"unexpected EOF while parsing\".  Here is a complete example "
-"using the GNU readline library (you may want to ignore **SIGINT** while "
-"calling readline())::"
-msgstr ""
-"Sin embargo, a veces debe ejecutar el intérprete de Python integrado en el "
-"mismo hilo que su aplicación de descanso y no puede permitir que el :c:func:"
-"`PyRun_InteractiveLoop` se detenga mientras espera la entrada del usuario. "
-"Una solución es intentar compilar la cadena recibida con :c:func:"
-"`Py_CompileString`. Si se compila sin errores, intente ejecutar el objeto de "
-"código devuelto llamando a :c:func:`PyEval_EvalCode`. De lo contrario, "
-"guarde la entrada para más tarde. Si la compilación falla, averigüe si es un "
-"error o simplemente se requiere más entrada, extrayendo la cadena del "
-"mensaje de la tupla de excepción y comparándola con la cadena \"EOF "
-"inesperado durante el análisis\". Aquí hay un ejemplo completo usando la "
-"biblioteca de línea de lectura de GNU (es posible que desee ignorar "
-"**SIGINT** mientras llama a readline ()):"
-
-#: ../Doc/faq/extending.rst:401
 msgid "How do I find undefined g++ symbols __builtin_new or __pure_virtual?"
 msgstr "¿Cómo encuentro símbolos g++ __builtin_new o __pure_virtual?"
 
-#: ../Doc/faq/extending.rst:403
+#: ../Doc/faq/extending.rst:278
 msgid ""
 "To dynamically load g++ extension modules, you must recompile Python, relink "
 "it using g++ (change LINKCC in the Python Modules Makefile), and link your "
@@ -493,7 +468,7 @@ msgstr ""
 "Makefile) y enlaza tu extensión usando g++ (por ejemplo, ``g++ -shared -o "
 "mymodule.so mymodule.o``)."
 
-#: ../Doc/faq/extending.rst:409
+#: ../Doc/faq/extending.rst:284
 msgid ""
 "Can I create an object class with some methods implemented in C and others "
 "in Python (e.g. through inheritance)?"
@@ -501,7 +476,7 @@ msgstr ""
 "¿Puedo crear una clase objeto con algunos métodos implementado en C y otros "
 "en Python (por ejemplo a través de la herencia)?"
 
-#: ../Doc/faq/extending.rst:411
+#: ../Doc/faq/extending.rst:286
 msgid ""
 "Yes, you can inherit from built-in classes such as :class:`int`, :class:"
 "`list`, :class:`dict`, etc."
@@ -509,12 +484,39 @@ msgstr ""
 "Si, puedes heredar de clases integradas como :class:`int`, :class:`list`, :"
 "class:`dict`, etc."
 
-#: ../Doc/faq/extending.rst:414
+#: ../Doc/faq/extending.rst:289
+#, fuzzy
 msgid ""
-"The Boost Python Library (BPL, http://www.boost.org/libs/python/doc/index."
+"The Boost Python Library (BPL, https://www.boost.org/libs/python/doc/index."
 "html) provides a way of doing this from C++ (i.e. you can inherit from an "
 "extension class written in C++ using the BPL)."
 msgstr ""
 "La biblioteca *Boost Pyhton* (BPL, http://www.boost.org/libs/python/doc/"
 "index.html) provee una manera de realizar esto desde C++ (por ejemplo puedes "
 "heredar de una clase extensión escrita en C++ usando el BPL)."
+
+#~ msgid ""
+#~ "However sometimes you have to run the embedded Python interpreter in the "
+#~ "same thread as your rest application and you can't allow the :c:func:"
+#~ "`PyRun_InteractiveLoop` to stop while waiting for user input. A solution "
+#~ "is trying to compile the received string with :c:func:`Py_CompileString`. "
+#~ "If it compiles without errors, try to execute the returned code object by "
+#~ "calling :c:func:`PyEval_EvalCode`. Otherwise save the input for later. If "
+#~ "the compilation fails, find out if it's an error or just more input is "
+#~ "required - by extracting the message string from the exception tuple and "
+#~ "comparing it to the string \"unexpected EOF while parsing\".  Here is a "
+#~ "complete example using the GNU readline library (you may want to ignore "
+#~ "**SIGINT** while calling readline())::"
+#~ msgstr ""
+#~ "Sin embargo, a veces debe ejecutar el intérprete de Python integrado en "
+#~ "el mismo hilo que su aplicación de descanso y no puede permitir que el :c:"
+#~ "func:`PyRun_InteractiveLoop` se detenga mientras espera la entrada del "
+#~ "usuario. Una solución es intentar compilar la cadena recibida con :c:func:"
+#~ "`Py_CompileString`. Si se compila sin errores, intente ejecutar el objeto "
+#~ "de código devuelto llamando a :c:func:`PyEval_EvalCode`. De lo contrario, "
+#~ "guarde la entrada para más tarde. Si la compilación falla, averigüe si es "
+#~ "un error o simplemente se requiere más entrada, extrayendo la cadena del "
+#~ "mensaje de la tupla de excepción y comparándola con la cadena \"EOF "
+#~ "inesperado durante el análisis\". Aquí hay un ejemplo completo usando la "
+#~ "biblioteca de línea de lectura de GNU (es posible que desee ignorar "
+#~ "**SIGINT** mientras llama a readline ()):"

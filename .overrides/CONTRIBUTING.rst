@@ -64,11 +64,11 @@ Antes de comenzar
 
 #. Selecciona un :ref:`archivo para traducir <que-archivo-traducir>`.
 
-#. Verifica que estás en la rama principal del repositorio, **3.10** (esto es muy
+#. Verifica que estás en la rama principal del repositorio, **3.11** (esto es muy
    importante para evitar crear una nueva rama a partir de una traducción
    anterior)::
 
-     git checkout 3.10
+     git checkout 3.11
 
 #. Crea una rama nueva en base al artículo en el que vayas a trabajar.  Por
    ejemplo, si vas a trabajar en el archivo ``library/glosario.po``, usa un nombre
