@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-19 11:16+0100\n"
+"POT-Creation-Date: 2022-10-25 19:47+0200\n"
 "PO-Revision-Date: 2021-08-04 13:56+0200\n"
 "Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
 "Language: es\n"
@@ -19,8 +19,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.8.0\n"
-"X-Generator: Poedit 3.0\n"
+"Generated-By: Babel 2.10.3\n"
 
 #: ../Doc/library/asyncio-dev.rst:7
 msgid "Developing with asyncio"
@@ -130,8 +129,9 @@ msgstr ""
 "tiempo en realizar una operación E/S."
 
 #: ../Doc/library/asyncio-dev.rst:60
+#, fuzzy
 msgid ""
-"Callbacks taking longer than 100ms are logged.  The :attr:`loop."
+"Callbacks taking longer than 100 milliseconds are logged.  The :attr:`loop."
 "slow_callback_duration` attribute can be used to set the minimum execution "
 "duration in seconds that is considered \"slow\"."
 msgstr ""
@@ -212,24 +212,14 @@ msgstr ""
 msgid ""
 "There is currently no way to schedule coroutines or callbacks directly from "
 "a different process (such as one started with :mod:`multiprocessing`). The :"
-"ref:`Event Loop Methods <asyncio-event-loop>` section lists APIs that can "
-"read from pipes and watch file descriptors without blocking the event loop. "
-"In addition, asyncio's :ref:`Subprocess <asyncio-subprocess>` APIs provide a "
-"way to start a process and communicate with it from the event loop. Lastly, "
-"the aforementioned :meth:`loop.run_in_executor` method can also be used with "
-"a :class:`concurrent.futures.ProcessPoolExecutor` to execute code in a "
+"ref:`asyncio-event-loop-methods` section lists APIs that can read from pipes "
+"and watch file descriptors without blocking the event loop. In addition, "
+"asyncio's :ref:`Subprocess <asyncio-subprocess>` APIs provide a way to start "
+"a process and communicate with it from the event loop. Lastly, the "
+"aforementioned :meth:`loop.run_in_executor` method can also be used with a :"
+"class:`concurrent.futures.ProcessPoolExecutor` to execute code in a "
 "different process."
 msgstr ""
-"Actualmente no hay forma de programar corrutinas o devoluciones de llamada "
-"directamente desde un proceso diferente (como uno que comenzó con :mod:"
-"`multiprocessing`). La sección :ref:`Event Loop Methods <asyncio-event-"
-"loop>` enumera las APIs que pueden leer desde las tuberías y ver "
-"descriptores de archivos sin bloquear el bucle de eventos. Además, las APIs "
-"de asyncio :ref:`Subprocess <asyncio-subprocess>` proporcionan una forma de "
-"iniciar un proceso y comunicarse con él desde el bucle de eventos. Por "
-"último, el método :meth:`loop.run_in_executor` mencionado anteriormente "
-"también se puede usar con un :class:`concurrent.futures.ProcessPoolExecutor` "
-"para ejecutar código en un proceso diferente."
 
 #: ../Doc/library/asyncio-dev.rst:124
 msgid "Running Blocking Code"
@@ -277,11 +267,18 @@ msgstr ""
 "El nivel de log por defecto es :py:data:`logging.INFO`, el cual puede ser "
 "fácilmente ajustado::"
 
-#: ../Doc/library/asyncio-dev.rst:154
+#: ../Doc/library/asyncio-dev.rst:151
+msgid ""
+"Network logging can block the event loop. It is recommended to use a "
+"separate thread for handling logs or use non-blocking IO. For example, see :"
+"ref:`blocking-handlers`."
+msgstr ""
+
+#: ../Doc/library/asyncio-dev.rst:159
 msgid "Detect never-awaited coroutines"
 msgstr "Detectar corrutinas no esperadas"
 
-#: ../Doc/library/asyncio-dev.rst:156
+#: ../Doc/library/asyncio-dev.rst:161
 msgid ""
 "When a coroutine function is called, but not awaited (e.g. ``coro()`` "
 "instead of ``await coro()``) or the coroutine is not scheduled with :meth:"
@@ -291,15 +288,15 @@ msgstr ""
 "``coro()`` en lugar de ``await coro()``) o la corrutina no es programada "
 "con :meth:`asyncio.create_task`, asyncio emitirá una :exc:`RuntimeWarning`::"
 
-#: ../Doc/library/asyncio-dev.rst:171 ../Doc/library/asyncio-dev.rst:216
+#: ../Doc/library/asyncio-dev.rst:176 ../Doc/library/asyncio-dev.rst:221
 msgid "Output::"
 msgstr "Salida::"
 
-#: ../Doc/library/asyncio-dev.rst:176 ../Doc/library/asyncio-dev.rst:232
+#: ../Doc/library/asyncio-dev.rst:181 ../Doc/library/asyncio-dev.rst:237
 msgid "Output in debug mode::"
 msgstr "Salida en modo depuración::"
 
-#: ../Doc/library/asyncio-dev.rst:189
+#: ../Doc/library/asyncio-dev.rst:194
 msgid ""
 "The usual fix is to either await the coroutine or call the :meth:`asyncio."
 "create_task` function::"
@@ -307,11 +304,11 @@ msgstr ""
 "La solución habitual es esperar la corrutina o llamar a la función :meth:"
 "`asyncio.create_task`::"
 
-#: ../Doc/library/asyncio-dev.rst:197
+#: ../Doc/library/asyncio-dev.rst:202
 msgid "Detect never-retrieved exceptions"
 msgstr "Detectar excepciones nunca recuperadas"
 
-#: ../Doc/library/asyncio-dev.rst:199
+#: ../Doc/library/asyncio-dev.rst:204
 msgid ""
 "If a :meth:`Future.set_exception` is called but the Future object is never "
 "awaited on, the exception would never be propagated to the user code.  In "
@@ -323,11 +320,11 @@ msgstr ""
 "este caso, asyncio emitiría un mensaje de registro cuando el objeto Futuro "
 "fuera recolectado como basura."
 
-#: ../Doc/library/asyncio-dev.rst:204
+#: ../Doc/library/asyncio-dev.rst:209
 msgid "Example of an unhandled exception::"
 msgstr "Ejemplo de una excepción no manejada::"
 
-#: ../Doc/library/asyncio-dev.rst:227
+#: ../Doc/library/asyncio-dev.rst:232
 msgid ""
 ":ref:`Enable the debug mode <asyncio-debug-mode>` to get the traceback where "
 "the task was created::"
@@ -335,6 +332,24 @@ msgstr ""
 ":ref:`Habilita el modo depuración <asyncio-debug-mode>` para obtener el "
 "seguimiento de pila (*traceback*) donde la tarea fue creada::"
 
-#~ msgid "Using the :option:`-X` ``dev`` Python command line option."
+#~ msgid ""
+#~ "There is currently no way to schedule coroutines or callbacks directly "
+#~ "from a different process (such as one started with :mod:"
+#~ "`multiprocessing`). The :ref:`Event Loop Methods <asyncio-event-loop>` "
+#~ "section lists APIs that can read from pipes and watch file descriptors "
+#~ "without blocking the event loop. In addition, asyncio's :ref:`Subprocess "
+#~ "<asyncio-subprocess>` APIs provide a way to start a process and "
+#~ "communicate with it from the event loop. Lastly, the aforementioned :meth:"
+#~ "`loop.run_in_executor` method can also be used with a :class:`concurrent."
+#~ "futures.ProcessPoolExecutor` to execute code in a different process."
 #~ msgstr ""
-#~ "Usando la opción :option:`-X` ``dev`` de la línea de comandos de Python."
+#~ "Actualmente no hay forma de programar corrutinas o devoluciones de "
+#~ "llamada directamente desde un proceso diferente (como uno que comenzó "
+#~ "con :mod:`multiprocessing`). La sección :ref:`Event Loop Methods <asyncio-"
+#~ "event-loop>` enumera las APIs que pueden leer desde las tuberías y ver "
+#~ "descriptores de archivos sin bloquear el bucle de eventos. Además, las "
+#~ "APIs de asyncio :ref:`Subprocess <asyncio-subprocess>` proporcionan una "
+#~ "forma de iniciar un proceso y comunicarse con él desde el bucle de "
+#~ "eventos. Por último, el método :meth:`loop.run_in_executor` mencionado "
+#~ "anteriormente también se puede usar con un :class:`concurrent.futures."
+#~ "ProcessPoolExecutor` para ejecutar código en un proceso diferente."

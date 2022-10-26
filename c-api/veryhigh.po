@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-16 21:42+0200\n"
+"POT-Creation-Date: 2022-10-25 19:47+0200\n"
 "PO-Revision-Date: 2021-12-09 10:55+0800\n"
 "Last-Translator: Rodrigo Tobar <rtobarc@gmail.com>\n"
 "Language: es\n"
@@ -19,8 +19,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.1\n"
-"X-Generator: Poedit 3.0\n"
+"Generated-By: Babel 2.10.3\n"
 
 #: ../Doc/c-api/veryhigh.rst:8
 msgid "The Very High Level Layer"
@@ -49,13 +48,14 @@ msgstr ""
 "siguiendo las funciones que los aceptan como parámetros."
 
 #: ../Doc/c-api/veryhigh.rst:19
+#, fuzzy
 msgid ""
-"Note also that several of these functions take :c:type:`FILE*` parameters.  "
-"One particular issue which needs to be handled carefully is that the :c:type:"
+"Note also that several of these functions take :c:expr:`FILE*` parameters.  "
+"One particular issue which needs to be handled carefully is that the :c:expr:"
 "`FILE` structure for different C libraries can be different and "
 "incompatible.  Under Windows (at least), it is possible for dynamically "
 "linked extensions to actually use different libraries, so care should be "
-"taken that :c:type:`FILE*` parameters are only passed to these functions if "
+"taken that :c:expr:`FILE*` parameters are only passed to these functions if "
 "it is certain that they were created by the same library that the Python "
 "runtime is using."
 msgstr ""
@@ -133,13 +133,15 @@ msgstr ""
 "abajo, dejando *flags* establecido a ``NULL``."
 
 #: ../Doc/c-api/veryhigh.rst:72
+#, fuzzy
 msgid ""
 "If *fp* refers to a file associated with an interactive device (console or "
 "terminal input or Unix pseudo-terminal), return the value of :c:func:"
 "`PyRun_InteractiveLoop`, otherwise return the result of :c:func:"
 "`PyRun_SimpleFile`.  *filename* is decoded from the filesystem encoding (:"
 "func:`sys.getfilesystemencoding`).  If *filename* is ``NULL``, this function "
-"uses ``\"???\"`` as the filename."
+"uses ``\"???\"`` as the filename. If *closeit* is true, the file is closed "
+"before ``PyRun_SimpleFileExFlags()`` returns."
 msgstr ""
 "Si *fp* se refiere a un archivo asociado con un dispositivo interactivo "
 "(entrada de consola o terminal o pseudo-terminal Unix), retorna el valor de :"
@@ -148,16 +150,17 @@ msgstr ""
 "codificación del sistema de archivos (:func:`sys.getfilesystemencoding`). Si "
 "*filename* es ``NULL``, esta función usa ``\"???\"`` como nombre de archivo."
 
-#: ../Doc/c-api/veryhigh.rst:82
+#: ../Doc/c-api/veryhigh.rst:84
+#, fuzzy
 msgid ""
 "This is a simplified interface to :c:func:`PyRun_SimpleStringFlags` below, "
-"leaving the :c:type:`PyCompilerFlags`\\* argument set to ``NULL``."
+"leaving the :c:struct:`PyCompilerFlags`\\* argument set to ``NULL``."
 msgstr ""
 "Esta es una interfaz simplificada para :c:func:`PyRun_SimpleStringFlags` más "
 "abajo, dejando el argumento :c:type:`PyCompilerFlags`\\* establecido a "
 "``NULL``."
 
-#: ../Doc/c-api/veryhigh.rst:88
+#: ../Doc/c-api/veryhigh.rst:90
 msgid ""
 "Executes the Python source code from *command* in the :mod:`__main__` module "
 "according to the *flags* argument. If :mod:`__main__` does not already "
@@ -171,7 +174,7 @@ msgstr ""
 "excepción. Si hubo un error, no hay forma de obtener la información de "
 "excepción. Para el significado de *flags*, ver abajo."
 
-#: ../Doc/c-api/veryhigh.rst:94
+#: ../Doc/c-api/veryhigh.rst:96
 msgid ""
 "Note that if an otherwise unhandled :exc:`SystemExit` is raised, this "
 "function will not return ``-1``, but exit the process, as long as "
@@ -181,7 +184,7 @@ msgstr ""
 "función no retornará ``-1``, pero saldrá del proceso, siempre que "
 "``Py_InspectFlag`` no esté configurado."
 
-#: ../Doc/c-api/veryhigh.rst:101
+#: ../Doc/c-api/veryhigh.rst:103
 msgid ""
 "This is a simplified interface to :c:func:`PyRun_SimpleFileExFlags` below, "
 "leaving *closeit* set to ``0`` and *flags* set to ``NULL``."
@@ -190,7 +193,7 @@ msgstr ""
 "abajo, dejando *closeit* establecido a ``0`` y *flags* establecido a "
 "``NULL``."
 
-#: ../Doc/c-api/veryhigh.rst:107
+#: ../Doc/c-api/veryhigh.rst:109
 msgid ""
 "This is a simplified interface to :c:func:`PyRun_SimpleFileExFlags` below, "
 "leaving *flags* set to ``NULL``."
@@ -198,7 +201,7 @@ msgstr ""
 "Esta es una interfaz simplificada para :c:func:`PyRun_SimpleStringFlags` más "
 "abajo, dejando *flags* establecido a ``NULL``."
 
-#: ../Doc/c-api/veryhigh.rst:113
+#: ../Doc/c-api/veryhigh.rst:115
 msgid ""
 "Similar to :c:func:`PyRun_SimpleStringFlags`, but the Python source code is "
 "read from *fp* instead of an in-memory string. *filename* should be the name "
@@ -212,17 +215,17 @@ msgstr ""
 "`filesystem encoding and error handler`. Si *closeit* es verdadero, el "
 "fichero se cierra antes de que ``PyRun_SimpleFileExFlags()`` retorne."
 
-#: ../Doc/c-api/veryhigh.rst:120
+#: ../Doc/c-api/veryhigh.rst:122
 msgid ""
-"On Windows, *fp* should be opened as binary mode (e.g. ``fopen(filename, \"rb"
-"\")``). Otherwise, Python may not handle script file with LF line ending "
+"On Windows, *fp* should be opened as binary mode (e.g. ``fopen(filename, "
+"\"rb\")``). Otherwise, Python may not handle script file with LF line ending "
 "correctly."
 msgstr ""
 "En Windows, *fp* debe abrirse en modo binario (por ejemplo, "
 "``fopen(filename, \"rb\")``. De lo contrario, Python puede no manejar "
 "correctamente el archivo de script con la terminación de línea LF."
 
-#: ../Doc/c-api/veryhigh.rst:126
+#: ../Doc/c-api/veryhigh.rst:128
 msgid ""
 "This is a simplified interface to :c:func:`PyRun_InteractiveOneFlags` below, "
 "leaving *flags* set to ``NULL``."
@@ -230,7 +233,7 @@ msgstr ""
 "Esta es una interfaz simplificada para :c:func:`PyRun_InteractiveOneFlags` "
 "más abajo, dejando *flags* establecido a ``NULL``."
 
-#: ../Doc/c-api/veryhigh.rst:132
+#: ../Doc/c-api/veryhigh.rst:134
 msgid ""
 "Read and execute a single statement from a file associated with an "
 "interactive device according to the *flags* argument.  The user will be "
@@ -243,7 +246,7 @@ msgstr ""
 "term:`manejador de codificación y errores del sistema de archivos "
 "<filesystem encoding and error handler>`."
 
-#: ../Doc/c-api/veryhigh.rst:137
+#: ../Doc/c-api/veryhigh.rst:139
 msgid ""
 "Returns ``0`` when the input was executed successfully, ``-1`` if there was "
 "an exception, or an error code from the :file:`errcode.h` include file "
@@ -257,7 +260,7 @@ msgstr ""
 "cuenta que :file:`errcode.h` no está incluido en :file:`Python.h`, por lo "
 "que debe incluirse específicamente si es necesario)."
 
-#: ../Doc/c-api/veryhigh.rst:146
+#: ../Doc/c-api/veryhigh.rst:148
 msgid ""
 "This is a simplified interface to :c:func:`PyRun_InteractiveLoopFlags` "
 "below, leaving *flags* set to ``NULL``."
@@ -265,7 +268,7 @@ msgstr ""
 "Esta es una interfaz simplificada para :c:func:`PyRun_InteractiveLoopFlags` "
 "más abajo, dejando *flags* establecido a ``NULL``."
 
-#: ../Doc/c-api/veryhigh.rst:152
+#: ../Doc/c-api/veryhigh.rst:154
 msgid ""
 "Read and execute statements from a file associated with an interactive "
 "device until EOF is reached.  The user will be prompted using ``sys.ps1`` "
@@ -278,7 +281,7 @@ msgstr ""
 "de codificación y errores del sistema de archivos <filesystem encoding and "
 "error handler>`. Retorna ``0`` en EOF o un número negativo en caso de falla."
 
-#: ../Doc/c-api/veryhigh.rst:160
+#: ../Doc/c-api/veryhigh.rst:162
 msgid ""
 "Can be set to point to a function with the prototype ``int func(void)``.  "
 "The function will be called when Python's interpreter prompt is about to "
@@ -295,7 +298,7 @@ msgstr ""
 "eventos, como se hace en :file:`Modules/_tkinter.c` en el código fuente de "
 "Python."
 
-#: ../Doc/c-api/veryhigh.rst:171
+#: ../Doc/c-api/veryhigh.rst:173
 msgid ""
 "Can be set to point to a function with the prototype ``char *func(FILE "
 "*stdin, FILE *stdout, char *prompt)``, overriding the default function used "
@@ -314,7 +317,7 @@ msgstr ""
 "resultante. Por ejemplo, el módulo :mod:`readline` establece este enlace "
 "para proporcionar funciones de edición de línea y finalización de tabulación."
 
-#: ../Doc/c-api/veryhigh.rst:180
+#: ../Doc/c-api/veryhigh.rst:182
 msgid ""
 "The result must be a string allocated by :c:func:`PyMem_RawMalloc` or :c:"
 "func:`PyMem_RawRealloc`, or ``NULL`` if an error occurred."
@@ -323,7 +326,7 @@ msgstr ""
 "`PyMem_RawMalloc` o :c:func:`PyMem_RawRealloc`, o ``NULL`` si ocurre un "
 "error."
 
-#: ../Doc/c-api/veryhigh.rst:183
+#: ../Doc/c-api/veryhigh.rst:185
 msgid ""
 "The result must be allocated by :c:func:`PyMem_RawMalloc` or :c:func:"
 "`PyMem_RawRealloc`, instead of being allocated by :c:func:`PyMem_Malloc` or :"
@@ -333,7 +336,7 @@ msgstr ""
 "`PyMem_RawRealloc`, en vez de ser alocado por :c:func:`PyMem_Malloc` o :c:"
 "func:`PyMem_Realloc`."
 
-#: ../Doc/c-api/veryhigh.rst:190
+#: ../Doc/c-api/veryhigh.rst:192
 msgid ""
 "This is a simplified interface to :c:func:`PyRun_StringFlags` below, leaving "
 "*flags* set to ``NULL``."
@@ -341,7 +344,7 @@ msgstr ""
 "Esta es una interfaz simplificada para :c:func:`PyRun_StringFlags` más "
 "abajo, dejando *flags* establecido a ``NULL``."
 
-#: ../Doc/c-api/veryhigh.rst:196
+#: ../Doc/c-api/veryhigh.rst:198
 msgid ""
 "Execute Python source code from *str* in the context specified by the "
 "objects *globals* and *locals* with the compiler flags specified by "
@@ -356,7 +359,7 @@ msgstr ""
 "*start* especifica el token de inicio que se debe usar para analizar el "
 "código fuente."
 
-#: ../Doc/c-api/veryhigh.rst:202
+#: ../Doc/c-api/veryhigh.rst:204
 msgid ""
 "Returns the result of executing the code as a Python object, or ``NULL`` if "
 "an exception was raised."
@@ -364,7 +367,7 @@ msgstr ""
 "Retorna el resultado de ejecutar el código como un objeto Python, o "
 "``NULL``' si se produjo una excepción."
 
-#: ../Doc/c-api/veryhigh.rst:208
+#: ../Doc/c-api/veryhigh.rst:210
 msgid ""
 "This is a simplified interface to :c:func:`PyRun_FileExFlags` below, leaving "
 "*closeit* set to ``0`` and *flags* set to ``NULL``."
@@ -373,7 +376,7 @@ msgstr ""
 "abajo, dejando *closeit* establecido a ``0`` y *flags* establecido a "
 "``NULL``."
 
-#: ../Doc/c-api/veryhigh.rst:214
+#: ../Doc/c-api/veryhigh.rst:216
 msgid ""
 "This is a simplified interface to :c:func:`PyRun_FileExFlags` below, leaving "
 "*flags* set to ``NULL``."
@@ -381,7 +384,7 @@ msgstr ""
 "Esta es una interfaz simplificada para :c:func:`PyRun_FileExFlags` más "
 "abajo, dejando *flags* establecido a ``NULL``."
 
-#: ../Doc/c-api/veryhigh.rst:220
+#: ../Doc/c-api/veryhigh.rst:222
 msgid ""
 "This is a simplified interface to :c:func:`PyRun_FileExFlags` below, leaving "
 "*closeit* set to ``0``."
@@ -389,7 +392,7 @@ msgstr ""
 "Esta es una interfaz simplificada para :c:func:`PyRun_FileExFlags` más "
 "abajo, dejando *closeit* establecido a ``0``."
 
-#: ../Doc/c-api/veryhigh.rst:226
+#: ../Doc/c-api/veryhigh.rst:228
 msgid ""
 "Similar to :c:func:`PyRun_StringFlags`, but the Python source code is read "
 "from *fp* instead of an in-memory string. *filename* should be the name of "
@@ -403,7 +406,7 @@ msgstr ""
 "encoding and error handler`. Si *closeit* es verdadero, el fichero se cierra "
 "antes de que :c:func:`PyRun_FileExFlags` retorne."
 
-#: ../Doc/c-api/veryhigh.rst:235
+#: ../Doc/c-api/veryhigh.rst:237
 msgid ""
 "This is a simplified interface to :c:func:`Py_CompileStringFlags` below, "
 "leaving *flags* set to ``NULL``."
@@ -411,7 +414,7 @@ msgstr ""
 "Esta es una interfaz simplificada para :c:func:`Py_CompileStringFlags` más "
 "abajo, dejando *flags* establecido a ``NULL``."
 
-#: ../Doc/c-api/veryhigh.rst:241
+#: ../Doc/c-api/veryhigh.rst:243
 msgid ""
 "This is a simplified interface to :c:func:`Py_CompileStringExFlags` below, "
 "with *optimize* set to ``-1``."
@@ -419,7 +422,7 @@ msgstr ""
 "Esta es una interfaz simplificada para :c:func:`Py_CompileStringExFlags` más "
 "abajo, con *optimize* establecido a ``-1``."
 
-#: ../Doc/c-api/veryhigh.rst:247
+#: ../Doc/c-api/veryhigh.rst:249
 msgid ""
 "Parse and compile the Python source code in *str*, returning the resulting "
 "code object.  The start token is given by *start*; this can be used to "
@@ -438,7 +441,7 @@ msgstr ""
 "mensajes de excepción :exc:`SyntaxError`. Esto retorna ``NULL``' si el "
 "código no se puede analizar gramaticalmente o compilar."
 
-#: ../Doc/c-api/veryhigh.rst:255
+#: ../Doc/c-api/veryhigh.rst:257
 msgid ""
 "The integer *optimize* specifies the optimization level of the compiler; a "
 "value of ``-1`` selects the optimization level of the interpreter as given "
@@ -453,7 +456,7 @@ msgstr ""
 "(los *asserts* se eliminan, ``__debug__`` es falso) o ``2`` (los docstrings "
 "también se eliminan) )"
 
-#: ../Doc/c-api/veryhigh.rst:266
+#: ../Doc/c-api/veryhigh.rst:268
 msgid ""
 "Like :c:func:`Py_CompileStringObject`, but *filename* is a byte string "
 "decoded from the :term:`filesystem encoding and error handler`."
@@ -462,7 +465,7 @@ msgstr ""
 "bytes decodificada a partir del :term:`manejador de codificación y errores "
 "del sistema de archivos <filesystem encoding and error handler>`."
 
-#: ../Doc/c-api/veryhigh.rst:273
+#: ../Doc/c-api/veryhigh.rst:275
 msgid ""
 "This is a simplified interface to :c:func:`PyEval_EvalCodeEx`, with just the "
 "code object, and global and local variables.  The other arguments are set to "
@@ -472,7 +475,7 @@ msgstr ""
 "el objeto de código y las variables globales y locales. Los otros argumentos "
 "están establecidos en ``NULL``."
 
-#: ../Doc/c-api/veryhigh.rst:280
+#: ../Doc/c-api/veryhigh.rst:282
 msgid ""
 "Evaluate a precompiled code object, given a particular environment for its "
 "evaluation.  This environment consists of a dictionary of global variables, "
@@ -487,15 +490,7 @@ msgstr ""
 "argumentos :ref:`keyword-only <keyword-only_parameter>` y  una tupla de "
 "cierre de células."
 
-#: ../Doc/c-api/veryhigh.rst:289
-msgid ""
-"The C structure of the objects used to describe frame objects. The fields of "
-"this type are subject to change at any time."
-msgstr ""
-"La estructura en C de los objetos utilizados para describir objetos del "
-"marco. Los campos de este tipo están sujetos a cambios en cualquier momento."
-
-#: ../Doc/c-api/veryhigh.rst:295
+#: ../Doc/c-api/veryhigh.rst:291
 msgid ""
 "Evaluate an execution frame.  This is a simplified interface to :c:func:"
 "`PyEval_EvalFrameEx`, for backward compatibility."
@@ -503,7 +498,7 @@ msgstr ""
 "Evaluar un marco de ejecución. Esta es una interfaz simplificada para :c:"
 "func:`PyEval_EvalFrameEx`, para compatibilidad con versiones anteriores."
 
-#: ../Doc/c-api/veryhigh.rst:301
+#: ../Doc/c-api/veryhigh.rst:297
 msgid ""
 "This is the main, unvarnished function of Python interpretation.  The code "
 "object associated with the execution frame *f* is executed, interpreting "
@@ -516,10 +511,10 @@ msgstr ""
 "objeto de código asociado con el marco de ejecución del marco *f* se "
 "ejecuta, interpretando el código de bytes y ejecutando llamadas según sea "
 "necesario. El parámetro adicional *throwflag* se puede ignorar por lo "
-"general; si es verdadero, entonces se genera una excepción de inmediato; "
-"esto se usa para los métodos :meth:`~generator.throw` de objetos generadores."
+"general; si es verdadero, entonces se lanza una excepción de inmediato; esto "
+"se usa para los métodos :meth:`~generator.throw` de objetos generadores."
 
-#: ../Doc/c-api/veryhigh.rst:308
+#: ../Doc/c-api/veryhigh.rst:304
 msgid ""
 "This function now includes a debug assertion to help ensure that it does not "
 "silently discard an active exception."
@@ -527,7 +522,7 @@ msgstr ""
 "Esta función ahora incluye una afirmación de depuración para ayudar a "
 "garantizar que no descarte silenciosamente una excepción activa."
 
-#: ../Doc/c-api/veryhigh.rst:315
+#: ../Doc/c-api/veryhigh.rst:311
 msgid ""
 "This function changes the flags of the current evaluation frame, and returns "
 "true on success, false on failure."
@@ -535,7 +530,7 @@ msgstr ""
 "Esta función cambia los flags del marco de evaluación actual, y retorna "
 "verdad (*true*) en caso de éxito, falso (*false*) en caso de fallo."
 
-#: ../Doc/c-api/veryhigh.rst:323
+#: ../Doc/c-api/veryhigh.rst:319
 msgid ""
 "The start symbol from the Python grammar for isolated expressions; for use "
 "with :c:func:`Py_CompileString`."
@@ -543,7 +538,7 @@ msgstr ""
 "El símbolo de inicio de la gramática de Python para expresiones aisladas; "
 "para usar con :c:func:`Py_CompileString`."
 
-#: ../Doc/c-api/veryhigh.rst:331
+#: ../Doc/c-api/veryhigh.rst:327
 msgid ""
 "The start symbol from the Python grammar for sequences of statements as read "
 "from a file or other source; for use with :c:func:`Py_CompileString`.  This "
@@ -554,7 +549,7 @@ msgstr ""
 "`Py_CompileString`. Este es el símbolo usado cuando se compile un código "
 "fuente en Python arbitrariamente largo."
 
-#: ../Doc/c-api/veryhigh.rst:340
+#: ../Doc/c-api/veryhigh.rst:336
 msgid ""
 "The start symbol from the Python grammar for a single statement; for use "
 "with :c:func:`Py_CompileString`. This is the symbol used for the interactive "
@@ -564,7 +559,7 @@ msgstr ""
 "para usar con :c:func:`Py_CompileString`. Este es el símbolo usado para el "
 "bucle interactivo del intérprete."
 
-#: ../Doc/c-api/veryhigh.rst:347
+#: ../Doc/c-api/veryhigh.rst:343
 msgid ""
 "This is the structure used to hold compiler flags.  In cases where code is "
 "only being compiled, it is passed as ``int flags``, and in cases where code "
@@ -577,7 +572,7 @@ msgstr ""
 "*flags``.  En este caso,  ``from __future__ import`` puede modificar los "
 "*flags*."
 
-#: ../Doc/c-api/veryhigh.rst:352
+#: ../Doc/c-api/veryhigh.rst:348
 msgid ""
 "Whenever ``PyCompilerFlags *flags`` is ``NULL``, :attr:`cf_flags` is treated "
 "as equal to ``0``, and any modification due to ``from __future__ import`` is "
@@ -587,11 +582,11 @@ msgstr ""
 "tratado como igual a ``0``, y cualquier modificación debido a ``from "
 "__future__ import`` es descartada."
 
-#: ../Doc/c-api/veryhigh.rst:358
+#: ../Doc/c-api/veryhigh.rst:354
 msgid "Compiler flags."
 msgstr "Flags del compilador."
 
-#: ../Doc/c-api/veryhigh.rst:362
+#: ../Doc/c-api/veryhigh.rst:358
 msgid ""
 "*cf_feature_version* is the minor Python version. It should be initialized "
 "to ``PY_MINOR_VERSION``."
@@ -599,7 +594,7 @@ msgstr ""
 "*cf_feature_version* es la versión menor de Python. Debe ser inicializado a "
 "``PY_MINOR_VERSION``."
 
-#: ../Doc/c-api/veryhigh.rst:365
+#: ../Doc/c-api/veryhigh.rst:361
 msgid ""
 "The field is ignored by default, it is used if and only if ``PyCF_ONLY_AST`` "
 "flag is set in *cf_flags*."
@@ -607,11 +602,11 @@ msgstr ""
 "El campo es ignorado por defecto, es usado si y solo si el flag "
 "``PyCF_ONLY_AST`` está configurado en *cf_flags*."
 
-#: ../Doc/c-api/veryhigh.rst:368
+#: ../Doc/c-api/veryhigh.rst:364
 msgid "Added *cf_feature_version* field."
 msgstr "Agregado el campo *cf_feature_version*."
 
-#: ../Doc/c-api/veryhigh.rst:374
+#: ../Doc/c-api/veryhigh.rst:370
 msgid ""
 "This bit can be set in *flags* to cause division operator ``/`` to be "
 "interpreted as \"true division\" according to :pep:`238`."
@@ -621,77 +616,9 @@ msgstr ""
 "`238`."
 
 #~ msgid ""
-#~ "Similar to :c:func:`PyRun_SimpleStringFlags`, but the Python source code "
-#~ "is read from *fp* instead of an in-memory string. *filename* should be "
-#~ "the name of the file, it is decoded from the filesystem encoding (:func:"
-#~ "`sys.getfilesystemencoding`).  If *closeit* is true, the file is closed "
-#~ "before PyRun_SimpleFileExFlags returns."
+#~ "The C structure of the objects used to describe frame objects. The fields "
+#~ "of this type are subject to change at any time."
 #~ msgstr ""
-#~ "Similar a :c:func:`PyRun_SimpleStringFlags`, pero el código fuente de "
-#~ "Python se lee desde *fp* en lugar de una cadena de caracteres en memoria. "
-#~ "*filename* debe ser el nombre del archivo, se decodifica a partir de la "
-#~ "codificación del sistema de archivos (:func:`sys.getfilesystemencoding`). "
-#~ "Si *closeit* es verdadero, el archivo se cierra antes de que "
-#~ "PyRun_SimpleFileExFlags retorne."
-
-#~ msgid ""
-#~ "This is a simplified interface to :c:func:"
-#~ "`PyParser_SimpleParseStringFlagsFilename` below, leaving  *filename* set "
-#~ "to ``NULL`` and *flags* set to ``0``."
-#~ msgstr ""
-#~ "Esta es una interfaz simplificada para :c:func:"
-#~ "`PyParser_SimpleParseStringFlagsFilename` más abajo, dejando *filename* "
-#~ "establecido a ``NULL`` y *flags* establecido a ``0``."
-
-#~ msgid ""
-#~ "This is a simplified interface to :c:func:"
-#~ "`PyParser_SimpleParseStringFlagsFilename` below, leaving  *filename* set "
-#~ "to ``NULL``."
-#~ msgstr ""
-#~ "Esta es una interfaz simplificada para :c:func:"
-#~ "`PyParser_SimpleParseStringFlagsFilename` más abajo, dejando *filename* "
-#~ "establecido a ``NULL``."
-
-#~ msgid ""
-#~ "Parse Python source code from *str* using the start token *start* "
-#~ "according to the *flags* argument.  The result can be used to create a "
-#~ "code object which can be evaluated efficiently. This is useful if a code "
-#~ "fragment must be evaluated many times. *filename* is decoded from the "
-#~ "filesystem encoding (:func:`sys.getfilesystemencoding`)."
-#~ msgstr ""
-#~ "Analiza gramaticalmente el código fuente de Python desde *str* usando el "
-#~ "token de inicio *start* de acuerdo con el argumento *flags*. El resultado "
-#~ "se puede usar para crear un objeto de código que se puede evaluar de "
-#~ "manera eficiente. Esto es útil si un fragmento de código debe evaluarse "
-#~ "muchas veces. *filename* se decodifica a partir de la codificación del "
-#~ "sistema de archivos (:func:`sys.getfilesystemencoding`)."
-
-#~ msgid ""
-#~ "This is a simplified interface to :c:func:`PyParser_SimpleParseFileFlags` "
-#~ "below, leaving *flags* set to ``0``."
-#~ msgstr ""
-#~ "Esta es una interfaz simplificada para :c:func:"
-#~ "`PyParser_SimpleParseFileFlags` más abajo, dejando *flags* establecido a "
-#~ "``0``."
-
-#~ msgid ""
-#~ "Similar to :c:func:`PyParser_SimpleParseStringFlagsFilename`, but the "
-#~ "Python source code is read from *fp* instead of an in-memory string."
-#~ msgstr ""
-#~ "Similar a :c:func:`PyParser_SimpleParseStringFlagsFilename`, pero el "
-#~ "código fuente de Python se lee desde *fp* en lugar de una cadena de "
-#~ "caracteres en memoria."
-
-#~ msgid ""
-#~ "Similar to :c:func:`PyRun_StringFlags`, but the Python source code is "
-#~ "read from *fp* instead of an in-memory string. *filename* should be the "
-#~ "name of the file, it is decoded from the filesystem encoding (:func:`sys."
-#~ "getfilesystemencoding`). If *closeit* is true, the file is closed before :"
-#~ "c:func:`PyRun_FileExFlags` returns."
-#~ msgstr ""
-#~ "Similar a :c:func:`PyRun_StringFlags`, pero el código fuente de Python se "
-#~ "lee desde *fp* en lugar de una cadena de caracteres en memoria. "
-#~ "*filename* debe ser el nombre del archivo, se decodifica a partir de la "
-#~ "codificación del sistema de archivos (:func:`sys.getfilesystemencoding`). "
-#~ "Si *closeit* es verdadero, el archivo se cierra antes que :c:func:"
-#~ "`PyRun_FileExFlags` retorne."
+#~ "La estructura en C de los objetos utilizados para describir objetos del "
+#~ "marco. Los campos de este tipo están sujetos a cambios en cualquier "
+#~ "momento."
