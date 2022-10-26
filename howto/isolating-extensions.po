@@ -1,0 +1,633 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2001-2022, Python Software Foundation
+# This file is distributed under the same license as the Python en Español
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Python en Español 3.11\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-10-25 19:47+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: ../Doc/howto/isolating-extensions.rst:5
+msgid "Isolating Extension Modules"
+msgstr ""
+
+msgid "Abstract"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:9
+msgid ""
+"Traditionally, state belonging to Python extension modules was kept in C "
+"``static`` variables, which have process-wide scope. This document describes "
+"problems of such per-process state and shows a safer way: per-module state."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:14
+msgid ""
+"The document also describes how to switch to per-module state where "
+"possible. This transition involves allocating space for that state, "
+"potentially switching from static types to heap types, and—perhaps most "
+"importantly—accessing per-module state from code."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:21
+msgid "Who should read this"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:23
+msgid ""
+"This guide is written for maintainers of :ref:`C-API <c-api-index>` "
+"extensions who would like to make that extension safer to use in "
+"applications where Python itself is used as a library."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:29
+msgid "Background"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:31
+msgid ""
+"An *interpreter* is the context in which Python code runs. It contains "
+"configuration (e.g. the import path) and runtime state (e.g. the set of "
+"imported modules)."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:35
+msgid ""
+"Python supports running multiple interpreters in one process. There are two "
+"cases to think about—users may run interpreters:"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:38
+msgid ""
+"in sequence, with several :c:func:`Py_InitializeEx`/:c:func:`Py_FinalizeEx` "
+"cycles, and"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:40
+msgid ""
+"in parallel, managing \"sub-interpreters\" using :c:func:"
+"`Py_NewInterpreter`/:c:func:`Py_EndInterpreter`."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:43
+msgid ""
+"Both cases (and combinations of them) would be most useful when embedding "
+"Python within a library. Libraries generally shouldn't make assumptions "
+"about the application that uses them, which include assuming a process-wide "
+"\"main Python interpreter\"."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:48
+msgid ""
+"Historically, Python extension modules don't handle this use case well. Many "
+"extension modules (and even some stdlib modules) use *per-process* global "
+"state, because C ``static`` variables are extremely easy to use. Thus, data "
+"that should be specific to an interpreter ends up being shared between "
+"interpreters. Unless the extension developer is careful, it is very easy to "
+"introduce edge cases that lead to crashes when a module is loaded in more "
+"than one interpreter in the same process."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:56
+msgid ""
+"Unfortunately, *per-interpreter* state is not easy to achieve. Extension "
+"authors tend to not keep multiple interpreters in mind when developing, and "
+"it is currently cumbersome to test the behavior."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:61
+msgid "Enter Per-Module State"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:63
+msgid ""
+"Instead of focusing on per-interpreter state, Python's C API is evolving to "
+"better support the more granular *per-module* state. This means that C-level "
+"data is be attached to a *module object*. Each interpreter creates its own "
+"module object, keeping the data separate. For testing the isolation, "
+"multiple module objects corresponding to a single extension can even be "
+"loaded in a single interpreter."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:70
+msgid ""
+"Per-module state provides an easy way to think about lifetime and resource "
+"ownership: the extension module will initialize when a module object is "
+"created, and clean up when it's freed. In this regard, a module is just like "
+"any other :c:expr:`PyObject *`; there are no \"on interpreter shutdown\" "
+"hooks to think—or forget—about."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:76
+msgid ""
+"Note that there are use cases for different kinds of \"globals\": per-"
+"process, per-interpreter, per-thread or per-task state. With per-module "
+"state as the default, these are still possible, but you should treat them as "
+"exceptional cases: if you need them, you should give them additional care "
+"and testing. (Note that this guide does not cover them.)"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:85
+msgid "Isolated Module Objects"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:87
+msgid ""
+"The key point to keep in mind when developing an extension module is that "
+"several module objects can be created from a single shared library. For "
+"example:"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:101
+msgid ""
+"As a rule of thumb, the two modules should be completely independent. All "
+"objects and state specific to the module should be encapsulated within the "
+"module object, not shared with other module objects, and cleaned up when the "
+"module object is deallocated. Since this just is a rule of thumb, exceptions "
+"are possible (see `Managing Global State`_), but they will need more thought "
+"and attention to edge cases."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:109
+msgid ""
+"While some modules could do with less stringent restrictions, isolated "
+"modules make it easier to set clear expectations and guidelines that work "
+"across a variety of use cases."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:115
+msgid "Surprising Edge Cases"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:117
+msgid ""
+"Note that isolated modules do create some surprising edge cases. Most "
+"notably, each module object will typically not share its classes and "
+"exceptions with other similar modules. Continuing from the `example above "
+"<Isolated Module Objects_>`__, note that ``old_binascii.Error`` and "
+"``binascii.Error`` are separate objects. In the following code, the "
+"exception is *not* caught:"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:137
+msgid ""
+"This is expected. Notice that pure-Python modules behave the same way: it is "
+"a part of how Python works."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:140
+msgid ""
+"The goal is to make extension modules safe at the C level, not to make hacks "
+"behave intuitively. Mutating ``sys.modules`` \"manually\" counts as a hack."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:146
+msgid "Making Modules Safe with Multiple Interpreters"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:150
+msgid "Managing Global State"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:152
+msgid ""
+"Sometimes, the state associated with a Python module is not specific to that "
+"module, but to the entire process (or something else \"more global\" than a "
+"module). For example:"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:156
+msgid "The ``readline`` module manages *the* terminal."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:157
+msgid ""
+"A module running on a circuit board wants to control *the* on-board LED."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:160
+msgid ""
+"In these cases, the Python module should provide *access* to the global "
+"state, rather than *own* it. If possible, write the module so that multiple "
+"copies of it can access the state independently (along with other libraries, "
+"whether for Python or other languages). If that is not possible, consider "
+"explicit locking."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:166
+msgid ""
+"If it is necessary to use process-global state, the simplest way to avoid "
+"issues with multiple interpreters is to explicitly prevent a module from "
+"being loaded more than once per process—see `Opt-Out: Limiting to One Module "
+"Object per Process`_."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:173
+msgid "Managing Per-Module State"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:175
+msgid ""
+"To use per-module state, use :ref:`multi-phase extension module "
+"initialization <multi-phase-initialization>`. This signals that your module "
+"supports multiple interpreters correctly."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:179
+msgid ""
+"Set ``PyModuleDef.m_size`` to a positive number to request that many bytes "
+"of storage local to the module. Usually, this will be set to the size of "
+"some module-specific ``struct``, which can store all of the module's C-level "
+"state. In particular, it is where you should put pointers to classes "
+"(including exceptions, but excluding static types) and settings (e.g. "
+"``csv``'s :py:data:`~csv.field_size_limit`) which the C code needs to "
+"function."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:188
+msgid ""
+"Another option is to store state in the module's ``__dict__``, but you must "
+"avoid crashing when users modify ``__dict__`` from Python code. This usually "
+"means error- and type-checking at the C level, which is easy to get wrong "
+"and hard to test sufficiently."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:193
+msgid ""
+"However, if module state is not needed in C code, storing it in ``__dict__`` "
+"only is a good idea."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:196
+msgid ""
+"If the module state includes ``PyObject`` pointers, the module object must "
+"hold references to those objects and implement the module-level hooks "
+"``m_traverse``, ``m_clear`` and ``m_free``. These work like ``tp_traverse``, "
+"``tp_clear`` and ``tp_free`` of a class. Adding them will require some work "
+"and make the code longer; this is the price for modules which can be "
+"unloaded cleanly."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:203
+msgid ""
+"An example of a module with per-module state is currently available as "
+"`xxlimited <https://github.com/python/cpython/blob/master/Modules/xxlimited."
+"c>`__; example module initialization shown at the bottom of the file."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:209
+msgid "Opt-Out: Limiting to One Module Object per Process"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:211
+msgid ""
+"A non-negative ``PyModuleDef.m_size`` signals that a module supports "
+"multiple interpreters correctly. If this is not yet the case for your "
+"module, you can explicitly make your module loadable only once per process. "
+"For example::"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:232
+msgid "Module State Access from Functions"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:234
+msgid ""
+"Accessing the state from module-level functions is straightforward. "
+"Functions get the module object as their first argument; for extracting the "
+"state, you can use ``PyModule_GetState``::"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:249
+msgid ""
+"``PyModule_GetState`` may return ``NULL`` without setting an exception if "
+"there is no module state, i.e. ``PyModuleDef.m_size`` was zero. In your own "
+"module, you're in control of ``m_size``, so this is easy to prevent."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:256
+msgid "Heap Types"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:258
+msgid ""
+"Traditionally, types defined in C code are *static*; that is, ``static "
+"PyTypeObject`` structures defined directly in code and initialized using "
+"``PyType_Ready()``."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:262
+msgid ""
+"Such types are necessarily shared across the process. Sharing them between "
+"module objects requires paying attention to any state they own or access. To "
+"limit the possible issues, static types are immutable at the Python level: "
+"for example, you can't set ``str.myattribute = 123``."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:268
+msgid ""
+"Sharing truly immutable objects between interpreters is fine, as long as "
+"they don't provide access to mutable objects. However, in CPython, every "
+"Python object has a mutable implementation detail: the reference count. "
+"Changes to the refcount are guarded by the GIL. Thus, code that shares any "
+"Python objects across interpreters implicitly depends on CPython's current, "
+"process-wide GIL."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:275
+msgid ""
+"Because they are immutable and process-global, static types cannot access "
+"\"their\" module state. If any method of such a type requires access to "
+"module state, the type must be converted to a *heap-allocated type*, or "
+"*heap type* for short. These correspond more closely to classes created by "
+"Python's ``class`` statement."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:282
+msgid "For new modules, using heap types by default is a good rule of thumb."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:286
+msgid "Changing Static Types to Heap Types"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:288
+msgid ""
+"Static types can be converted to heap types, but note that the heap type API "
+"was not designed for \"lossless\" conversion from static types—that is, "
+"creating a type that works exactly like a given static type. So, when "
+"rewriting the class definition in a new API, you are likely to "
+"unintentionally change a few details (e.g. pickleability or inherited "
+"slots). Always test the details that are important to you."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:297
+msgid ""
+"Watch out for the following two points in particular (but note that this is "
+"not a comprehensive list):"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:300
+msgid ""
+"Unlike static types, heap type objects are mutable by default. Use the :c:"
+"data:`Py_TPFLAGS_IMMUTABLETYPE` flag to prevent mutability."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:302
+msgid ""
+"Heap types inherit :c:member:`~PyTypeObject.tp_new` by default, so it may "
+"become possible to instantiate them from Python code. You can prevent this "
+"with the :c:data:`Py_TPFLAGS_DISALLOW_INSTANTIATION` flag."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:308
+msgid "Defining Heap Types"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:310
+msgid ""
+"Heap types can be created by filling a :c:struct:`PyType_Spec` structure, a "
+"description or \"blueprint\" of a class, and calling :c:func:"
+"`PyType_FromModuleAndSpec` to construct a new class object."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:315
+msgid ""
+"Other functions, like :c:func:`PyType_FromSpec`, can also create heap types, "
+"but :c:func:`PyType_FromModuleAndSpec` associates the module with the class, "
+"allowing access to the module state from methods."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:319
+msgid ""
+"The class should generally be stored in *both* the module state (for safe "
+"access from C) and the module's ``__dict__`` (for access from Python code)."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:325
+msgid "Garbage-Collection Protocol"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:327
+msgid ""
+"Instances of heap types hold a reference to their type. This ensures that "
+"the type isn't destroyed before all its instances are, but may result in "
+"reference cycles that need to be broken by the garbage collector."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:332
+msgid ""
+"To avoid memory leaks, instances of heap types must implement the garbage "
+"collection protocol. That is, heap types should:"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:336
+msgid "Have the :c:data:`Py_TPFLAGS_HAVE_GC` flag."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:337
+msgid ""
+"Define a traverse function using ``Py_tp_traverse``, which visits the type "
+"(e.g. using :c:expr:`Py_VISIT(Py_TYPE(self))`)."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:340
+msgid ""
+"Please refer to the :ref:`the documentation <type-structs>` of :c:data:"
+"`Py_TPFLAGS_HAVE_GC` and :c:member:`~PyTypeObject.tp_traverse` for "
+"additional considerations."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:344
+msgid ""
+"If your traverse function delegates to the ``tp_traverse`` of its base class "
+"(or another type), ensure that ``Py_TYPE(self)`` is visited only once. Note "
+"that only heap type are expected to visit the type in ``tp_traverse``."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:348
+msgid "For example, if your traverse function includes::"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:352
+msgid "...and ``base`` may be a static type, then it should also include::"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:360
+msgid ""
+"It is not necessary to handle the type's reference count in ``tp_new`` and "
+"``tp_clear``."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:365
+msgid "Module State Access from Classes"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:367
+msgid ""
+"If you have a type object defined with :c:func:`PyType_FromModuleAndSpec`, "
+"you can call :c:func:`PyType_GetModule` to get the associated module, and "
+"then :c:func:`PyModule_GetState` to get the module's state."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:371
+msgid ""
+"To save a some tedious error-handling boilerplate code, you can combine "
+"these two steps with :c:func:`PyType_GetModuleState`, resulting in::"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:381
+msgid "Module State Access from Regular Methods"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:383
+msgid ""
+"Accessing the module-level state from methods of a class is somewhat more "
+"complicated, but is possible thanks to API introduced in Python 3.9. To get "
+"the state, you need to first get the *defining class*, and then get the "
+"module state from it."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:388
+msgid ""
+"The largest roadblock is getting *the class a method was defined in*, or "
+"that method's \"defining class\" for short. The defining class can have a "
+"reference to the module it is part of."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:392
+msgid ""
+"Do not confuse the defining class with :c:expr:`Py_TYPE(self)`. If the "
+"method is called on a *subclass* of your type, ``Py_TYPE(self)`` will refer "
+"to that subclass, which may be defined in different module than yours."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:397
+msgid ""
+"The following Python code can illustrate the concept. ``Base."
+"get_defining_class`` returns ``Base`` even if ``type(self) == Sub``:"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:413
+msgid ""
+"For a method to get its \"defining class\", it must use the :data:"
+"`METH_METHOD | METH_FASTCALL | METH_KEYWORDS` :c:type:`calling convention "
+"<PyMethodDef>` and the corresponding :c:type:`PyCMethod` signature::"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:425
+msgid ""
+"Once you have the defining class, call :c:func:`PyType_GetModuleState` to "
+"get the state of its associated module."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:428
+msgid "For example::"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:456
+msgid "Module State Access from Slot Methods, Getters and Setters"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:460
+msgid "This is new in Python 3.11."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:468
+msgid ""
+"Slot methods—the fast C equivalents for special methods, such as :c:member:"
+"`~PyNumberMethods.nb_add` for :py:attr:`~object.__add__` or :c:member:"
+"`~PyType.tp_new` for initialization—have a very simple API that doesn't "
+"allow passing in the defining class, unlike with :c:type:`PyCMethod`. The "
+"same goes for getters and setters defined with :c:type:`PyGetSetDef`."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:475
+msgid ""
+"To access the module state in these cases, use the :c:func:"
+"`PyType_GetModuleByDef` function, and pass in the module definition. Once "
+"you have the module, call :c:func:`PyModule_GetState` to get the state::"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:486
+msgid ""
+"``PyType_GetModuleByDef`` works by searching the :term:`method resolution "
+"order` (i.e. all superclasses) for the first superclass that has a "
+"corresponding module."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:492
+msgid ""
+"In very exotic cases (inheritance chains spanning multiple modules created "
+"from the same definition), ``PyType_GetModuleByDef`` might not return the "
+"module of the true defining class. However, it will always return a module "
+"with the same definition, ensuring a compatible C memory layout."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:500
+msgid "Lifetime of the Module State"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:502
+msgid ""
+"When a module object is garbage-collected, its module state is freed. For "
+"each pointer to (a part of) the module state, you must hold a reference to "
+"the module object."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:506
+msgid ""
+"Usually this is not an issue, because types created with :c:func:"
+"`PyType_FromModuleAndSpec`, and their instances, hold a reference to the "
+"module. However, you must be careful in reference counting when you "
+"reference module state from other places, such as callbacks for external "
+"libraries."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:515
+msgid "Open Issues"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:517
+msgid "Several issues around per-module state and heap types are still open."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:519
+msgid ""
+"Discussions about improving the situation are best held on the `capi-sig "
+"mailing list <https://mail.python.org/mailman3/lists/capi-sig.python.org/"
+">`__."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:524
+msgid "Per-Class Scope"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:526
+msgid ""
+"It is currently (as of Python 3.11) not possible to attach state to "
+"individual *types* without relying on CPython implementation details (which "
+"may change in the future—perhaps, ironically, to allow a proper solution for "
+"per-class scope)."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:533
+msgid "Lossless Conversion to Heap Types"
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:535
+msgid ""
+"The heap type API was not designed for \"lossless\" conversion from static "
+"types; that is, creating a type that works exactly like a given static type."
+msgstr ""

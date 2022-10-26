@@ -9,13 +9,13 @@ on:
 jobs:
   test:
     name: Test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
-      - name: Preparar Python v3.10
+      - name: Preparar Python v3.11
         uses: actions/setup-python@v2
         with:
-          python-version: "3.10"
+          python-version: "3.11"
       - name: Sincronizar con CPython
         run: |
           git submodule update --init --depth=1 cpython
@@ -36,4 +36,14 @@ jobs:
         run: |
           python scripts/check_spell.py
       - name: Construir documentación
-        run: PYTHONWARNINGS=ignore::FutureWarning sphinx-build -j auto -W --keep-going -b html -d cpython/Doc/_build/doctree -D language=es . cpython/Doc/_build/html
+        run: |
+          # FIXME: Relative paths for includes in 'cpython'
+          sed -i -e 's|.. include:: ../includes/wasm-notavail.rst|.. include:: ../../../../includes/wasm-notavail.rst|g' cpython/Doc/**/*.rst
+          sed -i -e 's|.. include:: ../distutils/_setuptools_disclaimer.rst|.. include:: ../../../../distutils/_setuptools_disclaimer.rst|g' cpython/Doc/**/*.rst
+          sed -i -e 's|.. include:: ./_setuptools_disclaimer.rst|.. include:: ../../../_setuptools_disclaimer.rst|g' cpython/Doc/**/*.rst
+          sed -i -e 's|.. include:: token-list.inc|.. include:: ../../../token-list.inc|g' cpython/Doc/**/*.rst
+          sed -i -e 's|.. include:: ../../using/venv-create.inc|.. include:: ../using/venv-create.inc|g' cpython/Doc/**/*.rst
+          sed -i -e 's|.. include:: ../../../using/venv-create.inc|.. include:: ../../using/venv-create.inc|g' cpython/Doc/**/*.rst
+          sed -i -e 's|.. include:: /using/venv-create.inc|.. include:: ../../../../using/venv-create.inc|g' cpython/Doc/**/*.rst
+          # Normal build
+          PYTHONWARNINGS=ignore::FutureWarning sphinx-build -j auto -W --keep-going -b html -d cpython/Doc/_build/doctree -D language=es . cpython/Doc/_build/html
