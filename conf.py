@@ -13,21 +13,28 @@
 #
 #   $ sphinx-build -b html -d _build/doctrees -D language=es . _build/html
 
-import sys, os, time
+import sys
+import os
+import time
 sys.path.append(os.path.abspath('cpython/Doc/tools/extensions'))
 sys.path.append(os.path.abspath('cpython/Doc/includes'))
 
 # Import all the Sphinx settings from cpython
+# This import will trigger warnings on the 'Include/patchlevel.h'
+# not being found, because it execute the content of the whole file,
+# and there there is a local call to 'get_header_version' like the one
+# we have in a few lines.
 sys.path.insert(0, os.path.abspath('cpython/Doc'))
 from conf import *
 
 # Call patchlevel with the proper path to get the version from
 # instead of hardcoding it
-import patchlevel
-version, release = patchlevel.get_header_version_info(os.path.abspath('cpython/Doc'))
+from patchlevel import get_header_version_info
+version, release = get_header_version_info(os.path.abspath('cpython/Doc'))
 
 project = 'Python en Español'
-copyright = '2001-%s, Python Software Foundation' % time.strftime('%Y')
+year = time.strftime("%Y")
+copyright = f'2001-{year}, Python Software Foundation'
 
 html_theme_path = ['cpython/Doc/tools']
 templates_path = ['cpython/Doc/tools/templates']
@@ -61,13 +68,17 @@ else:
     extensions = _extensions
 
 
-if not os.environ.get('SPHINX_GETTEXT') == 'True':
+if os.environ.get('SPHINX_GETTEXT') is None:
     # Override all the files from ``.overrides`` directory
     from pathlib import Path
     overrides_paths = Path('.overrides')
 
     for path in overrides_paths.glob('**/*.*'):
         if path.name == 'README.rst' and path.parent == '.overrides':
+            continue
+        # Skip the files in the .overrides/logo directory
+        # to avoid ln issues.
+        if str(path.parent).endswith("logo"):
             continue
         destroot = str(path.parent).replace('.overrides', '').lstrip('/')
         outputdir = Path('cpython/Doc') / destroot / path.name
@@ -85,6 +96,7 @@ latex_documents = [
      _stdauthor, 'manual'),
 ]
 
+
 def setup(app):
 
     def add_contributing_banner(app, doctree):
@@ -101,10 +113,13 @@ def setup(app):
             return
 
         from docutils import nodes, core
+        from textwrap import dedent
 
-        message = '¡Ayúdanos a traducir la documentación oficial de Python al Español! ' \
-        f'Puedes encontrar más información en `Como contribuir </es/{version}/CONTRIBUTING.html>`_.  ' \
-        'Ayuda a acercar Python a más personas de habla hispana.'
+        message = dedent(f"""\
+        ¡Ayúdanos a traducir la documentación oficial de Python al Español!
+        Puedes encontrar más información en `Como contribuir </es/{version}/CONTRIBUTING.html>`_.
+        Ayuda a acercar Python a más personas de habla hispana.
+        """)
 
         paragraph = core.publish_doctree(message)[0]
         banner = nodes.note(ids=['contributing-banner'])
