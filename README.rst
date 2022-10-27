@@ -1,5 +1,5 @@
-.. image:: https://github.com/python/python-docs-es/actions/workflows/main.yml/badge.svg
-  :target: https://github.com/python/python-docs-es/actions/workflows/main.yml
+.. image:: https://github.com/python/python-docs-es/actions/workflows/main.yml/badge.svg?branch=3.11
+  :target: https://github.com/python/python-docs-es/actions?query=branch:3.11
   :alt: Build Status
 
 .. image:: https://readthedocs.org/projects/python-docs-es/badge/?version=3.11
