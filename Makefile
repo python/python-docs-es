@@ -30,7 +30,6 @@ help:
 	@echo " spell        Check spelling"
 	@echo " wrap         Wrap all the PO files to a fixed column width"
 	@echo " progress     To compute current progression on the tutorial"
-	@echo " dict_dups	Check duplicated entries on the dict"
 	@echo ""
 
 
