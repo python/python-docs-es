@@ -1,5 +1,5 @@
-.. image:: https://travis-ci.org/python/python-docs-es.svg?branch=3.11
-  :target: https://travis-ci.org/python/python-docs-es
+.. image:: https://github.com/python/python-docs-es/actions/workflows/main.yml/badge.svg
+  :target: https://github.com/python/python-docs-es/actions/workflows/main.yml
   :alt: Build Status
 
 .. image:: https://readthedocs.org/projects/python-docs-es/badge/?version=3.11
