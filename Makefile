@@ -19,7 +19,6 @@ CPYTHON_WORKDIR     := cpython
 OUTPUT_DOCTREE      := $(CPYTHON_WORKDIR)/Doc/build/doctree
 OUTPUT_HTML         := $(CPYTHON_WORKDIR)/Doc/build/html
 LOCALE_DIR          := $(CPYTHON_WORKDIR)/locale
-TRANSIFEX_PROJECT   := python-docs-es
 POSPELL_TMP_DIR     := .pospell
 
 

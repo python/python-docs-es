@@ -1,5 +1,5 @@
-.. image:: https://travis-ci.org/python/python-docs-es.svg?branch=3.11
-  :target: https://travis-ci.org/python/python-docs-es
+.. image:: https://github.com/python/python-docs-es/actions/workflows/main.yml/badge.svg?branch=3.11
+  :target: https://github.com/python/python-docs-es/actions?query=branch:3.11
   :alt: Build Status
 
 .. image:: https://readthedocs.org/projects/python-docs-es/badge/?version=3.11
@@ -32,7 +32,7 @@ Documentation Contribution Agreement
 
 NOTE REGARDING THE LICENSE FOR TRANSLATIONS: Python's documentation is
 maintained using a global network of volunteers. By posting this
-project on Transifex, Github, and other public places, and inviting
+project on Github, and other public places, and inviting
 you to participate, we are proposing an agreement that you will
 provide your improvements to Python's documentation or the translation
 of Python's documentation for the PSF's use under the CC0 license
