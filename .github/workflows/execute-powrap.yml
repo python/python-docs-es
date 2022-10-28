@@ -1,0 +1,42 @@
+name: Ejecuta powrap
+
+on:
+  issue_comment:
+    types:
+      - edited
+      - created
+
+jobs:
+  ejecutar-powrap:
+    name: Revisa y repara el formato con Powrap
+    runs-on: ubuntu-latest
+    if: ${{ github.event.issue.pull_request && github.event.comment.body == 'powrap-fix' }}
+    steps:
+      - name: Confirmar ejecucion
+        continue-on-error: true
+        run: |
+          curl ${{github.event.comment.url}}/reactions \
+            -X POST \
+            -d '{"content":"+1"}' \
+            -H "Accept: application/vnd.github.squirrel-girl-preview+json" \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}"
+      - uses: actions/checkout@v3
+      - uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: gettext
+          version: 1.0
+      - name: Preparar Python v3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          cache: "pip"
+      - name: Instalar dependencias
+        run: python -m pip install powrap
+      - name: Ejecutar Powrap
+        run: powrap --quiet **/*.po
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          message: "auto: spell check"
+          branch: ${{ github.head_ref }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
