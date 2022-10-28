@@ -17,6 +17,9 @@ contribución, queremos señalar algunos
 .. note::
 
    Si tienes cualquier duda, puedes enviarnos un email a docs-es@python.org.
+   
+   También puedes unirte a `nuestro canal de Telegram`_ si necesitas ayuda.
+
 
 Antes de comenzar
 -----------------
@@ -64,11 +67,11 @@ Antes de comenzar
 
 #. Selecciona un :ref:`archivo para traducir <que-archivo-traducir>`.
 
-#. Verifica que estás en la rama principal del repositorio, **3.10** (esto es muy
+#. Verifica que estás en la rama principal del repositorio, **3.11** (esto es muy
    importante para evitar crear una nueva rama a partir de una traducción
    anterior)::
 
-     git checkout 3.10
+     git checkout 3.11
 
 #. Crea una rama nueva en base al artículo en el que vayas a trabajar.  Por
    ejemplo, si vas a trabajar en el archivo ``library/glosario.po``, usa un nombre
@@ -180,11 +183,6 @@ A tener en cuenta
 
 * Último pero no menos importante, **divertite y contá con la ayuda de todes**. Te
   esperamos en nuestro chat en telegram. ¡Gracias!
-
-
-.. note::
-
-   También puedes unirte a `nuestro canal de Telegram`_ si necesitas ayuda.
 
 
 Previsualizar los cambios
