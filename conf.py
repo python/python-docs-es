@@ -32,6 +32,15 @@ from conf import *
 from patchlevel import get_header_version_info
 version, release = get_header_version_info(os.path.abspath('cpython/Doc'))
 
+_rst_epilog = """
+.. |pythonversion| replace:: 3.11
+"""
+
+if 'rst_epilog' in globals():
+    rst_epilog += _rst_epilog
+else:
+    rst_epilog = _rst_epilog
+
 project = 'Python en Español'
 year = time.strftime("%Y")
 copyright = f'2001-{year}, Python Software Foundation'

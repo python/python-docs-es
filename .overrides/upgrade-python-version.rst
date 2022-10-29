@@ -1,5 +1,9 @@
 :orphan:
 
+.. No uso |pythonversion| "replace" acá porque esta página documenta
+   la actualización puntual de una versión a otra y no quiero que se actualice
+   automaticamente cuando cambiamos la variable en ``conf.py``
+
 How to update to a new Python version
 =====================================
 
