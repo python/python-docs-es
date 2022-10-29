@@ -58,7 +58,8 @@ html_title = f'Documentación de Python en Español -- {release}'
 
 # Extend settings from upstream
 _exclude_patterns = [
-    # This file is not included and it's not marked as :orphan:
+    # These file is not included and it's not marked as :orphan:
+    # These files are used in ".. include::" directives
     'distutils/_setuptools_disclaimer.rst',
     'includes/wasm-notavail.rst',
 ]
@@ -67,10 +68,12 @@ if 'exclude_patterns' in globals():
 else:
     exclude_patterns  = _exclude_patterns
 
+# Extra extensions for our own documentation site
 _extensions = [
     'sphinx_tabs.tabs',
     'sphinxemoji.sphinxemoji',
 ]
+
 if 'extensions' in globals():
     extensions += _extensions
 else:
@@ -85,10 +88,12 @@ if os.environ.get('SPHINX_GETTEXT') is None:
     for path in overrides_paths.glob('**/*.*'):
         if path.name == 'README.rst' and path.parent == '.overrides':
             continue
+
         # Skip the files in the .overrides/logo directory
         # to avoid ln issues.
         if str(path.parent).endswith("logo"):
             continue
+
         destroot = str(path.parent).replace('.overrides', '').lstrip('/')
         outputdir = Path('cpython/Doc') / destroot / path.name
         os.system(f'ln -nfs `pwd`/{path.parent}/{path.name} {outputdir}')
