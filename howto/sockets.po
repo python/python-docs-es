@@ -10,16 +10,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-16 21:42+0200\n"
+"POT-Creation-Date: 2022-10-25 19:47+0200\n"
 "PO-Revision-Date: 2021-08-04 20:37+0200\n"
 "Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
-"Language-Team: python-doc-es\n"
 "Language: es\n"
+"Language-Team: python-doc-es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"Generated-By: Babel 2.9.1\n"
+"Generated-By: Babel 2.10.3\n"
 
 #: ../Doc/howto/sockets.rst:5
 msgid "Socket Programming HOWTO"
@@ -390,8 +390,8 @@ msgstr ""
 "mensajería - en Python envías cadenas y usas ``len()`` para determinar su "
 "longitud (incluso si tiene caracteres ``\\0`` incrustados). Es "
 "principalmente el código receptor el que se vuelve más complejo. (Y en C no "
-"es mucho peor, excepto que no puedes usar ``strlen`` si el mensaje tiene ``"
-"\\0`` incrustados)."
+"es mucho peor, excepto que no puedes usar ``strlen`` si el mensaje tiene "
+"``\\0`` incrustados)."
 
 #: ../Doc/howto/sockets.rst:223
 msgid ""
@@ -464,13 +464,22 @@ msgstr "Datos binarios"
 msgid ""
 "It is perfectly possible to send binary data over a socket. The major "
 "problem is that not all machines use the same formats for binary data. For "
-"example, a Motorola chip will represent a 16 bit integer with the value 1 as "
-"the two hex bytes 00 01. Intel and DEC, however, are byte-reversed - that "
-"same 1 is 01 00. Socket libraries have calls for converting 16 and 32 bit "
-"integers - ``ntohl, htonl, ntohs, htons`` where \"n\" means *network* and \"h"
-"\" means *host*, \"s\" means *short* and \"l\" means *long*. Where network "
-"order is host order, these do nothing, but where the machine is byte-"
-"reversed, these swap the bytes around appropriately."
+"example, `network byte order <https://en.wikipedia.org/wiki/"
+"Endianness#Networking>`_ is big-endian, with the most significant byte "
+"first, so a 16 bit integer with the value ``1`` would be the two hex bytes "
+"``00 01``. However, most common processors (x86/AMD64, ARM, RISC-V), are "
+"little-endian, with the least significant byte first - that same ``1`` would "
+"be ``01 00``."
+msgstr ""
+
+#: ../Doc/howto/sockets.rst:262
+#, fuzzy
+msgid ""
+"Socket libraries have calls for converting 16 and 32 bit integers - ``ntohl, "
+"htonl, ntohs, htons`` where \"n\" means *network* and \"h\" means *host*, "
+"\"s\" means *short* and \"l\" means *long*. Where network order is host "
+"order, these do nothing, but where the machine is byte-reversed, these swap "
+"the bytes around appropriately."
 msgstr ""
 "Es perfectamente posible mandar datos binarios en un socket. El mayor "
 "problema es que no todas las máquinas usan el mismo formato para datos "
@@ -484,13 +493,15 @@ msgstr ""
 "pero cuando la máquina es de \"bytes invertidos\", estas cambian los bytes "
 "apropiadamente."
 
-#: ../Doc/howto/sockets.rst:264
+#: ../Doc/howto/sockets.rst:268
+#, fuzzy
 msgid ""
-"In these days of 32 bit machines, the ascii representation of binary data is "
+"In these days of 64-bit machines, the ASCII representation of binary data is "
 "frequently smaller than the binary representation. That's because a "
-"surprising amount of the time, all those longs have the value 0, or maybe 1. "
-"The string \"0\" would be two bytes, while binary is four. Of course, this "
-"doesn't fit well with fixed-length messages. Decisions, decisions."
+"surprising amount of the time, most integers have the value 0, or maybe 1. "
+"The string ``\"0\"`` would be two bytes, while a full 64-bit integer would "
+"be 8. Of course, this doesn't fit well with fixed-length messages. "
+"Decisions, decisions."
 msgstr ""
 "En estos días de máquinas de 32 bit, la representación ascii de los datos "
 "binarios es con frecuencia más pequeña que la representación binaria. Esto "
@@ -499,11 +510,11 @@ msgstr ""
 "cuatro. Por supuesto, esto no funciona bien con los mensajes de longitud "
 "fija. Decisiones, decisiones."
 
-#: ../Doc/howto/sockets.rst:272
+#: ../Doc/howto/sockets.rst:277
 msgid "Disconnecting"
 msgstr "Desconectando"
 
-#: ../Doc/howto/sockets.rst:274
+#: ../Doc/howto/sockets.rst:279
 msgid ""
 "Strictly speaking, you're supposed to use ``shutdown`` on a socket before "
 "you ``close`` it.  The ``shutdown`` is an advisory to the socket at the "
@@ -524,7 +535,7 @@ msgstr ""
 "la mayoría de las situaciones usar ``shutdown`` de manera explícita no es "
 "necesario."
 
-#: ../Doc/howto/sockets.rst:282
+#: ../Doc/howto/sockets.rst:287
 msgid ""
 "One way to use ``shutdown`` effectively is in an HTTP-like exchange. The "
 "client sends a request and then does a ``shutdown(1)``. This tells the "
@@ -541,7 +552,7 @@ msgstr ""
 "servidor envía una respuesta. Si el ``send`` termina satisfactoriamente "
 "entonces, en efecto, el cliente todavía estaba recibiendo."
 
-#: ../Doc/howto/sockets.rst:289
+#: ../Doc/howto/sockets.rst:294
 msgid ""
 "Python takes the automatic shutdown a step further, and says that when a "
 "socket is garbage collected, it will automatically do a ``close`` if it's "
@@ -557,11 +568,11 @@ msgstr ""
 "lado puede colgarse indefinidamente, pensando que solo estas siendo lento. "
 "*Por favor* cierra los sockets cuando termines."
 
-#: ../Doc/howto/sockets.rst:297
+#: ../Doc/howto/sockets.rst:302
 msgid "When Sockets Die"
 msgstr "Cuando los sockets mueren"
 
-#: ../Doc/howto/sockets.rst:299
+#: ../Doc/howto/sockets.rst:304
 msgid ""
 "Probably the worst thing about using blocking sockets is what happens when "
 "the other side comes down hard (without doing a ``close``). Your socket is "
@@ -588,12 +599,12 @@ msgstr ""
 "otras palabras, si te las arreglas para matar el hilo, es muy probable que "
 "todo el proceso termine arruinado."
 
-#: ../Doc/howto/sockets.rst:313
+#: ../Doc/howto/sockets.rst:318
 msgid "Non-blocking Sockets"
 msgstr "*Sockets* no bloqueantes"
 
 # Como traduzco inside-out?
-#: ../Doc/howto/sockets.rst:315
+#: ../Doc/howto/sockets.rst:320
 msgid ""
 "If you've understood the preceding, you already know most of what you need "
 "to know about the mechanics of using sockets. You'll still use the same "
@@ -605,7 +616,7 @@ msgstr ""
 "mismas llamadas, de la misma manera. Es solo eso, si lo haces correctamente, "
 "tu aplicación estará casi correcta."
 
-#: ../Doc/howto/sockets.rst:320
+#: ../Doc/howto/sockets.rst:325
 msgid ""
 "In Python, you use ``socket.setblocking(False)`` to make it non-blocking. In "
 "C, it's more complex, (for one thing, you'll need to choose between the BSD "
@@ -621,7 +632,7 @@ msgstr ""
 "idea. Haz esto después de crear el socket, pero antes de usarlo. (En "
 "realidad, si estás loco, puedes cambiar de un lado a otro)."
 
-#: ../Doc/howto/sockets.rst:327
+#: ../Doc/howto/sockets.rst:332
 msgid ""
 "The major mechanical difference is that ``send``, ``recv``, ``connect`` and "
 "``accept`` can return without having done anything. You have (of course) a "
@@ -637,11 +648,11 @@ msgstr ""
 "aplicación crecerá grande, con errores y consumirá todo el CPU. Así que "
 "vamos a saltarnos las soluciones descerebradas y hacerlo correctamente."
 
-#: ../Doc/howto/sockets.rst:334
+#: ../Doc/howto/sockets.rst:339
 msgid "Use ``select``."
 msgstr "Usando ``select``."
 
-#: ../Doc/howto/sockets.rst:336
+#: ../Doc/howto/sockets.rst:341
 msgid ""
 "In C, coding ``select`` is fairly complex. In Python, it's a piece of cake, "
 "but it's close enough to the C version that if you understand ``select`` in "
@@ -651,7 +662,7 @@ msgstr ""
 "lo suficientemente cercano a la versión de C que si entiendes el ``select`` "
 "en Python tendrás pocos problemas con él el C:"
 
-#: ../Doc/howto/sockets.rst:347
+#: ../Doc/howto/sockets.rst:352
 msgid ""
 "You pass ``select`` three lists: the first contains all sockets that you "
 "might want to try reading; the second all the sockets you might want to try "
@@ -670,7 +681,7 @@ msgstr ""
 "dale un tiempo de espera largo (un minuto por ejemplo) a menos que tengas "
 "una buena razón para no hacerlo."
 
-#: ../Doc/howto/sockets.rst:355
+#: ../Doc/howto/sockets.rst:360
 msgid ""
 "In return, you will get three lists. They contain the sockets that are "
 "actually readable, writable and in error. Each of these lists is a subset "
@@ -680,7 +691,7 @@ msgstr ""
 "realmente legibles, escribibles y con error. Cada una de estas lista es un "
 "subconjunto (posiblemente vacío) de la lista correspondiente que pasaste."
 
-#: ../Doc/howto/sockets.rst:359
+#: ../Doc/howto/sockets.rst:364
 msgid ""
 "If a socket is in the output readable list, you can be as-close-to-certain-"
 "as-we-ever-get-in-this-business that a ``recv`` on that socket will return "
@@ -697,7 +708,7 @@ msgstr ""
 "razonablemente saludable va a retornar como escribible - eso solo significa "
 "que el espacio de salida del buffer de red está disponible)"
 
-#: ../Doc/howto/sockets.rst:366
+#: ../Doc/howto/sockets.rst:371
 msgid ""
 "If you have a \"server\" socket, put it in the potential_readers list. If it "
 "comes out in the readable list, your ``accept`` will (almost certainly) "
@@ -712,7 +723,7 @@ msgstr ""
 "retorna en la lista de escribibles, tienes una buena oportunidad de que esté "
 "conectado."
 
-#: ../Doc/howto/sockets.rst:372
+#: ../Doc/howto/sockets.rst:377
 msgid ""
 "Actually, ``select`` can be handy even with blocking sockets. It's one way "
 "of determining whether you will block - the socket returns as readable when "
@@ -726,7 +737,7 @@ msgstr ""
 "problema de determinar si el otro extremo terminó, o solo está ocupado con "
 "otra cosa."
 
-#: ../Doc/howto/sockets.rst:377
+#: ../Doc/howto/sockets.rst:382
 msgid ""
 "**Portability alert**: On Unix, ``select`` works both with the sockets and "
 "files. Don't try this on Windows. On Windows, ``select`` works with sockets "

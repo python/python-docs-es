@@ -7,8 +7,8 @@
 
 # Configuration
 
-CPYTHON_PATH        := cpython   #Current commit for this upstream repo is setted by the submodule
-BRANCH              := 3.8
+CPYTHON_PATH        := cpython   # Current commit for this upstream repo is setted by the submodule
+BRANCH              := 3.11
 LANGUAGE_TEAM       := python-docs-es
 LANGUAGE            := es
 
@@ -19,7 +19,6 @@ CPYTHON_WORKDIR     := cpython
 OUTPUT_DOCTREE      := $(CPYTHON_WORKDIR)/Doc/build/doctree
 OUTPUT_HTML         := $(CPYTHON_WORKDIR)/Doc/build/html
 LOCALE_DIR          := $(CPYTHON_WORKDIR)/locale
-TRANSIFEX_PROJECT   := python-docs-es
 POSPELL_TMP_DIR     := .pospell
 
 
@@ -31,7 +30,6 @@ help:
 	@echo " spell        Check spelling"
 	@echo " wrap         Wrap all the PO files to a fixed column width"
 	@echo " progress     To compute current progression on the tutorial"
-	@echo " dict_dups	Check duplicated entries on the dict"
 	@echo ""
 
 
@@ -41,7 +39,17 @@ help:
 #        treated as errors, which is good to skip simple Sphinx syntax mistakes.
 .PHONY: build
 build: setup
-	PYTHONWARNINGS=ignore::FutureWarning $(VENV)/bin/sphinx-build -j auto -W --keep-going -b html -d $(OUTPUT_DOCTREE) -D language=$(LANGUAGE) . $(OUTPUT_HTML) && \
+	# FIXME: Relative paths for includes in 'cpython'
+	# See more about this at https://github.com/python/python-docs-es/issues/1844
+	sed -i -e 's|.. include:: ../includes/wasm-notavail.rst|.. include:: ../../../../includes/wasm-notavail.rst|g' cpython/Doc/**/*.rst
+	sed -i -e 's|.. include:: ../distutils/_setuptools_disclaimer.rst|.. include:: ../../../../distutils/_setuptools_disclaimer.rst|g' cpython/Doc/**/*.rst
+	sed -i -e 's|.. include:: ./_setuptools_disclaimer.rst|.. include:: ../../../_setuptools_disclaimer.rst|g' cpython/Doc/**/*.rst
+	sed -i -e 's|.. include:: token-list.inc|.. include:: ../../../token-list.inc|g' cpython/Doc/**/*.rst
+	sed -i -e 's|.. include:: ../../using/venv-create.inc|.. include:: ../using/venv-create.inc|g' cpython/Doc/**/*.rst
+	sed -i -e 's|.. include:: ../../../using/venv-create.inc|.. include:: ../../using/venv-create.inc|g' cpython/Doc/**/*.rst
+	sed -i -e 's|.. include:: /using/venv-create.inc|.. include:: ../../../../using/venv-create.inc|g' cpython/Doc/**/*.rst
+	# Normal build
+	PYTHONWARNINGS=ignore::FutureWarning,ignore::RuntimeWarning $(VENV)/bin/sphinx-build -j auto -W --keep-going -b html -d $(OUTPUT_DOCTREE) -D language=$(LANGUAGE) . $(OUTPUT_HTML) && \
 		echo "Success! Open file://`pwd`/$(OUTPUT_HTML)/index.html, " \
 			"or run 'make serve' to see them in http://localhost:8000";
 
@@ -71,7 +79,7 @@ venv:
 #        Makefile's "serve" target. Run "build" before using this target.
 .PHONY: serve
 serve:
-	$(MAKE) -C $(CPYTHON_WORKDIR)/Doc serve
+	$(MAKE) -C $(CPYTHON_WORKDIR)/Doc htmlview
 
 
 # clean: remove all .mo files and the venv directory that may exist and
