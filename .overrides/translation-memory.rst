@@ -80,6 +80,9 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 
    auditing event
      evento de auditoría ``library/tempfile`` and many others
+     
+   array
+     arreglo
 
    awaitable
      aguardable ``glossary``
