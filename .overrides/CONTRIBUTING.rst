@@ -20,7 +20,7 @@ contribución, queremos señalar algunos
 
    También puedes unirte a `nuestro canal de Telegram`_ si necesitas ayuda.
 
-El proceso general de traducción son tres pasos, de los cuales uno tendrás que
+El proceso general de traducción son tres pasos, de los cuales el primero tendrás que
 realizar solo una vez. Te los detallamos a continuación.
 
 
@@ -126,9 +126,9 @@ Paso 2: ¡Comienza a traducir!
 
     python scripts/check_spell.py <directorio>/tu_archivo.po
 
-   Si alguna palabra no es reconocida y es una palabra válida, tienes que
-   agregarla al directorio ``dictionaries/`` y buscar el archivo que
-   corresponde al que estás traduciendo, y si no existe crearlo.
+   Si alguna palabra no es reconocida, y es una palabra válida, tienes que
+   agregarla al diccionario correspondiente en el directorio dictionaries/.
+   Busca el archivo que corresponde al que estás traduciendo y si no existe, créalo.
    Por ejemplo el diccionario del archivo ``library/ast.po`` se encuentra en
    ``dictionaries/library_ast.po``.
 
