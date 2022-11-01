@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-10-25 19:47+0200\n"
-"PO-Revision-Date: 2021-08-07 18:27+0200\n"
-"Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
-"Language: es\n"
+"PO-Revision-Date: 2022-10-30 21:19-0300\n"
+"Last-Translator: Marco Richetta <marcorichetta@gmail.com>\n"
 "Language-Team: python-doc-es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.10.3\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #: ../Doc/library/exceptions.rst:4
 msgid "Built-in Exceptions"
@@ -89,9 +90,8 @@ msgstr ""
 "userexceptions`."
 
 #: ../Doc/library/exceptions.rst:39
-#, fuzzy
 msgid "Exception context"
-msgstr "Excepciones del sistema operativo"
+msgstr "Contexto de una excepción"
 
 #: ../Doc/library/exceptions.rst:41
 msgid ""
@@ -101,17 +101,19 @@ msgid ""
 "`except` or :keyword:`finally` clause, or a :keyword:`with` statement, is "
 "used."
 msgstr ""
+"Al lanzar una nueva excepción mientras otra excepción está siendo manejada, "
+"el atributo :attr:`__context__` de la nueva excepción es automáticamente "
+"asignado a la excepción manejada.  Una excepción puede ser manejada cuando "
+"se utiliza la cláusula :keyword:`except` o :keyword:`finally`, o con la "
+"sentencia :keyword:`with`."
 
 #: ../Doc/library/exceptions.rst:47
-#, fuzzy
 msgid ""
 "This implicit exception context can be supplemented with an explicit cause "
 "by using :keyword:`!from` with :keyword:`raise`::"
 msgstr ""
-"Al lanzar una nueva excepción (en lugar de usar un ``raise`` simple para "
-"volver a lanzar la excepción que se está manejando actualmente), el contexto "
-"de excepción implícita se puede complementar con una causa explícita usando :"
-"keyword:`from<raise>` con :keyword:`raise` ::"
+"Este contexto de excepción implícita se puede complementar con una causa "
+"explícita usando :keyword:`!from` con :keyword:`raise`::"
 
 #: ../Doc/library/exceptions.rst:53
 msgid ""
@@ -159,9 +161,8 @@ msgstr ""
 "siempre muestre la última excepción que se generó."
 
 #: ../Doc/library/exceptions.rst:74
-#, fuzzy
 msgid "Inheriting from built-in exceptions"
-msgstr "La jerarquía de clases para las excepciones incorporadas es:"
+msgstr "Heredando de excepciones incorporadas"
 
 #: ../Doc/library/exceptions.rst:76
 msgid ""
@@ -170,6 +171,11 @@ msgid ""
 "possible conflicts between how the bases handle the ``args`` attribute, as "
 "well as due to possible memory layout incompatibilities."
 msgstr ""
+"El código del usuario puede crear subclases que heredan de una excepción. Se "
+"recomienda heredar solo de una clase de tipo excepción a la vez para evitar "
+"cualquier conflicto posible en el manejo del atributo ``args`` por parte de "
+"las clases base, como también por posibles incompatibilidades en de la "
+"memoria."
 
 #: ../Doc/library/exceptions.rst:83
 msgid ""
@@ -180,6 +186,13 @@ msgid ""
 "between Python versions, leading to new conflicts in the future.  Therefore, "
 "it's recommended to avoid subclassing multiple exception types altogether."
 msgstr ""
+"La mayoría de las excepciones integradas están implementadas en C por "
+"eficiencia, vea: :source:`Objects/exceptions.c`.  Algunas tienen "
+"distribuciones de memoria personalizadas, lo que hace imposible crear una "
+"subclase que herede de múltiples tipos de excepciones. La distribución de "
+"memoria de un tipo es un detalle de implementación y podría cambiar entre "
+"versiones de Python, llevando a nuevos conflictos en el futuro.  Por lo "
+"tanto, se recomienda evitar la herencia de múltiples tipos de excepción."
 
 #: ../Doc/library/exceptions.rst:93
 msgid "Base classes"
@@ -247,12 +260,18 @@ msgid ""
 "standard traceback after the exception string. A :exc:`TypeError` is raised "
 "if ``note`` is not a string."
 msgstr ""
+"Agrega la cadena ``note`` a las notas de la excepción, las cuales aparecen "
+"en el rastreo después de la cadena de la excepción. Se lanza un :exc:"
+"`TypeError` si ``note`` no es una cadena de caracteres."
 
 #: ../Doc/library/exceptions.rst:139
 msgid ""
 "A list of the notes of this exception, which were added with :meth:"
 "`add_note`. This attribute is created when :meth:`add_note` is called."
 msgstr ""
+"Una lista de las notas de esta excepción, las cuales fueron añadidas con el "
+"método :meth:`add_note`. Este atributo es creado cuando se llama a :meth:"
+"`add_note`."
 
 #: ../Doc/library/exceptions.rst:147
 msgid ""
@@ -436,6 +455,12 @@ msgid ""
 "allow :exc:`KeyboardInterrupt` to end the program as quickly as possible or "
 "avoid raising it entirely. (See :ref:`handlers-and-exceptions`.)"
 msgstr ""
+"Capturar una :exc:`KeyboardInterrupt` requiere especial consideración. "
+"Debido a que puede ser lanzada en puntos impredecibles, puede, en algunas "
+"circunstancias, dejar al programa en ejecución en un estado inconsistente. "
+"Por lo general, es mejor permitir que :exc:`KeyboardInterrupt` termine el "
+"programa tan pronto como sea o evitar lanzarla por completo. (Vea :ref:"
+"`handlers-and-exceptions`.)"
 
 #: ../Doc/library/exceptions.rst:276
 msgid ""
@@ -1073,6 +1098,10 @@ msgid ""
 "EAGAIN`, :py:data:`~errno.EALREADY`, :py:data:`~errno.EWOULDBLOCK` and :py:"
 "data:`~errno.EINPROGRESS`."
 msgstr ""
+"Se lanza cuando una operación se bloquearía en un objeto (ejemplo: socket) "
+"configurado para una operación no bloqueante. Corresponde a :c:data:`errno` :"
+"py:data:`~errno.EAGAIN`, :py:data:`~errno.EALREADY`, :py:data:`~errno."
+"EWOULDBLOCK` y :py:data:`~errno.EINPROGRESS`."
 
 #: ../Doc/library/exceptions.rst:665
 msgid ""
@@ -1093,13 +1122,12 @@ msgstr ""
 "las clases de E/S almacenadas en el modulo :mod:`io`."
 
 #: ../Doc/library/exceptions.rst:676
-#, fuzzy
 msgid ""
 "Raised when an operation on a child process failed. Corresponds to :c:data:"
 "`errno` :py:data:`~errno.ECHILD`."
 msgstr ""
-"Se genera cuando falla una operación en un proceso secundario. Corresponde :"
-"c:data:`errno` ``ECHILD``."
+"Se genera cuando falla una operación en un proceso secundario. Corresponde "
+"a :c:data:`errno` :py:data:`~errno.ECHILD`."
 
 #: ../Doc/library/exceptions.rst:681
 msgid "A base class for connection-related issues."
@@ -1114,7 +1142,6 @@ msgstr ""
 "exc:`ConnectionRefusedError` y :exc:`ConnectionResetError`."
 
 #: ../Doc/library/exceptions.rst:688
-#, fuzzy
 msgid ""
 "A subclass of :exc:`ConnectionError`, raised when trying to write on a pipe "
 "while the other end has been closed, or trying to write on a socket which "
@@ -1124,56 +1151,52 @@ msgstr ""
 "Una subclase de :exc:`ConnectionError`, que se genera cuando se intenta "
 "escribir en una tubería mientras el otro extremo se ha cerrado, o cuando se "
 "intenta escribir en un *socket* que se ha cerrado por escritura. Corresponde "
-"a :c:data:`errno` ``EPIPE`` y ``ESHUTDOWN``."
+"a :c:data:`errno` :py:data:`~errno.EPIPE` y :py:data:`~errno.ESHUTDOWN`."
 
 #: ../Doc/library/exceptions.rst:695
-#, fuzzy
 msgid ""
 "A subclass of :exc:`ConnectionError`, raised when a connection attempt is "
 "aborted by the peer. Corresponds to :c:data:`errno` :py:data:`~errno."
 "ECONNABORTED`."
 msgstr ""
 "Una subclase de :exc:`ConnectionError`, que se genera cuando el par "
-"interrumpe un intento de conexión. Corresponde a :c:data:`errno` "
-"``ECONNABORTED``."
+"interrumpe un intento de conexión. Corresponde a :c:data:`errno` :py:data:"
+"`~errno.ECONNABORTED`."
 
 #: ../Doc/library/exceptions.rst:701
-#, fuzzy
 msgid ""
 "A subclass of :exc:`ConnectionError`, raised when a connection attempt is "
 "refused by the peer. Corresponds to :c:data:`errno` :py:data:`~errno."
 "ECONNREFUSED`."
 msgstr ""
 "Una subclase de :exc:`ConnectionError`, que se genera cuando el par "
-"interrumpe un intento de conexión. Corresponde a :c:data:`errno` "
-"``ECONNABORTED``."
+"interrumpe un intento de conexión. Corresponde a :c:data:`errno` :py:data:"
+"`~errno.ECONNREFUSED`."
 
 #: ../Doc/library/exceptions.rst:707
-#, fuzzy
 msgid ""
 "A subclass of :exc:`ConnectionError`, raised when a connection is reset by "
 "the peer. Corresponds to :c:data:`errno` :py:data:`~errno.ECONNRESET`."
 msgstr ""
 "Una subclase de :exc:`ConnectionError`, que se genera cuando el par "
-"restablece una conexión. Corresponde a :c:data:`errno` ``ECONNRESET``."
+"restablece una conexión. Corresponde a :c:data:`errno` :py:data:`~errno."
+"ECONNRESET`."
 
 #: ../Doc/library/exceptions.rst:713
-#, fuzzy
 msgid ""
 "Raised when trying to create a file or directory which already exists. "
 "Corresponds to :c:data:`errno` :py:data:`~errno.EEXIST`."
 msgstr ""
 "Se genera al intentar crear un archivo o directorio que ya existe. "
-"Corresponde a :c:data:`errno` ``EEXIST``."
+"Corresponde a :c:data:`errno` :py:data:`~errno.EEXIST`."
 
 #: ../Doc/library/exceptions.rst:718
-#, fuzzy
 msgid ""
 "Raised when a file or directory is requested but doesn't exist. Corresponds "
 "to :c:data:`errno` :py:data:`~errno.ENOENT`."
 msgstr ""
 "Se genera cuando se solicita un archivo o directorio pero no existe. "
-"Corresponde a :c:data:`errno` ``ENOENT``."
+"Corresponde a :c:data:`errno` :py:data:`~errno.ENOENT`."
 
 #: ../Doc/library/exceptions.rst:723
 msgid ""
@@ -1195,16 +1218,15 @@ msgstr ""
 "`InterruptedError`."
 
 #: ../Doc/library/exceptions.rst:733
-#, fuzzy
 msgid ""
 "Raised when a file operation (such as :func:`os.remove`) is requested on a "
 "directory. Corresponds to :c:data:`errno` :py:data:`~errno.EISDIR`."
 msgstr ""
 "Se genera cuando se solicita una operación de archivo (como :func:`os."
-"remove`) en un directorio. Corresponde a: :c:data:`errno` ``EISDIR``."
+"remove`) en un directorio. Corresponde a: :c:data:`errno` :py:data:`~errno."
+"EISDIR`."
 
 #: ../Doc/library/exceptions.rst:739
-#, fuzzy
 msgid ""
 "Raised when a directory operation (such as :func:`os.listdir`) is requested "
 "on something which is not a directory.  On most POSIX platforms, it may also "
@@ -1213,10 +1235,10 @@ msgid ""
 "ENOTDIR`."
 msgstr ""
 "Se genera cuando se solicita una operación de directorio (como :func:`os."
-"listdir`) en algo que no es un directorio. En la mayoría de las plataformas "
+"listdir`) en algo que no es un directorio.  En la mayoría de las plataformas "
 "POSIX, también se puede lanzar si una operación intenta abrir o recorrer un "
 "archivo que no es de directorio como si fuera un directorio. Corresponde a :"
-"c:data:`errno` ``ENOTDIR``."
+"c:data:`errno` :py:data:`~errno.ENOTDIR`."
 
 #: ../Doc/library/exceptions.rst:747
 msgid ""
@@ -1224,29 +1246,32 @@ msgid ""
 "for example filesystem permissions. Corresponds to :c:data:`errno` :py:data:"
 "`~errno.EACCES`, :py:data:`~errno.EPERM`, and :py:data:`~errno.ENOTCAPABLE`."
 msgstr ""
+"Se genera cuando se intenta ejecutar una operación sin los permisos de "
+"acceso adecuados - por ejemplo permisos del sistema de archivos. Corresponde "
+"a :c:data:`errno` :py:data:`~errno.EACCES`, :py:data:`~errno.EPERM`, y :py:"
+"data:`~errno.ENOTCAPABLE`."
 
 #: ../Doc/library/exceptions.rst:752
 msgid ""
 "WASI's :py:data:`~errno.ENOTCAPABLE` is now mapped to :exc:`PermissionError`."
 msgstr ""
+"WASI's :py:data:`~errno.ENOTCAPABLE` ahora se mapea a :exc:`PermissionError`."
 
 #: ../Doc/library/exceptions.rst:758
-#, fuzzy
 msgid ""
 "Raised when a given process doesn't exist. Corresponds to :c:data:`errno` :"
 "py:data:`~errno.ESRCH`."
 msgstr ""
-"Generado cuando un proceso dado no existe. Corresponde a :c:data:`errno` "
-"``ESRCH``."
+"Generado cuando un proceso dado no existe. Corresponde a :c:data:`errno` :py:"
+"data:`~errno.ESRCH`."
 
 #: ../Doc/library/exceptions.rst:763
-#, fuzzy
 msgid ""
 "Raised when a system function timed out at the system level. Corresponds to :"
 "c:data:`errno` :py:data:`~errno.ETIMEDOUT`."
 msgstr ""
 "Se genera cuando se agota el tiempo de espera de una función del sistema a "
-"nivel del sistema. Corresponde a :c:data:`errno` ``ETIMEDOUT``."
+"nivel del sistema. Corresponde a :c:data:`errno` :py:data:`~errno.ETIMEDOUT`."
 
 #: ../Doc/library/exceptions.rst:766
 msgid "All the above :exc:`OSError` subclasses were added."
@@ -1378,9 +1403,8 @@ msgid "Base class for warnings related to resource usage."
 msgstr "Clase base para advertencias relacionadas con el uso de recursos."
 
 #: ../Doc/library/exceptions.rst:875
-#, fuzzy
 msgid "Exception groups"
-msgstr "Excepciones del sistema operativo"
+msgstr "Grupos de excepciones"
 
 #: ../Doc/library/exceptions.rst:877
 msgid ""
@@ -1390,6 +1414,11 @@ msgid ""
 "recognised by :keyword:`except*<except_star>`, which matches their subgroups "
 "based on the types of the contained exceptions."
 msgstr ""
+"Las siguientes se utilizan cuando es necesario lanzar múltiples excepciones "
+"no relacionadas. Forman parte de la jerarquía de excepciones, por lo que "
+"pueden ser manejadas con :keyword:`except` como todas las demás excepciones. "
+"Además, son reconocidas por :keyword:`except*<except_star>`, lo que hace "
+"coincidir sus subgrupos basándose en los tipos de las excepciones contenidas."
 
 #: ../Doc/library/exceptions.rst:886
 msgid ""
@@ -1401,6 +1430,13 @@ msgid ""
 "is so that ``except Exception`` catches an :exc:`ExceptionGroup` but not :"
 "exc:`BaseExceptionGroup`."
 msgstr ""
+"Ambos tipos de excepción envuelven las excepciones en la secuencia ``excs``. "
+"El parámetro ``msg`` debe ser una cadena de caracteres. La diferencia entre "
+"las dos clases es que :exc:`BaseExceptionGroup` extiende a :exc:"
+"`BaseException` y puede envolver cualquier excepción, mientras que :exc:"
+"`ExceptionGroup` extiende a :exc:`Exception` y solo puede envolver subclases "
+"de :exc:`Exception`. Este diseño está pensado para que ``except Exception`` "
+"capture un :exc:`ExceptionGroup` pero no :exc:`BaseExceptionGroup`"
 
 #: ../Doc/library/exceptions.rst:894
 msgid ""
@@ -1410,22 +1446,33 @@ msgid ""
 "The :exc:`ExceptionGroup` constructor, on the other hand, raises a :exc:"
 "`TypeError` if any contained exception is not an :exc:`Exception` subclass."
 msgstr ""
+"El constructor :exc:`BaseExceptionGroup` retorna una :exc:`ExceptionGroup` "
+"en lugar de una :exc:`BaseExceptionGroup` si todas las excepciones "
+"contenidas son instancias de :exc:`Exception` , por lo que puede utilizarse "
+"para hacer la selección automática. El constructor :exc:`ExceptionGroup`, "
+"por su parte, lanza un :exc:`TypeError` si alguna de las excepciones "
+"contenidas no es una subclase de :exc:`Exception`."
 
 #: ../Doc/library/exceptions.rst:903
 msgid "The ``msg`` argument to the constructor. This is a read-only attribute."
 msgstr ""
+"El argumento ``msg`` para el constructor. Este atributo es de sólo lectura."
 
 #: ../Doc/library/exceptions.rst:907
 msgid ""
 "A tuple of the exceptions in the ``excs`` sequence given to the constructor. "
 "This is a read-only attribute."
 msgstr ""
+"Una tupla de la excepciones en la secuencia ``excs`` pasada al constructor. "
+"Este atributo es de sólo lectura."
 
 #: ../Doc/library/exceptions.rst:912
 msgid ""
 "Returns an exception group that contains only the exceptions from the "
 "current group that match *condition*, or ``None`` if the result is empty."
 msgstr ""
+"Retorna un grupo de excepciones que contiene sólo las excepciones del grupo "
+"actual que cumplen con *condition*, o ``None`` si el resultado está vacío."
 
 #: ../Doc/library/exceptions.rst:915
 msgid ""
@@ -1434,6 +1481,11 @@ msgid ""
 "type or a tuple of exception types, which is used to check for a match using "
 "the same check that is used in an ``except`` clause."
 msgstr ""
+"La condición puede ser una función que acepta una excepción y retorna *True* "
+"para aquellas que deberían estar en el subgrupo, o puede ser un tipo de "
+"excepción o una tupla de tipos de excepción, que se utiliza para comprobar "
+"una coincidencia utilizando la misma comprobación que se utiliza en una "
+"cláusula ``except``."
 
 #: ../Doc/library/exceptions.rst:920
 msgid ""
@@ -1442,6 +1494,10 @@ msgid ""
 "`__cause__`, :attr:`__context__` and :attr:`__notes__` fields. Empty nested "
 "groups are omitted from the result."
 msgstr ""
+"La estructura de anidamiento de la excepción actual se conserva en el "
+"resultado, así como también los valores de sus campos :attr:`message`, :attr:"
+"`__traceback__`, :attr:`__cause__`, :attr:`__context__` y :attr:`__notes__`. "
+"Los grupos anidados vacíos son omitidos del resultado."
 
 #: ../Doc/library/exceptions.rst:925
 msgid ""
@@ -1449,6 +1505,10 @@ msgid ""
 "including the top-level and any nested exception groups. If the condition is "
 "true for such an exception group, it is included in the result in full."
 msgstr ""
+"La condición se comprueba para todas las excepciones del grupo de excepción "
+"anidado, incluyendo el nivel superior y cualquier grupo de excepción "
+"anidado. Si la condición es verdadera para dicho grupo de excepción, se "
+"incluye en el resultado en su totalidad."
 
 #: ../Doc/library/exceptions.rst:931
 msgid ""
@@ -1456,6 +1516,9 @@ msgid ""
 "``match`` is ``subgroup(condition)`` and ``rest`` is the remaining non-"
 "matching part."
 msgstr ""
+"Al igual que :meth:`subgroup`, pero retorna el par ``(match, rest)`` donde "
+"``match`` es ``subgroup(condition)`` y ``rest`` es la parte restante que no "
+"coincide."
 
 #: ../Doc/library/exceptions.rst:937
 msgid ""
@@ -1463,6 +1526,9 @@ msgid ""
 "`__traceback__`, :attr:`__cause__`, :attr:`__context__` and :attr:"
 "`__notes__` but which wraps the exceptions in ``excs``."
 msgstr ""
+"Retorna un grupo de excepción con los mismos :attr:`message`, :attr:"
+"`__traceback__`, :attr:`__cause__`, :attr:`__context__` y :attr:`__notes__` "
+"pero que envuelve las excepciones en ``excs``."
 
 #: ../Doc/library/exceptions.rst:941
 msgid ""
@@ -1470,8 +1536,12 @@ msgid ""
 "to override it in order to make :meth:`subgroup` and :meth:`split` return "
 "instances of the subclass rather than :exc:`ExceptionGroup`. ::"
 msgstr ""
+"Este método es usado por :meth:`subgroup` y :meth:`split`. Se necesita una "
+"subclase que lo sobrescriba para que :meth:`subgroup` y :meth:`split` "
+"retornan instancias de la subclase en lugar de :exc:`ExceptionGroup`. ::"
 
 #: ../Doc/library/exceptions.rst:953
+#, fuzzy
 msgid ""
 "Note that :exc:`BaseExceptionGroup` defines :meth:`__new__`, so subclasses "
 "that need a different constructor signature need to override that rather "
@@ -1479,6 +1549,11 @@ msgid ""
 "subclass which accepts an exit_code and and constructs the group's message "
 "from it. ::"
 msgstr ""
+"Nota que :exc:`BaseExceptionGroup` define :meth:`__new__`, por lo que las "
+"subclases que necesiten una firma de constructor diferente deben "
+"sobrescribir ese método en lugar de :`__init__`. Por ejemplo, lo siguiente "
+"define una subclase de grupo de excepción que acepta un *exit_code* y "
+"construye el mensaje del grupo a partir del mismo. ::"
 
 #: ../Doc/library/exceptions.rst:972
 msgid "Exception hierarchy"
