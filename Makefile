@@ -61,7 +61,7 @@ build: setup
 .PHONY: setup
 setup: venv
 	git submodule sync
-	git submodule update --init --force $(CPYTHON_PATH)
+	git submodule update --init --force --depth 1 $(CPYTHON_PATH)
 
 
 # venv: create a virtual environment which will be used by almost every
