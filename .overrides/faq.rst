@@ -51,14 +51,14 @@ como error que no tiene hunspell instalado, lo puedes instalar así:
       Utilizando el gestor de paquetes de tu distribución::
 
          # Arch Linux
-         yay -S hunspell-es_any
+         yay -S hunspell-es_es
 
          # Ubuntu Linux
          apt install hunspell-es
 
 
-Estamos trabajando para unificar el uso de un mismo set de diccionarios de español,
-pero por el momento el chequeo que hacemos es con los diccionarios es_AR y es_ES.
+Las verificaciones del CI se realizan con ``es_ES``, pero puedes utilizar
+localmente alguna otra variación.
 
 
 ¿Cómo agrego una palabra al diccionario?
@@ -291,3 +291,9 @@ dos opciones:
    .. note:: Tendrás que tener todo configurado en el subsistema Linux para
              poder utilizar esta opción.
 
+
+``powrap`` no muestra cambios locales, pero sí en el CI
+-------------------------------------------------------
+
+Asegúrate que tengas instalado el paquete ``gettext`` 0.21 pues es el que se
+utiliza en el CI, que es una dependencia de ``powrap``.
