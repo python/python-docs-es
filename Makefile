@@ -7,7 +7,7 @@
 
 # Configuration
 
-CPYTHON_PATH        := cpython   #Current commit for this upstream repo is setted by the submodule
+CPYTHON_PATH        := cpython   # Current commit for this upstream repo is setted by the submodule
 BRANCH              := 3.11
 LANGUAGE_TEAM       := python-docs-es
 LANGUAGE            := es
@@ -40,6 +40,7 @@ help:
 .PHONY: build
 build: setup
 	# FIXME: Relative paths for includes in 'cpython'
+	# See more about this at https://github.com/python/python-docs-es/issues/1844
 	sed -i -e 's|.. include:: ../includes/wasm-notavail.rst|.. include:: ../../../../includes/wasm-notavail.rst|g' cpython/Doc/**/*.rst
 	sed -i -e 's|.. include:: ../distutils/_setuptools_disclaimer.rst|.. include:: ../../../../distutils/_setuptools_disclaimer.rst|g' cpython/Doc/**/*.rst
 	sed -i -e 's|.. include:: ./_setuptools_disclaimer.rst|.. include:: ../../../_setuptools_disclaimer.rst|g' cpython/Doc/**/*.rst
@@ -48,7 +49,7 @@ build: setup
 	sed -i -e 's|.. include:: ../../../using/venv-create.inc|.. include:: ../../using/venv-create.inc|g' cpython/Doc/**/*.rst
 	sed -i -e 's|.. include:: /using/venv-create.inc|.. include:: ../../../../using/venv-create.inc|g' cpython/Doc/**/*.rst
 	# Normal build
-	PYTHONWARNINGS=ignore::FutureWarning $(VENV)/bin/sphinx-build -j auto -W --keep-going -b html -d $(OUTPUT_DOCTREE) -D language=$(LANGUAGE) . $(OUTPUT_HTML) && \
+	PYTHONWARNINGS=ignore::FutureWarning,ignore::RuntimeWarning $(VENV)/bin/sphinx-build -j auto -W --keep-going -b html -d $(OUTPUT_DOCTREE) -D language=$(LANGUAGE) . $(OUTPUT_HTML) && \
 		echo "Success! Open file://`pwd`/$(OUTPUT_HTML)/index.html, " \
 			"or run 'make serve' to see them in http://localhost:8000";
 
@@ -60,7 +61,7 @@ build: setup
 .PHONY: setup
 setup: venv
 	git submodule sync
-	git submodule update --init --force $(CPYTHON_PATH)
+	git submodule update --init --force --depth 1 $(CPYTHON_PATH)
 
 
 # venv: create a virtual environment which will be used by almost every
