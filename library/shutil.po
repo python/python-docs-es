@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-10-25 19:47+0200\n"
-"PO-Revision-Date: 2021-08-17 10:12+0800\n"
+"PO-Revision-Date: 2022-10-30 14:38-0600\n"
 "Last-Translator: \n"
 "Language: es\n"
 "Language-Team: python-doc-es\n"
@@ -301,7 +301,6 @@ msgstr ""
 "extendidos de Linux."
 
 #: ../Doc/library/shutil.rst:160
-#, fuzzy
 msgid ""
 "Copies the file *src* to the file or directory *dst*.  *src* and *dst* "
 "should be :term:`path-like objects <path-like object>` or strings.  If *dst* "
@@ -312,8 +311,9 @@ msgstr ""
 "Copia el archivo *src* al archivo o directorio *dst*. *src* y *dst* deberían "
 "ser :term:`objetos tipo ruta <path-like object>` o cadenas de caracteres "
 "(*strings*). Si *dst* especifica un directorio, el archivo será copiado en "
-"*dst* usando el nombre de archivo base de *src*. Retorna la ruta del archivo "
-"recién creado."
+"*dst* usando el nombre de archivo base de *src*. Si *dst* especifica un "
+"archivo que existe, será reemplazado. Retorna la ruta del archivo recién "
+"creado."
 
 #: ../Doc/library/shutil.rst:166
 msgid ""
@@ -354,7 +354,6 @@ msgstr ""
 "conservar los metadatos del archivo."
 
 #: ../Doc/library/shutil.rst:195
-#, fuzzy
 msgid ""
 "When *follow_symlinks* is false, and *src* is a symbolic link, :func:`copy2` "
 "attempts to copy all metadata from the *src* symbolic link to the newly "
@@ -408,6 +407,10 @@ msgid ""
 "named *dst* and return the destination directory.  All intermediate "
 "directories needed to contain *dst* will also be created by default."
 msgstr ""
+"Copia recursivamente un directorio completo que inicia en *src* hasta un "
+"directorio llamado *dst* y devuelve el directorio destino. Todos los "
+"directorios intermedios necesarios para contener *dst* serán creados por "
+"default."
 
 #: ../Doc/library/shutil.rst:237
 msgid ""
@@ -495,6 +498,11 @@ msgid ""
 "within the *dst* tree will be overwritten by corresponding files from the "
 "*src* tree."
 msgstr ""
+"Si *dirs_exist_ok* es falso (el default) y *dst* existe, la excepción :exc:"
+"`FileExistsError` es lanzada. Si *dirs_exist_ok* es verdadero, la operación "
+"de copiado continuara si encuentra directorios existentes, los archivos "
+"dentro del árbol de *dst* serán sobreescritos por los archivos "
+"correspondientes del árbol *src*."
 
 #: ../Doc/library/shutil.rst:275
 msgid ""
@@ -509,15 +517,14 @@ msgid "Copy metadata when *symlinks* is false. Now returns *dst*."
 msgstr "Copia los metadatos cuando *symlinks* es falso. Ahora retorna *dst*."
 
 #: ../Doc/library/shutil.rst:281
-#, fuzzy
 msgid ""
 "Added the *copy_function* argument to be able to provide a custom copy "
 "function. Added the *ignore_dangling_symlinks* argument to silence dangling "
 "symlinks errors when *symlinks* is false."
 msgstr ""
 "Se añadió el argumento *copy_function* para poder proporcionar una función "
-"de copia personalizada. Se añadió el argumento *ignore_dangling_symlinks* a "
-"los errores de enlaces colgantes silenciosos cuando *symlinks* es falso."
+"de copia personalizada. Se añadió el argumento *ignore_dangling_symlinks* "
+"para silenciar los errores de enlaces colgantes cuando *symlinks* es falso."
 
 #: ../Doc/library/shutil.rst:292
 msgid "The *dirs_exist_ok* parameter."
@@ -542,6 +549,8 @@ msgid ""
 "This function can support :ref:`paths relative to directory descriptors "
 "<dir_fd>`."
 msgstr ""
+"Esta función puede soportar :ref:`rutas relativas a descriptores de "
+"directorio <dir_fd>`."
 
 #: ../Doc/library/shutil.rst:310
 msgid ""
@@ -586,13 +595,12 @@ msgstr ""
 "exc_info`. Las excepciones generadas por *onerror* no serán tomadas."
 
 #: ../Doc/library/shutil.rst:327
-#, fuzzy
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``shutil.rmtree`` with arguments "
 "``path``, ``dir_fd``."
 msgstr ""
 "Genera un :ref:`evento de auditoría <auditing>` ``shutil.rmtree`` con "
-"argumento ``path``."
+"argumentos ``path``, ``dir_fd``."
 
 #: ../Doc/library/shutil.rst:329
 msgid ""
@@ -612,9 +620,8 @@ msgstr ""
 "de quitar el cruce."
 
 #: ../Doc/library/shutil.rst:337
-#, fuzzy
 msgid "The *dir_fd* parameter."
-msgstr "El parámetro *dirs_exist_ok*."
+msgstr "El parámetro *dir_fd*."
 
 #: ../Doc/library/shutil.rst:342
 msgid ""
@@ -867,9 +874,8 @@ msgid "copytree example"
 msgstr "ejemplo de *copytree*"
 
 #: ../Doc/library/shutil.rst:485
-#, fuzzy
 msgid "An example that uses the :func:`ignore_patterns` helper::"
-msgstr "Otro ejemplo que usa el auxiliar :func:`ignore_patterns`::"
+msgstr "Un ejemplo que usa el auxiliar :func:`ignore_patterns`::"
 
 #: ../Doc/library/shutil.rst:491
 msgid ""
@@ -1005,6 +1011,10 @@ msgid ""
 "`register_archive_format` are used.  In this case it temporarily changes the "
 "current working directory of the process to perform archiving."
 msgstr ""
+"Esta función no es segura para hilos cuando son usados archivos "
+"personalizados registrados con :func:`register_archive_format`. En este caso "
+"temporalmente cambia el directorio de trabajo actual del proceso para "
+"realizar el archivado."
 
 #: ../Doc/library/shutil.rst:582
 msgid ""
@@ -1019,6 +1029,8 @@ msgid ""
 "This function is now made thread-safe during creation of standard ``.zip`` "
 "and tar archives."
 msgstr ""
+"Esta función ahora es segura para hilos durante la creación de archivos "
+"estándar ``.zip`` y tar."
 
 #: ../Doc/library/shutil.rst:592
 msgid ""
@@ -1152,6 +1164,11 @@ msgid ""
 "*extract_dir* argument, e.g. members that have absolute filenames starting "
 "with \"/\" or filenames with two dots \"..\"."
 msgstr ""
+"Nunca extraiga archivos de fuentes no confiables sin una inspección previa. "
+"Es posible que los archivos sean creados fuera de la ruta especificada en el "
+"argumento *extract_dir*, p.e. miembros que tienen nombres de archivo "
+"absolutos comenzando con \\\"/\\\" or nombres de archivos con dos puntos \\"
+"\"..\\\"."
 
 #: ../Doc/library/shutil.rst:652
 msgid "Accepts a :term:`path-like object` for *filename* and *extract_dir*."
@@ -1329,6 +1346,8 @@ msgid ""
 "The ``fallback`` values are also used if :func:`os.get_terminal_size` "
 "returns zeroes."
 msgstr ""
+"Los valores ``fallback`` son usados también si :func:`os.get_terminal_size` "
+"devuelve zeros."
 
 #~ msgid ""
 #~ "Recursively copy an entire directory tree rooted at *src* to a directory "
