@@ -12,6 +12,12 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
+      - name: Register problem matchers
+        run: echo "::add-matcher::.github/problem-matchers/pospell.json"
+      - uses: lots0logs/gh-action-get-changed-files@2.1.4
+        id: changed_files
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Preparar Python v3.11
         uses: actions/setup-python@v2
         with:
@@ -35,6 +41,19 @@ jobs:
       - name: Pospell
         run: |
           python scripts/check_spell.py
+      - name: Padpoes
+        env:
+          ADDED_FILES: ${{ join(fromJSON(steps.changed_files.outputs.added), ' ') }}
+          MODIFIED_FILES: ${{ join(fromJSON(steps.changed_files.outputs.modified), ' ') }}
+        run: |
+          CHANGED_PO_FILES=$(printf "%s %s\n" "$ADDED_FILES" "$MODIFIED_FILES" | tr ' ' '\n' | grep '.po$'; true)
+          if [ -n "$CHANGED_PO_FILES" ]
+          then
+            echo "Running on:" $CHANGED_PO_FILES
+            padpoes -i $CHANGED_PO_FILES 2>&1 | grep -v -Ff padpoes.ignore
+          else
+            echo "No changed po files, nothing to check."
+          fi
       - name: Construir documentación
         run: |
           # FIXME: Relative paths for includes in 'cpython'
