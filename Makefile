@@ -99,6 +99,10 @@ progress: venv
 spell: venv
 	$(VENV)/bin/python scripts/check_spell.py
 
+.PHONY: lint
+lint: venv
+	$(VENV)/bin/python -m sphinxlint */*.po
+
 
 .PHONY: wrap
 wrap: venv
