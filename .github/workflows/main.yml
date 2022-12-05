@@ -11,9 +11,9 @@ jobs:
     name: Test
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Preparar Python v3.11
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: "3.11"
       - name: Sincronizar con CPython
@@ -32,6 +32,9 @@ jobs:
           diff -Naur TRANSLATORS <(LANG=es python scripts/sort.py < TRANSLATORS)
       - name: Powrap
         run: powrap --check --quiet **/*.po
+      - name: Sphinx lint
+        run: |
+          sphinx-lint */*.po
       - name: Pospell
         run: |
           python scripts/check_spell.py
