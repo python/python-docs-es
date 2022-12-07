@@ -48,6 +48,43 @@ Tres razones por las que puede fallar el *build* de Travis:
 
 Para facilitar la comparación de ficheros se emplea este programa que va a hacer que todas las líneas tengan el mismo tamaño. Solucionar este problema en nuestra traducción es muy sencillo, solo hay que instalar la herramienta powrap en nuestro entorno y ejecutar el comando ``powrap nuestro_fichero.po``
 
+``sphinx-lint`` falla
+---------------------
+
+El formato en el que la documentación de python está escrito
+(`reStructredText <https://es.wikipedia.org/wiki/ReStructuredText>`_ , o rst)
+puede ser difícil de manejar y escribir correctamente.
+``sphinx-lint`` ayuda a encontrar errores comunes al momento de escribir
+entradas en este formato, y advierte al respecto.
+
+Entre los errores más comunes están:
+
+* Textos literales no están separados por un espacio
+  respecto a las palabras que lo rodean:
+
+  * Mal: :literal:`no hay espacio antes del\`\`literal\`\``
+  * Mal: :literal:`después del \`\`literal \`\`no hay un espacio`
+  * Bien: :literal:`hay espacio antes del \`\`literal\`\` y después también`
+
+* Textos literales comienzan o terminan con espacios:
+
+  * Mal: :literal:`\`\` literal empieza con un espacio\`\``
+  * Mal: :literal:`\`\`literal termina con un espacio \`\``
+  * Bien: :literal:`\`\`literal no termina ni empieza con espacios\`\``
+
+* Textos literales no están delineados con dos acentos fuertes:
+
+  * Mal: :literal:`\`\`falta uno al final :(\``
+  * Mal: :literal:`\`falta uno al principio :(\`\``
+  * Bien: :literal:`\`\`todo bien :)\`\``
+
+* Enlaces no terminan en un guión bajo:
+
+  * Mal: :literal:`\`<https://python.org>\``
+  * Mal: :literal:`\`Python <https://python.org>\``
+  * Bien: :literal:`\`<https://python.org>\`_`
+  * Bien: :literal:`\`Python <https://python.org>\`_`
+
 
 ``pospell`` falla
 ---------------------
