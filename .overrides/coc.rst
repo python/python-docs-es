@@ -169,7 +169,6 @@ Este Código de conducta se aplica a los siguientes espacios en línea:
 
 * listas de correo python-ideas, core-mentorship, python-dev, docs
 * Todas las demás listas de correo alojadas en python.org
-* Servidor de chat *Zulip* de la *Python Software Foundation*
 * Servidor *Discourse* alojado en discuss.python.org
 * Repositorios de código, rastreadores de problemas y solicitudes de extracción realizadas contra
   cualquier organización GitHub controlada por la *Python Software Foundation*
