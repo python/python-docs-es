@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-10-25 19:47+0200\n"
-"PO-Revision-Date: 2023-01-10 10:49-0300\n"
+"PO-Revision-Date: 2023-01-11 13:15-0300\n"
 "Last-Translator: Francisco Mora <fr.morac@duocuc.cl>\n"
 "Language-Team: python-doc-es\n"
 "Language: es\n"
@@ -185,6 +185,7 @@ msgstr ""
 "gestores de los logger ancestrales."
 
 #: ../Doc/library/logging.rst:91
+#, fuzzy
 msgid ""
 "Spelling it out with an example: If the propagate attribute of the logger "
 "named ``A.B.C`` evaluates to true, any event logged to ``A.B.C`` via a "
@@ -196,6 +197,16 @@ msgid ""
 "false, then that is the last logger whose handlers are offered the event to "
 "handle, and propagation stops at that point."
 msgstr ""
+"Explicándolo con un ejemplo: Si el atributo propagate del logger llamado ``A."
+"B.C`` se evalúa a true, cualquier evento registrado en ``A.B.C`` a través de "
+"una llamada a un método como ``logging.getLogger('A.B.C').error(...)`` será "
+"[sujeto a pasar el nivel de ese logger y la configuración del filtro] pasado "
+"a su vez a cualquier manejador adjunto a los loggers llamados ``A.B``, ``A`` "
+"y al logger raíz, después de ser pasado primero a cualquier manejador "
+"adjunto a ``A.B.C``. Si cualquier logger en la cadena ``A.B.C``, ``A.B``, "
+"``A`` tiene su atributo ``propagate`` a false, entonces ese es el último "
+"logger a cuyos manejadores se les ofrece el evento a manejar, y la "
+"propagación se detiene en ese punto."
 
 #: ../Doc/library/logging.rst:100
 msgid "The constructor sets this attribute to ``True``."
@@ -926,14 +937,23 @@ msgid ""
 "logging API which might do locking, because that might result in a deadlock. "
 "Specifically:"
 msgstr ""
+"Este método es llamado después de que un bloqueo a nivel de gestor es "
+"adquirido, el cual es liberado después de que este método retorna. Cuando "
+"sobrescriba este método, tenga en cuenta que debe tener cuidado al llamar a "
+"cualquier cosa que invoque a otras partes de la API de registro que puedan "
+"realizar bloqueos, ya que esto podría provocar un bloqueo. Específicamente:"
 
 #: ../Doc/library/logging.rst:531
 msgid ""
 "Logging configuration APIs acquire the module-level lock, and then "
 "individual handler-level locks as those handlers are configured."
 msgstr ""
+"Las API de configuración del registro adquieren el bloqueo a nivel de módulo "
+"y, a continuación, los bloqueos a nivel de gestor individual a medida que se "
+"configuran dichos gestores."
 
 #: ../Doc/library/logging.rst:534
+#, fuzzy
 msgid ""
 "Many logging APIs lock the module-level lock. If such an API is called from "
 "this method, it could cause a deadlock if a configuration call is made on "
@@ -942,6 +962,13 @@ msgid ""
 "the module-level lock *after* the handler-level lock (because in this "
 "method, the handler-level lock has already been acquired)."
 msgstr ""
+"Muchas APIs de registro bloquean el bloqueo a nivel de módulo. Si se llama a "
+"una API de este tipo desde este método, podría causar un bloqueo si se "
+"realiza una llamada de configuración en otro hilo, porque ese hilo intentará "
+"adquirir el bloqueo a nivel de módulo *antes* del bloqueo a nivel de gestor, "
+"mientras que este hilo intenta adquirir el bloqueo a nivel de módulo "
+"*después* del bloqueo a nivel de gestor (porque en este método, el bloqueo a "
+"nivel de gestor ya se ha adquirido)."
 
 #: ../Doc/library/logging.rst:541
 msgid ""
@@ -1204,6 +1231,7 @@ msgstr ""
 "entrada."
 
 #: ../Doc/library/logging.rst:673
+#, fuzzy
 msgid ""
 "A base formatter class suitable for subclassing when you want to format a "
 "number of records. You can pass a :class:`Formatter` instance which you want "
@@ -1211,6 +1239,11 @@ msgid ""
 "specified, the default formatter (which just outputs the event message) is "
 "used as the line formatter."
 msgstr ""
+"Una clase base de formateador adecuada para subclasificar cuando se desea "
+"formatear un número de registros. Puede pasar una instancia :class:"
+"`Formatter` que desee utilizar para formatear cada línea (que corresponde a "
+"un único registro). Si no se especifica, el formateador por defecto (que "
+"sólo muestra el mensaje del evento) se utiliza como formateador de línea."
 
 #: ../Doc/library/logging.rst:681
 msgid ""
@@ -1219,6 +1252,10 @@ msgid ""
 "specific behaviour, e.g. to show the count of records, a title or a "
 "separator line."
 msgstr ""
+"Retorna una cabecera para una lista de *registros*. La implementación base "
+"sólo devuelve la cadena vacía. Tendrá que anular este método si desea un "
+"comportamiento específico, por ejemplo, mostrar el recuento de registros, un "
+"título o una línea separadora."
 
 #: ../Doc/library/logging.rst:688
 msgid ""
@@ -1226,6 +1263,10 @@ msgid ""
 "returns the empty string. You will need to override this method if you want "
 "specific behaviour, e.g. to show the count of records or a separator line."
 msgstr ""
+"Retorna un pie de página para una lista de *registros*. La implementación "
+"base sólo devuelve la cadena vacía. Tendrá que anular este método si desea "
+"un comportamiento específico, por ejemplo, para mostrar el recuento de "
+"registros o una línea separadora."
 
 #: ../Doc/library/logging.rst:695
 msgid ""
@@ -1234,6 +1275,10 @@ msgid ""
 "concatenation of the header, each record formatted with the line formatter, "
 "and the footer."
 msgstr ""
+"Retorna el texto formateado de una lista de *registros*. La implementación "
+"base sólo devuelve la cadena vacía si no hay registros; en caso contrario, "
+"devuelve la concatenación de la cabecera, cada registro formateado con el "
+"formateador de líneas y el pie de página."
 
 #: ../Doc/library/logging.rst:703
 msgid "Filter Objects"
@@ -1388,12 +1433,17 @@ msgstr ""
 "(ancestro)."
 
 #: ../Doc/library/logging.rst:783
+#, fuzzy
 msgid ""
 "The :ref:`numeric level <levels>` of the logging event (such as ``10`` for "
 "``DEBUG``, ``20`` for ``INFO``, etc). Note that this is converted to *two* "
 "attributes of the LogRecord: :attr:`!levelno` for the numeric value and :"
 "attr:`!levelname` for the corresponding level name."
 msgstr ""
+"El :ref:`numeric <levels>level` del evento de registro (como ``10`` para "
+"``DEBUG``, ``20`` para ``INFO``, etc). Tenga en cuenta que esto se convierte "
+"en *dos* atributos del LogRecord: :attr:`!levelno` para el valor numérico y :"
+"attr:`!levelname` para el nombre del nivel correspondiente.</levels>"
 
 #: ../Doc/library/logging.rst:790
 #, fuzzy
