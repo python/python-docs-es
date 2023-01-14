@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-10-25 19:47+0200\n"
-"PO-Revision-Date: 2021-11-05 11:57-0300\n"
-"Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
-"Language: es\n"
+"PO-Revision-Date: 2023-01-04 17:03-0300\n"
+"Last-Translator: Francisco Mora <fr.morac@duocuc.cl>\n"
 "Language-Team: python-doc-es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.10.3\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: ../Doc/library/re.rst:2
 msgid ":mod:`re` --- Regular expression operations"
@@ -341,6 +342,7 @@ msgid "``*+``, ``++``, ``?+``"
 msgstr "``*?``, ``+?``, ``??``"
 
 #: ../Doc/library/re.rst:163
+#, fuzzy
 msgid ""
 "Like the ``'*'``, ``'+'``, and ``'?'`` quantifiers, those where ``'+'`` is "
 "appended also match as many times as possible. However, unlike the true "
@@ -356,6 +358,20 @@ msgid ""
 "``x*+``, ``x++`` and ``x?+`` are equivalent to ``(?>x*)``, ``(?>x+)`` and "
 "``(?>x?)`` correspondingly."
 msgstr ""
+"Como el ``'*'``, ``'+'``, y ``'?'`` Los cuantificadores, aquellos en los que "
+"se agrega ``'+'`` también coinciden tantas veces como sea posible. Sin "
+"embargo, a diferencia de los verdaderos cuantificadores codiciosos, estos no "
+"permiten retroceder cuando la expresión que le sigue no coincide. Estos se "
+"conocen como cuantificadores :dfn:`posesivo`. Por ejemplo, ``a*a`` "
+"coincidirá con ``'aaaa'`` porque la ``a*`` coincidirá con los 4 ``'a'``\\ s, "
+"pero, cuando se encuentra la ``'a'`` final, la expresión se retrotrae de "
+"modo que al final la ``a*`` termina coincidiendo con 3 ``'a'``\\ s total, y "
+"la cuarta ``'a'`` coincide con la final ``'a'``. Sin embargo, cuando "
+"``a*+a`` se usa para que coincida con ``'aaaa'``, el ``a*+`` coincidirá con "
+"los 4 ``'a'``, pero cuando el ``'a'`` final no encuentra más caracteres para "
+"coincidir, la expresión no se puede retrotraer y, por lo tanto, no "
+"coincidirá. ``x*+``, ``x++`` and ``x?+`` son equivalentes a ``(?>x*)``, ``(?"
+">x+)`` and ``(?>x?)`` correspondientemente."
 
 #: ../Doc/library/re.rst:187
 msgid "``{m}``"
@@ -421,6 +437,7 @@ msgid "``{m,n}+``"
 msgstr "``{m,n}``"
 
 #: ../Doc/library/re.rst:206
+#, fuzzy
 msgid ""
 "Causes the resulting RE to match from *m* to *n* repetitions of the "
 "preceding RE, attempting to match as many repetitions as possible *without* "
@@ -432,6 +449,16 @@ msgid ""
 "backtracking and then the final 2 ``'a'``\\ s are matched by the final "
 "``aa`` in the pattern. ``x{m,n}+`` is equivalent to ``(?>x{m,n})``."
 msgstr ""
+"Hace que el RE resultante coincida de *m* a *n* repeticiones del RE "
+"anterior, intentando hacer coincidir tantas repeticiones como sea posible "
+"*sin* establecer ningún punto de retroceso. Esta es la versión posesiva del "
+"cuantificador anterior. Por ejemplo, en la cadena de 6 caracteres "
+"``'aaaaaa'``, ``a{3,5}+aa`` intenta hacer coincidir 5 caracteres ``'a'``, "
+"entonces, al requerir 2 más ``'a'``\\ s, necesitará más caracteres de los "
+"disponibles y, por lo tanto, fallará, mientras que ``a{3,5}aa`` coincidirá "
+"con ``a{3,5}`` capturando 5, luego 4 ``'a'``\\ s por retroceso y luego los "
+"últimos 2 ``'a'``\\ s son emparejados por el ``aa`` final en el patrón. "
+"``x{m,n}+`` es equivalente a ``(?>x{m,n})``."
 
 #: ../Doc/library/re.rst:233
 msgid "``\\``"
@@ -670,7 +697,7 @@ msgstr ""
 
 #: ../Doc/library/re.rst:341
 msgid "This construction can only be used at the start of the expression."
-msgstr ""
+msgstr "Esta construcción solo se puede usar al comienzo de la expresión."
 
 #: ../Doc/library/re.rst:350
 msgid "``(?:...)``"
@@ -743,11 +770,11 @@ msgstr ""
 "Las letras ``'a'``, ``'L'`` y ``'u'`` también pueden ser usadas en un grupo."
 
 #: ../Doc/library/re.rst:391
-#, fuzzy
 msgid "``(?>...)``"
-msgstr "``(?...)``"
+msgstr "``(?>...)``"
 
 #: ../Doc/library/re.rst:379
+#, fuzzy
 msgid ""
 "Attempts to match ``...`` as if it was a separate regular expression, and if "
 "successful, continues to match the rest of the pattern following it. If the "
@@ -760,6 +787,16 @@ msgid ""
 "Group, and there is no stack point before it, the entire expression would "
 "thus fail to match."
 msgstr ""
+"Intenta hacer coincidir ``...`` como si fuera una expresión regular "
+"separada, y si tiene éxito, continúa coincidiendo con el resto del patrón "
+"que la sigue. Si el patrón posterior no coincide, la pila solo se puede "
+"desenrollar a un punto *antes* del ``(?>...)`` Porque una vez que salió, la "
+"expresión, conocida como :dfn:`ato`, ha desechado todos los puntos de pila "
+"dentro de sí misma. Por lo tanto, ``(?>.*).`` nunca coincidiría con nada "
+"porque primero el ``.*`` coincidiría con todos los caracteres posibles, "
+"luego, al no tener nada que igualar, el ``.`` final no coincidiría. Dado que "
+"no hay puntos de pila guardados en el Grupo Atómico, y no hay ningún punto "
+"de pila antes de él, toda la expresión no coincidiría."
 
 #: ../Doc/library/re.rst:421
 msgid "``(?P<name>...)``"
@@ -836,7 +873,7 @@ msgstr "``\\g<1>``"
 
 #: ../Doc/library/re.rst:420
 msgid "Group names containing non-ASCII characters in bytes patterns."
-msgstr ""
+msgstr "Nombres de grupo contiene caracteres no-ASCII en patrones de bytes."
 
 #: ../Doc/library/re.rst:427
 msgid "``(?P=name)``"
@@ -969,7 +1006,7 @@ msgstr ""
 
 #: ../Doc/library/re.rst:492
 msgid "Group *id* containing anything except ASCII digits."
-msgstr ""
+msgstr "Grupo *id* que contenga cualquier cosa excepto dígitos ASCII."
 
 #: ../Doc/library/re.rst:496
 msgid ""
@@ -1287,7 +1324,7 @@ msgstr ""
 
 #: ../Doc/library/re.rst:670
 msgid "Flags"
-msgstr ""
+msgstr "Indicadores"
 
 #: ../Doc/library/re.rst:672
 msgid ""
@@ -1301,10 +1338,12 @@ msgstr ""
 msgid ""
 "An :class:`enum.IntFlag` class containing the regex options listed below."
 msgstr ""
+"Una clase :class:`enum.IntFlag` contiene las opciones regex que se enumeran "
+"a continuación."
 
 #: ../Doc/library/re.rst:681
 msgid "- added to ``__all__``"
-msgstr ""
+msgstr "- agregado a ``__all__``"
 
 #: ../Doc/library/re.rst:686
 msgid ""
@@ -1431,12 +1470,17 @@ msgstr ""
 "al final de la cadena. Corresponde al indicador en línea ``(?m)``."
 
 #: ../Doc/library/re.rst:757
+#, fuzzy
 msgid ""
 "Indicates no flag being applied, the value is ``0``.  This flag may be used "
 "as a default value for a function keyword argument or as a base value that "
 "will be conditionally ORed with other flags.  Example of use as a default "
 "value::"
 msgstr ""
+"Indica que no se aplica ningún indicador, el valor es ``0``. Este indicador "
+"se puede utilizar como valor predeterminado para un argumento de palabra "
+"clave de función o como un valor base que sea ORed condicionalmente con "
+"otros indicadores. Ejemplo de uso como valor predeterminado:"
 
 #: ../Doc/library/re.rst:770
 msgid ""
@@ -1486,7 +1530,7 @@ msgstr "Corresponde al indicador en línea ``(?x)``."
 
 #: ../Doc/library/re.rst:802
 msgid "Functions"
-msgstr ""
+msgstr "Funciones"
 
 #: ../Doc/library/re.rst:806
 msgid ""
@@ -1806,6 +1850,8 @@ msgid ""
 "Group *id* containing anything except ASCII digits. Group names containing "
 "non-ASCII characters in bytes replacement strings."
 msgstr ""
+"Grupo *id* que contengan cualquier cosa excepto dígitos ASCII. Nombres de "
+"grupo que contengan caracteres no ASCII en cadenas de reemplazo de bytes."
 
 #: ../Doc/library/re.rst:1021
 msgid ""
@@ -1855,7 +1901,7 @@ msgstr "Despeja la caché de expresión regular."
 
 #: ../Doc/library/re.rst:1072
 msgid "Exceptions"
-msgstr ""
+msgstr "Excepciones"
 
 #: ../Doc/library/re.rst:1076
 msgid ""
@@ -2164,7 +2210,7 @@ msgstr ""
 
 #: ../Doc/library/re.rst:1328
 msgid "Named groups are supported as well::"
-msgstr ""
+msgstr "Los grupos con nombre también son compatibles::"
 
 #: ../Doc/library/re.rst:1341
 msgid ""
