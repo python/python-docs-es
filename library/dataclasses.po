@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-10-25 19:47+0200\n"
-"PO-Revision-Date: 2023-02-14 15:40-0300\n"
+"PO-Revision-Date: 2023-02-16 11:56-0300\n"
 "Last-Translator: Francisco Mora <fr.morac@duocuc.cl>\n"
 "Language-Team: python-doc-es\n"
 "Language: es_ES\n"
@@ -360,15 +360,14 @@ msgid ""
 msgstr ""
 "Si un nombre de campo ya está incluido en las ``__slots__`` de una clase "
 "base, no se incluirá en las ``__slots__`` generadas para evitar que se "
-"`overriding them <https://docs.python.org/3/reference/datamodel.html#notes-"
-"on-using-slots>`_. Por lo tanto, no utilice ``__slots__`` para recuperar los "
+"`sobreescriban <https://docs.python.org/3/reference/datamodel.html#notes-on-"
+"using-slots>`_. Por lo tanto, no utilice ``__slots__`` para recuperar los "
 "nombres de campo de una clase de datos. Utilice :func:`fields` en su lugar. "
 "Para poder determinar las ranuras heredadas, la clase base ``__slots__`` "
-"puede ser cualquier iterable, pero *not* un iterador."
+"puede ser cualquier iterable, pero *no* un iterador."
 
 # No estoy seguro de si es correcto traducir slot por "ranura".
 #: ../Doc/library/dataclasses.rst:201
-#, fuzzy
 msgid ""
 "``weakref_slot``: If true (the default is ``False``), add a slot named "
 "\"__weakref__\", which is required to make an instance weakref-able.  It is "
@@ -377,8 +376,8 @@ msgid ""
 msgstr ""
 "``weakref_slot``: Si es verdadero (por defecto es ``False``), añade una "
 "ranura llamada \"__weakref__\", que es necesaria para generar una instancia "
-"weakref-able.  Es un error especificar ``weakref_slot=True`` sin especificar "
-"también ``slots=True``."
+"referenciable de forma débil. Es un error especificar ``weakref_slot=True`` "
+"sin especificar también ``slots=True``."
 
 #: ../Doc/library/dataclasses.rst:208
 msgid ""
@@ -1162,10 +1161,10 @@ msgid ""
 "Using default factory functions is a way to create new instances of mutable "
 "types as default values for fields::"
 msgstr ""
-"Usar las funciones fábrica por defecto es una forma de crear nuevas "
+"Usar las funciones de fábrica por defecto es una forma de crear nuevas "
 "instancias de tipos mutables como valores por defecto para campos::"
 
-# No estoy seguro de la traducción de "Unhashhability". Para La incobrabilidad se utiliza para aproximar la mutabilidad.
+# Creo que no es la mejor traducción pero no se me ocurre otra.
 #: ../Doc/library/dataclasses.rst:747
 #, fuzzy
 msgid ""
@@ -1174,19 +1173,19 @@ msgid ""
 "Unhashability is used to approximate mutability."
 msgstr ""
 "En lugar de buscar y desautorizar objetos de tipo ``list``, ``dict``, o "
-"``set``, ahora no se permiten objetos unhashable como valores por defecto.  "
-"La incobrabilidad se utiliza para aproximar la mutabilidad."
+"``set``, ahora no se permiten objetos sin un hash como valores por defecto.  "
+"La Incalculabilidad se utiliza para aproximar la mutabilidad."
 
 #: ../Doc/library/dataclasses.rst:754
 msgid "Descriptor-typed fields"
-msgstr "Campos Descriptor-tipo"
+msgstr "Campos tipo descriptor"
 
 #: ../Doc/library/dataclasses.rst:756
 msgid ""
 "Fields that are assigned :ref:`descriptor objects <descriptors>` as their "
 "default value have the following special behaviors:"
 msgstr ""
-"Los campos a los que se asigna :ref:`descriptor objects <descriptors>` como "
+"Los campos a los que se asigna :ref:`objetos descriptor <descriptors>` como "
 "valor por defecto tienen los siguientes comportamientos especiales:"
 
 #: ../Doc/library/dataclasses.rst:759
@@ -1205,6 +1204,9 @@ msgid ""
 "or ``__set__`` method is called rather than returning or overwriting the "
 "descriptor object."
 msgstr ""
+"Del mismo modo, al obtener o establecer el campo, se llama al método "
+"``__get__`` o ``__set__`` del descriptor en lugar de retornar o sobrescribir "
+"el objeto descriptor."
 
 #: ../Doc/library/dataclasses.rst:765
 msgid ""
@@ -1215,6 +1217,13 @@ msgid ""
 "hand, if the descriptor raises :exc:`AttributeError` in this situation, no "
 "default value will be provided for the field."
 msgstr ""
+"Para determinar si un campo contiene un valor por defecto, ``dataclasses`` "
+"llamará al método ``get__`` del descriptor utilizando su forma de acceso a "
+"la clase (es decir, ``descriptor.__get__(obj=None, type=cls)``.  Si el "
+"descriptor devuelve un valor en este caso, se utilizará como valor por "
+"defecto del campo. Por otro lado, si el descriptor devuelve :exc:"
+"`AttributeError` en esta situación, no se proporcionará ningún valor por "
+"defecto para el campo."
 
 #: ../Doc/library/dataclasses.rst:800
 msgid ""
