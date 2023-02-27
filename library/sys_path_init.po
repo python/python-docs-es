@@ -4,29 +4,33 @@
 # package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Python en Español 3.11\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-10-25 19:47+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2022-10-29 11:15-0300\n"
+"Last-Translator: Carlos A. Crespo <lvccrespo@gmail.com>\n"
+"Language-Team: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.10.3\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: ../Doc/library/sys_path_init.rst:4
 msgid "The initialization of the :data:`sys.path` module search path"
-msgstr ""
+msgstr "La inicialización de la ruta de búsqueda de módulo de :data:`sys.path`"
 
 #: ../Doc/library/sys_path_init.rst:6
 msgid ""
 "A module search path is initialized when Python starts. This module search "
 "path may be accessed at :data:`sys.path`."
 msgstr ""
+"Una ruta de búsqueda de módulo se inicializa cuando se inicia Python. Se "
+"puede acceder a esta ruta de búsqueda de módulo en :data:`sys.path`."
 
 #: ../Doc/library/sys_path_init.rst:9
 msgid ""
@@ -35,6 +39,10 @@ msgid ""
 "directory, which is the case when executing the interactive shell, a :option:"
 "`-c` command, or :option:`-m` module."
 msgstr ""
+"La primera entrada en la ruta de búsqueda de módulo es el directorio que "
+"contiene el script de entrada, si lo hay. De lo contrario, la primera "
+"entrada es el directorio actual, que es el caso cuando se ejecuta el shell "
+"interactivo, un comando :option:`-c` o un módulo :option:`-m`."
 
 #: ../Doc/library/sys_path_init.rst:14
 msgid ""
@@ -42,6 +50,9 @@ msgid ""
 "directories to the search path. If this environment variable is found then "
 "the contents are added to the module search path."
 msgstr ""
+"La variable de entorno :envvar:`PYTHONPATH` se utiliza a menudo para añadir "
+"directorios a la ruta de búsqueda. Si se encuentra esta variable de entorno, "
+"su contenido se añade a la ruta de búsqueda del módulo."
 
 #: ../Doc/library/sys_path_init.rst:20
 msgid ""
@@ -50,6 +61,10 @@ msgid ""
 "variables. The :mod:`site` module offers more nuanced techniques as "
 "mentioned below."
 msgstr ""
+":envvar:`PYTHONPATH` afectará a todas las versiones/entornos de Python "
+"instalados. Tenga cuidado al establecer esto en su perfil de shell o en las "
+"variables de entorno globales. El módulo :mod:`site` ofrece técnicas más "
+"suavizadas como se menciona a continuación."
 
 #: ../Doc/library/sys_path_init.rst:24
 msgid ""
@@ -60,6 +75,12 @@ msgid ""
 "called ``prefix``. The directory with the extension modules is called "
 "``exec_prefix``."
 msgstr ""
+"Los siguientes elementos que se añaden son los directorios que contienen los "
+"módulos estándar de Python, así como los :term:`extension module` de los que "
+"dependen estos módulos. Los módulos de extensión son archivos ``.pyd`` en "
+"Windows y archivos ``.so`` en otras plataformas. El directorio con los "
+"módulos Python independientes de la plataforma se llama ``prefix``. El "
+"directorio con los módulos de extensión se llama ``exec_prefix``."
 
 #: ../Doc/library/sys_path_init.rst:30
 msgid ""
@@ -70,6 +91,13 @@ msgid ""
 "are followed so the real Python executable location is used as the search "
 "starting point. The Python executable location is called ``home``."
 msgstr ""
+"La variable de entorno :envvar:`PYTHONHOME` puede utilizarse para establecer "
+"las ubicaciones ``prefix`` y ``exec_prefix``. De lo contrario, estos "
+"directorios se encuentran utilizando el ejecutable de Python como punto de "
+"partida y luego buscando varios archivos y directorios \"de referencia\". "
+"Tenga en cuenta que cualquier enlace simbólico se sigue, por lo que la "
+"ubicación real del ejecutable de Python se utiliza como punto de partida de "
+"la búsqueda. La ubicación del ejecutable de Python se llama ``home``."
 
 #: ../Doc/library/sys_path_init.rst:37
 msgid ""
@@ -88,12 +116,28 @@ msgid ""
 "`lib64` or another value, see :data:`sys.platlibdir` and :envvar:"
 "`PYTHONPLATLIBDIR`."
 msgstr ""
+"Una vez determinado ``home``, el directorio ``prefix`` se encuentra buscando "
+"primero :file:`python{majorversion}{minorversion}.zip` (``python311.zip``). "
+"En Windows el archivo zip se busca en ``home`` y en Unix se espera que el "
+"archivo esté en :file:`lib`. Tenga en cuenta que la ubicación esperada del "
+"archivo zip se añade a la ruta de búsqueda del módulo incluso si el archivo "
+"no existe. Si no se encuentra ningún archivo, Python en Windows continuará "
+"la búsqueda de ``prefix`` buscando en :file:`Lib\\\\os.py`. Python en Unix "
+"buscará :file:`lib/python{majorversion}.{minorversion}/os.py` (``lib/"
+"python3.11/os.py``). En Windows ``prefix`` y ``prefix_exec`` son los mismos, "
+"sin embargo en otras plataformas se busca :file:`lib/python{majorversion}."
+"{minorversion}/lib-dynload` (``lib/python3.11/lib-dynload``) y se utiliza "
+"como ancla para ``prefix_exec``. En algunas plataformas :file:`lib` puede "
+"ser :file:`lib64` u otro valor, ver :data:`sys.platlibdir` y :envvar:"
+"`PYTHONPLATLIBDIR`."
 
 #: ../Doc/library/sys_path_init.rst:50
 msgid ""
 "Once found, ``prefix`` and ``exec_prefix`` are available at :data:`sys."
 "prefix` and :data:`sys.exec_prefix` respectively."
 msgstr ""
+"Una vez encontrados, ``prefix`` y ``exec_prefix`` están disponibles en :data:"
+"`sys.prefix` y :data:`sys.exec_prefix` respectivamente."
 
 #: ../Doc/library/sys_path_init.rst:53
 msgid ""
@@ -102,28 +146,42 @@ msgid ""
 "the search path is to create :mod:`sitecustomize` or :mod:`usercustomize` "
 "modules as described in the :mod:`site` module documentation."
 msgstr ""
+"Finalmente, el módulo :mod:`site` se procesa y los directorios :file:`site-"
+"packages` se añaden a la ruta de búsqueda de módulo. Una forma común de "
+"personalizar la ruta de búsqueda es crear módulos :mod:`sitecustomize` o :"
+"mod:`usercustomize` como se describe en la documentación del módulo :mod:"
+"`site`."
 
 #: ../Doc/library/sys_path_init.rst:60
 msgid ""
 "Certain command line options may further affect path calculations. See :"
 "option:`-E`, :option:`-I`, :option:`-s` and :option:`-S` for further details."
 msgstr ""
+"Ciertas opciones de la línea de comandos pueden afectar aún más los cálculos "
+"de ruta. Vea :option:`-E`, :option:`-I`, :option:`-s` y :option:`-S` para "
+"más detalles."
 
 #: ../Doc/library/sys_path_init.rst:64
 msgid "Virtual environments"
-msgstr ""
+msgstr "Entornos virtuales"
 
 #: ../Doc/library/sys_path_init.rst:66
 msgid ""
 "If Python is run in a virtual environment (as described at :ref:`tut-venv`) "
 "then ``prefix`` and ``exec_prefix`` are specific to the virtual environment."
 msgstr ""
+"Si Python se ejecuta en un entorno virtual (como se describe en :ref:`tut-"
+"venv`) entonces ``prefix`` y ``exec_prefix`` son específicos del entorno "
+"virtual."
 
 #: ../Doc/library/sys_path_init.rst:69
 msgid ""
 "If a ``pyvenv.cfg`` file is found alongside the main executable, or in the "
 "directory one level above the executable, the following variations apply:"
 msgstr ""
+"Si se encuentra un archivo ``pyvenv.cfg`` junto al ejecutable principal, o "
+"en el directorio un nivel por encima del ejecutable, se aplican las "
+"siguientes variaciones:"
 
 #: ../Doc/library/sys_path_init.rst:72
 msgid ""
@@ -131,10 +189,13 @@ msgid ""
 "path is used instead of the path to the main executable when deducing "
 "``prefix`` and ``exec_prefix``."
 msgstr ""
+"Si ``home`` es una ruta absoluta y :envvar:`PYTHONHOME` no está establecido, "
+"esta ruta se utiliza en lugar de la ruta al ejecutable principal cuando se "
+"deduce ``prefix`` y ``exec_prefix``."
 
 #: ../Doc/library/sys_path_init.rst:77
 msgid "_pth files"
-msgstr ""
+msgstr "Archivos _pth"
 
 #: ../Doc/library/sys_path_init.rst:79
 msgid ""
@@ -146,6 +207,14 @@ msgid ""
 "the shared library name overrides the one based on the executable, which "
 "allows paths to be restricted for any program loading the runtime if desired."
 msgstr ""
+"Para anular completamente :data:`sys.path` cree un archivo ``._pth`` con el "
+"mismo nombre que la biblioteca compartida o el ejecutable (``python._pth`` o "
+"``python311._pth``). La ruta de la biblioteca compartida se conoce siempre "
+"en Windows, pero puede no estar disponible en otras plataformas. En el "
+"archivo ``._pth`` especifique una línea por cada ruta a añadir a :data:`sys."
+"path``. El archivo basado en el nombre de la biblioteca compartida anula el "
+"basado en el ejecutable, lo que permite restringir las rutas para cualquier "
+"programa en tiempo de ejecución si se desea."
 
 #: ../Doc/library/sys_path_init.rst:87
 msgid ""
@@ -156,16 +225,26 @@ msgid ""
 "the file. Import statements other than to ``site`` are not permitted, and "
 "arbitrary code cannot be specified."
 msgstr ""
+"Cuando el archivo existe, se ignoran todas las variables de registro y de "
+"entorno, se habilita el modo aislado y no se importa :mod:`site` a menos que "
+"una línea del archivo especifique ``import site``. Las rutas en blanco y las "
+"líneas que comienzan con ``#`` son ignoradas. Cada ruta puede ser absoluta o "
+"relativa a la ubicación del fichero. No se permiten declaraciones de "
+"importación distintas de ``site``, y no se puede especificar código "
+"arbitrario."
 
 #: ../Doc/library/sys_path_init.rst:94
 msgid ""
 "Note that ``.pth`` files (without leading underscore) will be processed "
 "normally by the :mod:`site` module when ``import site`` has been specified."
 msgstr ""
+"Tenga en cuenta que los archivos ``.pth`` (sin guión bajo inicial) serán "
+"procesados normalmente por el módulo :mod:`site` cuando se haya especificado "
+"``import site``."
 
 #: ../Doc/library/sys_path_init.rst:98
 msgid "Embedded Python"
-msgstr ""
+msgstr "Python embebido"
 
 #: ../Doc/library/sys_path_init.rst:100
 msgid ""
@@ -175,11 +254,17 @@ msgid ""
 "path-config`. Alternatively the older :c:func:`Py_SetPath` can be used to "
 "bypass the initialization of the module search path."
 msgstr ""
+"Si Python está embebido dentro de otra aplicación :c:func:"
+"`Py_InitializeFromConfig` y la estructura :c:type:`PyConfig` pueden "
+"utilizarse para inicializar Python. Los detalles específicos de la ruta se "
+"describen en :ref:`init-path-config`. Alternativamente se puede utilizar la "
+"antigua :c:func:`Py_SetPath` para saltarse la inicialización de la ruta de "
+"búsqueda de módulo."
 
 #: ../Doc/library/sys_path_init.rst:107
 msgid ":ref:`windows_finding_modules` for detailed Windows notes."
-msgstr ""
+msgstr ":ref:`windows_finding_modules` para las notas detalladas de Windows."
 
 #: ../Doc/library/sys_path_init.rst:108
 msgid ":ref:`using-on-unix` for Unix details."
-msgstr ""
+msgstr ":ref:`using-on-unix` para los detalles de Unix."
