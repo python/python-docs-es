@@ -1,9 +1,6 @@
+# Traducción al Español de la Documentación de Python
 ![Build Status](https://github.com/python/python-docs-es/actions/workflows/main.yml/badge.svg?branch=3.11 "Build Status")
 ![Documentation Status](https://readthedocs.org/projects/python-docs-es/badge/?version=3.11 "Documentation Status")
-
-
-# Traducción al Español de la Documentación de Python
-
 ## ¿Cómo contribuir?
 
 Tenemos una guía que te ayudará a contribuir. Por favor
@@ -11,15 +8,15 @@ consulta [acá](https://python-docs-es.readthedocs.io/page/CONTRIBUTING.html)
 para saber más detalles.
 
 
-# Spanish Translation of the Python Documentation
+## Spanish Translation of the Python Documentation
 
-## How to Contribute
+### How to Contribute
 
 We have a guide that will help you to contribute. Please check the details
 [here](https://python-docs-es.readthedocs.io/page/CONTRIBUTING.html)
 
 
-## Documentation Contribution Agreement
+### Documentation Contribution Agreement
 
 NOTE REGARDING THE LICENSE FOR TRANSLATIONS: Python's documentation is
 maintained using a global network of volunteers. By posting this project on
