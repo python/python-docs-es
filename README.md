@@ -6,9 +6,9 @@
 
 ## ¿Cómo contribuir?
 
-Tenemos una guía que te ayudará a contribuir en:
-https://python-docs-es.readthedocs.io/page/CONTRIBUTING.html. Por favor,
-consulta para saber más detalles.
+Tenemos una guía que te ayudará a contribuir. Por favor
+consulta [acá](https://python-docs-es.readthedocs.io/page/CONTRIBUTING.html)
+para saber más detalles.
 
 
 # Spanish Translation of the Python Documentation
