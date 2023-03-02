@@ -48,3 +48,10 @@ Python community is welcomed and appreciated.
 
 You signify acceptance of this agreement by submitting your work to
 the PSF for inclusion in the documentation.
+
+Contributors
+------------
+
+<a href="https://github.com/python/python-docs-es/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=python/python-docs-es" />
+</a>
