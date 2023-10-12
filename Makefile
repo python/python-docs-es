@@ -8,7 +8,7 @@
 # Configuration
 
 CPYTHON_PATH        := cpython   # Current commit for this upstream repo is setted by the submodule
-BRANCH              := 3.11
+BRANCH              := 3.12
 LANGUAGE_TEAM       := python-docs-es
 LANGUAGE            := es
 
