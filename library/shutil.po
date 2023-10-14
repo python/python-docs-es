@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-25 19:47+0200\n"
+"POT-Creation-Date: 2023-10-12 19:43+0200\n"
 "PO-Revision-Date: 2022-10-30 14:38-0600\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.10.3\n"
+"Generated-By: Babel 2.13.0\n"
 
 #: ../Doc/library/shutil.rst:2
 msgid ":mod:`shutil` --- High-level file operations"
@@ -157,7 +157,7 @@ msgstr ""
 
 #: ../Doc/library/shutil.rst:81 ../Doc/library/shutil.rst:185
 #: ../Doc/library/shutil.rst:217 ../Doc/library/shutil.rst:287
-#: ../Doc/library/shutil.rst:381
+#: ../Doc/library/shutil.rst:387
 msgid ""
 "Platform-specific fast-copy syscalls may be used internally in order to copy "
 "the file more efficiently. See :ref:`shutil-platform-dependent-efficient-"
@@ -531,12 +531,13 @@ msgid "The *dirs_exist_ok* parameter."
 msgstr "El parámetro *dirs_exist_ok*."
 
 #: ../Doc/library/shutil.rst:299
+#, fuzzy
 msgid ""
 "Delete an entire directory tree; *path* must point to a directory (but not a "
 "symbolic link to a directory).  If *ignore_errors* is true, errors resulting "
 "from failed removals will be ignored; if false or omitted, such errors are "
-"handled by calling a handler specified by *onerror* or, if that is omitted, "
-"they raise an exception."
+"handled by calling a handler specified by *onexc* or *onerror* or, if both "
+"are omitted, exceptions are propagated to the caller."
 msgstr ""
 "Elimina un árbol de directorios entero; *path* debe apuntar a un directorio "
 "(pero no a un enlace simbólico a un directorio). Si *ignore_errors* es "
@@ -573,20 +574,22 @@ msgstr ""
 "aplica."
 
 #: ../Doc/library/shutil.rst:318
+#, fuzzy
 msgid ""
-"If *onerror* is provided, it must be a callable that accepts three "
-"parameters: *function*, *path*, and *excinfo*."
+"If *onexc* is provided, it must be a callable that accepts three parameters: "
+"*function*, *path*, and *excinfo*."
 msgstr ""
 "Si se *onerror* está dado, debe ser un invocable que acepte tres parámetros: "
 "*function*, *path*, y *excinfo*."
 
 #: ../Doc/library/shutil.rst:321
+#, fuzzy
 msgid ""
 "The first parameter, *function*, is the function which raised the exception; "
 "it depends on the platform and implementation.  The second parameter, "
 "*path*, will be the path name passed to *function*.  The third parameter, "
-"*excinfo*, will be the exception information returned by :func:`sys."
-"exc_info`.  Exceptions raised by *onerror* will not be caught."
+"*excinfo*, is the exception that was raised. Exceptions raised by *onexc* "
+"will not be caught."
 msgstr ""
 "El primer parámetro, *function*, es la función que generó la excepción; "
 "depende de la plataforma y de la implementación. El segundo parámetro, "
@@ -596,13 +599,19 @@ msgstr ""
 
 #: ../Doc/library/shutil.rst:327
 msgid ""
+"The deprecated *onerror* is similar to *onexc*, except that the third "
+"parameter it receives is the tuple returned from :func:`sys.exc_info`."
+msgstr ""
+
+#: ../Doc/library/shutil.rst:330
+msgid ""
 "Raises an :ref:`auditing event <auditing>` ``shutil.rmtree`` with arguments "
 "``path``, ``dir_fd``."
 msgstr ""
 "Genera un :ref:`evento de auditoría <auditing>` ``shutil.rmtree`` con "
 "argumentos ``path``, ``dir_fd``."
 
-#: ../Doc/library/shutil.rst:329
+#: ../Doc/library/shutil.rst:332
 msgid ""
 "Added a symlink attack resistant version that is used automatically if "
 "platform supports fd-based functions."
@@ -611,7 +620,7 @@ msgstr ""
 "usan automáticamente si la plataforma admite funciones pasadas en "
 "descriptores de archivo."
 
-#: ../Doc/library/shutil.rst:333
+#: ../Doc/library/shutil.rst:336
 msgid ""
 "On Windows, will no longer delete the contents of a directory junction "
 "before removing the junction."
@@ -619,11 +628,15 @@ msgstr ""
 "En Windows, ya no eliminará los contenidos de un cruce de directorios antes "
 "de quitar el cruce."
 
-#: ../Doc/library/shutil.rst:337
+#: ../Doc/library/shutil.rst:340
 msgid "The *dir_fd* parameter."
 msgstr "El parámetro *dir_fd*."
 
-#: ../Doc/library/shutil.rst:342
+#: ../Doc/library/shutil.rst:343
+msgid "Added the *onexc* parameter, deprecated *onerror*."
+msgstr ""
+
+#: ../Doc/library/shutil.rst:348
 msgid ""
 "Indicates whether the current platform and implementation provides a symlink "
 "attack resistant version of :func:`rmtree`.  Currently this is only true for "
@@ -634,7 +647,7 @@ msgstr ""
 "esto solo sucede para plataformas que admitan funciones de acceso a "
 "directorios basadas en descriptores de archivo."
 
-#: ../Doc/library/shutil.rst:351
+#: ../Doc/library/shutil.rst:357
 msgid ""
 "Recursively move a file or directory (*src*) to another location (*dst*) and "
 "return the destination."
@@ -642,7 +655,7 @@ msgstr ""
 "Mueve de forma recursiva un archivo o directorio (*src*) a otra ubicación "
 "(*dst*) y retorna el destino."
 
-#: ../Doc/library/shutil.rst:354
+#: ../Doc/library/shutil.rst:360
 msgid ""
 "If the destination is an existing directory, then *src* is moved inside that "
 "directory. If the destination already exists but is not a directory, it may "
@@ -652,7 +665,7 @@ msgstr ""
 "ese directorio. Si el destino existe pero no es un directorio, puede "
 "sobrescribirse dependiendo de la semántica :func:`os.rename`."
 
-#: ../Doc/library/shutil.rst:358
+#: ../Doc/library/shutil.rst:364
 msgid ""
 "If the destination is on the current filesystem, then :func:`os.rename` is "
 "used. Otherwise, *src* is copied to *dst* using *copy_function* and then "
@@ -665,15 +678,16 @@ msgstr ""
 "enlace simbólico nuevo que apunta al destino de *src* en o como *dst* y será "
 "eliminado."
 
-#: ../Doc/library/shutil.rst:363
+#: ../Doc/library/shutil.rst:369
+#, fuzzy
 msgid ""
 "If *copy_function* is given, it must be a callable that takes two arguments "
 "*src* and *dst*, and will be used to copy *src* to *dst* if :func:`os."
 "rename` cannot be used.  If the source is a directory, :func:`copytree` is "
-"called, passing it the :func:`copy_function`. The default *copy_function* "
-"is :func:`copy2`.  Using :func:`~shutil.copy` as the *copy_function* allows "
-"the move to succeed when it is not possible to also copy the metadata, at "
-"the expense of not copying any of the metadata."
+"called, passing it the *copy_function*. The default *copy_function* is :func:"
+"`copy2`.  Using :func:`~shutil.copy` as the *copy_function* allows the move "
+"to succeed when it is not possible to also copy the metadata, at the expense "
+"of not copying any of the metadata."
 msgstr ""
 "Si *copy_function* se proporciona, debe ser un invocable que toma dos "
 "argumentos *src* y *dst*, y se usará para copiar *src* a *dest* si no se "
@@ -684,7 +698,7 @@ msgstr ""
 "es posible copiar los metadatos también, a expensas de no copiar ninguno de "
 "los metadatos."
 
-#: ../Doc/library/shutil.rst:371
+#: ../Doc/library/shutil.rst:377
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``shutil.move`` with arguments "
 "``src``, ``dst``."
@@ -692,7 +706,7 @@ msgstr ""
 "Genera un :ref:`evento de auditoría <auditing>` ``shutil.move`` con "
 "argumentos ``src``, ``dst``."
 
-#: ../Doc/library/shutil.rst:373
+#: ../Doc/library/shutil.rst:379
 msgid ""
 "Added explicit symlink handling for foreign filesystems, thus adapting it to "
 "the behavior of GNU's :program:`mv`. Now returns *dst*."
@@ -701,16 +715,16 @@ msgstr ""
 "archivos extranjeros, de manera que se adapta al comportamiento del :program:"
 "`mv` del GNU. Ahora retorna *dst*."
 
-#: ../Doc/library/shutil.rst:378
+#: ../Doc/library/shutil.rst:384
 msgid "Added the *copy_function* keyword argument."
 msgstr "Se agregó el argumento de keyword *copy_function*."
 
-#: ../Doc/library/shutil.rst:386
+#: ../Doc/library/shutil.rst:392
 msgid "Accepts a :term:`path-like object` for both *src* and *dst*."
 msgstr ""
 "Acepta un :term:`objeto tipo ruta <path-like object>` como *src* y *dst*."
 
-#: ../Doc/library/shutil.rst:391
+#: ../Doc/library/shutil.rst:397
 msgid ""
 "Return disk usage statistics about the given path as a :term:`named tuple` "
 "with the attributes *total*, *used* and *free*, which are the amount of "
@@ -721,19 +735,26 @@ msgstr ""
 "las cantidades del espacio total, el usado y el libre, en bytes. *path* "
 "puede ser un archivo o un directorio."
 
-#: ../Doc/library/shutil.rst:398
+#: ../Doc/library/shutil.rst:404
+msgid ""
+"On Unix filesystems, *path* must point to a path within a **mounted** "
+"filesystem partition. On those platforms, CPython doesn't attempt to "
+"retrieve disk usage information from non-mounted filesystems."
+msgstr ""
+
+#: ../Doc/library/shutil.rst:410
 msgid "On Windows, *path* can now be a file or directory."
 msgstr "En Windows, *path* ahora puede ser un archivo o un directorio."
 
-#: ../Doc/library/shutil.rst:401
+#: ../Doc/library/shutil.rst:413
 msgid ":ref:`Availability <availability>`: Unix, Windows."
 msgstr ":ref:`Disponibilidad <availability>`: Unix, Windows."
 
-#: ../Doc/library/shutil.rst:405
+#: ../Doc/library/shutil.rst:417
 msgid "Change owner *user* and/or *group* of the given *path*."
 msgstr "Cambia el propietario *user* y/o *group* de la *ruta* dada."
 
-#: ../Doc/library/shutil.rst:407
+#: ../Doc/library/shutil.rst:419
 msgid ""
 "*user* can be a system user name or a uid; the same applies to *group*. At "
 "least one argument is required."
@@ -741,11 +762,11 @@ msgstr ""
 "*user* puede ser un nombre usuario de sistema o un UID (identificador de "
 "usuario); lo mismo aplica a *group*. Se requiere al menos un argumento."
 
-#: ../Doc/library/shutil.rst:410
+#: ../Doc/library/shutil.rst:422
 msgid "See also :func:`os.chown`, the underlying function."
 msgstr "Véase también :func:`os.chown`, la función subyacente."
 
-#: ../Doc/library/shutil.rst:412
+#: ../Doc/library/shutil.rst:424
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``shutil.chown`` with arguments "
 "``path``, ``user``, ``group``."
@@ -753,11 +774,11 @@ msgstr ""
 "Genera un :ref:`evento de auditoría <auditing>` ``shutil.chown`` con "
 "argumentos ``path``, ``user``, ``group``."
 
-#: ../Doc/library/shutil.rst:415
+#: ../Doc/library/shutil.rst:426
 msgid ":ref:`Availability <availability>`: Unix."
 msgstr ":ref:`Disponibilidad <availability>`: Unix."
 
-#: ../Doc/library/shutil.rst:421
+#: ../Doc/library/shutil.rst:433
 msgid ""
 "Return the path to an executable which would be run if the given *cmd* was "
 "called.  If no *cmd* would be called, return ``None``."
@@ -765,7 +786,7 @@ msgstr ""
 "Retorna la ruta de acceso a un ejecutable que se ejecutaría si el *cmd* dado "
 "se invoca. Si no se invoca a *cmd*, retorna ``None``."
 
-#: ../Doc/library/shutil.rst:424
+#: ../Doc/library/shutil.rst:436
 msgid ""
 "*mode* is a permission mask passed to :func:`os.access`, by default "
 "determining if the file exists and executable."
@@ -773,34 +794,41 @@ msgstr ""
 "*mode* es una máscara de permiso que se pasa a :func:`os.access`, que "
 "determinar por defecto si el archivo existe y es ejecutable."
 
-#: ../Doc/library/shutil.rst:427
+#: ../Doc/library/shutil.rst:439
+#, fuzzy
 msgid ""
 "When no *path* is specified, the results of :func:`os.environ` are used, "
-"returning either the \"PATH\" value or a fallback of :attr:`os.defpath`."
+"returning either the \"PATH\" value or a fallback of :data:`os.defpath`."
 msgstr ""
 "Cuando no se especifica *path*, se usan los resultados de :func:`os.environ` "
 "y se retorna el valor de \"PATH\" o una reserva de :attr:`os.defpath`."
 
-#: ../Doc/library/shutil.rst:430
+#: ../Doc/library/shutil.rst:442
 msgid ""
-"On Windows, the current directory is always prepended to the *path* whether "
-"or not you use the default or provide your own, which is the behavior the "
-"command shell uses when finding executables.  Additionally, when finding the "
-"*cmd* in the *path*, the ``PATHEXT`` environment variable is checked.  For "
-"example, if you call ``shutil.which(\"python\")``, :func:`which` will search "
-"``PATHEXT`` to know that it should look for ``python.exe`` within the *path* "
-"directories.  For example, on Windows::"
+"On Windows, the current directory is prepended to the *path* if *mode* does "
+"not include ``os.X_OK``. When the *mode* does include ``os.X_OK``, the "
+"Windows API ``NeedCurrentDirectoryForExePathW`` will be consulted to "
+"determine if the current directory should be prepended to *path*. To avoid "
+"consulting the current working directory for executables: set the "
+"environment variable ``NoDefaultCurrentDirectoryInExePath``."
 msgstr ""
-"En Windows, el directorio actual siempre se antepone a *path*, "
-"independientemente de si usa el valor predeterminado o si tú provees el tuyo "
-"propio, que es el comportamiento que el comando *shell* usa cuando encuentra "
-"ejecutables. Además, al encontrar el *cmd* en el *path*, se comprueba la "
-"variable de entorno ``PATHEXT``. Por ejemplo, si invocas ``shutil."
-"which(\"python\")``, :func:`which` buscará ``PATHEXT`` para saber si debe "
-"buscar ``python.exe`` dentro de los directorios *path*. Por ejemplo, en "
-"Windows::"
 
-#: ../Doc/library/shutil.rst:443
+#: ../Doc/library/shutil.rst:449
+msgid ""
+"Also on Windows, the ``PATHEXT`` variable is used to resolve commands that "
+"may not already include an extension. For example, if you call ``shutil."
+"which(\"python\")``, :func:`which` will search ``PATHEXT`` to know that it "
+"should look for ``python.exe`` within the *path* directories. For example, "
+"on Windows::"
+msgstr ""
+
+#: ../Doc/library/shutil.rst:458
+msgid ""
+"This is also applied when *cmd* is a path that contains a directory "
+"component::"
+msgstr ""
+
+#: ../Doc/library/shutil.rst:466
 msgid ""
 "The :class:`bytes` type is now accepted.  If *cmd* type is :class:`bytes`, "
 "the result type is also :class:`bytes`."
@@ -808,7 +836,18 @@ msgstr ""
 "Ahora se acepta el tipo :class:`bytes`. Si el tipo *cmd* es :class:`bytes`, "
 "el tipo resultante también es :class:`bytes`."
 
-#: ../Doc/library/shutil.rst:449
+#: ../Doc/library/shutil.rst:470
+msgid ""
+"On Windows, the current directory is no longer prepended to the search path "
+"if *mode* includes ``os.X_OK`` and WinAPI "
+"``NeedCurrentDirectoryForExePathW(cmd)`` is false, else the current "
+"directory is prepended even if it is already in the search path; ``PATHEXT`` "
+"is used now even when *cmd* includes a directory component or ends with an "
+"extension that is in ``PATHEXT``; and filenames that have no extension can "
+"now be found."
+msgstr ""
+
+#: ../Doc/library/shutil.rst:481
 msgid ""
 "This exception collects exceptions that are raised during a multi-file "
 "operation. For :func:`copytree`, the exception argument is a list of 3-"
@@ -818,11 +857,11 @@ msgstr ""
 "de varios archivos. Para :func:`copytree`, el argumento de excepción es una "
 "lista de 3 tuplas (*scrname*, *dstname*, *exception*)."
 
-#: ../Doc/library/shutil.rst:456
+#: ../Doc/library/shutil.rst:488
 msgid "Platform-dependent efficient copy operations"
 msgstr "Operaciones de copia eficientes dependientes de la plataforma"
 
-#: ../Doc/library/shutil.rst:458
+#: ../Doc/library/shutil.rst:490
 msgid ""
 "Starting from Python 3.8, all functions involving a file copy (:func:"
 "`copyfile`, :func:`~shutil.copy`, :func:`copy2`, :func:`copytree`, and :func:"
@@ -839,17 +878,17 @@ msgstr ""
 "dentro del núcleo, evitando el uso de búferes en espacio de usuario en "
 "Python como en \"``outfd.write(infd.read())``\"."
 
-#: ../Doc/library/shutil.rst:466
+#: ../Doc/library/shutil.rst:498
 msgid "On macOS `fcopyfile`_ is used to copy the file content (not metadata)."
 msgstr ""
 "En macOS, se usa `fcopyfile`_ para copiar el contenido del archivo (pero no "
 "los metadatos)."
 
-#: ../Doc/library/shutil.rst:468
+#: ../Doc/library/shutil.rst:500
 msgid "On Linux :func:`os.sendfile` is used."
 msgstr "En Linux, se usa :func:`os.sendfile`."
 
-#: ../Doc/library/shutil.rst:470
+#: ../Doc/library/shutil.rst:502
 msgid ""
 "On Windows :func:`shutil.copyfile` uses a bigger default buffer size (1 MiB "
 "instead of 64 KiB) and a :func:`memoryview`-based variant of :func:`shutil."
@@ -859,7 +898,7 @@ msgstr ""
 "más grande (1 MiB en lugar de 64 KiB) y se usa una variante de :func:`shutil."
 "copyfileobj` basada en :func:`memoryview`."
 
-#: ../Doc/library/shutil.rst:474
+#: ../Doc/library/shutil.rst:506
 msgid ""
 "If the fast-copy operation fails and no data was written in the destination "
 "file then shutil will silently fallback on using less efficient :func:"
@@ -869,15 +908,15 @@ msgstr ""
 "dato en el archivo de destino, entonces shutil recurrirá silenciosamente a "
 "usar la función :func:`copyfileobj` menos eficiente internamente."
 
-#: ../Doc/library/shutil.rst:483
+#: ../Doc/library/shutil.rst:515
 msgid "copytree example"
 msgstr "ejemplo de *copytree*"
 
-#: ../Doc/library/shutil.rst:485
+#: ../Doc/library/shutil.rst:517
 msgid "An example that uses the :func:`ignore_patterns` helper::"
 msgstr "Un ejemplo que usa el auxiliar :func:`ignore_patterns`::"
 
-#: ../Doc/library/shutil.rst:491
+#: ../Doc/library/shutil.rst:523
 msgid ""
 "This will copy everything except ``.pyc`` files and files or directories "
 "whose name starts with ``tmp``."
@@ -885,21 +924,22 @@ msgstr ""
 "Esto copiará todo excepto archivos ``.pyc`` y archivos o directorios cuyo "
 "nombre comience con ``tmp``."
 
-#: ../Doc/library/shutil.rst:494
+#: ../Doc/library/shutil.rst:526
 msgid "Another example that uses the *ignore* argument to add a logging call::"
 msgstr ""
 "Otro ejemplo que usa el argumento *ignore* para agregar una llamada a "
 "iniciar sesión::"
 
-#: ../Doc/library/shutil.rst:509
+#: ../Doc/library/shutil.rst:541
 msgid "rmtree example"
 msgstr "ejemplo de rmtree"
 
-#: ../Doc/library/shutil.rst:511
+#: ../Doc/library/shutil.rst:543
+#, fuzzy
 msgid ""
 "This example shows how to remove a directory tree on Windows where some of "
-"the files have their read-only bit set. It uses the onerror callback to "
-"clear the readonly bit and reattempt the remove. Any subsequent failure will "
+"the files have their read-only bit set. It uses the onexc callback to clear "
+"the readonly bit and reattempt the remove. Any subsequent failure will "
 "propagate. ::"
 msgstr ""
 "Este ejemplo muestra como eliminar un árbol de directorio en Windows donde "
@@ -907,15 +947,15 @@ msgstr ""
 "*onerror callback* para limpiar el *bit* de sólo lectura y reintentar "
 "eliminarlo. Cualquier fallo que le siga, se propagará. ::"
 
-#: ../Doc/library/shutil.rst:529
+#: ../Doc/library/shutil.rst:561
 msgid "Archiving operations"
 msgstr "Operaciones de archivado"
 
-#: ../Doc/library/shutil.rst:533
+#: ../Doc/library/shutil.rst:565
 msgid "Added support for the *xztar* format."
 msgstr "Se agregó soporte para el formato *xztar*."
 
-#: ../Doc/library/shutil.rst:537
+#: ../Doc/library/shutil.rst:569
 msgid ""
 "High-level utilities to create and read compressed and archived files are "
 "also provided.  They rely on the :mod:`zipfile` and :mod:`tarfile` modules."
@@ -924,11 +964,11 @@ msgstr ""
 "comprimidos y archivados. Utilizan para esto los módulos :mod:`zipfile` y :"
 "mod:`tarfile`."
 
-#: ../Doc/library/shutil.rst:542
+#: ../Doc/library/shutil.rst:574
 msgid "Create an archive file (such as zip or tar) and return its name."
 msgstr "Crea un documento de archivado (como zip o tar) y retorna su nombre."
 
-#: ../Doc/library/shutil.rst:544
+#: ../Doc/library/shutil.rst:576
 msgid ""
 "*base_name* is the name of the file to create, including the path, minus any "
 "format-specific extension. *format* is the archive format: one of "
@@ -942,7 +982,7 @@ msgstr ""
 "\"gztar\" (si el módulo :mod:`zlib` está disponible), \"bztar\" (si el "
 "módulo :mod:`bz2` está disponible), o \"xztar\" (si el módulo :mod:`lzma`)."
 
-#: ../Doc/library/shutil.rst:550
+#: ../Doc/library/shutil.rst:582
 msgid ""
 "*root_dir* is a directory that will be the root directory of the archive, "
 "all paths in the archive will be relative to it; for example, we typically "
@@ -952,7 +992,7 @@ msgstr ""
 "las rutas en el archivo serán relativas a él; por ejemplo, típicamente nos "
 "cambiaremos de directorio (*chdir*) a *root_dir* antes de crear el archivo."
 
-#: ../Doc/library/shutil.rst:554
+#: ../Doc/library/shutil.rst:586
 msgid ""
 "*base_dir* is the directory where we start archiving from; i.e. *base_dir* "
 "will be the common prefix of all files and directories in the archive.  "
@@ -965,11 +1005,11 @@ msgstr ""
 "`shutil-archiving-example-with-basedir` se ve un ejemplo de cómo usar "
 "*base_dir* y *root_dir* juntos."
 
-#: ../Doc/library/shutil.rst:560
+#: ../Doc/library/shutil.rst:592
 msgid "*root_dir* and *base_dir* both default to the current directory."
 msgstr "*root_dir* y *base_dir* irán por defecto al directorio actual."
 
-#: ../Doc/library/shutil.rst:562
+#: ../Doc/library/shutil.rst:594
 msgid ""
 "If *dry_run* is true, no archive is created, but the operations that would "
 "be executed are logged to *logger*."
@@ -977,7 +1017,7 @@ msgstr ""
 "If *dry_run* es verdadero, no se crea un archivo, pero las operaciones que "
 "se ejecutarán están registradas en *logger*."
 
-#: ../Doc/library/shutil.rst:565
+#: ../Doc/library/shutil.rst:597
 msgid ""
 "*owner* and *group* are used when creating a tar archive. By default, uses "
 "the current owner and group."
@@ -985,7 +1025,7 @@ msgstr ""
 "*owner* y *group* se usan al crear un archivador tar. Por defecto, usa el "
 "propietario y el grupo actual."
 
-#: ../Doc/library/shutil.rst:568
+#: ../Doc/library/shutil.rst:600
 msgid ""
 "*logger* must be an object compatible with :pep:`282`, usually an instance "
 "of :class:`logging.Logger`."
@@ -993,11 +1033,11 @@ msgstr ""
 "*logger* debe ser un objeto compatible con  :pep:`282`, usualmente una "
 "instancia de :class:`logging.Logger`."
 
-#: ../Doc/library/shutil.rst:571
+#: ../Doc/library/shutil.rst:603
 msgid "The *verbose* argument is unused and deprecated."
 msgstr "El argumento *verbose* está fuera de uso y es obsoleto."
 
-#: ../Doc/library/shutil.rst:573
+#: ../Doc/library/shutil.rst:605
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``shutil.make_archive`` with "
 "arguments ``base_name``, ``format``, ``root_dir``, ``base_dir``."
@@ -1005,18 +1045,20 @@ msgstr ""
 "Genera un :ref:`evento de auditoría <auditing>` ``shutil.make_archive`` con "
 "argumentos ``base_name``, ``format``, ``root_dir``, ``base_dir``."
 
-#: ../Doc/library/shutil.rst:577
+#: ../Doc/library/shutil.rst:609
+#, fuzzy
 msgid ""
 "This function is not thread-safe when custom archivers registered with :func:"
-"`register_archive_format` are used.  In this case it temporarily changes the "
-"current working directory of the process to perform archiving."
+"`register_archive_format` do not support the *root_dir* argument.  In this "
+"case it temporarily changes the current working directory of the process to "
+"*root_dir* to perform archiving."
 msgstr ""
 "Esta función no es segura para hilos cuando son usados archivos "
 "personalizados registrados con :func:`register_archive_format`. En este caso "
 "temporalmente cambia el directorio de trabajo actual del proceso para "
 "realizar el archivado."
 
-#: ../Doc/library/shutil.rst:582
+#: ../Doc/library/shutil.rst:615
 msgid ""
 "The modern pax (POSIX.1-2001) format is now used instead of the legacy GNU "
 "format for archives created with ``format=\"tar\"``."
@@ -1024,7 +1066,7 @@ msgstr ""
 "El formato de *pax* moderno (POSIX.1-2001) se usa ahora en lugar del formato "
 "de legado GNU para archivadores creados con ``format=\"tar\"``."
 
-#: ../Doc/library/shutil.rst:586
+#: ../Doc/library/shutil.rst:619
 msgid ""
 "This function is now made thread-safe during creation of standard ``.zip`` "
 "and tar archives."
@@ -1032,7 +1074,7 @@ msgstr ""
 "Esta función ahora es segura para hilos durante la creación de archivos "
 "estándar ``.zip`` y tar."
 
-#: ../Doc/library/shutil.rst:592
+#: ../Doc/library/shutil.rst:625
 msgid ""
 "Return a list of supported formats for archiving. Each element of the "
 "returned sequence is a tuple ``(name, description)``."
@@ -1040,40 +1082,40 @@ msgstr ""
 "Retorna una lista de formatos admitidos para archivado. Cada elemento de una "
 "secuencia retornada es una tupla ``(name, description)``."
 
-#: ../Doc/library/shutil.rst:595 ../Doc/library/shutil.rst:683
+#: ../Doc/library/shutil.rst:628 ../Doc/library/shutil.rst:739
 msgid "By default :mod:`shutil` provides these formats:"
 msgstr "Por defecto, :mod:`shutil` provee los siguientes formatos:"
 
-#: ../Doc/library/shutil.rst:597
+#: ../Doc/library/shutil.rst:630
 msgid "*zip*: ZIP file (if the :mod:`zlib` module is available)."
 msgstr "*zip*: archivo ZIP (si el módulo :mod:`zlib` está disponible)."
 
-#: ../Doc/library/shutil.rst:598
+#: ../Doc/library/shutil.rst:631
 msgid ""
 "*tar*: Uncompressed tar file. Uses POSIX.1-2001 pax format for new archives."
 msgstr ""
 "*tar*: archivo tar sin comprimir. Utiliza el formato pax POSIX.1-2001 para "
 "archivos nuevos."
 
-#: ../Doc/library/shutil.rst:599 ../Doc/library/shutil.rst:688
+#: ../Doc/library/shutil.rst:632 ../Doc/library/shutil.rst:744
 msgid "*gztar*: gzip'ed tar-file (if the :mod:`zlib` module is available)."
 msgstr ""
 "*gztar*: archivo tar comprimido con gzip (si el módulo :mod:`zlib` está "
 "disponible)."
 
-#: ../Doc/library/shutil.rst:600 ../Doc/library/shutil.rst:689
+#: ../Doc/library/shutil.rst:633 ../Doc/library/shutil.rst:745
 msgid "*bztar*: bzip2'ed tar-file (if the :mod:`bz2` module is available)."
 msgstr ""
 "*bztar*: archivo tar comprimido con bzip2 (si el módulo :mod:`bz2` está "
 "disponible)."
 
-#: ../Doc/library/shutil.rst:601 ../Doc/library/shutil.rst:690
+#: ../Doc/library/shutil.rst:634 ../Doc/library/shutil.rst:746
 msgid "*xztar*: xz'ed tar-file (if the :mod:`lzma` module is available)."
 msgstr ""
 "*xztar*: archivo tar comprimido con xz (si el módulo :mod:`lzma` está "
 "disponible)."
 
-#: ../Doc/library/shutil.rst:603
+#: ../Doc/library/shutil.rst:636
 msgid ""
 "You can register new formats or provide your own archiver for any existing "
 "formats, by using :func:`register_archive_format`."
@@ -1081,11 +1123,11 @@ msgstr ""
 "Puedes registrar formatos nuevos o proporcionar tu propio archivador para "
 "cualquier formato existente, usando :func:`register_archive_format`."
 
-#: ../Doc/library/shutil.rst:609
+#: ../Doc/library/shutil.rst:642
 msgid "Register an archiver for the format *name*."
 msgstr "Registra un archivador para el formato *name*."
 
-#: ../Doc/library/shutil.rst:611
+#: ../Doc/library/shutil.rst:644
 msgid ""
 "*function* is the callable that will be used to unpack archives. The "
 "callable will receive the *base_name* of the file to create, followed by the "
@@ -1100,7 +1142,16 @@ msgstr ""
 "clave: *owner*, *group*, *dry_run* y *logger* (como se pasa en :func:"
 "`make_archive`)."
 
-#: ../Doc/library/shutil.rst:617
+#: ../Doc/library/shutil.rst:650
+msgid ""
+"If *function* has the custom attribute ``function.supports_root_dir`` set to "
+"``True``, the *root_dir* argument is passed as a keyword argument. Otherwise "
+"the current working directory of the process is temporarily changed to "
+"*root_dir* before calling *function*. In this case :func:`make_archive` is "
+"not thread-safe."
+msgstr ""
+
+#: ../Doc/library/shutil.rst:656
 msgid ""
 "If given, *extra_args* is a sequence of ``(name, value)`` pairs that will be "
 "used as extra keywords arguments when the archiver callable is used."
@@ -1109,7 +1160,7 @@ msgstr ""
 "se usarán como argumentos de palabras clave extra cuando se usa el "
 "archivador invocable."
 
-#: ../Doc/library/shutil.rst:620
+#: ../Doc/library/shutil.rst:659
 msgid ""
 "*description* is used by :func:`get_archive_formats` which returns the list "
 "of archivers.  Defaults to an empty string."
@@ -1117,16 +1168,21 @@ msgstr ""
 "*description* se usa por :func:`get_archive_formats` que retorna la lista de "
 "archivadores. Cae por defecto en una cadena de caracteres vacía."
 
-#: ../Doc/library/shutil.rst:626
+#: ../Doc/library/shutil.rst:662
+#, fuzzy
+msgid "Added support for functions supporting the *root_dir* argument."
+msgstr "Se agregó soporte para el formato *xztar*."
+
+#: ../Doc/library/shutil.rst:668
 msgid "Remove the archive format *name* from the list of supported formats."
 msgstr ""
 "Elimina el formato de archivo *name* de la lista de formatos admitidos."
 
-#: ../Doc/library/shutil.rst:631
+#: ../Doc/library/shutil.rst:673
 msgid "Unpack an archive. *filename* is the full path of the archive."
 msgstr "Desempaqueta un archivo. *filename* es la ruta completa del archivo."
 
-#: ../Doc/library/shutil.rst:633
+#: ../Doc/library/shutil.rst:675
 msgid ""
 "*extract_dir* is the name of the target directory where the archive is "
 "unpacked. If not provided, the current working directory is used."
@@ -1134,7 +1190,7 @@ msgstr ""
 "*extract_dir* es el nombre del directorio donde se desempaca el archivo. Si "
 "no está provisto, se usa el nombre del directorio actual."
 
-#: ../Doc/library/shutil.rst:636
+#: ../Doc/library/shutil.rst:678
 msgid ""
 "*format* is the archive format: one of \"zip\", \"tar\", \"gztar\", "
 "\"bztar\", or \"xztar\".  Or any other format registered with :func:"
@@ -1149,7 +1205,17 @@ msgstr ""
 "para esa extensión. En caso de que no se encuentre ninguno, se genera un :"
 "exc:`ValueError`."
 
-#: ../Doc/library/shutil.rst:643
+#: ../Doc/library/shutil.rst:685
+msgid ""
+"The keyword-only *filter* argument is passed to the underlying unpacking "
+"function. For zip files, *filter* is not accepted. For tar files, it is "
+"recommended to set it to ``'data'``, unless using features specific to tar "
+"and UNIX-like filesystems. (See :ref:`tarfile-extraction-filter` for "
+"details.) The ``'data'`` filter will become the default for tar files in "
+"Python 3.14."
+msgstr ""
+
+#: ../Doc/library/shutil.rst:693
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``shutil.unpack_archive`` with "
 "arguments ``filename``, ``extract_dir``, ``format``."
@@ -1157,7 +1223,7 @@ msgstr ""
 "Se genera un :ref:`evento de auditoría <auditing>` ``shutil.unpack_archive`` "
 "con argumentos ``filename``, ``extract_dir``, ``format``."
 
-#: ../Doc/library/shutil.rst:647
+#: ../Doc/library/shutil.rst:697
 msgid ""
 "Never extract archives from untrusted sources without prior inspection. It "
 "is possible that files are created outside of the path specified in the "
@@ -1170,11 +1236,16 @@ msgstr ""
 "absolutos comenzando con \\\"/\\\" or nombres de archivos con dos puntos \\"
 "\"..\\\"."
 
-#: ../Doc/library/shutil.rst:652
+#: ../Doc/library/shutil.rst:702
 msgid "Accepts a :term:`path-like object` for *filename* and *extract_dir*."
 msgstr "Acepta un :term:`path-like object` como *filename* y *extract_dir*."
 
-#: ../Doc/library/shutil.rst:657
+#: ../Doc/library/shutil.rst:705
+#, fuzzy
+msgid "Added the *filter* argument."
+msgstr "Se agregó el argumento de keyword *copy_function*."
+
+#: ../Doc/library/shutil.rst:710
 msgid ""
 "Registers an unpack format. *name* is the name of the format and "
 "*extensions* is a list of extensions corresponding to the format, like ``."
@@ -1184,25 +1255,38 @@ msgstr ""
 "*extensions* es una lista de extensiones que corresponden al formato, como "
 "``.zip`` para archivos zip."
 
-#: ../Doc/library/shutil.rst:661
+#: ../Doc/library/shutil.rst:714
+#, fuzzy
 msgid ""
 "*function* is the callable that will be used to unpack archives. The "
-"callable will receive the path of the archive, followed by the directory the "
-"archive must be extracted to."
+"callable will receive:"
 msgstr ""
 "*function* es el invocable que se usará para desempacar archivadores. El "
 "invocable recibirá la ruta del archivador, seguida del directorio al que el "
 "archivador debe extraerse."
 
-#: ../Doc/library/shutil.rst:665
-msgid ""
-"When provided, *extra_args* is a sequence of ``(name, value)`` tuples that "
-"will be passed as keywords arguments to the callable."
+#: ../Doc/library/shutil.rst:717
+msgid "the path of the archive, as a positional argument;"
 msgstr ""
-"Cuando está dado, *extra_args* es una secuencia de tuplas ``(name, value)`` "
-"que se pasarán como argumentos de palabra clave al invocable."
 
-#: ../Doc/library/shutil.rst:668
+#: ../Doc/library/shutil.rst:718
+msgid ""
+"the directory the archive must be extracted to, as a positional argument;"
+msgstr ""
+
+#: ../Doc/library/shutil.rst:719
+msgid ""
+"possibly a *filter* keyword argument, if it was given to :func:"
+"`unpack_archive`;"
+msgstr ""
+
+#: ../Doc/library/shutil.rst:721
+msgid ""
+"additional keyword arguments, specified by *extra_args* as a sequence of "
+"``(name, value)`` tuples."
+msgstr ""
+
+#: ../Doc/library/shutil.rst:724
 msgid ""
 "*description* can be provided to describe the format, and will be returned "
 "by the :func:`get_unpack_formats` function."
@@ -1210,12 +1294,12 @@ msgstr ""
 "*description* se puede proporcionar para describir el formato y será "
 "retornado por la función :func:`get_unpack_formats`."
 
-#: ../Doc/library/shutil.rst:674
+#: ../Doc/library/shutil.rst:730
 msgid "Unregister an unpack format. *name* is the name of the format."
 msgstr ""
 "Anula el registro del formato de desempaque. *name* es el nombre del formato."
 
-#: ../Doc/library/shutil.rst:679
+#: ../Doc/library/shutil.rst:735
 msgid ""
 "Return a list of all registered formats for unpacking. Each element of the "
 "returned sequence is a tuple ``(name, extensions, description)``."
@@ -1223,7 +1307,7 @@ msgstr ""
 "Retorna una lista de todos los formatos registrados para desempaquetar. Cada "
 "elemento de la secuencia es una tupla ``(name, extensions, description)``."
 
-#: ../Doc/library/shutil.rst:685
+#: ../Doc/library/shutil.rst:741
 msgid ""
 "*zip*: ZIP file (unpacking compressed files works only if the corresponding "
 "module is available)."
@@ -1231,11 +1315,11 @@ msgstr ""
 "*zip*: archivo zip (desempaquetar archivos comprimidos funciona solo si el "
 "módulo correspondiente está disponible)."
 
-#: ../Doc/library/shutil.rst:687
+#: ../Doc/library/shutil.rst:743
 msgid "*tar*: uncompressed tar file."
 msgstr "*tar*: archivo tar sin comprimir."
 
-#: ../Doc/library/shutil.rst:692
+#: ../Doc/library/shutil.rst:748
 msgid ""
 "You can register new formats or provide your own unpacker for any existing "
 "formats, by using :func:`register_unpack_format`."
@@ -1243,11 +1327,11 @@ msgstr ""
 "Puedes registrar formatos nuevos o proporcionar tu propio desempaquetado "
 "para cualquier formato existente, usando :func:`register_unpack_format`."
 
-#: ../Doc/library/shutil.rst:699
+#: ../Doc/library/shutil.rst:755
 msgid "Archiving example"
 msgstr "Ejemplo de archivado"
 
-#: ../Doc/library/shutil.rst:701
+#: ../Doc/library/shutil.rst:757
 msgid ""
 "In this example, we create a gzip'ed tar-file archive containing all files "
 "found in the :file:`.ssh` directory of the user::"
@@ -1255,15 +1339,15 @@ msgstr ""
 "En este ejemplo, creamos un archivo tar de tipo gzip que contiene todos los "
 "archivos que se encuentran en el directorio :file:`.ssh` del usuario::"
 
-#: ../Doc/library/shutil.rst:711
+#: ../Doc/library/shutil.rst:767
 msgid "The resulting archive contains:"
 msgstr "El archivo resultante contiene:"
 
-#: ../Doc/library/shutil.rst:729
+#: ../Doc/library/shutil.rst:785
 msgid "Archiving example with *base_dir*"
 msgstr "Ejemplo de archivado con *base_dir*"
 
-#: ../Doc/library/shutil.rst:731
+#: ../Doc/library/shutil.rst:787
 msgid ""
 "In this example, similar to the `one above <shutil-archiving-example_>`_, we "
 "show how to use :func:`make_archive`, but this time with the usage of "
@@ -1273,7 +1357,7 @@ msgstr ""
 "mostramos cómo usar :func:`make_archive`, pero esta vez utilizando "
 "*base_dir*.  Ahora tenemos la siguiente estructura de directorios:"
 
-#: ../Doc/library/shutil.rst:745
+#: ../Doc/library/shutil.rst:801
 msgid ""
 "In the final archive, :file:`please_add.txt` should be included, but :file:"
 "`do_not_add.txt` should not.  Therefore we use the following::"
@@ -1281,19 +1365,19 @@ msgstr ""
 "En el archivo final, :file:`please_add.txt` debería estar incluido, pero :"
 "file:`do_not_add.txt` no.  Por lo tanto usamos lo siguiente::"
 
-#: ../Doc/library/shutil.rst:759
+#: ../Doc/library/shutil.rst:815
 msgid "Listing the files in the resulting archive gives us:"
 msgstr "Listando los archivos en el archivo resultante nos da:"
 
-#: ../Doc/library/shutil.rst:769
+#: ../Doc/library/shutil.rst:825
 msgid "Querying the size of the output terminal"
 msgstr "Consulta el tamaño de la terminal de salida"
 
-#: ../Doc/library/shutil.rst:773
+#: ../Doc/library/shutil.rst:829
 msgid "Get the size of the terminal window."
 msgstr "Obtén el tamaño de la ventana de la terminal."
 
-#: ../Doc/library/shutil.rst:775
+#: ../Doc/library/shutil.rst:831
 msgid ""
 "For each of the two dimensions, the environment variable, ``COLUMNS`` and "
 "``LINES`` respectively, is checked. If the variable is defined and the value "
@@ -1303,7 +1387,7 @@ msgstr ""
 "``COLUMNS`` y ``LINES`` respectivamente. Si la variable está definida y el "
 "valor es un entero positivo, se utiliza."
 
-#: ../Doc/library/shutil.rst:779
+#: ../Doc/library/shutil.rst:835
 msgid ""
 "When ``COLUMNS`` or ``LINES`` is not defined, which is the common case, the "
 "terminal connected to :data:`sys.__stdout__` is queried by invoking :func:"
@@ -1313,7 +1397,7 @@ msgstr ""
 "terminal conectada a :data:`sys.__stdout__` se consulta invocando :func:`os."
 "get_terminal_size`."
 
-#: ../Doc/library/shutil.rst:783
+#: ../Doc/library/shutil.rst:839
 msgid ""
 "If the terminal size cannot be successfully queried, either because the "
 "system doesn't support querying, or because we are not connected to a "
@@ -1327,13 +1411,13 @@ msgstr ""
 "tiene por defecto ``(80, 24)``, que es el tamaño por defecto que se usa en "
 "muchos emuladores de terminal."
 
-#: ../Doc/library/shutil.rst:789
+#: ../Doc/library/shutil.rst:845
 msgid "The value returned is a named tuple of type :class:`os.terminal_size`."
 msgstr ""
 "El valor retornado es una tupla con su respectivo nombre, de tipo :class:`os."
 "terminal_size`."
 
-#: ../Doc/library/shutil.rst:791
+#: ../Doc/library/shutil.rst:847
 msgid ""
 "See also: The Single UNIX Specification, Version 2, `Other Environment "
 "Variables`_."
@@ -1341,10 +1425,56 @@ msgstr ""
 "Ver también: *The Single UNIX Specification*, Versión 2, `Other Environment "
 "Variables`_."
 
-#: ../Doc/library/shutil.rst:796
+#: ../Doc/library/shutil.rst:852
 msgid ""
 "The ``fallback`` values are also used if :func:`os.get_terminal_size` "
 "returns zeroes."
 msgstr ""
 "Los valores ``fallback`` son usados también si :func:`os.get_terminal_size` "
 "devuelve zeros."
+
+#: ../Doc/library/shutil.rst:12
+msgid "file"
+msgstr ""
+
+#: ../Doc/library/shutil.rst:12
+msgid "copying"
+msgstr ""
+
+#: ../Doc/library/shutil.rst:12
+msgid "copying files"
+msgstr ""
+
+#: ../Doc/library/shutil.rst:297
+msgid "directory"
+msgstr ""
+
+#: ../Doc/library/shutil.rst:297
+msgid "deleting"
+msgstr ""
+
+#~ msgid ""
+#~ "On Windows, the current directory is always prepended to the *path* "
+#~ "whether or not you use the default or provide your own, which is the "
+#~ "behavior the command shell uses when finding executables.  Additionally, "
+#~ "when finding the *cmd* in the *path*, the ``PATHEXT`` environment "
+#~ "variable is checked.  For example, if you call ``shutil."
+#~ "which(\"python\")``, :func:`which` will search ``PATHEXT`` to know that "
+#~ "it should look for ``python.exe`` within the *path* directories.  For "
+#~ "example, on Windows::"
+#~ msgstr ""
+#~ "En Windows, el directorio actual siempre se antepone a *path*, "
+#~ "independientemente de si usa el valor predeterminado o si tú provees el "
+#~ "tuyo propio, que es el comportamiento que el comando *shell* usa cuando "
+#~ "encuentra ejecutables. Además, al encontrar el *cmd* en el *path*, se "
+#~ "comprueba la variable de entorno ``PATHEXT``. Por ejemplo, si invocas "
+#~ "``shutil.which(\"python\")``, :func:`which` buscará ``PATHEXT`` para "
+#~ "saber si debe buscar ``python.exe`` dentro de los directorios *path*. Por "
+#~ "ejemplo, en Windows::"
+
+#~ msgid ""
+#~ "When provided, *extra_args* is a sequence of ``(name, value)`` tuples "
+#~ "that will be passed as keywords arguments to the callable."
+#~ msgstr ""
+#~ "Cuando está dado, *extra_args* es una secuencia de tuplas ``(name, "
+#~ "value)`` que se pasarán como argumentos de palabra clave al invocable."
