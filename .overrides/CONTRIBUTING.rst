@@ -18,8 +18,17 @@ contribución, queremos señalar algunos
 
    Si tienes cualquier duda, puedes enviarnos un email a docs-es@python.org.
 
-Antes de comenzar
------------------
+   También puedes unirte a `nuestro canal de Telegram`_ si necesitas ayuda.
+
+El proceso general de traducción son tres pasos, de los cuales el primero tendrás que
+realizar solo una vez. Te los detallamos a continuación.
+
+
+Paso 0: Configuración de Github
+-------------------------------
+
+Esta configuración la tienes que realizar sólo una vez, y con ello
+podrás realizar todas las contribuciones que quieras.
 
 #. Para enviar una traducción, necesitas tener un **fork** del repositorio_
    oficial, haciendo click en el botón encerrado en rojo.
@@ -59,10 +68,26 @@ Antes de comenzar
       ``powrap`` y ``pospell`` para poder verificar tus archivos traducidos,
       y también construir la documentación localmente.
 
-¡Comienza a traducir!
----------------------
+.. _que-archivo-traducir:
 
-#. Selecciona un :ref:`archivo para traducir <que-archivo-traducir>`.
+Paso 1: ¿Qué archivo traducir?
+------------------------------
+
+Tenemos una `lista de issues en GitHub`_ en dónde vamos coordinando el trabajo
+realizado para no traducir dos veces lo mismo.  El proceso para traducir un
+archivo es el siguiente:
+
+
+#. Elige cualquiera de los issues que *no están asignados* a otra persona.
+#. Deja un comentario en el issue diciendo que quieres trabajar en él.
+#. Espera a que un administrador te asigne el issue.
+#. ¡Empieza a traducir!
+
+
+Paso 2: ¡Comienza a traducir!
+-----------------------------
+
+#. Tener un :ref:`archivo asignado para traducir <que-archivo-traducir>`.
 
 #. Verifica que estás en la rama principal del repositorio, **3.11** (esto es muy
    importante para evitar crear una nueva rama a partir de una traducción
@@ -71,20 +96,52 @@ Antes de comenzar
      git checkout 3.11
 
 #. Crea una rama nueva en base al artículo en el que vayas a trabajar.  Por
-   ejemplo, si vas a trabajar en el archivo ``library/glosario.po``, usa un nombre
+   ejemplo, si vas a trabajar en el archivo ``library/ast.po``, usa un nombre
    similar a::
 
-     git checkout -b traduccion-glosario
+     git checkout -b traduccion-ast
 
 #. Una vez que hayas elegido el archivo, lo puedes abrir con el editor poedit_ y
    empezar a traducir.
 
-#. Cuando hayas terminado tu sesión, debes guardar tus cambios y enviarlos a
-   GitHub (No olvides añadir tu nombre al archivo ``TRANSLATORS``)::
+#. **Formato de columnas**: Si utilizas poedit_ es posible que tu archivo tenga
+   la estructura adecuada, pero te invitamos a comprobarlo con la herramienta
+   powrap_, la cual puedes instalar y utilizar por la línea de comandos.
+   Ejecuta::
 
-     git add library/glosario.po
-     git commit -m 'Traducido archivo library/glosario'
-     git push origin traduccion-glosario
+     powrap <directorio>/tu_archivo.po
+
+   Recuerda que tu archivo puede estar dentro de un ``<directorio>``, como
+   ``library``, con lo que tendrás que ejecutar el comando ``powrap
+   library/tu_archivo.po`` si no te encuentras en el mismo directorio de tu
+   archivo.
+
+   .. note:: Si estás en Windows y tienes problemas, mira los comentarios de
+             :ref:`powrap_windows` para más información.
+
+#. **Corrección ortográfica**: Para verificar la ortografía de tu archivo
+   puedes utilizar la herramienta pospell_ para que verifiques que todas las
+   palabras están aceptadas o incluidas en diccionarios. Para ello tenemos
+   un script de conveniencia que puedes utilizar::
+
+    python scripts/check_spell.py <directorio>/tu_archivo.po
+
+   Si alguna palabra no es reconocida, y es una palabra válida, tienes que
+   agregarla al diccionario correspondiente en el directorio dictionaries/.
+   Busca el archivo que corresponde al que estás traduciendo y si no existe, créalo.
+   Por ejemplo el diccionario del archivo ``library/ast.po`` se encuentra en
+   ``dictionaries/library_ast.po``.
+
+   .. note:: Si estás en Windows y tienes problemas, mira los comentarios de
+             :ref:`pospell_windows` para más información.
+
+#. Cuando hayas terminado tu sesión, debes guardar tus cambios y enviarlos a
+   GitHub (No olvides añadir tu nombre al archivo ``TRANSLATORS``).
+   Si estuvieras trabajando en el archivo ``library/ast.po`` los pasos serían::
+
+     git add library/ast.po
+     git commit -m 'Traducido archivo library/ast'
+     git push origin traduccion-ast
 
    .. note::
 
@@ -103,22 +160,6 @@ Antes de comenzar
       Si hace tiempo que venis trabajando en una traducción es importante
       :ref:`mantener actualizada <mantener-actualizada>` tu copia local antes
       de realizar el *Pull Request*.
-
-.. _que-archivo-traducir:
-
-¿Qué archivo traducir?
-----------------------
-
-Tenemos una `lista de issues en GitHub`_ en dónde vamos coordinando el trabajo
-realizado para no traducir dos veces lo mismo.  El proceso para traducir un
-archivo es el siguiente:
-
-
-#. Elige cualquiera de los issues que *no están asignados* a otra persona.
-#. Deja un comentario en el issue diciendo que quieres trabajar en él.
-#. Espera a que un administrador te asigne el issue.
-#. ¡Empieza a traducir!
-
 
 .. _a-tener-en-cuenta:
 
@@ -182,11 +223,6 @@ A tener en cuenta
   esperamos en nuestro chat en telegram. ¡Gracias!
 
 
-.. note::
-
-   También puedes unirte a `nuestro canal de Telegram`_ si necesitas ayuda.
-
-
 Previsualizar los cambios
 -------------------------
 
@@ -205,9 +241,9 @@ Memoria de traducción
 ---------------------
 
 Tenemos una :doc:`Memoria de Traducción <translation-memory>`, que usamos para tener consistencia con algunos
-términos. 
+términos.
 Si tienes alguna duda respecto a cómo traducir alguna palabra no te olvides de revisar este contenido.
-Del mismo modo, si luego de trabajar sobre un término *complicado* llegas a un acuerdo con otros colaboradores: 
+Del mismo modo, si luego de trabajar sobre un término *complicado* llegas a un acuerdo con otros colaboradores:
 no se olviden de agregarlo.
 
 
@@ -217,6 +253,8 @@ no se olviden de agregarlo.
 .. _ayuda oficial de GitHub para crear un Pull Request:
    https://help.github.com/es/github/collaborating-with-issues-and-pull-requests/about-pull-requests
 .. _poedit: https://poedit.net/
+.. _powrap: https://github.com/AFPy/powrap
+.. _pospell: https://github.com/AFPy/pospell
 
 .. _nuestro canal de Telegram: https://t.me/python_docs_es
 .. _la traducción al Portugués: https://docs.python.org/pt-br/3/

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-25 19:47+0200\n"
-"PO-Revision-Date: 2021-08-01 20:11+0200\n"
+"POT-Creation-Date: 2023-10-12 19:43+0200\n"
+"PO-Revision-Date: 2022-12-01 10:01+0400\n"
 "Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
 "Language: es\n"
 "Language-Team: python-doc-es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.10.3\n"
+"Generated-By: Babel 2.13.0\n"
 
 #: ../Doc/c-api/float.rst:6
 msgid "Floating Point Objects"
@@ -62,8 +62,8 @@ msgid ""
 "Create a :c:type:`PyFloatObject` object based on the string value in *str*, "
 "or ``NULL`` on failure."
 msgstr ""
-"Crea un objeto :c:type:`PyFloatObject` en función del valor de cadena de "
-"caracteres en *str* o ``NULL`` en caso de error."
+"Crea un objeto :c:type:`PyFloatObject` basado en la cadena de caracteres en "
+"*str*, o ``NULL`` en caso de error."
 
 #: ../Doc/c-api/float.rst:42
 msgid ""
@@ -76,13 +76,13 @@ msgstr ""
 #, fuzzy
 msgid ""
 "Return a C :c:expr:`double` representation of the contents of *pyfloat*.  If "
-"*pyfloat* is not a Python floating point object but has a :meth:`__float__` "
-"method, this method will first be called to convert *pyfloat* into a float. "
-"If ``__float__()`` is not defined then it falls back to :meth:`__index__`. "
-"This method returns ``-1.0`` upon failure, so one should call :c:func:"
-"`PyErr_Occurred` to check for errors."
+"*pyfloat* is not a Python floating point object but has a :meth:`~object."
+"__float__` method, this method will first be called to convert *pyfloat* "
+"into a float. If :meth:`!__float__` is not defined then it falls back to :"
+"meth:`~object.__index__`. This method returns ``-1.0`` upon failure, so one "
+"should call :c:func:`PyErr_Occurred` to check for errors."
 msgstr ""
-"Retorna una representación C :c:type:`double` de los contenidos de "
+"Retorna una representación C :c:expr:`double` de los contenidos de "
 "*pyfloat*. Si *pyfloat* no es un objeto de punto flotante de Python pero "
 "tiene un método :meth:`__float__`, primero se llamará a este método para "
 "convertir *pyfloat* en un flotante. Si ``__float __()`` no está definido, "
@@ -91,16 +91,16 @@ msgstr ""
 "verificar si hay errores."
 
 #: ../Doc/c-api/float.rst:54
-msgid "Use :meth:`__index__` if available."
+#, fuzzy
+msgid "Use :meth:`~object.__index__` if available."
 msgstr "Utilice :meth:`__index__` si está disponible."
 
 #: ../Doc/c-api/float.rst:60
-#, fuzzy
 msgid ""
 "Return a C :c:expr:`double` representation of the contents of *pyfloat*, but "
 "without error checking."
 msgstr ""
-"Retorna una representación C :c:type:`double` de los contenidos de "
+"Retorna una representación C :c:expr:`double` de los contenidos de "
 "*pyfloat*, pero sin verificación de errores."
 
 #: ../Doc/c-api/float.rst:66
@@ -110,29 +110,27 @@ msgid ""
 "file :file:`float.h`."
 msgstr ""
 "Retorna una instancia de *structseq* que contiene información sobre la "
-"precisión, los valores mínimos y máximos de un flotante. Es una envoltura "
-"delgada alrededor del archivo de encabezado :file:`float.h`."
+"precisión, los valores mínimos y máximos de un flotante. Es un contenedor "
+"reducido alrededor del archivo de encabezado :file:`float.h`."
 
 #: ../Doc/c-api/float.rst:73
-#, fuzzy
 msgid ""
 "Return the maximum representable finite float *DBL_MAX* as C :c:expr:"
 "`double`."
 msgstr ""
-"Retorna el máximo flotante finito representable *DBL_MAX* como C :c:type:"
+"Retorna el máximo flotante finito representable *DBL_MAX* como C :c:expr:"
 "`double`."
 
 #: ../Doc/c-api/float.rst:78
-#, fuzzy
 msgid ""
 "Return the minimum normalized positive float *DBL_MIN* as C :c:expr:`double`."
 msgstr ""
-"Retorna el flotante positivo normalizado mínimo *DBL_MIN* como C :c:type:"
+"Retorna el flotante positivo normalizado mínimo *DBL_MIN* como C :c:expr:"
 "`double`."
 
 #: ../Doc/c-api/float.rst:82
 msgid "Pack and Unpack functions"
-msgstr ""
+msgstr "Funciones de empaquetado y desempaquetado"
 
 #: ../Doc/c-api/float.rst:84
 msgid ""
@@ -142,6 +140,12 @@ msgid ""
 "c:expr:`double` from such a bytes string. The suffix (2, 4 or 8) specifies "
 "the number of bytes in the bytes string."
 msgstr ""
+"Las funciones de empaquetar y desempaquetar proporcionan una manera "
+"eficiente e independiente de la plataforma para almacenar valores de coma "
+"flotante como cadenas de bytes. Las rutinas Pack producen una cadena de "
+"bytes a partir de un C :c:expr:`double`, y las rutinas Desempaquetar "
+"producen un C :c:expr:`double` a partir de dicha cadena de bytes. El sufijo "
+"(2, 4 u 8) especifica el número de bytes en la cadena de bytes."
 
 #: ../Doc/c-api/float.rst:90
 msgid ""
@@ -154,6 +158,14 @@ msgid ""
 "attempting to unpack a bytes string containing an IEEE INF or NaN will raise "
 "an exception."
 msgstr ""
+"En plataformas que parecen usar formatos IEEE 754, estas funciones actúan "
+"copiando los bits. En otras plataformas, el formato 2-byte es idéntico al "
+"formato de media precision IEEE 754 binary16, el formato de 4-byte (32 bits) "
+"es idéntico al formato de precisión simple binario IEEE 754 binary32, y el "
+"formato de 8-byte al formato de doble precisión binario IEEE 754 binary64, "
+"aunque el empaquetado de INFs y NaNs (si existen en la plataforma) no se "
+"maneja correctamente, mientras que intentar desempaquetar una cadena de "
+"bytes que contenga un IEEE INF o NaN generará una excepción."
 
 #: ../Doc/c-api/float.rst:99
 msgid ""
@@ -162,64 +174,90 @@ msgid ""
 "less precision, or smaller dynamic range, not all values can be unpacked. "
 "What happens in such cases is partly accidental (alas)."
 msgstr ""
+"En plataformas que no son IEEE con más precisión, o mayor rango dinámico, "
+"que el IEEE 754 admite, no se pueden empaquetar todos los valores; en "
+"plataformas que no son IEEE con menos precisión o con un rango dinámico más "
+"pequeño, no se pueden desempaquetar todos los valores. Lo que sucede en "
+"tales casos es en parte accidental (desafortunadamente)."
 
 #: ../Doc/c-api/float.rst:107
 msgid "Pack functions"
-msgstr ""
+msgstr "Funciones de Empaquetado"
 
 #: ../Doc/c-api/float.rst:109
+#, fuzzy
 msgid ""
 "The pack routines write 2, 4 or 8 bytes, starting at *p*. *le* is an :c:expr:"
 "`int` argument, non-zero if you want the bytes string in little-endian "
 "format (exponent last, at ``p+1``, ``p+3``, or ``p+6`` ``p+7``), zero if you "
-"want big-endian format (exponent first, at *p*). The :c:data:`PY_BIG_ENDIAN` "
-"constant can be used to use the native endian: it is equal to ``1`` on big "
-"endian processor, or ``0`` on little endian processor."
+"want big-endian format (exponent first, at *p*). The :c:macro:"
+"`PY_BIG_ENDIAN` constant can be used to use the native endian: it is equal "
+"to ``1`` on big endian processor, or ``0`` on little endian processor."
 msgstr ""
+"Las rutinas de empaquetado escriben 2, 4 o 8 bytes, comenzando en *p*. *le* "
+"es un argumento :c:expr:`int`, distinto de cero si desea la cadena bytes con "
+"criterio little-endian (exponente al final, en ``p+1``, ``p+3``, o ``p+6`` "
+"``p+7``), cero si se necesita el criterio big-endian (exponente primero, en "
+"*p*). La constante :c:data:`PY_BIG_ENDIAN` se puede usar para usar el endian "
+"nativo: es igual a ``1`` en el procesador big endian, o ``0`` en el "
+"procesador little endian."
 
 #: ../Doc/c-api/float.rst:116
 msgid ""
 "Return value: ``0`` if all is OK, ``-1`` if error (and an exception is set, "
 "most likely :exc:`OverflowError`)."
 msgstr ""
+"Valor retornado: ``0`` si todo está bien, ``-1`` si hay error (y se "
+"establece una excepción, probablemente :exc:`OverflowError`)."
 
 #: ../Doc/c-api/float.rst:119
 msgid "There are two problems on non-IEEE platforms:"
-msgstr ""
+msgstr "Hay dos problemas en plataformas que no son IEEE:"
 
 #: ../Doc/c-api/float.rst:121
 msgid "What this does is undefined if *x* is a NaN or infinity."
-msgstr ""
+msgstr "Lo que esto hace es indefinido si *x* es un NaN o infinito."
 
 #: ../Doc/c-api/float.rst:122
 msgid "``-0.0`` and ``+0.0`` produce the same bytes string."
-msgstr ""
+msgstr "``-0.0`` and ``+0.0`` produce la misma cadena de bytes."
 
 #: ../Doc/c-api/float.rst:126
 msgid "Pack a C double as the IEEE 754 binary16 half-precision format."
 msgstr ""
+"Empaquete un C doble como el formato de media precisión IEEE 754 binary16."
 
 #: ../Doc/c-api/float.rst:130
 msgid "Pack a C double as the IEEE 754 binary32 single precision format."
 msgstr ""
+"Empaque un C doble como el formato de precisión simple IEEE 754 binary32."
 
 #: ../Doc/c-api/float.rst:134
 msgid "Pack a C double as the IEEE 754 binary64 double precision format."
 msgstr ""
+"Empaque un C doble como el formato de doble precisión IEEE 754 binary64."
 
 #: ../Doc/c-api/float.rst:138
 msgid "Unpack functions"
-msgstr ""
+msgstr "Funciones de Desempaquetado"
 
 #: ../Doc/c-api/float.rst:140
+#, fuzzy
 msgid ""
 "The unpack routines read 2, 4 or 8 bytes, starting at *p*.  *le* is an :c:"
 "expr:`int` argument, non-zero if the bytes string is in little-endian format "
 "(exponent last, at ``p+1``, ``p+3`` or ``p+6`` and ``p+7``), zero if big-"
-"endian (exponent first, at *p*). The :c:data:`PY_BIG_ENDIAN` constant can be "
-"used to use the native endian: it is equal to ``1`` on big endian processor, "
-"or ``0`` on little endian processor."
+"endian (exponent first, at *p*). The :c:macro:`PY_BIG_ENDIAN` constant can "
+"be used to use the native endian: it is equal to ``1`` on big endian "
+"processor, or ``0`` on little endian processor."
 msgstr ""
+"Las rutinas de desempaquetado leen 2, 4 o 8 bytes, comenzando en *p*. *le* "
+"es un argumento :c:expr:`int` , distinto de cero si la cadena bytes usa el "
+"criterio little-endian (exponente al final, en ``p+1``, ``p+3`` o ``p+6`` y "
+"``p+7``), cero si usa el criterio big-endian (exponente primero, en *p*). La "
+"constante :c:data:`PY_BIG_ENDIAN` se puede usar para usar el endian: es "
+"igual a ``1`` en el procesador big endian, o ``0`` en el procesador little "
+"endian."
 
 #: ../Doc/c-api/float.rst:147
 msgid ""
@@ -227,21 +265,38 @@ msgid ""
 "`PyErr_Occurred` is true (and an exception is set, most likely :exc:"
 "`OverflowError`)."
 msgstr ""
+"Valor retornado: Doble desempaquetado. Si hay error, ``-1.0`` y :c:func:"
+"`PyErr_Occurred` es verdadero (y se establece una excepción, probablemente :"
+"exc:`OverflowError`)."
 
 #: ../Doc/c-api/float.rst:151
 msgid ""
 "Note that on a non-IEEE platform this will refuse to unpack a bytes string "
 "that represents a NaN or infinity."
 msgstr ""
+"Hay que tener en cuenta que en una plataforma que no sea IEEE, esto se "
+"negará a desempaquetar una cadena de bytes que representa un NaN o infinito."
 
 #: ../Doc/c-api/float.rst:156
 msgid "Unpack the IEEE 754 binary16 half-precision format as a C double."
 msgstr ""
+"Descomprima el formato de media precisión IEEE 754 binary16 como un doble C."
 
 #: ../Doc/c-api/float.rst:160
 msgid "Unpack the IEEE 754 binary32 single precision format as a C double."
 msgstr ""
+"Descomprima el formato de precisión simple IEEE 754 binary32 como un doble C."
 
 #: ../Doc/c-api/float.rst:164
 msgid "Unpack the IEEE 754 binary64 double precision format as a C double."
 msgstr ""
+"Descomprima el formato de doble precisión IEEE 754 binary64 como un doble C."
+
+#: ../Doc/c-api/float.rst:8
+msgid "object"
+msgstr ""
+
+#: ../Doc/c-api/float.rst:8
+#, fuzzy
+msgid "floating point"
+msgstr "Objetos de punto flotante"

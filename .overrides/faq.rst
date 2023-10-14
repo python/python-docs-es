@@ -51,14 +51,14 @@ como error que no tiene hunspell instalado, lo puedes instalar así:
       Utilizando el gestor de paquetes de tu distribución::
 
          # Arch Linux
-         yay -S hunspell-es_any
+         yay -S hunspell-es_es
 
          # Ubuntu Linux
          apt install hunspell-es
 
 
-Estamos trabajando para unificar el uso de un mismo set de diccionarios de español,
-pero por el momento el chequeo que hacemos es con los diccionarios es_AR y es_ES.
+Las verificaciones del CI se realizan con ``es_ES``, pero puedes utilizar
+localmente alguna otra variación.
 
 
 ¿Cómo agrego una palabra al diccionario?
@@ -204,9 +204,9 @@ repositorio principal de la traducción). Se hace de la siguiente manera::
 
 Luego nos vamos a nuestra rama local, confirmamos e impactamos esos cambios::
 
-    git checkout 3.10
-    git merge upstream/3.10
-    git push origin 3.10
+    git checkout 3.11
+    git merge upstream/3.11
+    git push origin 3.11
 
 ¡Eso es todo!
 
@@ -246,3 +246,54 @@ No tiene mucho tráfico aún ya que estamos usando más el canal de Telegram por
 Puedes suscribirte ingresando aquí_.
 
 .. _aquí: https://mail.python.org/mailman3/lists/docs-es.python.org/
+
+.. _powrap_windows:
+
+Utilizar ``powrap`` en Windows
+------------------------------
+
+Si no estás usando MinGW o el Subsistema de Linux en Windows como entorno
+de trabajo, la única opción que tienes es utilizar la herramienta ``poedit``
+para traducir y ajustar el largo de cada línea.
+
+Si vas a *Preferences -> Advanced* podrás encontrar una forma de seleccionar
+que los *Line endings* sean *Unix (recommended)* y que la opción **Wrap
+at** esté activada y tenga el valor **70**.
+
+La razón de estos problemas, es que ``powrap`` utiliza una dependencia
+llamada ``msgcat`` que provee el paquete ``gettext`` que usualmente
+se puede instalar en macOS y Linux, pero no en Windows.
+
+.. _pospell_windows:
+
+Utilizar ``pospell`` en Windows
+-------------------------------
+
+La herramienta ``pospell`` depende de un paquete llamado ``hunspell``, y que no
+se instala por defecto mediante ``pip``.  Para instalar la dependencia tienes
+dos opciones:
+
+#. Utilizar el paquete que provee una iniciativa llamada
+   *exwinports*, que puedes seleccionar desde esta
+   `lista de archivos <https://sourceforge.net/projects/ezwinports/files/>`_.
+   Luego descomprimes el archivo en algún lugar como ``C:\hunspell\``,
+   y agregas dicho directorio al ``PATH``::
+
+     set PATH=C:\hunspell\bin;%PATH%
+
+   y finalmente, descarga un diccionario ``es_ES`` de algún lugar,
+   por ejemplo, de `acá <https://kitscenarist.ru/downloads/hunspell/>`_.
+#. Utilizar el subsistema Linux, y configurar todo desde dicho sistema,
+   clonando el repositorio y todo desde ahí. Luego ejecutas la instalación
+   de ``pospell`` (via pip) y ``hunspell`` (via apt-get) para utilizar
+   las herramientas desde ahí.
+
+   .. note:: Tendrás que tener todo configurado en el subsistema Linux para
+             poder utilizar esta opción.
+
+
+``powrap`` no muestra cambios locales, pero sí en el CI
+-------------------------------------------------------
+
+Asegúrate que tengas instalado el paquete ``gettext`` 0.21 pues es el que se
+utiliza en el CI, que es una dependencia de ``powrap``.

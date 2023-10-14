@@ -10,7 +10,7 @@ y otras estadísticas.
 
 .. note::
 
-   Estas listas se actualiza automáticamente cuando Pull Requests se *mergean* a la rama ``3.10``.
+   Estas listas se actualiza automáticamente cuando Pull Requests se *mergean* a la rama ``3.11``.
 
 
 En progreso
@@ -20,7 +20,7 @@ Muestra los porcentajes completados por directorio y solo los archivos que no es
 
 .. runblock:: console
 
-    $ potodo --offline --path .
+    $ potodo --path .
 
 
 Completados

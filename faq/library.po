@@ -10,16 +10,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-25 19:47+0200\n"
-"PO-Revision-Date: 2021-08-02 11:09+0200\n"
-"Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
+"POT-Creation-Date: 2023-10-12 19:43+0200\n"
+"PO-Revision-Date: 2022-11-05 13:47-0300\n"
+"Last-Translator: Sofía Denner <sofi.denner@gmail.com>\n"
 "Language: es\n"
 "Language-Team: python-doc-es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.10.3\n"
+"Generated-By: Babel 2.13.0\n"
 
 #: ../Doc/faq/library.rst:5
 msgid "Library and Extension FAQ"
@@ -216,9 +216,10 @@ msgid "Is there an equivalent to C's onexit() in Python?"
 msgstr "¿Hay un equivalente en Python al onexit() de C?"
 
 #: ../Doc/faq/library.rst:113
+#, fuzzy
 msgid ""
 "The :mod:`atexit` module provides a register function that is similar to "
-"C's :c:func:`onexit`."
+"C's :c:func:`!onexit`."
 msgstr ""
 "El módulo :mod:`atexit` proporciona una función de registro que es similar "
 "a :c:func:`onexit` de C."
@@ -337,7 +338,6 @@ msgid "How do I create documentation from doc strings?"
 msgstr "¿Cómo creo documentación a partir de los docstrings?"
 
 #: ../Doc/faq/library.rst:181
-#, fuzzy
 msgid ""
 "The :mod:`pydoc` module can create HTML from the doc strings in your Python "
 "source code.  An alternative for creating API documentation purely from "
@@ -524,11 +524,12 @@ msgid "These aren't::"
 msgstr "Estas no lo son::"
 
 #: ../Doc/faq/library.rst:399
+#, fuzzy
 msgid ""
 "Operations that replace other objects may invoke those other objects' :meth:"
-"`__del__` method when their reference count reaches zero, and that can "
-"affect things.  This is especially true for the mass updates to dictionaries "
-"and lists.  When in doubt, use a mutex!"
+"`~object.__del__` method when their reference count reaches zero, and that "
+"can affect things.  This is especially true for the mass updates to "
+"dictionaries and lists.  When in doubt, use a mutex!"
 msgstr ""
 "Las operaciones que reemplazan otros objetos pueden invocar el método :meth:"
 "`__del__` de esos otros objetos cuando su número de referencias alcance "
@@ -650,7 +651,7 @@ msgstr ""
 
 #: ../Doc/faq/library.rst:456
 msgid "Input and Output"
-msgstr "Entrada y Salida"
+msgstr "Entrada y salida"
 
 #: ../Doc/faq/library.rst:459
 msgid "How do I delete a file? (And other file questions...)"
@@ -722,6 +723,14 @@ msgid ""
 "permissions and metadata, though using :func:`shutil.copy2` instead will "
 "preserve most (though not all) of it."
 msgstr ""
+"El módulo :mod:`shutil` contiene una función :func:`~shutil.copyfile`. "
+"Nótese que en volúmenes de Windows NTFS, no copia los `flujos alternativos "
+"de datos (ADS) <https://es.wikipedia.org/wiki/Alternate_Data_Streams>`_ ni "
+"las `bifurcaciones de recursos (resource forks) <https://en.wikipedia.org/"
+"wiki/Resource_fork>`_ en los volúmenes macOS HFS+, aunque ahora ambos rara "
+"vez son utilizados. Además tampoco copia los permisos ni metadatos de los "
+"archivos, pero si se usa :func:`shutil.copy2` en su lugar, se preservará la "
+"mayor parte (aunque no todo)."
 
 #: ../Doc/faq/library.rst:497
 msgid "How do I read (or write) binary data?"
@@ -801,11 +810,11 @@ msgstr "¿Cómo accedo al puerto serial (RS232)?"
 
 #: ../Doc/faq/library.rst:620
 msgid "For Win32, OSX, Linux, BSD, Jython, IronPython:"
-msgstr ""
+msgstr "Para Win32, OSX, Linux, BSD, Jython, IronPython:"
 
 #: ../Doc/faq/library.rst:622
 msgid "https://pypi.org/project/pyserial/"
-msgstr ""
+msgstr "https://pypi.org/project/pyserial/"
 
 #: ../Doc/faq/library.rst:624
 msgid "For Unix, see a Usenet post by Mitch Chapman:"
@@ -897,14 +906,14 @@ msgstr ""
 "wiki.python.org/moin/WebProgramming\\ ."
 
 #: ../Doc/faq/library.rst:672
-#, fuzzy
 msgid ""
 "Cameron Laird maintains a useful set of pages about Python web technologies "
 "at https://web.archive.org/web/20210224183619/http://phaseit.net/claird/comp."
 "lang.python/web_python."
 msgstr ""
 "Cameron Laird mantiene un conjunto útil de páginas sobre tecnologías web "
-"Python en http://phaseit.net/claird/comp.lang.python/web_python."
+"Python en https://web.archive.org/web/20210224183619/http://phaseit.net/"
+"claird/comp.lang.python/web_python."
 
 #: ../Doc/faq/library.rst:677
 msgid "How can I mimic CGI form submission (METHOD=POST)?"
@@ -989,13 +998,15 @@ msgstr ""
 "salida de sockets."
 
 #: ../Doc/faq/library.rst:767
+#, fuzzy
 msgid ""
 "To prevent the TCP connect from blocking, you can set the socket to non-"
-"blocking mode.  Then when you do the :meth:`socket.connect`, you will either "
-"connect immediately (unlikely) or get an exception that contains the error "
-"number as ``.errno``. ``errno.EINPROGRESS`` indicates that the connection is "
-"in progress, but hasn't finished yet.  Different OSes will return different "
-"values, so you're going to have to check what's returned on your system."
+"blocking mode.  Then when you do the :meth:`~socket.socket.connect`, you "
+"will either connect immediately (unlikely) or get an exception that contains "
+"the error number as ``.errno``. ``errno.EINPROGRESS`` indicates that the "
+"connection is in progress, but hasn't finished yet.  Different OSes will "
+"return different values, so you're going to have to check what's returned on "
+"your system."
 msgstr ""
 "Para evitar que la conexión TCP se bloquee, puede configurar el socket en "
 "modo sin bloqueo. Luego, cuando hagas el :meth:`socket.connect`, te "
@@ -1005,13 +1016,14 @@ msgstr ""
 "sistemas operativos devolverán valores diferentes, por lo que tendrá que "
 "verificar lo que se devuelve en su sistema."
 
-#: ../Doc/faq/library.rst:774
+#: ../Doc/faq/library.rst:775
+#, fuzzy
 msgid ""
-"You can use the :meth:`socket.connect_ex` method to avoid creating an "
-"exception.  It will just return the errno value.  To poll, you can call :"
-"meth:`socket.connect_ex` again later -- ``0`` or ``errno.EISCONN`` indicate "
-"that you're connected -- or you can pass this socket to :meth:`select."
-"select` to check if it's writable."
+"You can use the :meth:`~socket.socket.connect_ex` method to avoid creating "
+"an exception. It will just return the errno value. To poll, you can call :"
+"meth:`~socket.socket.connect_ex` again later -- ``0`` or ``errno.EISCONN`` "
+"indicate that you're connected -- or you can pass this socket to :meth:"
+"`select.select` to check if it's writable."
 msgstr ""
 "Puede utilizar el método :meth:`socket.connect_ex` para evitar crear una "
 "excepción. Simplemente retornará el valor de errno. Para sondear, puede "
@@ -1019,12 +1031,13 @@ msgstr ""
 "EISCONN`` indican que está conectado -- o puede pasar este socket a :meth:"
 "`select.select` para comprobar si se puede escribir."
 
-#: ../Doc/faq/library.rst:780
+#: ../Doc/faq/library.rst:783
+#, fuzzy
 msgid ""
 "The :mod:`asyncio` module provides a general purpose single-threaded and "
 "concurrent asynchronous library, which can be used for writing non-blocking "
-"network code. The third-party `Twisted <https://twistedmatrix.com/trac/>`_ "
-"library is a popular and feature-rich alternative."
+"network code. The third-party `Twisted <https://twisted.org/>`_ library is a "
+"popular and feature-rich alternative."
 msgstr ""
 "El módulo :mod:`asyncio` proporciona una biblioteca asíncrona concurrente y "
 "de un solo subproceso de propósito general, que se puede utilizar para "
@@ -1032,19 +1045,19 @@ msgstr ""
 "<https://twistedmatrix.com/trac/>`_ es una alternativa popular y rica en "
 "funciones."
 
-#: ../Doc/faq/library.rst:788
+#: ../Doc/faq/library.rst:791
 msgid "Databases"
 msgstr "Bases de datos"
 
-#: ../Doc/faq/library.rst:791
+#: ../Doc/faq/library.rst:794
 msgid "Are there any interfaces to database packages in Python?"
 msgstr "¿Hay paquetes para interfaces a bases de datos en Python?"
 
-#: ../Doc/faq/library.rst:793
+#: ../Doc/faq/library.rst:796
 msgid "Yes."
 msgstr "Sí."
 
-#: ../Doc/faq/library.rst:795
+#: ../Doc/faq/library.rst:798
 msgid ""
 "Interfaces to disk-based hashes such as :mod:`DBM <dbm.ndbm>` and :mod:`GDBM "
 "<dbm.gnu>` are also included with standard Python.  There is also the :mod:"
@@ -1056,7 +1069,7 @@ msgstr ""
 "un módulo :mod:`sqlite3`, que proporciona una base de datos relacional "
 "ligera basada en disco."
 
-#: ../Doc/faq/library.rst:800
+#: ../Doc/faq/library.rst:803
 msgid ""
 "Support for most relational databases is available.  See the "
 "`DatabaseProgramming wiki page <https://wiki.python.org/moin/"
@@ -1066,11 +1079,11 @@ msgstr ""
 "Vea la `página wiki de Programación de Bases de datos <https://wiki.python."
 "org/moin/DatabaseProgramming>`_ para más detalles."
 
-#: ../Doc/faq/library.rst:806
+#: ../Doc/faq/library.rst:809
 msgid "How do you implement persistent objects in Python?"
 msgstr "¿Cómo implementar objetos persistentes en Python?"
 
-#: ../Doc/faq/library.rst:808
+#: ../Doc/faq/library.rst:811
 msgid ""
 "The :mod:`pickle` library module solves this in a very general way (though "
 "you still can't store things like open files, sockets or windows), and the :"
@@ -1083,15 +1096,15 @@ msgstr ""
 "*(g)dbm* para crear mapeos persistentes que contienen objetos arbitrarios "
 "Python."
 
-#: ../Doc/faq/library.rst:815
-msgid "Mathematics and Numerics"
-msgstr "Matemáticas y Numérica"
-
 #: ../Doc/faq/library.rst:818
+msgid "Mathematics and Numerics"
+msgstr "Matemáticas y numérica"
+
+#: ../Doc/faq/library.rst:821
 msgid "How do I generate random numbers in Python?"
 msgstr "¿Cómo genero números aleatorios en Python?"
 
-#: ../Doc/faq/library.rst:820
+#: ../Doc/faq/library.rst:823
 msgid ""
 "The standard module :mod:`random` implements a random number generator.  "
 "Usage is simple::"
@@ -1099,79 +1112,51 @@ msgstr ""
 "El módulo estándar :mod:`random` implementa un generador de números "
 "aleatorios. El uso es simple::"
 
-#: ../Doc/faq/library.rst:826
+#: ../Doc/faq/library.rst:829
 msgid "This returns a random floating point number in the range [0, 1)."
 msgstr "Esto retorna un número flotante aleatorio en el rango [0, 1)."
 
-#: ../Doc/faq/library.rst:828
+#: ../Doc/faq/library.rst:831
 msgid ""
 "There are also many other specialized generators in this module, such as:"
 msgstr ""
 "Hay también muchos otros generadores especializados en este módulo, tales "
 "como:"
 
-#: ../Doc/faq/library.rst:830
+#: ../Doc/faq/library.rst:833
 msgid "``randrange(a, b)`` chooses an integer in the range [a, b)."
 msgstr "``randrange(a, b)`` selecciona un entero en el rango [a, b)."
 
-#: ../Doc/faq/library.rst:831
+#: ../Doc/faq/library.rst:834
 msgid "``uniform(a, b)`` chooses a floating point number in the range [a, b)."
 msgstr "``uniform(a, b)`` selecciona un número flotante en el rango [a, b)."
 
-#: ../Doc/faq/library.rst:832
+#: ../Doc/faq/library.rst:835
 msgid ""
 "``normalvariate(mean, sdev)`` samples the normal (Gaussian) distribution."
 msgstr ""
 "``normalvariate(mean, sdev)`` muestrea una distribución normal (*Gausiana*)."
 
-#: ../Doc/faq/library.rst:834
+#: ../Doc/faq/library.rst:837
 msgid "Some higher-level functions operate on sequences directly, such as:"
 msgstr ""
 "Algunas funciones de alto nivel operan directamente sobre secuencias, tales "
 "como:"
 
-#: ../Doc/faq/library.rst:836
+#: ../Doc/faq/library.rst:839
 msgid "``choice(S)`` chooses a random element from a given sequence."
 msgstr "``choice(S)`` selecciona un elemento aleatorio de una secuencia dada."
 
-#: ../Doc/faq/library.rst:837
+#: ../Doc/faq/library.rst:840
 msgid "``shuffle(L)`` shuffles a list in-place, i.e. permutes it randomly."
 msgstr ""
 "``shuffle(L)`` reorganiza una lista in-situ, es decir, la permuta "
 "aleatoriamente."
 
-#: ../Doc/faq/library.rst:839
+#: ../Doc/faq/library.rst:842
 msgid ""
 "There's also a ``Random`` class you can instantiate to create independent "
 "multiple random number generators."
 msgstr ""
 "También hay una clase ``Random`` que usted puede instanciar para crear "
 "múltiples generadores independientes de valores aleatorios."
-
-#~ msgid ""
-#~ "For Windows: use `the consolelib module <http://effbot.org/zone/console-"
-#~ "index.htm>`_."
-#~ msgstr ""
-#~ "Para Windows: use `el módulo consolelib <http://effbot.org/zone/console-"
-#~ "index.htm>`_."
-
-#~ msgid ""
-#~ "Aahz has a set of slides from his threading tutorial that are helpful; "
-#~ "see http://www.pythoncraft.com/OSCON2001/."
-#~ msgstr ""
-#~ "Aahz tiene un conjunto de transparencias en su tutorial de hilos que "
-#~ "resulta útil: vea http://www.pythoncraft.com/OSCON2001/."
-
-#~ msgid ""
-#~ "The :mod:`shutil` module contains a :func:`~shutil.copyfile` function.  "
-#~ "Note that on MacOS 9 it doesn't copy the resource fork and Finder info."
-#~ msgstr ""
-#~ "El módulo :mod:`shutil` contiene una función :func:`~shutil.copyfile`. "
-#~ "Nótese que en MacOS 9 no copia el fork del recurso ni la información de "
-#~ "Finder."
-
-#~ msgid "For Win32, POSIX (Linux, BSD, etc.), Jython:"
-#~ msgstr "Para *Win32*, POSIX (Linux, BSD, etc.), Jython:"
-
-#~ msgid "http://pyserial.sourceforge.net"
-#~ msgstr "http://pyserial.sourceforge.net"

@@ -10,16 +10,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-25 19:47+0200\n"
+"POT-Creation-Date: 2023-10-12 19:43+0200\n"
 "PO-Revision-Date: 2021-08-30 21:44+0800\n"
-"Last-Translator: Rodrigo Tobar <rtobarc@gmail.com>\n"
+"Last-Translator: Juan Pablo Esparza R. <jesparzarom@outlook.com>\n"
 "Language: es_ES\n"
 "Language-Team: python-doc-es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.10.3\n"
+"Generated-By: Babel 2.13.0\n"
 
 #: ../Doc/library/json.rst:2
 msgid ":mod:`json` --- JSON encoder and decoder"
@@ -51,6 +51,10 @@ msgid ""
 "string may cause the decoder to consume considerable CPU and memory "
 "resources. Limiting the size of data to be parsed is recommended."
 msgstr ""
+"Se debe tener cuidado al analizar datos JSON de fuentes que no son de "
+"confianza. Una cadena JSON maliciosa puede hacer que el decodificador "
+"consuma considerables recursos del CPU y la memoria. Se recomienda limitar "
+"el tamaño de los datos que se van a analizar."
 
 #: ../Doc/library/json.rst:26
 msgid ""
@@ -95,7 +99,6 @@ msgid "See :ref:`json-commandline` for detailed documentation."
 msgstr "Consulte :ref:`json-commandline` para obtener documentación detallada."
 
 #: ../Doc/library/json.rst:123
-#, fuzzy
 msgid ""
 "JSON is a subset of `YAML <https://yaml.org/>`_ 1.2.  The JSON produced by "
 "this module's default settings (in particular, the default *separators* "
@@ -162,7 +165,6 @@ msgstr ""
 "*ensure_ascii* es falso, estos caracteres se mostrarán tal cual."
 
 #: ../Doc/library/json.rst:158
-#, fuzzy
 msgid ""
 "If *check_circular* is false (default: ``True``), then the circular "
 "reference check for container types will be skipped and a circular reference "
@@ -170,7 +172,7 @@ msgid ""
 msgstr ""
 "Si *check_circular* es falso (predeterminado: ``True``), se omitirá la "
 "verificación de referencia circular para los tipos de contenedor y una "
-"referencia circular dará como resultado :exc:`OverflowError` (o peor)."
+"referencia circular dará como resultado :exc:`RecursionError` (o algo peor)."
 
 #: ../Doc/library/json.rst:162
 msgid ""
@@ -181,10 +183,10 @@ msgid ""
 "Infinity``) will be used."
 msgstr ""
 "Si *allow_nan* es falso (predeterminado: ``True``), entonces serializar los "
-"valores fuera de rango :class:`float` (``nan``, ``inf` `, ``-inf``) "
-"provocará un :exc:`ValueError` en estricto cumplimiento de la especificación "
-"JSON. Si *allow_nan* es verdadero, se utilizarán sus equivalentes de "
-"JavaScript (``NaN``, ``Infinity``, ``-Infinity``)."
+"valores fuera de rango :class:`float` (``nan``, ``inf``, ``-inf``) provocará "
+"un :exc:`ValueError` en estricto cumplimiento de la especificación JSON. Si "
+"*allow_nan* es verdadero, se utilizarán sus equivalentes de JavaScript "
+"(``NaN``, ``Infinity``, ``-Infinity``)."
 
 #: ../Doc/library/json.rst:168 ../Doc/library/json.rst:452
 msgid ""
@@ -245,10 +247,11 @@ msgstr ""
 "diccionarios se ordenará por llave."
 
 #: ../Doc/library/json.rst:194
+#, fuzzy
 msgid ""
 "To use a custom :class:`JSONEncoder` subclass (e.g. one that overrides the :"
-"meth:`default` method to serialize additional types), specify it with the "
-"*cls* kwarg; otherwise :class:`JSONEncoder` is used."
+"meth:`~JSONEncoder.default` method to serialize additional types), specify "
+"it with the *cls* kwarg; otherwise :class:`JSONEncoder` is used."
 msgstr ""
 "Para usar una subclase personalizada de :class:`JSONEncoder` (por ejemplo, "
 "una que sobre escriba el método :meth:`default` para serializar tipos "
@@ -311,7 +314,6 @@ msgstr ""
 "ref:`conversion table <json-to-py-table>`."
 
 #: ../Doc/library/json.rst:231
-#, fuzzy
 msgid ""
 "*object_hook* is an optional function that will be called with the result of "
 "any object literal decoded (a :class:`dict`).  The return value of "
@@ -376,6 +378,10 @@ msgid ""
 "integer string via the interpreter's :ref:`integer string conversion length "
 "limitation <int_max_str_digits>` to help avoid denial of service attacks."
 msgstr ""
+"El *parse_int* predeterminado de :func:`int` ahora limita la longitud máxima "
+"de la cadena de enteros a través de la :ref:`integer string conversion "
+"length limitation <int_max_str_digits>` del intérprete para ayudar a evitar "
+"ataques de denegación de servicio."
 
 #: ../Doc/library/json.rst:262 ../Doc/library/json.rst:361
 msgid ""
@@ -540,7 +546,6 @@ msgstr ""
 "correspondientes valores ``float``, que está fuera de la especificación JSON."
 
 #: ../Doc/library/json.rst:337
-#, fuzzy
 msgid ""
 "*object_hook*, if specified, will be called with the result of every JSON "
 "object decoded and its return value will be used in place of the given :"
@@ -645,11 +650,12 @@ msgid "Added support for int- and float-derived Enum classes."
 msgstr "Compatibilidad añadida con las clases Enum derivadas de int y float."
 
 #: ../Doc/library/json.rst:424
+#, fuzzy
 msgid ""
 "To extend this to recognize other objects, subclass and implement a :meth:"
-"`default` method with another method that returns a serializable object for "
-"``o`` if possible, otherwise it should call the superclass implementation "
-"(to raise :exc:`TypeError`)."
+"`~JSONEncoder.default` method with another method that returns a "
+"serializable object for ``o`` if possible, otherwise it should call the "
+"superclass implementation (to raise :exc:`TypeError`)."
 msgstr ""
 "A fin de extender esto para reconocer otros objetos, implementar una "
 "subclase con un método :meth:`default` con otro método que retorna un objeto "
@@ -668,7 +674,6 @@ msgstr ""
 "simplemente pasados por alto."
 
 #: ../Doc/library/json.rst:437
-#, fuzzy
 msgid ""
 "If *check_circular* is true (the default), then lists, dicts, and custom "
 "encoded objects will be checked for circular references during encoding to "
@@ -678,7 +683,7 @@ msgstr ""
 "Si *check_circular* es cierto (valor predeterminado), se comprobarán las "
 "listas, los diccionarios y los objetos codificados personalizados en busca "
 "de referencias circulares durante la codificación para evitar una "
-"recursividad infinita (lo que provocaría un :exc:`OverflowError`). De lo "
+"recursividad infinita (lo que provocaría un :exc:`RecursionError`). De lo "
 "contrario, no se realiza ninguna comprobación de este tipo."
 
 #: ../Doc/library/json.rst:442
@@ -716,9 +721,10 @@ msgstr ""
 "exc:`TypeError`)."
 
 #: ../Doc/library/json.rst:485
+#, fuzzy
 msgid ""
 "For example, to support arbitrary iterators, you could implement :meth:"
-"`default` like this::"
+"`~JSONEncoder.default` like this::"
 msgstr ""
 "Por ejemplo, para admitir iteradores arbitrarios, podría implementar :meth:"
 "`default` de esta manera::"
@@ -1030,9 +1036,10 @@ msgstr ""
 "simple para validar e imprimir objetos JSON."
 
 #: ../Doc/library/json.rst:685
+#, fuzzy
 msgid ""
 "If the optional ``infile`` and ``outfile`` arguments are not specified, :"
-"attr:`sys.stdin` and :attr:`sys.stdout` will be used respectively:"
+"data:`sys.stdin` and :data:`sys.stdout` will be used respectively:"
 msgstr ""
 "Si no se especifican los argumentos opcionales ``infile`` y ``outfile``, se "
 "utilizarán :attr:`sys.stdin` y :attr:`sys.stdout` respectivamente:"
@@ -1055,13 +1062,15 @@ msgid "The JSON file to be validated or pretty-printed:"
 msgstr "El archivo JSON que se va a validar o imprimir con impresión linda:"
 
 #: ../Doc/library/json.rst:724
-msgid "If *infile* is not specified, read from :attr:`sys.stdin`."
+#, fuzzy
+msgid "If *infile* is not specified, read from :data:`sys.stdin`."
 msgstr "Si no se especifica *infile*, lee :attr:`sys.stdin`."
 
 #: ../Doc/library/json.rst:728
+#, fuzzy
 msgid ""
 "Write the output of the *infile* to the given *outfile*. Otherwise, write it "
-"to :attr:`sys.stdout`."
+"to :data:`sys.stdout`."
 msgstr ""
 "Escribe la salida de *infile* en el *outfile* dado. De lo contrario, lo "
 "escribe en :attr:`sys.stdout`."
@@ -1105,18 +1114,3 @@ msgstr ""
 "errata_search.php?rfc-7159>`_, JSON permite caracteres literales U+2028 "
 "(SEPARADOR DE LINEA) y U+2029 (SEPARADOR DE PÁRRAFO) en cadenas, mientras "
 "que JavaScript (a partir de ECMAScript Edición 5.1) no lo hace."
-
-#~ msgid ""
-#~ "Prior to Python 3.7, :class:`dict` was not guaranteed to be ordered, so "
-#~ "inputs and outputs were typically scrambled unless :class:`collections."
-#~ "OrderedDict` was specifically requested.  Starting with Python 3.7, the "
-#~ "regular :class:`dict` became order preserving, so it is no longer "
-#~ "necessary to specify :class:`collections.OrderedDict` for JSON generation "
-#~ "and parsing."
-#~ msgstr ""
-#~ "Antes de Python 3.7, no se garantizaba que :class:`dict` fuera ordenado, "
-#~ "por lo que las entradas y salidas se mezclaban a menos que :class:"
-#~ "`collections.OrderedDict` se solicitara específicamente. Comenzando con "
-#~ "Python 3.7, la clase regular :class:`dict` conserva el orden, por lo que "
-#~ "ya no es necesario especificar :class:`collections.OrderedDict` para la "
-#~ "generación y análisis JSON."

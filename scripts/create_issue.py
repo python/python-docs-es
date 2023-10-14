@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 from github import Github
-from potodo._po_file import PoFileStats
+from potodo.potodo import PoFileStats
 
 if len(sys.argv) != 2:
     print('Specify PO filename')
@@ -32,7 +32,7 @@ for issue in issues:
         if answer != 'y':
             sys.exit(1)
 
-if any([
+if pofile.fuzzy == 0 and any([
     pofile.translated_nb == pofile.po_file_size,
     pofile.untranslated_nb == 0,
 ]):
@@ -56,7 +56,7 @@ Current stats for `{pofilename}`:
 - Entries: {pofile.translated_nb} / {pofile.po_file_size}
 - Untranslated: {pofile.untranslated_nb}
 
-Please, comment here if you want this file to be assigned to you and an member will assign it to you as soon as possible, so you can start working on it.
+Please, comment here if you want this file to be assigned to you and a member will assign it to you as soon as possible, so you can start working on it.
 
 Remember to follow the steps in our [Contributing Guide](https://python-docs-es.readthedocs.io/page/CONTRIBUTING.html).''',
 )
