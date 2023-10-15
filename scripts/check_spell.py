@@ -9,6 +9,11 @@ import tempfile
 
 import pospell
 
+# fix multiprocessing error loop on MacOS
+if sys.platform == "darwin":
+    import multiprocessing
+    multiprocessing.set_start_method("fork")
+
 # Read custom dictionaries
 entries = set()
 for filename in Path("dictionaries").glob("*.txt"):
