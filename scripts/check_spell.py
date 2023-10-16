@@ -11,11 +11,18 @@ import pospell
 
 
 def check_spell(po_files=None):
-    # fix multiprocessing error loop on MacOS
-    if sys.platform == "darwin":
-        import multiprocessing
-        multiprocessing.set_start_method("fork")
+    """
+    Check spell in the given list of po_files and log the spell errors details.
 
+    If not po_files given, check spell in all files.
+
+    args:
+        po_files: list of po_files paths.
+
+    returns:
+        - int: spell errors count.
+
+    """
     # Read custom dictionaries
     entries = set()
     for filename in Path("dictionaries").glob("*.txt"):
