@@ -9,32 +9,39 @@ import tempfile
 
 import pospell
 
-# fix multiprocessing error loop on MacOS
-if sys.platform == "darwin":
-    import multiprocessing
-    multiprocessing.set_start_method("fork")
 
-# Read custom dictionaries
-entries = set()
-for filename in Path("dictionaries").glob("*.txt"):
-    with open(filename, "r") as f:
-        entries.update(
-            stripped_line
-            for stripped_line in (line.strip() for line in f.readlines())
-            if stripped_line
-        )
+def check_spell(po_files=None):
+    # fix multiprocessing error loop on MacOS
+    if sys.platform == "darwin":
+        import multiprocessing
+        multiprocessing.set_start_method("fork")
 
-# Write merged dictionary file
-output_filename = tempfile.mktemp(suffix="_merged_dict.txt")
-with open(output_filename, "w") as f:
-    for e in entries:
-        f.write(e)
-        f.write("\n")
+    # Read custom dictionaries
+    entries = set()
+    for filename in Path("dictionaries").glob("*.txt"):
+        with open(filename, "r") as f:
+            entries.update(
+                stripped_line
+                for stripped_line in (line.strip() for line in f.readlines())
+                if stripped_line
+            )
 
-# Run pospell either against all files or the file given on the command line
-po_files = sys.argv[1:]
-if not po_files:
-    po_files = Path(".").glob("*/*.po")
+    # Write merged dictionary file
+    output_filename = tempfile.mktemp(suffix="_merged_dict.txt")
+    with open(output_filename, "w") as f:
+        for e in entries:
+            f.write(e)
+            f.write("\n")
 
-errors = pospell.spell_check(po_files, personal_dict=output_filename, language="es_ES")
-sys.exit(0 if errors == 0 else -1)
+    # Run pospell either against all files or the file given on the command line
+    if not po_files:
+        po_files = Path(".").glob("*/*.po")
+
+    detected_errors = pospell.spell_check(po_files, personal_dict=output_filename, language="es_ES")
+    return detected_errors
+
+
+if __name__ == "__main__":
+    po_files = sys.argv[1:]
+    errors = check_spell(po_files)
+    sys.exit(0 if errors == 0 else -1)
