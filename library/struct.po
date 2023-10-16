@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-12 19:43+0200\n"
-"PO-Revision-Date: 2021-11-08 20:11-0600\n"
-"Last-Translator: \n"
-"Language: es_ES\n"
+"PO-Revision-Date: 2023-10-16 00:53-0600\n"
+"Last-Translator: José Luis Salgado Banda\n"
 "Language-Team: python-doc-es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.13.0\n"
+"X-Generator: Poedit 3.4\n"
 
 #: ../Doc/library/struct.rst:2
 msgid ":mod:`struct` --- Interpret bytes as packed binary data"
@@ -39,6 +40,13 @@ msgid ""
 "connections), or data transfer between the Python application and the C "
 "layer."
 msgstr ""
+"Este módulo convierte entre valores de Python y estructuras de C "
+"representadas como objetos de Python :class:`bytes`. Las :ref:`cadenas de "
+"formato <struct-format-strings>` compacto describen las conversiones "
+"previstas hacia/desde valores de Python. Las funciones y objetos del módulo "
+"se pueden utilizar para dos aplicaciones en gran medida distintas, el "
+"intercambio de datos con fuentes externas (archivos o conexiones de red) o "
+"la transferencia de datos entre la aplicación de Python y la capa de C."
 
 #: ../Doc/library/struct.rst:25
 msgid ""
@@ -51,6 +59,15 @@ msgid ""
 "for defining byte ordering and padding between elements. See :ref:`struct-"
 "alignment` for details."
 msgstr ""
+"Cuando no se proporciona ningún carácter de prefijo, el modo nativo es el "
+"predeterminado. Empaqueta o desempaqueta datos según la plataforma y el "
+"compilador en el que se creó el intérprete de Python. El resultado de "
+"empaquetar una estructura C determinada incluye *bytes* de relleno que "
+"mantienen la alineación adecuada para los tipos C involucrados; asimismo, se "
+"tiene en cuenta la alineación al desempaquetar. Por el contrario, cuando se "
+"comunican datos entre fuentes externas, el programador es responsable de "
+"definir el orden de *bytes* y el relleno entre elementos. Ver :ref:`struct-"
+"alignment` para más detalles."
 
 #: ../Doc/library/struct.rst:35
 msgid ""
@@ -134,7 +151,6 @@ msgstr ""
 "refleja en :func:`calcsize`."
 
 #: ../Doc/library/struct.rst:87
-#, fuzzy
 msgid ""
 "Iteratively unpack from the buffer *buffer* according to the format string "
 "*format*.  This function returns an iterator which will read equally sized "
@@ -144,8 +160,8 @@ msgid ""
 msgstr ""
 "Desempaqueta de manera iterativa desde el búfer *buffer* según la cadena de "
 "formato *format*.  Esta función retorna un iterador que leerá fragmentos de "
-"igual tamaño desde el búfer hasta que se haya consumido todo su contenido.  "
-"El tamaño del búfer en bytes debe ser un múltiplo del tamaño requerido por "
+"igual tamaño desde el búfer hasta que se haya consumido todo su contenido. "
+"El tamaño del búfer en *bytes* debe ser un múltiplo del tamaño requerido por "
 "el formato, como se refleja en :func:`calcsize`."
 
 #: ../Doc/library/struct.rst:93
@@ -168,7 +184,6 @@ msgid "Format Strings"
 msgstr "Cadenas de formato"
 
 #: ../Doc/library/struct.rst:109
-#, fuzzy
 msgid ""
 "Format strings describe the data layout when packing and unpacking data.  "
 "They are built up from :ref:`format characters<format-characters>`, which "
@@ -178,18 +193,20 @@ msgid ""
 "which describes the overall properties of the data and one or more format "
 "characters which describe the actual data values and padding."
 msgstr ""
-"Las cadenas de formato son el mecanismo utilizado para especificar el diseño "
-"esperado al empaquetar y desempaquetar datos.  Se crean a partir de :ref:"
-"`format-characters`, que especifican el tipo de datos que se empaquetan/"
-"desempaquetan.  Además, hay caracteres especiales para controlar :ref:"
-"`struct-alignment`."
+"Las cadenas de formato describen el diseño de los datos cuando empaquetan y "
+"desempaquetan datos. Se construyen a partir :ref:`caracteres de "
+"formato<format-characters>`, que especifican el tipo de datos que se "
+"empaquetan/desempaquetan. Además, los caracteres especiales controlan el :"
+"ref:`orden de *bytes*, tamaño y alineación<struct-alignment>`. Cada cadena "
+"de formato consta de un carácter de prefijo opcional que describe las "
+"propiedades generales de los datos y uno o más caracteres de formato que "
+"describen los valores de datos actuales y el relleno."
 
 #: ../Doc/library/struct.rst:121
 msgid "Byte Order, Size, and Alignment"
 msgstr "Orden de bytes, tamaño y alineación"
 
 #: ../Doc/library/struct.rst:123
-#, fuzzy
 msgid ""
 "By default, C types are represented in the machine's native format and byte "
 "order, and properly aligned by skipping pad bytes if necessary (according to "
@@ -199,8 +216,12 @@ msgid ""
 "standard formats depends on the application."
 msgstr ""
 "Por defecto, los tipos C se representan en el formato nativo y el orden de "
-"bytes de la máquina, y se alinean correctamente omitiendo bytes de relleno "
-"si es necesario (según las reglas utilizadas por el compilador de C)."
+"*bytes* de la máquina, y se alinean correctamente omitiendo *bytes* de "
+"relleno si es necesario (según las reglas utilizadas por el compilador de "
+"C). Se elige este comportamiento para que los *bytes* de una estructura "
+"empaquetada correspondan correctamente al diseño de memoria de la estructura "
+"C correspondiente. El uso de ordenamiento y relleno de *bytes* nativos o "
+"formatos estándar depende de la aplicación."
 
 #: ../Doc/library/struct.rst:139
 msgid ""
@@ -279,18 +300,18 @@ msgid "If the first character is not one of these, ``'@'`` is assumed."
 msgstr "Si el primer carácter no es uno de estos, se asume ``'@'``."
 
 #: ../Doc/library/struct.rst:159
-#, fuzzy
 msgid ""
 "Native byte order is big-endian or little-endian, depending on the host "
 "system. For example, Intel x86, AMD64 (x86-64), and Apple M1 are little-"
 "endian; IBM z and many legacy architectures are big-endian. Use :data:`sys."
 "byteorder` to check the endianness of your system."
 msgstr ""
-"El orden de bytes nativo es big-endian o little-endian, dependiendo del "
-"sistema host. Por ejemplo, Intel x86 y AMD64 (x86-64) son little-endian; "
-"Motorola 68000 y PowerPC G5 son big-endian; ARM e Intel *Itanium* tienen la "
-"propiedad de trabajar con ambos formatos (middle-endian). Utiliza ``sys."
-"byteorder`` para comprobar la *endianness* (\"extremidad\") de su sistema."
+"El orden de *bytes* nativo es big-endian o little-endian, dependiendo del "
+"sistema host. Por ejemplo, Intel x86, AMD64 (x86-64) y Apple M1 son little-"
+"endian; IBM z y muchas arquitecturas heredadas son big-endian; ARM e Intel "
+"*Itanium* tienen la propiedad de trabajar con ambos formatos (middle-"
+"endian). Utiliza :data:`sys.byteorder` para comprobar la *endianness* "
+"(\"extremidad\") de tu sistema."
 
 #: ../Doc/library/struct.rst:164
 msgid ""
@@ -418,18 +439,16 @@ msgid "no value"
 msgstr "sin valor"
 
 #: ../Doc/library/struct.rst:207
-#, fuzzy
 msgid "\\(7)"
-msgstr "\\(6)"
+msgstr "\\(7)"
 
 #: ../Doc/library/struct.rst:209
 msgid "``c``"
 msgstr "``c``"
 
 #: ../Doc/library/struct.rst:209
-#, fuzzy
 msgid ":c:expr:`char`"
-msgstr ":c:type:`char`"
+msgstr ":c:expr:`char`"
 
 #: ../Doc/library/struct.rst:209
 msgid "bytes of length 1"
@@ -445,9 +464,8 @@ msgid "``b``"
 msgstr "``b``"
 
 #: ../Doc/library/struct.rst:211
-#, fuzzy
 msgid ":c:expr:`signed char`"
-msgstr ":c:type:`signed char`"
+msgstr ":c:expr:`signed char`"
 
 #: ../Doc/library/struct.rst:211 ../Doc/library/struct.rst:213
 #: ../Doc/library/struct.rst:217 ../Doc/library/struct.rst:219
@@ -468,9 +486,8 @@ msgid "``B``"
 msgstr "``B``"
 
 #: ../Doc/library/struct.rst:213
-#, fuzzy
 msgid ":c:expr:`unsigned char`"
-msgstr ":c:type:`unsigned char`"
+msgstr ":c:expr:`unsigned char`"
 
 #: ../Doc/library/struct.rst:213 ../Doc/library/struct.rst:217
 #: ../Doc/library/struct.rst:219 ../Doc/library/struct.rst:221
@@ -485,9 +502,8 @@ msgid "``?``"
 msgstr "\\(2)"
 
 #: ../Doc/library/struct.rst:215
-#, fuzzy
 msgid ":c:expr:`_Bool`"
-msgstr ":c:type:`_Bool`"
+msgstr ":c:expr:`_Bool`"
 
 #: ../Doc/library/struct.rst:215
 msgid "bool"
@@ -502,9 +518,8 @@ msgid "``h``"
 msgstr "``h``"
 
 #: ../Doc/library/struct.rst:217
-#, fuzzy
 msgid ":c:expr:`short`"
-msgstr ":c:type:`short`"
+msgstr ":c:expr:`short`"
 
 #: ../Doc/library/struct.rst:217 ../Doc/library/struct.rst:219
 #: ../Doc/library/struct.rst:238
@@ -516,18 +531,16 @@ msgid "``H``"
 msgstr "``H``"
 
 #: ../Doc/library/struct.rst:219
-#, fuzzy
 msgid ":c:expr:`unsigned short`"
-msgstr ":c:type:`unsigned short`"
+msgstr ":c:expr:`unsigned short`"
 
 #: ../Doc/library/struct.rst:221
 msgid "``i``"
 msgstr "``i``"
 
 #: ../Doc/library/struct.rst:221
-#, fuzzy
 msgid ":c:expr:`int`"
-msgstr ":c:type:`int`"
+msgstr ":c:expr:`int`"
 
 #: ../Doc/library/struct.rst:221 ../Doc/library/struct.rst:223
 #: ../Doc/library/struct.rst:225 ../Doc/library/struct.rst:227
@@ -540,36 +553,32 @@ msgid "``I``"
 msgstr "``I``"
 
 #: ../Doc/library/struct.rst:223
-#, fuzzy
 msgid ":c:expr:`unsigned int`"
-msgstr ":c:type:`unsigned int`"
+msgstr ":c:expr:`unsigned int`"
 
 #: ../Doc/library/struct.rst:225
 msgid "``l``"
 msgstr "``l``"
 
 #: ../Doc/library/struct.rst:225
-#, fuzzy
 msgid ":c:expr:`long`"
-msgstr ":c:type:`long`"
+msgstr ":c:expr:`long`"
 
 #: ../Doc/library/struct.rst:227
 msgid "``L``"
 msgstr "``L``"
 
 #: ../Doc/library/struct.rst:227
-#, fuzzy
 msgid ":c:expr:`unsigned long`"
-msgstr ":c:type:`unsigned long`"
+msgstr ":c:expr:`unsigned long`"
 
 #: ../Doc/library/struct.rst:229
 msgid "``q``"
 msgstr "``q``"
 
 #: ../Doc/library/struct.rst:229
-#, fuzzy
 msgid ":c:expr:`long long`"
-msgstr ":c:type:`long long`"
+msgstr ":c:expr:`long long`"
 
 #: ../Doc/library/struct.rst:229 ../Doc/library/struct.rst:231
 #: ../Doc/library/struct.rst:242
@@ -581,16 +590,14 @@ msgid "``Q``"
 msgstr "``Q``"
 
 #: ../Doc/library/struct.rst:231
-#, fuzzy
 msgid ":c:expr:`unsigned long long`"
-msgstr ":c:type:`unsigned long long`"
+msgstr ":c:expr:`unsigned long long`"
 
 #: ../Doc/library/struct.rst:234
 msgid "``n``"
 msgstr "``n``"
 
 #: ../Doc/library/struct.rst:234
-#, fuzzy
 msgid ":c:type:`ssize_t`"
 msgstr ":c:type:`ssize_t`"
 
@@ -603,7 +610,6 @@ msgid "``N``"
 msgstr "``N``"
 
 #: ../Doc/library/struct.rst:236
-#, fuzzy
 msgid ":c:type:`size_t`"
 msgstr ":c:type:`size_t`"
 
@@ -630,54 +636,48 @@ msgid "``f``"
 msgstr "``f``"
 
 #: ../Doc/library/struct.rst:240
-#, fuzzy
 msgid ":c:expr:`float`"
-msgstr ":c:type:`float`"
+msgstr ":c:expr:`float`"
 
 #: ../Doc/library/struct.rst:242
 msgid "``d``"
 msgstr "``d``"
 
 #: ../Doc/library/struct.rst:242
-#, fuzzy
 msgid ":c:expr:`double`"
-msgstr ":c:type:`double`"
+msgstr ":c:expr:`double`"
 
 #: ../Doc/library/struct.rst:244
 msgid "``s``"
 msgstr "``s``"
 
 #: ../Doc/library/struct.rst:244 ../Doc/library/struct.rst:246
-#, fuzzy
 msgid ":c:expr:`char[]`"
-msgstr ":c:type:`char[]`"
+msgstr ":c:expr:`char[]`"
 
 #: ../Doc/library/struct.rst:244 ../Doc/library/struct.rst:246
 msgid "bytes"
 msgstr "bytes"
 
 #: ../Doc/library/struct.rst:244
-#, fuzzy
 msgid "\\(9)"
-msgstr "\\(6)"
+msgstr "\\(9)"
 
 #: ../Doc/library/struct.rst:246
 msgid "``p``"
 msgstr "``p``"
 
 #: ../Doc/library/struct.rst:246
-#, fuzzy
 msgid "\\(8)"
-msgstr "\\(6)"
+msgstr "\\(8)"
 
 #: ../Doc/library/struct.rst:248
 msgid "``P``"
 msgstr "``P``"
 
 #: ../Doc/library/struct.rst:248
-#, fuzzy
 msgid ":c:expr:`void \\*`"
-msgstr ":c:type:`void \\*`"
+msgstr ":c:expr:`void \\*`"
 
 #: ../Doc/library/struct.rst:248
 msgid "\\(5)"
@@ -692,32 +692,30 @@ msgid "Added support for the ``'e'`` format."
 msgstr "Soporte añadido para el formato ``'e'``."
 
 #: ../Doc/library/struct.rst:263
-#, fuzzy
 msgid ""
 "The ``'?'`` conversion code corresponds to the :c:expr:`_Bool` type defined "
 "by C99. If this type is not available, it is simulated using a :c:expr:"
 "`char`. In standard mode, it is always represented by one byte."
 msgstr ""
-"El código de conversión ``'?'`` corresponde al tipo :c:type:`_Bool` definido "
-"por C99. Si este tipo no está disponible, se simula mediante un :c:type:"
-"`char`. En el modo estándar, siempre se representa mediante un byte."
+"El código de conversión ``'?'`` corresponde al tipo :c:expr:`_Bool` definido "
+"por C99. Si este tipo no está disponible, se simula mediante un :c:expr:"
+"`char`. En el modo estándar, siempre se representa mediante un *byte*."
 
 #: ../Doc/library/struct.rst:268
-#, fuzzy
 msgid ""
 "When attempting to pack a non-integer using any of the integer conversion "
 "codes, if the non-integer has a :meth:`~object.__index__` method then that "
 "method is called to convert the argument to an integer before packing."
 msgstr ""
 "Al intentar empaquetar un no entero mediante cualquiera de los códigos de "
-"conversión de enteros, si el no entero tiene un método :meth:`__index__`, se "
-"llama a ese método para convertir el argumento en un entero antes de "
-"empaquetar."
+"conversión de enteros, si el no entero tiene un método :meth:`~object."
+"__index__`, se llama a ese método para convertir el argumento en un entero "
+"antes de empaquetar."
 
 #: ../Doc/library/struct.rst:272
-#, fuzzy
 msgid "Added use of the :meth:`~object.__index__` method for non-integers."
-msgstr "Agregado el uso del método :meth:`__index__` para los no enteros."
+msgstr ""
+"Agregado el uso del método :meth:`~object.__index__` para los no enteros."
 
 #: ../Doc/library/struct.rst:276
 msgid ""
@@ -782,7 +780,7 @@ msgstr ""
 
 #: ../Doc/library/struct.rst:305
 msgid "When packing, ``'x'`` inserts one NUL byte."
-msgstr ""
+msgstr "Al empaquetar, ``'x'`` inserta un *byte* NUL."
 
 #: ../Doc/library/struct.rst:308
 msgid ""
@@ -810,7 +808,6 @@ msgstr ""
 "retornada nunca puede contener más de 255 bytes."
 
 #: ../Doc/library/struct.rst:320
-#, fuzzy
 msgid ""
 "For the ``'s'`` format character, the count is interpreted as the length of "
 "the bytes, not a repeat count like for the other format characters; for "
@@ -825,14 +822,17 @@ msgid ""
 "(while ``'0c'`` means 0 characters)."
 msgstr ""
 "Para el carácter de formato ``'s'``, el recuento se interpreta como la "
-"longitud de los bytes, no un recuento de repetición como para los otros "
+"longitud de los *bytes*, no un recuento de repetición como para los otros "
 "caracteres de formato; por ejemplo, ``'10s'`` significa una sola cadena de "
-"10 bytes, mientras que ``'10c'`` significa 10 caracteres. Si no se da un "
-"recuento, el valor predeterminado es 1.  Para el empaquetado, la cadena es "
-"truncada o rellenada con bytes nulos según corresponda para que se ajuste. "
-"Para desempaquetar, el objeto bytes resultante siempre tiene exactamente el "
-"número especificado de bytes.  Como caso especial, ``'0s'`` significa una "
-"sola cadena vacía (mientras que ``'0c'`` significa 0 caracteres)."
+"10 *bytes* asignada hacia o desde una sola cadena de *bytes* de Python, "
+"mientras que ``'10c'`` significa 10 elementos de caracteres separados de un "
+"*byte* (por ejemplo, ``cccccccccc``) asignada hacia o desde diez objetos de "
+"*bytes* de Python diferentes. Si no se da un recuento, el valor "
+"predeterminado es 1. Para el empaquetado, la cadena es truncada o rellenada "
+"con *bytes* nulos según corresponda para que se ajuste. Para desempaquetar, "
+"el objeto bytes resultante siempre tiene exactamente el número especificado "
+"de *bytes*. Como caso especial, ``'0s'`` significa una sola cadena vacía "
+"(mientras que ``'0c'`` significa 0 caracteres)."
 
 #: ../Doc/library/struct.rst:333
 msgid ""
@@ -893,21 +893,29 @@ msgid ""
 "of any prefix character) may not match what the reader's machine produces as "
 "that depends on the platform and compiler."
 msgstr ""
+"Los ejemplos de orden de *bytes* nativos (designados por el prefijo de "
+"formato ``'@'`` o la falta de cualquier carácter de prefijo) pueden no "
+"coincidir con lo que produce la máquina del lector, ya que eso depende de la "
+"plataforma y el compilador."
 
 #: ../Doc/library/struct.rst:368
 msgid ""
 "Pack and unpack integers of three different sizes, using big endian "
 "ordering::"
 msgstr ""
+"Empaqueta y desempaqueta enteros de tres tamaños diferentes, utilizando el "
+"orden *big endian*::"
 
 #: ../Doc/library/struct.rst:379
 msgid "Attempt to pack an integer which is too large for the defined field::"
 msgstr ""
+"Intenta empaquetar un entero que es demasiado grande para el campo definido::"
 
 #: ../Doc/library/struct.rst:386
 msgid ""
 "Demonstrate the difference between ``'s'`` and ``'c'`` format characters::"
 msgstr ""
+"Demuestra la diferencia entre los caracteres de formato ``'s'`` y ``'c'``::"
 
 #: ../Doc/library/struct.rst:394
 msgid ""
@@ -926,9 +934,15 @@ msgid ""
 "integer on a four-byte boundary. In this example, the output was produced on "
 "a little endian machine::"
 msgstr ""
+"El orden de los caracteres de formato puede afectar el tamaño en el modo "
+"nativo, ya que el relleno está implícito. En el modo estándar, el usuario es "
+"responsable de insertar el relleno que desee. Toma en cuenta que en la "
+"primera llamada ``pack`` a continuación se agregaron tres *bytes* NUL "
+"después del ``'#'`` empaquetado para alinear el siguiente entero en un "
+"límite de cuatro *bytes*. En este ejemplo, el resultado se produjo en una "
+"máquina *little endian*::"
 
 #: ../Doc/library/struct.rst:422
-#, fuzzy
 msgid ""
 "The following format ``'llh0l'`` results in two pad bytes being added at the "
 "end, assuming the platform's longs are aligned on 4-byte boundaries::"
@@ -945,26 +959,24 @@ msgid "Packed binary storage of homogeneous data."
 msgstr "Almacenamiento binario empaquetado de datos homogéneos."
 
 #: ../Doc/library/struct.rst:435
-#, fuzzy
 msgid "Module :mod:`json`"
-msgstr "Módulo :mod:`array`"
+msgstr "Módulo :mod:`json`"
 
 #: ../Doc/library/struct.rst:435
 msgid "JSON encoder and decoder."
-msgstr ""
+msgstr "Codificador y decodificador JSON."
 
 #: ../Doc/library/struct.rst:437
-#, fuzzy
 msgid "Module :mod:`pickle`"
-msgstr "Módulo :mod:`xdrlib`"
+msgstr "Módulo :mod:`pickle`"
 
 #: ../Doc/library/struct.rst:438
 msgid "Python object serialization."
-msgstr ""
+msgstr "Serialización de objetos Python."
 
 #: ../Doc/library/struct.rst:444
 msgid "Applications"
-msgstr ""
+msgstr "Aplicaciones"
 
 #: ../Doc/library/struct.rst:446
 msgid ""
@@ -975,11 +987,17 @@ msgid ""
 "layout (:ref:`standard formats<struct-standard-formats>`).  Generally "
 "speaking, the format strings constructed for these two domains are distinct."
 msgstr ""
+"Existen dos aplicaciones principales para el módulo :mod:`struct`, el "
+"intercambio de datos entre el código Python y C dentro de una aplicación u "
+"otra aplicación compilada usando el mismo compilador (:ref:`formatos "
+"nativos<struct-native-formats>`) y el intercambio de datos entre "
+"aplicaciones usando un diseño de datos acordado (:ref:`formatos estándar "
+"<struct-standard-formats>`). En términos generales, las cadenas de formato "
+"construidas para estos dos dominios son distintas."
 
 #: ../Doc/library/struct.rst:457
-#, fuzzy
 msgid "Native Formats"
-msgstr "nativo"
+msgstr "Formatos nativos"
 
 #: ../Doc/library/struct.rst:459
 msgid ""
@@ -991,11 +1009,21 @@ msgid ""
 "format string to round up to the correct byte boundary for proper alignment "
 "of consecutive chunks of data."
 msgstr ""
+"Al construir cadenas de formato que imitan diseños nativos, el compilador y "
+"la arquitectura de la máquina determinan el orden y el relleno de los "
+"*bytes*. En tales casos, se debe utilizar el carácter de formato ``@`` para "
+"especificar el orden de *bytes* nativo y el tamaño de los datos. Los *bytes* "
+"de relleno internos normalmente se insertan automáticamente. Es posible que "
+"se necesite un código de formato de repetición cero al final de una cadena "
+"de formato para redondear hasta el límite de *bytes* correcto para una "
+"alineación adecuada de fragmentos de datos consecutivos."
 
 #: ../Doc/library/struct.rst:467
 msgid ""
 "Consider these two simple examples (on a 64-bit, little-endian machine)::"
 msgstr ""
+"Considera estos dos ejemplos sencillos (en una máquina *little-endian* de 64 "
+"bits)::"
 
 #: ../Doc/library/struct.rst:475
 msgid ""
@@ -1003,23 +1031,31 @@ msgid ""
 "string without the use of extra padding.  A zero-repeat format code solves "
 "that problem::"
 msgstr ""
+"Los datos no se rellenan hasta un límite de 8 *bytes* al final de la segunda "
+"cadena de formato sin el uso de relleno adicional. Un código de formato de "
+"repetición cero resuelve ese problema::"
 
 #: ../Doc/library/struct.rst:482
 msgid ""
 "The ``'x'`` format code can be used to specify the repeat, but for native "
 "formats it is better to use a zero-repeat format like ``'0l'``."
 msgstr ""
+"El código de formato ``'x'`` se puede utilizar para especificar la "
+"repetición, pero para formatos nativos es mejor utilizar un formato de "
+"repetición cero como ``'0l'``."
 
 #: ../Doc/library/struct.rst:485
 msgid ""
 "By default, native byte ordering and alignment is used, but it is better to "
 "be explicit and use the ``'@'`` prefix character."
 msgstr ""
+"De forma predeterminada, se utiliza el orden y la alineación de *bytes* "
+"nativos, pero es mejor ser explícito y utilizar el carácter de prefijo "
+"``'@'``."
 
 #: ../Doc/library/struct.rst:492
-#, fuzzy
 msgid "Standard Formats"
-msgstr "Tamaño estándar"
+msgstr "Formatos estándar"
 
 #: ../Doc/library/struct.rst:494
 msgid ""
@@ -1034,6 +1070,18 @@ msgid ""
 "must explicitly add ``'x'`` pad bytes where needed.  Revisiting the examples "
 "from the previous section, we have::"
 msgstr ""
+"Cuando intercambia datos más allá de su proceso, como redes o "
+"almacenamiento, sé preciso. Especifica el orden de *bytes*, el tamaño y la "
+"alineación exactos. No asumas que coinciden con el orden nativo de una "
+"máquina en particular. Por ejemplo, el orden de los *bytes* de la red es "
+"*big-endian*, mientras que muchas CPU populares son *little-endian*. Al "
+"definir esto explícitamente, el usuario no necesita preocuparse por las "
+"especificaciones de la plataforma en la que se ejecuta su código. El primer "
+"carácter normalmente debería ser ``<`` o ``>`` (o ``!``). El relleno es "
+"responsabilidad del programador. El carácter de formato de repetición cero "
+"no funcionará. En su lugar, el usuario debe agregar explícitamente ``'x'`` "
+"*bytes* de relleno donde sea necesario. Revisando los ejemplos de la sección "
+"anterior, tenemos::"
 
 #: ../Doc/library/struct.rst:521
 msgid ""
@@ -1041,6 +1089,9 @@ msgid ""
 "when executed on different machines.  For example, the examples below were "
 "executed on a 32-bit machine::"
 msgstr ""
+"No se garantiza que los resultados anteriores (ejecutados en una máquina de "
+"64 bits) coincidan cuando se ejecutan en diferentes máquinas. Por ejemplo, "
+"los siguientes ejemplos se ejecutaron en una máquina de 32 bits::"
 
 #: ../Doc/library/struct.rst:536
 msgid "Classes"
@@ -1051,7 +1102,6 @@ msgid "The :mod:`struct` module also defines the following type:"
 msgstr "El módulo :mod:`struct` también define el siguiente tipo:"
 
 #: ../Doc/library/struct.rst:543
-#, fuzzy
 msgid ""
 "Return a new Struct object which writes and reads binary data according to "
 "the format string *format*.  Creating a ``Struct`` object once and calling "
@@ -1059,21 +1109,20 @@ msgid ""
 "same format since the format string is only compiled once."
 msgstr ""
 "Retorna un nuevo objeto Struct que escribe y lee datos binarios según la "
-"cadena de formato *format*.  Crear un objeto Struct una vez y llamar a sus "
-"métodos es más eficaz que llamar a las funciones :mod:`struct` con el mismo "
-"formato, ya que la cadena de formato solo se compila una vez en ese caso."
+"cadena de formato *format*. Crear un objeto ``Struct`` una vez y llamar a "
+"sus métodos es más eficaz que llamar a las funciones a nivel de módulo con "
+"el mismo formato, ya que la cadena de formato solo se compila una vez."
 
 #: ../Doc/library/struct.rst:550
-#, fuzzy
 msgid ""
 "The compiled versions of the most recent format strings passed to the module-"
 "level functions are cached, so programs that use only a few format strings "
 "needn't worry about reusing a single :class:`Struct` instance."
 msgstr ""
-"Las versiones compiladas de las cadenas de formato más recientes pasadas a :"
-"class:`Struct` y las funciones de nivel de módulo se almacenan en caché, por "
-"lo que los programas que utilizan solo unas pocas cadenas de formato no "
-"necesitan preocuparse por volver a usar una sola instancia :class:`Struct`."
+"Las versiones compiladas de las cadenas de formato más recientes pasadas a "
+"las funciones de nivel de módulo se almacenan en caché, por lo que los "
+"programas que utilizan solo unas pocas cadenas de formato no necesitan "
+"preocuparse por volver a usar una sola instancia :class:`Struct`."
 
 #: ../Doc/library/struct.rst:555
 msgid "Compiled Struct objects support the following methods and attributes:"
@@ -1139,53 +1188,52 @@ msgstr ""
 
 #: ../Doc/library/struct.rst:9
 msgid "C"
-msgstr ""
+msgstr "C"
 
 #: ../Doc/library/struct.rst:9
 msgid "structures"
-msgstr ""
+msgstr "estructuras"
 
 #: ../Doc/library/struct.rst:9
 msgid "packing"
-msgstr ""
+msgstr "empaquetado"
 
 #: ../Doc/library/struct.rst:9
 msgid "binary"
-msgstr ""
+msgstr "binario"
 
 #: ../Doc/library/struct.rst:9
 msgid "data"
-msgstr ""
+msgstr "datos"
 
 #: ../Doc/library/struct.rst:132
 msgid "@ (at)"
-msgstr ""
+msgstr "@ (en)"
 
 #: ../Doc/library/struct.rst:132 ../Doc/library/struct.rst:261
 #: ../Doc/library/struct.rst:348
-#, fuzzy
 msgid "in struct format strings"
-msgstr "Cadenas de formato"
+msgstr "en cadenas de formato de estructura"
 
 #: ../Doc/library/struct.rst:132
 msgid "= (equals)"
-msgstr ""
+msgstr "= (igual a)"
 
 #: ../Doc/library/struct.rst:132
 msgid "< (less)"
-msgstr ""
+msgstr "< (menor que)"
 
 #: ../Doc/library/struct.rst:132
 msgid "> (greater)"
-msgstr ""
+msgstr "> (mayor que)"
 
 #: ../Doc/library/struct.rst:132
 msgid "! (exclamation)"
-msgstr ""
+msgstr "! (exclamación)"
 
 #: ../Doc/library/struct.rst:261 ../Doc/library/struct.rst:348
 msgid "? (question mark)"
-msgstr ""
+msgstr "? (signo de interrogación)"
 
 #~ msgid ""
 #~ "This module performs conversions between Python values and C structs "
