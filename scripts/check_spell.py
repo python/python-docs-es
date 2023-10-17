@@ -14,7 +14,7 @@ def check_spell(po_files=None):
     """
     Check spell in the given list of po_files and log the spell errors details.
 
-    If not po_files given, check spell in all files.
+    If no po_files are given, check spell in all files.
 
     args:
         po_files: list of po_files paths.
