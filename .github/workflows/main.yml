@@ -22,6 +22,10 @@ jobs:
         with:
           python-version: "3.11"
           cache: "pip"
+      - name: Configura dpkg/apt para correr de manera eficiente
+        uses: abbbi/github-actions-tune@v1
+      - name: Deshabilita triggers de postgresql-common
+        run: sudo sed -i '/postgresql-common/d' /var/lib/dpkg/triggers/File
       - name: Instalar dependencias de sistema
         run: |
           sudo apt-get update
