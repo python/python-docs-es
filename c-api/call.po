@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python en Español 3.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-25 19:47+0200\n"
+"POT-Creation-Date: 2023-10-12 19:43+0200\n"
 "PO-Revision-Date: 2021-12-09 10:27+0800\n"
 "Last-Translator: Rodrigo Tobar <rtobarc@gmail.com>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.10.3\n"
+"Generated-By: Babel 2.13.0\n"
 
 #: ../Doc/c-api/call.rst:6
 msgid "Call Protocol"
@@ -113,7 +113,17 @@ msgstr ""
 "Una clase que admita vectorcall **debe** también implementar :c:member:"
 "`~PyTypeObject.tp_call` con la misma semántica."
 
-#: ../Doc/c-api/call.rst:60
+#: ../Doc/c-api/call.rst:62
+msgid ""
+"The :c:macro:`Py_TPFLAGS_HAVE_VECTORCALL` flag is now removed from a class "
+"when the class's :py:meth:`~object.__call__` method is reassigned. (This "
+"internally sets :c:member:`~PyTypeObject.tp_call` only, and thus may make it "
+"behave differently than the vectorcall function.) In earlier Python "
+"versions, vectorcall should only be used with :c:macro:`immutable "
+"<Py_TPFLAGS_IMMUTABLETYPE>` or static types."
+msgstr ""
+
+#: ../Doc/c-api/call.rst:69
 msgid ""
 "A class should not implement vectorcall if that would be slower than "
 "*tp_call*. For example, if the callee needs to convert the arguments to an "
@@ -125,9 +135,10 @@ msgstr ""
 "los argumentos a una tupla args y un dict kwargs de todos modos, entonces no "
 "tiene sentido implementar vectorcall."
 
-#: ../Doc/c-api/call.rst:65
+#: ../Doc/c-api/call.rst:74
+#, fuzzy
 msgid ""
-"Classes can implement the vectorcall protocol by enabling the :const:"
+"Classes can implement the vectorcall protocol by enabling the :c:macro:"
 "`Py_TPFLAGS_HAVE_VECTORCALL` flag and setting :c:member:`~PyTypeObject."
 "tp_vectorcall_offset` to the offset inside the object structure where a "
 "*vectorcallfunc* appears. This is a pointer to a function with the following "
@@ -139,18 +150,18 @@ msgstr ""
 "estructura del objeto donde aparece un *vectorcallfunc*. Este es un puntero "
 "a una función con la siguiente firma:"
 
-#: ../Doc/c-api/call.rst:73
+#: ../Doc/c-api/call.rst:82
 msgid "*callable* is the object being called."
 msgstr "*callable* es el objeto siendo invocado."
 
-#: ../Doc/c-api/call.rst:75
+#: ../Doc/c-api/call.rst:84
 msgid ""
 "*args* is a C array consisting of the positional arguments followed by the"
 msgstr ""
 "*args* es un arreglo en C que consta de los argumentos posicionales seguidos "
 "por el"
 
-#: ../Doc/c-api/call.rst:75
+#: ../Doc/c-api/call.rst:84
 msgid ""
 "values of the keyword arguments. This can be *NULL* if there are no "
 "arguments."
@@ -158,25 +169,26 @@ msgstr ""
 "valores de los argumentos de la palabra clave. Puede ser *NULL* si no hay "
 "argumentos."
 
-#: ../Doc/c-api/call.rst:79
+#: ../Doc/c-api/call.rst:88
 msgid "*nargsf* is the number of positional arguments plus possibly the"
 msgstr "*nargsf* es el número de argumentos posicionales más posiblemente el"
 
-#: ../Doc/c-api/call.rst:78
+#: ../Doc/c-api/call.rst:87
+#, fuzzy
 msgid ""
-":const:`PY_VECTORCALL_ARGUMENTS_OFFSET` flag. To get the actual number of "
+":c:macro:`PY_VECTORCALL_ARGUMENTS_OFFSET` flag. To get the actual number of "
 "positional arguments from *nargsf*, use :c:func:`PyVectorcall_NARGS`."
 msgstr ""
 "flag :const:`PY_VECTORCALL_ARGUMENTS_OFFSET`. Para obtener el número real de "
 "argumentos posicionales de *nargsf*, use :c:func:`PyVectorcall_NARGS`."
 
-#: ../Doc/c-api/call.rst:85
+#: ../Doc/c-api/call.rst:94
 msgid "*kwnames* is a tuple containing the names of the keyword arguments;"
 msgstr ""
 "*kwnames* es una tupla que contiene los nombres de los argumentos de la "
 "palabra clave;"
 
-#: ../Doc/c-api/call.rst:82
+#: ../Doc/c-api/call.rst:91
 msgid ""
 "in other words, the keys of the kwargs dict. These names must be strings "
 "(instances of ``str`` or a subclass) and they must be unique. If there are "
@@ -186,7 +198,7 @@ msgstr ""
 "ser cadenas (instancias de ``str`` o una subclase) y deben ser únicos. Si no "
 "hay argumentos de palabras clave, entonces *kwnames* puede ser *NULL*."
 
-#: ../Doc/c-api/call.rst:89
+#: ../Doc/c-api/call.rst:98
 msgid ""
 "If this flag is set in a vectorcall *nargsf* argument, the callee is allowed "
 "to temporarily change ``args[-1]``. In other words, *args* points to "
@@ -199,7 +211,7 @@ msgstr ""
 "El destinatario de la llamada debe restaurar el valor de ``args[-1]`` antes "
 "de regresar."
 
-#: ../Doc/c-api/call.rst:94
+#: ../Doc/c-api/call.rst:103
 msgid ""
 "For :c:func:`PyObject_VectorcallMethod`, this flag means instead that "
 "``args[0]`` may be changed."
@@ -207,10 +219,11 @@ msgstr ""
 "Para :c:func:`PyObject_VectorcallMethod`, este flag significa en cambio que "
 "``args[0]`` puede cambiarse."
 
-#: ../Doc/c-api/call.rst:97
+#: ../Doc/c-api/call.rst:106
+#, fuzzy
 msgid ""
 "Whenever they can do so cheaply (without additional allocation), callers are "
-"encouraged to use :const:`PY_VECTORCALL_ARGUMENTS_OFFSET`. Doing so will "
+"encouraged to use :c:macro:`PY_VECTORCALL_ARGUMENTS_OFFSET`. Doing so will "
 "allow callables such as bound methods to make their onward calls (which "
 "include a prepended *self* argument) very efficiently."
 msgstr ""
@@ -220,7 +233,7 @@ msgstr ""
 "llaman, como los métodos enlazados, realicen sus llamadas posteriores (que "
 "incluyen un argumento *self* antepuesto) de manera muy eficiente."
 
-#: ../Doc/c-api/call.rst:102
+#: ../Doc/c-api/call.rst:111
 msgid ""
 "To call an object that implements vectorcall, use a :ref:`call API <capi-"
 "call>` function as with any other callable. :c:func:`PyObject_Vectorcall` "
@@ -230,7 +243,7 @@ msgstr ""
 "`call API <capi-call>` como con cualquier otro invocable. :c:func:"
 "`PyObject_Vectorcall` normalmente será más eficiente."
 
-#: ../Doc/c-api/call.rst:109
+#: ../Doc/c-api/call.rst:118
 msgid ""
 "In CPython 3.8, the vectorcall API and related functions were available "
 "provisionally under names with a leading underscore: "
@@ -250,11 +263,11 @@ msgstr ""
 "``_PyObject_FastCallDict``. Los nombres antiguos todavía se definen como "
 "alias de los nuevos nombres no subrayados."
 
-#: ../Doc/c-api/call.rst:121
+#: ../Doc/c-api/call.rst:130
 msgid "Recursion Control"
 msgstr "Control de recursión"
 
-#: ../Doc/c-api/call.rst:123
+#: ../Doc/c-api/call.rst:132
 msgid ""
 "When using *tp_call*, callees do not need to worry about :ref:`recursion "
 "<recursion>`: CPython uses :c:func:`Py_EnterRecursiveCall` and :c:func:"
@@ -264,7 +277,7 @@ msgstr ""
 "`recursividad <recursion>`: CPython usa :c:func:`Py_EnterRecursiveCall` y :c:"
 "func:`Py_LeaveRecursiveCall` para llamadas realizadas usando *tp_call*."
 
-#: ../Doc/c-api/call.rst:128
+#: ../Doc/c-api/call.rst:137
 msgid ""
 "For efficiency, this is not the case for calls done using vectorcall: the "
 "callee should use *Py_EnterRecursiveCall* and *Py_LeaveRecursiveCall* if "
@@ -274,11 +287,11 @@ msgstr ""
 "vectorcall: el destinatario de la llamada debe utilizar "
 "*Py_EnterRecursiveCall* y *Py_LeaveRecursiveCall* si es necesario."
 
-#: ../Doc/c-api/call.rst:134
+#: ../Doc/c-api/call.rst:143
 msgid "Vectorcall Support API"
 msgstr "API de soporte para vectorcall"
 
-#: ../Doc/c-api/call.rst:138
+#: ../Doc/c-api/call.rst:147
 msgid ""
 "Given a vectorcall *nargsf* argument, return the actual number of arguments. "
 "Currently equivalent to::"
@@ -286,7 +299,7 @@ msgstr ""
 "Dado un argumento vectorcall *nargsf*, retorna el número real de argumentos. "
 "Actualmente equivalente a:"
 
-#: ../Doc/c-api/call.rst:144
+#: ../Doc/c-api/call.rst:153
 msgid ""
 "However, the function ``PyVectorcall_NARGS`` should be used to allow for "
 "future extensions."
@@ -294,7 +307,7 @@ msgstr ""
 "Sin embargo, la función ``PyVectorcall_NARGS`` debe usarse para permitir "
 "futuras extensiones."
 
-#: ../Doc/c-api/call.rst:151
+#: ../Doc/c-api/call.rst:160
 msgid ""
 "If *op* does not support the vectorcall protocol (either because the type "
 "does not or because the specific instance does not), return *NULL*. "
@@ -306,7 +319,7 @@ msgstr ""
 "contrario, retorna el puntero de la función vectorcall almacenado en *op*. "
 "Esta función nunca lanza una excepción."
 
-#: ../Doc/c-api/call.rst:156
+#: ../Doc/c-api/call.rst:165
 msgid ""
 "This is mostly useful to check whether or not *op* supports vectorcall, "
 "which can be done by checking ``PyVectorcall_Function(op) != NULL``."
@@ -314,7 +327,7 @@ msgstr ""
 "Esto es principalmente útil para verificar si *op* admite vectorcall, lo "
 "cual se puede hacer marcando ``PyVectorcall_Function(op) != NULL``."
 
-#: ../Doc/c-api/call.rst:163
+#: ../Doc/c-api/call.rst:172
 msgid ""
 "Call *callable*'s :c:type:`vectorcallfunc` with positional and keyword "
 "arguments given in a tuple and dict, respectively."
@@ -322,11 +335,12 @@ msgstr ""
 "Llama a la :c:type:`vectorcallfunc` de *callable* con argumentos "
 "posicionales y de palabras clave dados en una tupla y dict, respectivamente."
 
-#: ../Doc/c-api/call.rst:166
+#: ../Doc/c-api/call.rst:175
+#, fuzzy
 msgid ""
 "This is a specialized function, intended to be put in the :c:member:"
 "`~PyTypeObject.tp_call` slot or be used in an implementation of ``tp_call``. "
-"It does not check the :const:`Py_TPFLAGS_HAVE_VECTORCALL` flag and it does "
+"It does not check the :c:macro:`Py_TPFLAGS_HAVE_VECTORCALL` flag and it does "
 "not fall back to ``tp_call``."
 msgstr ""
 "Esta es una función especializada, destinada a colocarse en el slot :c:"
@@ -334,11 +348,11 @@ msgstr ""
 "``tp_call``. No comprueba el flag :const:`Py_TPFLAGS_HAVE_VECTORCALL` y no "
 "vuelve a ``tp_call``."
 
-#: ../Doc/c-api/call.rst:177
+#: ../Doc/c-api/call.rst:186
 msgid "Object Calling API"
 msgstr "API para invocar objetos"
 
-#: ../Doc/c-api/call.rst:179
+#: ../Doc/c-api/call.rst:188
 msgid ""
 "Various functions are available for calling a Python object. Each converts "
 "its arguments to a convention supported by the called object – either "
@@ -350,7 +364,7 @@ msgstr ""
 "ya sea *tp_call* o vectorcall. Para realizar la menor conversión posible, "
 "elija la que mejor se adapte al formato de datos que tiene disponible."
 
-#: ../Doc/c-api/call.rst:185
+#: ../Doc/c-api/call.rst:194
 msgid ""
 "The following table summarizes the available functions; please see "
 "individual documentation for details."
@@ -358,132 +372,132 @@ msgstr ""
 "La siguiente tabla resume las funciones disponibles; consulte la "
 "documentación individual para obtener más detalles."
 
-#: ../Doc/c-api/call.rst:189
+#: ../Doc/c-api/call.rst:198
 msgid "Function"
 msgstr "Función"
 
-#: ../Doc/c-api/call.rst:189
+#: ../Doc/c-api/call.rst:198
 msgid "callable"
 msgstr "invocable"
 
-#: ../Doc/c-api/call.rst:189
+#: ../Doc/c-api/call.rst:198
 msgid "args"
 msgstr "args"
 
-#: ../Doc/c-api/call.rst:189
+#: ../Doc/c-api/call.rst:198
 msgid "kwargs"
 msgstr "kwargs"
 
-#: ../Doc/c-api/call.rst:191
+#: ../Doc/c-api/call.rst:200
 msgid ":c:func:`PyObject_Call`"
 msgstr ":c:func:`PyObject_Call`"
 
-#: ../Doc/c-api/call.rst:191 ../Doc/c-api/call.rst:193
-#: ../Doc/c-api/call.rst:195 ../Doc/c-api/call.rst:197
-#: ../Doc/c-api/call.rst:199 ../Doc/c-api/call.rst:203
-#: ../Doc/c-api/call.rst:211 ../Doc/c-api/call.rst:213
+#: ../Doc/c-api/call.rst:200 ../Doc/c-api/call.rst:202
+#: ../Doc/c-api/call.rst:204 ../Doc/c-api/call.rst:206
+#: ../Doc/c-api/call.rst:208 ../Doc/c-api/call.rst:212
+#: ../Doc/c-api/call.rst:220 ../Doc/c-api/call.rst:222
 msgid "``PyObject *``"
 msgstr "``PyObject *``"
 
-#: ../Doc/c-api/call.rst:191
+#: ../Doc/c-api/call.rst:200
 msgid "tuple"
 msgstr "tupla"
 
-#: ../Doc/c-api/call.rst:191 ../Doc/c-api/call.rst:213
+#: ../Doc/c-api/call.rst:200 ../Doc/c-api/call.rst:222
 msgid "dict/``NULL``"
 msgstr "dict/``NULL``"
 
-#: ../Doc/c-api/call.rst:193
+#: ../Doc/c-api/call.rst:202
 msgid ":c:func:`PyObject_CallNoArgs`"
 msgstr ":c:func:`PyObject_CallNoArgs`"
 
-#: ../Doc/c-api/call.rst:193 ../Doc/c-api/call.rst:195
-#: ../Doc/c-api/call.rst:197 ../Doc/c-api/call.rst:199
-#: ../Doc/c-api/call.rst:201 ../Doc/c-api/call.rst:203
-#: ../Doc/c-api/call.rst:205 ../Doc/c-api/call.rst:207
-#: ../Doc/c-api/call.rst:209
+#: ../Doc/c-api/call.rst:202 ../Doc/c-api/call.rst:204
+#: ../Doc/c-api/call.rst:206 ../Doc/c-api/call.rst:208
+#: ../Doc/c-api/call.rst:210 ../Doc/c-api/call.rst:212
+#: ../Doc/c-api/call.rst:214 ../Doc/c-api/call.rst:216
+#: ../Doc/c-api/call.rst:218
 msgid "---"
 msgstr "---"
 
-#: ../Doc/c-api/call.rst:195
+#: ../Doc/c-api/call.rst:204
 msgid ":c:func:`PyObject_CallOneArg`"
 msgstr ":c:func:`PyObject_CallOneArg`"
 
-#: ../Doc/c-api/call.rst:195 ../Doc/c-api/call.rst:209
+#: ../Doc/c-api/call.rst:204 ../Doc/c-api/call.rst:218
 msgid "1 object"
 msgstr "1 objeto"
 
-#: ../Doc/c-api/call.rst:197
+#: ../Doc/c-api/call.rst:206
 msgid ":c:func:`PyObject_CallObject`"
 msgstr ":c:func:`PyObject_CallObject`"
 
-#: ../Doc/c-api/call.rst:197
+#: ../Doc/c-api/call.rst:206
 msgid "tuple/``NULL``"
 msgstr "tuple/``NULL``"
 
-#: ../Doc/c-api/call.rst:199
+#: ../Doc/c-api/call.rst:208
 msgid ":c:func:`PyObject_CallFunction`"
 msgstr ":c:func:`PyObject_CallFunction`"
 
-#: ../Doc/c-api/call.rst:199 ../Doc/c-api/call.rst:201
+#: ../Doc/c-api/call.rst:208 ../Doc/c-api/call.rst:210
 msgid "format"
 msgstr "formato"
 
-#: ../Doc/c-api/call.rst:201
+#: ../Doc/c-api/call.rst:210
 msgid ":c:func:`PyObject_CallMethod`"
 msgstr ":c:func:`PyObject_CallMethod`"
 
-#: ../Doc/c-api/call.rst:201
+#: ../Doc/c-api/call.rst:210
 msgid "obj + ``char*``"
 msgstr "obj + ``char*``"
 
-#: ../Doc/c-api/call.rst:203
+#: ../Doc/c-api/call.rst:212
 msgid ":c:func:`PyObject_CallFunctionObjArgs`"
 msgstr ":c:func:`PyObject_CallFunctionObjArgs`"
 
-#: ../Doc/c-api/call.rst:203 ../Doc/c-api/call.rst:205
+#: ../Doc/c-api/call.rst:212 ../Doc/c-api/call.rst:214
 msgid "variadic"
 msgstr "variadica"
 
-#: ../Doc/c-api/call.rst:205
+#: ../Doc/c-api/call.rst:214
 msgid ":c:func:`PyObject_CallMethodObjArgs`"
 msgstr ":c:func:`PyObject_CallMethodObjArgs`"
 
-#: ../Doc/c-api/call.rst:205 ../Doc/c-api/call.rst:207
-#: ../Doc/c-api/call.rst:209
+#: ../Doc/c-api/call.rst:214 ../Doc/c-api/call.rst:216
+#: ../Doc/c-api/call.rst:218
 msgid "obj + name"
 msgstr "obj + nombre"
 
-#: ../Doc/c-api/call.rst:207
+#: ../Doc/c-api/call.rst:216
 msgid ":c:func:`PyObject_CallMethodNoArgs`"
 msgstr ":c:func:`PyObject_CallMethodNoArgs`"
 
-#: ../Doc/c-api/call.rst:209
+#: ../Doc/c-api/call.rst:218
 msgid ":c:func:`PyObject_CallMethodOneArg`"
 msgstr ":c:func:`PyObject_CallMethodOneArg`"
 
-#: ../Doc/c-api/call.rst:211
+#: ../Doc/c-api/call.rst:220
 msgid ":c:func:`PyObject_Vectorcall`"
 msgstr ":c:func:`PyObject_Vectorcall`"
 
-#: ../Doc/c-api/call.rst:211 ../Doc/c-api/call.rst:213
-#: ../Doc/c-api/call.rst:215
+#: ../Doc/c-api/call.rst:220 ../Doc/c-api/call.rst:222
+#: ../Doc/c-api/call.rst:224
 msgid "vectorcall"
 msgstr "vectorcall"
 
-#: ../Doc/c-api/call.rst:213
+#: ../Doc/c-api/call.rst:222
 msgid ":c:func:`PyObject_VectorcallDict`"
 msgstr ":c:func:`PyObject_VectorcallDict`"
 
-#: ../Doc/c-api/call.rst:215
+#: ../Doc/c-api/call.rst:224
 msgid ":c:func:`PyObject_VectorcallMethod`"
 msgstr ":c:func:`PyObject_VectorcallMethod`"
 
-#: ../Doc/c-api/call.rst:215
+#: ../Doc/c-api/call.rst:224
 msgid "arg + name"
 msgstr "arg + nombre"
 
-#: ../Doc/c-api/call.rst:221
+#: ../Doc/c-api/call.rst:230
 msgid ""
 "Call a callable Python object *callable*, with arguments given by the tuple "
 "*args*, and named arguments given by the dictionary *kwargs*."
@@ -491,7 +505,7 @@ msgstr ""
 "Llama a un objeto de Python invocable *callable*, con argumentos dados por "
 "la tupla *args*, y argumentos con nombre dados por el diccionario *kwargs*."
 
-#: ../Doc/c-api/call.rst:224
+#: ../Doc/c-api/call.rst:233
 msgid ""
 "*args* must not be *NULL*; use an empty tuple if no arguments are needed. If "
 "no named arguments are needed, *kwargs* can be *NULL*."
@@ -500,12 +514,12 @@ msgstr ""
 "argumentos. Si no se necesitan argumentos con nombre, *kwargs* puede ser "
 "*NULL*."
 
-#: ../Doc/c-api/call.rst:227 ../Doc/c-api/call.rst:239
-#: ../Doc/c-api/call.rst:250 ../Doc/c-api/call.rst:261
-#: ../Doc/c-api/call.rst:273 ../Doc/c-api/call.rst:293
-#: ../Doc/c-api/call.rst:312 ../Doc/c-api/call.rst:326
-#: ../Doc/c-api/call.rst:335 ../Doc/c-api/call.rst:347
-#: ../Doc/c-api/call.rst:360 ../Doc/c-api/call.rst:394
+#: ../Doc/c-api/call.rst:236 ../Doc/c-api/call.rst:248
+#: ../Doc/c-api/call.rst:259 ../Doc/c-api/call.rst:270
+#: ../Doc/c-api/call.rst:282 ../Doc/c-api/call.rst:302
+#: ../Doc/c-api/call.rst:321 ../Doc/c-api/call.rst:335
+#: ../Doc/c-api/call.rst:344 ../Doc/c-api/call.rst:356
+#: ../Doc/c-api/call.rst:369 ../Doc/c-api/call.rst:403
 msgid ""
 "Return the result of the call on success, or raise an exception and return "
 "*NULL* on failure."
@@ -513,7 +527,7 @@ msgstr ""
 "Retorna el resultado de la llamada en caso de éxito o lanza una excepción y "
 "retorna *NULL* en caso de error."
 
-#: ../Doc/c-api/call.rst:230
+#: ../Doc/c-api/call.rst:239
 msgid ""
 "This is the equivalent of the Python expression: ``callable(*args, "
 "**kwargs)``."
@@ -521,7 +535,7 @@ msgstr ""
 "Este es el equivalente de la expresión de Python: ``callable(*args, "
 "**kwargs)``."
 
-#: ../Doc/c-api/call.rst:236
+#: ../Doc/c-api/call.rst:245
 msgid ""
 "Call a callable Python object *callable* without any arguments. It is the "
 "most efficient way to call a callable Python object without any argument."
@@ -530,7 +544,7 @@ msgstr ""
 "forma más eficiente de llamar a un objeto Python invocable sin ningún "
 "argumento."
 
-#: ../Doc/c-api/call.rst:247
+#: ../Doc/c-api/call.rst:256
 msgid ""
 "Call a callable Python object *callable* with exactly 1 positional argument "
 "*arg* and no keyword arguments."
@@ -538,7 +552,7 @@ msgstr ""
 "Llama a un objeto de Python invocable *callable* con exactamente 1 argumento "
 "posicional *arg* y sin argumentos de palabra clave."
 
-#: ../Doc/c-api/call.rst:258
+#: ../Doc/c-api/call.rst:267
 msgid ""
 "Call a callable Python object *callable*, with arguments given by the tuple "
 "*args*.  If no arguments are needed, then *args* can be *NULL*."
@@ -547,11 +561,11 @@ msgstr ""
 "la tupla *args*. Si no se necesitan argumentos, entonces *args* puede ser "
 "*NULL*."
 
-#: ../Doc/c-api/call.rst:264 ../Doc/c-api/call.rst:276
+#: ../Doc/c-api/call.rst:273 ../Doc/c-api/call.rst:285
 msgid "This is the equivalent of the Python expression: ``callable(*args)``."
 msgstr "Este es el equivalente de la expresión de Python: ``callable(*args)``."
 
-#: ../Doc/c-api/call.rst:269
+#: ../Doc/c-api/call.rst:278
 msgid ""
 "Call a callable Python object *callable*, with a variable number of C "
 "arguments. The C arguments are described using a :c:func:`Py_BuildValue` "
@@ -563,7 +577,7 @@ msgstr ""
 "caracteres de formato de estilo :c:func:`Py_BuildValue`. El formato puede "
 "ser *NULL*, lo que indica que no se proporcionan argumentos."
 
-#: ../Doc/c-api/call.rst:278
+#: ../Doc/c-api/call.rst:287
 #, fuzzy
 msgid ""
 "Note that if you only pass :c:expr:`PyObject *` args, :c:func:"
@@ -572,11 +586,11 @@ msgstr ""
 "Tenga en cuenta que si solo pasa :c:type:`PyObject *` args, :c:func:"
 "`PyObject_CallFunctionObjArgs` es una alternativa más rápida."
 
-#: ../Doc/c-api/call.rst:281
+#: ../Doc/c-api/call.rst:290
 msgid "The type of *format* was changed from ``char *``."
 msgstr "El tipo de *format* se cambió desde ``char *``."
 
-#: ../Doc/c-api/call.rst:287
+#: ../Doc/c-api/call.rst:296
 msgid ""
 "Call the method named *name* of object *obj* with a variable number of C "
 "arguments.  The C arguments are described by a :c:func:`Py_BuildValue` "
@@ -586,12 +600,12 @@ msgstr ""
 "argumentos en C. Los argumentos de C se describen mediante una cadena de "
 "formato :c:func:`Py_BuildValue` que debería producir una tupla."
 
-#: ../Doc/c-api/call.rst:291
+#: ../Doc/c-api/call.rst:300
 msgid "The format can be *NULL*, indicating that no arguments are provided."
 msgstr ""
 "El formato puede ser *NULL*, lo que indica que no se proporcionan argumentos."
 
-#: ../Doc/c-api/call.rst:296
+#: ../Doc/c-api/call.rst:305
 msgid ""
 "This is the equivalent of the Python expression: ``obj.name(arg1, "
 "arg2, ...)``."
@@ -599,7 +613,7 @@ msgstr ""
 "Este es el equivalente de la expresión de Python: ``obj.name(arg1, "
 "arg2, ...)``."
 
-#: ../Doc/c-api/call.rst:299
+#: ../Doc/c-api/call.rst:308
 #, fuzzy
 msgid ""
 "Note that if you only pass :c:expr:`PyObject *` args, :c:func:"
@@ -608,11 +622,11 @@ msgstr ""
 "Tenga en cuenta que si solo pasa :c:type:`PyObject *` args, :c:func:"
 "`PyObject_CallMethodObjArgs` es una alternativa más rápida."
 
-#: ../Doc/c-api/call.rst:302
+#: ../Doc/c-api/call.rst:311
 msgid "The types of *name* and *format* were changed from ``char *``."
 msgstr "Los tipos de *name* y *format* se cambiaron desde ``char *``."
 
-#: ../Doc/c-api/call.rst:308
+#: ../Doc/c-api/call.rst:317
 #, fuzzy
 msgid ""
 "Call a callable Python object *callable*, with a variable number of :c:expr:"
@@ -623,7 +637,7 @@ msgstr ""
 "argumentos :c:type:`PyObject *`. Los argumentos se proporcionan como un "
 "número variable de parámetros seguidos de *NULL*."
 
-#: ../Doc/c-api/call.rst:315
+#: ../Doc/c-api/call.rst:324
 msgid ""
 "This is the equivalent of the Python expression: ``callable(arg1, "
 "arg2, ...)``."
@@ -631,7 +645,7 @@ msgstr ""
 "Este es el equivalente de la expresión de Python: ``callable(arg1, "
 "arg2, ...)``."
 
-#: ../Doc/c-api/call.rst:321
+#: ../Doc/c-api/call.rst:330
 #, fuzzy
 msgid ""
 "Call a method of the Python object *obj*, where the name of the method is "
@@ -645,7 +659,7 @@ msgstr ""
 "argumentos se proporcionan como un número variable de parámetros seguidos de "
 "*NULL*."
 
-#: ../Doc/c-api/call.rst:332
+#: ../Doc/c-api/call.rst:341
 msgid ""
 "Call a method of the Python object *obj* without arguments, where the name "
 "of the method is given as a Python string object in *name*."
@@ -653,7 +667,7 @@ msgstr ""
 "Llama a un método del objeto de Python *obj* sin argumentos, donde el nombre "
 "del método se da como un objeto de cadena de caracteres de Python en *name*."
 
-#: ../Doc/c-api/call.rst:343
+#: ../Doc/c-api/call.rst:352
 msgid ""
 "Call a method of the Python object *obj* with a single positional argument "
 "*arg*, where the name of the method is given as a Python string object in "
@@ -663,7 +677,7 @@ msgstr ""
 "posicional *arg*, donde el nombre del método se proporciona como un objeto "
 "de cadena de caracteres de Python en *name*."
 
-#: ../Doc/c-api/call.rst:355
+#: ../Doc/c-api/call.rst:364
 msgid ""
 "Call a callable Python object *callable*. The arguments are the same as for :"
 "c:type:`vectorcallfunc`. If *callable* supports vectorcall_, this directly "
@@ -673,7 +687,7 @@ msgstr ""
 "mismos que para :c:type:`vectorcallfunc`. Si *callable* admite vectorcall_, "
 "esto llama directamente a la función vectorcall almacenada en *callable*."
 
-#: ../Doc/c-api/call.rst:367
+#: ../Doc/c-api/call.rst:376
 msgid ""
 "Call *callable* with positional arguments passed exactly as in the "
 "vectorcall_ protocol, but with keyword arguments passed as a dictionary "
@@ -684,7 +698,7 @@ msgstr ""
 "un diccionario *kwdict*. El arreglo *args* contiene solo los argumentos "
 "posicionales."
 
-#: ../Doc/c-api/call.rst:371
+#: ../Doc/c-api/call.rst:380
 msgid ""
 "Regardless of which protocol is used internally, a conversion of arguments "
 "needs to be done. Therefore, this function should only be used if the caller "
@@ -697,14 +711,15 @@ msgstr ""
 "los argumentos de palabras clave, pero no una tupla para los argumentos "
 "posicionales."
 
-#: ../Doc/c-api/call.rst:381
+#: ../Doc/c-api/call.rst:390
+#, fuzzy
 msgid ""
 "Call a method using the vectorcall calling convention. The name of the "
 "method is given as a Python string *name*. The object whose method is called "
 "is *args[0]*, and the *args* array starting at *args[1]* represents the "
 "arguments of the call. There must be at least one positional argument. "
-"*nargsf* is the number of positional arguments including *args[0]*, plus :"
-"const:`PY_VECTORCALL_ARGUMENTS_OFFSET` if the value of ``args[0]`` may "
+"*nargsf* is the number of positional arguments including *args[0]*, plus :c:"
+"macro:`PY_VECTORCALL_ARGUMENTS_OFFSET` if the value of ``args[0]`` may "
 "temporarily be changed. Keyword arguments can be passed just like in :c:func:"
 "`PyObject_Vectorcall`."
 msgstr ""
@@ -717,20 +732,21 @@ msgstr ""
 "``args[0]`` puede cambiarse temporalmente. Los argumentos de palabras clave "
 "se pueden pasar como en :c:func:`PyObject_Vectorcall`."
 
-#: ../Doc/c-api/call.rst:390
+#: ../Doc/c-api/call.rst:399
+#, fuzzy
 msgid ""
-"If the object has the :const:`Py_TPFLAGS_METHOD_DESCRIPTOR` feature, this "
+"If the object has the :c:macro:`Py_TPFLAGS_METHOD_DESCRIPTOR` feature, this "
 "will call the unbound method object with the full *args* vector as arguments."
 msgstr ""
 "Si el objeto tiene la característica :const:`Py_TPFLAGS_METHOD_DESCRIPTOR`, "
 "esto llamará al objeto de método independiente con el vector *args* completo "
 "como argumentos."
 
-#: ../Doc/c-api/call.rst:401
+#: ../Doc/c-api/call.rst:410
 msgid "Call Support API"
 msgstr "API de soporte de llamadas"
 
-#: ../Doc/c-api/call.rst:405
+#: ../Doc/c-api/call.rst:414
 msgid ""
 "Determine if the object *o* is callable.  Return ``1`` if the object is "
 "callable and ``0`` otherwise.  This function always succeeds."

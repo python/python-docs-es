@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-25 19:47+0200\n"
+"POT-Creation-Date: 2023-10-12 19:43+0200\n"
 "PO-Revision-Date: 2020-05-10 02:44+0200\n"
 "Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.10.3\n"
+"Generated-By: Babel 2.13.0\n"
 
 #: ../Doc/c-api/mapping.rst:6
 msgid "Mapping Protocol"
@@ -38,8 +38,8 @@ msgstr ""
 msgid ""
 "Return ``1`` if the object provides the mapping protocol or supports "
 "slicing, and ``0`` otherwise.  Note that it returns ``1`` for Python classes "
-"with a :meth:`__getitem__` method, since in general it is impossible to "
-"determine what type of keys the class supports. This function always "
+"with a :meth:`~object.__getitem__` method, since in general it is impossible "
+"to determine what type of keys the class supports. This function always "
 "succeeds."
 msgstr ""
 "Retorna ``1`` si el objeto proporciona el protocolo de mapeo o admite "
@@ -58,46 +58,30 @@ msgstr ""
 
 #: ../Doc/c-api/mapping.rst:31
 msgid ""
-"Return element of *o* corresponding to the string *key* or ``NULL`` on "
-"failure. This is the equivalent of the Python expression ``o[key]``. See "
-"also :c:func:`PyObject_GetItem`."
+"This is the same as :c:func:`PyObject_GetItem`, but *key* is specified as a :"
+"c:expr:`const char*` UTF-8 encoded bytes string, rather than a :c:expr:"
+"`PyObject*`."
 msgstr ""
-"Retorna el elemento de *o* correspondiente a la cadena de caracteres *key* o "
-"``NULL`` en caso de error. Este es el equivalente de la expresión de Python "
-"``o[key]``. Ver también :c:func:`PyObject_GetItem`."
 
 #: ../Doc/c-api/mapping.rst:38
 msgid ""
-"Map the string *key* to the value *v* in object *o*.  Returns ``-1`` on "
-"failure.  This is the equivalent of the Python statement ``o[key] = v``. See "
-"also :c:func:`PyObject_SetItem`.  This function *does not* steal a reference "
-"to *v*."
+"This is the same as :c:func:`PyObject_SetItem`, but *key* is specified as a :"
+"c:expr:`const char*` UTF-8 encoded bytes string, rather than a :c:expr:"
+"`PyObject*`."
 msgstr ""
-"Asigna la cadena de caracteres *key* al valor *v* en el objeto *o*. Retorna "
-"``-1`` en caso de falla. Este es el equivalente de la declaración de Python "
-"``o[key] = v``. Ver también :c:func:`PyObject_SetItem`. Esta función *no* "
-"roba una referencia a *v*."
 
-#: ../Doc/c-api/mapping.rst:46
+#: ../Doc/c-api/mapping.rst:45
+msgid "This is an alias of :c:func:`PyObject_DelItem`."
+msgstr ""
+
+#: ../Doc/c-api/mapping.rst:50
 msgid ""
-"Remove the mapping for the object *key* from the object *o*.  Return ``-1`` "
-"on failure.  This is equivalent to the Python statement ``del o[key]``. This "
-"is an alias of :c:func:`PyObject_DelItem`."
+"This is the same as :c:func:`PyObject_DelItem`, but *key* is specified as a :"
+"c:expr:`const char*` UTF-8 encoded bytes string, rather than a :c:expr:"
+"`PyObject*`."
 msgstr ""
-"Elimina la asignación para el objeto *key* del objeto *o*. Retorna ``-1`` en "
-"caso de falla. Esto es equivalente a la declaración de Python ``del "
-"o[key]``. Este es un alias de :c:func:`PyObject_DelItem`."
 
-#: ../Doc/c-api/mapping.rst:53
-msgid ""
-"Remove the mapping for the string *key* from the object *o*.  Return ``-1`` "
-"on failure.  This is equivalent to the Python statement ``del o[key]``."
-msgstr ""
-"Elimina la asignación de la cadena de caracteres *key* del objeto *o*. "
-"Retorna ``-1`` en caso de falla. Esto es equivalente a la declaración de "
-"Python ``del o[key]``."
-
-#: ../Doc/c-api/mapping.rst:59 ../Doc/c-api/mapping.rst:70
+#: ../Doc/c-api/mapping.rst:57
 msgid ""
 "Return ``1`` if the mapping object has the key *key* and ``0`` otherwise. "
 "This is equivalent to the Python expression ``key in o``. This function "
@@ -108,27 +92,36 @@ msgstr ""
 "función siempre finaliza con éxito."
 
 #: ../Doc/c-api/mapping.rst:63
+#, fuzzy
 msgid ""
-"Note that exceptions which occur while calling the :meth:`__getitem__` "
-"method will get suppressed. To get error reporting use :c:func:"
+"Exceptions which occur when this calls :meth:`~object.__getitem__` method "
+"are silently ignored. For proper error handling, use :c:func:"
 "`PyObject_GetItem()` instead."
 msgstr ""
 "Tenga en cuenta que las excepciones que se producen al llamar al método :"
 "meth:`__getitem__` se suprimirán. Para obtener informes de errores, utilice :"
 "c:func:`PyObject_GetItem()` en su lugar."
 
-#: ../Doc/c-api/mapping.rst:74
+#: ../Doc/c-api/mapping.rst:70
 msgid ""
-"Note that exceptions which occur while calling the :meth:`__getitem__` "
-"method and creating a temporary string object will get suppressed. To get "
-"error reporting use :c:func:`PyMapping_GetItemString()` instead."
+"This is the same as :c:func:`PyMapping_HasKey`, but *key* is specified as a :"
+"c:expr:`const char*` UTF-8 encoded bytes string, rather than a :c:expr:"
+"`PyObject*`."
+msgstr ""
+
+#: ../Doc/c-api/mapping.rst:76
+#, fuzzy
+msgid ""
+"Exceptions that occur when this calls :meth:`~object.__getitem__` method or "
+"while creating the temporary :class:`str` object are silently ignored. For "
+"proper error handling, use :c:func:`PyMapping_GetItemString` instead."
 msgstr ""
 "Tenga en cuenta que las excepciones que se producen al llamar al método :"
 "meth:`__getitem__` y al crear un objeto de cadena de caracteres temporal se "
 "suprimirán. Para obtener informes de errores, utilice :c:func:"
 "`PyMapping_GetItemString()` en su lugar."
 
-#: ../Doc/c-api/mapping.rst:81
+#: ../Doc/c-api/mapping.rst:84
 msgid ""
 "On success, return a list of the keys in object *o*.  On failure, return "
 "``NULL``."
@@ -136,12 +129,12 @@ msgstr ""
 "En caso de éxito, retorna una lista de las claves en el objeto *o*. En caso "
 "de fallo, retorna ``NULL``."
 
-#: ../Doc/c-api/mapping.rst:84 ../Doc/c-api/mapping.rst:93
-#: ../Doc/c-api/mapping.rst:102
+#: ../Doc/c-api/mapping.rst:87 ../Doc/c-api/mapping.rst:96
+#: ../Doc/c-api/mapping.rst:105
 msgid "Previously, the function returned a list or a tuple."
 msgstr "Anteriormente, la función retornaba una lista o una tupla."
 
-#: ../Doc/c-api/mapping.rst:90
+#: ../Doc/c-api/mapping.rst:93
 msgid ""
 "On success, return a list of the values in object *o*.  On failure, return "
 "``NULL``."
@@ -149,7 +142,7 @@ msgstr ""
 "En caso de éxito, retorna una lista de los valores en el objeto *o*. En caso "
 "de fallo, retorna ``NULL``."
 
-#: ../Doc/c-api/mapping.rst:99
+#: ../Doc/c-api/mapping.rst:102
 msgid ""
 "On success, return a list of the items in object *o*, where each item is a "
 "tuple containing a key-value pair.  On failure, return ``NULL``."
@@ -157,3 +150,49 @@ msgstr ""
 "En caso de éxito, retorna una lista de los elementos en el objeto *o*, donde "
 "cada elemento es una tupla que contiene un par clave-valor (*key-value*). En "
 "caso de fallo, retorna ``NULL``."
+
+#: ../Doc/c-api/mapping.rst:23
+msgid "built-in function"
+msgstr ""
+
+#: ../Doc/c-api/mapping.rst:23
+msgid "len"
+msgstr ""
+
+#~ msgid ""
+#~ "Return element of *o* corresponding to the string *key* or ``NULL`` on "
+#~ "failure. This is the equivalent of the Python expression ``o[key]``. See "
+#~ "also :c:func:`PyObject_GetItem`."
+#~ msgstr ""
+#~ "Retorna el elemento de *o* correspondiente a la cadena de caracteres "
+#~ "*key* o ``NULL`` en caso de error. Este es el equivalente de la expresión "
+#~ "de Python ``o[key]``. Ver también :c:func:`PyObject_GetItem`."
+
+#~ msgid ""
+#~ "Map the string *key* to the value *v* in object *o*.  Returns ``-1`` on "
+#~ "failure.  This is the equivalent of the Python statement ``o[key] = v``. "
+#~ "See also :c:func:`PyObject_SetItem`.  This function *does not* steal a "
+#~ "reference to *v*."
+#~ msgstr ""
+#~ "Asigna la cadena de caracteres *key* al valor *v* en el objeto *o*. "
+#~ "Retorna ``-1`` en caso de falla. Este es el equivalente de la declaración "
+#~ "de Python ``o[key] = v``. Ver también :c:func:`PyObject_SetItem`. Esta "
+#~ "función *no* roba una referencia a *v*."
+
+#~ msgid ""
+#~ "Remove the mapping for the object *key* from the object *o*.  Return "
+#~ "``-1`` on failure.  This is equivalent to the Python statement ``del "
+#~ "o[key]``. This is an alias of :c:func:`PyObject_DelItem`."
+#~ msgstr ""
+#~ "Elimina la asignación para el objeto *key* del objeto *o*. Retorna ``-1`` "
+#~ "en caso de falla. Esto es equivalente a la declaración de Python ``del "
+#~ "o[key]``. Este es un alias de :c:func:`PyObject_DelItem`."
+
+#~ msgid ""
+#~ "Remove the mapping for the string *key* from the object *o*.  Return "
+#~ "``-1`` on failure.  This is equivalent to the Python statement ``del "
+#~ "o[key]``."
+#~ msgstr ""
+#~ "Elimina la asignación de la cadena de caracteres *key* del objeto *o*. "
+#~ "Retorna ``-1`` en caso de falla. Esto es equivalente a la declaración de "
+#~ "Python ``del o[key]``."

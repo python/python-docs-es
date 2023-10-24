@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-25 19:47+0200\n"
+"POT-Creation-Date: 2023-10-12 19:43+0200\n"
 "PO-Revision-Date: 2021-12-09 10:29+0800\n"
 "Last-Translator: Rodrigo Tobar <rtobarc@gmail.com>\n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.10.3\n"
+"Generated-By: Babel 2.13.0\n"
 
 #: ../Doc/c-api/function.rst:6
 msgid "Function Objects"
@@ -130,12 +130,22 @@ msgstr ""
 "Establece los valores predeterminados del argumento para el objeto función "
 "*op*. *defaults* deben ser ``Py_None`` o una tupla."
 
-#: ../Doc/c-api/function.rst:83 ../Doc/c-api/function.rst:97
-#: ../Doc/c-api/function.rst:111
+#: ../Doc/c-api/function.rst:83 ../Doc/c-api/function.rst:106
+#: ../Doc/c-api/function.rst:120
 msgid "Raises :exc:`SystemError` and returns ``-1`` on failure."
 msgstr "Lanza :exc:`SystemError` y retorna ``-1`` en caso de error."
 
 #: ../Doc/c-api/function.rst:88
+msgid "Set the vectorcall field of a given function object *func*."
+msgstr ""
+
+#: ../Doc/c-api/function.rst:90
+msgid ""
+"Warning: extensions using this API must preserve the behavior of the "
+"unaltered (default) vectorcall function!"
+msgstr ""
+
+#: ../Doc/c-api/function.rst:97
 msgid ""
 "Return the closure associated with the function object *op*. This can be "
 "``NULL`` or a tuple of cell objects."
@@ -143,7 +153,7 @@ msgstr ""
 "Retorna el cierre asociado con el objeto función *op*. Esto puede ser "
 "``NULL`` o una tupla de objetos celda."
 
-#: ../Doc/c-api/function.rst:94
+#: ../Doc/c-api/function.rst:103
 msgid ""
 "Set the closure associated with the function object *op*. *closure* must be "
 "``Py_None`` or a tuple of cell objects."
@@ -151,7 +161,7 @@ msgstr ""
 "Establece el cierre asociado con el objeto función *op*. *cierre* debe ser "
 "``Py_None`` o una tupla de objetos celda."
 
-#: ../Doc/c-api/function.rst:102
+#: ../Doc/c-api/function.rst:111
 msgid ""
 "Return the annotations of the function object *op*. This can be a mutable "
 "dictionary or ``NULL``."
@@ -159,10 +169,101 @@ msgstr ""
 "Retorna las anotaciones del objeto función *op*. Este puede ser un "
 "diccionario mutable o ``NULL``."
 
-#: ../Doc/c-api/function.rst:108
+#: ../Doc/c-api/function.rst:117
 msgid ""
 "Set the annotations for the function object *op*. *annotations* must be a "
 "dictionary or ``Py_None``."
 msgstr ""
 "Establece las anotaciones para el objeto función *op*. *annotations* debe "
 "ser un diccionario o ``Py_None``."
+
+#: ../Doc/c-api/function.rst:125
+msgid ""
+"Register *callback* as a function watcher for the current interpreter. "
+"Return an ID which may be passed to :c:func:`PyFunction_ClearWatcher`. In "
+"case of error (e.g. no more watcher IDs available), return ``-1`` and set an "
+"exception."
+msgstr ""
+
+#: ../Doc/c-api/function.rst:135
+msgid ""
+"Clear watcher identified by *watcher_id* previously returned from :c:func:"
+"`PyFunction_AddWatcher` for the current interpreter. Return ``0`` on "
+"success, or ``-1`` and set an exception on error (e.g.  if the given "
+"*watcher_id* was never registered.)"
+msgstr ""
+
+#: ../Doc/c-api/function.rst:145
+msgid ""
+"Enumeration of possible function watcher events: - "
+"``PyFunction_EVENT_CREATE`` - ``PyFunction_EVENT_DESTROY`` - "
+"``PyFunction_EVENT_MODIFY_CODE`` - ``PyFunction_EVENT_MODIFY_DEFAULTS`` - "
+"``PyFunction_EVENT_MODIFY_KWDEFAULTS``"
+msgstr ""
+
+#: ../Doc/c-api/function.rst:157
+msgid "Type of a function watcher callback function."
+msgstr ""
+
+#: ../Doc/c-api/function.rst:159
+msgid ""
+"If *event* is ``PyFunction_EVENT_CREATE`` or ``PyFunction_EVENT_DESTROY`` "
+"then *new_value* will be ``NULL``. Otherwise, *new_value* will hold a :term:"
+"`borrowed reference` to the new value that is about to be stored in *func* "
+"for the attribute that is being modified."
+msgstr ""
+
+#: ../Doc/c-api/function.rst:164
+msgid ""
+"The callback may inspect but must not modify *func*; doing so could have "
+"unpredictable effects, including infinite recursion."
+msgstr ""
+
+#: ../Doc/c-api/function.rst:167
+msgid ""
+"If *event* is ``PyFunction_EVENT_CREATE``, then the callback is invoked "
+"after `func` has been fully initialized. Otherwise, the callback is invoked "
+"before the modification to *func* takes place, so the prior state of *func* "
+"can be inspected. The runtime is permitted to optimize away the creation of "
+"function objects when possible. In such cases no event will be emitted. "
+"Although this creates the possibility of an observable difference of runtime "
+"behavior depending on optimization decisions, it does not change the "
+"semantics of the Python code being executed."
+msgstr ""
+
+#: ../Doc/c-api/function.rst:176
+msgid ""
+"If *event* is ``PyFunction_EVENT_DESTROY``,  Taking a reference in the "
+"callback to the about-to-be-destroyed function will resurrect it, preventing "
+"it from being freed at this time. When the resurrected object is destroyed "
+"later, any watcher callbacks active at that time will be called again."
+msgstr ""
+
+#: ../Doc/c-api/function.rst:181
+msgid ""
+"If the callback sets an exception, it must return ``-1``; this exception "
+"will be printed as an unraisable exception using :c:func:"
+"`PyErr_WriteUnraisable`. Otherwise it should return ``0``."
+msgstr ""
+
+#: ../Doc/c-api/function.rst:185
+msgid ""
+"There may already be a pending exception set on entry to the callback. In "
+"this case, the callback should return ``0`` with the same exception still "
+"set. This means the callback may not call any other API that can set an "
+"exception unless it saves and clears the exception state first, and restores "
+"it before returning."
+msgstr ""
+
+#: ../Doc/c-api/function.rst:8
+msgid "object"
+msgstr ""
+
+#: ../Doc/c-api/function.rst:8
+#, fuzzy
+msgid "function"
+msgstr "Objetos función"
+
+#: ../Doc/c-api/function.rst:20
+msgid "MethodType (in module types)"
+msgstr ""
