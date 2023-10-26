@@ -32,8 +32,8 @@ def _get_file_entries(pattern, width, filename):
 def find_in_po(pattern):
     pattern = regex.compile(pattern)
     try:
-        _, columns = os.popen("stty size", "r").read().split()
-        available_width = int(columns) // 2 - 3
+        columns, _ = list(os.get_terminal_size())
+        available_width = columns // 2 - 3
     except:
         available_width = 80 // 2 - 3
 
