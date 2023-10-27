@@ -12,15 +12,13 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: 'true'
       - name: Preparar Python v3.11
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
           cache: "pip"
-      - name: Sincronizar con CPython
-        run: |
-          git submodule update --init --depth=1 cpython
-      - name: Instalar dependencias
         run: |
           sudo apt-get update
           sudo apt-get install -y hunspell hunspell-es gettext language-pack-es
