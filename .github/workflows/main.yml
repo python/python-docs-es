@@ -11,9 +11,12 @@ jobs:
     name: Test
     runs-on: ubuntu-22.04
     steps:
+      # Obtención del código
       - uses: actions/checkout@v4
         with:
           submodules: 'true'
+
+      # Instalación de dependencias
       - name: Preparar Python v3.11
         uses: actions/setup-python@v4
         with:
@@ -31,6 +34,8 @@ jobs:
           pip list
           pospell --version
           powrap --version
+
+      # Chequeos a realizar
       - name: TRANSLATORS
         run: |
           diff -Naur TRANSLATORS <(LANG=es python scripts/sort.py < TRANSLATORS)
@@ -42,6 +47,8 @@ jobs:
       - name: Pospell
         run: |
           python scripts/check_spell.py
+
+      # Construcción de la documentación
       - name: Construir documentación
         run: |
           # FIXME: Relative paths for includes in 'cpython'
