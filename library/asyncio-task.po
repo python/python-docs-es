@@ -38,7 +38,7 @@ msgstr "Corrutinas"
 
 #: ../Doc/library/asyncio-task.rst:21
 msgid "**Source code:** :source:`Lib/asyncio/coroutines.py`"
-msgstr ""
+msgstr "**Source code:** :source:`Lib/asyncio/coroutines.py`"
 
 #: ../Doc/library/asyncio-task.rst:25
 #, fuzzy
@@ -253,7 +253,7 @@ msgstr "Creando Tareas"
 
 #: ../Doc/library/asyncio-task.rst:237
 msgid "**Source code:** :source:`Lib/asyncio/tasks.py`"
-msgstr ""
+msgstr "**Source code:** :source:`Lib/asyncio/tasks.py`"
 
 #: ../Doc/library/asyncio-task.rst:243
 msgid ""
@@ -346,11 +346,12 @@ msgid ""
 "`asyncio.CancelledError` directly subclasses :exc:`BaseException` so most "
 "code will not need to be aware of it."
 msgstr ""
-"Se recomienda que las rutinas utilicen bloques ``try/finally`` para realizar "
-"una lógica de limpieza sólida. En caso de que :exc:`asyncio.CancelledError` "
-"se detecte explícitamente, por lo general debería propagarse cuando se "
-"complete la limpieza. La mayoría de los códigos pueden ignorar con "
-"seguridad :exc:`asyncio.CancelledError`."
+"Se recomienda que las corrutinas utilicen bloques ``try/finally`` para "
+"realizar de forma sólida la lógica de limpieza. En caso de que :exc:`asyncio."
+"CancelledError` se detecte explícitamente, generalmente debería propagarse "
+"cuando se complete la limpieza. :exc:`asyncio.CancelledError` subclasifica "
+"directamente a :exc:`BaseException`, por lo que la mayor parte del código no "
+"necesitará tenerlo en cuenta."
 
 #: ../Doc/library/asyncio-task.rst:307
 msgid ""
@@ -364,9 +365,12 @@ msgid ""
 msgstr ""
 "Los componentes asyncio que permiten la simultaneidad estructurada, como :"
 "class:`asyncio.TaskGroup` y :func:`asyncio.timeout`, se implementan mediante "
-"la cancelación interna y pueden comportarse mal si una corrutina absorbe :"
-"exc:`asyncio.CancelledError`. De manera similar, el código de usuario no "
-"debe llamar a :meth:`uncancel <asyncio.Task.uncancel>`."
+"cancelación internamente y podrían comportarse mal si una rutina traga :exc:"
+"`asyncio.CancelledError`. De manera similar, el código de usuario "
+"generalmente no debería llamar a :meth:`uncancel <asyncio.Task.uncancel>`. "
+"Sin embargo, en los casos en los que realmente se desea suprimir :exc:"
+"`asyncio.CancelledError`, es necesario llamar también a ``uncancel()`` para "
+"eliminar completamente el estado de cancelación."
 
 #: ../Doc/library/asyncio-task.rst:319
 msgid "Task Groups"
@@ -654,11 +658,11 @@ msgstr ""
 
 #: ../Doc/library/asyncio-task.rst:533
 msgid "Eager Task Factory"
-msgstr ""
+msgstr "Fábrica de tareas ansiosas"
 
 #: ../Doc/library/asyncio-task.rst:537
 msgid "A task factory for eager task execution."
-msgstr ""
+msgstr "Una fábrica de tareas para una ejecución entusiasta de tareas."
 
 #: ../Doc/library/asyncio-task.rst:539
 msgid ""
@@ -669,12 +673,22 @@ msgid ""
 "overhead of loop scheduling is avoided for coroutines that complete "
 "synchronously."
 msgstr ""
+"Cuando se utiliza esta fábrica (a través de :meth:`loop."
+"set_task_factory(asyncio.eager_task_factory) <loop.set_task_factory>`), las "
+"corrutinas comienzan a ejecutarse sincrónicamente durante la construcción "
+"de :class:`Task`. Las tareas sólo se programan en el bucle de eventos si se "
+"bloquean. Esto puede suponer una mejora del rendimiento, ya que se evita la "
+"sobrecarga de la programación del bucle para las corrutinas que se completan "
+"sincrónicamente."
 
 #: ../Doc/library/asyncio-task.rst:545
 msgid ""
 "A common example where this is beneficial is coroutines which employ caching "
 "or memoization to avoid actual I/O when possible."
 msgstr ""
+"Un ejemplo común en el que esto resulta beneficioso son las rutinas que "
+"emplean almacenamiento en caché o memorización para evitar E/S reales cuando "
+"sea posible."
 
 #: ../Doc/library/asyncio-task.rst:550
 msgid ""
@@ -684,6 +698,12 @@ msgid ""
 "change may introduce behavior changes to existing applications. For example, "
 "the application's task execution order is likely to change."
 msgstr ""
+"La ejecución inmediata de la corrutina es un cambio semántico. Si la rutina "
+"regresa o se activa, la tarea nunca se programa en el bucle de eventos. Si "
+"la ejecución de la rutina se bloquea, la tarea se programa en el bucle de "
+"eventos. Este cambio puede introducir cambios de comportamiento en las "
+"aplicaciones existentes. Por ejemplo, es probable que cambie el orden de "
+"ejecución de las tareas de la aplicación."
 
 #: ../Doc/library/asyncio-task.rst:561
 msgid ""
@@ -691,6 +711,9 @@ msgid ""
 "the provided *custom_task_constructor* when creating a new task instead of "
 "the default :class:`Task`."
 msgstr ""
+"Cree una fábrica de tareas entusiastas, similar a :func:"
+"`eager_task_factory`, utilizando el *custom_task_constructor* proporcionado "
+"al crear una nueva tarea en lugar del :class:`Task` predeterminado."
 
 #: ../Doc/library/asyncio-task.rst:565
 msgid ""
@@ -698,6 +721,9 @@ msgid ""
 "the signature of :class:`Task.__init__ <Task>`. The callable must return a :"
 "class:`asyncio.Task`-compatible object."
 msgstr ""
+"*custom_task_constructor* debe ser un *callable* con la firma que coincida "
+"con la firma de :class:`Task.__init__ <Task>`. El invocable debe devolver un "
+"objeto compatible con :class:`asyncio.Task`."
 
 #: ../Doc/library/asyncio-task.rst:569
 msgid ""
@@ -705,6 +731,9 @@ msgid ""
 "an event loop via :meth:`loop.set_task_factory(factory) <loop."
 "set_task_factory>`)."
 msgstr ""
+"Esta función devuelve un *callable* destinado a ser utilizado como fábrica "
+"de tareas de un bucle de eventos a través de :meth:`loop."
+"set_task_factory(factory) <loop.set_task_factory>`)."
 
 #: ../Doc/library/asyncio-task.rst:576
 msgid "Shielding From Cancellation"
@@ -854,8 +883,8 @@ msgid ""
 "An :ref:`asynchronous context manager <async-context-managers>` for "
 "cancelling overdue coroutines."
 msgstr ""
-"Retorna la fecha límite actual o ``None`` si la fecha límite actual no está "
-"establecida."
+"Un :ref:`asynchronous context manager <async-context-managers>` para "
+"cancelar corrutinas vencidas."
 
 #: ../Doc/library/asyncio-task.rst:682
 msgid ""
@@ -867,7 +896,7 @@ msgstr ""
 
 #: ../Doc/library/asyncio-task.rst:685
 msgid "If ``when`` is ``None``, the timeout will never trigger."
-msgstr ""
+msgstr "Si ``when`` es ``None``, el tiempo de espera nunca se activará."
 
 #: ../Doc/library/asyncio-task.rst:686
 msgid ""
@@ -1074,7 +1103,7 @@ msgstr "Está prohibido pasar objetos de rutina a ``wait()`` directamente."
 
 #: ../Doc/library/asyncio-task.rst:855 ../Doc/library/asyncio-task.rst:882
 msgid "Added support for generators yielding tasks."
-msgstr ""
+msgstr "Se agregó soporte para generadores que generan tareas."
 
 #: ../Doc/library/asyncio-task.rst:861
 msgid ""
@@ -1341,6 +1370,10 @@ msgid ""
 "provided, the Task copies the current context and later runs its coroutine "
 "in the copied context."
 msgstr ""
+"Un argumento *context* opcional de solo palabra clave permite especificar "
+"un :class:`contextvars.Context` personalizado para que se ejecute *coro*. Si "
+"no se proporciona ningún *context*, la tarea copia el contexto actual y "
+"luego ejecuta su rutina en el contexto copiado."
 
 #: ../Doc/library/asyncio-task.rst:1066
 msgid ""
@@ -1351,6 +1384,13 @@ msgid ""
 "coroutine returns or raises without blocking, the task will be finished "
 "eagerly and will skip scheduling to the event loop."
 msgstr ""
+"Un argumento *eager_start* opcional de solo palabra clave permite iniciar "
+"con entusiasmo la ejecución de :class:`asyncio.Task` en el momento de la "
+"creación de la tarea. Si se establece en ``True`` y el bucle de eventos se "
+"está ejecutando, la tarea comenzará a ejecutar la corrutina inmediatamente, "
+"hasta la primera vez que la corrutina se bloquee. Si la rutina regresa o se "
+"activa sin bloquearse, la tarea finalizará con entusiasmo y saltará la "
+"programación al bucle de eventos."
 
 #: ../Doc/library/asyncio-task.rst:1073
 msgid "Added support for the :mod:`contextvars` module."
@@ -1532,15 +1572,19 @@ msgid ""
 "This will return ``None`` for Tasks which have already completed eagerly. "
 "See the :ref:`Eager Task Factory <eager-task-factory>`."
 msgstr ""
+"Esto devolverá ``None`` para las tareas que ya se han completado con "
+"entusiasmo. Consulte el :ref:`Eager Task Factory <eager-task-factory>`."
 
 #: ../Doc/library/asyncio-task.rst:1188
 msgid "Newly added eager task execution means result may be ``None``."
 msgstr ""
+"La ejecución ansiosa de la tarea recientemente agregada significa que el "
+"resultado puede ser ``None``."
 
 #: ../Doc/library/asyncio-task.rst:1192
 msgid ""
 "Return the :class:`contextvars.Context` object associated with the task."
-msgstr ""
+msgstr "Devuelve el objeto :class:`contextvars.Context` asociado con la tarea."
 
 #: ../Doc/library/asyncio-task.rst:1199
 msgid "Return the name of the Task."
@@ -1686,6 +1730,9 @@ msgid ""
 "exc:`CancelledError`, it needs to call this method to remove the "
 "cancellation state."
 msgstr ""
+"Si el código del usuario final, por algún motivo, suprime la cancelación al "
+"detectar :exc:`CancelledError`, debe llamar a este método para eliminar el "
+"estado de cancelación."
 
 #: ../Doc/library/asyncio-task.rst:1330
 msgid ""
@@ -1715,6 +1762,9 @@ msgid ""
 "This method is used by asyncio's internals and isn't expected to be used by "
 "end-user code.  See :meth:`uncancel` for more details."
 msgstr ""
+"Este método lo utilizan las partes internas de asyncio y no se espera que lo "
+"utilice el código del usuario final. Consulte :meth:`uncancel` para obtener "
+"más detalles."
 
 #~ msgid ""
 #~ "Tasks support the :mod:`contextvars` module.  When a Task is created it "
