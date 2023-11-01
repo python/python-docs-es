@@ -15,6 +15,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: 'true'
+          # Necesario para que tj-actions/changed-files corra
+          # dentro de un tiempo adecuado
+          fetch-depth: 2
 
       # Instalación de dependencias
       - name: Preparar Python v3.11
@@ -37,6 +40,32 @@ jobs:
           pip list
           pospell --version
           powrap --version
+
+      # Cálculo de los archivos .po a verificar.
+      # En el caso de un PR, sólo se chequean los .po que se están editando,
+      # mientras que en caseo de un push a las ramas 3.* queremos revisar
+      # todos los archivos
+      - name: Obtiene la lista de archivos .po con cambios (sólo en PRs)
+        if: github.event_name == 'pull_request'
+        id: changed-po-files
+        uses: tj-actions/changed-files@v40
+        with:
+          files: |
+             **/*.po
+      - name: Calcula lista de archivos .po a revisar
+        id: po-files-to-check
+        env:
+          PO_FILES_TO_CHECK: ${{ steps.changed-po-files.conclusion == 'skipped' && '**/*.po' || steps.changed-po-files.outputs.all_changed_files }}
+        run: |
+          echo "po_files_to_check=$PO_FILES_TO_CHECK" >> $GITHUB_OUTPUT
+          echo "any_po_files_to_check=`test -n \"$PO_FILES_TO_CHECK\" && echo true || echo false`" >> $GITHUB_OUTPUT
+      - name: Muestra outputs de steps anteriores para debugueo
+        env:
+          CHANGED_PO_FILES: ${{ toJson(steps.changed-po-files) }}
+          PO_FILES_TO_CHECK: ${{ toJson(steps.po-files-to-check) }}
+        run: |
+          echo "$PO_FILES_TO_CHECK"
+          echo "$CHANGED_PO_FILES"
 
       # Chequeos a realizar
       - name: TRANSLATORS
