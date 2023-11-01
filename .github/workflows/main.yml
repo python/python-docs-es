@@ -72,13 +72,14 @@ jobs:
         run: |
           diff -Naur TRANSLATORS <(LANG=es python scripts/sort.py < TRANSLATORS)
       - name: Powrap
-        run: powrap --check --quiet **/*.po
+        if: steps.po-files-to-check.outputs.any_po_files_to_check == 'true'
+        run: powrap --check --quiet ${{ steps.po-files-to-check.outputs.po_files_to_check }}
       - name: Sphinx lint
-        run: |
-          sphinx-lint */*.po
+        if: steps.po-files-to-check.outputs.any_po_files_to_check == 'true'
+        run: sphinx-lint ${{ steps.po-files-to-check.outputs.po_files_to_check }}
       - name: Pospell
-        run: |
-          python scripts/check_spell.py
+        if: steps.po-files-to-check.outputs.any_po_files_to_check == 'true'
+        run: python scripts/check_spell.py ${{ steps.po-files-to-check.outputs.po_files_to_check }}
 
       # Construcción de la documentación
       - name: Construir documentación
