@@ -116,18 +116,13 @@ We are currently in branch 3.11, and we want to update the strings from 3.12.
 **Once the process is completely and you are happy with the results,
 there are a few extra steps to finish the process**
 
-#. Upgrade GitHub Actions to use Python 3.12::
-	Something to be done.
+#. Upgrade GitHub Actions to use Python 3.12, by updating Python version to 3.12 in the '.github/workflows/main.yml' file.
 
-#. Update Read the Docs project to use 3.12 in the build and also as default branch/version::
-	Update here.
+#. Update the *Read the Docs* project to use 3.12 in the build and also as default branch/version.
 	
-#. Añadir paso final de commitear todos los archivos generados::
-	// TODO
+#. Commit all the newly created files locally.
 	
-#. Crear rama 3.12 en el repositorio para hacer el merge ahí::
-	// TODO
+#. Create branch 3.12 in the repository in order to merge changes there.
 	
-#. Cambiar branch por defecto en el repositorio::
-	// TODO
+#. Inside the github project settings, set 3.12 branch as the default branch for the repository.
 
