@@ -39,6 +39,12 @@ We are currently in branch 3.11, and we want to update the strings from 3.12.
    .. note:: This is important, so the later ``make build`` step will not reset
              the cpython submodule to the previous hash on the old branch.
 
+#. Create a virtual environment and install the dependencies of the project::
+
+     python -m venv env
+     source env/bin/activate  # Windows: env\Scripts\activate.bat
+     pip install -r requirements.txt
+     
 #. Verify that the docs build with the new versions you changed from
    ``requirements.txt`` mainly the sphinx version::
 
@@ -53,20 +59,13 @@ We are currently in branch 3.11, and we want to update the strings from 3.12.
 
 #. Clean possible garbage (form previous builds)::
 
-     rm -rf _build ../python-docs-es-pot cpython/Doc/CONTRIBUTING.rst cpython/Doc/upgrade-python-version.rst
+     rm -rf _build ../python-docs-es-pot cpython/Doc/CONTRIBUTING.rst cpython/Doc/upgrade-python-version.rst reviewers-guide.rst
 
    .. note::
 
       The 'python-docs-es-pot' is a temporary directory that is created
       in the next step. It's included here because it might be a leftover
       from previous attempts on your machine.
-
-#. Create a virtual environment and install the dependencies of the project::
-
-     python -m venv env
-     source env/bin/activate  # Windows: env\Scripts\activate.bat
-     pip install -r requirements.txt
-
 
 #. Create the .po files from the new source code. This will generate all the .po files for version 3.11::
 
@@ -114,9 +113,21 @@ We are currently in branch 3.11, and we want to update the strings from 3.12.
    of the new branch is done. So prepare a cup of any hot beverage
    and fix them.
 
-Once the process is completely and you are happy with the results,
-there are a few extra steps to finish the process::
+**Once the process is completely and you are happy with the results,
+there are a few extra steps to finish the process**
 
-#. Upgrade GitHub Actions to use Python 3.12
+#. Upgrade GitHub Actions to use Python 3.12::
+	Something to be done.
 
-#. Update Read the Docs project to use 3.12 in the build and also as default branch/version
+#. Update Read the Docs project to use 3.12 in the build and also as default branch/version::
+	Update here.
+	
+#. Añadir paso final de commitear todos los archivos generados::
+	// TODO
+	
+#. Crear rama 3.12 en el repositorio para hacer el merge ahí::
+	// TODO
+	
+#. Cambiar branch por defecto en el repositorio::
+	// TODO
+
