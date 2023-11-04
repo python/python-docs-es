@@ -116,7 +116,7 @@ We are currently in branch 3.11, and we want to update the strings from 3.12.
 **Once the process is completely and you are happy with the results,
 there are a few extra steps to finish the process**
 
-#. Upgrade GitHub Actions to use Python 3.12, by updating Python version to 3.12 in the '.github/workflows/main.yml' file.
+#. Upgrade GitHub Actions to use Python 3.12, by updating Python version to 3.12 in the ``.github/workflows/main.yml`` file.
 
 #. Update the *Read the Docs* project to use 3.12 in the build and also as default branch/version.
 	
