@@ -1,11 +1,39 @@
 """
 Script to identify and complete general index entries with original content.
+
+This script processes .po files, identifies out-of-order entries based on the
+source order, and completes them with original content.
+
+Usage:
+    python script_name.py [list of .po files]
+
+If no list of .po files is provided, the script processes all .po files in the
+current directory and its immediate subdirectories.
 """
 
-import glob
+from pathlib import Path
 import sys
 
 import polib
+
+
+def out_of_order_entries(po_file):
+    """
+    Compare the order of source lines against the order in which they appear in
+    the file, and return a generator with entries that are out of order.
+    """
+    po_file = polib.pofile(po_file)
+    po_entries = [entry for entry in po_file if not entry.obsolete]
+    val_max = 0
+
+    for entry in po_entries:
+        source_index = int(entry.occurrences[0][1])
+
+        if source_index <= val_max:
+            yield(entry)
+            po_file.save()
+
+        val_max = max(val_max, source_index)
 
 
 def complete_index(po_files=None):
@@ -16,53 +44,30 @@ def complete_index(po_files=None):
     args:
         po_files: List of .po files to process. If not provided, it processes
         all .po files in the current directory and immediate subdirectories.
-
-    returns:
-        str: Files and entries modified.
-    """
+   """
 
     # Read .po files
     if not po_files:
-        po_files = [f for f in glob.glob("**/*.po", recursive=True)]
+        po_files = Path(".").glob("**/*.po")
 
-    modified_texts = []
-    po_entries = []
-    for file in po_files:
+    for po_file in po_files:
         try:
-            po_file = polib.pofile(file)
-            po_entries = [entry for entry in po_file if not entry.obsolete]
-            val_max = 0
-            marks = []
-
-            # Compare source index with file order and create marks
-            for i, entry in enumerate(po_entries):
-
-                source_index = int(entry.occurrences[0][1])
-                if source_index <= val_max:
-                    marks.append(i)
-                val_max = val_max if source_index <= val_max else source_index
-
-            # We only keep the entries that are marked
-            po_entries = [j for i, j in enumerate(po_entries) if i in marks]
-
-            # Complete translation with original text
-            for entry in po_entries:
+            # Ask to complete entries out of order with original text
+            for entry in out_of_order_entries(po_file):
                 user_input = input(f"\n{entry}\nIs this a index entry? (y/N):")
                 if user_input.lower() == "y":
-                        entry.msgstr = entry.msgid
-                        modified_texts.append(f"Adjusted: {file}\n{entry}")
-            po_file.save()
+                    entry.msgstr = entry.msgid
+
+        except KeyboardInterrupt:
+            break
 
         except Exception as e:
-            print(f"{len(modified_texts)} text(s) adjusted.",
-                  f"Error! file {file}: {e}\n")
-            return 1
+            print(f"Error! file {po_file}: {e}\n")
 
-    print(f"\n{len(modified_texts)} text(s) adjusted",
-          f"{len(po_files)} file(s) processed.")
+        else:
+            print(f"{po_file} processed!\n")
 
 
 if __name__ == "__main__":
     po_files = sys.argv[1:]
-    results = complete_index(po_files)
-    sys.exit(0 if results != 1 else -1)
+    complete_index(po_files)
