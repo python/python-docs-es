@@ -22,7 +22,6 @@ def out_of_order_entries(po_file):
     Compare the order of source lines against the order in which they appear in
     the file, and return a generator with entries that are out of order.
     """
-    po_file = polib.pofile(po_file)
     po_entries = [entry for entry in po_file if not entry.obsolete]
     val_max = 0
 
@@ -30,8 +29,7 @@ def out_of_order_entries(po_file):
         source_index = int(entry.occurrences[0][1])
 
         if source_index <= val_max:
-            yield(entry)
-            po_file.save()
+            yield entry
 
         val_max = max(val_max, source_index)
 
@@ -50,22 +48,26 @@ def complete_index(po_files=None):
     if not po_files:
         po_files = Path(".").glob("**/*.po")
 
-    for po_file in po_files:
+    for po_file_path in po_files:
+
         try:
+            po_file = polib.pofile(po_file_path)
+
             # Ask to complete entries out of order with original text
             for entry in out_of_order_entries(po_file):
                 user_input = input(f"\n{entry}\nIs this a index entry? (y/N):")
                 if user_input.lower() == "y":
                     entry.msgstr = entry.msgid
+                    po_file.save() # Save if an entry has been modified
 
         except KeyboardInterrupt:
             break
 
         except Exception as e:
-            print(f"Error! file {po_file}: {e}\n")
+            print(f"Error! file {po_file_path}: {e}\n")
 
         else:
-            print(f"{po_file} processed!\n")
+            print(f"\n---\n{po_file_path} processed!\n---")
 
 
 if __name__ == "__main__":
