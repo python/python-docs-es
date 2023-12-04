@@ -1,0 +1,45 @@
+name: Agrega comentario a PR
+
+on:
+  pull_request_target:
+
+jobs:
+  pr-comment:
+    name: Entradas sin traducción
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Preparar Python v3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: "pip"
+      - name: Instalar dependencias
+        run: |
+          python -m pip install -r requirements.txt
+      - name: Obtiene lista de archivos con cambios
+        id: changed-files
+        uses: tj-actions/changed-files@v40
+        with:
+          files: |
+            **/*.po
+      - name: Calcular entradas faltantes
+        if: steps.changed-files.outputs.any_changed == 'true'
+        id: create-pr-comment
+        env:
+          CHANGED_PO_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+        run: |
+          {
+            echo 'comment<<EOF'
+            python scripts/list_missing_entries.py --github $CHANGED_PO_FILES
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
+      - name: Agregar comentario con entradas faltantes
+        if: steps.changed-files.outputs.any_changed == 'true'
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: ${{ steps.create-pr-comment.outputs.comment }}
+          comment_tag: missing-entries
