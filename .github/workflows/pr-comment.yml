@@ -7,12 +7,12 @@ permissions:
   contents: read
 
 jobs:
-  pr-comment:
+  define-comment:
     name: Entradas sin traducción
     runs-on: ubuntu-22.04
-    permissions:
-      issues: write
-      pull-requests: write
+    outputs:
+      any_changed: ${{ steps.changed-files.outputs.any_changed }}
+      comment: ${{ steps.create-pr-comment.outputs.comment }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -43,9 +43,17 @@ jobs:
             python scripts/list_missing_entries.py --github $CHANGED_PO_FILES
             echo EOF
           } >> "$GITHUB_OUTPUT"
+
+  write-comment:
+    runs-on: ubuntu-22.04
+    needs: [define-comment]
+    if: needs.define-comment.outputs.any_changed == 'true'
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
       - name: Agregar comentario con entradas faltantes
-        if: steps.changed-files.outputs.any_changed == 'true'
         uses: thollander/actions-comment-pull-request@v2
         with:
-          message: ${{ steps.create-pr-comment.outputs.comment }}
+          message: ${{ needs.define-comment.outputs.comment }}
           comment_tag: missing-entries
