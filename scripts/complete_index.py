@@ -51,7 +51,7 @@ def complete_index(po_files=None):
     for po_file_path in po_files:
 
         try:
-            po_file = polib.pofile(po_file_path)
+            po_file = polib.pofile(po_file_path, wrapwidth=79)
 
             # Ask to complete entries out of order with original text
             needs_save = False
