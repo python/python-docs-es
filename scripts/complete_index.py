@@ -54,11 +54,14 @@ def complete_index(po_files=None):
             po_file = polib.pofile(po_file_path)
 
             # Ask to complete entries out of order with original text
+            needs_save = False
             for entry in out_of_order_entries(po_file):
                 user_input = input(f"\n{entry}\nIs this a index entry? (y/N):")
                 if user_input.lower() == "y":
                     entry.msgstr = entry.msgid
-                    po_file.save() # Save if an entry has been modified
+                    needs_save = True
+            if needs_save:
+                po_file.save()
 
         except KeyboardInterrupt:
             break
