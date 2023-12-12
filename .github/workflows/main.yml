@@ -6,39 +6,86 @@ on:
       - 3.*
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   test:
     name: Test
     runs-on: ubuntu-22.04
     steps:
+      # Obtención del código
       - uses: actions/checkout@v4
+        with:
+          submodules: 'true'
+          # Necesario para que tj-actions/changed-files se ejecute
+          # dentro de un tiempo adecuado
+          fetch-depth: 2
+
+      # Instalación de dependencias
       - name: Preparar Python v3.11
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           cache: "pip"
-      - name: Sincronizar con CPython
-        run: |
-          git submodule update --init --depth=1 cpython
-      - name: Instalar dependencias
+      - name: Configura dpkg/apt para ejecutarse de manera eficiente
+        uses: abbbi/github-actions-tune@v1
+      - name: Deshabilita triggers de postgresql-common
+        run: sudo sed -i '/postgresql-common/d' /var/lib/dpkg/triggers/File
+      - name: Instalar dependencias de sistema
         run: |
           sudo apt-get update
-          sudo apt-get install -y hunspell hunspell-es gettext language-pack-es
+          sudo apt-get install -y hunspell hunspell-es gettext language-pack-es locales-all
+      - name: Instalar dependencias de Python
+        run: |
           python -m pip install -r requirements.txt
+      - name: Listar paquetes y versiones
+        run: |
           pip list
           pospell --version
           powrap --version
+
+      # Cálculo de los archivos .po a verificar.
+      # En el caso de un PR, sólo se chequean los .po que se están editando,
+      # mientras que en caseo de un push a las ramas 3.* queremos revisar
+      # todos los archivos
+      - name: Obtiene la lista de archivos .po con cambios (sólo en PRs)
+        if: github.event_name == 'pull_request'
+        id: changed-po-files
+        uses: tj-actions/changed-files@v40
+        with:
+          files: |
+             **/*.po
+      - name: Calcula lista de archivos .po a revisar
+        id: po-files-to-check
+        env:
+          PO_FILES_TO_CHECK: ${{ steps.changed-po-files.conclusion == 'skipped' && '**/*.po' || steps.changed-po-files.outputs.all_changed_files }}
+        run: |
+          echo "po_files_to_check=$PO_FILES_TO_CHECK" >> $GITHUB_OUTPUT
+          echo "any_po_files_to_check=`test -n \"$PO_FILES_TO_CHECK\" && echo true || echo false`" >> $GITHUB_OUTPUT
+      - name: Muestra outputs de steps anteriores para debugueo
+        env:
+          CHANGED_PO_FILES: ${{ toJson(steps.changed-po-files) }}
+          PO_FILES_TO_CHECK: ${{ toJson(steps.po-files-to-check) }}
+        run: |
+          echo "steps.changed-po-files=$PO_FILES_TO_CHECK"
+          echo "steps.po-files-to-change.$CHANGED_PO_FILES"
+
+      # Chequeos a realizar
       - name: TRANSLATORS
         run: |
           diff -Naur TRANSLATORS <(LANG=es python scripts/sort.py < TRANSLATORS)
       - name: Powrap
-        run: powrap --check --quiet **/*.po
+        if: steps.po-files-to-check.outputs.any_po_files_to_check == 'true'
+        run: powrap --check --quiet ${{ steps.po-files-to-check.outputs.po_files_to_check }}
       - name: Sphinx lint
-        run: |
-          sphinx-lint */*.po
+        if: steps.po-files-to-check.outputs.any_po_files_to_check == 'true'
+        run: sphinx-lint ${{ steps.po-files-to-check.outputs.po_files_to_check }}
       - name: Pospell
-        run: |
-          python scripts/check_spell.py
+        if: steps.po-files-to-check.outputs.any_po_files_to_check == 'true'
+        run: python scripts/check_spell.py ${{ steps.po-files-to-check.outputs.po_files_to_check }}
+
+      # Construcción de la documentación
       - name: Construir documentación
         run: |
           # FIXME: Relative paths for includes in 'cpython'
