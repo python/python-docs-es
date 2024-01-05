@@ -1,0 +1,27 @@
+name: 'Cierra issues y PRs antiguos'
+on:
+  schedule:
+    - cron: '30 1 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/stale@v9
+        with:
+          stale-pr-label: 'needs decision'
+          stale-issue-label: 'stale'
+          days-before-issue-stale: 10
+          # don't close issues, lest we miss translations
+          days-before-issue-close: -1
+          days-before-pr-stale: 7
+          days-before-pr-close: 21
+          stale-issue-message: "Este issue lleva un tiempo sin actualizaciones. ¿Estás trabajando todavía?\nSi necesitas ayuda :sos: no dudes en contactarnos en nuestro [grupo de Telegram](https://t.me/python_docs_es)."
+          stale-pr-message: "Este PR lleva un tiempo sin actualizaciones. Vamos a pedir a un admin de nuestro equipo que decida si alguien más puede finalizarlo o si tenemos que cerrarlo.\nPor favor, avisanos en caso de que aún puedas terminarlo."
+          include-only-assigned: true
