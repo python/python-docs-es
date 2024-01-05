@@ -1,0 +1,202 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2001-2023, Python Software Foundation
+# This file is distributed under the same license as the Python en Español
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Python en Español 3.12\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-12 19:43+0200\n"
+"PO-Revision-Date: 2023-11-13 17:54-0300\n"
+"Last-Translator: Alfonso Areiza Guerra <alfareiza@gmail.com>\n"
+"Language-Team: es <LL@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.13.0\n"
+"X-Generator: Poedit 3.4\n"
+
+#: ../Doc/howto/perf_profiling.rst:7
+msgid "Python support for the Linux ``perf`` profiler"
+msgstr "Soporte de Python para el perfilador ``perf`` de Linux"
+
+#: ../Doc/howto/perf_profiling.rst
+msgid "author"
+msgstr "autor"
+
+#: ../Doc/howto/perf_profiling.rst:9
+msgid "Pablo Galindo"
+msgstr "Pablo Galindo"
+
+#: ../Doc/howto/perf_profiling.rst:11
+msgid ""
+"`The Linux perf profiler <https://perf.wiki.kernel.org>`_ is a very powerful "
+"tool that allows you to profile and obtain information about the performance "
+"of your application. ``perf`` also has a very vibrant ecosystem of tools "
+"that aid with the analysis of the data that it produces."
+msgstr ""
+"`El perfilador perf de Linux <https://perf.wiki.kernel.org>`_ es una "
+"herramienta muy poderosa que le permite crear perfiles y obtener información "
+"sobre el rendimiento de su aplicación. ``perf`` también tiene un ecosistema "
+"muy vibrante de herramientas que ayudan con el análisis de los datos que "
+"produce."
+
+#: ../Doc/howto/perf_profiling.rst:17
+msgid ""
+"The main problem with using the ``perf`` profiler with Python applications "
+"is that ``perf`` only gets information about native symbols, that is, the "
+"names of functions and procedures written in C. This means that the names "
+"and file names of Python functions in your code will not appear in the "
+"output of ``perf``."
+msgstr ""
+"El principal problema con el uso del perfilador ``perf`` con aplicaciones "
+"Python es que ``perf`` sólo obtiene información sobre símbolos nativos, es "
+"decir, los nombres de funciones y procedimientos escritos en C. Esto "
+"significa que los nombres y nombres de archivos de las funciones de Python "
+"en su código no aparecerán en la salida de ``perf``."
+
+#: ../Doc/howto/perf_profiling.rst:22
+msgid ""
+"Since Python 3.12, the interpreter can run in a special mode that allows "
+"Python functions to appear in the output of the ``perf`` profiler. When this "
+"mode is enabled, the interpreter will interpose a small piece of code "
+"compiled on the fly before the execution of every Python function and it "
+"will teach ``perf`` the relationship between this piece of code and the "
+"associated Python function using :doc:`perf map files <../c-api/perfmaps>`."
+msgstr ""
+"Desde Python 3.12, el intérprete puede ejecutarse en un modo especial que "
+"permite que las funciones de Python aparezcan en la salida del perfilador "
+"``perf``. Cuando este modo está habilitado, el intérprete interpondrá un "
+"pequeño fragmento de código compilado sobre la marcha antes de la ejecución "
+"de cada función de Python y enseñará a ``perf`` la relación entre este "
+"fragmento de código y la función de Python asociada usando :doc:`perf map "
+"files <../c-api/perfmaps>`."
+
+#: ../Doc/howto/perf_profiling.rst:31
+msgid ""
+"Support for the ``perf`` profiler is currently only available for Linux on "
+"select architectures. Check the output of the ``configure`` build step or "
+"check the output of ``python -m sysconfig | grep HAVE_PERF_TRAMPOLINE`` to "
+"see if your system is supported."
+msgstr ""
+"Actualmente, el soporte para el perfilador ``perf`` solo está disponible "
+"para Linux en arquitecturas seleccionadas. Verifique el resultado del paso "
+"de compilación ``configure`` o verifique el resultado de ``python -m "
+"sysconfig | grep HAVE_PERF_TRAMPOLINE`` para ver si su sistema es compatible."
+
+#: ../Doc/howto/perf_profiling.rst:36
+msgid "For example, consider the following script:"
+msgstr "Por ejemplo, considere el siguiente script:"
+
+#: ../Doc/howto/perf_profiling.rst:55
+msgid "We can run ``perf`` to sample CPU stack traces at 9999 hertz::"
+msgstr ""
+"Podemos ejecutar ``perf`` para obtener un registro de los seguimientos de la "
+"pila de CPU a 9999 hercios::"
+
+#: ../Doc/howto/perf_profiling.rst:59
+msgid "Then we can use ``perf report`` to analyze the data:"
+msgstr "Luego podemos usar ``perf report`` para analizar los datos:"
+
+#: ../Doc/howto/perf_profiling.rst:100
+msgid ""
+"As you can see, the Python functions are not shown in the output, only "
+"``_Py_Eval_EvalFrameDefault`` (the function that evaluates the Python "
+"bytecode) shows up. Unfortunately that's not very useful because all Python "
+"functions use the same C function to evaluate bytecode so we cannot know "
+"which Python function corresponds to which bytecode-evaluating function."
+msgstr ""
+"Como puede ver, las funciones de Python no se muestran en la salida, solo "
+"aparece ``_Py_Eval_EvalFrameDefault`` (la función que evalúa el código de "
+"bytes de Python). Desafortunadamente, eso no es muy útil porque todas las "
+"funciones de Python usan la misma función de C para evaluar el código de "
+"bytes, por lo que no podemos saber qué función de Python corresponde a qué "
+"función de evaluación de código de bytes."
+
+#: ../Doc/howto/perf_profiling.rst:105
+msgid ""
+"Instead, if we run the same experiment with ``perf`` support enabled we get:"
+msgstr ""
+"En cambio, si ejecutamos el mismo experimento con el soporte ``perf`` "
+"habilitado obtenemos:"
+
+#: ../Doc/howto/perf_profiling.rst:152
+msgid "How to enable ``perf`` profiling support"
+msgstr "Cómo habilitar el soporte de creación de perfiles ``perf``"
+
+#: ../Doc/howto/perf_profiling.rst:154
+msgid ""
+"``perf`` profiling support can be enabled either from the start using the "
+"environment variable :envvar:`PYTHONPERFSUPPORT` or the :option:`-X perf <-"
+"X>` option, or dynamically using :func:`sys.activate_stack_trampoline` and :"
+"func:`sys.deactivate_stack_trampoline`."
+msgstr ""
+"El soporte de creación de perfiles ``perf`` se puede habilitar desde el "
+"principio usando la variable de entorno :envvar:`PYTHONPERFSUPPORT` o la "
+"opción :option:`-X perf <-X>`, o dinámicamente usando :func:`sys."
+"activate_stack_trampoline` y :func:`sys.deactivate_stack_trampoline`."
+
+#: ../Doc/howto/perf_profiling.rst:160
+msgid ""
+"The :mod:`!sys` functions take precedence over the :option:`!-X` option, "
+"the :option:`!-X` option takes precedence over the environment variable."
+msgstr ""
+"Las funciones :mod:`!sys` tienen prioridad sobre la opción :option:`!-X`, la "
+"opción :option:`!-X` tiene prioridad sobre la variable de entorno."
+
+#: ../Doc/howto/perf_profiling.rst:163
+msgid "Example, using the environment variable::"
+msgstr "Ejemplo, usando la variable de entorno::"
+
+#: ../Doc/howto/perf_profiling.rst:169
+msgid "Example, using the :option:`!-X` option::"
+msgstr "Ejemplo, usando la opción :option:`!-X`::"
+
+#: ../Doc/howto/perf_profiling.rst:174
+msgid "Example, using the :mod:`sys` APIs in file :file:`example.py`:"
+msgstr "Ejemplo, usando las API :mod:`sys` en el archivo :file:`example.py`:"
+
+#: ../Doc/howto/perf_profiling.rst:186
+msgid "...then::"
+msgstr "...entonces::"
+
+#: ../Doc/howto/perf_profiling.rst:193
+msgid "How to obtain the best results"
+msgstr "Cómo obtener los mejores resultados"
+
+#: ../Doc/howto/perf_profiling.rst:195
+msgid ""
+"For best results, Python should be compiled with ``CFLAGS=\"-fno-omit-frame-"
+"pointer -mno-omit-leaf-frame-pointer\"`` as this allows profilers to unwind "
+"using only the frame pointer and not on DWARF debug information. This is "
+"because as the code that is interposed to allow ``perf`` support is "
+"dynamically generated it doesn't have any DWARF debugging information "
+"available."
+msgstr ""
+"Para obtener mejores resultados, Python debe compilarse con ``CFLAGS=\"-fno-"
+"omit-frame-pointer -mno-omit-leaf-frame-pointer\"`` ya que esto permite a "
+"los perfiladores desenrollarse usando solo el puntero del marco y no en la "
+"información de depuración de DWARF. Esto se debe a que como el código que se "
+"interpone para permitir el soporte ``perf`` se genera dinámicamente, no "
+"tiene ninguna información de depuración DWARF disponible."
+
+#: ../Doc/howto/perf_profiling.rst:202
+msgid ""
+"You can check if your system has been compiled with this flag by running::"
+msgstr ""
+"Puede verificar si su sistema ha sido compilado con este indicador "
+"ejecutando::"
+
+#: ../Doc/howto/perf_profiling.rst:206
+msgid ""
+"If you don't see any output it means that your interpreter has not been "
+"compiled with frame pointers and therefore it may not be able to show Python "
+"functions in the output of ``perf``."
+msgstr ""
+"Si no ve ningún resultado, significa que su intérprete no ha sido compilado "
+"con punteros de marco y, por lo tanto, es posible que no pueda mostrar "
+"funciones de Python en el resultado de ``perf``."

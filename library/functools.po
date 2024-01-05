@@ -10,16 +10,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-25 19:47+0200\n"
+"POT-Creation-Date: 2023-10-12 19:43+0200\n"
 "PO-Revision-Date: 2021-12-12 12:55-0500\n"
 "Last-Translator: Adolfo Hristo David Roque Gámez <aroquega@gmail.com>\n"
-"Language-Team: python-doc-es\n"
 "Language: es\n"
+"Language-Team: python-doc-es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.10.3\n"
+"Generated-By: Babel 2.13.0\n"
 
 #: ../Doc/library/functools.rst:2
 msgid ""
@@ -68,11 +68,25 @@ msgstr ""
 "función. Debido a que nunca necesita desalojar los valores antiguos, esto es "
 "más pequeño y más rápido que :func:`lru_cache()` con un límite de tamaño."
 
-#: ../Doc/library/functools.rst:39 ../Doc/library/functools.rst:267
+#: ../Doc/library/functools.rst:39 ../Doc/library/functools.rst:291
 msgid "For example::"
 msgstr "Por ejemplo::"
 
-#: ../Doc/library/functools.rst:57
+#: ../Doc/library/functools.rst:52 ../Doc/library/functools.rst:158
+msgid ""
+"The cache is threadsafe so that the wrapped function can be used in multiple "
+"threads.  This means that the underlying data structure will remain coherent "
+"during concurrent updates."
+msgstr ""
+
+#: ../Doc/library/functools.rst:56 ../Doc/library/functools.rst:162
+msgid ""
+"It is possible for the wrapped function to be called more than once if "
+"another thread makes an additional call before the initial call has been "
+"completed and cached."
+msgstr ""
+
+#: ../Doc/library/functools.rst:65
 msgid ""
 "Transform a method of a class into a property whose value is computed once "
 "and then cached as a normal attribute for the life of the instance. Similar "
@@ -85,12 +99,12 @@ msgstr ""
 "propiedades calculadas costosas de instancias que de otra manera son "
 "efectivamente inmutables."
 
-#: ../Doc/library/functools.rst:62 ../Doc/library/functools.rst:127
-#: ../Doc/library/functools.rst:359
+#: ../Doc/library/functools.rst:70 ../Doc/library/functools.rst:142
+#: ../Doc/library/functools.rst:383
 msgid "Example::"
 msgstr "Ejemplo::"
 
-#: ../Doc/library/functools.rst:73
+#: ../Doc/library/functools.rst:81
 msgid ""
 "The mechanics of :func:`cached_property` are somewhat different from :func:"
 "`property`.  A regular property blocks attribute writes unless a setter is "
@@ -101,7 +115,7 @@ msgstr ""
 "se defina un establecedor. Por el contrario, *cached_property* permite "
 "escrituras."
 
-#: ../Doc/library/functools.rst:77
+#: ../Doc/library/functools.rst:85
 msgid ""
 "The *cached_property* decorator only runs on lookups and only when an "
 "attribute of the same name doesn't exist.  When it does run, the "
@@ -115,7 +129,7 @@ msgstr ""
 "atributos posteriores tienen prioridad sobre el método *cached_property* y "
 "funciona como un atributo normal."
 
-#: ../Doc/library/functools.rst:83
+#: ../Doc/library/functools.rst:91
 msgid ""
 "The cached value can be cleared by deleting the attribute.  This allows the "
 "*cached_property* method to run again."
@@ -123,7 +137,18 @@ msgstr ""
 "El valor en caché se puede borrar eliminando el atributo. Esto permite que "
 "el método *cached_property* se ejecute nuevamente."
 
-#: ../Doc/library/functools.rst:86
+#: ../Doc/library/functools.rst:94
+msgid ""
+"The *cached_property* does not prevent a possible race condition in multi-"
+"threaded usage. The getter function could run more than once on the same "
+"instance, with the latest run setting the cached value. If the cached "
+"property is idempotent or otherwise not harmful to run more than once on an "
+"instance, this is fine. If synchronization is needed, implement the "
+"necessary locking inside the decorated getter function or around the cached "
+"property access."
+msgstr ""
+
+#: ../Doc/library/functools.rst:102
 msgid ""
 "Note, this decorator interferes with the operation of :pep:`412` key-sharing "
 "dictionaries.  This means that instance dictionaries can take more space "
@@ -133,7 +158,7 @@ msgstr ""
 "diccionarios de intercambio de claves :pep:`412`. Esto significa que los "
 "diccionarios de instancias pueden ocupar más espacio de lo habitual."
 
-#: ../Doc/library/functools.rst:90
+#: ../Doc/library/functools.rst:106
 msgid ""
 "Also, this decorator requires that the ``__dict__`` attribute on each "
 "instance be a mutable mapping. This means it will not work with some types, "
@@ -150,17 +175,29 @@ msgstr ""
 "``__dict__`` como una de las ranuras definidas (ya que tales clases no "
 "proporcionan un atributo ``__dict__`` en absoluto)."
 
-#: ../Doc/library/functools.rst:97
+#: ../Doc/library/functools.rst:113
+#, fuzzy
 msgid ""
 "If a mutable mapping is not available or if space-efficient key sharing is "
-"desired, an effect similar to :func:`cached_property` can be achieved by a "
-"stacking :func:`property` on top of :func:`cache`::"
+"desired, an effect similar to :func:`cached_property` can also be achieved "
+"by stacking :func:`property` on top of :func:`lru_cache`. See :ref:`faq-"
+"cache-method-calls` for more details on how this differs from :func:"
+"`cached_property`."
 msgstr ""
 "Si un mapeo mutable no está disponible o si se desea compartir claves con "
 "espacio eficiente, se puede lograr un efecto similar a :func:"
 "`cached_property` apilando :func:`property` encima de :func:`cache`::"
 
-#: ../Doc/library/functools.rst:115
+#: ../Doc/library/functools.rst:120
+msgid ""
+"Prior to Python 3.12, ``cached_property`` included an undocumented lock to "
+"ensure that in multi-threaded usage the getter function was guaranteed to "
+"run only once per instance. However, the lock was per-property, not per-"
+"instance, which could result in unacceptably high lock contention. In Python "
+"3.12+ this locking is removed."
+msgstr ""
+
+#: ../Doc/library/functools.rst:130
 msgid ""
 "Transform an old-style comparison function to a :term:`key function`.  Used "
 "with tools that accept key functions (such as :func:`sorted`, :func:`min`, :"
@@ -177,7 +214,7 @@ msgstr ""
 "están convirtiendo a partir de Python 2, que soportaba el uso de funciones "
 "de comparación."
 
-#: ../Doc/library/functools.rst:122
+#: ../Doc/library/functools.rst:137
 msgid ""
 "A comparison function is any callable that accepts two arguments, compares "
 "them, and returns a negative number for less-than, zero for equality, or a "
@@ -190,14 +227,14 @@ msgstr ""
 "invocable que acepta un argumento y devuelve otro valor para usar como clave "
 "de ordenación."
 
-#: ../Doc/library/functools.rst:131
+#: ../Doc/library/functools.rst:146
 msgid ""
 "For sorting examples and a brief sorting tutorial, see :ref:`sortinghowto`."
 msgstr ""
 "Para ejemplos de clasificación y un breve tutorial de clasificación, ver :"
 "ref:`sortinghowto`."
 
-#: ../Doc/library/functools.rst:139
+#: ../Doc/library/functools.rst:154
 msgid ""
 "Decorator to wrap a function with a memoizing callable that saves up to the "
 "*maxsize* most recent calls.  It can save time when an expensive or I/O "
@@ -208,16 +245,17 @@ msgstr ""
 "cuando una función costosa o de E/S es llamada periódicamente con los mismos "
 "argumentos."
 
-#: ../Doc/library/functools.rst:143
+#: ../Doc/library/functools.rst:166
+#, fuzzy
 msgid ""
 "Since a dictionary is used to cache results, the positional and keyword "
-"arguments to the function must be hashable."
+"arguments to the function must be :term:`hashable`."
 msgstr ""
 "Dado que se utiliza un diccionario para guardar los resultados, los "
 "argumentos posicionales y de las palabras clave de la función deben ser "
 "hashable."
 
-#: ../Doc/library/functools.rst:146
+#: ../Doc/library/functools.rst:169
 msgid ""
 "Distinct argument patterns may be considered to be distinct calls with "
 "separate cache entries.  For example, ``f(a=1, b=2)`` and ``f(b=2, a=1)`` "
@@ -229,7 +267,7 @@ msgstr ""
 "``f(b=2, a=1)`` difieren en el orden de sus argumentos de palabras clave y "
 "pueden tener dos entradas de caché separadas."
 
-#: ../Doc/library/functools.rst:151
+#: ../Doc/library/functools.rst:174
 msgid ""
 "If *user_function* is specified, it must be a callable. This allows the "
 "*lru_cache* decorator to be applied directly to a user function, leaving the "
@@ -239,7 +277,7 @@ msgstr ""
 "decorador *lru_cache* se aplique directamente a una función de usuario, "
 "dejando el *maxsize* en su valor por defecto de 128::"
 
-#: ../Doc/library/functools.rst:159
+#: ../Doc/library/functools.rst:182
 msgid ""
 "If *maxsize* is set to ``None``, the LRU feature is disabled and the cache "
 "can grow without bound."
@@ -247,7 +285,7 @@ msgstr ""
 "Si *maxsize* está configurado como ``None``, la función LRU está desactivada "
 "y la caché puede crecer sin límites."
 
-#: ../Doc/library/functools.rst:162
+#: ../Doc/library/functools.rst:185
 msgid ""
 "If *typed* is set to true, function arguments of different types will be "
 "cached separately.  If *typed* is false, the implementation will usually "
@@ -261,7 +299,7 @@ msgstr ""
 "*int* pueden almacenarse en caché por separado incluso cuando *typed* es "
 "falso)."
 
-#: ../Doc/library/functools.rst:168
+#: ../Doc/library/functools.rst:191
 msgid ""
 "Note, type specificity applies only to the function's immediate arguments "
 "rather than their contents.  The scalar arguments, ``Decimal(42)`` and "
@@ -276,7 +314,7 @@ msgstr ""
 "tupla ``('answer', Decimal(42))`` y ``('answer', Fraction(42))`` se tratan "
 "como equivalentes."
 
-#: ../Doc/library/functools.rst:174
+#: ../Doc/library/functools.rst:197
 msgid ""
 "The wrapped function is instrumented with a :func:`cache_parameters` "
 "function that returns a new :class:`dict` showing the values for *maxsize* "
@@ -288,7 +326,7 @@ msgstr ""
 "valores para *maxsize* y *typed*. Esto es solo para fines informativos. La "
 "mutación de los valores no tiene ningún efecto."
 
-#: ../Doc/library/functools.rst:179
+#: ../Doc/library/functools.rst:202
 msgid ""
 "To help measure the effectiveness of the cache and tune the *maxsize* "
 "parameter, the wrapped function is instrumented with a :func:`cache_info` "
@@ -300,7 +338,7 @@ msgstr ""
 "`cache_info` que retorna un :term:`named tuple` mostrando *hits*, *misses*, "
 "*maxsize* y *currsize*."
 
-#: ../Doc/library/functools.rst:184
+#: ../Doc/library/functools.rst:207
 msgid ""
 "The decorator also provides a :func:`cache_clear` function for clearing or "
 "invalidating the cache."
@@ -308,7 +346,7 @@ msgstr ""
 "El decorador también proporciona una función :func:`cache_clear` para "
 "limpiar o invalidar la caché."
 
-#: ../Doc/library/functools.rst:187
+#: ../Doc/library/functools.rst:210
 msgid ""
 "The original underlying function is accessible through the :attr:"
 "`__wrapped__` attribute.  This is useful for introspection, for bypassing "
@@ -318,7 +356,7 @@ msgstr ""
 "`__wrapped__`.  Esto es útil para la introspección, para evitar el caché, o "
 "para volver a envolver la función con un caché diferente."
 
-#: ../Doc/library/functools.rst:191
+#: ../Doc/library/functools.rst:214
 msgid ""
 "The cache keeps references to the arguments and return values until they age "
 "out of the cache or until the cache is cleared."
@@ -326,7 +364,7 @@ msgstr ""
 "La caché mantiene referencias de los argumentos y retorna los valores hasta "
 "que se caduquen de la caché o hasta que se borre la caché."
 
-#: ../Doc/library/functools.rst:194
+#: ../Doc/library/functools.rst:217
 msgid ""
 "If a method is cached, the ``self`` instance argument is included in the "
 "cache.  See :ref:`faq-cache-method-calls`"
@@ -334,7 +372,7 @@ msgstr ""
 "Si un método se almacena en caché, el argumento de la instancia ``self`` se "
 "incluye en el caché. Ver :ref:`faq-cache-method-calls`"
 
-#: ../Doc/library/functools.rst:197
+#: ../Doc/library/functools.rst:220
 msgid ""
 "An `LRU (least recently used) cache <https://en.wikipedia.org/wiki/"
 "Cache_replacement_policies#Least_recently_used_(LRU)>`_ works best when the "
@@ -351,12 +389,14 @@ msgstr ""
 "caché asegura que la caché no crezca sin límites en procesos de larga "
 "ejecución como servidores web."
 
-#: ../Doc/library/functools.rst:204
+#: ../Doc/library/functools.rst:227
+#, fuzzy
 msgid ""
 "In general, the LRU cache should only be used when you want to reuse "
 "previously computed values.  Accordingly, it doesn't make sense to cache "
 "functions with side-effects, functions that need to create distinct mutable "
-"objects on each call, or impure functions such as time() or random()."
+"objects on each call (such as generators and async functions), or impure "
+"functions such as time() or random()."
 msgstr ""
 "En general, la caché de la LRU sólo debe utilizarse cuando se desea "
 "reutilizar valores previamente calculados.  Por consiguiente, no tiene "
@@ -364,11 +404,11 @@ msgstr ""
 "que necesitan crear distintos objetos mutables en cada llamada, o funciones "
 "impuras como time() o random()."
 
-#: ../Doc/library/functools.rst:209
+#: ../Doc/library/functools.rst:233
 msgid "Example of an LRU cache for static web content::"
 msgstr "Ejemplo de un caché de la LRU para contenido web estático::"
 
-#: ../Doc/library/functools.rst:228
+#: ../Doc/library/functools.rst:252
 msgid ""
 "Example of efficiently computing `Fibonacci numbers <https://en.wikipedia."
 "org/wiki/Fibonacci_number>`_ using a cache to implement a `dynamic "
@@ -379,19 +419,19 @@ msgstr ""
 "implementar una técnica de `programación dinámica <https://en.wikipedia.org/"
 "wiki/Dynamic_programming>`_::"
 
-#: ../Doc/library/functools.rst:248
+#: ../Doc/library/functools.rst:272
 msgid "Added the *typed* option."
 msgstr "Añadida la opción *typed* option."
 
-#: ../Doc/library/functools.rst:251
+#: ../Doc/library/functools.rst:275
 msgid "Added the *user_function* option."
 msgstr "Añadida la opción *user_function*."
 
-#: ../Doc/library/functools.rst:254
+#: ../Doc/library/functools.rst:278
 msgid "Added the function :func:`cache_parameters`"
 msgstr "Añadida la función :func:`cache_parameters`"
 
-#: ../Doc/library/functools.rst:259
+#: ../Doc/library/functools.rst:283
 msgid ""
 "Given a class defining one or more rich comparison ordering methods, this "
 "class decorator supplies the rest.  This simplifies the effort involved in "
@@ -401,7 +441,7 @@ msgstr ""
 "ricos, este decorador de clase suministra el resto.  Esto simplifica el "
 "esfuerzo de especificar todas las posibles operaciones de comparación rica:"
 
-#: ../Doc/library/functools.rst:263
+#: ../Doc/library/functools.rst:287
 msgid ""
 "The class must define one of :meth:`__lt__`, :meth:`__le__`, :meth:`__gt__`, "
 "or :meth:`__ge__`. In addition, the class should supply an :meth:`__eq__` "
@@ -414,7 +454,7 @@ msgstr ""
 "simplifica el esfuerzo de especificar todas las posibles operaciones de "
 "comparación rica."
 
-#: ../Doc/library/functools.rst:287
+#: ../Doc/library/functools.rst:311
 msgid ""
 "While this decorator makes it easy to create well behaved totally ordered "
 "types, it *does* come at the cost of slower execution and more complex stack "
@@ -430,7 +470,7 @@ msgstr ""
 "los seis métodos de comparación ricos en su lugar es probable que "
 "proporcione un fácil aumento de la velocidad."
 
-#: ../Doc/library/functools.rst:296
+#: ../Doc/library/functools.rst:320
 msgid ""
 "This decorator makes no attempt to override methods that have been declared "
 "in the class *or its superclasses*. Meaning that if a superclass defines a "
@@ -442,7 +482,7 @@ msgstr ""
 "de comparación, *total_ordering* no lo implementará de nuevo, incluso si el "
 "método original es abstracto."
 
-#: ../Doc/library/functools.rst:303
+#: ../Doc/library/functools.rst:327
 msgid ""
 "Returning NotImplemented from the underlying comparison function for "
 "unrecognised types is now supported."
@@ -450,7 +490,7 @@ msgstr ""
 "Retornando NotImplemented de la función de comparación subyacente para los "
 "tipos no reconocidos está ahora soportado."
 
-#: ../Doc/library/functools.rst:309
+#: ../Doc/library/functools.rst:333
 msgid ""
 "Return a new :ref:`partial object<partial-objects>` which when called will "
 "behave like *func* called with the positional arguments *args* and keyword "
@@ -465,7 +505,7 @@ msgstr ""
 "argumentos de palabras clave, se extienden y anulan las *keywords*. "
 "Aproximadamente equivalente a::"
 
-#: ../Doc/library/functools.rst:325
+#: ../Doc/library/functools.rst:349
 msgid ""
 "The :func:`partial` is used for partial function application which "
 "\"freezes\" some portion of a function's arguments and/or keywords resulting "
@@ -480,7 +520,7 @@ msgstr ""
 "llamada que se comporte como la función :func:`int` donde el argumento "
 "*base* tiene un valor por defecto de dos:"
 
-#: ../Doc/library/functools.rst:340
+#: ../Doc/library/functools.rst:364
 msgid ""
 "Return a new :class:`partialmethod` descriptor which behaves like :class:"
 "`partial` except that it is designed to be used as a method definition "
@@ -490,7 +530,7 @@ msgstr ""
 "class:`partial` excepto que está diseñado para ser usado como una definición "
 "de método en lugar de ser directamente invocable."
 
-#: ../Doc/library/functools.rst:344
+#: ../Doc/library/functools.rst:368
 msgid ""
 "*func* must be a :term:`descriptor` or a callable (objects which are both, "
 "like normal functions, are handled as descriptors)."
@@ -498,7 +538,7 @@ msgstr ""
 "*func* debe ser un :term:`descriptor` o un invocable (los objetos que son "
 "ambos, como las funciones normales, se manejan como descriptores)."
 
-#: ../Doc/library/functools.rst:347
+#: ../Doc/library/functools.rst:371
 msgid ""
 "When *func* is a descriptor (such as a normal Python function, :func:"
 "`classmethod`, :func:`staticmethod`, :func:`abstractmethod` or another "
@@ -512,7 +552,7 @@ msgstr ""
 "descriptor subyacente, y se retorna un :ref:`partial object<partial-"
 "objects>` apropiado como resultado."
 
-#: ../Doc/library/functools.rst:353
+#: ../Doc/library/functools.rst:377
 msgid ""
 "When *func* is a non-descriptor callable, an appropriate bound method is "
 "created dynamically. This behaves like a normal Python function when used as "
@@ -526,7 +566,7 @@ msgstr ""
 "argumento posicional, incluso antes de las *args* y *keywords* suministradas "
 "al constructor :class:`partialmethod`."
 
-#: ../Doc/library/functools.rst:384
+#: ../Doc/library/functools.rst:408
 msgid ""
 "Apply *function* of two arguments cumulatively to the items of *iterable*, "
 "from left to right, so as to reduce the iterable to a single value.  For "
@@ -548,11 +588,11 @@ msgstr ""
 "la *iterable* está vacía.  Si no se da el *initializer* y el *iterable* "
 "contiene sólo un elemento, se retorna el primer elemento."
 
-#: ../Doc/library/functools.rst:393
+#: ../Doc/library/functools.rst:417
 msgid "Roughly equivalent to::"
 msgstr "Aproximadamente equivalente a::"
 
-#: ../Doc/library/functools.rst:405
+#: ../Doc/library/functools.rst:429
 msgid ""
 "See :func:`itertools.accumulate` for an iterator that yields all "
 "intermediate values."
@@ -560,7 +600,7 @@ msgstr ""
 "Ver :func:`itertools.accumulate` para un iterador que produce todos los "
 "valores intermedios."
 
-#: ../Doc/library/functools.rst:410
+#: ../Doc/library/functools.rst:434
 msgid ""
 "Transform a function into a :term:`single-dispatch <single dispatch>` :term:"
 "`generic function`."
@@ -568,7 +608,7 @@ msgstr ""
 "Transformar una función en una :term:`single-dispatch <single dispatch>` :"
 "term:`generic function`."
 
-#: ../Doc/library/functools.rst:413
+#: ../Doc/library/functools.rst:437
 msgid ""
 "To define a generic function, decorate it with the ``@singledispatch`` "
 "decorator. When defining a function using ``@singledispatch``, note that the "
@@ -578,7 +618,7 @@ msgstr ""
 "``@singledispatch``. Al definir una función usando ``@singledispatch``, "
 "tenga en cuenta que el envío ocurre en el tipo del primer argumento:"
 
-#: ../Doc/library/functools.rst:424
+#: ../Doc/library/functools.rst:448
 msgid ""
 "To add overloaded implementations to the function, use the :func:`register` "
 "attribute of the generic function, which can be used as a decorator.  For "
@@ -590,12 +630,12 @@ msgstr ""
 "Para las funciones anotadas con tipos, el decorador inferirá automáticamente "
 "el tipo del primer argumento:"
 
-#: ../Doc/library/functools.rst:442
+#: ../Doc/library/functools.rst:466
 msgid ":data:`types.UnionType` and :data:`typing.Union` can also be used::"
 msgstr ""
 "También se pueden utilizar :data:`types.UnionType` y :data:`typing.Union`:"
 
-#: ../Doc/library/functools.rst:459
+#: ../Doc/library/functools.rst:483
 msgid ""
 "For code which doesn't use type annotations, the appropriate type argument "
 "can be passed explicitly to the decorator itself::"
@@ -603,7 +643,7 @@ msgstr ""
 "Para el código que no utiliza anotaciones de tipo, el argumento de tipo "
 "apropiado puede ser pasado explícitamente al propio decorador::"
 
-#: ../Doc/library/functools.rst:470
+#: ../Doc/library/functools.rst:494
 msgid ""
 "To enable registering :term:`lambdas<lambda>` and pre-existing functions, "
 "the :func:`register` attribute can also be used in a functional form::"
@@ -612,7 +652,7 @@ msgstr ""
 "preexistentes, el atributo :func:`register` también se puede utilizar de "
 "forma funcional:"
 
-#: ../Doc/library/functools.rst:478
+#: ../Doc/library/functools.rst:502
 msgid ""
 "The :func:`register` attribute returns the undecorated function. This "
 "enables decorator stacking, :mod:`pickling<pickle>`, and the creation of "
@@ -622,7 +662,7 @@ msgstr ""
 "el apilamiento de decoradores, :mod:`pickling<pickle>`, y la creación de "
 "pruebas unitarias para cada variante de forma independiente:"
 
-#: ../Doc/library/functools.rst:492
+#: ../Doc/library/functools.rst:516
 msgid ""
 "When called, the generic function dispatches on the type of the first "
 "argument::"
@@ -630,7 +670,7 @@ msgstr ""
 "Cuando se llama, la función genérica despacha sobre el tipo del primer "
 "argumento::"
 
-#: ../Doc/library/functools.rst:512
+#: ../Doc/library/functools.rst:536
 msgid ""
 "Where there is no registered implementation for a specific type, its method "
 "resolution order is used to find a more generic implementation. The original "
@@ -644,7 +684,7 @@ msgstr ""
 "registrada para el tipo base :class:`object`, lo que significa que se usa si "
 "no se encuentra una implementación mejor."
 
-#: ../Doc/library/functools.rst:518
+#: ../Doc/library/functools.rst:542
 msgid ""
 "If an implementation is registered to an :term:`abstract base class`, "
 "virtual subclasses of the base class will be dispatched to that "
@@ -653,7 +693,7 @@ msgstr ""
 "Si una implementación está registrada en un :term:`abstract base class`, las "
 "subclases virtuales de la clase base se enviarán a esa implementación:"
 
-#: ../Doc/library/functools.rst:533
+#: ../Doc/library/functools.rst:557
 msgid ""
 "To check which implementation the generic function will choose for a given "
 "type, use the ``dispatch()`` attribute::"
@@ -661,7 +701,7 @@ msgstr ""
 "Para verificar qué implementación elegirá la función genérica para un tipo "
 "dado, use el atributo ``dispatch()``:"
 
-#: ../Doc/library/functools.rst:541
+#: ../Doc/library/functools.rst:565
 msgid ""
 "To access all registered implementations, use the read-only ``registry`` "
 "attribute::"
@@ -669,12 +709,12 @@ msgstr ""
 "Para acceder a todas las implementaciones registradas, utilice el atributo "
 "``registry`` de sólo lectura::"
 
-#: ../Doc/library/functools.rst:555
+#: ../Doc/library/functools.rst:579
 msgid "The :func:`register` attribute now supports using type annotations."
 msgstr ""
 "El atributo :func:`register` ahora admite el uso de anotaciones de tipo."
 
-#: ../Doc/library/functools.rst:558
+#: ../Doc/library/functools.rst:582
 msgid ""
 "The :func:`register` attribute now supports :data:`types.UnionType` and :"
 "data:`typing.Union` as type annotations."
@@ -682,7 +722,7 @@ msgstr ""
 "El atributo :func:`register` ahora admite :data:`types.UnionType` y :data:"
 "`typing.Union` como anotaciones de tipo."
 
-#: ../Doc/library/functools.rst:565
+#: ../Doc/library/functools.rst:589
 msgid ""
 "Transform a method into a :term:`single-dispatch <single dispatch>` :term:"
 "`generic function`."
@@ -690,7 +730,7 @@ msgstr ""
 "Transformar un método en un  :term:`single-dispatch <single dispatch>` :term:"
 "`generic function`."
 
-#: ../Doc/library/functools.rst:568
+#: ../Doc/library/functools.rst:592
 msgid ""
 "To define a generic method, decorate it with the ``@singledispatchmethod`` "
 "decorator. When defining a function using ``@singledispatchmethod``, note "
@@ -702,7 +742,7 @@ msgstr ""
 "``@singledispatchmethod``, tenga en cuenta que el envío ocurre en el tipo "
 "del primer argumento no *self* o no *cls*:"
 
-#: ../Doc/library/functools.rst:586
+#: ../Doc/library/functools.rst:610
 msgid ""
 "``@singledispatchmethod`` supports nesting with other decorators such as :"
 "func:`@classmethod<classmethod>`. Note that to allow for ``dispatcher."
@@ -716,7 +756,7 @@ msgstr ""
 "externo*. Aquí está la clase ``Negator`` con los métodos ``neg`` vinculados "
 "a la clase, en lugar de una instancia de la clase:"
 
-#: ../Doc/library/functools.rst:608
+#: ../Doc/library/functools.rst:632
 msgid ""
 "The same pattern can be used for other similar decorators: :func:"
 "`@staticmethod<staticmethod>`, :func:`@abstractmethod<abc.abstractmethod>`, "
@@ -726,7 +766,7 @@ msgstr ""
 "`@staticmethod<staticmethod>`, :func:`@abstractmethod<abc.abstractmethod>` y "
 "otros."
 
-#: ../Doc/library/functools.rst:617
+#: ../Doc/library/functools.rst:641
 msgid ""
 "Update a *wrapper* function to look like the *wrapped* function. The "
 "optional arguments are tuples to specify which attributes of the original "
@@ -751,7 +791,7 @@ msgstr ""
 "(que actualiza el ``__dict__`` de la función contenedora, es decir, el "
 "diccionario de instancia)."
 
-#: ../Doc/library/functools.rst:627
+#: ../Doc/library/functools.rst:651
 msgid ""
 "To allow access to the original function for introspection and other "
 "purposes (e.g. bypassing a caching decorator such as :func:`lru_cache`), "
@@ -763,7 +803,7 @@ msgstr ""
 "`lru_cache`), esta función añade automáticamente un atributo ``__wrapped__`` "
 "al envoltorio que se refiere a la función que se está envolviendo."
 
-#: ../Doc/library/functools.rst:632
+#: ../Doc/library/functools.rst:656
 msgid ""
 "The main intended use for this function is in :term:`decorator` functions "
 "which wrap the decorated function and return the wrapper. If the wrapper "
@@ -777,7 +817,7 @@ msgstr ""
 "reflejarán la definición de la envoltura en lugar de la definición de la "
 "función original, lo que normalmente no es de gran ayuda."
 
-#: ../Doc/library/functools.rst:638
+#: ../Doc/library/functools.rst:662
 msgid ""
 ":func:`update_wrapper` may be used with callables other than functions. Any "
 "attributes named in *assigned* or *updated* that are missing from the object "
@@ -792,19 +832,19 @@ msgstr ""
 "`AttributeError` sigue apareciendo si la propia función de envoltura no "
 "tiene ningún atributo nombrado en *updated*."
 
-#: ../Doc/library/functools.rst:644
+#: ../Doc/library/functools.rst:668
 msgid "Automatic addition of the ``__wrapped__`` attribute."
 msgstr "Adición automática de ``__wrapped__`` attribute."
 
-#: ../Doc/library/functools.rst:647
+#: ../Doc/library/functools.rst:671
 msgid "Copying of the ``__annotations__`` attribute by default."
 msgstr "Copia del atributo ``__annotations__`` por defecto."
 
-#: ../Doc/library/functools.rst:650
+#: ../Doc/library/functools.rst:674
 msgid "Missing attributes no longer trigger an :exc:`AttributeError`."
 msgstr "Los atributos faltantes ya no desencadenan un :exc:`AtributoError`."
 
-#: ../Doc/library/functools.rst:653
+#: ../Doc/library/functools.rst:677
 msgid ""
 "The ``__wrapped__`` attribute now always refers to the wrapped function, "
 "even if that function defined a ``__wrapped__`` attribute. (see :issue:"
@@ -814,7 +854,7 @@ msgstr ""
 "incluso si esa función definió un atributo ``__wrapped__``. (see :issue:"
 "`17482`)"
 
-#: ../Doc/library/functools.rst:661
+#: ../Doc/library/functools.rst:685
 msgid ""
 "This is a convenience function for invoking :func:`update_wrapper` as a "
 "function decorator when defining a wrapper function.  It is equivalent to "
@@ -826,7 +866,7 @@ msgstr ""
 "(*wrapper*).  Es equivalente a ``partial(update_wrapper, wrapped=wrapped, "
 "assigned=assigned, updated=updated)``. Por ejemplo::"
 
-#: ../Doc/library/functools.rst:687
+#: ../Doc/library/functools.rst:711
 msgid ""
 "Without the use of this decorator factory, the name of the example function "
 "would have been ``'wrapper'``, and the docstring of the original :func:"
@@ -836,11 +876,11 @@ msgstr ""
 "ejemplo habría sido ``'wrapper'``, y el docstring de la :func:`example` se "
 "habría perdido."
 
-#: ../Doc/library/functools.rst:695
+#: ../Doc/library/functools.rst:719
 msgid ":class:`partial` Objects"
 msgstr ":class:`partial` Objetos"
 
-#: ../Doc/library/functools.rst:697
+#: ../Doc/library/functools.rst:721
 msgid ""
 ":class:`partial` objects are callable objects created by :func:`partial`. "
 "They have three read-only attributes:"
@@ -848,7 +888,7 @@ msgstr ""
 "Los objetos :class:`partial` son objetos invocables creados por :func:"
 "`partial`. Tienen tres atributos de sólo lectura:"
 
-#: ../Doc/library/functools.rst:703
+#: ../Doc/library/functools.rst:727
 msgid ""
 "A callable object or function.  Calls to the :class:`partial` object will be "
 "forwarded to :attr:`func` with new arguments and keywords."
@@ -856,7 +896,7 @@ msgstr ""
 "Un objeto o función invocable.  Las llamadas al objeto :class:`partial` "
 "serán reenviadas a :attr:`func` con nuevos argumentos y palabras clave."
 
-#: ../Doc/library/functools.rst:709
+#: ../Doc/library/functools.rst:733
 msgid ""
 "The leftmost positional arguments that will be prepended to the positional "
 "arguments provided to a :class:`partial` object call."
@@ -864,7 +904,7 @@ msgstr ""
 "Los argumentos posicionales de la izquierda que se prepararán para los "
 "argumentos posicionales proporcionados un llamado al objeto :class:`partial`."
 
-#: ../Doc/library/functools.rst:715
+#: ../Doc/library/functools.rst:739
 msgid ""
 "The keyword arguments that will be supplied when the :class:`partial` object "
 "is called."
@@ -872,7 +912,7 @@ msgstr ""
 "Los argumentos de la palabra clave que se suministrarán cuando se llame al "
 "objeto :class:`partial`."
 
-#: ../Doc/library/functools.rst:718
+#: ../Doc/library/functools.rst:742
 msgid ""
 ":class:`partial` objects are like :class:`function` objects in that they are "
 "callable, weak referencable, and can have attributes.  There are some "

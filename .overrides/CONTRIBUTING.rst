@@ -89,11 +89,11 @@ Paso 2: ¡Comienza a traducir!
 
 #. Tener un :ref:`archivo asignado para traducir <que-archivo-traducir>`.
 
-#. Verifica que estás en la rama principal del repositorio, **3.11** (esto es muy
+#. Verifica que estás en la rama principal del repositorio, **3.12** (esto es muy
    importante para evitar crear una nueva rama a partir de una traducción
    anterior)::
 
-     git checkout 3.11
+     git checkout 3.12
 
 #. Crea una rama nueva en base al artículo en el que vayas a trabajar.  Por
    ejemplo, si vas a trabajar en el archivo ``library/ast.po``, usa un nombre

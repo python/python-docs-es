@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-25 19:47+0200\n"
-"PO-Revision-Date: 2023-04-03 15:39-0600\n"
+"POT-Creation-Date: 2023-10-12 19:43+0200\n"
+"PO-Revision-Date: 2023-11-20 09:49-0500\n"
 "Last-Translator: \n"
 "Language-Team: python-doc-es\n"
 "Language: es\n"
@@ -19,8 +19,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.10.3\n"
-"X-Generator: Poedit 3.2.2\n"
+"Generated-By: Babel 2.13.0\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #: ../Doc/library/bisect.rst:2
 msgid ":mod:`bisect` --- Array bisection algorithm"
@@ -34,25 +34,37 @@ msgstr "**Código fuente:** :source:`Lib/bisect.py`"
 msgid ""
 "This module provides support for maintaining a list in sorted order without "
 "having to sort the list after each insertion.  For long lists of items with "
-"expensive comparison operations, this can be an improvement over the more "
-"common approach.  The module is called :mod:`bisect` because it uses a basic "
-"bisection algorithm to do its work.  The source code may be most useful as a "
-"working example of the algorithm (the boundary conditions are already "
-"right!)."
+"expensive comparison operations, this can be an improvement over linear "
+"searches or frequent resorting."
 msgstr ""
 "Este módulo brinda soporte para mantener una lista ordenada sin tener que "
 "reordenar la lista tras cada nueva inserción. Para listas largas de "
-"elementos que tienen operaciones de comparación costosas, será una mejora "
-"respecto a la estrategia más habitual. El módulo se llama  :mod:`bisect` "
-"porque usa un algoritmo de bisección básico para lograr su objetivo. El "
-"código fuente puede ser útil como ejemplo del algoritmo en funcionamiento "
-"(¡las precondiciones ya están bien de antemano!)."
+"elementos que tienen operaciones de comparación costosas, esto puede suponer "
+"una mejora con respecto a las búsquedas lineales o el reordenado frecuente."
 
-#: ../Doc/library/bisect.rst:21
+#: ../Doc/library/bisect.rst:19
+msgid ""
+"The module is called :mod:`bisect` because it uses a basic bisection "
+"algorithm to do its work.  Unlike other bisection tools that search for a "
+"specific value, the functions in this module are designed to locate an "
+"insertion point. Accordingly, the functions never call an :meth:`__eq__` "
+"method to determine whether a value has been found.  Instead, the functions "
+"only call the :meth:`__lt__` method and will return an insertion point "
+"between values in an array."
+msgstr ""
+"El módulo se llama :mod:`bisect` porque utiliza un algoritmo básico de "
+"bisección para realizar su trabajo.  A diferencia de otras herramientas de "
+"bisección que buscan un valor específico, las funciones de este módulo están "
+"diseñadas para localizar un punto de inserción.  En consecuencia, las "
+"funciones nunca llaman a un método :meth:`__eq__` para determinar si se ha "
+"encontrado un valor.  En su lugar, las funciones sólo llaman al método :meth:"
+"`__lt__` y devolverán un punto de inserción entre valores de un arreglo."
+
+#: ../Doc/library/bisect.rst:29
 msgid "The following functions are provided:"
 msgstr "Las siguientes funciones están disponibles:"
 
-#: ../Doc/library/bisect.rst:26
+#: ../Doc/library/bisect.rst:34
 msgid ""
 "Locate the insertion point for *x* in *a* to maintain sorted order. The "
 "parameters *lo* and *hi* may be used to specify a subset of the list which "
@@ -63,23 +75,25 @@ msgid ""
 msgstr ""
 "Ubicar el punto de inserción para *x* en *a* para mantener el ordenamiento. "
 "Los parámetros *lo* (inferior) y *hi* (superior) pueden utilizarse para "
-"especificar un subconjunto (*subset*) de la lista que debería considerarse. "
-"Por defecto, se utiliza la lista completa. Si *x* ya está presente en *a*, "
-"el punto de inserción será antes (a la izquierda de) cualquier elemento "
-"existente. El valor de retorno es adecuado para que se utilice como primer "
-"parámetro para ``list.insert()``, suponiendo que *a* ya está ordenada."
+"especificar un subconjunto de la lista que debería considerarse; por defecto "
+"se utiliza la lista completa. Si *x* ya está presente en *a*, el punto de "
+"inserción será antes (a la izquierda) de cualquier elemento existente. El "
+"valor de retorno es adecuado para que se utilice como primer parámetro para "
+"``list.insert()``, suponiendo que *a* ya está ordenada."
 
-#: ../Doc/library/bisect.rst:33
+#: ../Doc/library/bisect.rst:41
 msgid ""
-"The returned insertion point *i* partitions the array *a* into two halves so "
-"that ``all(val < x for val in a[lo : i])`` for the left side and ``all(val "
-">= x for val in a[i : hi])`` for the right side."
+"The returned insertion point *ip* partitions the array *a* into two slices "
+"such that ``all(elem < x for elem in a[lo : ip])`` is true for the left "
+"slice and ``all(elem >= x for elem in a[ip : hi])`` is true for the right "
+"slice."
 msgstr ""
-"El punto de inserción retornado *i* divide el arreglo *a* en dos mitades, de "
-"modo que ``all(val < x for val in a[lo : i])`` para el lado izquierdo y "
-"``all(val >= x for val in a[i : hi])`` para el lado derecho."
+"El punto de inserción retornado *ip* divide el arreglo *a* en dos partes, de "
+"modo que ``all(elem < x for elem in a[lo : ip])`` es verdadero para el lado "
+"izquierdo y ``all(elem >= x for elem in a[ip : hi])`` es verdadero para el "
+"lado derecho."
 
-#: ../Doc/library/bisect.rst:37 ../Doc/library/bisect.rst:58
+#: ../Doc/library/bisect.rst:46
 msgid ""
 "*key* specifies a :term:`key function` of one argument that is used to "
 "extract a comparison key from each element in the array.  To support "
@@ -89,52 +103,55 @@ msgstr ""
 "extraer una clave de comparación de cada elemento en el arreglo. La función "
 "clave no se aplica a *x* para facilitar la búsqueda de registros complejos."
 
-#: ../Doc/library/bisect.rst:41 ../Doc/library/bisect.rst:62
+#: ../Doc/library/bisect.rst:50
 msgid ""
-"If *key* is ``None``, the elements are compared directly with no intervening "
-"function call."
+"If *key* is ``None``, the elements are compared directly and no key function "
+"is called."
 msgstr ""
-"Si *key* es ``None``, los elementos son comparados directamente sin "
-"intervención de una función."
+"Si *key* es ``None``, los elementos se comparan directamente y ninguna "
+"función clave es llamada."
 
-#: ../Doc/library/bisect.rst:44 ../Doc/library/bisect.rst:65
-#: ../Doc/library/bisect.rst:83 ../Doc/library/bisect.rst:103
+#: ../Doc/library/bisect.rst:53 ../Doc/library/bisect.rst:67
+#: ../Doc/library/bisect.rst:85 ../Doc/library/bisect.rst:105
 msgid "Added the *key* parameter."
 msgstr "Se agregó el parámetro *key*."
 
-#: ../Doc/library/bisect.rst:51
+#: ../Doc/library/bisect.rst:60
 msgid ""
-"Similar to :func:`bisect_left`, but returns an insertion point which comes "
-"after (to the right of) any existing entries of *x* in *a*."
+"Similar to :py:func:`~bisect.bisect_left`, but returns an insertion point "
+"which comes after (to the right of) any existing entries of *x* in *a*."
 msgstr ""
-"Similar a  :func:`bisect_left`, pero retorna un punto de inserción que viene "
-"después (a la derecha de) cualquier entrada de *x* en *a*."
+"Similar a :py:func:`~bisect.bisect_left`, pero retorna un punto de inserción "
+"que viene después (a la derecha) de cualquier entrada existente de *x* en "
+"*a*."
 
-#: ../Doc/library/bisect.rst:54
+#: ../Doc/library/bisect.rst:63
 msgid ""
-"The returned insertion point *i* partitions the array *a* into two halves so "
-"that ``all(val <= x for val in a[lo : i])`` for the left side and ``all(val "
-"> x for val in a[i : hi])`` for the right side."
+"The returned insertion point *ip* partitions the array *a* into two slices "
+"such that ``all(elem <= x for elem in a[lo : ip])`` is true for the left "
+"slice and ``all(elem > x for elem in a[ip : hi])`` is true for the right "
+"slice."
 msgstr ""
-"El punto de inserción retornado *i* divide el arreglo *a* en dos mitades, de "
-"modo que ``all(val <= x for val in a[lo : i])`` para el lado izquierdo y "
-"``all(val > x for val in a[i : hi])`` para el lado derecho."
+"El punto de inserción retornado *ip* divide el arreglo *a* en dos partes, de "
+"modo que ``all(elem  <= x for elem in a[lo : ip])`` es verdadero para el "
+"lado izquierdo y ``all(elem > x for elem in a[ip : hi])`` es verdadero para "
+"el lado derecho."
 
-#: ../Doc/library/bisect.rst:71
+#: ../Doc/library/bisect.rst:73
 msgid "Insert *x* in *a* in sorted order."
 msgstr "Inserte *x* en *a* en orden ordenado."
 
-#: ../Doc/library/bisect.rst:73
+#: ../Doc/library/bisect.rst:75
 msgid ""
-"This function first runs :func:`bisect_left` to locate an insertion point. "
-"Next, it runs the :meth:`insert` method on *a* to insert *x* at the "
-"appropriate position to maintain sort order."
+"This function first runs :py:func:`~bisect.bisect_left` to locate an "
+"insertion point. Next, it runs the :meth:`insert` method on *a* to insert "
+"*x* at the appropriate position to maintain sort order."
 msgstr ""
-"Esta función primero ejecuta :func:`bisect_left` para localizar un punto de "
-"inserción. A continuación, ejecuta el método :meth:`insert` en *a* para "
-"insertar *x* en la posición adecuada para mantener el orden de clasificación."
+"Esta función ejecuta primero :py:func:`~bisect.bisect_left` para localizar "
+"un punto de inserción. A continuación, ejecuta el método :meth:`insert` en "
+"*a* para insertar *x* en la posición adecuada para mantener el orden."
 
-#: ../Doc/library/bisect.rst:77 ../Doc/library/bisect.rst:97
+#: ../Doc/library/bisect.rst:79 ../Doc/library/bisect.rst:99
 msgid ""
 "To support inserting records in a table, the *key* function (if any) is "
 "applied to *x* for the search step but not for the insertion step."
@@ -143,37 +160,37 @@ msgstr ""
 "caso de existir) se aplica a *x* en el paso de búsqueda pero no en el paso "
 "de inserción."
 
-#: ../Doc/library/bisect.rst:80 ../Doc/library/bisect.rst:100
+#: ../Doc/library/bisect.rst:82 ../Doc/library/bisect.rst:102
 msgid ""
 "Keep in mind that the ``O(log n)`` search is dominated by the slow O(n) "
 "insertion step."
 msgstr ""
 "Tenga en cuenta que la búsqueda ``O(log n)`` está dominada por el lento paso "
-"de inserción O (n)."
+"de inserción O(n)."
 
-#: ../Doc/library/bisect.rst:90
+#: ../Doc/library/bisect.rst:92
 msgid ""
-"Similar to :func:`insort_left`, but inserting *x* in *a* after any existing "
-"entries of *x*."
+"Similar to :py:func:`~bisect.insort_left`, but inserting *x* in *a* after "
+"any existing entries of *x*."
 msgstr ""
-"Similar a :func:`insort_left`, pero inserta *x* en *a* después de cualquier "
-"entrada *x* existente."
+"Similar a :py:func:`~bisect.insort_left`, pero inserta *x* en *a* después de "
+"cualquier entrada de *x* existente."
 
-#: ../Doc/library/bisect.rst:93
+#: ../Doc/library/bisect.rst:95
 msgid ""
-"This function first runs :func:`bisect_right` to locate an insertion point. "
-"Next, it runs the :meth:`insert` method on *a* to insert *x* at the "
-"appropriate position to maintain sort order."
+"This function first runs :py:func:`~bisect.bisect_right` to locate an "
+"insertion point. Next, it runs the :meth:`insert` method on *a* to insert "
+"*x* at the appropriate position to maintain sort order."
 msgstr ""
-"Esta función primero ejecuta :func:`bisect_right` para localizar un punto de "
-"inserción. A continuación, ejecuta el método :meth:`insert` en *a* para "
-"insertar *x* en la posición adecuada para mantener el orden de clasificación."
+"Esta función primero ejecuta :py:func:`~bisect.bisect_right` para localizar "
+"un punto de inserción. A continuación, ejecuta el método :meth:`insert` en "
+"*a* para insertar *x* en la posición adecuada para mantener el orden."
 
-#: ../Doc/library/bisect.rst:108
+#: ../Doc/library/bisect.rst:110
 msgid "Performance Notes"
 msgstr "Notas de rendimiento"
 
-#: ../Doc/library/bisect.rst:110
+#: ../Doc/library/bisect.rst:112
 msgid ""
 "When writing time sensitive code using *bisect()* and *insort()*, keep these "
 "thoughts in mind:"
@@ -181,7 +198,7 @@ msgstr ""
 "Al escribir código sensible al tiempo usando *bisect()* y *insort()*, tenga "
 "en cuenta estos pensamientos:"
 
-#: ../Doc/library/bisect.rst:113
+#: ../Doc/library/bisect.rst:115
 msgid ""
 "Bisection is effective for searching ranges of values. For locating specific "
 "values, dictionaries are more performant."
@@ -189,7 +206,7 @@ msgstr ""
 "La bisección es eficaz para buscar rangos de valores. Para localizar valores "
 "específicos, los diccionarios son más eficaces."
 
-#: ../Doc/library/bisect.rst:116
+#: ../Doc/library/bisect.rst:118
 msgid ""
 "The *insort()* functions are ``O(n)`` because the logarithmic search step is "
 "dominated by the linear time insertion step."
@@ -197,26 +214,26 @@ msgstr ""
 "Las funciones *insort()* son ``O(n)`` porque el paso de búsqueda logarítmica "
 "está dominado por el paso de inserción de tiempo lineal."
 
-#: ../Doc/library/bisect.rst:119
+#: ../Doc/library/bisect.rst:121
 msgid ""
 "The search functions are stateless and discard key function results after "
 "they are used.  Consequently, if the search functions are used in a loop, "
 "the key function may be called again and again on the same array elements. "
-"If the key function isn't fast, consider wrapping it with :func:`functools."
-"cache` to avoid duplicate computations.  Alternatively, consider searching "
-"an array of precomputed keys to locate the insertion point (as shown in the "
-"examples section below)."
+"If the key function isn't fast, consider wrapping it with :py:func:"
+"`functools.cache` to avoid duplicate computations.  Alternatively, consider "
+"searching an array of precomputed keys to locate the insertion point (as "
+"shown in the examples section below)."
 msgstr ""
 "Las funciones de búsqueda no tienen estado y descartan los resultados de las "
-"funciones clave después de su uso. En consecuencia, si las funciones de "
+"funciones clave después de ser usadas.  En consecuencia, si las funciones de "
 "búsqueda se utilizan en un bucle, la función clave se puede llamar una y "
-"otra vez en los mismos elementos del arreglo. Si la función clave no es "
+"otra vez en los mismos elementos del arreglo.  Si la función clave no es "
 "rápida, considere envolverla con :func:`functools.cache` para evitar "
 "cálculos duplicados. Alternativamente, considere buscar un arreglo de claves "
 "precalculadas para ubicar el punto de inserción (como se muestra en la "
 "sección de ejemplos a continuación)."
 
-#: ../Doc/library/bisect.rst:129
+#: ../Doc/library/bisect.rst:131
 msgid ""
 "`Sorted Collections <https://grantjenks.com/docs/sortedcollections/>`_ is a "
 "high performance module that uses *bisect* to managed sorted collections of "
@@ -226,7 +243,7 @@ msgstr ""
 "módulo de alto rendimiento que utiliza *bisect* para gestionar colecciones "
 "de datos ordenadas."
 
-#: ../Doc/library/bisect.rst:133
+#: ../Doc/library/bisect.rst:135
 msgid ""
 "The `SortedCollection recipe <https://code.activestate.com/recipes/577197-"
 "sortedcollection/>`_ uses bisect to build a full-featured collection class "
@@ -240,49 +257,50 @@ msgstr ""
 "función clave. Las claves se calculan previamente para ahorrar llamadas "
 "innecesarias a la función clave durante las búsquedas."
 
-#: ../Doc/library/bisect.rst:141
+#: ../Doc/library/bisect.rst:143
 msgid "Searching Sorted Lists"
 msgstr "Búsqueda en listas ordenadas"
 
-#: ../Doc/library/bisect.rst:143
+#: ../Doc/library/bisect.rst:145
 msgid ""
-"The above :func:`bisect` functions are useful for finding insertion points "
-"but can be tricky or awkward to use for common searching tasks. The "
-"following five functions show how to transform them into the standard "
-"lookups for sorted lists::"
+"The above `bisect functions`_ are useful for finding insertion points but "
+"can be tricky or awkward to use for common searching tasks. The following "
+"five functions show how to transform them into the standard lookups for "
+"sorted lists::"
 msgstr ""
-"Las funciones anteriores :func:`bisect` son útiles para encontrar puntos de "
+"Las `bisect functions`_ anteriores son útiles para encontrar puntos de "
 "inserción, pero pueden resultar difíciles o engorrosas para tareas de "
-"búsqueda habituales. Las cinco funciones que siguen muestran cómo "
+"búsqueda habituales. Las siguientes cinco funciones muestran cómo "
 "convertirlas en búsquedas estándar para listas ordenadas::"
 
-#: ../Doc/library/bisect.rst:185
+#: ../Doc/library/bisect.rst:187
 msgid "Examples"
 msgstr "Ejemplos"
 
-#: ../Doc/library/bisect.rst:189
+#: ../Doc/library/bisect.rst:191
 msgid ""
-"The :func:`bisect` function can be useful for numeric table lookups. This "
-"example uses :func:`bisect` to look up a letter grade for an exam score "
-"(say) based on a set of ordered numeric breakpoints: 90 and up is an 'A', 80 "
-"to 89 is a 'B', and so on::"
+"The :py:func:`~bisect.bisect` function can be useful for numeric table "
+"lookups. This example uses :py:func:`~bisect.bisect` to look up a letter "
+"grade for an exam score (say) based on a set of ordered numeric breakpoints: "
+"90 and up is an 'A', 80 to 89 is a 'B', and so on::"
 msgstr ""
-"La función :func:`bisect` puede ser útil para búsquedas en tablas numéricas. "
-"Este ejemplo utiliza :func:`bisect` para buscar una calificación de un "
-"examen dada por una letra, basada en un conjunto de marcas numéricas "
-"ordenadas: 90 o más es una 'A', de 80 a 89 es una 'B', y así sucesivamente::"
+"La función :py:func:`~bisect.bisect` puede ser útil para búsquedas en tablas "
+"numéricas. Este ejemplo utiliza :py:func:`~bisect.bisect` para buscar una "
+"calificación de un examen (digamos) dada por una letra, basándose en un "
+"conjunto de punto de corte numéricos ordenados: 90 o más es una 'A', de 80 a "
+"89 es una 'B', y así sucesivamente::"
 
-#: ../Doc/library/bisect.rst:201
+#: ../Doc/library/bisect.rst:203
 msgid ""
-"The :func:`bisect` and :func:`insort` functions also work with lists of "
-"tuples.  The *key* argument can serve to extract the field used for ordering "
-"records in a table::"
+"The :py:func:`~bisect.bisect` and :py:func:`~bisect.insort` functions also "
+"work with lists of tuples.  The *key* argument can serve to extract the "
+"field used for ordering records in a table::"
 msgstr ""
-"Las funciones :func:`bisect` e :func:`insort` también funcionan con listas "
-"de tuplas. El argumento *key* puede usarse para extraer el campo usado para "
-"ordenar registros en una tabla::"
+"Las funciones :py:func:`~bisect.bisect` y :py:func:`~bisect.insort` también "
+"funcionan con listas de tuplas. El argumento *key* puede usarse para extraer "
+"el campo usado para ordenar registros en una tabla::"
 
-#: ../Doc/library/bisect.rst:235
+#: ../Doc/library/bisect.rst:237
 msgid ""
 "If the key function is expensive, it is possible to avoid repeated function "
 "calls by searching a list of precomputed keys to find the index of a record::"
