@@ -6,6 +6,9 @@ on:
       - 3.*
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   test:
     name: Test
@@ -21,7 +24,7 @@ jobs:
 
       # Instalación de dependencias
       - name: Preparar Python v3.11
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           cache: "pip"
@@ -31,6 +34,7 @@ jobs:
         run: sudo sed -i '/postgresql-common/d' /var/lib/dpkg/triggers/File
       - name: Instalar dependencias de sistema
         run: |
+          sudo apt-get update
           sudo apt-get install -y hunspell hunspell-es gettext language-pack-es locales-all
       - name: Instalar dependencias de Python
         run: |
@@ -48,7 +52,7 @@ jobs:
       - name: Obtiene la lista de archivos .po con cambios (sólo en PRs)
         if: github.event_name == 'pull_request'
         id: changed-po-files
-        uses: tj-actions/changed-files@v40
+        uses: tj-actions/changed-files@v41
         with:
           files: |
              **/*.po
