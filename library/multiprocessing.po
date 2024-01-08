@@ -10,16 +10,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-25 19:47+0200\n"
+"POT-Creation-Date: 2023-10-12 19:43+0200\n"
 "PO-Revision-Date: 2021-12-12 13:14-0500\n"
 "Last-Translator: Adolfo Hristo David Roque Gámez <aroquega@gmail.com>\n"
-"Language-Team: python-doc-es\n"
 "Language: es_ES\n"
+"Language-Team: python-doc-es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.10.3\n"
+"Generated-By: Babel 2.13.0\n"
 
 #: ../Doc/library/multiprocessing.rst:2
 msgid ":mod:`multiprocessing` --- Process-based parallelism"
@@ -29,11 +29,12 @@ msgstr ":mod:`multiprocessing` --- Paralelismo basado en procesos"
 msgid "**Source code:** :source:`Lib/multiprocessing/`"
 msgstr "**Código fuente:** :source:`Lib/multiprocessing/`"
 
+#: ../Doc/includes/wasm-notavail.rst:3
 #, fuzzy
 msgid ":ref:`Availability <availability>`: not Emscripten, not WASI."
 msgstr ":ref:`Availability <availability>`: no Emscripten, no WASI."
 
-#: ../Doc/library/cpython/Doc/includes/wasm-notavail.rst:5
+#: ../Doc/includes/wasm-notavail.rst:5
 msgid ""
 "This module does not work or is not available on WebAssembly platforms "
 "``wasm32-emscripten`` and ``wasm32-wasi``. See :ref:`wasm-availability` for "
@@ -48,6 +49,7 @@ msgid "Introduction"
 msgstr "Introducción"
 
 #: ../Doc/library/multiprocessing.rst:16
+#, fuzzy
 msgid ""
 ":mod:`multiprocessing` is a package that supports spawning processes using "
 "an API similar to the :mod:`threading` module.  The :mod:`multiprocessing` "
@@ -55,7 +57,7 @@ msgid ""
 "the :term:`Global Interpreter Lock <global interpreter lock>` by using "
 "subprocesses instead of threads.  Due to this, the :mod:`multiprocessing` "
 "module allows the programmer to fully leverage multiple processors on a "
-"given machine.  It runs on both Unix and Windows."
+"given machine.  It runs on both POSIX and Windows."
 msgstr ""
 ":mod:`multiprocessing` es un paquete que permite crear procesos (*spawning*) "
 "utilizando una API similar al módulo :mod:`threading`. El paquete :mod:"
@@ -139,7 +141,7 @@ msgstr ""
 "Para obtener una explicación de por qué es necesaria la parte ``if __name__ "
 "== '__main__'`` , consulte :ref:`multiprocessing-programming`."
 
-#: ../Doc/library/multiprocessing.rst:103
+#: ../Doc/library/multiprocessing.rst:105
 msgid "Contexts and start methods"
 msgstr "Contextos y métodos de inicio"
 
@@ -172,10 +174,12 @@ msgstr ""
 "comparación con *fork* o *forkserver*."
 
 #: ../Doc/library/multiprocessing.rst:118
-msgid "Available on Unix and Windows.  The default on Windows and macOS."
+#, fuzzy
+msgid ""
+"Available on POSIX and Windows platforms.  The default on Windows and macOS."
 msgstr "Disponible en Unix y Windows. Por defecto en Windows y macOS."
 
-#: ../Doc/library/multiprocessing.rst:127
+#: ../Doc/library/multiprocessing.rst:138
 msgid "*fork*"
 msgstr "*fork*"
 
@@ -193,20 +197,39 @@ msgstr ""
 "proceso multihilo es problemático."
 
 #: ../Doc/library/multiprocessing.rst:127
-msgid "Available on Unix only.  The default on Unix."
+#, fuzzy
+msgid ""
+"Available on POSIX systems.  Currently the default on POSIX except macOS."
 msgstr "Disponible solo en Unix. Por defecto en Unix."
-
-#: ../Doc/library/multiprocessing.rst:138
-msgid "*forkserver*"
-msgstr "*forkserver*"
 
 #: ../Doc/library/multiprocessing.rst:130
 msgid ""
+"The default start method will change away from *fork* in Python 3.14. Code "
+"that requires *fork* should explicitly specify that via :func:`get_context` "
+"or :func:`set_start_method`."
+msgstr ""
+
+#: ../Doc/library/multiprocessing.rst:134
+msgid ""
+"If Python is able to detect that your process has multiple threads, the :"
+"func:`os.fork` function that this start method calls internally will raise "
+"a :exc:`DeprecationWarning`. Use a different start method. See the :func:`os."
+"fork` documentation for further explanation."
+msgstr ""
+
+#: ../Doc/library/multiprocessing.rst:151
+msgid "*forkserver*"
+msgstr "*forkserver*"
+
+#: ../Doc/library/multiprocessing.rst:141
+#, fuzzy
+msgid ""
 "When the program starts and selects the *forkserver* start method, a server "
-"process is started.  From then on, whenever a new process is needed, the "
+"process is spawned.  From then on, whenever a new process is needed, the "
 "parent process connects to the server and requests that it fork a new "
-"process.  The fork server process is single threaded so it is safe for it to "
-"use :func:`os.fork`.  No unnecessary resources are inherited."
+"process.  The fork server process is single threaded unless system libraries "
+"or preloaded imports spawn threads as a side-effect so it is generally safe "
+"for it to use :func:`os.fork`. No unnecessary resources are inherited."
 msgstr ""
 "Cuando el programa se inicia y selecciona el método de inicio *forkserver*, "
 "se inicia un proceso de servidor. A partir de ese momento, cada vez que se "
@@ -215,28 +238,30 @@ msgstr ""
 "un solo hilo, por lo que es seguro usarlo :func:`os.fork`. No se heredan "
 "recursos innecesarios."
 
-#: ../Doc/library/multiprocessing.rst:137
+#: ../Doc/library/multiprocessing.rst:149
+#, fuzzy
 msgid ""
-"Available on Unix platforms which support passing file descriptors over Unix "
-"pipes."
+"Available on POSIX platforms which support passing file descriptors over "
+"Unix pipes such as Linux."
 msgstr ""
 "Disponible en plataformas Unix que admiten pasar descriptores de archivo a "
 "través de tuberías (*pipes*) Unix."
 
-#: ../Doc/library/multiprocessing.rst:142
-#: ../Doc/library/multiprocessing.rst:1070
+#: ../Doc/library/multiprocessing.rst:155
+#, fuzzy
 msgid ""
 "On macOS, the *spawn* start method is now the default.  The *fork* start "
 "method should be considered unsafe as it can lead to crashes of the "
-"subprocess. See :issue:`33725`."
+"subprocess as macOS system libraries may start threads. See :issue:`33725`."
 msgstr ""
 "En macOS, el método de inicio *spawn* ahora es el predeterminado. El método "
 "de inicio *fork* debe considerarse inseguro ya que puede provocar bloqueos "
 "del subproceso. Consulte :issue:`33725`."
 
-#: ../Doc/library/multiprocessing.rst:146
+#: ../Doc/library/multiprocessing.rst:159
+#, fuzzy
 msgid ""
-"*spawn* added on all Unix platforms, and *forkserver* added for some Unix "
+"*spawn* added on all POSIX platforms, and *forkserver* added for some POSIX "
 "platforms. Child processes no longer inherit all of the parents inheritable "
 "handles on Windows."
 msgstr ""
@@ -244,9 +269,10 @@ msgstr ""
 "para algunas plataformas Unix. Los procesos secundarios ya no heredan todos "
 "los identificadores heredables principales en Windows."
 
-#: ../Doc/library/multiprocessing.rst:152
+#: ../Doc/library/multiprocessing.rst:165
+#, fuzzy
 msgid ""
-"On Unix using the *spawn* or *forkserver* start methods will also start a "
+"On POSIX using the *spawn* or *forkserver* start methods will also start a "
 "*resource tracker* process which tracks the unlinked named system resources "
 "(such as named semaphores or :class:`~multiprocessing.shared_memory."
 "SharedMemory` objects) created by processes of the program.  When all "
@@ -271,7 +297,7 @@ msgstr ""
 "permite un número limitado de semáforos con nombre, y los segmentos de "
 "memoria compartida ocupan algo de espacio en la memoria principal)."
 
-#: ../Doc/library/multiprocessing.rst:165
+#: ../Doc/library/multiprocessing.rst:178
 msgid ""
 "To select a start method you use the :func:`set_start_method` in the ``if "
 "__name__ == '__main__'`` clause of the main module.  For example::"
@@ -280,13 +306,13 @@ msgstr ""
 "`set_start_method` en la cláusula ``if __name__ == '__main__'`` del módulo "
 "principal. Por ejemplo::"
 
-#: ../Doc/library/multiprocessing.rst:182
+#: ../Doc/library/multiprocessing.rst:195
 msgid ""
 ":func:`set_start_method` should not be used more than once in the program."
 msgstr ""
 ":func:`set_start_method` no debería ser usada más de una vez en el programa."
 
-#: ../Doc/library/multiprocessing.rst:185
+#: ../Doc/library/multiprocessing.rst:198
 msgid ""
 "Alternatively, you can use :func:`get_context` to obtain a context object.  "
 "Context objects have the same API as the multiprocessing module, and allow "
@@ -297,7 +323,7 @@ msgstr ""
 "multiprocesamiento, y permiten utilizar múltiples métodos de inicio en el "
 "mismo programa. ::"
 
-#: ../Doc/library/multiprocessing.rst:203
+#: ../Doc/library/multiprocessing.rst:216
 msgid ""
 "Note that objects related to one context may not be compatible with "
 "processes for a different context.  In particular, locks created using the "
@@ -309,7 +335,7 @@ msgstr ""
 "*locks* creados con el contexto *fork* no se pueden pasar a los procesos "
 "iniciados con los métodos de inicio *spawn* o *forkserver* ."
 
-#: ../Doc/library/multiprocessing.rst:208
+#: ../Doc/library/multiprocessing.rst:221
 msgid ""
 "A library which wants to use a particular start method should probably use :"
 "func:`get_context` to avoid interfering with the choice of the library user."
@@ -318,23 +344,24 @@ msgstr ""
 "debería usar :func:`get_context` para evitar interferir con la elección del "
 "usuario de la biblioteca."
 
-#: ../Doc/library/multiprocessing.rst:214
+#: ../Doc/library/multiprocessing.rst:227
+#, fuzzy
 msgid ""
-"The ``'spawn'`` and ``'forkserver'`` start methods cannot currently be used "
+"The ``'spawn'`` and ``'forkserver'`` start methods generally cannot be used "
 "with \"frozen\" executables (i.e., binaries produced by packages like "
-"**PyInstaller** and **cx_Freeze**) on Unix. The ``'fork'`` start method does "
-"work."
+"**PyInstaller** and **cx_Freeze**) on POSIX systems. The ``'fork'`` start "
+"method may work if code does not use threads."
 msgstr ""
 "Los métodos de inicio ``'spawn'`` y ``'forkserver'`` actualmente no pueden "
 "ser usados con ejecutables \"congelados\" (*frozen*)(es decir, binarios "
 "producidos por paquetes como **PyInstaller** y **cx_Freeze**) en Unix. El "
 "método de inicio ``'fork'`` funciona."
 
-#: ../Doc/library/multiprocessing.rst:221
+#: ../Doc/library/multiprocessing.rst:234
 msgid "Exchanging objects between processes"
 msgstr "Intercambiando objetos entre procesos"
 
-#: ../Doc/library/multiprocessing.rst:223
+#: ../Doc/library/multiprocessing.rst:236
 msgid ""
 ":mod:`multiprocessing` supports two types of communication channel between "
 "processes:"
@@ -342,11 +369,11 @@ msgstr ""
 ":mod:`multiprocessing` admite dos tipos de canales de comunicación entre "
 "procesos:"
 
-#: ../Doc/library/multiprocessing.rst:226
+#: ../Doc/library/multiprocessing.rst:239
 msgid "**Queues**"
 msgstr "**Colas (*queues*)**"
 
-#: ../Doc/library/multiprocessing.rst:228
+#: ../Doc/library/multiprocessing.rst:241
 msgid ""
 "The :class:`Queue` class is a near clone of :class:`queue.Queue`.  For "
 "example::"
@@ -354,15 +381,15 @@ msgstr ""
 "La clase :class:`Queue` es prácticamente un clon de :class:`queue.Queue`. "
 "Por ejemplo::"
 
-#: ../Doc/library/multiprocessing.rst:243
+#: ../Doc/library/multiprocessing.rst:256
 msgid "Queues are thread and process safe."
 msgstr "Las colas (*queues*) son hilos y procesos seguro."
 
-#: ../Doc/library/multiprocessing.rst:245
+#: ../Doc/library/multiprocessing.rst:258
 msgid "**Pipes**"
 msgstr "**Tuberías (*Pipes*)**"
 
-#: ../Doc/library/multiprocessing.rst:247
+#: ../Doc/library/multiprocessing.rst:260
 msgid ""
 "The :func:`Pipe` function returns a pair of connection objects connected by "
 "a pipe which by default is duplex (two-way).  For example::"
@@ -371,7 +398,7 @@ msgstr ""
 "una tubería (*pipe*) que, por defecto, es un dúplex (bidireccional). Por "
 "ejemplo::"
 
-#: ../Doc/library/multiprocessing.rst:263
+#: ../Doc/library/multiprocessing.rst:276
 msgid ""
 "The two connection objects returned by :func:`Pipe` represent the two ends "
 "of the pipe.  Each connection object has :meth:`~Connection.send` and :meth:"
@@ -388,11 +415,11 @@ msgstr ""
 "al mismo tiempo. Por supuesto, no hay riesgo de corrupción por procesos que "
 "utilizan diferentes extremos de la tubería (*pipe*) al mismo tiempo."
 
-#: ../Doc/library/multiprocessing.rst:273
+#: ../Doc/library/multiprocessing.rst:286
 msgid "Synchronization between processes"
 msgstr "Sincronización entre procesos"
 
-#: ../Doc/library/multiprocessing.rst:275
+#: ../Doc/library/multiprocessing.rst:288
 msgid ""
 ":mod:`multiprocessing` contains equivalents of all the synchronization "
 "primitives from :mod:`threading`.  For instance one can use a lock to ensure "
@@ -403,7 +430,7 @@ msgstr ""
 "(*lock*) para garantizar que solo un proceso se imprima a la salida estándar "
 "a la vez::"
 
-#: ../Doc/library/multiprocessing.rst:294
+#: ../Doc/library/multiprocessing.rst:307
 msgid ""
 "Without using the lock output from the different processes is liable to get "
 "all mixed up."
@@ -411,11 +438,11 @@ msgstr ""
 "Sin usar el candado (*lock*) de salida de los diferentes procesos, es "
 "probable que todo se mezcle."
 
-#: ../Doc/library/multiprocessing.rst:299
+#: ../Doc/library/multiprocessing.rst:312
 msgid "Sharing state between processes"
 msgstr "Compartiendo estado entre procesos"
 
-#: ../Doc/library/multiprocessing.rst:301
+#: ../Doc/library/multiprocessing.rst:314
 msgid ""
 "As mentioned above, when doing concurrent programming it is usually best to "
 "avoid using shared state as far as possible.  This is particularly true when "
@@ -426,7 +453,7 @@ msgstr ""
 "medida de lo posible. Esto es particularmente cierto cuando se utilizan "
 "múltiples procesos."
 
-#: ../Doc/library/multiprocessing.rst:305
+#: ../Doc/library/multiprocessing.rst:318
 msgid ""
 "However, if you really do need to use some shared data then :mod:"
 "`multiprocessing` provides a couple of ways of doing so."
@@ -434,11 +461,11 @@ msgstr ""
 "Sin embargo, si usted realmente necesita usar algunos datos compartidos el :"
 "mod:`multiprocessing` proporciona un par de maneras de hacerlo."
 
-#: ../Doc/library/multiprocessing.rst:308
+#: ../Doc/library/multiprocessing.rst:321
 msgid "**Shared memory**"
 msgstr "**Memoria compartida**"
 
-#: ../Doc/library/multiprocessing.rst:310
+#: ../Doc/library/multiprocessing.rst:323
 msgid ""
 "Data can be stored in a shared memory map using :class:`Value` or :class:"
 "`Array`.  For example, the following code ::"
@@ -446,12 +473,12 @@ msgstr ""
 "Los datos se pueden almacenar en un mapa de memoria compartida usando :class:"
 "`Value` o :class:`Array`. Por ejemplo, el siguiente código ::"
 
-#: ../Doc/library/multiprocessing.rst:331
-#: ../Doc/library/multiprocessing.rst:377
+#: ../Doc/library/multiprocessing.rst:344
+#: ../Doc/library/multiprocessing.rst:390
 msgid "will print ::"
 msgstr "imprimirá ::"
 
-#: ../Doc/library/multiprocessing.rst:336
+#: ../Doc/library/multiprocessing.rst:349
 msgid ""
 "The ``'d'`` and ``'i'`` arguments used when creating ``num`` and ``arr`` are "
 "typecodes of the kind used by the :mod:`array` module: ``'d'`` indicates a "
@@ -463,7 +490,7 @@ msgstr ""
 "un flotador de doble precisión y ``'i'`` indica un entero con signo. Estos "
 "objetos compartidos serán seguros para procesos y subprocesos."
 
-#: ../Doc/library/multiprocessing.rst:341
+#: ../Doc/library/multiprocessing.rst:354
 msgid ""
 "For more flexibility in using shared memory one can use the :mod:"
 "`multiprocessing.sharedctypes` module which supports the creation of "
@@ -473,11 +500,11 @@ msgstr ""
 "usar el módulo :mod:`multiprocessing.sharedctypes` que admite la creación "
 "arbitraria de objetos *ctypes* asignados desde la memoria compartida."
 
-#: ../Doc/library/multiprocessing.rst:345
+#: ../Doc/library/multiprocessing.rst:358
 msgid "**Server process**"
 msgstr "**Proceso servidor (*Server process*)**"
 
-#: ../Doc/library/multiprocessing.rst:347
+#: ../Doc/library/multiprocessing.rst:360
 msgid ""
 "A manager object returned by :func:`Manager` controls a server process which "
 "holds Python objects and allows other processes to manipulate them using "
@@ -487,7 +514,7 @@ msgstr ""
 "de servidor que contiene objetos de Python y permite que otros procesos los "
 "manipulen usando proxies."
 
-#: ../Doc/library/multiprocessing.rst:351
+#: ../Doc/library/multiprocessing.rst:364
 msgid ""
 "A manager returned by :func:`Manager` will support types :class:`list`, :"
 "class:`dict`, :class:`~managers.Namespace`, :class:`Lock`, :class:`RLock`, :"
@@ -501,7 +528,7 @@ msgstr ""
 "class:`Condition`, :class:`Event`, :class:`Barrier`, :class:`Queue`, :class:"
 "`Value` y :class:`Array`.  Por ejemplo, ::"
 
-#: ../Doc/library/multiprocessing.rst:382
+#: ../Doc/library/multiprocessing.rst:395
 msgid ""
 "Server process managers are more flexible than using shared memory objects "
 "because they can be made to support arbitrary object types.  Also, a single "
@@ -514,11 +541,11 @@ msgstr ""
 "compartido por procesos en diferentes ordenadores a través de una red. Sin "
 "embargo, son más lentos que usar memoria compartida."
 
-#: ../Doc/library/multiprocessing.rst:389
+#: ../Doc/library/multiprocessing.rst:402
 msgid "Using a pool of workers"
 msgstr "Usando una piscina de trabajadores (*pool of workers*)"
 
-#: ../Doc/library/multiprocessing.rst:391
+#: ../Doc/library/multiprocessing.rst:404
 msgid ""
 "The :class:`~multiprocessing.pool.Pool` class represents a pool of worker "
 "processes.  It has methods which allows tasks to be offloaded to the worker "
@@ -528,11 +555,11 @@ msgstr ""
 "de trabajadores (*pool of workers*). Tiene métodos que permiten que las "
 "tareas se descarguen a los procesos de trabajo de diferentes maneras."
 
-#: ../Doc/library/multiprocessing.rst:395
+#: ../Doc/library/multiprocessing.rst:408
 msgid "For example::"
 msgstr "Por ejemplo::"
 
-#: ../Doc/library/multiprocessing.rst:439
+#: ../Doc/library/multiprocessing.rst:452
 msgid ""
 "Note that the methods of a pool should only ever be used by the process "
 "which created it."
@@ -540,7 +567,7 @@ msgstr ""
 "Tenga en cuenta que los métodos de una piscina (*pool*) solo deben ser "
 "utilizados por el proceso que lo creó."
 
-#: ../Doc/library/multiprocessing.rst:444
+#: ../Doc/library/multiprocessing.rst:457
 msgid ""
 "Functionality within this package requires that the ``__main__`` module be "
 "importable by the children. This is covered in :ref:`multiprocessing-"
@@ -554,7 +581,7 @@ msgstr ""
 "Esto significa que algunos ejemplos, como :class:`multiprocessing.pool.Pool` "
 "no funcionarán en el intérprete interactivo. Por ejemplo::"
 
-#: ../Doc/library/multiprocessing.rst:467
+#: ../Doc/library/multiprocessing.rst:480
 msgid ""
 "(If you try this it will actually output three full tracebacks interleaved "
 "in a semi-random fashion, and then you may have to stop the parent process "
@@ -564,11 +591,11 @@ msgstr ""
 "forma semialeatoria, y luego tendrá que detener el proceso principal de "
 "alguna manera)"
 
-#: ../Doc/library/multiprocessing.rst:473
+#: ../Doc/library/multiprocessing.rst:486
 msgid "Reference"
 msgstr "Referencia"
 
-#: ../Doc/library/multiprocessing.rst:475
+#: ../Doc/library/multiprocessing.rst:488
 msgid ""
 "The :mod:`multiprocessing` package mostly replicates the API of the :mod:"
 "`threading` module."
@@ -576,11 +603,11 @@ msgstr ""
 "El paquete :mod:`multiprocessing` mayoritariamente replica la API del "
 "módulo :mod:`threading`."
 
-#: ../Doc/library/multiprocessing.rst:480
+#: ../Doc/library/multiprocessing.rst:493
 msgid ":class:`Process` and exceptions"
 msgstr ":class:`Process` y excepciones"
 
-#: ../Doc/library/multiprocessing.rst:485
+#: ../Doc/library/multiprocessing.rst:498
 msgid ""
 "Process objects represent activity that is run in a separate process. The :"
 "class:`Process` class has equivalents of all the methods of :class:"
@@ -590,7 +617,7 @@ msgstr ""
 "separado. La clase :class:`Process` tiene equivalentes para todos los "
 "métodos :class:`threading.Thread`."
 
-#: ../Doc/library/multiprocessing.rst:489
+#: ../Doc/library/multiprocessing.rst:502
 msgid ""
 "The constructor should always be called with keyword arguments. *group* "
 "should always be ``None``; it exists solely for compatibility with :class:"
@@ -615,7 +642,7 @@ msgstr ""
 "``True`` o ``False``.  Si ``None`` (el valor predeterminado), este indicador "
 "se heredará del proceso de creación."
 
-#: ../Doc/library/multiprocessing.rst:500
+#: ../Doc/library/multiprocessing.rst:513
 msgid ""
 "By default, no arguments are passed to *target*. The *args* argument, which "
 "defaults to ``()``, can be used to specify a list or tuple of the arguments "
@@ -625,7 +652,7 @@ msgstr ""
 "*args*, que por defecto es ``()``, se puede usar para especificar una lista "
 "o tupla de los argumentos para pasar a *target*."
 
-#: ../Doc/library/multiprocessing.rst:504
+#: ../Doc/library/multiprocessing.rst:517
 msgid ""
 "If a subclass overrides the constructor, it must make sure it invokes the "
 "base class constructor (:meth:`Process.__init__`) before doing anything else "
@@ -635,15 +662,15 @@ msgstr ""
 "constructor de la clase base (:meth:`Process.__init__`) antes de hacer "
 "cualquier otra cosa al proceso."
 
-#: ../Doc/library/multiprocessing.rst:508
+#: ../Doc/library/multiprocessing.rst:521
 msgid "Added the *daemon* argument."
 msgstr "Añadido el argumento *daemon*."
 
-#: ../Doc/library/multiprocessing.rst:513
+#: ../Doc/library/multiprocessing.rst:526
 msgid "Method representing the process's activity."
 msgstr "Método que representa la actividad del proceso."
 
-#: ../Doc/library/multiprocessing.rst:515
+#: ../Doc/library/multiprocessing.rst:528
 msgid ""
 "You may override this method in a subclass.  The standard :meth:`run` method "
 "invokes the callable object passed to the object's constructor as the target "
@@ -655,7 +682,7 @@ msgstr ""
 "objetivo, si lo hay, con argumentos posicionares y de palabras clave tomados "
 "de los argumentos *args* y *kwargs*, respectivamente."
 
-#: ../Doc/library/multiprocessing.rst:520
+#: ../Doc/library/multiprocessing.rst:533
 msgid ""
 "Using a list or tuple as the *args* argument passed to :class:`Process` "
 "achieves the same effect."
@@ -663,15 +690,15 @@ msgstr ""
 "El uso de una lista o tupla como argumento *args* pasado a :class:`Process` "
 "logra el mismo efecto."
 
-#: ../Doc/library/multiprocessing.rst:523
+#: ../Doc/library/multiprocessing.rst:536
 msgid "Example::"
 msgstr "Ejemplo::"
 
-#: ../Doc/library/multiprocessing.rst:535
+#: ../Doc/library/multiprocessing.rst:548
 msgid "Start the process's activity."
 msgstr "Comienza la actividad del proceso."
 
-#: ../Doc/library/multiprocessing.rst:537
+#: ../Doc/library/multiprocessing.rst:550
 msgid ""
 "This must be called at most once per process object.  It arranges for the "
 "object's :meth:`run` method to be invoked in a separate process."
@@ -679,7 +706,7 @@ msgstr ""
 "Esto debe llamarse como máximo una vez por objeto de proceso. Organiza la "
 "invocación del método :meth:`run` del objeto en un proceso separado."
 
-#: ../Doc/library/multiprocessing.rst:542
+#: ../Doc/library/multiprocessing.rst:555
 msgid ""
 "If the optional argument *timeout* is ``None`` (the default), the method "
 "blocks until the process whose :meth:`join` method is called terminates. If "
@@ -695,11 +722,11 @@ msgstr ""
 "finaliza o si el método agota el tiempo de espera. Verifique el proceso :"
 "attr:`exitcode` para determinar si terminó."
 
-#: ../Doc/library/multiprocessing.rst:549
+#: ../Doc/library/multiprocessing.rst:562
 msgid "A process can be joined many times."
 msgstr "Un proceso puede unirse muchas veces."
 
-#: ../Doc/library/multiprocessing.rst:551
+#: ../Doc/library/multiprocessing.rst:564
 msgid ""
 "A process cannot join itself because this would cause a deadlock.  It is an "
 "error to attempt to join a process before it has been started."
@@ -708,7 +735,7 @@ msgstr ""
 "muerto. Es un error intentar unirse a un proceso antes de que se haya "
 "iniciado."
 
-#: ../Doc/library/multiprocessing.rst:556
+#: ../Doc/library/multiprocessing.rst:569
 msgid ""
 "The process's name.  The name is a string used for identification purposes "
 "only.  It has no semantics.  Multiple processes may be given the same name."
@@ -717,7 +744,7 @@ msgstr ""
 "identificación. No tiene semántica. Múltiples procesos pueden tener el mismo "
 "nombre."
 
-#: ../Doc/library/multiprocessing.rst:560
+#: ../Doc/library/multiprocessing.rst:573
 msgid ""
 "The initial name is set by the constructor.  If no explicit name is provided "
 "to the constructor, a name of the form 'Process-N\\ :sub:`1`:N\\ :sub:"
@@ -729,11 +756,11 @@ msgstr ""
 "sub:`1`:N\\ :sub:`2`:...:N\\ :sub:`k`'* se construye, donde cada *N\\ :sub:"
 "`k`* es el *N-enésimo* hijo del parental."
 
-#: ../Doc/library/multiprocessing.rst:567
+#: ../Doc/library/multiprocessing.rst:580
 msgid "Return whether the process is alive."
 msgstr "Retorna si el proceso está vivo."
 
-#: ../Doc/library/multiprocessing.rst:569
+#: ../Doc/library/multiprocessing.rst:582
 msgid ""
 "Roughly, a process object is alive from the moment the :meth:`start` method "
 "returns until the child process terminates."
@@ -741,7 +768,7 @@ msgstr ""
 "Aproximadamente, un objeto de proceso está vivo desde el momento en que el "
 "método :meth:`start` retorna hasta que finaliza el proceso hijo."
 
-#: ../Doc/library/multiprocessing.rst:574
+#: ../Doc/library/multiprocessing.rst:587
 msgid ""
 "The process's daemon flag, a Boolean value.  This must be set before :meth:"
 "`start` is called."
@@ -749,11 +776,11 @@ msgstr ""
 "La bandera del proceso *daemon* , es un valor booleano. Esto debe "
 "establecerse antes de que :meth:`start` sea llamado."
 
-#: ../Doc/library/multiprocessing.rst:577
+#: ../Doc/library/multiprocessing.rst:590
 msgid "The initial value is inherited from the creating process."
 msgstr "El valor inicial se hereda del proceso de creación."
 
-#: ../Doc/library/multiprocessing.rst:579
+#: ../Doc/library/multiprocessing.rst:592
 msgid ""
 "When a process exits, it attempts to terminate all of its daemonic child "
 "processes."
@@ -761,7 +788,7 @@ msgstr ""
 "Cuando un proceso sale, intenta terminar todos sus procesos demoníacos "
 "(*daemonic*) hijos."
 
-#: ../Doc/library/multiprocessing.rst:582
+#: ../Doc/library/multiprocessing.rst:595
 msgid ""
 "Note that a daemonic process is not allowed to create child processes. "
 "Otherwise a daemonic process would leave its children orphaned if it gets "
@@ -776,7 +803,7 @@ msgstr ""
 "normales qué finalizarán (y no se unirán) si los procesos no demoníacos han "
 "salido."
 
-#: ../Doc/library/multiprocessing.rst:588
+#: ../Doc/library/multiprocessing.rst:601
 msgid ""
 "In addition to the  :class:`threading.Thread` API, :class:`Process` objects "
 "also support the following attributes and methods:"
@@ -784,14 +811,14 @@ msgstr ""
 "Además de API :class:`threading.Thread`, los objetos :class:`Process` "
 "también admiten los siguientes atributos y métodos:"
 
-#: ../Doc/library/multiprocessing.rst:593
+#: ../Doc/library/multiprocessing.rst:606
 msgid ""
 "Return the process ID.  Before the process is spawned, this will be ``None``."
 msgstr ""
 "Retorna el ID del proceso. Antes de que se genere el proceso, esto será "
 "``None``."
 
-#: ../Doc/library/multiprocessing.rst:598
+#: ../Doc/library/multiprocessing.rst:611
 msgid ""
 "The child's exit code.  This will be ``None`` if the process has not yet "
 "terminated."
@@ -799,7 +826,7 @@ msgstr ""
 "El código de salida del proceso secundario. Será ``None`` si el proceso aún "
 "no ha finalizado."
 
-#: ../Doc/library/multiprocessing.rst:601
+#: ../Doc/library/multiprocessing.rst:614
 msgid ""
 "If the child's :meth:`run` method returned normally, the exit code will be "
 "0.  If it terminated via :func:`sys.exit` with an integer argument *N*, the "
@@ -809,7 +836,7 @@ msgstr ""
 "código de salida será 0. Si terminó a través de :func:`sys.exit` con un "
 "argumento entero *N*, el código de salida será *N*."
 
-#: ../Doc/library/multiprocessing.rst:605
+#: ../Doc/library/multiprocessing.rst:618
 msgid ""
 "If the child terminated due to an exception not caught within :meth:`run`, "
 "the exit code will be 1.  If it was terminated by signal *N*, the exit code "
@@ -819,11 +846,11 @@ msgstr ""
 "de :meth:`run`, el código de salida será 1. Si fue terminado por la señal "
 "*N*, el código de salida será el valor negativo *-N*."
 
-#: ../Doc/library/multiprocessing.rst:611
+#: ../Doc/library/multiprocessing.rst:624
 msgid "The process's authentication key (a byte string)."
 msgstr "La clave de autenticación del proceso (una cadena de bytes)."
 
-#: ../Doc/library/multiprocessing.rst:613
+#: ../Doc/library/multiprocessing.rst:626
 msgid ""
 "When :mod:`multiprocessing` is initialized the main process is assigned a "
 "random string using :func:`os.urandom`."
@@ -831,7 +858,7 @@ msgstr ""
 "Cuando el :mod:`multiprocessing` se inicializa el proceso principal se le "
 "asigna una cadena aleatoria usando :func:`os.urandom`."
 
-#: ../Doc/library/multiprocessing.rst:616
+#: ../Doc/library/multiprocessing.rst:629
 msgid ""
 "When a :class:`Process` object is created, it will inherit the "
 "authentication key of its parent process, although this may be changed by "
@@ -841,11 +868,11 @@ msgstr ""
 "autenticación de su proceso parental, aunque esto puede cambiarse "
 "configurando :attr:`authkey` a otra cadena de bytes."
 
-#: ../Doc/library/multiprocessing.rst:620
+#: ../Doc/library/multiprocessing.rst:633
 msgid "See :ref:`multiprocessing-auth-keys`."
 msgstr "Consulte :ref:`multiprocessing-auth-keys`."
 
-#: ../Doc/library/multiprocessing.rst:624
+#: ../Doc/library/multiprocessing.rst:637
 msgid ""
 "A numeric handle of a system object which will become \"ready\" when the "
 "process ends."
@@ -853,7 +880,7 @@ msgstr ""
 "Un identificador numérico de un objeto del sistema que estará \"listo\" "
 "cuando finalice el proceso."
 
-#: ../Doc/library/multiprocessing.rst:627
+#: ../Doc/library/multiprocessing.rst:640
 msgid ""
 "You can use this value if you want to wait on several events at once using :"
 "func:`multiprocessing.connection.wait`.  Otherwise calling :meth:`join()` is "
@@ -863,10 +890,11 @@ msgstr ""
 "func:`multiprocessing.connection.wait`. De lo contrario, llamar a :meth:"
 "`join()` es más simple."
 
-#: ../Doc/library/multiprocessing.rst:631
+#: ../Doc/library/multiprocessing.rst:644
+#, fuzzy
 msgid ""
 "On Windows, this is an OS handle usable with the ``WaitForSingleObject`` and "
-"``WaitForMultipleObjects`` family of API calls.  On Unix, this is a file "
+"``WaitForMultipleObjects`` family of API calls.  On POSIX, this is a file "
 "descriptor usable with primitives from the :mod:`select` module."
 msgstr ""
 "En Windows, este es un sistema operativo manejable con la familia de "
@@ -874,9 +902,10 @@ msgstr ""
 "este es un descriptor de archivo utilizable con primitivas del módulo :mod:"
 "`select`."
 
-#: ../Doc/library/multiprocessing.rst:639
+#: ../Doc/library/multiprocessing.rst:652
+#, fuzzy
 msgid ""
-"Terminate the process.  On Unix this is done using the ``SIGTERM`` signal; "
+"Terminate the process.  On POSIX this is done using the ``SIGTERM`` signal; "
 "on Windows :c:func:`TerminateProcess` is used.  Note that exit handlers and "
 "finally clauses, etc., will not be executed."
 msgstr ""
@@ -884,7 +913,7 @@ msgstr ""
 "Windows se utiliza :c:func:`TerminateProcess` . Tenga en cuenta que los "
 "manejadores de salida y finalmente las cláusulas, etc., no se ejecutarán."
 
-#: ../Doc/library/multiprocessing.rst:643
+#: ../Doc/library/multiprocessing.rst:656
 msgid ""
 "Note that descendant processes of the process will *not* be terminated -- "
 "they will simply become orphaned."
@@ -892,7 +921,7 @@ msgstr ""
 "Tenga en cuenta que los procesos descendientes del proceso *no* finalizarán "
 "-- simplemente quedarán huérfanos."
 
-#: ../Doc/library/multiprocessing.rst:648
+#: ../Doc/library/multiprocessing.rst:661
 msgid ""
 "If this method is used when the associated process is using a pipe or queue "
 "then the pipe or queue is liable to become corrupted and may become unusable "
@@ -906,13 +935,14 @@ msgstr ""
 "si el proceso ha adquirido un *lock* o un semáforo, etc., su finalización "
 "puede provocar el bloqueo de otros procesos."
 
-#: ../Doc/library/multiprocessing.rst:656
-msgid "Same as :meth:`terminate()` but using the ``SIGKILL`` signal on Unix."
+#: ../Doc/library/multiprocessing.rst:669
+#, fuzzy
+msgid "Same as :meth:`terminate()` but using the ``SIGKILL`` signal on POSIX."
 msgstr ""
 "Siempre como :meth:`terminate()` pero utilizando la señal ``SIGKILL`` en "
 "Unix."
 
-#: ../Doc/library/multiprocessing.rst:662
+#: ../Doc/library/multiprocessing.rst:675
 msgid ""
 "Close the :class:`Process` object, releasing all resources associated with "
 "it.  :exc:`ValueError` is raised if the underlying process is still "
@@ -925,7 +955,7 @@ msgstr ""
 "otros métodos y atributos del objeto :class:`Process` lanzará :exc:"
 "`ValueError`."
 
-#: ../Doc/library/multiprocessing.rst:670
+#: ../Doc/library/multiprocessing.rst:683
 msgid ""
 "Note that the :meth:`start`, :meth:`join`, :meth:`is_alive`, :meth:"
 "`terminate` and :attr:`exitcode` methods should only be called by the "
@@ -935,15 +965,15 @@ msgstr ""
 "`is_alive`, :meth:`terminate` y :attr:`exitcode` deberían solo ser llamados "
 "por el proceso que creó el objeto del proceso."
 
-#: ../Doc/library/multiprocessing.rst:674
+#: ../Doc/library/multiprocessing.rst:687
 msgid "Example usage of some of the methods of :class:`Process`:"
 msgstr "Ejemplo de uso de algunos métodos de la :class:`Process`:"
 
-#: ../Doc/library/multiprocessing.rst:694
+#: ../Doc/library/multiprocessing.rst:708
 msgid "The base class of all :mod:`multiprocessing` exceptions."
 msgstr "La clase base de todas las excepciones :mod:`multiprocessing`."
 
-#: ../Doc/library/multiprocessing.rst:698
+#: ../Doc/library/multiprocessing.rst:712
 msgid ""
 "Exception raised by :meth:`Connection.recv_bytes_into()` when the supplied "
 "buffer object is too small for the message read."
@@ -951,7 +981,7 @@ msgstr ""
 "La excepción :meth:`Connection.recv_bytes_into()` es lanzada cuando el "
 "objeto de búfer suministrado es demasiado pequeño para el mensaje leído."
 
-#: ../Doc/library/multiprocessing.rst:701
+#: ../Doc/library/multiprocessing.rst:715
 msgid ""
 "If ``e`` is an instance of :exc:`BufferTooShort` then ``e.args[0]`` will "
 "give the message as a byte string."
@@ -959,20 +989,20 @@ msgstr ""
 "Si ``e`` es una instancia de :exc:`BufferTooShort` entonces ``e.args[0]`` "
 "dará el mensaje como una cadena de *bytes*."
 
-#: ../Doc/library/multiprocessing.rst:706
+#: ../Doc/library/multiprocessing.rst:720
 msgid "Raised when there is an authentication error."
 msgstr "Lanzada cuando hay un error de autenticación."
 
-#: ../Doc/library/multiprocessing.rst:710
+#: ../Doc/library/multiprocessing.rst:724
 msgid "Raised by methods with a timeout when the timeout expires."
 msgstr ""
 "Lanzada por métodos con un tiempo de espera (*timeout*) cuando este expira."
 
-#: ../Doc/library/multiprocessing.rst:713
+#: ../Doc/library/multiprocessing.rst:727
 msgid "Pipes and Queues"
 msgstr "Tuberías (*Pipes*) y Colas (*Queues*)"
 
-#: ../Doc/library/multiprocessing.rst:715
+#: ../Doc/library/multiprocessing.rst:729
 msgid ""
 "When using multiple processes, one generally uses message passing for "
 "communication between processes and avoids having to use any synchronization "
@@ -982,7 +1012,7 @@ msgstr ""
 "para la comunicación entre procesos y evita tener que usar primitivas de "
 "sincronización como *locks*."
 
-#: ../Doc/library/multiprocessing.rst:719
+#: ../Doc/library/multiprocessing.rst:733
 msgid ""
 "For passing messages one can use :func:`Pipe` (for a connection between two "
 "processes) or a queue (which allows multiple producers and consumers)."
@@ -991,7 +1021,7 @@ msgstr ""
 "procesos) o una cola (*queue*)(que permite múltiples productores y "
 "consumidores)."
 
-#: ../Doc/library/multiprocessing.rst:722
+#: ../Doc/library/multiprocessing.rst:736
 msgid ""
 "The :class:`Queue`, :class:`SimpleQueue` and :class:`JoinableQueue` types "
 "are multi-producer, multi-consumer :abbr:`FIFO (first-in, first-out)` queues "
@@ -1007,7 +1037,7 @@ msgstr ""
 "`~queue.Queue.task_done` y :meth:`~queue.Queue.join` métodos introducidos en "
 "Python 2.5 :class:`queue.Queue` class."
 
-#: ../Doc/library/multiprocessing.rst:729
+#: ../Doc/library/multiprocessing.rst:743
 msgid ""
 "If you use :class:`JoinableQueue` then you **must** call :meth:"
 "`JoinableQueue.task_done` for each task removed from the queue or else the "
@@ -1019,7 +1049,7 @@ msgstr ""
 "de lo contrario el semáforo utilizado para contar el número de tareas sin "
 "terminar puede eventualmente desbordarse, lanzando un excepción."
 
-#: ../Doc/library/multiprocessing.rst:734
+#: ../Doc/library/multiprocessing.rst:748
 msgid ""
 "Note that one can also create a shared queue by using a manager object -- "
 "see :ref:`multiprocessing-managers`."
@@ -1028,7 +1058,7 @@ msgstr ""
 "uso de un objeto de administrador -- consulte :ref:`multiprocessing-"
 "managers`."
 
-#: ../Doc/library/multiprocessing.rst:739
+#: ../Doc/library/multiprocessing.rst:753
 msgid ""
 ":mod:`multiprocessing` uses the usual :exc:`queue.Empty` and :exc:`queue."
 "Full` exceptions to signal a timeout.  They are not available in the :mod:"
@@ -1039,7 +1069,7 @@ msgstr ""
 "en el espacio de nombres :mod:`multiprocessing`, por lo que debe importarlos "
 "desde :mod:`queue`."
 
-#: ../Doc/library/multiprocessing.rst:746
+#: ../Doc/library/multiprocessing.rst:760
 msgid ""
 "When an object is put on a queue, the object is pickled and a background "
 "thread later flushes the pickled data to an underlying pipe.  This has some "
@@ -1054,7 +1084,7 @@ msgstr ""
 "realmente causan molestias, se puede usar una cola creada con un :ref:"
 "`manager <multiprocessing-managers>`."
 
-#: ../Doc/library/multiprocessing.rst:753
+#: ../Doc/library/multiprocessing.rst:767
 msgid ""
 "After putting an object on an empty queue there may be an infinitesimal "
 "delay before the queue's :meth:`~Queue.empty` method returns :const:`False` "
@@ -1065,7 +1095,7 @@ msgstr ""
 "retorne :const:`False` y :meth:`~Queue.get_nowait` puede retornar sin "
 "lanzar :exc:`queue.Empty`."
 
-#: ../Doc/library/multiprocessing.rst:758
+#: ../Doc/library/multiprocessing.rst:772
 msgid ""
 "If multiple processes are enqueuing objects, it is possible for the objects "
 "to be received at the other end out-of-order. However, objects enqueued by "
@@ -1077,7 +1107,7 @@ msgstr ""
 "objetos en cola por el mismo proceso siempre estarán en el orden esperado "
 "entre sí."
 
-#: ../Doc/library/multiprocessing.rst:765
+#: ../Doc/library/multiprocessing.rst:779
 msgid ""
 "If a process is killed using :meth:`Process.terminate` or :func:`os.kill` "
 "while it is trying to use a :class:`Queue`, then the data in the queue is "
@@ -1089,7 +1119,7 @@ msgstr ""
 "la cola(*queue*) se corrompan. Esto puede hacer que cualquier otro proceso "
 "obtenga una excepción cuando intente usar la cola más adelante."
 
-#: ../Doc/library/multiprocessing.rst:772
+#: ../Doc/library/multiprocessing.rst:786
 msgid ""
 "As mentioned above, if a child process has put items on a queue (and it has "
 "not used :meth:`JoinableQueue.cancel_join_thread <multiprocessing.Queue."
@@ -1102,7 +1132,7 @@ msgstr ""
 "ese proceso no terminará hasta que todos los elementos almacenados en búfer "
 "hayan sido vaciados a la tubería (*pipe*)."
 
-#: ../Doc/library/multiprocessing.rst:777
+#: ../Doc/library/multiprocessing.rst:791
 msgid ""
 "This means that if you try joining that process you may get a deadlock "
 "unless you are sure that all items which have been put on the queue have "
@@ -1116,7 +1146,7 @@ msgstr ""
 "es *daemonic*, el proceso parental puede bloquearse en la salida cuando "
 "intenta unir todos sus elementos hijos no *daemonic*."
 
-#: ../Doc/library/multiprocessing.rst:782
+#: ../Doc/library/multiprocessing.rst:796
 msgid ""
 "Note that a queue created using a manager does not have this issue.  See :"
 "ref:`multiprocessing-programming`."
@@ -1124,7 +1154,7 @@ msgstr ""
 "Tenga en cuenta que una cola (*queue*) creada con un administrador no tiene "
 "este problema. Consulte :ref:`multiprocessing-programming`."
 
-#: ../Doc/library/multiprocessing.rst:785
+#: ../Doc/library/multiprocessing.rst:799
 msgid ""
 "For an example of the usage of queues for interprocess communication see :"
 "ref:`multiprocessing-examples`."
@@ -1132,7 +1162,7 @@ msgstr ""
 "Para ver un ejemplo del uso de colas para la comunicación entre procesos, "
 "consulte :ref:`multiprocessing-examples`."
 
-#: ../Doc/library/multiprocessing.rst:791
+#: ../Doc/library/multiprocessing.rst:805
 msgid ""
 "Returns a pair ``(conn1, conn2)`` of :class:`~multiprocessing.connection."
 "Connection` objects representing the ends of a pipe."
@@ -1141,7 +1171,7 @@ msgstr ""
 "`~multiprocessing.connection.Connection` que representan los extremos de una "
 "tubería (*pipe*)."
 
-#: ../Doc/library/multiprocessing.rst:795
+#: ../Doc/library/multiprocessing.rst:809
 msgid ""
 "If *duplex* is ``True`` (the default) then the pipe is bidirectional.  If "
 "*duplex* is ``False`` then the pipe is unidirectional: ``conn1`` can only be "
@@ -1153,7 +1183,7 @@ msgstr ""
 "unidireccional: ``conn1`` solo se puede usar para recibir mensajes y "
 "``conn2`` solo se puede usar para enviar mensajes."
 
-#: ../Doc/library/multiprocessing.rst:803
+#: ../Doc/library/multiprocessing.rst:817
 msgid ""
 "Returns a process shared queue implemented using a pipe and a few locks/"
 "semaphores.  When a process first puts an item on the queue a feeder thread "
@@ -1164,7 +1194,7 @@ msgstr ""
 "un proceso pone por primera vez un elemento en la cola, se inicia un hilo "
 "alimentador que transfiere objetos desde un búfer a la tubería."
 
-#: ../Doc/library/multiprocessing.rst:807
+#: ../Doc/library/multiprocessing.rst:821
 msgid ""
 "The usual :exc:`queue.Empty` and :exc:`queue.Full` exceptions from the "
 "standard library's :mod:`queue` module are raised to signal timeouts."
@@ -1173,7 +1203,7 @@ msgstr ""
 "de la biblioteca estándar :mod:`queue` se generan para indicar tiempos de "
 "espera."
 
-#: ../Doc/library/multiprocessing.rst:810
+#: ../Doc/library/multiprocessing.rst:824
 msgid ""
 ":class:`Queue` implements all the methods of :class:`queue.Queue` except "
 "for :meth:`~queue.Queue.task_done` and :meth:`~queue.Queue.join`."
@@ -1181,7 +1211,7 @@ msgstr ""
 "La :class:`Queue` implementa todos los métodos de la :class:`queue.Queue` "
 "excepto por :meth:`~queue.Queue.task_done` y :meth:`~queue.Queue.join`."
 
-#: ../Doc/library/multiprocessing.rst:815
+#: ../Doc/library/multiprocessing.rst:829
 msgid ""
 "Return the approximate size of the queue.  Because of multithreading/"
 "multiprocessing semantics, this number is not reliable."
@@ -1189,15 +1219,16 @@ msgstr ""
 "Retorna el tamaño aproximado de la cola (*queue*). Debido a la semántica "
 "multiproceso/multiprocesamiento, este número no es confiable."
 
-#: ../Doc/library/multiprocessing.rst:818
+#: ../Doc/library/multiprocessing.rst:832
+#, fuzzy
 msgid ""
-"Note that this may raise :exc:`NotImplementedError` on Unix platforms like "
-"macOS where ``sem_getvalue()`` is not implemented."
+"Note that this may raise :exc:`NotImplementedError` on platforms like macOS "
+"where ``sem_getvalue()`` is not implemented."
 msgstr ""
 "Tenga en cuenta que esto puede lanzar :exc:`NotImplementedError` en "
 "plataformas Unix como macOS donde ``sem_getvalue()`` no está implementado."
 
-#: ../Doc/library/multiprocessing.rst:823
+#: ../Doc/library/multiprocessing.rst:837
 msgid ""
 "Return ``True`` if the queue is empty, ``False`` otherwise.  Because of "
 "multithreading/multiprocessing semantics, this is not reliable."
@@ -1206,7 +1237,7 @@ msgstr ""
 "``False`` . Debido a la semántica multiproceso/multiprocesamiento, esto no "
 "es confiable."
 
-#: ../Doc/library/multiprocessing.rst:828
+#: ../Doc/library/multiprocessing.rst:842
 msgid ""
 "Return ``True`` if the queue is full, ``False`` otherwise.  Because of "
 "multithreading/multiprocessing semantics, this is not reliable."
@@ -1215,7 +1246,7 @@ msgstr ""
 "``False`` . Debido a la semántica multiproceso/multiprocesamiento, esto no "
 "es confiable."
 
-#: ../Doc/library/multiprocessing.rst:833
+#: ../Doc/library/multiprocessing.rst:847
 msgid ""
 "Put obj into the queue.  If the optional argument *block* is ``True`` (the "
 "default) and *timeout* is ``None`` (the default), block if necessary until a "
@@ -1234,7 +1265,7 @@ msgstr ""
 "cola si hay un espacio libre disponible de inmediato, de lo contrario, "
 "genera la excepción :exc:`queue.Full` (*timeout* se ignora en ese caso)."
 
-#: ../Doc/library/multiprocessing.rst:842
+#: ../Doc/library/multiprocessing.rst:856
 msgid ""
 "If the queue is closed, :exc:`ValueError` is raised instead of :exc:"
 "`AssertionError`."
@@ -1242,11 +1273,11 @@ msgstr ""
 "Si la cola (*queue*) está cerrada, :exc:`ValueError` se lanza en lugar de :"
 "exc:`AssertionError`."
 
-#: ../Doc/library/multiprocessing.rst:848
+#: ../Doc/library/multiprocessing.rst:862
 msgid "Equivalent to ``put(obj, False)``."
 msgstr "Equivalente a ``put(obj, False)``."
 
-#: ../Doc/library/multiprocessing.rst:852
+#: ../Doc/library/multiprocessing.rst:866
 msgid ""
 "Remove and return an item from the queue.  If optional args *block* is "
 "``True`` (the default) and *timeout* is ``None`` (the default), block if "
@@ -1266,7 +1297,7 @@ msgstr ""
 "contrario, levante la excepción :exc:`queue.Empty` (*timeout* se ignora en "
 "ese caso)."
 
-#: ../Doc/library/multiprocessing.rst:860
+#: ../Doc/library/multiprocessing.rst:874
 msgid ""
 "If the queue is closed, :exc:`ValueError` is raised instead of :exc:"
 "`OSError`."
@@ -1274,11 +1305,11 @@ msgstr ""
 "Si la cola está cerrada, se lanza :exc:`ValueError` en lugar de :exc:"
 "`OSError`."
 
-#: ../Doc/library/multiprocessing.rst:866
+#: ../Doc/library/multiprocessing.rst:880
 msgid "Equivalent to ``get(False)``."
 msgstr "Equivalente a ``get(False)``."
 
-#: ../Doc/library/multiprocessing.rst:868
+#: ../Doc/library/multiprocessing.rst:882
 msgid ""
 ":class:`multiprocessing.Queue` has a few additional methods not found in :"
 "class:`queue.Queue`.  These methods are usually unnecessary for most code:"
@@ -1287,7 +1318,7 @@ msgstr ""
 "se encuentran en :class:`queue.Queue`. Estos métodos suelen ser innecesarios "
 "para la mayoría de los códigos:"
 
-#: ../Doc/library/multiprocessing.rst:874
+#: ../Doc/library/multiprocessing.rst:888
 msgid ""
 "Indicate that no more data will be put on this queue by the current "
 "process.  The background thread will quit once it has flushed all buffered "
@@ -1299,7 +1330,7 @@ msgstr ""
 "datos almacenados en la tubería (*pipe*). Esto se llama automáticamente "
 "cuando la cola es recolectada por el recolector de basura."
 
-#: ../Doc/library/multiprocessing.rst:881
+#: ../Doc/library/multiprocessing.rst:895
 msgid ""
 "Join the background thread.  This can only be used after :meth:`close` has "
 "been called.  It blocks until the background thread exits, ensuring that all "
@@ -1310,7 +1341,7 @@ msgstr ""
 "asegurando que todos los datos en el búfer se hayan vaciado a la tubería "
 "(*pipe*)."
 
-#: ../Doc/library/multiprocessing.rst:885
+#: ../Doc/library/multiprocessing.rst:899
 msgid ""
 "By default if a process is not the creator of the queue then on exit it will "
 "attempt to join the queue's background thread.  The process can call :meth:"
@@ -1320,7 +1351,7 @@ msgstr ""
 "intentará unirse al hilo de fondo de la cola. El proceso puede llamar a :"
 "meth:`cancel_join_thread` para hacer que el :meth:`join_thread` no haga nada."
 
-#: ../Doc/library/multiprocessing.rst:891
+#: ../Doc/library/multiprocessing.rst:905
 msgid ""
 "Prevent :meth:`join_thread` from blocking.  In particular, this prevents the "
 "background thread from being joined automatically when the process exits -- "
@@ -1330,7 +1361,7 @@ msgstr ""
 "subproceso en segundo plano se una automáticamente cuando finaliza el "
 "proceso; consulte :meth:`join_thread`."
 
-#: ../Doc/library/multiprocessing.rst:895
+#: ../Doc/library/multiprocessing.rst:909
 msgid ""
 "A better name for this method might be ``allow_exit_without_flush()``.  It "
 "is likely to cause enqueued data to be lost, and you almost certainly will "
@@ -1344,7 +1375,7 @@ msgstr ""
 "actual salga inmediatamente sin esperar a vaciar los datos en en la tubería "
 "(*pipe*) subyacente, y no le importan los datos perdidos."
 
-#: ../Doc/library/multiprocessing.rst:904
+#: ../Doc/library/multiprocessing.rst:918
 msgid ""
 "This class's functionality requires a functioning shared semaphore "
 "implementation on the host operating system. Without one, the functionality "
@@ -1361,18 +1392,18 @@ msgstr ""
 "cualquiera de los tipos de cola especializados que se enumeran a "
 "continuación."
 
-#: ../Doc/library/multiprocessing.rst:913
+#: ../Doc/library/multiprocessing.rst:927
 msgid ""
 "It is a simplified :class:`Queue` type, very close to a locked :class:`Pipe`."
 msgstr ""
 "Es un tipo simplificado :class:`Queue`, muy similar a un *lock* de :class:"
 "`Pipe`."
 
-#: ../Doc/library/multiprocessing.rst:917
+#: ../Doc/library/multiprocessing.rst:931
 msgid "Close the queue: release internal resources."
 msgstr "Cierra la cola: libera recursos internos."
 
-#: ../Doc/library/multiprocessing.rst:919
+#: ../Doc/library/multiprocessing.rst:933
 msgid ""
 "A queue must not be used anymore after it is closed. For example, :meth:"
 "`get`, :meth:`put` and :meth:`empty` methods must no longer be called."
@@ -1380,21 +1411,21 @@ msgstr ""
 "Una cola no se debe usar más después de ser cerrada. Por ejemplo los "
 "métodos :meth:`get`, :meth:`put` y :meth:`empty` no deben ser llamados."
 
-#: ../Doc/library/multiprocessing.rst:927
+#: ../Doc/library/multiprocessing.rst:941
 msgid "Return ``True`` if the queue is empty, ``False`` otherwise."
 msgstr ""
 "Retorna ``True`` si la cola (*queue*) está vacía, de otra manera retorna "
 "``False``."
 
-#: ../Doc/library/multiprocessing.rst:931
+#: ../Doc/library/multiprocessing.rst:945
 msgid "Remove and return an item from the queue."
 msgstr "Eliminar y retornar un artículo de la cola (*queue*)."
 
-#: ../Doc/library/multiprocessing.rst:935
+#: ../Doc/library/multiprocessing.rst:949
 msgid "Put *item* into the queue."
 msgstr "Pone *item* en la cola."
 
-#: ../Doc/library/multiprocessing.rst:940
+#: ../Doc/library/multiprocessing.rst:954
 msgid ""
 ":class:`JoinableQueue`, a :class:`Queue` subclass, is a queue which "
 "additionally has :meth:`task_done` and :meth:`join` methods."
@@ -1402,7 +1433,7 @@ msgstr ""
 ":class:`JoinableQueue`, una subclase :class:`Queue` , es una cola (*queue*) "
 "que además tiene los métodos :meth:`task_done` y :meth:`join`."
 
-#: ../Doc/library/multiprocessing.rst:945
+#: ../Doc/library/multiprocessing.rst:959
 msgid ""
 "Indicate that a formerly enqueued task is complete. Used by queue "
 "consumers.  For each :meth:`~Queue.get` used to fetch a task, a subsequent "
@@ -1414,7 +1445,7 @@ msgstr ""
 "recuperar una tarea, una llamada posterior a :meth:`task_done` le dice a la "
 "cola que el procesamiento de la tarea se ha completado."
 
-#: ../Doc/library/multiprocessing.rst:950
+#: ../Doc/library/multiprocessing.rst:964
 msgid ""
 "If a :meth:`~queue.Queue.join` is currently blocking, it will resume when "
 "all items have been processed (meaning that a :meth:`task_done` call was "
@@ -1425,7 +1456,7 @@ msgstr ""
 "`task_done` es llamado para cada elemento que había sido puesto en cola "
 "(*queue*) por :meth:`~Queue.put`)."
 
-#: ../Doc/library/multiprocessing.rst:954
+#: ../Doc/library/multiprocessing.rst:968
 msgid ""
 "Raises a :exc:`ValueError` if called more times than there were items placed "
 "in the queue."
@@ -1433,13 +1464,13 @@ msgstr ""
 "Lanza un :exc:`ValueError` si es llamado más veces que elementos hay en una "
 "cola."
 
-#: ../Doc/library/multiprocessing.rst:960
+#: ../Doc/library/multiprocessing.rst:974
 msgid "Block until all items in the queue have been gotten and processed."
 msgstr ""
 "Se bloquea hasta que todos los elementos en una cola han sido recibidos y "
 "procesados."
 
-#: ../Doc/library/multiprocessing.rst:962
+#: ../Doc/library/multiprocessing.rst:976
 msgid ""
 "The count of unfinished tasks goes up whenever an item is added to the "
 "queue.  The count goes down whenever a consumer calls :meth:`task_done` to "
@@ -1453,15 +1484,15 @@ msgstr ""
 "trabajo en él está completo. Cuando el recuento de tareas inacabadas cae a "
 "cero, :meth:`~queue.Queue.join` se desbloquea."
 
-#: ../Doc/library/multiprocessing.rst:970
+#: ../Doc/library/multiprocessing.rst:984
 msgid "Miscellaneous"
 msgstr "Miscelánea"
 
-#: ../Doc/library/multiprocessing.rst:974
+#: ../Doc/library/multiprocessing.rst:988
 msgid "Return list of all live children of the current process."
 msgstr "Retorna una lista con todos los hijos del proceso actual."
 
-#: ../Doc/library/multiprocessing.rst:976
+#: ../Doc/library/multiprocessing.rst:990
 msgid ""
 "Calling this has the side effect of \"joining\" any processes which have "
 "already finished."
@@ -1469,11 +1500,11 @@ msgstr ""
 "Llamar a esto tiene el efecto secundario de \"unir\" (*joining*) cualquier "
 "proceso que ya haya finalizado."
 
-#: ../Doc/library/multiprocessing.rst:981
+#: ../Doc/library/multiprocessing.rst:995
 msgid "Return the number of CPUs in the system."
 msgstr "Retorna el número de CPU en el sistema."
 
-#: ../Doc/library/multiprocessing.rst:983
+#: ../Doc/library/multiprocessing.rst:997
 msgid ""
 "This number is not equivalent to the number of CPUs the current process can "
 "use.  The number of usable CPUs can be obtained with ``len(os."
@@ -1483,7 +1514,7 @@ msgstr ""
 "actual. El número de CPU utilizables se puede obtener con ``len(os."
 "sched_getaffinity(0))``"
 
-#: ../Doc/library/multiprocessing.rst:987
+#: ../Doc/library/multiprocessing.rst:1001
 msgid ""
 "When the number of CPUs cannot be determined a :exc:`NotImplementedError` is "
 "raised."
@@ -1491,21 +1522,21 @@ msgstr ""
 "Cuando no se puede determinar el número de CPUs, se lanza un :exc:"
 "`NotImplementedError`."
 
-#: ../Doc/library/multiprocessing.rst:991
+#: ../Doc/library/multiprocessing.rst:1005
 msgid ":func:`os.cpu_count`"
 msgstr ":func:`os.cpu_count`"
 
-#: ../Doc/library/multiprocessing.rst:995
+#: ../Doc/library/multiprocessing.rst:1009
 msgid ""
 "Return the :class:`Process` object corresponding to the current process."
 msgstr ""
 "Retorna el objeto de la :class:`Process` correspondiente al proceso actual."
 
-#: ../Doc/library/multiprocessing.rst:997
+#: ../Doc/library/multiprocessing.rst:1011
 msgid "An analogue of :func:`threading.current_thread`."
 msgstr "Un análogo de la :func:`threading.current_thread`."
 
-#: ../Doc/library/multiprocessing.rst:1001
+#: ../Doc/library/multiprocessing.rst:1015
 msgid ""
 "Return the :class:`Process` object corresponding to the parent process of "
 "the :func:`current_process`. For the main process, ``parent_process`` will "
@@ -1515,7 +1546,7 @@ msgstr ""
 "de :func:`current_process`. Para el proceso principal, ``parent_process`` "
 "será ``None``."
 
-#: ../Doc/library/multiprocessing.rst:1009
+#: ../Doc/library/multiprocessing.rst:1023
 msgid ""
 "Add support for when a program which uses :mod:`multiprocessing` has been "
 "frozen to produce a Windows executable.  (Has been tested with **py2exe**, "
@@ -1525,7 +1556,7 @@ msgstr ""
 "haya congelado para producir un ejecutable de Windows. (Ha sido probado con "
 "**py2exe**, **PyInstaller** y **cx_Freeze**.)"
 
-#: ../Doc/library/multiprocessing.rst:1013
+#: ../Doc/library/multiprocessing.rst:1027
 msgid ""
 "One needs to call this function straight after the ``if __name__ == "
 "'__main__'`` line of the main module.  For example::"
@@ -1533,7 +1564,7 @@ msgstr ""
 "Es necesario llamar a esta función inmediatamente después de la línea "
 "principal del módulo ``if __name__ == '__main__'`` . Por ejemplo::"
 
-#: ../Doc/library/multiprocessing.rst:1025
+#: ../Doc/library/multiprocessing.rst:1039
 msgid ""
 "If the ``freeze_support()`` line is omitted then trying to run the frozen "
 "executable will raise :exc:`RuntimeError`."
@@ -1541,7 +1572,7 @@ msgstr ""
 "Si se omite la línea ``freeze_support()`` entonces se intenta comenzar el "
 "ejecutable congelado que lanzará :exc:`RuntimeError`."
 
-#: ../Doc/library/multiprocessing.rst:1028
+#: ../Doc/library/multiprocessing.rst:1042
 msgid ""
 "Calling ``freeze_support()`` has no effect when invoked on any operating "
 "system other than Windows.  In addition, if the module is being run normally "
@@ -1553,13 +1584,13 @@ msgstr ""
 "ejecutado en un intérprete de Python en Windows (y el programa no se ha "
 "congelado) entonces ``freeze_support()`` no tiene efecto."
 
-#: ../Doc/library/multiprocessing.rst:1035
+#: ../Doc/library/multiprocessing.rst:1049
+#, fuzzy
 msgid ""
 "Returns a list of the supported start methods, the first of which is the "
 "default.  The possible start methods are ``'fork'``, ``'spawn'`` and "
-"``'forkserver'``.  On Windows only ``'spawn'`` is available.  On Unix "
-"``'fork'`` and ``'spawn'`` are always supported, with ``'fork'`` being the "
-"default."
+"``'forkserver'``.  Not all platforms support all methods.  See :ref:"
+"`multiprocessing-start-methods`."
 msgstr ""
 "Retorna una lista de los métodos de inicio admitidos, el primero de los "
 "cuales es el predeterminado. Los posibles métodos de inicio son ``'fork'``, "
@@ -1567,7 +1598,7 @@ msgstr ""
 "En Unix, ``'fork'`` y ``'spawn'`` siempre son compatibles, siendo ``'fork'`` "
 "el valor predeterminado."
 
-#: ../Doc/library/multiprocessing.rst:1045
+#: ../Doc/library/multiprocessing.rst:1058
 msgid ""
 "Return a context object which has the same attributes as the :mod:"
 "`multiprocessing` module."
@@ -1575,24 +1606,26 @@ msgstr ""
 "Retorna un objeto de contexto que tiene los mismos atributos que el módulo :"
 "mod:`multiprocessing`."
 
-#: ../Doc/library/multiprocessing.rst:1048
+#: ../Doc/library/multiprocessing.rst:1061
+#, fuzzy
 msgid ""
 "If *method* is ``None`` then the default context is returned. Otherwise "
 "*method* should be ``'fork'``, ``'spawn'``, ``'forkserver'``.  :exc:"
-"`ValueError` is raised if the specified start method is not available."
+"`ValueError` is raised if the specified start method is not available.  See :"
+"ref:`multiprocessing-start-methods`."
 msgstr ""
 "Si el método *method* es ``None`` entonces el contexto predeterminado es "
 "retornado. Por lo contrario, *method* debería ser ``'fork'``, ``'spawn'``, "
 "``'forkserver'``. Se lanza :exc:`ValueError` if el método de inicio no esta "
 "disponible."
 
-#: ../Doc/library/multiprocessing.rst:1057
+#: ../Doc/library/multiprocessing.rst:1070
 msgid "Return the name of start method used for starting processes."
 msgstr ""
 "Retorna el nombre del método de inicio que es utilizado para iniciar "
 "procesos."
 
-#: ../Doc/library/multiprocessing.rst:1059
+#: ../Doc/library/multiprocessing.rst:1072
 msgid ""
 "If the start method has not been fixed and *allow_none* is false, then the "
 "start method is fixed to the default and the name is returned.  If the start "
@@ -1603,17 +1636,27 @@ msgstr ""
 "nombre. Si el método de inicio no se ha solucionado y *allow_none* es "
 "verdadero, se retorna ``None``."
 
-#: ../Doc/library/multiprocessing.rst:1064
+#: ../Doc/library/multiprocessing.rst:1077
+#, fuzzy
 msgid ""
 "The return value can be ``'fork'``, ``'spawn'``, ``'forkserver'`` or "
-"``None``.  ``'fork'`` is the default on Unix, while ``'spawn'`` is the "
-"default on Windows and macOS."
+"``None``.  See :ref:`multiprocessing-start-methods`."
 msgstr ""
 "El valor retornado puede ser ``'fork'``, ``'spawn'``, ``'forkserver'`` o "
 "``None``. En Unix ``'fork'`` es el valor predeterminado mientras que "
 "``'spawn'`` lo es en Windows y macOS."
 
-#: ../Doc/library/multiprocessing.rst:1078
+#: ../Doc/library/multiprocessing.rst:1082
+msgid ""
+"On macOS, the *spawn* start method is now the default.  The *fork* start "
+"method should be considered unsafe as it can lead to crashes of the "
+"subprocess. See :issue:`33725`."
+msgstr ""
+"En macOS, el método de inicio *spawn* ahora es el predeterminado. El método "
+"de inicio *fork* debe considerarse inseguro ya que puede provocar bloqueos "
+"del subproceso. Consulte :issue:`33725`."
+
+#: ../Doc/library/multiprocessing.rst:1090
 msgid ""
 "Set the path of the Python interpreter to use when starting a child process. "
 "(By default :data:`sys.executable` is used).  Embedders will probably need "
@@ -1623,28 +1666,52 @@ msgstr ""
 "secundario. (Por defecto se usa :data:`sys.executable`). Los integradores "
 "probablemente necesitarán hacer algo como ::"
 
-#: ../Doc/library/multiprocessing.rst:1084
+#: ../Doc/library/multiprocessing.rst:1096
 msgid "before they can create child processes."
 msgstr "antes ellos pueden crear procesos hijos."
 
-#: ../Doc/library/multiprocessing.rst:1086
-msgid "Now supported on Unix when the ``'spawn'`` start method is used."
+#: ../Doc/library/multiprocessing.rst:1098
+#, fuzzy
+msgid "Now supported on POSIX when the ``'spawn'`` start method is used."
 msgstr ""
 "Ahora es compatible con Unix cuando se usa el método de inicio ``'spawn'``."
 
-#: ../Doc/library/multiprocessing.rst:1089
+#: ../Doc/library/multiprocessing.rst:1101
 msgid "Accepts a :term:`path-like object`."
 msgstr "Acepta un :term:`path-like object`."
 
-#: ../Doc/library/multiprocessing.rst:1094
+#: ../Doc/library/multiprocessing.rst:1106
 msgid ""
-"Set the method which should be used to start child processes. *method* can "
-"be ``'fork'``, ``'spawn'`` or ``'forkserver'``."
+"Set a list of module names for the forkserver main process to attempt to "
+"import so that their already imported state is inherited by forked "
+"processes. Any :exc:`ImportError` when doing so is silently ignored. This "
+"can be used as a performance enhancement to avoid repeated work in every "
+"process."
 msgstr ""
-"Se establece el método que se debe usar para iniciar procesos secundarios. "
-"*method* puede ser ``'fork'``, ``'spawn'`` o ``'forkserver'``."
 
-#: ../Doc/library/multiprocessing.rst:1097
+#: ../Doc/library/multiprocessing.rst:1112
+msgid ""
+"For this to work, it must be called before the forkserver process has been "
+"launched (before creating a :class:`Pool` or starting a :class:`Process`)."
+msgstr ""
+
+#: ../Doc/library/multiprocessing.rst:1115
+msgid ""
+"Only meaningful when using the ``'forkserver'`` start method. See :ref:"
+"`multiprocessing-start-methods`."
+msgstr ""
+
+#: ../Doc/library/multiprocessing.rst:1122
+msgid ""
+"Set the method which should be used to start child processes. The *method* "
+"argument can be ``'fork'``, ``'spawn'`` or ``'forkserver'``. Raises :exc:"
+"`RuntimeError` if the start method has already been set and *force* is not "
+"``True``.  If *method* is ``None`` and *force* is ``True`` then the start "
+"method is set to ``None``.  If *method* is ``None`` and *force* is ``False`` "
+"then the context is set to the default context."
+msgstr ""
+
+#: ../Doc/library/multiprocessing.rst:1129
 msgid ""
 "Note that this should be called at most once, and it should be protected "
 "inside the ``if __name__ == '__main__'`` clause of the main module."
@@ -1653,7 +1720,12 @@ msgstr ""
 "protegerse dentro de la cláusula ``if __name__ == '__main__'`` del módulo "
 "principal."
 
-#: ../Doc/library/multiprocessing.rst:1105
+#: ../Doc/library/multiprocessing.rst:1133
+#, fuzzy
+msgid "See :ref:`multiprocessing-start-methods`."
+msgstr "Consulte :ref:`multiprocessing-auth-keys`."
+
+#: ../Doc/library/multiprocessing.rst:1139
 msgid ""
 ":mod:`multiprocessing` contains no analogues of :func:`threading."
 "active_count`, :func:`threading.enumerate`, :func:`threading.settrace`, :"
@@ -1665,11 +1737,11 @@ msgstr ""
 "func:`threading.setprofile`, :class:`threading.Timer`, o :class:`threading."
 "local`."
 
-#: ../Doc/library/multiprocessing.rst:1112
+#: ../Doc/library/multiprocessing.rst:1146
 msgid "Connection Objects"
 msgstr "Objetos de conexión *Connection Objects*"
 
-#: ../Doc/library/multiprocessing.rst:1116
+#: ../Doc/library/multiprocessing.rst:1150
 msgid ""
 "Connection objects allow the sending and receiving of picklable objects or "
 "strings.  They can be thought of as message oriented connected sockets."
@@ -1678,7 +1750,7 @@ msgstr ""
 "serializables (*pickable*) o cadenas de caracteres seleccionables. Pueden "
 "considerarse como sockets conectados orientados a mensajes."
 
-#: ../Doc/library/multiprocessing.rst:1119
+#: ../Doc/library/multiprocessing.rst:1153
 msgid ""
 "Connection objects are usually created using :func:`Pipe <multiprocessing."
 "Pipe>` -- see also :ref:`multiprocessing-listeners-clients`."
@@ -1687,7 +1759,7 @@ msgstr ""
 "<multiprocessing.Pipe>` -- ver también :ref:`multiprocessing-listeners-"
 "clients`."
 
-#: ../Doc/library/multiprocessing.rst:1127
+#: ../Doc/library/multiprocessing.rst:1161
 msgid ""
 "Send an object to the other end of the connection which should be read "
 "using :meth:`recv`."
@@ -1695,7 +1767,7 @@ msgstr ""
 "Envía un objeto al otro extremo de la conexión que debe leerse usando :meth:"
 "`recv`."
 
-#: ../Doc/library/multiprocessing.rst:1130
+#: ../Doc/library/multiprocessing.rst:1164
 msgid ""
 "The object must be picklable.  Very large pickles (approximately 32 MiB+, "
 "though it depends on the OS) may raise a :exc:`ValueError` exception."
@@ -1704,7 +1776,7 @@ msgstr ""
 "muy grandes (aproximadamente 32 *MiB+* , aunque depende del sistema "
 "operativo) pueden generar una excepción :exc:`ValueError`."
 
-#: ../Doc/library/multiprocessing.rst:1135
+#: ../Doc/library/multiprocessing.rst:1169
 msgid ""
 "Return an object sent from the other end of the connection using :meth:"
 "`send`.  Blocks until there is something to receive.  Raises :exc:`EOFError` "
@@ -1714,25 +1786,25 @@ msgstr ""
 "`send`. Se bloquea hasta que haya algo para recibir. Se lanza :exc:"
 "`EOFError` si no queda nada por recibir y el otro extremo está cerrado."
 
-#: ../Doc/library/multiprocessing.rst:1142
+#: ../Doc/library/multiprocessing.rst:1176
 msgid "Return the file descriptor or handle used by the connection."
 msgstr ""
 "Retorna el descriptor de archivo o identificador utilizado por la conexión."
 
-#: ../Doc/library/multiprocessing.rst:1146
+#: ../Doc/library/multiprocessing.rst:1180
 msgid "Close the connection."
 msgstr "Cierra la conexión."
 
-#: ../Doc/library/multiprocessing.rst:1148
+#: ../Doc/library/multiprocessing.rst:1182
 msgid "This is called automatically when the connection is garbage collected."
 msgstr ""
 "Esto se llama automáticamente cuando la conexión es basura recolectada."
 
-#: ../Doc/library/multiprocessing.rst:1152
+#: ../Doc/library/multiprocessing.rst:1186
 msgid "Return whether there is any data available to be read."
 msgstr "Retorna si hay datos disponibles para leer."
 
-#: ../Doc/library/multiprocessing.rst:1154
+#: ../Doc/library/multiprocessing.rst:1188
 msgid ""
 "If *timeout* is not specified then it will return immediately.  If *timeout* "
 "is a number then this specifies the maximum time in seconds to block.  If "
@@ -1742,7 +1814,7 @@ msgstr ""
 "número, esto especifica el tiempo máximo en segundos para bloquear. Si "
 "*timeout* es ``None``, se usa un tiempo de espera infinito."
 
-#: ../Doc/library/multiprocessing.rst:1158
+#: ../Doc/library/multiprocessing.rst:1192
 msgid ""
 "Note that multiple connection objects may be polled at once by using :func:"
 "`multiprocessing.connection.wait`."
@@ -1750,13 +1822,13 @@ msgstr ""
 "Tenga en cuenta que se pueden sondear varios objetos de conexión a la vez "
 "utilizando :func:`multiprocessing.connection.wait`."
 
-#: ../Doc/library/multiprocessing.rst:1163
+#: ../Doc/library/multiprocessing.rst:1197
 msgid "Send byte data from a :term:`bytes-like object` as a complete message."
 msgstr ""
 "Envía datos de *bytes* desde a :term:`bytes-like object` como un mensaje "
 "completo."
 
-#: ../Doc/library/multiprocessing.rst:1165
+#: ../Doc/library/multiprocessing.rst:1199
 msgid ""
 "If *offset* is given then data is read from that position in *buffer*.  If "
 "*size* is given then that many bytes will be read from buffer.  Very large "
@@ -1768,7 +1840,7 @@ msgstr ""
 "grandes (aproximadamente *32 MiB+*, aunque depende del sistema operativo) "
 "pueden generar una excepción :exc:`ValueError`"
 
-#: ../Doc/library/multiprocessing.rst:1172
+#: ../Doc/library/multiprocessing.rst:1206
 msgid ""
 "Return a complete message of byte data sent from the other end of the "
 "connection as a string.  Blocks until there is something to receive. Raises :"
@@ -1780,7 +1852,7 @@ msgstr ""
 "haya algo para recibir. Aumenta :exc:`EOFError` si no queda nada por recibir "
 "y el otro extremo se ha cerrado."
 
-#: ../Doc/library/multiprocessing.rst:1177
+#: ../Doc/library/multiprocessing.rst:1211
 msgid ""
 "If *maxlength* is specified and the message is longer than *maxlength* then :"
 "exc:`OSError` is raised and the connection will no longer be readable."
@@ -1788,7 +1860,7 @@ msgstr ""
 "Si se especifica *maxlength* y el mensaje es más largo que *maxlength*, "
 "entonces se lanza un :exc:`OSError` y la conexión ya no será legible."
 
-#: ../Doc/library/multiprocessing.rst:1181
+#: ../Doc/library/multiprocessing.rst:1215
 msgid ""
 "This function used to raise :exc:`IOError`, which is now an alias of :exc:"
 "`OSError`."
@@ -1796,7 +1868,7 @@ msgstr ""
 "Esta función solía lanzar un :exc:`IOError`, que ahora es un alias de :exc:"
 "`OSError`."
 
-#: ../Doc/library/multiprocessing.rst:1188
+#: ../Doc/library/multiprocessing.rst:1222
 msgid ""
 "Read into *buffer* a complete message of byte data sent from the other end "
 "of the connection and return the number of bytes in the message.  Blocks "
@@ -1808,7 +1880,7 @@ msgstr ""
 "bloquea hasta que haya algo para recibir. Si no queda nada por recibir y el "
 "otro extremo está cerrándose se lanza :exc:`EOFError`."
 
-#: ../Doc/library/multiprocessing.rst:1194
+#: ../Doc/library/multiprocessing.rst:1228
 msgid ""
 "*buffer* must be a writable :term:`bytes-like object`.  If *offset* is given "
 "then the message will be written into the buffer from that position.  Offset "
@@ -1819,7 +1891,7 @@ msgstr ""
 "compensación debe ser un número entero no negativo menor que la longitud de "
 "*buffer* (en *bytes*)."
 
-#: ../Doc/library/multiprocessing.rst:1199
+#: ../Doc/library/multiprocessing.rst:1233
 msgid ""
 "If the buffer is too short then a :exc:`BufferTooShort` exception is raised "
 "and the complete message is available as ``e.args[0]`` where ``e`` is the "
@@ -1829,7 +1901,7 @@ msgstr ""
 "`BufferTooShort` y el mensaje completo está disponible como ``e.args[0]`` "
 "donde ``e`` es la instancia de excepción."
 
-#: ../Doc/library/multiprocessing.rst:1203
+#: ../Doc/library/multiprocessing.rst:1237
 msgid ""
 "Connection objects themselves can now be transferred between processes "
 "using :meth:`Connection.send` and :meth:`Connection.recv`."
@@ -1837,7 +1909,7 @@ msgstr ""
 "Los objetos de conexión ahora pueden transferirse entre procesos usando :"
 "meth:`Connection.send` y :meth:`Connection.recv`."
 
-#: ../Doc/library/multiprocessing.rst:1207
+#: ../Doc/library/multiprocessing.rst:1241
 msgid ""
 "Connection objects now support the context management protocol -- see :ref:"
 "`typecontextmanager`.  :meth:`~contextmanager.__enter__` returns the "
@@ -1848,11 +1920,11 @@ msgstr ""
 "__enter__` retorna el objeto de conexión, y :meth:`~contextmanager.__exit__` "
 "llama a :meth:`close`."
 
-#: ../Doc/library/multiprocessing.rst:1212
+#: ../Doc/library/multiprocessing.rst:1246
 msgid "For example:"
 msgstr "Por ejemplo:"
 
-#: ../Doc/library/multiprocessing.rst:1237
+#: ../Doc/library/multiprocessing.rst:1271
 msgid ""
 "The :meth:`Connection.recv` method automatically unpickles the data it "
 "receives, which can be a security risk unless you can trust the process "
@@ -1862,7 +1934,7 @@ msgstr ""
 "recibe, lo que puede ser un riesgo de seguridad a menos que pueda confiar en "
 "el proceso que envió el mensaje."
 
-#: ../Doc/library/multiprocessing.rst:1241
+#: ../Doc/library/multiprocessing.rst:1275
 msgid ""
 "Therefore, unless the connection object was produced using :func:`Pipe` you "
 "should only use the :meth:`~Connection.recv` and :meth:`~Connection.send` "
@@ -1874,7 +1946,7 @@ msgstr ""
 "`~Connection.send` después de realizar algún tipo de autenticación. "
 "Consulte :ref:`multiprocessing-auth-keys`."
 
-#: ../Doc/library/multiprocessing.rst:1248
+#: ../Doc/library/multiprocessing.rst:1282
 msgid ""
 "If a process is killed while it is trying to read or write to a pipe then "
 "the data in the pipe is likely to become corrupted, because it may become "
@@ -1885,11 +1957,11 @@ msgstr ""
 "porque puede ser imposible estar seguro de dónde se encuentran los límites "
 "del mensaje."
 
-#: ../Doc/library/multiprocessing.rst:1254
+#: ../Doc/library/multiprocessing.rst:1288
 msgid "Synchronization primitives"
 msgstr "Primitivas de sincronización (*Synchronization primitives*)"
 
-#: ../Doc/library/multiprocessing.rst:1258
+#: ../Doc/library/multiprocessing.rst:1292
 msgid ""
 "Generally synchronization primitives are not as necessary in a multiprocess "
 "program as they are in a multithreaded program.  See the documentation for :"
@@ -1899,7 +1971,7 @@ msgstr ""
 "programa multiproceso como en un programa *multihilos* (*multithreaded*). "
 "Consulte la documentación para :mod:`threading` ."
 
-#: ../Doc/library/multiprocessing.rst:1262
+#: ../Doc/library/multiprocessing.rst:1296
 msgid ""
 "Note that one can also create synchronization primitives by using a manager "
 "object -- see :ref:`multiprocessing-managers`."
@@ -1908,11 +1980,11 @@ msgstr ""
 "utilizando un objeto administrador -- consulte :ref:`multiprocessing-"
 "managers`."
 
-#: ../Doc/library/multiprocessing.rst:1267
+#: ../Doc/library/multiprocessing.rst:1301
 msgid "A barrier object: a clone of :class:`threading.Barrier`."
 msgstr "Un objeto de barrera: un clon de :class:`threading.Barrier`."
 
-#: ../Doc/library/multiprocessing.rst:1273
+#: ../Doc/library/multiprocessing.rst:1307
 msgid ""
 "A bounded semaphore object: a close analog of :class:`threading."
 "BoundedSemaphore`."
@@ -1920,8 +1992,8 @@ msgstr ""
 "Un objeto semáforo (*semaphore object*) acotado: un análogo cercano de la :"
 "class:`threading.BoundedSemaphore`."
 
-#: ../Doc/library/multiprocessing.rst:1276
-#: ../Doc/library/multiprocessing.rst:1414
+#: ../Doc/library/multiprocessing.rst:1310
+#: ../Doc/library/multiprocessing.rst:1448
 msgid ""
 "A solitary difference from its close analog exists: its ``acquire`` method's "
 "first argument is named *block*, as is consistent with :meth:`Lock.acquire`."
@@ -1930,7 +2002,7 @@ msgstr ""
 "de su método ``acquire`` es nombrado *block*, es consistente con :meth:`Lock."
 "acquire`."
 
-#: ../Doc/library/multiprocessing.rst:1280
+#: ../Doc/library/multiprocessing.rst:1314
 msgid ""
 "On macOS, this is indistinguishable from :class:`Semaphore` because "
 "``sem_getvalue()`` is not implemented on that platform."
@@ -1938,12 +2010,12 @@ msgstr ""
 "En macOS, esto no se puede distinguir de :class:`Semaphore` porque "
 "``sem_getvalue()`` no está implementado en esa plataforma."
 
-#: ../Doc/library/multiprocessing.rst:1285
+#: ../Doc/library/multiprocessing.rst:1319
 msgid "A condition variable: an alias for :class:`threading.Condition`."
 msgstr ""
 "Una variable de condición: un alias para la :class:`threading.Condition`."
 
-#: ../Doc/library/multiprocessing.rst:1287
+#: ../Doc/library/multiprocessing.rst:1321
 msgid ""
 "If *lock* is specified then it should be a :class:`Lock` or :class:`RLock` "
 "object from :mod:`multiprocessing`."
@@ -1951,16 +2023,16 @@ msgstr ""
 "Si se especifica *lock*, entonces debería ser una :class:`Lock` o :class:"
 "`RLock` objeto de :mod:`multiprocessing`."
 
-#: ../Doc/library/multiprocessing.rst:1290
-#: ../Doc/library/multiprocessing.rst:1839
+#: ../Doc/library/multiprocessing.rst:1324
+#: ../Doc/library/multiprocessing.rst:1873
 msgid "The :meth:`~threading.Condition.wait_for` method was added."
 msgstr "El método :meth:`~threading.Condition.wait_for` fue a añadido."
 
-#: ../Doc/library/multiprocessing.rst:1295
+#: ../Doc/library/multiprocessing.rst:1329
 msgid "A clone of :class:`threading.Event`."
 msgstr "Un clon de :class:`threading.Event`."
 
-#: ../Doc/library/multiprocessing.rst:1300
+#: ../Doc/library/multiprocessing.rst:1334
 msgid ""
 "A non-recursive lock object: a close analog of :class:`threading.Lock`. Once "
 "a process or thread has acquired a lock, subsequent attempts to acquire it "
@@ -1978,7 +2050,7 @@ msgstr ""
 "los subprocesos se replican aquí en :class:`multiprocessing.Lock` como se "
 "aplica a los procesos o subprocesos, excepto como se indica."
 
-#: ../Doc/library/multiprocessing.rst:1308
+#: ../Doc/library/multiprocessing.rst:1342
 msgid ""
 "Note that :class:`Lock` is actually a factory function which returns an "
 "instance of ``multiprocessing.synchronize.Lock`` initialized with a default "
@@ -1988,7 +2060,7 @@ msgstr ""
 "retorna una instancia de ``multiprocessing.synchronize.Lock`` inicializada "
 "con un contexto predeterminado."
 
-#: ../Doc/library/multiprocessing.rst:1312
+#: ../Doc/library/multiprocessing.rst:1346
 msgid ""
 ":class:`Lock` supports the :term:`context manager` protocol and thus may be "
 "used in :keyword:`with` statements."
@@ -1996,12 +2068,12 @@ msgstr ""
 "La :class:`Lock` soporta el protocolo :term:`context manager` y, por lo "
 "tanto, se puede usar en la declaración :keyword:`with`."
 
-#: ../Doc/library/multiprocessing.rst:1317
-#: ../Doc/library/multiprocessing.rst:1368
+#: ../Doc/library/multiprocessing.rst:1351
+#: ../Doc/library/multiprocessing.rst:1402
 msgid "Acquire a lock, blocking or non-blocking."
 msgstr "Adquiriendo un candado (*lock*), bloqueante o no bloqueante."
 
-#: ../Doc/library/multiprocessing.rst:1319
+#: ../Doc/library/multiprocessing.rst:1353
 msgid ""
 "With the *block* argument set to ``True`` (the default), the method call "
 "will block until the lock is in an unlocked state, then set it to locked and "
@@ -2014,7 +2086,7 @@ msgstr ""
 "cuenta que el nombre de este primer argumento difiere del que aparece en :"
 "meth:`threading.Lock.acquire`."
 
-#: ../Doc/library/multiprocessing.rst:1324
+#: ../Doc/library/multiprocessing.rst:1358
 msgid ""
 "With the *block* argument set to ``False``, the method call does not block.  "
 "If the lock is currently in a locked state, return ``False``; otherwise set "
@@ -2025,7 +2097,7 @@ msgstr ""
 "``False``; de lo contrario, configure el bloqueo en un estado bloqueado y "
 "retorne ``True``."
 
-#: ../Doc/library/multiprocessing.rst:1328
+#: ../Doc/library/multiprocessing.rst:1362
 msgid ""
 "When invoked with a positive, floating-point value for *timeout*, block for "
 "at most the number of seconds specified by *timeout* as long as the lock can "
@@ -2050,7 +2122,7 @@ msgstr ""
 "Retorna ``True`` si se ha adquirido el candado o ``False`` si ha "
 "transcurrido el tiempo de espera."
 
-#: ../Doc/library/multiprocessing.rst:1343
+#: ../Doc/library/multiprocessing.rst:1377
 msgid ""
 "Release a lock.  This can be called from any process or thread, not only the "
 "process or thread which originally acquired the lock."
@@ -2059,7 +2131,7 @@ msgstr ""
 "subproceso, no solo desde el proceso o subproceso que originalmente adquirió "
 "el candado."
 
-#: ../Doc/library/multiprocessing.rst:1346
+#: ../Doc/library/multiprocessing.rst:1380
 msgid ""
 "Behavior is the same as in :meth:`threading.Lock.release` except that when "
 "invoked on an unlocked lock, a :exc:`ValueError` is raised."
@@ -2068,7 +2140,7 @@ msgstr ""
 "que cuando se invoca en un bloqueo desbloqueado, se genera a :exc:"
 "`ValueError`."
 
-#: ../Doc/library/multiprocessing.rst:1352
+#: ../Doc/library/multiprocessing.rst:1386
 msgid ""
 "A recursive lock object: a close analog of :class:`threading.RLock`.  A "
 "recursive lock must be released by the process or thread that acquired it. "
@@ -2083,7 +2155,7 @@ msgstr ""
 "bloquearlo; ese proceso o hilo debe liberarlo una vez por cada vez que se "
 "haya adquirido."
 
-#: ../Doc/library/multiprocessing.rst:1358
+#: ../Doc/library/multiprocessing.rst:1392
 msgid ""
 "Note that :class:`RLock` is actually a factory function which returns an "
 "instance of ``multiprocessing.synchronize.RLock`` initialized with a default "
@@ -2093,7 +2165,7 @@ msgstr ""
 "retorna una instancia de ``multiprocessing.synchronize.RLock`` inicializada "
 "con un contexto predeterminado."
 
-#: ../Doc/library/multiprocessing.rst:1362
+#: ../Doc/library/multiprocessing.rst:1396
 msgid ""
 ":class:`RLock` supports the :term:`context manager` protocol and thus may be "
 "used in :keyword:`with` statements."
@@ -2101,7 +2173,7 @@ msgstr ""
 "La :class:`RLock` admite el protocolo :term:`context manager` y, por lo "
 "tanto, puede usarse en :keyword:`with`."
 
-#: ../Doc/library/multiprocessing.rst:1370
+#: ../Doc/library/multiprocessing.rst:1404
 msgid ""
 "When invoked with the *block* argument set to ``True``, block until the lock "
 "is in an unlocked state (not owned by any process or thread) unless the lock "
@@ -2123,7 +2195,7 @@ msgstr ""
 "argumento en comparación con la implementación de :meth:`threading.RLock."
 "acquire`, comenzando con el nombre del argumento en sí."
 
-#: ../Doc/library/multiprocessing.rst:1380
+#: ../Doc/library/multiprocessing.rst:1414
 msgid ""
 "When invoked with the *block* argument set to ``False``, do not block. If "
 "the lock has already been acquired (and thus is owned) by another process or "
@@ -2141,7 +2213,7 @@ msgstr ""
 "proceso o subproceso actual toma posesión y el nivel de recurrencia se "
 "incrementa, lo que resulta en un valor de retorno de ``True``."
 
-#: ../Doc/library/multiprocessing.rst:1388
+#: ../Doc/library/multiprocessing.rst:1422
 msgid ""
 "Use and behaviors of the *timeout* argument are the same as in :meth:`Lock."
 "acquire`.  Note that some of these behaviors of *timeout* differ from the "
@@ -2152,7 +2224,7 @@ msgstr ""
 "*timeout* difieren de los comportamientos implementados en :meth:`threading."
 "RLock.acquire`."
 
-#: ../Doc/library/multiprocessing.rst:1395
+#: ../Doc/library/multiprocessing.rst:1429
 msgid ""
 "Release a lock, decrementing the recursion level.  If after the decrement "
 "the recursion level is zero, reset the lock to unlocked (not owned by any "
@@ -2169,7 +2241,7 @@ msgstr ""
 "decremento el nivel de recursión sigue siendo distinto de cero, el candado "
 "permanece bloqueado y pertenece al proceso de llamada o subproceso."
 
-#: ../Doc/library/multiprocessing.rst:1403
+#: ../Doc/library/multiprocessing.rst:1437
 msgid ""
 "Only call this method when the calling process or thread owns the lock. An :"
 "exc:`AssertionError` is raised if this method is called by a process or "
@@ -2184,12 +2256,12 @@ msgstr ""
 "que el tipo de excepción planteada en esta situación difiere del "
 "comportamiento implementado en :meth:`threading.RLock.release`."
 
-#: ../Doc/library/multiprocessing.rst:1412
+#: ../Doc/library/multiprocessing.rst:1446
 msgid "A semaphore object: a close analog of :class:`threading.Semaphore`."
 msgstr ""
 "Un objeto semáforo: un análogo cercano de :class:`threading.Semaphore`."
 
-#: ../Doc/library/multiprocessing.rst:1419
+#: ../Doc/library/multiprocessing.rst:1453
 msgid ""
 "On macOS, ``sem_timedwait`` is unsupported, so calling ``acquire()`` with a "
 "timeout will emulate that function's behavior using a sleeping loop."
@@ -2198,7 +2270,7 @@ msgstr ""
 "``acquire()`` con un tiempo de espera emulará el comportamiento de esa "
 "función utilizando un bucle inactivo."
 
-#: ../Doc/library/multiprocessing.rst:1424
+#: ../Doc/library/multiprocessing.rst:1458
 msgid ""
 "If the SIGINT signal generated by :kbd:`Ctrl-C` arrives while the main "
 "thread is blocked by a call to :meth:`BoundedSemaphore.acquire`, :meth:`Lock."
@@ -2212,7 +2284,7 @@ msgstr ""
 "acquire`, :meth:`Condition.acquire` o :meth:`Condition.wait`, la llamada se "
 "interrumpirá inmediatamente y :exc:`KeyboardInterrupt` se lanzará."
 
-#: ../Doc/library/multiprocessing.rst:1430
+#: ../Doc/library/multiprocessing.rst:1464
 msgid ""
 "This differs from the behaviour of :mod:`threading` where SIGINT will be "
 "ignored while the equivalent blocking calls are in progress."
@@ -2220,7 +2292,7 @@ msgstr ""
 "Esto difiere del comportamiento de :mod:`threading` donde SIGINT será "
 "ignorado mientras las llamadas de candado equivalentes están en progreso."
 
-#: ../Doc/library/multiprocessing.rst:1435
+#: ../Doc/library/multiprocessing.rst:1469
 msgid ""
 "Some of this package's functionality requires a functioning shared semaphore "
 "implementation on the host operating system. Without one, the :mod:"
@@ -2234,11 +2306,11 @@ msgstr ""
 "importarlo darán como resultado :exc:`ImportError`. Consulte :issue:`3770` "
 "para información adicional."
 
-#: ../Doc/library/multiprocessing.rst:1443
+#: ../Doc/library/multiprocessing.rst:1477
 msgid "Shared :mod:`ctypes` Objects"
 msgstr "Objetos compartidos :mod:`ctypes`"
 
-#: ../Doc/library/multiprocessing.rst:1445
+#: ../Doc/library/multiprocessing.rst:1479
 msgid ""
 "It is possible to create shared objects using shared memory which can be "
 "inherited by child processes."
@@ -2246,7 +2318,7 @@ msgstr ""
 "Es posible crear objetos compartidos utilizando memoria compartida que puede "
 "ser heredada por procesos secundarios."
 
-#: ../Doc/library/multiprocessing.rst:1450
+#: ../Doc/library/multiprocessing.rst:1484
 msgid ""
 "Return a :mod:`ctypes` object allocated from shared memory.  By default the "
 "return value is actually a synchronized wrapper for the object.  The object "
@@ -2257,8 +2329,8 @@ msgstr ""
 "el objeto. Se puede acceder al objeto en sí a través del atributo *value* de "
 "la :class:`Value`."
 
-#: ../Doc/library/multiprocessing.rst:1454
-#: ../Doc/library/multiprocessing.rst:1541
+#: ../Doc/library/multiprocessing.rst:1488
+#: ../Doc/library/multiprocessing.rst:1575
 msgid ""
 "*typecode_or_type* determines the type of the returned object: it is either "
 "a ctypes type or a one character typecode of the kind used by the :mod:"
@@ -2268,7 +2340,7 @@ msgstr ""
 "*ctypes* o un código de tipo de un carácter del tipo utilizado por el "
 "módulo :mod:`array`. *\\*args* se pasa al constructor para el tipo."
 
-#: ../Doc/library/multiprocessing.rst:1458
+#: ../Doc/library/multiprocessing.rst:1492
 msgid ""
 "If *lock* is ``True`` (the default) then a new recursive lock object is "
 "created to synchronize access to the value.  If *lock* is a :class:`Lock` "
@@ -2284,7 +2356,7 @@ msgstr ""
 "estará protegido automáticamente por un candado, por lo que no será "
 "necesariamente \"proceso-seguro\"."
 
-#: ../Doc/library/multiprocessing.rst:1465
+#: ../Doc/library/multiprocessing.rst:1499
 msgid ""
 "Operations like ``+=`` which involve a read and write are not atomic.  So "
 "if, for instance, you want to atomically increment a shared value it is "
@@ -2294,7 +2366,7 @@ msgstr ""
 "atómicas. Entonces, si, por ejemplo, desea incrementar atómicamente un valor "
 "compartido, es insuficiente simplemente hacer::"
 
-#: ../Doc/library/multiprocessing.rst:1471
+#: ../Doc/library/multiprocessing.rst:1505
 msgid ""
 "Assuming the associated lock is recursive (which it is by default) you can "
 "instead do ::"
@@ -2302,13 +2374,13 @@ msgstr ""
 "Suponiendo que el candado asociado es recursivo (que es por defecto), puede "
 "hacer ::"
 
-#: ../Doc/library/multiprocessing.rst:1477
-#: ../Doc/library/multiprocessing.rst:1567
-#: ../Doc/library/multiprocessing.rst:1582
+#: ../Doc/library/multiprocessing.rst:1511
+#: ../Doc/library/multiprocessing.rst:1601
+#: ../Doc/library/multiprocessing.rst:1616
 msgid "Note that *lock* is a keyword-only argument."
 msgstr "Véase que *lock* es un argumento de solo una palabra clave."
 
-#: ../Doc/library/multiprocessing.rst:1481
+#: ../Doc/library/multiprocessing.rst:1515
 msgid ""
 "Return a ctypes array allocated from shared memory.  By default the return "
 "value is actually a synchronized wrapper for the array."
@@ -2317,7 +2389,7 @@ msgstr ""
 "defecto, el valor de retorno es en realidad un contenedor sincronizado para "
 "el arreglo."
 
-#: ../Doc/library/multiprocessing.rst:1484
+#: ../Doc/library/multiprocessing.rst:1518
 msgid ""
 "*typecode_or_type* determines the type of the elements of the returned "
 "array: it is either a ctypes type or a one character typecode of the kind "
@@ -2334,7 +2406,7 @@ msgstr ""
 "secuencia que se utiliza para inicializar la matriz y cuya longitud "
 "determina la longitud de la matriz."
 
-#: ../Doc/library/multiprocessing.rst:1491
+#: ../Doc/library/multiprocessing.rst:1525
 msgid ""
 "If *lock* is ``True`` (the default) then a new lock object is created to "
 "synchronize access to the value.  If *lock* is a :class:`Lock` or :class:"
@@ -2350,11 +2422,11 @@ msgstr ""
 "protegido automáticamente por un candado, por lo que no será necesariamente "
 "\"proceso seguro\"."
 
-#: ../Doc/library/multiprocessing.rst:1498
+#: ../Doc/library/multiprocessing.rst:1532
 msgid "Note that *lock* is a keyword only argument."
 msgstr "Véase que *lock* es un argumento de solo una palabra clave."
 
-#: ../Doc/library/multiprocessing.rst:1500
+#: ../Doc/library/multiprocessing.rst:1534
 msgid ""
 "Note that an array of :data:`ctypes.c_char` has *value* and *raw* attributes "
 "which allow one to use it to store and retrieve strings."
@@ -2363,11 +2435,11 @@ msgstr ""
 "*value* y *raw* que le permiten a uno usarlo para almacenar y recuperar "
 "cadenas de caracteres."
 
-#: ../Doc/library/multiprocessing.rst:1505
+#: ../Doc/library/multiprocessing.rst:1539
 msgid "The :mod:`multiprocessing.sharedctypes` module"
 msgstr "El módulo :mod:`multiprocessing.sharedctypes`"
 
-#: ../Doc/library/multiprocessing.rst:1510
+#: ../Doc/library/multiprocessing.rst:1544
 msgid ""
 "The :mod:`multiprocessing.sharedctypes` module provides functions for "
 "allocating :mod:`ctypes` objects from shared memory which can be inherited "
@@ -2377,7 +2449,7 @@ msgstr ""
 "asignar objetos :mod:`ctypes` de la memoria compartida que pueden ser "
 "heredados por procesos secundarios."
 
-#: ../Doc/library/multiprocessing.rst:1516
+#: ../Doc/library/multiprocessing.rst:1550
 msgid ""
 "Although it is possible to store a pointer in shared memory remember that "
 "this will refer to a location in the address space of a specific process. "
@@ -2391,11 +2463,11 @@ msgstr ""
 "en el contexto de un segundo proceso y tratar de desreferenciar el puntero "
 "del segundo proceso puede causar un bloqueo."
 
-#: ../Doc/library/multiprocessing.rst:1524
+#: ../Doc/library/multiprocessing.rst:1558
 msgid "Return a ctypes array allocated from shared memory."
 msgstr "Retorna una matriz *ctypes* asignada desde la memoria compartida."
 
-#: ../Doc/library/multiprocessing.rst:1526
+#: ../Doc/library/multiprocessing.rst:1560
 msgid ""
 "*typecode_or_type* determines the type of the elements of the returned "
 "array: it is either a ctypes type or a one character typecode of the kind "
@@ -2412,7 +2484,7 @@ msgstr ""
 "secuencia que se usa para inicializar la matriz y cuya longitud determina la "
 "longitud del arreglo."
 
-#: ../Doc/library/multiprocessing.rst:1533
+#: ../Doc/library/multiprocessing.rst:1567
 msgid ""
 "Note that setting and getting an element is potentially non-atomic -- use :"
 "func:`Array` instead to make sure that access is automatically synchronized "
@@ -2422,11 +2494,11 @@ msgstr ""
 "atómico -- utiliza :func:`Array` en su lugar para asegurarse de que el "
 "acceso se sincronice automáticamente mediante un candado."
 
-#: ../Doc/library/multiprocessing.rst:1539
+#: ../Doc/library/multiprocessing.rst:1573
 msgid "Return a ctypes object allocated from shared memory."
 msgstr "Retorna un objeto *ctypes* asignado desde la memoria compartida."
 
-#: ../Doc/library/multiprocessing.rst:1545
+#: ../Doc/library/multiprocessing.rst:1579
 msgid ""
 "Note that setting and getting the value is potentially non-atomic -- use :"
 "func:`Value` instead to make sure that access is automatically synchronized "
@@ -2436,7 +2508,7 @@ msgstr ""
 "atómico -- use :func:`Value` en su lugar para asegurarse de que el acceso se "
 "sincronice automáticamente mediante un candado."
 
-#: ../Doc/library/multiprocessing.rst:1549
+#: ../Doc/library/multiprocessing.rst:1583
 msgid ""
 "Note that an array of :data:`ctypes.c_char` has ``value`` and ``raw`` "
 "attributes which allow one to use it to store and retrieve strings -- see "
@@ -2446,7 +2518,7 @@ msgstr ""
 "``value`` y ``raw`` que le permiten a uno usarlo para almacenar y recuperar "
 "cadenas de caracteres -- consulte la documentación para :mod:`ctypes`."
 
-#: ../Doc/library/multiprocessing.rst:1555
+#: ../Doc/library/multiprocessing.rst:1589
 msgid ""
 "The same as :func:`RawArray` except that depending on the value of *lock* a "
 "process-safe synchronization wrapper may be returned instead of a raw ctypes "
@@ -2456,8 +2528,8 @@ msgstr ""
 "se puede retornar un contenedor de sincronización seguro para el proceso en "
 "lugar de un arreglo de tipos crudos."
 
-#: ../Doc/library/multiprocessing.rst:1559
-#: ../Doc/library/multiprocessing.rst:1575
+#: ../Doc/library/multiprocessing.rst:1593
+#: ../Doc/library/multiprocessing.rst:1609
 msgid ""
 "If *lock* is ``True`` (the default) then a new lock object is created to "
 "synchronize access to the value.  If *lock* is a :class:`~multiprocessing."
@@ -2473,7 +2545,7 @@ msgstr ""
 "al objeto retornado no estará protegido automáticamente por un candado, por "
 "lo que no será necesariamente \"seguro para el proceso\"."
 
-#: ../Doc/library/multiprocessing.rst:1571
+#: ../Doc/library/multiprocessing.rst:1605
 msgid ""
 "The same as :func:`RawValue` except that depending on the value of *lock* a "
 "process-safe synchronization wrapper may be returned instead of a raw ctypes "
@@ -2483,7 +2555,7 @@ msgstr ""
 "se puede retornar una envoltura de sincronización segura para el proceso en "
 "lugar de un objeto *ctypes* sin procesar."
 
-#: ../Doc/library/multiprocessing.rst:1586
+#: ../Doc/library/multiprocessing.rst:1620
 msgid ""
 "Return a ctypes object allocated from shared memory which is a copy of the "
 "ctypes object *obj*."
@@ -2491,7 +2563,7 @@ msgstr ""
 "Retorna un objeto *ctypes* asignado de la memoria compartida, que es una "
 "copia del objeto *ctypes* *obj*."
 
-#: ../Doc/library/multiprocessing.rst:1591
+#: ../Doc/library/multiprocessing.rst:1625
 msgid ""
 "Return a process-safe wrapper object for a ctypes object which uses *lock* "
 "to synchronize access.  If *lock* is ``None`` (the default) then a :class:"
@@ -2501,7 +2573,7 @@ msgstr ""
 "para sincronizar el acceso. Si *lock* es ``None`` (el valor predeterminado), "
 "se crea automáticamente un objeto :class:`multiprocessing.RLock`."
 
-#: ../Doc/library/multiprocessing.rst:1595
+#: ../Doc/library/multiprocessing.rst:1629
 msgid ""
 "A synchronized wrapper will have two methods in addition to those of the "
 "object it wraps: :meth:`get_obj` returns the wrapped object and :meth:"
@@ -2511,7 +2583,7 @@ msgstr ""
 "envuelve: :meth:`get_obj` retorna el objeto envuelto y :meth:`get_lock` "
 "retorna el objeto de bloqueo utilizado para la sincronización."
 
-#: ../Doc/library/multiprocessing.rst:1599
+#: ../Doc/library/multiprocessing.rst:1633
 msgid ""
 "Note that accessing the ctypes object through the wrapper can be a lot "
 "slower than accessing the raw ctypes object."
@@ -2519,12 +2591,12 @@ msgstr ""
 "Tenga en cuenta que acceder al objeto *ctypes* a través del contenedor puede "
 "ser mucho más lento que acceder al objeto *ctypes* sin formato."
 
-#: ../Doc/library/multiprocessing.rst:1602
+#: ../Doc/library/multiprocessing.rst:1636
 msgid "Synchronized objects support the :term:`context manager` protocol."
 msgstr ""
 "Los objetos sincronizados admiten el protocolo: :term:`context manager`."
 
-#: ../Doc/library/multiprocessing.rst:1606
+#: ../Doc/library/multiprocessing.rst:1640
 msgid ""
 "The table below compares the syntax for creating shared ctypes objects from "
 "shared memory with the normal ctypes syntax.  (In the table ``MyStruct`` is "
@@ -2534,63 +2606,63 @@ msgstr ""
 "compartidos desde la memoria compartida con la sintaxis *ctypes* normal. (En "
 "la tabla ``MyStruct`` hay alguna subclase de :class:`ctypes.Structure`.)"
 
-#: ../Doc/library/multiprocessing.rst:1611
+#: ../Doc/library/multiprocessing.rst:1645
 msgid "ctypes"
 msgstr "*ctypes*"
 
-#: ../Doc/library/multiprocessing.rst:1611
+#: ../Doc/library/multiprocessing.rst:1645
 msgid "sharedctypes using type"
 msgstr "*sharedctypes* usando *type*"
 
-#: ../Doc/library/multiprocessing.rst:1611
+#: ../Doc/library/multiprocessing.rst:1645
 msgid "sharedctypes using typecode"
 msgstr "*sharedctypes* usando *typecode*"
 
-#: ../Doc/library/multiprocessing.rst:1613
+#: ../Doc/library/multiprocessing.rst:1647
 msgid "c_double(2.4)"
 msgstr "*c_double(2.4)*"
 
-#: ../Doc/library/multiprocessing.rst:1613
+#: ../Doc/library/multiprocessing.rst:1647
 msgid "RawValue(c_double, 2.4)"
 msgstr "*RawValue(c_double, 2.4)*"
 
-#: ../Doc/library/multiprocessing.rst:1613
+#: ../Doc/library/multiprocessing.rst:1647
 msgid "RawValue('d', 2.4)"
 msgstr "*RawValue('d', 2.4)*"
 
-#: ../Doc/library/multiprocessing.rst:1614
+#: ../Doc/library/multiprocessing.rst:1648
 msgid "MyStruct(4, 6)"
 msgstr "*MyStruct(4, 6)*"
 
-#: ../Doc/library/multiprocessing.rst:1614
+#: ../Doc/library/multiprocessing.rst:1648
 msgid "RawValue(MyStruct, 4, 6)"
 msgstr "*RawValue(MyStruct, 4, 6)*"
 
-#: ../Doc/library/multiprocessing.rst:1615
+#: ../Doc/library/multiprocessing.rst:1649
 msgid "(c_short * 7)()"
 msgstr "*(c_short * 7)()*"
 
-#: ../Doc/library/multiprocessing.rst:1615
+#: ../Doc/library/multiprocessing.rst:1649
 msgid "RawArray(c_short, 7)"
 msgstr "*RawArray(c_short, 7)*"
 
-#: ../Doc/library/multiprocessing.rst:1615
+#: ../Doc/library/multiprocessing.rst:1649
 msgid "RawArray('h', 7)"
 msgstr "*RawArray(‘h’, 7)*"
 
-#: ../Doc/library/multiprocessing.rst:1616
+#: ../Doc/library/multiprocessing.rst:1650
 msgid "(c_int * 3)(9, 2, 8)"
 msgstr "*(c_int * 3)(9, 2, 8)*"
 
-#: ../Doc/library/multiprocessing.rst:1616
+#: ../Doc/library/multiprocessing.rst:1650
 msgid "RawArray(c_int, (9, 2, 8))"
 msgstr "*RawArray(c_int, (9, 2, 8))*"
 
-#: ../Doc/library/multiprocessing.rst:1616
+#: ../Doc/library/multiprocessing.rst:1650
 msgid "RawArray('i', (9, 2, 8))"
 msgstr "*RawArray('i', (9, 2, 8))*"
 
-#: ../Doc/library/multiprocessing.rst:1620
+#: ../Doc/library/multiprocessing.rst:1654
 msgid ""
 "Below is an example where a number of ctypes objects are modified by a child "
 "process::"
@@ -2598,15 +2670,15 @@ msgstr ""
 "A continuación se muestra un ejemplo donde un número de objetos *ctypes* son "
 "modificados por un proceso hijo::"
 
-#: ../Doc/library/multiprocessing.rst:1658
+#: ../Doc/library/multiprocessing.rst:1692
 msgid "The results printed are ::"
 msgstr "Los resultados impresos son ::"
 
-#: ../Doc/library/multiprocessing.rst:1671
+#: ../Doc/library/multiprocessing.rst:1705
 msgid "Managers"
 msgstr "Administradores (*Managers*)"
 
-#: ../Doc/library/multiprocessing.rst:1673
+#: ../Doc/library/multiprocessing.rst:1707
 msgid ""
 "Managers provide a way to create data which can be shared between different "
 "processes, including sharing over a network between processes running on "
@@ -2621,7 +2693,7 @@ msgstr ""
 "(*objetos compartidos*). Otros procesos pueden acceder a los objetos "
 "compartidos mediante el uso de servidores proxy."
 
-#: ../Doc/library/multiprocessing.rst:1682
+#: ../Doc/library/multiprocessing.rst:1716
 msgid ""
 "Returns a started :class:`~multiprocessing.managers.SyncManager` object "
 "which can be used for sharing objects between processes.  The returned "
@@ -2634,7 +2706,7 @@ msgstr ""
 "métodos que crearán objetos compartidos y retornarán los proxies "
 "correspondientes."
 
-#: ../Doc/library/multiprocessing.rst:1690
+#: ../Doc/library/multiprocessing.rst:1724
 msgid ""
 "Manager processes will be shutdown as soon as they are garbage collected or "
 "their parent process exits.  The manager classes are defined in the :mod:"
@@ -2644,11 +2716,11 @@ msgstr ""
 "basura o salga su proceso padre. Las clases de administrador se definen en "
 "el módulo :mod:`multiprocessing.managers`:"
 
-#: ../Doc/library/multiprocessing.rst:1696
+#: ../Doc/library/multiprocessing.rst:1730
 msgid "Create a BaseManager object."
 msgstr "Crear un objeto *BaseManager*."
 
-#: ../Doc/library/multiprocessing.rst:1698
+#: ../Doc/library/multiprocessing.rst:1732
 msgid ""
 "Once created one should call :meth:`start` or ``get_server()."
 "serve_forever()`` to ensure that the manager object refers to a started "
@@ -2658,7 +2730,7 @@ msgstr ""
 "serve_forever()`` para asegurarse de que el objeto de administrador se "
 "refiera a un proceso de administrador iniciado."
 
-#: ../Doc/library/multiprocessing.rst:1701
+#: ../Doc/library/multiprocessing.rst:1735
 msgid ""
 "*address* is the address on which the manager process listens for new "
 "connections.  If *address* is ``None`` then an arbitrary one is chosen."
@@ -2666,7 +2738,7 @@ msgstr ""
 "*address* es la dirección en la que el proceso del administrador escucha las "
 "nuevas conexiones. Si *address* es ``None``, se elige una arbitrariamente."
 
-#: ../Doc/library/multiprocessing.rst:1704
+#: ../Doc/library/multiprocessing.rst:1738
 msgid ""
 "*authkey* is the authentication key which will be used to check the validity "
 "of incoming connections to the server process.  If *authkey* is ``None`` "
@@ -2678,7 +2750,7 @@ msgstr ""
 "``None``, entonces se usa ``current_process().authkey``. De lo contrario, se "
 "usa *authkey* y debe ser una cadena de *bytes*."
 
-#: ../Doc/library/multiprocessing.rst:1709
+#: ../Doc/library/multiprocessing.rst:1743
 msgid ""
 "*serializer* must be ``'pickle'`` (use :mod:`pickle` serialization) or "
 "``'xmlrpclib'`` (use :mod:`xmlrpc.client` serialization)."
@@ -2686,7 +2758,7 @@ msgstr ""
 "*serializer* debe ser ``'pickle'`` (usar serialización :mod:`pickle`) o "
 "``'xmlrpclib'`` (usar serialización :mod:`xmlrpc.client`)."
 
-#: ../Doc/library/multiprocessing.rst:1712
+#: ../Doc/library/multiprocessing.rst:1746
 msgid ""
 "*ctx* is a context object, or ``None`` (use the current context). See the :"
 "func:`get_context` function."
@@ -2694,7 +2766,7 @@ msgstr ""
 "*ctx* es un objeto de contexto, o ``None`` (utilice el contexto actual). "
 "Consulte la función :func:`get_context`."
 
-#: ../Doc/library/multiprocessing.rst:1715
+#: ../Doc/library/multiprocessing.rst:1749
 msgid ""
 "*shutdown_timeout* is a timeout in seconds used to wait until the process "
 "used by the manager completes in the :meth:`shutdown` method. If the "
@@ -2707,11 +2779,11 @@ msgstr ""
 "finaliza. Si la finalización del proceso también supera el tiempo de espera, "
 "el proceso se cancela."
 
-#: ../Doc/library/multiprocessing.rst:1720
+#: ../Doc/library/multiprocessing.rst:1754
 msgid "Added the *shutdown_timeout* parameter."
 msgstr "Se agregó el parámetro *shutdown_timeout*."
 
-#: ../Doc/library/multiprocessing.rst:1725
+#: ../Doc/library/multiprocessing.rst:1759
 msgid ""
 "Start a subprocess to start the manager.  If *initializer* is not ``None`` "
 "then the subprocess will call ``initializer(*initargs)`` when it starts."
@@ -2720,7 +2792,7 @@ msgstr ""
 "es ``None``, entonces el subproceso llamará ``initializer(*initargs)`` "
 "cuando se inicie."
 
-#: ../Doc/library/multiprocessing.rst:1730
+#: ../Doc/library/multiprocessing.rst:1764
 msgid ""
 "Returns a :class:`Server` object which represents the actual server under "
 "the control of the Manager. The :class:`Server` object supports the :meth:"
@@ -2730,17 +2802,17 @@ msgstr ""
 "control del Administrador. El objeto :class:`Server` admite el método :meth:"
 "`serve_forever`::"
 
-#: ../Doc/library/multiprocessing.rst:1739
+#: ../Doc/library/multiprocessing.rst:1773
 msgid ":class:`Server` additionally has an :attr:`address` attribute."
 msgstr ":class:`Server` tiene un atributo adicional :attr:`address`."
 
-#: ../Doc/library/multiprocessing.rst:1743
+#: ../Doc/library/multiprocessing.rst:1777
 msgid "Connect a local manager object to a remote manager process::"
 msgstr ""
 "Conecta un objeto de administrador (*manager*) local a un proceso de "
 "administrador remoto::"
 
-#: ../Doc/library/multiprocessing.rst:1751
+#: ../Doc/library/multiprocessing.rst:1785
 msgid ""
 "Stop the process used by the manager.  This is only available if :meth:"
 "`start` has been used to start the server process."
@@ -2749,11 +2821,11 @@ msgstr ""
 "disponible si :meth:`start` se ha utilizado para iniciar el proceso del "
 "servidor."
 
-#: ../Doc/library/multiprocessing.rst:1754
+#: ../Doc/library/multiprocessing.rst:1788
 msgid "This can be called multiple times."
 msgstr "Esto se puede llamar múltiples veces."
 
-#: ../Doc/library/multiprocessing.rst:1758
+#: ../Doc/library/multiprocessing.rst:1792
 msgid ""
 "A classmethod which can be used for registering a type or callable with the "
 "manager class."
@@ -2761,7 +2833,7 @@ msgstr ""
 "Un método de clase que puede usarse para registrar un tipo o invocarse con "
 "la clase de administrador (*manager*)."
 
-#: ../Doc/library/multiprocessing.rst:1761
+#: ../Doc/library/multiprocessing.rst:1795
 msgid ""
 "*typeid* is a \"type identifier\" which is used to identify a particular "
 "type of shared object.  This must be a string."
@@ -2769,7 +2841,7 @@ msgstr ""
 "*typeid* es un \"identificador de tipo\" que se utiliza para identificar un "
 "tipo particular de objeto compartido. Esto debe ser una cadena de caracteres."
 
-#: ../Doc/library/multiprocessing.rst:1764
+#: ../Doc/library/multiprocessing.rst:1798
 msgid ""
 "*callable* is a callable used for creating objects for this type "
 "identifier.  If a manager instance will be connected to the server using "
@@ -2781,7 +2853,7 @@ msgstr ""
 "servidor utilizando el método :meth:`connect`, o si el argumento "
 "*create_method* es ``False``, esto se puede dejar como ``None``."
 
-#: ../Doc/library/multiprocessing.rst:1770
+#: ../Doc/library/multiprocessing.rst:1804
 msgid ""
 "*proxytype* is a subclass of :class:`BaseProxy` which is used to create "
 "proxies for shared objects with this *typeid*.  If ``None`` then a proxy "
@@ -2791,7 +2863,7 @@ msgstr ""
 "*proxies* para objetos compartidos con este *typeid*. Si ``None``, se crea "
 "automáticamente una clase proxy."
 
-#: ../Doc/library/multiprocessing.rst:1774
+#: ../Doc/library/multiprocessing.rst:1808
 msgid ""
 "*exposed* is used to specify a sequence of method names which proxies for "
 "this typeid should be allowed to access using :meth:`BaseProxy."
@@ -2810,7 +2882,7 @@ msgstr ""
 "\"método público\" significa cualquier atributo que tenga un método :meth:"
 "`~object.__call__` y cuyo nombre no comience con ``'_'``.)"
 
-#: ../Doc/library/multiprocessing.rst:1783
+#: ../Doc/library/multiprocessing.rst:1817
 msgid ""
 "*method_to_typeid* is a mapping used to specify the return type of those "
 "exposed methods which should return a proxy.  It maps method names to typeid "
@@ -2827,7 +2899,7 @@ msgstr ""
 "asignación es ``None`` entonces el objeto retornado por el método se copiará "
 "por valor."
 
-#: ../Doc/library/multiprocessing.rst:1790
+#: ../Doc/library/multiprocessing.rst:1824
 msgid ""
 "*create_method* determines whether a method should be created with name "
 "*typeid* which can be used to tell the server process to create a new shared "
@@ -2837,17 +2909,17 @@ msgstr ""
 "que se puede usar para indicarle al proceso del servidor que cree un nuevo "
 "objeto compartido y retornando un proxy para él. Por defecto es ``True``."
 
-#: ../Doc/library/multiprocessing.rst:1794
+#: ../Doc/library/multiprocessing.rst:1828
 msgid ":class:`BaseManager` instances also have one read-only property:"
 msgstr ""
 ":class:`BaseManager` las instancias también tienen una propiedad de solo "
 "lectura:"
 
-#: ../Doc/library/multiprocessing.rst:1798
+#: ../Doc/library/multiprocessing.rst:1832
 msgid "The address used by the manager."
 msgstr "La dirección utilizada por el administrador."
 
-#: ../Doc/library/multiprocessing.rst:1800
+#: ../Doc/library/multiprocessing.rst:1834
 msgid ""
 "Manager objects support the context management protocol -- see :ref:"
 "`typecontextmanager`.  :meth:`~contextmanager.__enter__` starts the server "
@@ -2859,7 +2931,7 @@ msgstr ""
 "el proceso del servidor (si aún no se ha iniciado) y luego retorna el objeto "
 "de administrador. :meth:`~contextmanager .__exit__` llama :meth:`shutdown`."
 
-#: ../Doc/library/multiprocessing.rst:1806
+#: ../Doc/library/multiprocessing.rst:1840
 msgid ""
 "In previous versions :meth:`~contextmanager.__enter__` did not start the "
 "manager's server process if it was not already started."
@@ -2867,7 +2939,7 @@ msgstr ""
 "En versiones anteriores :meth:`~contextmanager.__enter__` no iniciaba el "
 "proceso del servidor del administrador si aún no se había iniciado."
 
-#: ../Doc/library/multiprocessing.rst:1811
+#: ../Doc/library/multiprocessing.rst:1845
 msgid ""
 "A subclass of :class:`BaseManager` which can be used for the synchronization "
 "of processes.  Objects of this type are returned by :func:`multiprocessing."
@@ -2877,7 +2949,7 @@ msgstr ""
 "sincronización de procesos. Los objetos de este tipo son retornados por :"
 "func:`multiprocessing.Manager`."
 
-#: ../Doc/library/multiprocessing.rst:1815
+#: ../Doc/library/multiprocessing.rst:1849
 msgid ""
 "Its methods create and return :ref:`multiprocessing-proxy_objects` for a "
 "number of commonly used data types to be synchronized across processes. This "
@@ -2887,14 +2959,14 @@ msgstr ""
 "varios tipos de datos de uso común que se sincronizarán entre procesos. Esto "
 "incluye notablemente listas compartidas y diccionarios."
 
-#: ../Doc/library/multiprocessing.rst:1821
+#: ../Doc/library/multiprocessing.rst:1855
 msgid ""
 "Create a shared :class:`threading.Barrier` object and return a proxy for it."
 msgstr ""
 ":class:`threading.Barrier` crea un objeto compartido y retorna un proxy para "
 "él."
 
-#: ../Doc/library/multiprocessing.rst:1828
+#: ../Doc/library/multiprocessing.rst:1862
 msgid ""
 "Create a shared :class:`threading.BoundedSemaphore` object and return a "
 "proxy for it."
@@ -2902,7 +2974,7 @@ msgstr ""
 "Crea un objeto compartido :class:`threading.BoundedSemaphore` y retorna un "
 "proxy para él."
 
-#: ../Doc/library/multiprocessing.rst:1833
+#: ../Doc/library/multiprocessing.rst:1867
 msgid ""
 "Create a shared :class:`threading.Condition` object and return a proxy for "
 "it."
@@ -2910,7 +2982,7 @@ msgstr ""
 "Crea un objeto compartido :class:`threading.Condition` y retorna un proxy "
 "para él."
 
-#: ../Doc/library/multiprocessing.rst:1836
+#: ../Doc/library/multiprocessing.rst:1870
 msgid ""
 "If *lock* is supplied then it should be a proxy for a :class:`threading."
 "Lock` or :class:`threading.RLock` object."
@@ -2918,37 +2990,37 @@ msgstr ""
 "Si se proporciona *lock*, debería ser un proxy para un objeto :class:"
 "`threading.Lock` o :class:`threading.RLock`."
 
-#: ../Doc/library/multiprocessing.rst:1844
+#: ../Doc/library/multiprocessing.rst:1878
 msgid ""
 "Create a shared :class:`threading.Event` object and return a proxy for it."
 msgstr ""
 "Crea un objeto compartido :class:`threading.Event` y retorna un proxy para "
 "él."
 
-#: ../Doc/library/multiprocessing.rst:1848
+#: ../Doc/library/multiprocessing.rst:1882
 msgid ""
 "Create a shared :class:`threading.Lock` object and return a proxy for it."
 msgstr ""
 "Crea un objeto compartido :class:`threading.Lock` y retorna un proxy para él."
 
-#: ../Doc/library/multiprocessing.rst:1852
+#: ../Doc/library/multiprocessing.rst:1886
 msgid "Create a shared :class:`Namespace` object and return a proxy for it."
 msgstr ""
 "Crea un objeto compartido :class:`Namespace` y retorna un proxy para él."
 
-#: ../Doc/library/multiprocessing.rst:1856
+#: ../Doc/library/multiprocessing.rst:1890
 msgid "Create a shared :class:`queue.Queue` object and return a proxy for it."
 msgstr ""
 "Crea un objeto compartido :class:`queue.Queue` y retorna un proxy para él."
 
-#: ../Doc/library/multiprocessing.rst:1860
+#: ../Doc/library/multiprocessing.rst:1894
 msgid ""
 "Create a shared :class:`threading.RLock` object and return a proxy for it."
 msgstr ""
 "Crea un objeto compartido :class:`threading.RLock` y retorna un proxy para "
 "él."
 
-#: ../Doc/library/multiprocessing.rst:1864
+#: ../Doc/library/multiprocessing.rst:1898
 msgid ""
 "Create a shared :class:`threading.Semaphore` object and return a proxy for "
 "it."
@@ -2956,11 +3028,11 @@ msgstr ""
 "Crea un objeto compartido :class:`threading.Semaphore` y retorna un proxy "
 "para él."
 
-#: ../Doc/library/multiprocessing.rst:1869
+#: ../Doc/library/multiprocessing.rst:1903
 msgid "Create an array and return a proxy for it."
 msgstr "Crea un arreglo y retorna un proxy para ello."
 
-#: ../Doc/library/multiprocessing.rst:1873
+#: ../Doc/library/multiprocessing.rst:1907
 msgid ""
 "Create an object with a writable ``value`` attribute and return a proxy for "
 "it."
@@ -2968,15 +3040,15 @@ msgstr ""
 "Crea un objeto con un atributo de escritura ``value`` y retorna un proxy "
 "para él."
 
-#: ../Doc/library/multiprocessing.rst:1880
+#: ../Doc/library/multiprocessing.rst:1914
 msgid "Create a shared :class:`dict` object and return a proxy for it."
 msgstr "Crea un objeto compartido :class:`dict` y retorna un proxy para él."
 
-#: ../Doc/library/multiprocessing.rst:1885
+#: ../Doc/library/multiprocessing.rst:1919
 msgid "Create a shared :class:`list` object and return a proxy for it."
 msgstr "Crea un objeto compartido :class:`list` y retorna un proxy para él."
 
-#: ../Doc/library/multiprocessing.rst:1887
+#: ../Doc/library/multiprocessing.rst:1921
 msgid ""
 "Shared objects are capable of being nested.  For example, a shared container "
 "object such as a shared list can contain other shared objects which will all "
@@ -2986,11 +3058,11 @@ msgstr ""
 "compartido, como una lista compartida, puede contener otros objetos "
 "compartidos que serán administrados y sincronizados por :class:`SyncManager`."
 
-#: ../Doc/library/multiprocessing.rst:1894
+#: ../Doc/library/multiprocessing.rst:1928
 msgid "A type that can register with :class:`SyncManager`."
 msgstr "Un tipo que puede registrarse con :class:`SyncManager`."
 
-#: ../Doc/library/multiprocessing.rst:1896
+#: ../Doc/library/multiprocessing.rst:1930
 msgid ""
 "A namespace object has no public methods, but does have writable attributes. "
 "Its representation shows the values of its attributes."
@@ -2999,7 +3071,7 @@ msgstr ""
 "atributos de escritura. Su representación muestra los valores de sus "
 "atributos."
 
-#: ../Doc/library/multiprocessing.rst:1899
+#: ../Doc/library/multiprocessing.rst:1933
 msgid ""
 "However, when using a proxy for a namespace object, an attribute beginning "
 "with ``'_'`` will be an attribute of the proxy and not an attribute of the "
@@ -3009,11 +3081,11 @@ msgstr ""
 "atributo que comience con ``'_'`` será un atributo del proxy y no un "
 "atributo del referente:"
 
-#: ../Doc/library/multiprocessing.rst:1915
+#: ../Doc/library/multiprocessing.rst:1950
 msgid "Customized managers"
 msgstr "Administradores customizables (*Customized managers*)"
 
-#: ../Doc/library/multiprocessing.rst:1917
+#: ../Doc/library/multiprocessing.rst:1952
 msgid ""
 "To create one's own manager, one creates a subclass of :class:`BaseManager` "
 "and uses the :meth:`~BaseManager.register` classmethod to register new types "
@@ -3024,11 +3096,11 @@ msgstr ""
 "para registrar nuevos tipos o llamadas con la clase de administrador. Por "
 "ejemplo::"
 
-#: ../Doc/library/multiprocessing.rst:1942
+#: ../Doc/library/multiprocessing.rst:1977
 msgid "Using a remote manager"
 msgstr "Utilizando un administrador remoto"
 
-#: ../Doc/library/multiprocessing.rst:1944
+#: ../Doc/library/multiprocessing.rst:1979
 msgid ""
 "It is possible to run a manager server on one machine and have clients use "
 "it from other machines (assuming that the firewalls involved allow it)."
@@ -3037,7 +3109,7 @@ msgstr ""
 "clientes lo usen desde otras máquinas (suponiendo que los cortafuegos "
 "involucrados lo permitan)."
 
-#: ../Doc/library/multiprocessing.rst:1947
+#: ../Doc/library/multiprocessing.rst:1982
 msgid ""
 "Running the following commands creates a server for a single shared queue "
 "which remote clients can access::"
@@ -3045,15 +3117,15 @@ msgstr ""
 "La ejecución de los siguientes comandos crea un servidor para una única cola "
 "compartida a la que los clientes remotos pueden acceder::"
 
-#: ../Doc/library/multiprocessing.rst:1959
+#: ../Doc/library/multiprocessing.rst:1994
 msgid "One client can access the server as follows::"
 msgstr "Un cliente puede tener accesos al servidor de la siguiente manera::"
 
-#: ../Doc/library/multiprocessing.rst:1969
+#: ../Doc/library/multiprocessing.rst:2004
 msgid "Another client can also use it::"
 msgstr "Otro cliente puede también usarlo::"
 
-#: ../Doc/library/multiprocessing.rst:1980
+#: ../Doc/library/multiprocessing.rst:2015
 msgid ""
 "Local processes can also access that queue, using the code from above on the "
 "client to access it remotely::"
@@ -3061,11 +3133,11 @@ msgstr ""
 "Los procesos locales también pueden acceder a esa cola (*queue*), utilizando "
 "el código de arriba en el cliente para acceder de forma remota::"
 
-#: ../Doc/library/multiprocessing.rst:2005
+#: ../Doc/library/multiprocessing.rst:2040
 msgid "Proxy Objects"
 msgstr "Objetos Proxy (*Proxy Objects*)"
 
-#: ../Doc/library/multiprocessing.rst:2007
+#: ../Doc/library/multiprocessing.rst:2042
 msgid ""
 "A proxy is an object which *refers* to a shared object which lives "
 "(presumably) in a different process.  The shared object is said to be the "
@@ -3076,7 +3148,7 @@ msgstr ""
 "es el *referente* del proxy. Varios objetos proxy pueden tener el mismo "
 "referente."
 
-#: ../Doc/library/multiprocessing.rst:2011
+#: ../Doc/library/multiprocessing.rst:2046
 msgid ""
 "A proxy object has methods which invoke corresponding methods of its "
 "referent (although not every method of the referent will necessarily be "
@@ -3088,7 +3160,7 @@ msgstr ""
 "disponibles a través del proxy). De esta manera, un proxy se puede usar al "
 "igual que su referente:"
 
-#: ../Doc/library/multiprocessing.rst:2029
+#: ../Doc/library/multiprocessing.rst:2064
 msgid ""
 "Notice that applying :func:`str` to a proxy will return the representation "
 "of the referent, whereas applying :func:`repr` will return the "
@@ -3098,7 +3170,7 @@ msgstr ""
 "representación del referente, mientras que la aplicación :func:`repr` "
 "retornará la representación del proxy."
 
-#: ../Doc/library/multiprocessing.rst:2033
+#: ../Doc/library/multiprocessing.rst:2068
 msgid ""
 "An important feature of proxy objects is that they are picklable so they can "
 "be passed between processes.  As such, a referent can contain :ref:"
@@ -3110,13 +3182,13 @@ msgstr ""
 "contener :ref:`multiprocessing-proxy_objects`. Esto permite anidar estas "
 "listas administradas, dictados y otros :ref:`multiprocessing-proxy_objects`:"
 
-#: ../Doc/library/multiprocessing.rst:2049
+#: ../Doc/library/multiprocessing.rst:2084
 msgid "Similarly, dict and list proxies may be nested inside one another::"
 msgstr ""
 "Del mismo modo, los proxies *dict* y *list* pueden estar anidados uno dentro "
 "del otro::"
 
-#: ../Doc/library/multiprocessing.rst:2062
+#: ../Doc/library/multiprocessing.rst:2097
 msgid ""
 "If standard (non-proxy) :class:`list` or :class:`dict` objects are contained "
 "in a referent, modifications to those mutable values will not be propagated "
@@ -3135,7 +3207,7 @@ msgstr ""
 "por lo tanto, para modificar efectivamente dicho elemento, uno podría "
 "reasignar el valor modificado al proxy de contenedor::"
 
-#: ../Doc/library/multiprocessing.rst:2081
+#: ../Doc/library/multiprocessing.rst:2116
 msgid ""
 "This approach is perhaps less convenient than employing nested :ref:"
 "`multiprocessing-proxy_objects` for most use cases but also demonstrates a "
@@ -3145,7 +3217,7 @@ msgstr ""
 "`multiprocessing-proxy_objects` para la mayoría de los casos de uso, pero "
 "también demuestra un nivel de control sobre la sincronización."
 
-#: ../Doc/library/multiprocessing.rst:2087
+#: ../Doc/library/multiprocessing.rst:2122
 msgid ""
 "The proxy types in :mod:`multiprocessing` do nothing to support comparisons "
 "by value.  So, for instance, we have:"
@@ -3153,35 +3225,35 @@ msgstr ""
 "Los tipos de proxy en :mod:`multiprocessing` no hacen nada para admitir "
 "comparaciones por valor. Entonces, por ejemplo, tenemos:"
 
-#: ../Doc/library/multiprocessing.rst:2095
+#: ../Doc/library/multiprocessing.rst:2130
 msgid ""
 "One should just use a copy of the referent instead when making comparisons."
 msgstr ""
 "En su lugar, se debe usar una copia del referente al hacer comparaciones."
 
-#: ../Doc/library/multiprocessing.rst:2099
+#: ../Doc/library/multiprocessing.rst:2134
 msgid "Proxy objects are instances of subclasses of :class:`BaseProxy`."
 msgstr "Los objetos proxy son instancias de subclases de :class:`BaseProxy`."
 
-#: ../Doc/library/multiprocessing.rst:2103
+#: ../Doc/library/multiprocessing.rst:2138
 msgid "Call and return the result of a method of the proxy's referent."
 msgstr "Llama y retorna el resultado de un método del referente del proxy."
 
-#: ../Doc/library/multiprocessing.rst:2105
+#: ../Doc/library/multiprocessing.rst:2140
 msgid ""
 "If ``proxy`` is a proxy whose referent is ``obj`` then the expression ::"
 msgstr ""
 "Si ``proxy`` es un proxy cuyo referente es ``obj`` entonces la expresión ::"
 
-#: ../Doc/library/multiprocessing.rst:2109
+#: ../Doc/library/multiprocessing.rst:2144
 msgid "will evaluate the expression ::"
 msgstr "evaluará la expresión ::"
 
-#: ../Doc/library/multiprocessing.rst:2113
+#: ../Doc/library/multiprocessing.rst:2148
 msgid "in the manager's process."
 msgstr "en el proceso del administrador."
 
-#: ../Doc/library/multiprocessing.rst:2115
+#: ../Doc/library/multiprocessing.rst:2150
 msgid ""
 "The returned value will be a copy of the result of the call or a proxy to a "
 "new shared object -- see documentation for the *method_to_typeid* argument "
@@ -3191,7 +3263,7 @@ msgstr ""
 "un nuevo objeto compartido; consulte la documentación del argumento "
 "*method_to_typeid* de :meth:`BaseManager.register`."
 
-#: ../Doc/library/multiprocessing.rst:2119
+#: ../Doc/library/multiprocessing.rst:2154
 msgid ""
 "If an exception is raised by the call, then is re-raised by :meth:"
 "`_callmethod`.  If some other exception is raised in the manager's process "
@@ -3203,7 +3275,7 @@ msgstr ""
 "administrador, esto se convierte en una excepción :exc:`RemoteError` y se "
 "genera mediante  :meth:`_callmethod`."
 
-#: ../Doc/library/multiprocessing.rst:2124
+#: ../Doc/library/multiprocessing.rst:2159
 msgid ""
 "Note in particular that an exception will be raised if *methodname* has not "
 "been *exposed*."
@@ -3211,33 +3283,33 @@ msgstr ""
 "Tenga en cuenta en particular que se lanzará una excepción si *methodname* "
 "no ha sido *exposed*."
 
-#: ../Doc/library/multiprocessing.rst:2127
+#: ../Doc/library/multiprocessing.rst:2162
 msgid "An example of the usage of :meth:`_callmethod`:"
 msgstr "Un ejemplo de uso de :meth:`_callmethod`:"
 
-#: ../Doc/library/multiprocessing.rst:2143
+#: ../Doc/library/multiprocessing.rst:2178
 msgid "Return a copy of the referent."
 msgstr "Retorna una copia del referente."
 
-#: ../Doc/library/multiprocessing.rst:2145
+#: ../Doc/library/multiprocessing.rst:2180
 msgid "If the referent is unpicklable then this will raise an exception."
 msgstr ""
 "Si el referente no se puede deserializar (*unpicklable*), esto lanzará una "
 "excepción."
 
-#: ../Doc/library/multiprocessing.rst:2149
+#: ../Doc/library/multiprocessing.rst:2184
 msgid "Return a representation of the proxy object."
 msgstr "Retorna una representación de un objeto proxy."
 
-#: ../Doc/library/multiprocessing.rst:2153
+#: ../Doc/library/multiprocessing.rst:2188
 msgid "Return the representation of the referent."
 msgstr "Retorna una representación del referente."
 
-#: ../Doc/library/multiprocessing.rst:2157
+#: ../Doc/library/multiprocessing.rst:2192
 msgid "Cleanup"
 msgstr "Limpieza (*Cleanup*)"
 
-#: ../Doc/library/multiprocessing.rst:2159
+#: ../Doc/library/multiprocessing.rst:2194
 msgid ""
 "A proxy object uses a weakref callback so that when it gets garbage "
 "collected it deregisters itself from the manager which owns its referent."
@@ -3246,7 +3318,7 @@ msgstr ""
 "débil (*weakref*) para que cuando sea recolectado por el recolector de "
 "basura se da de baja del administrador que posee su referente."
 
-#: ../Doc/library/multiprocessing.rst:2162
+#: ../Doc/library/multiprocessing.rst:2197
 msgid ""
 "A shared object gets deleted from the manager process when there are no "
 "longer any proxies referring to it."
@@ -3254,11 +3326,11 @@ msgstr ""
 "Un objeto compartido se elimina del proceso del administrador cuando ya no "
 "hay ningún proxy que se refiera a él."
 
-#: ../Doc/library/multiprocessing.rst:2167
+#: ../Doc/library/multiprocessing.rst:2202
 msgid "Process Pools"
 msgstr "Piscinas de procesos (*Process Pools*)"
 
-#: ../Doc/library/multiprocessing.rst:2172
+#: ../Doc/library/multiprocessing.rst:2207
 msgid ""
 "One can create a pool of processes which will carry out tasks submitted to "
 "it with the :class:`Pool` class."
@@ -3266,7 +3338,7 @@ msgstr ""
 "Se puede crear un grupo de procesos que llevarán a cabo las tareas que se le "
 "presenten con la  :class:`Pool` class."
 
-#: ../Doc/library/multiprocessing.rst:2177
+#: ../Doc/library/multiprocessing.rst:2212
 msgid ""
 "A process pool object which controls a pool of worker processes to which "
 "jobs can be submitted.  It supports asynchronous results with timeouts and "
@@ -3277,7 +3349,7 @@ msgstr ""
 "tiempos de espera y devoluciones de llamada y tiene una implementación de "
 "mapa paralelo."
 
-#: ../Doc/library/multiprocessing.rst:2181
+#: ../Doc/library/multiprocessing.rst:2216
 msgid ""
 "*processes* is the number of worker processes to use.  If *processes* is "
 "``None`` then the number returned by :func:`os.cpu_count` is used."
@@ -3285,8 +3357,8 @@ msgstr ""
 "*processes* es el número de procesos de trabajo a utilizar. Si *processes* "
 "es ``None`` , se utiliza el número retornado por :func:`os.cpu_count`."
 
-#: ../Doc/library/multiprocessing.rst:2184
-#: ../Doc/library/multiprocessing.rst:2745
+#: ../Doc/library/multiprocessing.rst:2219
+#: ../Doc/library/multiprocessing.rst:2780
 msgid ""
 "If *initializer* is not ``None`` then each worker process will call "
 "``initializer(*initargs)`` when it starts."
@@ -3294,7 +3366,7 @@ msgstr ""
 "Si *initializer* no es ``None``, cada proceso de trabajo llamará "
 "``initializer(*initargs)`` cuando se inicie."
 
-#: ../Doc/library/multiprocessing.rst:2187
+#: ../Doc/library/multiprocessing.rst:2222
 msgid ""
 "*maxtasksperchild* is the number of tasks a worker process can complete "
 "before it will exit and be replaced with a fresh worker process, to enable "
@@ -3307,7 +3379,7 @@ msgstr ""
 "predeterminado *maxtasksperchild* es ``None``, lo que significa que los "
 "procesos de trabajo vivirán tanto tiempo como el grupo."
 
-#: ../Doc/library/multiprocessing.rst:2192
+#: ../Doc/library/multiprocessing.rst:2227
 msgid ""
 "*context* can be used to specify the context used for starting the worker "
 "processes.  Usually a pool is created using the function :func:"
@@ -3320,7 +3392,7 @@ msgstr ""
 "contexto :meth:`Pool`. En ambos casos, *context* se establece de manera "
 "adecuada."
 
-#: ../Doc/library/multiprocessing.rst:2198
+#: ../Doc/library/multiprocessing.rst:2233
 msgid ""
 "Note that the methods of the pool object should only be called by the "
 "process which created the pool."
@@ -3328,7 +3400,7 @@ msgstr ""
 "Tenga en cuenta que los métodos del objeto de grupo solo deben ser invocados "
 "por el proceso que creó el grupo."
 
-#: ../Doc/library/multiprocessing.rst:2202
+#: ../Doc/library/multiprocessing.rst:2237
 msgid ""
 ":class:`multiprocessing.pool` objects have internal resources that need to "
 "be properly managed (like any other resource) by using the pool as a context "
@@ -3341,7 +3413,7 @@ msgstr ""
 "`close` y :meth:`terminate` manualmente. De lo contrario, el proceso puede "
 "demorarse en la finalización."
 
-#: ../Doc/library/multiprocessing.rst:2207
+#: ../Doc/library/multiprocessing.rst:2242
 msgid ""
 "Note that it is **not correct** to rely on the garbage collector to destroy "
 "the pool as CPython does not assure that the finalizer of the pool will be "
@@ -3352,15 +3424,15 @@ msgstr ""
 "finalizador del grupo (consulte :meth:`object.__del__` para obtener más "
 "información)."
 
-#: ../Doc/library/multiprocessing.rst:2211
+#: ../Doc/library/multiprocessing.rst:2246
 msgid "*maxtasksperchild*"
 msgstr "*maxtasksperchild*"
 
-#: ../Doc/library/multiprocessing.rst:2214
+#: ../Doc/library/multiprocessing.rst:2249
 msgid "*context*"
 msgstr "*context*"
 
-#: ../Doc/library/multiprocessing.rst:2219
+#: ../Doc/library/multiprocessing.rst:2254
 msgid ""
 "Worker processes within a :class:`Pool` typically live for the complete "
 "duration of the Pool's work queue. A frequent pattern found in other systems "
@@ -3379,7 +3451,7 @@ msgstr ""
 "el viejo. El argumento *maxtasksperchild* para :class:`Pool` expone esta "
 "capacidad al usuario final."
 
-#: ../Doc/library/multiprocessing.rst:2229
+#: ../Doc/library/multiprocessing.rst:2264
 msgid ""
 "Call *func* with arguments *args* and keyword arguments *kwds*.  It blocks "
 "until the result is ready. Given this blocks, :meth:`apply_async` is better "
@@ -3391,7 +3463,7 @@ msgstr ""
 "`apply_async` es más adecuado para realizar trabajos en paralelo. Además, "
 "*func* solo se ejecuta en uno de los trabajadores de piscina."
 
-#: ../Doc/library/multiprocessing.rst:2236
+#: ../Doc/library/multiprocessing.rst:2271
 msgid ""
 "A variant of the :meth:`apply` method which returns a :class:"
 "`~multiprocessing.pool.AsyncResult` object."
@@ -3399,8 +3471,8 @@ msgstr ""
 "Una variante del método :meth:`apply` que retorna un objeto :class:"
 "`~multiprocessing.pool.AsyncResult`."
 
-#: ../Doc/library/multiprocessing.rst:2239
-#: ../Doc/library/multiprocessing.rst:2270
+#: ../Doc/library/multiprocessing.rst:2274
+#: ../Doc/library/multiprocessing.rst:2305
 msgid ""
 "If *callback* is specified then it should be a callable which accepts a "
 "single argument.  When the result becomes ready *callback* is applied to it, "
@@ -3411,8 +3483,8 @@ msgstr ""
 "argumento. Cuando el resultado está listo, se le aplica *callback*, a menos "
 "que la llamada falle, en cuyo caso se aplica *error_callback*."
 
-#: ../Doc/library/multiprocessing.rst:2244
-#: ../Doc/library/multiprocessing.rst:2275
+#: ../Doc/library/multiprocessing.rst:2279
+#: ../Doc/library/multiprocessing.rst:2310
 msgid ""
 "If *error_callback* is specified then it should be a callable which accepts "
 "a single argument.  If the target function fails, then the *error_callback* "
@@ -3422,8 +3494,8 @@ msgstr ""
 "único argumento. Si la función de destino falla, se llama a *error_callback* "
 "con la instancia de excepción."
 
-#: ../Doc/library/multiprocessing.rst:2248
-#: ../Doc/library/multiprocessing.rst:2279
+#: ../Doc/library/multiprocessing.rst:2283
+#: ../Doc/library/multiprocessing.rst:2314
 msgid ""
 "Callbacks should complete immediately since otherwise the thread which "
 "handles the results will get blocked."
@@ -3431,7 +3503,7 @@ msgstr ""
 "Las devoluciones de llamada deben completarse inmediatamente ya que de lo "
 "contrario el hilo que maneja los resultados se bloqueará."
 
-#: ../Doc/library/multiprocessing.rst:2253
+#: ../Doc/library/multiprocessing.rst:2288
 msgid ""
 "A parallel equivalent of the :func:`map` built-in function (it supports only "
 "one *iterable* argument though, for multiple iterables see :meth:`starmap`). "
@@ -3441,7 +3513,7 @@ msgstr ""
 "admite un argumento *iterable*, para varios iterables consulte :meth:"
 "`starmap`). Bloquea hasta que el resultado esté listo."
 
-#: ../Doc/library/multiprocessing.rst:2257
+#: ../Doc/library/multiprocessing.rst:2292
 msgid ""
 "This method chops the iterable into a number of chunks which it submits to "
 "the process pool as separate tasks.  The (approximate) size of these chunks "
@@ -3451,7 +3523,7 @@ msgstr ""
 "procesos como tareas separadas. El tamaño (aproximado) de estos fragmentos "
 "se puede especificar estableciendo *chunksize* en un entero positivo."
 
-#: ../Doc/library/multiprocessing.rst:2261
+#: ../Doc/library/multiprocessing.rst:2296
 msgid ""
 "Note that it may cause high memory usage for very long iterables. Consider "
 "using :meth:`imap` or :meth:`imap_unordered` with explicit *chunksize* "
@@ -3461,7 +3533,7 @@ msgstr ""
 "largos. Considere usar :meth:`imap` o :meth:`imap_unordered` con la opción "
 "explícita *chunksize* para una mejor eficiencia."
 
-#: ../Doc/library/multiprocessing.rst:2267
+#: ../Doc/library/multiprocessing.rst:2302
 msgid ""
 "A variant of the :meth:`.map` method which returns a :class:"
 "`~multiprocessing.pool.AsyncResult` object."
@@ -3469,11 +3541,11 @@ msgstr ""
 "Una variante del método :meth:`.map` que retorna un objeto :class:"
 "`~multiprocessing.pool.AsyncResult`."
 
-#: ../Doc/library/multiprocessing.rst:2284
+#: ../Doc/library/multiprocessing.rst:2319
 msgid "A lazier version of :meth:`.map`."
 msgstr "Una versión más perezosa (*lazier*) de :meth:`.map`."
 
-#: ../Doc/library/multiprocessing.rst:2286
+#: ../Doc/library/multiprocessing.rst:2321
 msgid ""
 "The *chunksize* argument is the same as the one used by the :meth:`.map` "
 "method.  For very long iterables using a large value for *chunksize* can "
@@ -3484,7 +3556,7 @@ msgstr ""
 "hacer que el trabajo se complete **much** (**mucho**) más rápido que usar el "
 "valor predeterminado de ``1``."
 
-#: ../Doc/library/multiprocessing.rst:2291
+#: ../Doc/library/multiprocessing.rst:2326
 msgid ""
 "Also if *chunksize* is ``1`` then the :meth:`!next` method of the iterator "
 "returned by the :meth:`imap` method has an optional *timeout* parameter: "
@@ -3496,7 +3568,7 @@ msgstr ""
 "``next (timeout)`` lanzará  :exc:`multiprocessing.TimeoutError` si el "
 "resultado no puede retornarse dentro de *timeout* segundos."
 
-#: ../Doc/library/multiprocessing.rst:2298
+#: ../Doc/library/multiprocessing.rst:2333
 msgid ""
 "The same as :meth:`imap` except that the ordering of the results from the "
 "returned iterator should be considered arbitrary.  (Only when there is only "
@@ -3506,7 +3578,7 @@ msgstr ""
 "iterador retornado debe considerarse arbitrario. (Solo cuando hay un solo "
 "proceso de trabajo se garantiza que el orden sea \"correcto\")."
 
-#: ../Doc/library/multiprocessing.rst:2304
+#: ../Doc/library/multiprocessing.rst:2339
 msgid ""
 "Like :meth:`~multiprocessing.pool.Pool.map` except that the elements of the "
 "*iterable* are expected to be iterables that are unpacked as arguments."
@@ -3514,7 +3586,7 @@ msgstr ""
 "Como :meth:`~multiprocessing.pool.Pool.map`, excepto que se espera que los "
 "elementos de *iterable* sean iterables que se desempaquetan como argumentos."
 
-#: ../Doc/library/multiprocessing.rst:2308
+#: ../Doc/library/multiprocessing.rst:2343
 msgid ""
 "Hence an *iterable* of ``[(1,2), (3, 4)]`` results in ``[func(1,2), "
 "func(3,4)]``."
@@ -3522,7 +3594,7 @@ msgstr ""
 "Por lo tanto, un *iterable* de ``[(1,2), (3, 4)]`` da como resultado "
 "``[func(1,2), func(3,4)]``."
 
-#: ../Doc/library/multiprocessing.rst:2315
+#: ../Doc/library/multiprocessing.rst:2350
 msgid ""
 "A combination of :meth:`starmap` and :meth:`map_async` that iterates over "
 "*iterable* of iterables and calls *func* with the iterables unpacked. "
@@ -3532,7 +3604,7 @@ msgstr ""
 "*iterable* de iterables y llama a *func* con los iterables desempaquetados. "
 "Como resultado se retorna un objeto."
 
-#: ../Doc/library/multiprocessing.rst:2323
+#: ../Doc/library/multiprocessing.rst:2358
 msgid ""
 "Prevents any more tasks from being submitted to the pool.  Once all the "
 "tasks have been completed the worker processes will exit."
@@ -3540,7 +3612,7 @@ msgstr ""
 "Impide que se envíen más tareas a la piscina (*pool*). Una vez que se hayan "
 "completado todas las tareas, se cerrarán los procesos de trabajo."
 
-#: ../Doc/library/multiprocessing.rst:2328
+#: ../Doc/library/multiprocessing.rst:2363
 msgid ""
 "Stops the worker processes immediately without completing outstanding work.  "
 "When the pool object is garbage collected :meth:`terminate` will be called "
@@ -3550,7 +3622,7 @@ msgstr ""
 "pendiente. Cuando el objeto del grupo es basura recolectada :meth:"
 "`terminate` se llamará inmediatamente."
 
-#: ../Doc/library/multiprocessing.rst:2334
+#: ../Doc/library/multiprocessing.rst:2369
 msgid ""
 "Wait for the worker processes to exit.  One must call :meth:`close` or :meth:"
 "`terminate` before using :meth:`join`."
@@ -3558,7 +3630,7 @@ msgstr ""
 "Espera a que salgan los procesos de trabajo. Se debe llamar :meth:`close` o :"
 "meth:`terminate` antes de usar :meth:`join`."
 
-#: ../Doc/library/multiprocessing.rst:2337
+#: ../Doc/library/multiprocessing.rst:2372
 msgid ""
 "Pool objects now support the context management protocol -- see :ref:"
 "`typecontextmanager`.  :meth:`~contextmanager.__enter__` returns the pool "
@@ -3569,7 +3641,7 @@ msgstr ""
 "enter__` retorna el objeto de grupo, y :meth:`~ contextmanager.__ exit__` "
 "llama :meth:`terminate`."
 
-#: ../Doc/library/multiprocessing.rst:2345
+#: ../Doc/library/multiprocessing.rst:2380
 msgid ""
 "The class of the result returned by :meth:`Pool.apply_async` and :meth:`Pool."
 "map_async`."
@@ -3577,7 +3649,7 @@ msgstr ""
 "La clase del resultado retornado por :meth:`Pool.apply_async` y :meth:`Pool."
 "map_async`."
 
-#: ../Doc/library/multiprocessing.rst:2350
+#: ../Doc/library/multiprocessing.rst:2385
 msgid ""
 "Return the result when it arrives.  If *timeout* is not ``None`` and the "
 "result does not arrive within *timeout* seconds then :exc:`multiprocessing."
@@ -3589,17 +3661,17 @@ msgstr ""
 "`multiprocessing.TimeoutError`. Si la llamada remota generó una excepción, "
 "esa excepción se volverá a plantear mediante :meth:`get`."
 
-#: ../Doc/library/multiprocessing.rst:2357
+#: ../Doc/library/multiprocessing.rst:2392
 msgid "Wait until the result is available or until *timeout* seconds pass."
 msgstr ""
 "Espera hasta que el resultado esté disponible o hasta que pase *timeout* "
 "segundos."
 
-#: ../Doc/library/multiprocessing.rst:2361
+#: ../Doc/library/multiprocessing.rst:2396
 msgid "Return whether the call has completed."
 msgstr "Retorna si la llamada se ha completado."
 
-#: ../Doc/library/multiprocessing.rst:2365
+#: ../Doc/library/multiprocessing.rst:2400
 msgid ""
 "Return whether the call completed without raising an exception.  Will raise :"
 "exc:`ValueError` if the result is not ready."
@@ -3607,7 +3679,7 @@ msgstr ""
 "Retorna si la llamada se completó sin generar una excepción. Lanzará :exc:"
 "`ValueError` si el resultado no está listo."
 
-#: ../Doc/library/multiprocessing.rst:2368
+#: ../Doc/library/multiprocessing.rst:2403
 msgid ""
 "If the result is not ready, :exc:`ValueError` is raised instead of :exc:"
 "`AssertionError`."
@@ -3615,15 +3687,15 @@ msgstr ""
 "Si el resultado no está listo :exc:`ValueError` aparece en lugar de :exc:"
 "`AssertionError`."
 
-#: ../Doc/library/multiprocessing.rst:2372
+#: ../Doc/library/multiprocessing.rst:2407
 msgid "The following example demonstrates the use of a pool::"
 msgstr "El siguiente ejemplo demuestra el uso de una piscina(*pool*)::"
 
-#: ../Doc/library/multiprocessing.rst:2399
+#: ../Doc/library/multiprocessing.rst:2434
 msgid "Listeners and Clients"
 msgstr "Oyentes y clientes (*Listeners and Clients*)"
 
-#: ../Doc/library/multiprocessing.rst:2404
+#: ../Doc/library/multiprocessing.rst:2439
 msgid ""
 "Usually message passing between processes is done using queues or by using :"
 "class:`~Connection` objects returned by :func:`~multiprocessing.Pipe`."
@@ -3632,7 +3704,7 @@ msgstr ""
 "o mediante objetos :class:`~Connection` retornados por :func:"
 "`~multiprocessing.Pipe`."
 
-#: ../Doc/library/multiprocessing.rst:2408
+#: ../Doc/library/multiprocessing.rst:2443
 msgid ""
 "However, the :mod:`multiprocessing.connection` module allows some extra "
 "flexibility.  It basically gives a high level message oriented API for "
@@ -3646,7 +3718,7 @@ msgstr ""
 "Windows. También tiene soporte para *digest authentication* usando el "
 "módulo :mod:`hmac`, y para sondear múltiples conexiones al mismo tiempo."
 
-#: ../Doc/library/multiprocessing.rst:2417
+#: ../Doc/library/multiprocessing.rst:2452
 msgid ""
 "Send a randomly generated message to the other end of the connection and "
 "wait for a reply."
@@ -3654,7 +3726,7 @@ msgstr ""
 "Envía un mensaje generado aleatoriamente al otro extremo de la conexión y "
 "espera una respuesta."
 
-#: ../Doc/library/multiprocessing.rst:2420
+#: ../Doc/library/multiprocessing.rst:2455
 msgid ""
 "If the reply matches the digest of the message using *authkey* as the key "
 "then a welcome message is sent to the other end of the connection.  "
@@ -3665,7 +3737,7 @@ msgstr ""
 "conexión. De lo contrario se lanza :exc:`~multiprocessing."
 "AuthenticationError`."
 
-#: ../Doc/library/multiprocessing.rst:2426
+#: ../Doc/library/multiprocessing.rst:2461
 msgid ""
 "Receive a message, calculate the digest of the message using *authkey* as "
 "the key, and then send the digest back."
@@ -3673,7 +3745,7 @@ msgstr ""
 "Recibe un mensaje, calcula el resumen del mensaje usando *authkey* como la "
 "clave y luego envía el resumen de vuelta."
 
-#: ../Doc/library/multiprocessing.rst:2429
+#: ../Doc/library/multiprocessing.rst:2464
 msgid ""
 "If a welcome message is not received, then :exc:`~multiprocessing."
 "AuthenticationError` is raised."
@@ -3681,7 +3753,7 @@ msgstr ""
 "Si no se recibe un mensaje de bienvenida, se lanza :exc:`~multiprocessing."
 "AuthenticationError`."
 
-#: ../Doc/library/multiprocessing.rst:2434
+#: ../Doc/library/multiprocessing.rst:2469
 msgid ""
 "Attempt to set up a connection to the listener which is using address "
 "*address*, returning a :class:`~Connection`."
@@ -3689,7 +3761,7 @@ msgstr ""
 "Se intenta configurar una conexión con el oyente que utiliza la dirección "
 "*address*, retornando :class:`~Connection`."
 
-#: ../Doc/library/multiprocessing.rst:2437
+#: ../Doc/library/multiprocessing.rst:2472
 msgid ""
 "The type of the connection is determined by *family* argument, but this can "
 "generally be omitted since it can usually be inferred from the format of "
@@ -3699,8 +3771,8 @@ msgstr ""
 "generalmente se puede omitir ya que generalmente se puede inferir del "
 "formato de *address*. (Consulte :ref:`multiprocessing-address-formats`)"
 
-#: ../Doc/library/multiprocessing.rst:2441
 #: ../Doc/library/multiprocessing.rst:2476
+#: ../Doc/library/multiprocessing.rst:2511
 msgid ""
 "If *authkey* is given and not None, it should be a byte string and will be "
 "used as the secret key for an HMAC-based authentication challenge. No "
@@ -3714,7 +3786,7 @@ msgstr ""
 "autenticación se lanza :exc:`~multiprocessing.AuthenticationError`. "
 "Consulte :ref:`multiprocessing-auth-keys`."
 
-#: ../Doc/library/multiprocessing.rst:2449
+#: ../Doc/library/multiprocessing.rst:2484
 msgid ""
 "A wrapper for a bound socket or Windows named pipe which is 'listening' for "
 "connections."
@@ -3722,7 +3794,7 @@ msgstr ""
 "Un contenedor para un *socket* vinculado o una tubería (*pipe*) con nombre "
 "de Windows que está 'escuchando' las conexiones."
 
-#: ../Doc/library/multiprocessing.rst:2452
+#: ../Doc/library/multiprocessing.rst:2487
 msgid ""
 "*address* is the address to be used by the bound socket or named pipe of the "
 "listener object."
@@ -3730,7 +3802,7 @@ msgstr ""
 "*address* es la dirección que utilizará el *socket* vinculado o la conocida "
 "tubería (*pipe*) con nombre del objeto de escucha."
 
-#: ../Doc/library/multiprocessing.rst:2457
+#: ../Doc/library/multiprocessing.rst:2492
 msgid ""
 "If an address of '0.0.0.0' is used, the address will not be a connectable "
 "end point on Windows. If you require a connectable end-point, you should use "
@@ -3740,7 +3812,7 @@ msgstr ""
 "conectable en Windows. Si necesita un punto final conectable, debe usar "
 "'127.0.0.1'."
 
-#: ../Doc/library/multiprocessing.rst:2461
+#: ../Doc/library/multiprocessing.rst:2496
 msgid ""
 "*family* is the type of socket (or named pipe) to use.  This can be one of "
 "the strings ``'AF_INET'`` (for a TCP socket), ``'AF_UNIX'`` (for a Unix "
@@ -3765,7 +3837,7 @@ msgstr ""
 "*socket* se creará en un directorio temporal privado usando :func:`tempfile."
 "mkstemp`."
 
-#: ../Doc/library/multiprocessing.rst:2472
+#: ../Doc/library/multiprocessing.rst:2507
 msgid ""
 "If the listener object uses a socket then *backlog* (1 by default) is passed "
 "to the :meth:`~socket.socket.listen` method of the socket once it has been "
@@ -3775,7 +3847,7 @@ msgstr ""
 "defecto) se pasa al método :meth:`~socket.socket.listen` del *socket* una "
 "vez que se ha vinculado."
 
-#: ../Doc/library/multiprocessing.rst:2484
+#: ../Doc/library/multiprocessing.rst:2519
 msgid ""
 "Accept a connection on the bound socket or named pipe of the listener object "
 "and return a :class:`~Connection` object. If authentication is attempted and "
@@ -3786,7 +3858,7 @@ msgstr ""
 "autenticación y falla, entonces se lanza una :exc:`~multiprocessing."
 "AuthenticationError`."
 
-#: ../Doc/library/multiprocessing.rst:2491
+#: ../Doc/library/multiprocessing.rst:2526
 msgid ""
 "Close the bound socket or named pipe of the listener object.  This is called "
 "automatically when the listener is garbage collected.  However it is "
@@ -3796,16 +3868,16 @@ msgstr ""
 "Esto se llama automáticamente cuando el oyente es recolectado por el "
 "recolector de basura. Sin embargo, es aconsejable llamarlo explícitamente."
 
-#: ../Doc/library/multiprocessing.rst:2495
+#: ../Doc/library/multiprocessing.rst:2530
 msgid "Listener objects have the following read-only properties:"
 msgstr ""
 "Los objetos de escucha tienen las siguientes propiedades de solo lectura:"
 
-#: ../Doc/library/multiprocessing.rst:2499
+#: ../Doc/library/multiprocessing.rst:2534
 msgid "The address which is being used by the Listener object."
 msgstr "La dirección que está utilizando el objeto *Listener*."
 
-#: ../Doc/library/multiprocessing.rst:2503
+#: ../Doc/library/multiprocessing.rst:2538
 msgid ""
 "The address from which the last accepted connection came.  If this is "
 "unavailable then it is ``None``."
@@ -3813,7 +3885,7 @@ msgstr ""
 "La dirección de donde vino la última conexión aceptada. Si esto no está "
 "disponible, entonces es ``None``."
 
-#: ../Doc/library/multiprocessing.rst:2506
+#: ../Doc/library/multiprocessing.rst:2541
 msgid ""
 "Listener objects now support the context management protocol -- see :ref:"
 "`typecontextmanager`.  :meth:`~contextmanager.__enter__` returns the "
@@ -3824,7 +3896,7 @@ msgstr ""
 "`~contextmanager.__enter__`, y :meth:`~contextmanager.__exit__` llama a :"
 "meth:`close`."
 
-#: ../Doc/library/multiprocessing.rst:2513
+#: ../Doc/library/multiprocessing.rst:2548
 msgid ""
 "Wait till an object in *object_list* is ready.  Returns the list of those "
 "objects in *object_list* which are ready.  If *timeout* is a float then the "
@@ -3838,22 +3910,23 @@ msgstr ""
 "```None``, se bloqueará por un período ilimitado. Un tiempo de espera "
 "negativo es equivalente a un tiempo de espera cero."
 
-#: ../Doc/library/multiprocessing.rst:2519
+#: ../Doc/library/multiprocessing.rst:2554
+#, fuzzy
 msgid ""
-"For both Unix and Windows, an object can appear in *object_list* if it is"
+"For both POSIX and Windows, an object can appear in *object_list* if it is"
 msgstr ""
 "Tanto para Unix como para Windows, un objeto puede aparecer en *object_list* "
 "si este es"
 
-#: ../Doc/library/multiprocessing.rst:2522
+#: ../Doc/library/multiprocessing.rst:2557
 msgid "a readable :class:`~multiprocessing.connection.Connection` object;"
 msgstr "un objeto legible de :class:`~multiprocessing.connection.Connection`;"
 
-#: ../Doc/library/multiprocessing.rst:2523
+#: ../Doc/library/multiprocessing.rst:2558
 msgid "a connected and readable :class:`socket.socket` object; or"
 msgstr "un objeto conectado y legible de :class:`socket.socket`; o"
 
-#: ../Doc/library/multiprocessing.rst:2524
+#: ../Doc/library/multiprocessing.rst:2559
 msgid ""
 "the :attr:`~multiprocessing.Process.sentinel` attribute of a :class:"
 "`~multiprocessing.Process` object."
@@ -3861,7 +3934,7 @@ msgstr ""
 "el atributo :attr:`~multiprocessing.Process.sentinel` de un objeto :class:"
 "`~multiprocessing.Process`."
 
-#: ../Doc/library/multiprocessing.rst:2527
+#: ../Doc/library/multiprocessing.rst:2562
 msgid ""
 "A connection or socket object is ready when there is data available to be "
 "read from it, or the other end has been closed."
@@ -3869,9 +3942,10 @@ msgstr ""
 "Un objeto de conexión o *socket* está listo cuando hay datos disponibles "
 "para leer, o el otro extremo se ha cerrado."
 
-#: ../Doc/library/multiprocessing.rst:2530
+#: ../Doc/library/multiprocessing.rst:2565
+#, fuzzy
 msgid ""
-"**Unix**: ``wait(object_list, timeout)`` almost equivalent ``select."
+"**POSIX**: ``wait(object_list, timeout)`` almost equivalent ``select."
 "select(object_list, [], [], timeout)``.  The difference is that, if :func:"
 "`select.select` is interrupted by a signal, it can raise :exc:`OSError` with "
 "an error number of ``EINTR``, whereas :func:`wait` will not."
@@ -3881,7 +3955,7 @@ msgstr ""
 "interrumpe :func:`select.select` por una señal, este lanza :exc:`OSError` "
 "con un número de error ``EINTR``, a diferencia de :func:`wait`."
 
-#: ../Doc/library/multiprocessing.rst:2536
+#: ../Doc/library/multiprocessing.rst:2571
 msgid ""
 "**Windows**: An item in *object_list* must either be an integer handle which "
 "is waitable (according to the definition used by the documentation of the "
@@ -3896,11 +3970,11 @@ msgstr ""
 "tubo o manejador de tubería. (Tenga en cuenta que las manijas de las "
 "tuberías y las manijas de los zócalos son **no** manijas aptas)"
 
-#: ../Doc/library/multiprocessing.rst:2546
+#: ../Doc/library/multiprocessing.rst:2581
 msgid "**Examples**"
 msgstr "**Ejemplos**"
 
-#: ../Doc/library/multiprocessing.rst:2548
+#: ../Doc/library/multiprocessing.rst:2583
 msgid ""
 "The following server code creates a listener which uses ``'secret "
 "password'`` as an authentication key.  It then waits for a connection and "
@@ -3910,7 +3984,7 @@ msgstr ""
 "password'`` como clave de autenticación. Luego espera una conexión y envía "
 "algunos datos al cliente::"
 
-#: ../Doc/library/multiprocessing.rst:2567
+#: ../Doc/library/multiprocessing.rst:2602
 msgid ""
 "The following code connects to the server and receives some data from the "
 "server::"
@@ -3918,7 +3992,7 @@ msgstr ""
 "El siguiente código se conecta al servidor y recibe algunos datos del "
 "servidor::"
 
-#: ../Doc/library/multiprocessing.rst:2584
+#: ../Doc/library/multiprocessing.rst:2619
 msgid ""
 "The following code uses :func:`~multiprocessing.connection.wait` to wait for "
 "messages from multiple processes at once::"
@@ -3926,11 +4000,11 @@ msgstr ""
 "El siguiente código utiliza :func:`~multiprocessing.connection.wait` para "
 "esperar mensajes de múltiples procesos a la vez::"
 
-#: ../Doc/library/multiprocessing.rst:2623
+#: ../Doc/library/multiprocessing.rst:2658
 msgid "Address Formats"
 msgstr "Formatos de dirección (*Address formats*)"
 
-#: ../Doc/library/multiprocessing.rst:2625
+#: ../Doc/library/multiprocessing.rst:2660
 msgid ""
 "An ``'AF_INET'`` address is a tuple of the form ``(hostname, port)`` where "
 "*hostname* is a string and *port* is an integer."
@@ -3938,7 +4012,7 @@ msgstr ""
 "Una dirección ``'AF_INET'`` es una tupla de la forma ``(hostname, port)`` "
 "donde *hostname* es una cadena de caracteres y *port* es un número entero."
 
-#: ../Doc/library/multiprocessing.rst:2628
+#: ../Doc/library/multiprocessing.rst:2663
 msgid ""
 "An ``'AF_UNIX'`` address is a string representing a filename on the "
 "filesystem."
@@ -3946,7 +4020,7 @@ msgstr ""
 "Una dirección ``'AF_UNIX'`` es una cadena que representa un nombre de "
 "archivo en el sistema de archivos."
 
-#: ../Doc/library/multiprocessing.rst:2631
+#: ../Doc/library/multiprocessing.rst:2666
 msgid ""
 "An ``'AF_PIPE'`` address is a string of the form :samp:`r'\\\\\\\\\\\\.\\"
 "\\pipe\\\\\\\\{PipeName}'`.  To use :func:`Client` to connect to a named "
@@ -3960,7 +4034,7 @@ msgstr ""
 "debe usar una dirección de la forma :samp:`r'\\\\\\\\\\\\\\\\{ServerName}\\"
 "\\pipe\\\\\\\\{PipeName}'` en cambio."
 
-#: ../Doc/library/multiprocessing.rst:2636
+#: ../Doc/library/multiprocessing.rst:2671
 msgid ""
 "Note that any string beginning with two backslashes is assumed by default to "
 "be an ``'AF_PIPE'`` address rather than an ``'AF_UNIX'`` address."
@@ -3969,11 +4043,11 @@ msgstr ""
 "invertidas se asume por defecto como una dirección ``'AF_PIPE'`` en lugar de "
 "una dirección ``'AF_UNIX'``."
 
-#: ../Doc/library/multiprocessing.rst:2643
+#: ../Doc/library/multiprocessing.rst:2678
 msgid "Authentication keys"
 msgstr "Llaves de autentificación"
 
-#: ../Doc/library/multiprocessing.rst:2645
+#: ../Doc/library/multiprocessing.rst:2680
 msgid ""
 "When one uses :meth:`Connection.recv <Connection.recv>`, the data received "
 "is automatically unpickled. Unfortunately unpickling data from an untrusted "
@@ -3986,7 +4060,7 @@ msgstr ""
 "class:`Listener` y :func:`Client` usan el módulo :mod:`hmac` para "
 "proporcionar autenticación de resumen."
 
-#: ../Doc/library/multiprocessing.rst:2651
+#: ../Doc/library/multiprocessing.rst:2686
 msgid ""
 "An authentication key is a byte string which can be thought of as a "
 "password: once a connection is established both ends will demand proof that "
@@ -3999,7 +4073,7 @@ msgstr ""
 "que ambos extremos están usando la misma clave **no** implica enviar la "
 "clave a través de la conexión)."
 
-#: ../Doc/library/multiprocessing.rst:2657
+#: ../Doc/library/multiprocessing.rst:2692
 msgid ""
 "If authentication is requested but no authentication key is specified then "
 "the return value of ``current_process().authkey`` is used (see :class:"
@@ -4017,7 +4091,7 @@ msgstr ""
 "los procesos de un programa multiproceso compartirán una única clave de "
 "autenticación que se puede usar al configurar conexiones entre ellos."
 
-#: ../Doc/library/multiprocessing.rst:2665
+#: ../Doc/library/multiprocessing.rst:2700
 msgid ""
 "Suitable authentication keys can also be generated by using :func:`os."
 "urandom`."
@@ -4025,11 +4099,11 @@ msgstr ""
 "Las claves de autenticación adecuadas también se pueden generar utilizando :"
 "func:`os.urandom`."
 
-#: ../Doc/library/multiprocessing.rst:2669
+#: ../Doc/library/multiprocessing.rst:2704
 msgid "Logging"
 msgstr "*Logging*"
 
-#: ../Doc/library/multiprocessing.rst:2671
+#: ../Doc/library/multiprocessing.rst:2706
 msgid ""
 "Some support for logging is available.  Note, however, that the :mod:"
 "`logging` package does not use process shared locks so it is possible "
@@ -4041,7 +4115,7 @@ msgstr ""
 "que es posible (dependiendo del tipo de controlador) que los mensajes de "
 "diferentes procesos se mezclen."
 
-#: ../Doc/library/multiprocessing.rst:2678
+#: ../Doc/library/multiprocessing.rst:2713
 msgid ""
 "Returns the logger used by :mod:`multiprocessing`.  If necessary, a new one "
 "will be created."
@@ -4049,9 +4123,10 @@ msgstr ""
 "Retorna el registrador utilizado por :mod:`multiprocessing`. Si es "
 "necesario, se creará uno nuevo."
 
-#: ../Doc/library/multiprocessing.rst:2681
+#: ../Doc/library/multiprocessing.rst:2716
+#, fuzzy
 msgid ""
-"When first created the logger has level :data:`logging.NOTSET` and no "
+"When first created the logger has level :const:`logging.NOTSET` and no "
 "default handler. Messages sent to this logger will not by default propagate "
 "to the root logger."
 msgstr ""
@@ -4059,7 +4134,7 @@ msgstr ""
 "NOTSET` y no tiene un controlador predeterminado. Los mensajes enviados a "
 "este registrador no se propagarán por defecto al registrador raíz."
 
-#: ../Doc/library/multiprocessing.rst:2685
+#: ../Doc/library/multiprocessing.rst:2720
 msgid ""
 "Note that on Windows child processes will only inherit the level of the "
 "parent process's logger -- any other customization of the logger will not be "
@@ -4069,7 +4144,7 @@ msgstr ""
 "del registrador del proceso parental -- no se heredará ninguna otra "
 "personalización del registrador."
 
-#: ../Doc/library/multiprocessing.rst:2692
+#: ../Doc/library/multiprocessing.rst:2727
 #, python-format
 msgid ""
 "This function performs a call to :func:`get_logger` but in addition to "
@@ -4084,22 +4159,22 @@ msgstr ""
 "%(processName)s] %(message)s'``. Puede modificar ``levelname`` del "
 "registrador pasando un argumento ``level``."
 
-#: ../Doc/library/multiprocessing.rst:2698
+#: ../Doc/library/multiprocessing.rst:2733
 msgid "Below is an example session with logging turned on::"
 msgstr ""
 "A continuación se muestra una sesión de ejemplo con el registro activado::"
 
-#: ../Doc/library/multiprocessing.rst:2713
+#: ../Doc/library/multiprocessing.rst:2748
 msgid "For a full table of logging levels, see the :mod:`logging` module."
 msgstr ""
 "Para obtener una tabla completa de niveles de registro, consulte el módulo :"
 "mod:`logging`."
 
-#: ../Doc/library/multiprocessing.rst:2717
+#: ../Doc/library/multiprocessing.rst:2752
 msgid "The :mod:`multiprocessing.dummy` module"
 msgstr "El módulo :mod:`multiprocessing.dummy`"
 
-#: ../Doc/library/multiprocessing.rst:2722
+#: ../Doc/library/multiprocessing.rst:2757
 msgid ""
 ":mod:`multiprocessing.dummy` replicates the API of :mod:`multiprocessing` "
 "but is no more than a wrapper around the :mod:`threading` module."
@@ -4107,7 +4182,7 @@ msgstr ""
 "El :mod:`multiprocessing.dummy` replica la API de :mod:`multiprocessing` "
 "pero no es más que un contenedor alrededor del módulo :mod:`threading`."
 
-#: ../Doc/library/multiprocessing.rst:2727
+#: ../Doc/library/multiprocessing.rst:2762
 msgid ""
 "In particular, the ``Pool`` function provided by :mod:`multiprocessing."
 "dummy` returns an instance of :class:`ThreadPool`, which is a subclass of :"
@@ -4119,7 +4194,7 @@ msgstr ""
 "class:`Pool` que soporta todas las mismas llamadas, pero usa un *pool* de "
 "hebras trabajadoras en vez de procesos trabajadores."
 
-#: ../Doc/library/multiprocessing.rst:2735
+#: ../Doc/library/multiprocessing.rst:2770
 msgid ""
 "A thread pool object which controls a pool of worker threads to which jobs "
 "can be submitted.  :class:`ThreadPool` instances are fully interface "
@@ -4136,7 +4211,7 @@ msgstr ""
 "`~multiprocessing.pool.Pool.close` y :meth:`~multiprocessing.pool.Pool."
 "terminate` manualmente."
 
-#: ../Doc/library/multiprocessing.rst:2742
+#: ../Doc/library/multiprocessing.rst:2777
 msgid ""
 "*processes* is the number of worker threads to use.  If *processes* is "
 "``None`` then the number returned by :func:`os.cpu_count` is used."
@@ -4144,14 +4219,14 @@ msgstr ""
 "*processes* es el número de hebras de trabajo a utilizar. Si *processes* es "
 "``None`` , se utiliza el número retornado por :func:`os.cpu_count`."
 
-#: ../Doc/library/multiprocessing.rst:2748
+#: ../Doc/library/multiprocessing.rst:2783
 msgid ""
 "Unlike :class:`Pool`, *maxtasksperchild* and *context* cannot be provided."
 msgstr ""
 "A diferencia de :class:`Pool`, *maxtasksperchild* and *context* no se pueden "
 "entregar."
 
-#: ../Doc/library/multiprocessing.rst:2752
+#: ../Doc/library/multiprocessing.rst:2787
 msgid ""
 "A :class:`ThreadPool` shares the same interface as :class:`Pool`, which is "
 "designed around a pool of processes and predates the introduction of the :"
@@ -4167,7 +4242,7 @@ msgstr ""
 "tipo para representar el estado de trabajos asíncronos, :class:"
 "`AsyncResult`, el cual no es entendido por otras librerías."
 
-#: ../Doc/library/multiprocessing.rst:2759
+#: ../Doc/library/multiprocessing.rst:2794
 msgid ""
 "Users should generally prefer to use :class:`concurrent.futures."
 "ThreadPoolExecutor`, which has a simpler interface that was designed around "
@@ -4181,11 +4256,11 @@ msgstr ""
 "de :class:`concurrent.futures.Future`, las que son compatibles con muchas "
 "más librerías, incluyendo :mod:`asyncio`."
 
-#: ../Doc/library/multiprocessing.rst:2769
+#: ../Doc/library/multiprocessing.rst:2804
 msgid "Programming guidelines"
 msgstr "Pautas de programación"
 
-#: ../Doc/library/multiprocessing.rst:2771
+#: ../Doc/library/multiprocessing.rst:2806
 msgid ""
 "There are certain guidelines and idioms which should be adhered to when "
 "using :mod:`multiprocessing`."
@@ -4193,19 +4268,19 @@ msgstr ""
 "Hay ciertas pautas y expresiones idiomáticas que deben tenerse en cuenta al "
 "usar :mod:`multiprocessing` ."
 
-#: ../Doc/library/multiprocessing.rst:2776
+#: ../Doc/library/multiprocessing.rst:2811
 msgid "All start methods"
 msgstr "Todos los métodos de inicio"
 
-#: ../Doc/library/multiprocessing.rst:2778
+#: ../Doc/library/multiprocessing.rst:2813
 msgid "The following applies to all start methods."
 msgstr "Lo siguiente se aplica a todos los métodos de inicio."
 
-#: ../Doc/library/multiprocessing.rst:2780
+#: ../Doc/library/multiprocessing.rst:2815
 msgid "Avoid shared state"
 msgstr "Evita estado compartido"
 
-#: ../Doc/library/multiprocessing.rst:2782
+#: ../Doc/library/multiprocessing.rst:2817
 msgid ""
 "As far as possible one should try to avoid shifting large amounts of data "
 "between processes."
@@ -4213,7 +4288,7 @@ msgstr ""
 "En la medida de lo posible, se debe tratar de evitar el desplazamiento de "
 "grandes cantidades de datos entre procesos."
 
-#: ../Doc/library/multiprocessing.rst:2785
+#: ../Doc/library/multiprocessing.rst:2820
 msgid ""
 "It is probably best to stick to using queues or pipes for communication "
 "between processes rather than using the lower level synchronization "
@@ -4223,21 +4298,21 @@ msgstr ""
 "para la comunicación entre procesos en lugar de usar las primitivas de "
 "sincronización de nivel inferior."
 
-#: ../Doc/library/multiprocessing.rst:2789
+#: ../Doc/library/multiprocessing.rst:2824
 msgid "Picklability"
 msgstr "Serialización (*picklability*)"
 
-#: ../Doc/library/multiprocessing.rst:2791
+#: ../Doc/library/multiprocessing.rst:2826
 msgid "Ensure that the arguments to the methods of proxies are picklable."
 msgstr ""
 "Asegúrese que todos los argumentos de los métodos de *proxies* son "
 "serializables (*pickable*)"
 
-#: ../Doc/library/multiprocessing.rst:2793
+#: ../Doc/library/multiprocessing.rst:2828
 msgid "Thread safety of proxies"
 msgstr "Seguridad de hilos de *proxies*"
 
-#: ../Doc/library/multiprocessing.rst:2795
+#: ../Doc/library/multiprocessing.rst:2830
 msgid ""
 "Do not use a proxy object from more than one thread unless you protect it "
 "with a lock."
@@ -4245,25 +4320,26 @@ msgstr ""
 "No usa un objeto proxy de más de un hilo a menos que lo proteja con un "
 "candado (*lock*)."
 
-#: ../Doc/library/multiprocessing.rst:2798
+#: ../Doc/library/multiprocessing.rst:2833
 msgid ""
 "(There is never a problem with different processes using the *same* proxy.)"
 msgstr ""
 "(Nunca hay un problema con diferentes procesos que usan el *mismo* proxy.)"
 
-#: ../Doc/library/multiprocessing.rst:2800
+#: ../Doc/library/multiprocessing.rst:2835
 msgid "Joining zombie processes"
 msgstr "Uniéndose a procesos zombies"
 
-#: ../Doc/library/multiprocessing.rst:2802
+#: ../Doc/library/multiprocessing.rst:2837
+#, fuzzy
 msgid ""
-"On Unix when a process finishes but has not been joined it becomes a zombie. "
-"There should never be very many because each time a new process starts (or :"
-"func:`~multiprocessing.active_children` is called) all completed processes "
-"which have not yet been joined will be joined.  Also calling a finished "
-"process's :meth:`Process.is_alive <multiprocessing.Process.is_alive>` will "
-"join the process.  Even so it is probably good practice to explicitly join "
-"all the processes that you start."
+"On POSIX when a process finishes but has not been joined it becomes a "
+"zombie. There should never be very many because each time a new process "
+"starts (or :func:`~multiprocessing.active_children` is called) all completed "
+"processes which have not yet been joined will be joined.  Also calling a "
+"finished process's :meth:`Process.is_alive <multiprocessing.Process."
+"is_alive>` will join the process.  Even so it is probably good practice to "
+"explicitly join all the processes that you start."
 msgstr ""
 "En Unix, cuando un proceso finaliza pero no se ha unido, se convierte en un "
 "zombie. Nunca debería haber muchos porque cada vez que se inicia un nuevo "
@@ -4273,11 +4349,11 @@ msgstr ""
 "is_alive>` se unirá al proceso. Aun así, probablemente sea una buena "
 "práctica unir explícitamente todos los procesos que comience."
 
-#: ../Doc/library/multiprocessing.rst:2810
+#: ../Doc/library/multiprocessing.rst:2845
 msgid "Better to inherit than pickle/unpickle"
 msgstr "Mejor heredar que serializar/deserializar (*pickle/unpickle*)"
 
-#: ../Doc/library/multiprocessing.rst:2812
+#: ../Doc/library/multiprocessing.rst:2847
 msgid ""
 "When using the *spawn* or *forkserver* start methods many types from :mod:"
 "`multiprocessing` need to be picklable so that child processes can use "
@@ -4294,11 +4370,11 @@ msgstr ""
 "recurso compartido creado en otro lugar pueda heredarlo de un proceso "
 "ancestro."
 
-#: ../Doc/library/multiprocessing.rst:2820
+#: ../Doc/library/multiprocessing.rst:2855
 msgid "Avoid terminating processes"
 msgstr "Evita procesos de finalización"
 
-#: ../Doc/library/multiprocessing.rst:2822
+#: ../Doc/library/multiprocessing.rst:2857
 msgid ""
 "Using the :meth:`Process.terminate <multiprocessing.Process.terminate>` "
 "method to stop a process is liable to cause any shared resources (such as "
@@ -4310,7 +4386,7 @@ msgstr ""
 "compartidos (como candados, semáforos, tuberías  y colas) que el proceso "
 "utiliza actualmente se rompan o no disponible para otros procesos."
 
-#: ../Doc/library/multiprocessing.rst:2828
+#: ../Doc/library/multiprocessing.rst:2863
 msgid ""
 "Therefore it is probably best to only consider using :meth:`Process."
 "terminate <multiprocessing.Process.terminate>` on processes which never use "
@@ -4320,11 +4396,11 @@ msgstr ""
 "terminate <multiprocessing.Process.terminate>` en procesos que nunca usan "
 "recursos compartidos."
 
-#: ../Doc/library/multiprocessing.rst:2832
+#: ../Doc/library/multiprocessing.rst:2867
 msgid "Joining processes that use queues"
 msgstr "Unirse a procesos que usan colas"
 
-#: ../Doc/library/multiprocessing.rst:2834
+#: ../Doc/library/multiprocessing.rst:2869
 msgid ""
 "Bear in mind that a process that has put items in a queue will wait before "
 "terminating until all the buffered items are fed by the \"feeder\" thread to "
@@ -4339,7 +4415,7 @@ msgstr ""
 "<multiprocessing.Queue.cancel_join_thread>` de la cola para evitar este "
 "comportamiento)."
 
-#: ../Doc/library/multiprocessing.rst:2840
+#: ../Doc/library/multiprocessing.rst:2875
 msgid ""
 "This means that whenever you use a queue you need to make sure that all "
 "items which have been put on the queue will eventually be removed before the "
@@ -4353,11 +4429,11 @@ msgstr ""
 "puesto elementos en la cola finalizarán. Recuerde también que los procesos "
 "no demoníacos se unirán automáticamente."
 
-#: ../Doc/library/multiprocessing.rst:2846
+#: ../Doc/library/multiprocessing.rst:2881
 msgid "An example which will deadlock is the following::"
 msgstr "Un ejemplo que de bloqueo mutuo (*deadlock*) es el siguiente ::"
 
-#: ../Doc/library/multiprocessing.rst:2860
+#: ../Doc/library/multiprocessing.rst:2895
 msgid ""
 "A fix here would be to swap the last two lines (or simply remove the ``p."
 "join()`` line)."
@@ -4365,13 +4441,14 @@ msgstr ""
 "Una solución aquí sería intercambiar las dos últimas líneas (o simplemente "
 "eliminar la línea ``p.join()``)."
 
-#: ../Doc/library/multiprocessing.rst:2863
+#: ../Doc/library/multiprocessing.rst:2898
 msgid "Explicitly pass resources to child processes"
 msgstr "Se pasan recursos explícitamente a procesos hijos"
 
-#: ../Doc/library/multiprocessing.rst:2865
+#: ../Doc/library/multiprocessing.rst:2900
+#, fuzzy
 msgid ""
-"On Unix using the *fork* start method, a child process can make use of a "
+"On POSIX using the *fork* start method, a child process can make use of a "
 "shared resource created in a parent process using a global resource.  "
 "However, it is better to pass the object as an argument to the constructor "
 "for the child process."
@@ -4381,7 +4458,7 @@ msgstr ""
 "un recurso global. Sin embargo, es mejor pasar el objeto como argumento al "
 "constructor para el proceso secundario."
 
-#: ../Doc/library/multiprocessing.rst:2870
+#: ../Doc/library/multiprocessing.rst:2905
 msgid ""
 "Apart from making the code (potentially) compatible with Windows and the "
 "other start methods this also ensures that as long as the child process is "
@@ -4395,24 +4472,24 @@ msgstr ""
 "Esto podría ser importante si se libera algún recurso cuando el objeto es "
 "basura recolectada en el proceso padre."
 
-#: ../Doc/library/multiprocessing.rst:2877
+#: ../Doc/library/multiprocessing.rst:2912
 msgid "So for instance ::"
 msgstr "Entonces por ejemplo ::"
 
-#: ../Doc/library/multiprocessing.rst:2889
+#: ../Doc/library/multiprocessing.rst:2924
 msgid "should be rewritten as ::"
 msgstr "debería ser reescrito como ::"
 
-#: ../Doc/library/multiprocessing.rst:2901
+#: ../Doc/library/multiprocessing.rst:2936
 msgid "Beware of replacing :data:`sys.stdin` with a \"file like object\""
 msgstr ""
 "Tenga cuidado de reemplazar :data:`sys.stdin` con un *\"file like object\"*"
 
-#: ../Doc/library/multiprocessing.rst:2903
+#: ../Doc/library/multiprocessing.rst:2938
 msgid ":mod:`multiprocessing` originally unconditionally called::"
 msgstr ":mod:`multiprocessing` original e incondicionalmente llamado::"
 
-#: ../Doc/library/multiprocessing.rst:2907
+#: ../Doc/library/multiprocessing.rst:2942
 msgid ""
 "in the :meth:`multiprocessing.Process._bootstrap` method --- this resulted "
 "in issues with processes-in-processes. This has been changed to::"
@@ -4420,7 +4497,7 @@ msgstr ""
 "en el método :meth:`multiprocessing.Process._bootstrap` --- Esto dio lugar a "
 "problemas con los procesos en proceso. Esto ha sido cambiado a::"
 
-#: ../Doc/library/multiprocessing.rst:2913
+#: ../Doc/library/multiprocessing.rst:2948
 msgid ""
 "Which solves the fundamental issue of processes colliding with each other "
 "resulting in a bad file descriptor error, but introduces a potential danger "
@@ -4438,7 +4515,7 @@ msgstr ""
 "los mismos datos se vacíen al objeto varias veces, lo que provocaría "
 "corrupción."
 
-#: ../Doc/library/multiprocessing.rst:2920
+#: ../Doc/library/multiprocessing.rst:2955
 msgid ""
 "If you write a file-like object and implement your own caching, you can make "
 "it fork-safe by storing the pid whenever you append to the cache, and "
@@ -4449,17 +4526,17 @@ msgstr ""
 "(*fork-safe*) almacenando el pid cada vez que se agrega al caché y "
 "descartando el caché cuando cambia el pid. Por ejemplo::"
 
-#: ../Doc/library/multiprocessing.rst:2932
+#: ../Doc/library/multiprocessing.rst:2967
 msgid ""
 "For more information, see :issue:`5155`, :issue:`5313` and :issue:`5331`"
 msgstr ""
 "Para más información, consulte :issue:`5155`, :issue:`5313` y :issue:`5331`"
 
-#: ../Doc/library/multiprocessing.rst:2935
+#: ../Doc/library/multiprocessing.rst:2970
 msgid "The *spawn* and *forkserver* start methods"
 msgstr "Los métodos de inicio *spawn* y *forkserver*"
 
-#: ../Doc/library/multiprocessing.rst:2937
+#: ../Doc/library/multiprocessing.rst:2972
 msgid ""
 "There are a few extra restriction which don't apply to the *fork* start "
 "method."
@@ -4467,11 +4544,11 @@ msgstr ""
 "Hay algunas restricciones adicionales que no se aplican al método de inicio "
 "*fork*."
 
-#: ../Doc/library/multiprocessing.rst:2940
+#: ../Doc/library/multiprocessing.rst:2975
 msgid "More picklability"
 msgstr "Más serialización (*pickability*)"
 
-#: ../Doc/library/multiprocessing.rst:2942
+#: ../Doc/library/multiprocessing.rst:2977
 msgid ""
 "Ensure that all arguments to :meth:`Process.__init__` are picklable. Also, "
 "if you subclass :class:`~multiprocessing.Process` then make sure that "
@@ -4484,11 +4561,11 @@ msgstr ""
 "serializables cuando se llame al método :meth:`Process.start "
 "<multiprocessing.Process.start>`."
 
-#: ../Doc/library/multiprocessing.rst:2947
+#: ../Doc/library/multiprocessing.rst:2982
 msgid "Global variables"
 msgstr "Variables globales"
 
-#: ../Doc/library/multiprocessing.rst:2949
+#: ../Doc/library/multiprocessing.rst:2984
 msgid ""
 "Bear in mind that if code run in a child process tries to access a global "
 "variable, then the value it sees (if any) may not be the same as the value "
@@ -4500,7 +4577,7 @@ msgstr ""
 "puede no ser el mismo que el valor en el proceso primario en el momento en "
 "que fue llamado :meth:`Process.start <multiprocessing.Process.start>`."
 
-#: ../Doc/library/multiprocessing.rst:2954
+#: ../Doc/library/multiprocessing.rst:2989
 msgid ""
 "However, global variables which are just module level constants cause no "
 "problems."
@@ -4508,21 +4585,22 @@ msgstr ""
 "Sin embargo, las variables globales que son solo constantes de nivel de "
 "módulo no causan problemas."
 
-#: ../Doc/library/multiprocessing.rst:2959
+#: ../Doc/library/multiprocessing.rst:2994
 msgid "Safe importing of main module"
 msgstr "Importando de manera segura el módulo principal"
 
-#: ../Doc/library/multiprocessing.rst:2961
+#: ../Doc/library/multiprocessing.rst:2996
+#, fuzzy
 msgid ""
 "Make sure that the main module can be safely imported by a new Python "
-"interpreter without causing unintended side effects (such a starting a new "
+"interpreter without causing unintended side effects (such as starting a new "
 "process)."
 msgstr ""
 "Asegúrese de que un nuevo intérprete de Python pueda importar de forma "
 "segura el módulo principal sin causar efectos secundarios no deseados (como "
 "comenzar un nuevo proceso)."
 
-#: ../Doc/library/multiprocessing.rst:2965
+#: ../Doc/library/multiprocessing.rst:3000
 msgid ""
 "For example, using the *spawn* or *forkserver* start method running the "
 "following module would fail with a :exc:`RuntimeError`::"
@@ -4530,7 +4608,7 @@ msgstr ""
 "Por ejemplo, usando el método de inicio *spawn* o *forkserver* ejecutando "
 "este módulo fallaría produciendo :exc:`RuntimeError`::"
 
-#: ../Doc/library/multiprocessing.rst:2977
+#: ../Doc/library/multiprocessing.rst:3012
 msgid ""
 "Instead one should protect the \"entry point\" of the program by using ``if "
 "__name__ == '__main__':`` as follows::"
@@ -4538,7 +4616,7 @@ msgstr ""
 "En su lugar, se debe proteger el \"punto de entrada\" (*\"entry point\"*) "
 "del programa utilizando como sigue ``if __name__ == '__main__':`` ::"
 
-#: ../Doc/library/multiprocessing.rst:2991
+#: ../Doc/library/multiprocessing.rst:3026
 msgid ""
 "(The ``freeze_support()`` line can be omitted if the program will be run "
 "normally instead of frozen.)"
@@ -4546,7 +4624,7 @@ msgstr ""
 "(La línea ``freeze_support()`` puede omitirse si el programa se ejecuta "
 "normalmente en lugar de congelarse)."
 
-#: ../Doc/library/multiprocessing.rst:2994
+#: ../Doc/library/multiprocessing.rst:3029
 msgid ""
 "This allows the newly spawned Python interpreter to safely import the module "
 "and then run the module's ``foo()`` function."
@@ -4554,7 +4632,7 @@ msgstr ""
 "Esto permite que el intérprete de Python recién generado importe de forma "
 "segura el módulo y luego ejecute la función del módulo ``foo()``."
 
-#: ../Doc/library/multiprocessing.rst:2997
+#: ../Doc/library/multiprocessing.rst:3032
 msgid ""
 "Similar restrictions apply if a pool or manager is created in the main "
 "module."
@@ -4562,22 +4640,30 @@ msgstr ""
 "Se aplican restricciones similares si se crea un grupo o administrador en el "
 "módulo principal."
 
-#: ../Doc/library/multiprocessing.rst:3004
+#: ../Doc/library/multiprocessing.rst:3039
 msgid "Examples"
 msgstr "Ejemplos"
 
-#: ../Doc/library/multiprocessing.rst:3006
+#: ../Doc/library/multiprocessing.rst:3041
 msgid "Demonstration of how to create and use customized managers and proxies:"
 msgstr "Demostración de cómo crear y usar gerentes y proxies personalizados:"
 
-#: ../Doc/library/multiprocessing.rst:3012
+#: ../Doc/library/multiprocessing.rst:3047
 msgid "Using :class:`~multiprocessing.pool.Pool`:"
 msgstr "Usando :class:`~multiprocessing.pool.Pool`:"
 
-#: ../Doc/library/multiprocessing.rst:3018
+#: ../Doc/library/multiprocessing.rst:3053
 msgid ""
 "An example showing how to use queues to feed tasks to a collection of worker "
 "processes and collect the results:"
 msgstr ""
 "Un ejemplo que muestra cómo usar las colas para alimentar tareas a una "
 "colección de procesos de trabajo y recopilar los resultados:"
+
+#~ msgid ""
+#~ "Set the method which should be used to start child processes. *method* "
+#~ "can be ``'fork'``, ``'spawn'`` or ``'forkserver'``."
+#~ msgstr ""
+#~ "Se establece el método que se debe usar para iniciar procesos "
+#~ "secundarios. *method* puede ser ``'fork'``, ``'spawn'`` o "
+#~ "``'forkserver'``."

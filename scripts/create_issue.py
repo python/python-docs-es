@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 from github import Github
-from potodo._po_file import PoFileStats
+from potodo.potodo import PoFileStats
 
 if len(sys.argv) != 2:
     print('Specify PO filename')
@@ -32,7 +32,7 @@ for issue in issues:
         if answer != 'y':
             sys.exit(1)
 
-if any([
+if pofile.fuzzy == 0 and any([
     pofile.translated_nb == pofile.po_file_size,
     pofile.untranslated_nb == 0,
 ]):
