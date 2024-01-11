@@ -3,11 +3,17 @@ on:
   schedule:
     - cron: '30 1 * * *'
 
+permissions:
+  contents: read
+
 jobs:
   stale:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
     steps:
-      - uses: actions/stale@v8
+      - uses: actions/stale@v9
         with:
           stale-pr-label: 'needs decision'
           stale-issue-label: 'stale'
