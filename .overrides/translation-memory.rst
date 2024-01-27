@@ -125,6 +125,7 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
 
    floor division
      división entera a la baja
+     En este `issue`_ más información al respecto.
 
    key
      clave
@@ -321,3 +322,6 @@ Estas son las reglas de estilo que hemos convenido hasta el momento:
   extranjerismos.
 
   Referencia: https://www.fundeu.es/recomendacion/locuciones-latinas-latinismos-errores-frecuentes-621/
+
+
+.. _issue: hhttps://github.com/python/python-docs-es/issues/2754
