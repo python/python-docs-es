@@ -123,6 +123,9 @@ Dividimos esta sección en dos partes, los términos que se traducen y los que m
    docstring
      docstring. ``library/idle.po``
 
+   floor division
+     división entera a la baja
+
    key
      clave
 
