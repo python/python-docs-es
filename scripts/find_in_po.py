@@ -4,7 +4,7 @@ import argparse
 import functools
 from glob import glob
 import multiprocessing
-import os
+from shutil import get_terminal_size
 from textwrap import fill
 
 import regex  # fades
@@ -31,11 +31,8 @@ def _get_file_entries(pattern, width, filename):
 
 def find_in_po(pattern):
     pattern = regex.compile(pattern)
-    try:
-        _, columns = os.popen("stty size", "r").read().split()
-        available_width = int(columns) // 2 - 3
-    except:
-        available_width = 80 // 2 - 3
+    columns = get_terminal_size().columns
+    available_width = columns // 2 - 3
 
     # Find entries in parallel
     get_file_entries = functools.partial(_get_file_entries, pattern, available_width)
