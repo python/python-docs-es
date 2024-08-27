@@ -1,6 +1,6 @@
 # Traducción al Español de la Documentación de Python
-![Build Status](https://github.com/python/python-docs-es/actions/workflows/main.yml/badge.svg?branch=3.11 "Build Status")
-![Documentation Status](https://readthedocs.org/projects/python-docs-es/badge/?version=3.11 "Documentation Status")
+![Build Status](https://github.com/python/python-docs-es/actions/workflows/main.yml/badge.svg?branch=3.12 "Build Status")
+![Documentation Status](https://readthedocs.org/projects/python-docs-es/badge/?version=3.12 "Documentation Status")
 ## ¿Cómo contribuir?
 
 Tenemos una guía que te ayudará a contribuir. Por favor
