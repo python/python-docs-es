@@ -44,7 +44,7 @@ def main():
     opts = parser.parse_args()
     missing_entries = list(itertools.chain.from_iterable(map(find_missing_entries, opts.files)))
     if not missing_entries:
-        print(f"All entries translated, horray!{' :tada:' if opts.github_mode else ''}")
+        print(f"All entries translated, hooray!{' :tada:' if opts.github_mode else ''}")
     else:
         missing_entries.sort(key = lambda entry: (entry.file, entry.line))
         print("Entries missing translation, details follow:\n")

@@ -116,7 +116,7 @@ def setup(app):
         from textwrap import dedent
 
         message = dedent(f"""\
-        ¡Ayúdanos a traducir la documentación oficial de Python al Español!
+        ¡Ayúdanos a traducir la documentación official de Python al Español!
         Puedes encontrar más información en `Como contribuir </es/{version}/CONTRIBUTING.html>`_.
         Ayuda a acercar Python a más personas de habla hispana.
         """)
