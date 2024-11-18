@@ -16,6 +16,8 @@
 import sys
 import os
 import time
+from pathlib import Path
+
 sys.path.append(os.path.abspath('cpython/Doc/tools/extensions'))
 sys.path.append(os.path.abspath('cpython/Doc/includes'))
 
@@ -70,7 +72,6 @@ else:
 
 if os.environ.get('SPHINX_GETTEXT') is None:
     # Override all the files from ``.overrides`` directory
-    from pathlib import Path
     overrides_paths = Path('.overrides')
 
     for path in overrides_paths.glob('**/*.*'):
@@ -129,7 +130,7 @@ def setup(app):
             document.insert(0, banner)
 
     # Change the sourcedir programmatically because Read the Docs always call it with `.`
-    app.srcdir = 'cpython/Doc'
+    app.srcdir = Path(os.getcwd() + '/cpython/Doc')
 
     app.connect('doctree-read', add_contributing_banner)
 
