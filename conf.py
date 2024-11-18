@@ -129,7 +129,7 @@ def setup(app):
             document.insert(0, banner)
 
     # Change the sourcedir programmatically because Read the Docs always call it with `.`
-    app.srcdir = 'cpython/Doc'
+    app.srcdir = os.getcwd() + '/cpython/Doc'
 
     app.connect('doctree-read', add_contributing_banner)
 
