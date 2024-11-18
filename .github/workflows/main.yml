@@ -77,7 +77,7 @@ jobs:
           diff -Naur TRANSLATORS <(LANG=es python scripts/sort.py < TRANSLATORS)
       - name: Powrap
         if: steps.po-files-to-check.outputs.any_po_files_to_check == 'true'
-        run: powrap --check --quiet ${{ steps.po-files-to-check.outputs.po_files_to_check }}
+        run: powrap --diff --check --quiet ${{ steps.po-files-to-check.outputs.po_files_to_check }}
       - name: Sphinx lint
         if: steps.po-files-to-check.outputs.any_po_files_to_check == 'true'
         run: sphinx-lint ${{ steps.po-files-to-check.outputs.po_files_to_check }}
