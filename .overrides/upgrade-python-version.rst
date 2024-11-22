@@ -23,9 +23,7 @@ We are currently in branch 3.12, and we want to update the strings from 3.13.
 
      git checkout tags/v3.13.0 -b 3.13.0
 
-#. Update the branch on the ``Makefile`` and check the ``requirements.txt`` from
-   ``./cpython/Doc`` directory, to see if upgrades on the modules like sphinx is
-   needed.
+#. Update the branch on the ``Makefile``
 
 #. Commit the update of the submodule change::
 
@@ -40,9 +38,14 @@ We are currently in branch 3.12, and we want to update the strings from 3.13.
      python -m venv env
      source env/bin/activate  # Windows: env\Scripts\activate.bat
      pip install -r requirements.txt
-     
-#. Verify that the docs build with the new versions you changed from
-   ``requirements.txt`` mainly the sphinx version::
+
+   .. note::
+      This might fail if some of our own requirements
+      conflict with cpython's. If so, find a way to fix
+      *our* requirements.
+
+#. Verify that the docs build with the new versions of the build requirements,
+   mainly the sphinx version::
 
      make build
 
