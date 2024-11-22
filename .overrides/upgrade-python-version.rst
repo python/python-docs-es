@@ -48,9 +48,11 @@ We are currently in branch 3.12, and we want to update the strings from 3.13.
 
    .. note::
 
-      You can also run `make build -j` to use more than 1 core (but keep in mind
-      this is not always faster).
+      The underlying ``sphinx-build`` command uses all available cores by default.
+      Use the ``SPHINX_JOBS`` ``make`` variable (defaults to ``auto``)
+      to specify an explicit amount, e.g. ``make build SPHINX_JOBS=10``.
 
+   .. note::
       It may fail the build because there may be files
       that don't exist anymore in the new branch.
       If that's the case, just continue with the steps
