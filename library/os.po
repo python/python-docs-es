@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-21 16:38-0300\n"
-"PO-Revision-Date: 2021-08-19 21:45-0500\n"
+"PO-Revision-Date: 2024-11-24 19:12+0100\n"
 "Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
-"Language: es\n"
 "Language-Team: python-doc-es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.16.0\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: ../Doc/library/os.rst:2
 #, fuzzy
@@ -430,7 +431,6 @@ msgstr ""
 #: ../Doc/library/os.rst:4411 ../Doc/library/os.rst:4419
 #: ../Doc/library/os.rst:4427 ../Doc/library/os.rst:4434
 #: ../Doc/library/os.rst:4441 ../Doc/library/os.rst:4564
-#, fuzzy
 msgid ":ref:`Availability <availability>`: Unix, not WASI."
 msgstr ":ref:`Disponibilidad <availability>`: Unix, no WASI."
 
@@ -486,6 +486,9 @@ msgid ""
 "getting, setting, or deleting an item. For example, ``environ['monty'] = "
 "'python'`` maps the key ``'MONTY'`` to the value ``'python'``."
 msgstr ""
+"En Windows, las claves se convierten a mayúsculas. Esto también se aplica al "
+"obtener, configurar o eliminar un elemento. Por ejemplo, ``environ['monty'] "
+"= 'python'`` asigna la clave ``'MONTY'`` al valor ``'python'``."
 
 #: ../Doc/library/os.rst:211
 msgid ""
@@ -651,7 +654,6 @@ msgstr ""
 #: ../Doc/library/os.rst:3456 ../Doc/library/os.rst:3493
 #: ../Doc/library/os.rst:4322 ../Doc/library/os.rst:4871
 #: ../Doc/library/os.rst:4882 ../Doc/library/os.rst:4999
-#, fuzzy
 msgid ":ref:`Availability <availability>`: Unix, Windows."
 msgstr ":ref:`Disponibilidad <availability>`: Unix, Windows."
 
@@ -694,7 +696,6 @@ msgstr ""
 #: ../Doc/library/os.rst:5496 ../Doc/library/os.rst:5505
 #: ../Doc/library/os.rst:5529 ../Doc/library/os.rst:5556
 #: ../Doc/library/os.rst:5565
-#, fuzzy
 msgid ":ref:`Availability <availability>`: Unix."
 msgstr ":ref:`Disponibilidad <availability>`: Unix."
 
@@ -808,10 +809,8 @@ msgstr ""
 "sesión del ID de usuario real actual."
 
 #: ../Doc/library/os.rst:426 ../Doc/library/os.rst:462
-#, fuzzy
 msgid ":ref:`Availability <availability>`: Unix, Windows, not WASI."
-msgstr ""
-":ref:`Disponibilidad <availability>`: Unix, Windows, no Emscripten, no WASI."
+msgstr ":ref:`Disponibilidad <availability>`: Unix, Windows, no WASI."
 
 #: ../Doc/library/os.rst:431
 msgid ""
@@ -870,9 +869,8 @@ msgstr ""
 "Parámetros para las funciones :func:`getpriority` y :func:`setpriority`."
 
 #: ../Doc/library/os.rst:503
-#, fuzzy
 msgid ":ref:`Availability <availability>`: macOS"
-msgstr ":ref:`Disponibilidad <availability>`: Windows."
+msgstr ":ref:`Disponibilidad <availability>`: macOS"
 
 #: ../Doc/library/os.rst:509
 msgid ""
@@ -909,9 +907,8 @@ msgstr ""
 #: ../Doc/library/os.rst:687 ../Doc/library/os.rst:694
 #: ../Doc/library/os.rst:703 ../Doc/library/os.rst:712
 #: ../Doc/library/os.rst:735 ../Doc/library/os.rst:2181
-#, fuzzy
 msgid ":ref:`Availability <availability>`: Unix, not WASI, not Android."
-msgstr ":ref:`Disponibilidad <availability>`: Unix, no WASI."
+msgstr ":ref:`Disponibilidad <availability>`: Unix, no WASI, no Android."
 
 #: ../Doc/library/os.rst:554
 msgid ""
@@ -1003,6 +1000,9 @@ msgid ""
 "Reassociate the current thread with a Linux namespace. See the :manpage:"
 "`setns(2)` and :manpage:`namespaces(7)` man pages for more details."
 msgstr ""
+"Reasociar el hilo actual con un espacio de nombres de Linux. Consulta las "
+"páginas del manual :manpage:`setns(2)` y :manpage:`namespaces(7)` para "
+"obtener más detalles."
 
 #: ../Doc/library/os.rst:615
 msgid ""
@@ -1012,6 +1012,11 @@ msgid ""
 "clone-flags>` to impose constraints on the operation (``0`` means no "
 "constraints)."
 msgstr ""
+"Si *fd* hace referencia a un enlace :file:`/proc/{pid}/ns/`, ``setns()`` "
+"reasocia el hilo que llama con el espacio de nombres asociado con ese "
+"enlace, y *nstype* puede configurarse en uno de los :ref:`CLONE_NEW* "
+"constants <os-unshare-clone-flags>` para imponer restricciones a la "
+"operación (``0`` significa sin restricciones)."
 
 #: ../Doc/library/os.rst:622
 msgid ""
@@ -1023,18 +1028,31 @@ msgid ""
 "flags>`, e.g. ``setns(fd, os.CLONE_NEWUTS | os.CLONE_NEWPID)``. The caller's "
 "memberships in unspecified namespaces are left unchanged."
 msgstr ""
+"Desde Linux 5.8, *fd* puede hacer referencia a un descriptor de archivo PID "
+"obtenido de :func:`~os.pidfd_open`. En este caso, ``setns()`` reasocia el "
+"subproceso que realiza la llamada en uno o más de los mismos espacios de "
+"nombres que el subproceso al que hace referencia *fd*. Esto está sujeto a "
+"las restricciones impuestas por *nstype*, que es una máscara de bits que "
+"combina uno o más de los :ref:`CLONE_NEW* constants <os-unshare-clone-"
+"flags>`, por ejemplo, ``setns(fd, os.CLONE_NEWUTS | os.CLONE_NEWPID)``. Las "
+"pertenencias del autor de la llamada a espacios de nombres no especificados "
+"no se modifican."
 
 #: ../Doc/library/os.rst:631
 msgid ""
 "*fd* can be any object with a :meth:`~io.IOBase.fileno` method, or a raw "
 "file descriptor."
 msgstr ""
+"*fd* puede ser cualquier objeto con un método :meth:`~io.IOBase.fileno` o un "
+"descriptor de archivo sin formato."
 
 #: ../Doc/library/os.rst:633
 msgid ""
 "This example reassociates the thread with the ``init`` process's network "
 "namespace::"
 msgstr ""
+"Este ejemplo reasocia el hilo con el espacio de nombres de red del proceso "
+"``init``:"
 
 #: ../Doc/library/os.rst:635
 msgid ""
@@ -1042,11 +1060,13 @@ msgid ""
 "os.setns(fd, os.CLONE_NEWNET)\n"
 "os.close(fd)"
 msgstr ""
+"fd = os.open(\"/proc/1/ns/net\", os.O_RDONLY)\n"
+"os.setns(fd, os.CLONE_NEWNET)\n"
+"os.close(fd)"
 
 #: ../Doc/library/os.rst:639
-#, fuzzy
 msgid ":ref:`Availability <availability>`: Linux >= 3.0 with glibc >= 2.14."
-msgstr ":ref:`Disponibilidad <availability>`: Linux >= 3.17 con glibc >= 2.27."
+msgstr ":ref:`Disponibilidad <availability>`: Linux >= 3.0 con glibc >= 2.14."
 
 #: ../Doc/library/os.rst:645
 #, fuzzy
@@ -1220,6 +1240,10 @@ msgid ""
 "uname` can be used to get the user-facing operating system name and version "
 "on iOS and Android."
 msgstr ""
+"En macOS, iOS y Android, esto devuelve el nombre y la versión de *kernel* "
+"(es decir, ``'Darwin'`` en macOS e iOS; ``'Linux'`` en Android). :func:"
+"`platform.uname` se puede utilizar para obtener el nombre y la versión del "
+"sistema operativo que ven los usuarios en iOS y Android."
 
 #: ../Doc/library/os.rst:794 ../Doc/library/os.rst:5001
 msgid ""
@@ -1263,7 +1287,7 @@ msgstr ""
 msgid "The function is now always available and is also available on Windows."
 msgstr ""
 "Estas funciones se encuentra ahora siempre disponible y también esta "
-"disponible en Windows"
+"disponible en Windows."
 
 #: ../Doc/library/os.rst:820
 msgid ""
@@ -1275,11 +1299,18 @@ msgid ""
 "and moved to a new namespace. If the *flags* argument is ``0``, no changes "
 "are made to the calling process's execution context."
 msgstr ""
+"Desasociar partes del contexto de ejecución del proceso y moverlas a un "
+"nuevo espacio de nombres creado. Consulte la página del manual :manpage:"
+"`unshare(2)` para obtener más detalles. El argumento *flags* es una máscara "
+"de bits que combina cero o más de los :ref:`CLONE_* constants <os-unshare-"
+"clone-flags>` y que especifica qué partes del contexto de ejecución deben "
+"dejar de compartirse de sus asociaciones existentes y moverse a un nuevo "
+"espacio de nombres. Si el argumento *flags* es ``0``, no se realizan cambios "
+"en el contexto de ejecución del proceso que realiza la llamada."
 
 #: ../Doc/library/os.rst:831
-#, fuzzy
 msgid ":ref:`Availability <availability>`: Linux >= 2.6.16."
-msgstr ":ref:`Disponibilidad <availability>`: Linux >= 4.16."
+msgstr ":ref:`Disponibilidad <availability>`: Linux >=2.6.16."
 
 #: ../Doc/library/os.rst:837
 #, fuzzy
@@ -1292,6 +1323,9 @@ msgid ""
 "See :manpage:`unshare(2)` in the Linux manual for their exact effect and "
 "availability."
 msgstr ""
+"Indicadores de la función :func:`unshare`, si la implementación los admite. "
+"Consulte :manpage:`unshare(2)` en el manual de Linux para conocer su efecto "
+"exacto y su disponibilidad."
 
 #: ../Doc/library/os.rst:864
 msgid "File Object Creation"
@@ -1392,6 +1426,11 @@ msgid ""
 "    except OSError:\n"
 "        pass"
 msgstr ""
+"for fd in range(fd_low, fd_high):\n"
+"    try:\n"
+"        os.close(fd)\n"
+"    except OSError:\n"
+"        pass"
 
 #: ../Doc/library/os.rst:924
 #, fuzzy
@@ -1415,6 +1454,10 @@ msgid ""
 "reside in the same filesystem, otherwise an :exc:`OSError` is raised with :"
 "attr:`~OSError.errno` set to :const:`errno.EXDEV`."
 msgstr ""
+"En un kernel de Linux anterior a 5.3, los archivos a los que apuntan *src* y "
+"*dst* deben residir en el mismo sistema de archivos; de lo contrario, se "
+"genera un :exc:`OSError` con :attr:`~OSError.errno` establecido en :const:"
+"`errno.EXDEV`."
 
 #: ../Doc/library/os.rst:933
 #, fuzzy
@@ -1436,6 +1479,8 @@ msgid ""
 "The function copies bytes between two file descriptors. Text options, like "
 "the encoding and the line ending, are ignored."
 msgstr ""
+"La función copia bytes entre dos descriptores de archivo. Las opciones de "
+"texto, como la codificación y el final de línea, se ignoran."
 
 #: ../Doc/library/os.rst:943
 msgid ""
@@ -1452,9 +1497,12 @@ msgid ""
 "always copy no bytes and return 0 as if the file was empty because of a "
 "known Linux kernel issue."
 msgstr ""
+"En Linux, no se debe utilizar :func:`os.copy_file_range` para copiar un "
+"rango de un pseudoarchivo desde un sistema de archivos especial como procfs "
+"y sysfs. Siempre no copiará ningún byte y devolverá 0 como si el archivo "
+"estuviera vacío debido a un problema conocido del kernel de Linux."
 
 #: ../Doc/library/os.rst:953
-#, fuzzy
 msgid ":ref:`Availability <availability>`: Linux >= 4.5 with glibc >= 2.27."
 msgstr ":ref:`Disponibilidad <availability>`: Linux >= 4.5 con glibc >= 2.27."
 
@@ -1495,7 +1543,6 @@ msgstr ""
 "el nuevo descriptor de archivo es :ref:`heredable <fd_inheritance>`."
 
 #: ../Doc/library/os.rst:979 ../Doc/library/os.rst:992
-#, fuzzy
 msgid ":ref:`Availability <availability>`: not WASI."
 msgstr ":ref:`Disponibilidad <availability>`: no WASI."
 
@@ -1712,7 +1759,7 @@ msgstr ""
 
 #: ../Doc/library/os.rst:1123 ../Doc/library/os.rst:1708
 msgid "On Windows, this function is limited to pipes."
-msgstr ""
+msgstr "En Windows, esta función está limitada a las tuberías."
 
 #: ../Doc/library/os.rst:1127 ../Doc/library/os.rst:1712
 #, fuzzy
@@ -1725,10 +1772,13 @@ msgid ""
 "pseudo-terminal device to which the file descriptor *fd* refers. The file "
 "descriptor *fd* is not closed upon failure."
 msgstr ""
+"Otorgar acceso al dispositivo pseudoterminal esclavo asociado con el "
+"dispositivo pseudoterminal maestro al que hace referencia el descriptor de "
+"archivo *fd*. El descriptor de archivo *fd* no se cierra en caso de falla."
 
 #: ../Doc/library/os.rst:1137
 msgid "Calls the C standard library function :c:func:`grantpt`."
-msgstr ""
+msgstr "Llama a la función de la biblioteca estándar C :c:func:`grantpt`."
 
 #: ../Doc/library/os.rst:1146
 msgid ""
@@ -1779,34 +1829,47 @@ msgid ""
 "by *whence*, and return the new position in bytes relative to the start of "
 "the file. Valid values for *whence* are:"
 msgstr ""
+"Establece la posición actual del descriptor de archivo *fd* en la posición "
+"*pos*, modificada por *whence*, y devuelve la nueva posición en bytes con "
+"respecto al inicio del archivo. Los valores válidos para *whence* son:"
 
 #: ../Doc/library/os.rst:1195
 msgid ""
 ":const:`SEEK_SET` or ``0`` -- set *pos* relative to the beginning of the file"
 msgstr ""
+":const:`SEEK_SET` o ``0``: establece *pos* en relación con el comienzo del "
+"archivo"
 
 #: ../Doc/library/os.rst:1196
 msgid ""
 ":const:`SEEK_CUR` or ``1`` -- set *pos* relative to the current file position"
 msgstr ""
+":const:`SEEK_CUR` o ``1``: establece *pos* en relación con la posición "
+"actual del archivo"
 
 #: ../Doc/library/os.rst:1197
 msgid ":const:`SEEK_END` or ``2`` -- set *pos* relative to the end of the file"
 msgstr ""
+":const:`SEEK_END` o ``2``: establece *pos* en relación con el final del "
+"archivo"
 
 #: ../Doc/library/os.rst:1198
 msgid ""
 ":const:`SEEK_HOLE` -- set *pos* to the next data location, relative to *pos*"
 msgstr ""
+":const:`SEEK_HOLE`: establece *pos* en la siguiente ubicación de datos, "
+"relativa a *pos*"
 
 #: ../Doc/library/os.rst:1199
 msgid ""
 ":const:`SEEK_DATA` -- set *pos* to the next data hole, relative to *pos*"
 msgstr ""
+":const:`SEEK_DATA`: establece *pos* en el siguiente agujero de datos, "
+"relativo a *pos*"
 
 #: ../Doc/library/os.rst:1203
 msgid "Add support for :const:`!SEEK_HOLE` and :const:`!SEEK_DATA`."
-msgstr ""
+msgstr "Añadir soporte para :const:`!SEEK_HOLE` y :const:`!SEEK_DATA`."
 
 #: ../Doc/library/os.rst:1210
 msgid ""
@@ -1814,30 +1877,36 @@ msgid ""
 "method on :term:`file-like objects <file object>`, for whence to adjust the "
 "file position indicator."
 msgstr ""
+"Parámetros de la función :func:`lseek` y del método :meth:`~io.IOBase.seek` "
+"en :term:`file-like objects <file object>`, para desde donde ajustar el "
+"indicador de posición del archivo."
 
 #: ../Doc/library/os.rst:1214
 msgid ":const:`SEEK_SET`"
-msgstr ""
+msgstr ":const:`SEEK_SET`"
 
 #: ../Doc/library/os.rst:1215
 msgid "Adjust the file position relative to the beginning of the file."
 msgstr ""
+"Ajuste la posición del archivo en relación con el comienzo del archivo."
 
 #: ../Doc/library/os.rst:1216
 msgid ":const:`SEEK_CUR`"
-msgstr ""
+msgstr ":const:`SEEK_CUR`"
 
 #: ../Doc/library/os.rst:1217
 msgid "Adjust the file position relative to the current file position."
 msgstr ""
+"Ajuste la posición del archivo en relación con la posición del archivo "
+"actual."
 
 #: ../Doc/library/os.rst:1219
 msgid ":const:`SEEK_END`"
-msgstr ""
+msgstr ":const:`SEEK_END`"
 
 #: ../Doc/library/os.rst:1219
 msgid "Adjust the file position relative to the end of the file."
-msgstr ""
+msgstr "Ajuste la posición del archivo en relación con el final del archivo."
 
 #: ../Doc/library/os.rst:1221
 #, fuzzy
@@ -1852,37 +1921,44 @@ msgid ""
 "method on :term:`file-like objects <file object>`, for seeking file data and "
 "holes on sparsely allocated files."
 msgstr ""
+"Parámetros de la función :func:`lseek` y del método :meth:`~io.IOBase.seek` "
+"en :term:`file-like objects <file object>`, para buscar datos de archivos y "
+"agujeros en archivos escasamente asignados."
 
 #: ../Doc/library/os.rst:1233
-#, fuzzy
 msgid ":data:`!SEEK_DATA`"
-msgstr ":data:`RWF_NOWAIT`"
+msgstr ":data:`!SEEK_DATA`"
 
 #: ../Doc/library/os.rst:1232
 msgid ""
 "Adjust the file offset to the next location containing data, relative to the "
 "seek position."
 msgstr ""
+"Ajuste el desplazamiento del archivo a la siguiente ubicación que contenga "
+"datos, en relación con la posición de búsqueda."
 
 #: ../Doc/library/os.rst:1238
-#, fuzzy
 msgid ":data:`!SEEK_HOLE`"
-msgstr ":data:`stat.UF_OPAQUE`"
+msgstr ":data:`!SEEK_HOLE`"
 
 #: ../Doc/library/os.rst:1236
 msgid ""
 "Adjust the file offset to the next location containing a hole, relative to "
 "the seek position. A hole is defined as a sequence of zeros."
 msgstr ""
+"Ajuste el desplazamiento del archivo a la siguiente ubicación que contenga "
+"un agujero, en relación con la posición de búsqueda. Un agujero se define "
+"como una secuencia de ceros."
 
 #: ../Doc/library/os.rst:1242
 msgid "These operations only make sense for filesystems that support them."
 msgstr ""
+"Estas operaciones sólo tienen sentido para los sistemas de archivos que las "
+"admiten."
 
 #: ../Doc/library/os.rst:1244
-#, fuzzy
 msgid ":ref:`Availability <availability>`: Linux >= 3.1, macOS, Unix"
-msgstr ":ref:`Disponibilidad <availability>`: Linux >= 3.17."
+msgstr ":ref:`Disponibilidad <availability>`: Linux >= 3.1, macOS, Unix"
 
 #: ../Doc/library/os.rst:1251
 msgid ""
@@ -2130,6 +2206,8 @@ msgstr ""
 #: ../Doc/library/os.rst:1453
 msgid "Open and return a file descriptor for a master pseudo-terminal device."
 msgstr ""
+"Abrir y devolver un descriptor de archivo para un dispositivo pseudo-"
+"terminal maestro."
 
 #: ../Doc/library/os.rst:1455
 msgid ""
@@ -2137,6 +2215,10 @@ msgid ""
 "argument is used to set file status flags and file access modes as specified "
 "in the manual page of :c:func:`posix_openpt` of your system."
 msgstr ""
+"Llama a la función de la biblioteca estándar de C :c:func:`posix_openpt`. El "
+"argumento *oflag* se utiliza para establecer indicadores de estado de "
+"archivo y modos de acceso a archivos, tal como se especifica en la página "
+"del manual de :c:func:`posix_openpt` de su sistema."
 
 #: ../Doc/library/os.rst:1459
 msgid ""
@@ -2144,6 +2226,9 @@ msgid ""
 "the value :data:`O_CLOEXEC` is available on the system, it is added to "
 "*oflag*."
 msgstr ""
+"El descriptor de archivo devuelto es :ref:`non-inheritable "
+"<fd_inheritance>`. Si el valor :data:`O_CLOEXEC` está disponible en el "
+"sistema, se agrega a *oflag*."
 
 #: ../Doc/library/os.rst:1470
 msgid ""
@@ -2196,7 +2281,6 @@ msgid "Combine the functionality of :func:`os.readv` and :func:`os.pread`."
 msgstr "Combina la funcionalidad de :func:`os.readv` y :func:`os.pread`."
 
 #: ../Doc/library/os.rst:1489 ../Doc/library/os.rst:1574
-#, fuzzy
 msgid ""
 ":ref:`Availability <availability>`: Linux >= 2.6.30, FreeBSD >= 6.0, OpenBSD "
 ">= 2.7, AIX >= 7.1."
@@ -2230,7 +2314,6 @@ msgstr ""
 "EAGAIN`."
 
 #: ../Doc/library/os.rst:1506
-#, fuzzy
 msgid ":ref:`Availability <availability>`: Linux >= 4.14."
 msgstr ":ref:`Disponibilidad <availability>`: Linux >= 4.14."
 
@@ -2252,7 +2335,6 @@ msgstr ""
 "archivo abierto con el indicador :data:`O_DIRECT`."
 
 #: ../Doc/library/os.rst:1520
-#, fuzzy
 msgid ":ref:`Availability <availability>`: Linux >= 4.6."
 msgstr ":ref:`Disponibilidad <availability>`: Linux >= 4.6."
 
@@ -2262,6 +2344,9 @@ msgid ""
 "master pseudo-terminal device to which the file descriptor *fd* refers. The "
 "file descriptor *fd* is not closed upon failure."
 msgstr ""
+"Devuelve el nombre del dispositivo pseudoterminal esclavo asociado con el "
+"dispositivo pseudoterminal maestro al que hace referencia el descriptor de "
+"archivo *fd*. El descriptor de archivo *fd* no se cierra en caso de error."
 
 #: ../Doc/library/os.rst:1531
 msgid ""
@@ -2269,6 +2354,10 @@ msgid ""
 "available; otherwise, the C standard library function :c:func:`ptsname`, "
 "which is not guaranteed to be thread-safe, is called."
 msgstr ""
+"Llama a la función de biblioteca estándar reentrante C :c:func:`ptsname_r` "
+"si está disponible; de ​​lo contrario, se llama a la función de biblioteca "
+"estándar C :c:func:`ptsname`, que no se garantiza que sea segura para "
+"subprocesos."
 
 #: ../Doc/library/os.rst:1542
 msgid ""
@@ -2328,9 +2417,8 @@ msgstr ""
 "por la llamada al sistema."
 
 #: ../Doc/library/os.rst:1586 ../Doc/library/os.rst:1596
-#, fuzzy
 msgid ":ref:`Availability <availability>`: Linux >= 4.7."
-msgstr ":ref:`Disponibilidad <availability>`: Linux > 4.7."
+msgstr ":ref:`Disponibilidad <availability>`: Linux >= 4.7."
 
 #: ../Doc/library/os.rst:1593
 msgid ""
@@ -2358,7 +2446,6 @@ msgstr ""
 "*offset* es ``-1``, se actualiza el *offset* actual del archivo."
 
 #: ../Doc/library/os.rst:1610
-#, fuzzy
 msgid ":ref:`Availability <availability>`: Linux >= 4.16."
 msgstr ":ref:`Disponibilidad <availability>`: Linux >= 4.16."
 
@@ -2536,10 +2623,8 @@ msgstr ""
 "al extremo de escritura de la tubería."
 
 #: ../Doc/library/os.rst:1738
-#, fuzzy
 msgid ":ref:`Availability <availability>`: Linux >= 2.6.17 with glibc >= 2.5"
-msgstr ""
-":ref:`Disponibilidad <availability>`: Linux >= 2.6.17 con glibc >= 2.5."
+msgstr ":ref:`Disponibilidad <availability>`: Linux >= 2.6.17 con glibc >= 2.5"
 
 #: ../Doc/library/os.rst:1751
 msgid ""
@@ -2585,10 +2670,13 @@ msgid ""
 "terminal device to which the file descriptor *fd* refers. The file "
 "descriptor *fd* is not closed upon failure."
 msgstr ""
+"Desbloquee el dispositivo pseudoterminal esclavo asociado con el dispositivo "
+"pseudoterminal maestro al que hace referencia el descriptor de archivo *fd*. "
+"El descriptor de archivo *fd* no se cierra en caso de falla."
 
 #: ../Doc/library/os.rst:1798
 msgid "Calls the C standard library function :c:func:`unlockpt`."
-msgstr ""
+msgstr "Llama a la función de la biblioteca estándar C :c:func:`unlockpt`."
 
 #: ../Doc/library/os.rst:1807
 msgid "Write the bytestring in *str* to file descriptor *fd*."
@@ -2926,6 +3014,10 @@ msgid ""
 "        return fp.read()\n"
 "return \"some default data\""
 msgstr ""
+"if os.access(\"myfile\", os.R_OK):\n"
+"    with open(\"myfile\") as fp:\n"
+"        return fp.read()\n"
+"return \"some default data\""
 
 #: ../Doc/library/os.rst:2010
 msgid "is better written as::"
@@ -2941,6 +3033,13 @@ msgid ""
 "    with fp:\n"
 "        return fp.read()"
 msgstr ""
+"try:\n"
+"    fp = open(\"myfile\")\n"
+"except PermissionError:\n"
+"    return \"some default data\"\n"
+"else:\n"
+"    with fp:\n"
+"        return fp.read()"
 
 #: ../Doc/library/os.rst:2022
 msgid ""
@@ -3015,64 +3114,52 @@ msgstr ""
 "el módulo :mod:`stat`):"
 
 #: ../Doc/library/os.rst:2070
-#, fuzzy
 msgid ":const:`stat.UF_NODUMP`"
-msgstr ":data:`stat.UF_NODUMP`"
+msgstr ":const:`stat.UF_NODUMP`"
 
 #: ../Doc/library/os.rst:2071
-#, fuzzy
 msgid ":const:`stat.UF_IMMUTABLE`"
-msgstr ":data:`stat.UF_IMMUTABLE`"
+msgstr ":const:`stat.UF_IMMUTABLE`"
 
 #: ../Doc/library/os.rst:2072
-#, fuzzy
 msgid ":const:`stat.UF_APPEND`"
-msgstr ":data:`stat.UF_APPEND`"
+msgstr ":const:`stat.UF_APPEND`"
 
 #: ../Doc/library/os.rst:2073
-#, fuzzy
 msgid ":const:`stat.UF_OPAQUE`"
-msgstr ":data:`stat.UF_OPAQUE`"
+msgstr ":const:`stat.UF_OPAQUE`"
 
 #: ../Doc/library/os.rst:2074
-#, fuzzy
 msgid ":const:`stat.UF_NOUNLINK`"
-msgstr ":data:`stat.UF_NOUNLINK`"
+msgstr ":const:`stat.UF_NOUNLINK`"
 
 #: ../Doc/library/os.rst:2075
-#, fuzzy
 msgid ":const:`stat.UF_COMPRESSED`"
-msgstr ":data:`stat.UF_COMPRESSED`"
+msgstr ":const:`stat.UF_COMPRESSED`"
 
 #: ../Doc/library/os.rst:2076
-#, fuzzy
 msgid ":const:`stat.UF_HIDDEN`"
-msgstr ":data:`stat.UF_HIDDEN`"
+msgstr ":const:`stat.UF_HIDDEN`"
 
 #: ../Doc/library/os.rst:2077
-#, fuzzy
 msgid ":const:`stat.SF_ARCHIVED`"
-msgstr ":data:`stat.SF_ARCHIVED`"
+msgstr ":const:`stat.SF_ARCHIVED`"
 
 #: ../Doc/library/os.rst:2078
-#, fuzzy
 msgid ":const:`stat.SF_IMMUTABLE`"
-msgstr ":data:`stat.SF_IMMUTABLE`"
+msgstr ":const:`stat.SF_IMMUTABLE`"
 
 #: ../Doc/library/os.rst:2079
-#, fuzzy
 msgid ":const:`stat.SF_APPEND`"
-msgstr ":data:`stat.SF_APPEND`"
+msgstr ":const:`stat.SF_APPEND`"
 
 #: ../Doc/library/os.rst:2080
-#, fuzzy
 msgid ":const:`stat.SF_NOUNLINK`"
-msgstr ":data:`stat.SF_NOUNLINK`"
+msgstr ":const:`stat.SF_NOUNLINK`"
 
 #: ../Doc/library/os.rst:2081
-#, fuzzy
 msgid ":const:`stat.SF_SNAPSHOT`"
-msgstr ":data:`stat.SF_SNAPSHOT`"
+msgstr ":const:`stat.SF_SNAPSHOT`"
 
 #: ../Doc/library/os.rst:2083
 msgid ""
@@ -3105,99 +3192,80 @@ msgstr ""
 "combinaciones OR de bit a bit de ellos:"
 
 #: ../Doc/library/os.rst:2102
-#, fuzzy
 msgid ":const:`stat.S_ISUID`"
-msgstr ":data:`stat.S_ISUID`"
+msgstr ":const:`stat.S_ISUID`"
 
 #: ../Doc/library/os.rst:2103
-#, fuzzy
 msgid ":const:`stat.S_ISGID`"
-msgstr ":data:`stat.S_ISGID`"
+msgstr ":const:`stat.S_ISGID`"
 
 #: ../Doc/library/os.rst:2104
-#, fuzzy
 msgid ":const:`stat.S_ENFMT`"
-msgstr ":data:`stat.S_ENFMT`"
+msgstr ":const:`stat.S_ENFMT`"
 
 #: ../Doc/library/os.rst:2105
-#, fuzzy
 msgid ":const:`stat.S_ISVTX`"
-msgstr ":data:`stat.S_ISVTX`"
+msgstr ":const:`stat.S_ISVTX`"
 
 #: ../Doc/library/os.rst:2106
-#, fuzzy
 msgid ":const:`stat.S_IREAD`"
-msgstr ":data:`stat.S_IREAD`"
+msgstr ":const:`stat.S_IREAD`"
 
 #: ../Doc/library/os.rst:2107
-#, fuzzy
 msgid ":const:`stat.S_IWRITE`"
-msgstr ":data:`stat.S_IWRITE`"
+msgstr ":const:`stat.S_IWRITE`"
 
 #: ../Doc/library/os.rst:2108
-#, fuzzy
 msgid ":const:`stat.S_IEXEC`"
-msgstr ":data:`stat.S_IEXEC`"
+msgstr ":const:`stat.S_IEXEC`"
 
 #: ../Doc/library/os.rst:2109
-#, fuzzy
 msgid ":const:`stat.S_IRWXU`"
-msgstr ":data:`stat.S_IRWXU`"
+msgstr ":const:`stat.S_IRWXU`"
 
 #: ../Doc/library/os.rst:2110
-#, fuzzy
 msgid ":const:`stat.S_IRUSR`"
-msgstr ":data:`stat.S_IRUSR`"
+msgstr ":const:`stat.S_IRUSR`"
 
 #: ../Doc/library/os.rst:2111
-#, fuzzy
 msgid ":const:`stat.S_IWUSR`"
-msgstr ":data:`stat.S_IWUSR`"
+msgstr ":const:`stat.S_IWUSR`"
 
 #: ../Doc/library/os.rst:2112
-#, fuzzy
 msgid ":const:`stat.S_IXUSR`"
-msgstr ":data:`stat.S_IXUSR`"
+msgstr ":const:`stat.S_IXUSR`"
 
 #: ../Doc/library/os.rst:2113
-#, fuzzy
 msgid ":const:`stat.S_IRWXG`"
-msgstr ":data:`stat.S_IRWXG`"
+msgstr ":const:`stat.S_IRWXG`"
 
 #: ../Doc/library/os.rst:2114
-#, fuzzy
 msgid ":const:`stat.S_IRGRP`"
-msgstr ":data:`stat.S_IRGRP`"
+msgstr ":const:`stat.S_IRGRP`"
 
 #: ../Doc/library/os.rst:2115
-#, fuzzy
 msgid ":const:`stat.S_IWGRP`"
-msgstr ":data:`stat.S_IWGRP`"
+msgstr ":const:`stat.S_IWGRP`"
 
 #: ../Doc/library/os.rst:2116
-#, fuzzy
 msgid ":const:`stat.S_IXGRP`"
-msgstr ":data:`stat.S_IXGRP`"
+msgstr ":const:`stat.S_IXGRP`"
 
 #: ../Doc/library/os.rst:2117
-#, fuzzy
 msgid ":const:`stat.S_IRWXO`"
-msgstr ":data:`stat.S_IRWXO`"
+msgstr ":const:`stat.S_IRWXO`"
 
 #: ../Doc/library/os.rst:2118
-#, fuzzy
 msgid ":const:`stat.S_IROTH`"
-msgstr ":data:`stat.S_IROTH`"
+msgstr ":const:`stat.S_IROTH`"
 
 #: ../Doc/library/os.rst:2119
-#, fuzzy
 msgid ":const:`stat.S_IWOTH`"
-msgstr ":data:`stat.S_IWOTH`"
+msgstr ":const:`stat.S_IWOTH`"
 
 #: ../Doc/library/os.rst:2120
-#, fuzzy
 msgid ":const:`stat.S_IXOTH`"
-msgstr ":data:`stat.S_IXOTH`"
+msgstr ":const:`stat.S_IXOTH`"
 
 #: ../Doc/library/os.rst:2122 ../Doc/library/os.rst:2155
 #: ../Doc/library/os.rst:3546
@@ -3322,14 +3390,16 @@ msgid ""
 "``lchmod()`` is not part of POSIX, but Unix implementations may have it if "
 "changing the mode of symbolic links is supported."
 msgstr ""
+"``lchmod()`` no es parte de POSIX, pero las implementaciones de Unix pueden "
+"tenerlo si se admite el cambio del modo de enlaces simbólicos."
 
 #: ../Doc/library/os.rst:2239
-#, fuzzy
 msgid ""
 ":ref:`Availability <availability>`: Unix, Windows, not Linux, FreeBSD >= "
 "1.3, NetBSD >= 1.3, not OpenBSD"
 msgstr ""
-":ref:`Disponibilidad <availability>`: Unix, Windows, no Emscripten, no WASI."
+":ref:`Disponibilidad <availability>`: Unix, Windows, no Linux, FreeBSD >= "
+"1.3, NetBSD >= 1.3, no OpenBSD"
 
 #: ../Doc/library/os.rst:2249
 msgid ""
@@ -3451,6 +3521,8 @@ msgstr ""
 #: ../Doc/library/os.rst:2322
 msgid "Return a list containing the names of drives on a Windows system."
 msgstr ""
+"Devuelve una lista que contiene los nombres de las unidades en un sistema "
+"Windows."
 
 #: ../Doc/library/os.rst:2324
 msgid ""
@@ -3459,10 +3531,16 @@ msgid ""
 "reasons, including permissions, network connectivity or missing media. This "
 "function does not test for access."
 msgstr ""
+"El nombre de una unidad suele ser ``'C:\\\\'``. No todos los nombres de "
+"unidades se asociarán a un volumen y es posible que algunas sean "
+"inaccesibles por diversos motivos, incluidos permisos, conectividad de red o "
+"medios faltantes. Esta función no prueba el acceso."
 
 #: ../Doc/library/os.rst:2329
 msgid "May raise :exc:`OSError` if an error occurs collecting the drive names."
 msgstr ""
+"Puede generar :exc:`OSError` si ocurre un error al recopilar los nombres de "
+"las unidades."
 
 #: ../Doc/library/os.rst:2332
 #, fuzzy
@@ -3474,14 +3552,15 @@ msgstr ""
 
 #: ../Doc/library/os.rst:2334 ../Doc/library/os.rst:2358
 #: ../Doc/library/os.rst:2378
-#, fuzzy
 msgid ":ref:`Availability <availability>`: Windows"
-msgstr ":ref:`Disponibilidad <availability>`: Windows."
+msgstr ":ref:`Disponibilidad <availability>`: Windows"
 
 #: ../Doc/library/os.rst:2341
 msgid ""
 "Return a list containing the mount points for a volume on a Windows system."
 msgstr ""
+"Devuelve una lista que contiene los puntos de montaje de un volumen en un "
+"sistema Windows."
 
 #: ../Doc/library/os.rst:2344
 msgid ""
@@ -3490,18 +3569,27 @@ msgid ""
 "all. In the latter case, the list will be empty. Mount points that are not "
 "associated with a volume will not be returned by this function."
 msgstr ""
+"*volume* debe representarse como una ruta GUID, como las que devuelve :func:"
+"`os.listvolumes`. Los volúmenes pueden montarse en varias ubicaciones o no "
+"montarse en ninguna. En este último caso, la lista estará vacía. Esta "
+"función no devolverá los puntos de montaje que no estén asociados a un "
+"volumen."
 
 #: ../Doc/library/os.rst:2350
 msgid ""
 "The mount points return by this function will be absolute paths, and may be "
 "longer than the drive name."
 msgstr ""
+"Los puntos de montaje devueltos por esta función serán rutas absolutas y "
+"pueden ser más largos que el nombre de la unidad."
 
 #: ../Doc/library/os.rst:2353
 msgid ""
 "Raises :exc:`OSError` if the volume is not recognized or if an error occurs "
 "collecting the paths."
 msgstr ""
+"Genera :exc:`OSError` si no se reconoce el volumen o si se produce un error "
+"al recopilar las rutas."
 
 #: ../Doc/library/os.rst:2356
 #, fuzzy
@@ -3514,7 +3602,7 @@ msgstr ""
 
 #: ../Doc/library/os.rst:2365
 msgid "Return a list containing the volumes in the system."
-msgstr ""
+msgstr "Devuelve una lista que contiene los volúmenes del sistema."
 
 #: ../Doc/library/os.rst:2367
 msgid ""
@@ -3524,10 +3612,17 @@ msgid ""
 "generally not familiar with them, and so the recommended use of this "
 "function is to retrieve mount points using :func:`os.listmounts`."
 msgstr ""
+"Los volúmenes se representan normalmente como una ruta GUID similar a ``\\\\?"
+"\\Volume{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}\\``. Normalmente, se puede "
+"acceder a los archivos a través de una ruta GUID, si los permisos lo "
+"permiten. Sin embargo, los usuarios no suelen estar familiarizados con "
+"ellos, por lo que el uso recomendado de esta función es recuperar los puntos "
+"de montaje mediante :func:`os.listmounts`."
 
 #: ../Doc/library/os.rst:2374
 msgid "May raise :exc:`OSError` if an error occurs collecting the volumes."
 msgstr ""
+"Puede generar :exc:`OSError` si ocurre un error al recopilar los volúmenes."
 
 #: ../Doc/library/os.rst:2376
 #, fuzzy
@@ -3624,6 +3719,9 @@ msgid ""
 "control to the new directory such that only the current user and "
 "administrators have access. Other values of *mode* are ignored."
 msgstr ""
+"En Windows, se maneja específicamente un *mode* o ``0o700`` para aplicar el "
+"control de acceso al nuevo directorio de modo que solo el usuario actual y "
+"los administradores tengan acceso. Se ignoran otros valores de *mode*."
 
 #: ../Doc/library/os.rst:2440
 msgid ""
@@ -3643,7 +3741,7 @@ msgstr ""
 
 #: ../Doc/library/os.rst:2451
 msgid "Windows now handles a *mode* of ``0o700``."
-msgstr ""
+msgstr "Windows ahora maneja un *mode* o ``0o700``."
 
 #: ../Doc/library/os.rst:2461
 msgid ""
@@ -3953,6 +4051,10 @@ msgid ""
 "operation may fail if *src* and *dst* are on different filesystems. Use :"
 "func:`shutil.move` to support moves to a different filesystem."
 msgstr ""
+"En Windows, si existe *dst*, siempre se genera un :exc:`FileExistsError`. La "
+"operación puede fallar si *src* y *dst* están en sistemas de archivos "
+"diferentes. Utilice :func:`shutil.move` para admitir movimientos a un "
+"sistema de archivos diferente."
 
 #: ../Doc/library/os.rst:2684
 msgid ""
@@ -4169,6 +4271,10 @@ msgid ""
 "        if not entry.name.startswith('.') and entry.is_file():\n"
 "            print(entry.name)"
 msgstr ""
+"with os.scandir(path) as it:\n"
+"    for entry in it:\n"
+"        if not entry.name.startswith('.') and entry.is_file():\n"
+"            print(entry.name)"
 
 #: ../Doc/library/os.rst:2819
 msgid ""
@@ -4537,6 +4643,10 @@ msgid ""
 "future ``st_ctime`` may be changed to return zero or the metadata change "
 "time, if available."
 msgstr ""
+"El atributo ``st_ctime`` de un resultado estadístico está obsoleto en "
+"Windows. La hora de creación del archivo está disponible correctamente como "
+"``st_birthtime`` y, en el futuro, ``st_ctime`` puede cambiarse para que "
+"devuelva cero o la hora de cambio de metadatos, si está disponible."
 
 #: ../Doc/library/os.rst:3005
 msgid ""
@@ -4598,12 +4708,7 @@ msgstr ""
 
 #: ../Doc/library/os.rst:3030 ../Doc/library/os.rst:3799
 msgid "Example::"
-msgstr ""
-"El diseño de todos los módulos incorporados de Python dependientes del "
-"sistema operativo es tal que, mientras funcionalidad esté disponible, usará "
-"la misma interfaz; por ejemplo, la función ``os.stat(path)`` retorna "
-"estadísticas sobre la ruta (*path*) en el mismo formato (lo que sucede "
-"originalmente con la interfaz POSIX)."
+msgstr "Ejemplo::"
 
 #: ../Doc/library/os.rst:3032
 msgid ""
@@ -4616,6 +4721,14 @@ msgid ""
 ">>> statinfo.st_size\n"
 "264"
 msgstr ""
+">>> import os\n"
+">>> statinfo = os.stat('somefile.txt')\n"
+">>> statinfo\n"
+"os.stat_result(st_mode=33188, st_ino=7876932, st_dev=234881026,\n"
+"st_nlink=1, st_uid=501, st_gid=501, st_size=264, st_atime=1297230295,\n"
+"st_mtime=1297230027, st_ctime=1297230027)\n"
+">>> statinfo.st_size\n"
+"264"
 
 #: ../Doc/library/os.rst:3043
 msgid ":func:`fstat` and :func:`lstat` functions."
@@ -4735,6 +4848,9 @@ msgid ""
 "creation time. In the future, ``st_ctime`` will contain the time of the most "
 "recent metadata change, as for other platforms."
 msgstr ""
+"``st_ctime`` está obsoleto en Windows. Utilice ``st_birthtime`` para indicar "
+"la hora de creación del archivo. En el futuro, ``st_ctime`` contendrá la "
+"hora del cambio de metadatos más reciente, como en otras plataformas."
 
 #: ../Doc/library/os.rst:3126
 msgid "Time of most recent access expressed in nanoseconds as an integer."
@@ -4762,12 +4878,18 @@ msgid ""
 "file creation time. In the future, ``st_ctime`` will contain the time of the "
 "most recent metadata change, as for other platforms."
 msgstr ""
+"``st_ctime_ns`` está obsoleto en Windows. Utilice ``st_birthtime_ns`` para "
+"indicar la hora de creación del archivo. En el futuro, ``st_ctime`` "
+"contendrá la hora del cambio de metadatos más reciente, como en otras "
+"plataformas."
 
 #: ../Doc/library/os.rst:3151
 msgid ""
 "Time of file creation expressed in seconds. This attribute is not always "
 "available, and may raise :exc:`AttributeError`."
 msgstr ""
+"Hora de creación del archivo expresada en segundos. Este atributo no siempre "
+"está disponible y puede generar el error :exc:`AttributeError`."
 
 #: ../Doc/library/os.rst:3154
 #, fuzzy
@@ -4779,6 +4901,9 @@ msgid ""
 "Time of file creation expressed in nanoseconds as an integer. This attribute "
 "is not always available, and may raise :exc:`AttributeError`."
 msgstr ""
+"Hora de creación del archivo expresada en nanosegundos como un número "
+"entero. Este atributo no siempre está disponible y puede generar el error :"
+"exc:`AttributeError`."
 
 #: ../Doc/library/os.rst:3167
 #, fuzzy
@@ -4989,6 +5114,10 @@ msgid ""
 "last metadata change time, for consistency with other platforms, but for now "
 "still contains creation time. Use :attr:`st_birthtime` for the creation time."
 msgstr ""
+"En Windows, :attr:`st_ctime` está obsoleto. Con el tiempo, contendrá la "
+"última hora de cambio de metadatos, para mantener la coherencia con otras "
+"plataformas, pero por ahora aún contiene la hora de creación. Utilice :attr:"
+"`st_birthtime` para la hora de creación."
 
 #: ../Doc/library/os.rst:3287
 msgid ""
@@ -4996,12 +5125,17 @@ msgid ""
 "system. Previously it would not be above 64 bits, and larger file "
 "identifiers would be arbitrarily packed."
 msgstr ""
+"En Windows, :attr:`st_ino` puede tener hasta 128 bits, según el sistema de "
+"archivos. Antes no superaba los 64 bits y los identificadores de archivos "
+"más grandes se empaquetaban de forma arbitraria."
 
 #: ../Doc/library/os.rst:3291
 msgid ""
 "On Windows, :attr:`st_rdev` no longer returns a value. Previously it would "
 "contain the same as :attr:`st_dev`, which was incorrect."
 msgstr ""
+"En Windows, :attr:`st_rdev` ya no devuelve un valor. Antes contenía el mismo "
+"valor que :attr:`st_dev`, lo cual era incorrecto."
 
 #: ../Doc/library/os.rst:3294
 #, fuzzy
@@ -5119,7 +5253,7 @@ msgstr ""
 
 #: ../Doc/library/os.rst:3360
 msgid "os.stat in os.supports_dir_fd"
-msgstr ""
+msgstr "os.stat en os.supports_dir_fd"
 
 #: ../Doc/library/os.rst:3362
 msgid ""
@@ -5153,7 +5287,7 @@ msgstr ""
 
 #: ../Doc/library/os.rst:3379
 msgid "os.access in os.supports_effective_ids"
-msgstr ""
+msgstr "os.access en os.supports_effective_ids"
 
 #: ../Doc/library/os.rst:3381
 msgid ""
@@ -5194,7 +5328,7 @@ msgstr ""
 
 #: ../Doc/library/os.rst:3402
 msgid "os.chdir in os.supports_fd"
-msgstr ""
+msgstr "os.chdir en os.supports_fd"
 
 #: ../Doc/library/os.rst:3409
 msgid ""
@@ -5235,7 +5369,7 @@ msgstr ""
 
 #: ../Doc/library/os.rst:3425
 msgid "os.stat in os.supports_follow_symlinks"
-msgstr ""
+msgstr "os.stat en os.supports_follow_symlinks"
 
 #: ../Doc/library/os.rst:3432
 msgid "Create a symbolic link pointing to *src* named *dst*."
@@ -5644,6 +5778,14 @@ msgid ""
 "    if 'CVS' in dirs:\n"
 "        dirs.remove('CVS')  # don't visit CVS directories"
 msgstr ""
+"import os\n"
+"for root, dirs, files, rootfd in os.fwalk('python/Lib/email'):\n"
+"    print(root, \"consumes\", end=\"\")\n"
+"    print(sum([os.stat(name, dir_fd=rootfd).st_size for name in files]),\n"
+"          end=\"\")\n"
+"    print(\"bytes in\", len(files), \"non-directory files\")\n"
+"    if 'CVS' in dirs:\n"
+"        dirs.remove('CVS')  # don't visit CVS directories"
 
 #: ../Doc/library/os.rst:3695
 msgid ""
@@ -5709,7 +5851,6 @@ msgstr ""
 "archivos pueden tener el mismo nombre sin efectos secundarios."
 
 #: ../Doc/library/os.rst:3737
-#, fuzzy
 msgid ":ref:`Availability <availability>`: Linux >= 3.17 with glibc >= 2.27."
 msgstr ":ref:`Disponibilidad <availability>`: Linux >= 3.17 con glibc >= 2.27."
 
@@ -5718,9 +5859,8 @@ msgid "These flags can be passed to :func:`memfd_create`."
 msgstr "Estas flags se pueden pasar a :func:`memfd_create`."
 
 #: ../Doc/library/os.rst:3762
-#, fuzzy
 msgid ":ref:`Availability <availability>`: Linux >= 3.17 with glibc >= 2.27"
-msgstr ":ref:`Disponibilidad <availability>`: Linux >= 3.17 con glibc >= 2.27."
+msgstr ":ref:`Disponibilidad <availability>`: Linux >= 3.17 con glibc >= 2.27"
 
 #: ../Doc/library/os.rst:3764
 msgid "The ``MFD_HUGE*`` flags are only available since Linux 4.14."
@@ -5822,10 +5962,8 @@ msgstr ""
 #: ../Doc/library/os.rst:4023 ../Doc/library/os.rst:4032
 #: ../Doc/library/os.rst:4042 ../Doc/library/os.rst:4052
 #: ../Doc/library/os.rst:4062 ../Doc/library/os.rst:4073
-#, fuzzy
 msgid ":ref:`Availability <availability>`: Linux >= 2.6.27 with glibc >= 2.8"
-msgstr ""
-":ref:`Disponibilidad <availability>`: Linux >= 2.6.27 con glibc >= 2.8."
+msgstr ":ref:`Disponibilidad <availability>`: Linux >= 2.6.27 con glibc >= 2.8"
 
 #: ../Doc/library/os.rst:3822
 msgid ""
@@ -5837,7 +5975,6 @@ msgstr ""
 
 #: ../Doc/library/os.rst:3825 ../Doc/library/os.rst:3834
 #: ../Doc/library/os.rst:3842 ../Doc/library/os.rst:3851
-#, fuzzy
 msgid ":ref:`Availability <availability>`: Linux >= 2.6.27"
 msgstr ":ref:`Disponibilidad <availability>`: Linux >= 2.6.27"
 
@@ -5874,7 +6011,6 @@ msgstr ""
 "reduce en uno."
 
 #: ../Doc/library/os.rst:3860
-#, fuzzy
 msgid ":ref:`Availability <availability>`: Linux >= 2.6.30"
 msgstr ":ref:`Disponibilidad <availability>`: Linux >= 2.6.30"
 
@@ -5888,6 +6024,8 @@ msgid ""
 "These functions provide support for Linux's *timer file descriptor* API. "
 "Naturally, they are all only available on Linux."
 msgstr ""
+"Estas funciones brindan soporte para la API *timer file descriptor* de "
+"Linux. Naturalmente, todas ellas solo están disponibles en Linux."
 
 #: ../Doc/library/os.rst:3877
 #, fuzzy
@@ -5896,19 +6034,19 @@ msgstr "Lee como máximo *n* bytes del descriptor de archivo *fd*."
 
 #: ../Doc/library/os.rst:3879
 msgid "The file descriptor returned by :func:`timerfd_create` supports:"
-msgstr ""
+msgstr "El descriptor de archivo devuelto por :func:`timerfd_create` admite:"
 
 #: ../Doc/library/os.rst:3881
 msgid ":func:`read`"
-msgstr ""
+msgstr ":func:`read`"
 
 #: ../Doc/library/os.rst:3882
 msgid ":func:`~select.select`"
-msgstr ""
+msgstr ":func:`~select.select`"
 
 #: ../Doc/library/os.rst:3883
 msgid ":func:`~select.poll`"
-msgstr ""
+msgstr ":func:`~select.poll`"
 
 #: ../Doc/library/os.rst:3885
 msgid ""
@@ -5918,31 +6056,39 @@ msgid ""
 "converted to an :class:`int` by ``int.from_bytes(x, byteorder=sys."
 "byteorder)``."
 msgstr ""
+"El método :func:`read` del descriptor de archivo se puede llamar con un "
+"tamaño de búfer de 8. Si el temporizador ya ha expirado una o más veces, :"
+"func:`read` devuelve la cantidad de expiraciones con el orden de bytes del "
+"host, que se puede convertir a :class:`int` mediante ``int.from_bytes(x, "
+"byteorder=sys.byteorder)``."
 
 #: ../Doc/library/os.rst:3890
 msgid ""
 ":func:`~select.select` and :func:`~select.poll` can be used to wait until "
 "timer expires and the file descriptor is readable."
 msgstr ""
+"Se pueden usar :func:`~select.select` y :func:`~select.poll` para esperar "
+"hasta que el temporizador expire y el descriptor de archivo sea legible."
 
 #: ../Doc/library/os.rst:3893
 msgid ""
 "*clockid* must be a valid :ref:`clock ID <time-clock-id-constants>`, as "
 "defined in the :py:mod:`time` module:"
 msgstr ""
+"*clockid* debe ser un :ref:`clock ID <time-clock-id-constants>` válido, como "
+"se define en el módulo :py:mod:`time`:"
 
 #: ../Doc/library/os.rst:3896
-#, fuzzy
 msgid ":const:`time.CLOCK_REALTIME`"
-msgstr ":data:`stat.S_IREAD`"
+msgstr ":const:`time.CLOCK_REALTIME`"
 
 #: ../Doc/library/os.rst:3897
 msgid ":const:`time.CLOCK_MONOTONIC`"
-msgstr ""
+msgstr ":const:`time.CLOCK_MONOTONIC`"
 
 #: ../Doc/library/os.rst:3898
 msgid ":const:`time.CLOCK_BOOTTIME` (Since Linux 3.15 for timerfd_create)"
-msgstr ""
+msgstr ":const:`time.CLOCK_BOOTTIME` (desde Linux 3.15 para timerfd_create)"
 
 #: ../Doc/library/os.rst:3900
 msgid ""
@@ -5951,6 +6097,11 @@ msgid ""
 "updated. To cancel timer when system clock is changed, see :const:"
 "`TFD_TIMER_CANCEL_ON_SET`."
 msgstr ""
+"Si *clockid* es :const:`time.CLOCK_REALTIME`, se utiliza un reloj de tiempo "
+"real configurable para todo el sistema. Si se modifica el reloj del sistema, "
+"es necesario actualizar la configuración del temporizador. Para cancelar el "
+"temporizador cuando se modifica el reloj del sistema, consulte :const:"
+"`TFD_TIMER_CANCEL_ON_SET`."
 
 #: ../Doc/library/os.rst:3905
 msgid ""
@@ -5958,12 +6109,18 @@ msgid ""
 "increasing clock is used. Even if the system clock is changed, the timer "
 "setting will not be affected."
 msgstr ""
+"Si *clockid* es :const:`time.CLOCK_MONOTONIC`, se utiliza un reloj que "
+"aumenta de forma monótona y no se puede configurar. Incluso si se cambia el "
+"reloj del sistema, la configuración del temporizador no se verá afectada."
 
 #: ../Doc/library/os.rst:3909
 msgid ""
 "If *clockid* is :const:`time.CLOCK_BOOTTIME`, same as :const:`time."
 "CLOCK_MONOTONIC` except it includes any time that the system is suspended."
 msgstr ""
+"Si *clockid* es :const:`time.CLOCK_BOOTTIME`, igual que :const:`time."
+"CLOCK_MONOTONIC` excepto que incluye cualquier momento en que el sistema "
+"esté suspendido."
 
 #: ../Doc/library/os.rst:3912
 msgid ""
@@ -5971,16 +6128,17 @@ msgid ""
 "value. Any of the following variables may used, combined using bitwise OR "
 "(the ``|`` operator):"
 msgstr ""
+"El comportamiento del descriptor de archivo se puede modificar especificando "
+"un valor *flags*. Se puede utilizar cualquiera de las siguientes variables, "
+"combinadas mediante OR bit a bit (el operador ``|``):"
 
 #: ../Doc/library/os.rst:3916
-#, fuzzy
 msgid ":const:`TFD_NONBLOCK`"
-msgstr ":data:`stat.UF_NOUNLINK`"
+msgstr ":const:`TFD_NONBLOCK`"
 
 #: ../Doc/library/os.rst:3917
-#, fuzzy
 msgid ":const:`TFD_CLOEXEC`"
-msgstr ":data:`stat.S_IEXEC`"
+msgstr ":const:`TFD_CLOEXEC`"
 
 #: ../Doc/library/os.rst:3919
 msgid ""
@@ -5989,16 +6147,23 @@ msgid ""
 "there hasn't been an expiration since the last call to read, :func:`read` "
 "raises :class:`OSError` with ``errno`` is set to :const:`errno.EAGAIN`."
 msgstr ""
+"Si :const:`TFD_NONBLOCK` no está configurado como indicador, :func:`read` se "
+"bloquea hasta que el temporizador expire. Si está configurado como "
+"indicador, :func:`read` no se bloquea, pero si no ha habido una expiración "
+"desde la última llamada para leer, :func:`read` genera :class:`OSError` y "
+"``errno`` se configura como :const:`errno.EAGAIN`."
 
 #: ../Doc/library/os.rst:3925
 msgid ":const:`TFD_CLOEXEC` is always set by Python automatically."
-msgstr ""
+msgstr "Python siempre establece :const:`TFD_CLOEXEC` automáticamente."
 
 #: ../Doc/library/os.rst:3927
 msgid ""
 "The file descriptor must be closed with :func:`os.close` when it is no "
 "longer needed, or else the file descriptor will be leaked."
 msgstr ""
+"El descriptor de archivo debe cerrarse con :func:`os.close` cuando ya no sea "
+"necesario, de lo contrario se filtrará."
 
 #: ../Doc/library/os.rst:3930
 #, fuzzy
@@ -6010,10 +6175,13 @@ msgid ""
 "Alter a timer file descriptor's internal timer. This function operates the "
 "same interval timer as :func:`timerfd_settime_ns`."
 msgstr ""
+"Modificar el temporizador interno de un descriptor de archivo de "
+"temporizador. Esta función opera con el mismo temporizador de intervalos "
+"que :func:`timerfd_settime_ns`."
 
 #: ../Doc/library/os.rst:3942
 msgid "*fd* must be a valid timer file descriptor."
-msgstr ""
+msgstr "*fd* debe ser un descriptor de archivo de temporizador válido."
 
 #: ../Doc/library/os.rst:3944
 msgid ""
@@ -6021,14 +6189,17 @@ msgid ""
 "the following variables may used, combined using bitwise OR (the ``|`` "
 "operator):"
 msgstr ""
+"El comportamiento del temporizador se puede modificar especificando un valor "
+"*flags*. Se puede utilizar cualquiera de las siguientes variables, "
+"combinadas mediante OR bit a bit (el operador ``|``):"
 
 #: ../Doc/library/os.rst:3948
 msgid ":const:`TFD_TIMER_ABSTIME`"
-msgstr ""
+msgstr ":const:`TFD_TIMER_ABSTIME`"
 
 #: ../Doc/library/os.rst:3949
 msgid ":const:`TFD_TIMER_CANCEL_ON_SET`"
-msgstr ""
+msgstr ":const:`TFD_TIMER_CANCEL_ON_SET`"
 
 #: ../Doc/library/os.rst:3951
 msgid ""
@@ -6037,12 +6208,19 @@ msgid ""
 "than zero, it raises an :class:`OSError` exception with ``errno`` set to :"
 "const:`errno.EINVAL`"
 msgstr ""
+"El temporizador se desactiva al configurar *initial* en cero (``0``). Si "
+"*initial* es igual o mayor que cero, el temporizador se activa. Si *initial* "
+"es menor que cero, genera una excepción :class:`OSError` con ``errno`` "
+"configurado en :const:`errno.EINVAL`"
 
 #: ../Doc/library/os.rst:3956
 msgid ""
 "By default the timer will fire when *initial* seconds have elapsed. (If "
 "*initial* is zero, timer will fire immediately.)"
 msgstr ""
+"De forma predeterminada, el temporizador se activará cuando transcurran "
+"*initial* segundos. (Si *initial* es cero, el temporizador se activará "
+"inmediatamente)."
 
 #: ../Doc/library/os.rst:3959
 msgid ""
@@ -6050,6 +6228,9 @@ msgid ""
 "when the timer's clock (set by *clockid* in :func:`timerfd_create`) reaches "
 "*initial* seconds."
 msgstr ""
+"Sin embargo, si se establece el indicador :const:`TFD_TIMER_ABSTIME`, el "
+"temporizador se activará cuando el reloj del temporizador (establecido por "
+"*clockid* en :func:`timerfd_create`) alcance los *initial* segundos."
 
 #: ../Doc/library/os.rst:3963
 msgid ""
@@ -6060,6 +6241,12 @@ msgid ""
 "than zero, it raises :class:`OSError` with ``errno`` set to :const:`errno."
 "EINVAL`"
 msgstr ""
+"El intervalo del temporizador se establece mediante *interval* :py:class:"
+"`float`. Si *interval* es cero, el temporizador solo se activa una vez, en "
+"la expiración inicial. Si *interval* es mayor que cero, el temporizador se "
+"activa cada vez que transcurren *interval* segundos desde la expiración "
+"anterior. Si *interval* es menor que cero, genera :class:`OSError` con "
+"``errno`` establecido en :const:`errno.EINVAL`"
 
 #: ../Doc/library/os.rst:3970
 msgid ""
@@ -6069,6 +6256,11 @@ msgid ""
 "changed discontinuously. Reading the descriptor is aborted with the error "
 "ECANCELED."
 msgstr ""
+"Si el indicador :const:`TFD_TIMER_CANCEL_ON_SET` se configura junto con :"
+"const:`TFD_TIMER_ABSTIME` y el reloj de este temporizador es :const:`time."
+"CLOCK_REALTIME`, el temporizador se marca como cancelable si el reloj de "
+"tiempo real se modifica de manera discontinua. La lectura del descriptor se "
+"cancela con el error ECANCELED."
 
 #: ../Doc/library/os.rst:3976
 msgid ""
@@ -6076,65 +6268,86 @@ msgid ""
 "done by changing time offset only and doesn't cause discontinuous system "
 "clock change."
 msgstr ""
+"Linux administra el reloj del sistema como UTC. La transición al horario de "
+"verano se realiza modificando únicamente la diferencia horaria y no provoca "
+"cambios discontinuos en el reloj del sistema."
 
 #: ../Doc/library/os.rst:3980
 msgid ""
 "Discontinuous system clock change will be caused by the following events:"
 msgstr ""
+"El cambio discontinuo del reloj del sistema será causado por los siguientes "
+"eventos:"
 
 #: ../Doc/library/os.rst:3982
 msgid "``settimeofday``"
-msgstr ""
+msgstr "``settimeofday``"
 
 #: ../Doc/library/os.rst:3983
 msgid "``clock_settime``"
-msgstr ""
+msgstr "``clock_settime``"
 
 #: ../Doc/library/os.rst:3984
 msgid "set the system date and time by ``date`` command"
-msgstr ""
+msgstr "Establezca la fecha y la hora del sistema mediante el comando ``date``"
 
 #: ../Doc/library/os.rst:3986
 msgid ""
 "Return a two-item tuple of (``next_expiration``, ``interval``) from the "
 "previous timer state, before this function executed."
 msgstr ""
+"Devuelve una tupla de dos elementos de (``next_expiration``, ``interval``) "
+"del estado del temporizador anterior, antes de que se ejecutara esta función."
 
 #: ../Doc/library/os.rst:3991
 msgid ""
 ":manpage:`timerfd_create(2)`, :manpage:`timerfd_settime(2)`, :manpage:"
 "`settimeofday(2)`, :manpage:`clock_settime(2)`, and :manpage:`date(1)`."
 msgstr ""
+":manpage:`timerfd_create(2)`, :manpage:`timerfd_settime(2)`, :manpage:"
+"`settimeofday(2)`, :manpage:`clock_settime(2)`, y :manpage:`date(1)`."
 
 #: ../Doc/library/os.rst:4002
 msgid ""
 "Similar to :func:`timerfd_settime`, but use time as nanoseconds. This "
 "function operates the same interval timer as :func:`timerfd_settime`."
 msgstr ""
+"Similar a :func:`timerfd_settime`, pero utiliza el tiempo en nanosegundos. "
+"Esta función opera con el mismo temporizador de intervalos que :func:"
+"`timerfd_settime`."
 
 #: ../Doc/library/os.rst:4012
 msgid "Return a two-item tuple of floats (``next_expiration``, ``interval``)."
 msgstr ""
+"Devuelve una tupla de dos elementos de flotantes (``next_expiration``, "
+"``interval``)."
 
 #: ../Doc/library/os.rst:4014
 msgid ""
 "``next_expiration`` denotes the relative time until next the timer next "
 "fires, regardless of if the :const:`TFD_TIMER_ABSTIME` flag is set."
 msgstr ""
+"``next_expiration`` indica el tiempo relativo hasta que el temporizador se "
+"vuelva a activar, independientemente de si el indicador :const:"
+"`TFD_TIMER_ABSTIME` está configurado."
 
 #: ../Doc/library/os.rst:4017
 msgid ""
 "``interval`` denotes the timer's interval. If zero, the timer will only fire "
 "once, after ``next_expiration`` seconds have elapsed."
 msgstr ""
+"``interval`` indica el intervalo del temporizador. Si es cero, el "
+"temporizador se activará solo una vez, después de que transcurran "
+"``next_expiration`` segundos."
 
 #: ../Doc/library/os.rst:4021
 msgid ":manpage:`timerfd_gettime(2)`"
-msgstr ""
+msgstr ":manpage:`timerfd_gettime(2)`"
 
 #: ../Doc/library/os.rst:4030
 msgid "Similar to :func:`timerfd_gettime`, but return time as nanoseconds."
 msgstr ""
+"Similar a :func:`timerfd_gettime`, pero devuelve el tiempo en nanosegundos."
 
 #: ../Doc/library/os.rst:4038
 msgid ""
@@ -6142,12 +6355,19 @@ msgid ""
 "`O_NONBLOCK` status flag for the new timer file descriptor. If :const:"
 "`TFD_NONBLOCK` is not set as a flag, :func:`read` blocks."
 msgstr ""
+"Un indicador para la función :func:`timerfd_create`, que establece el "
+"indicador de estado :const:`O_NONBLOCK` para el nuevo descriptor de archivo "
+"del temporizador. Si :const:`TFD_NONBLOCK` no está establecido como "
+"indicador, :func:`read` se bloquea."
 
 #: ../Doc/library/os.rst:4048
 msgid ""
 "A flag for the :func:`timerfd_create` function, If :const:`TFD_CLOEXEC` is "
 "set as a flag, set close-on-exec flag for new file descriptor."
 msgstr ""
+"Una bandera para la función :func:`timerfd_create`. Si :const:`TFD_CLOEXEC` "
+"está configurado como bandera, establece la bandera de cierre al ejecutar "
+"para el nuevo descriptor de archivo."
 
 #: ../Doc/library/os.rst:4058
 msgid ""
@@ -6156,6 +6376,10 @@ msgid ""
 "value on the timer's clock (in UTC seconds or nanoseconds since the Unix "
 "Epoch)."
 msgstr ""
+"Indicador para las funciones :func:`timerfd_settime` y :func:"
+"`timerfd_settime_ns`. Si se establece este indicador, *initial* se "
+"interpreta como un valor absoluto en el reloj del temporizador (en segundos "
+"UTC o nanosegundos desde la época Unix)."
 
 #: ../Doc/library/os.rst:4068
 msgid ""
@@ -6163,6 +6387,9 @@ msgid ""
 "functions along with :const:`TFD_TIMER_ABSTIME`. The timer is cancelled when "
 "the time of the underlying clock changes discontinuously."
 msgstr ""
+"Una bandera para las funciones :func:`timerfd_settime` y :func:"
+"`timerfd_settime_ns` junto con :const:`TFD_TIMER_ABSTIME`. El temporizador "
+"se cancela cuando la hora del reloj subyacente cambia de manera discontinua."
 
 #: ../Doc/library/os.rst:4079
 msgid "Linux extended attributes"
@@ -6514,12 +6741,12 @@ msgstr ""
 #: ../Doc/library/os.rst:4287 ../Doc/library/os.rst:4852
 #: ../Doc/library/os.rst:4976 ../Doc/library/os.rst:5095
 #: ../Doc/library/os.rst:5264
-#, fuzzy
 msgid ""
 ":ref:`Availability <availability>`: Unix, Windows, not WASI, not Android, "
 "not iOS."
 msgstr ""
-":ref:`Disponibilidad <availability>`: Unix, Windows, no Emscripten, no WASI."
+":ref:`Disponibilidad <availability>`: Unix, Windows, no WASI, no Android, no "
+"iOS."
 
 #: ../Doc/library/os.rst:4289
 msgid ""
@@ -6708,12 +6935,17 @@ msgid ""
 "If you use TLS sockets in an application calling ``fork()``, see the warning "
 "in the :mod:`ssl` documentation."
 msgstr ""
+"Si utiliza sockets TLS en una aplicación que llama a ``fork()``, consulte la "
+"advertencia en la documentación de :mod:`ssl`."
 
 #: ../Doc/library/os.rst:4461 ../Doc/library/os.rst:4505
 msgid ""
 "On macOS the use of this function is unsafe when mixed with using higher-"
 "level system APIs, and that includes using :mod:`urllib.request`."
 msgstr ""
+"En macOS, el uso de esta función no es seguro cuando se combina con el uso "
+"de API de sistema de nivel superior, incluido el uso de :mod:`urllib."
+"request`."
 
 #: ../Doc/library/os.rst:4464
 msgid ""
@@ -6728,6 +6960,8 @@ msgid ""
 "If Python is able to detect that your process has multiple threads, :func:"
 "`os.fork` now raises a :exc:`DeprecationWarning`."
 msgstr ""
+"Si Python puede detectar que su proceso tiene varios subprocesos, :func:`os."
+"fork` ahora genera un :exc:`DeprecationWarning`."
 
 #: ../Doc/library/os.rst:4472
 msgid ""
@@ -6739,6 +6973,14 @@ msgid ""
 "child process when threads existed in the parent (such as ``malloc`` and "
 "``free``)."
 msgstr ""
+"Elegimos mostrar esto como una advertencia, cuando sea detectable, para "
+"informar mejor a los desarrolladores sobre un problema de diseño que la "
+"plataforma POSIX señala específicamente como no compatible. Incluso en el "
+"código en el que *appears* funciona, nunca ha sido seguro mezclar "
+"subprocesos con :func:`os.fork` en plataformas POSIX. El entorno de "
+"ejecución de CPython en sí siempre ha realizado llamadas a la API que no son "
+"seguras para su uso en el proceso secundario cuando existían subprocesos en "
+"el primario (como ``malloc`` y ``free``)."
 
 #: ../Doc/library/os.rst:4481
 msgid ""
@@ -6746,6 +6988,10 @@ msgid ""
 "typically found in glibc to date are among those already more likely to "
 "experience deadlocks running such code."
 msgstr ""
+"Los usuarios de macOS o los usuarios de implementaciones de libc o malloc "
+"distintas de las que se encuentran habitualmente en glibc hasta la fecha se "
+"encuentran entre los que tienen más probabilidades de experimentar bloqueos "
+"al ejecutar dicho código."
 
 #: ../Doc/library/os.rst:4485
 msgid ""
@@ -6753,12 +6999,16 @@ msgid ""
 "discuss.python.org/t/33555>`_ for technical details of why we're surfacing "
 "this longstanding platform compatibility problem to developers."
 msgstr ""
+"Consulte `this discussion on fork being incompatible with threads <https://"
+"discuss.python.org/t/33555>`_ para obtener detalles técnicos sobre el motivo "
+"por el cual estamos informando a los desarrolladores de este problema de "
+"compatibilidad de plataformas de larga data."
 
 #: ../Doc/library/os.rst:4490 ../Doc/library/os.rst:4750
-#, fuzzy
 msgid ""
 ":ref:`Availability <availability>`: POSIX, not WASI, not Android, not iOS."
-msgstr ":ref:`Disponibilidad <availability>`: POSIX, no Emscripten, no WASI."
+msgstr ""
+":ref:`Disponibilidad <availability>`: POSIX, no WASI, no Android, no iOS."
 
 #: ../Doc/library/os.rst:4495
 msgid ""
@@ -6795,6 +7045,9 @@ msgid ""
 "raises a :exc:`DeprecationWarning`. See the longer explanation on :func:`os."
 "fork`."
 msgstr ""
+"Si Python puede detectar que su proceso tiene varios subprocesos, esto ahora "
+"genera un error :exc:`DeprecationWarning`. Consulte la explicación más "
+"extensa sobre :func:`os.fork`."
 
 #: ../Doc/library/os.rst:4517 ../Doc/library/os.rst:4734
 #: ../Doc/library/os.rst:4783 ../Doc/library/os.rst:5020
@@ -6808,10 +7061,10 @@ msgstr ""
 #: ../Doc/library/os.rst:5310 ../Doc/library/os.rst:5319
 #: ../Doc/library/os.rst:5328 ../Doc/library/os.rst:5337
 #: ../Doc/library/os.rst:5346
-#, fuzzy
 msgid ""
 ":ref:`Availability <availability>`: Unix, not WASI, not Android, not iOS."
-msgstr ":ref:`Disponibilidad <availability>`: Unix, no WASI."
+msgstr ""
+":ref:`Disponibilidad <availability>`: Unix, no WASI, no Android, no iOS."
 
 #: ../Doc/library/os.rst:4526
 msgid ""
@@ -6854,10 +7107,8 @@ msgstr ""
 "``pid``, ``sig``."
 
 #: ../Doc/library/os.rst:4541
-#, fuzzy
 msgid ":ref:`Availability <availability>`: Unix, Windows, not WASI, not iOS."
-msgstr ""
-":ref:`Disponibilidad <availability>`: Unix, Windows, no Emscripten, no WASI."
+msgstr ":ref:`Disponibilidad <availability>`: Unix, Windows, no WASI, no iOS."
 
 #: ../Doc/library/os.rst:4553
 msgid "Send the signal *sig* to the process group *pgid*."
@@ -6872,9 +7123,8 @@ msgstr ""
 "``pgid``, ``sig``."
 
 #: ../Doc/library/os.rst:4557 ../Doc/library/os.rst:4594
-#, fuzzy
 msgid ":ref:`Availability <availability>`: Unix, not WASI, not iOS."
-msgstr ":ref:`Disponibilidad <availability>`: Unix, no WASI."
+msgstr ":ref:`Disponibilidad <availability>`:Unix, no WASI, no iOS."
 
 #: ../Doc/library/os.rst:4562
 msgid ""
@@ -6901,13 +7151,12 @@ msgid "See the :manpage:`pidfd_open(2)` man page for more details."
 msgstr "Ver la página manual de :manpage:`pidfd_open(2)` para mas detalles."
 
 #: ../Doc/library/os.rst:4575
-#, fuzzy
 msgid ""
 ":ref:`Availability <availability>`: Linux >= 5.3, Android >= :func:`build-"
 "time <sys.getandroidapilevel>` API level 31"
 msgstr ""
-":ref:`Disponibilidad <availability>`: Linux >= 2.6.30, FreeBSD >= 6.0, "
-"OpenBSD >= 2.7, AIX >= 7.1."
+":ref:`Disponibilidad <availability>`: Linux >= 5.3, Android >= :func:`build-"
+"time <sys.getandroidapilevel>` API level 31"
 
 #: ../Doc/library/os.rst:4580
 msgid ""
@@ -6916,11 +7165,15 @@ msgid ""
 "attempt to wait on the file descriptor using :manpage:`waitid(2)` will "
 "immediately return the error :const:`~errno.EAGAIN` rather than blocking."
 msgstr ""
+"Esta bandera indica que el descriptor de archivo no será bloqueante. Si el "
+"proceso al que hace referencia el descriptor de archivo aún no ha "
+"finalizado, entonces un intento de esperar en el descriptor de archivo "
+"utilizando :manpage:`waitid(2)` devolverá inmediatamente el error :const:"
+"`~errno.EAGAIN` en lugar de bloquearse."
 
 #: ../Doc/library/os.rst:4585
-#, fuzzy
 msgid ":ref:`Availability <availability>`: Linux >= 5.10"
-msgstr ":ref:`Disponibilidad <availability>`: Linux >= 5.4"
+msgstr ":ref:`Disponibilidad <availability>`: Linux >= 5.10"
 
 #: ../Doc/library/os.rst:4591
 msgid ""
@@ -6989,9 +7242,8 @@ msgstr ""
 "comunicarse con subprocesos."
 
 #: ../Doc/library/os.rst:4626
-#, fuzzy
 msgid ":ref:`Availability <availability>`: not WASI, not Android, not iOS."
-msgstr ":ref:`Disponibilidad <availability>`: no WASI."
+msgstr ":ref:`Disponibilidad <availability>`: no WASI, no Android, no iOS."
 
 #: ../Doc/library/os.rst:4629
 msgid ""
@@ -7085,9 +7337,8 @@ msgid "Performs ``os.dup2(fd, new_fd)``."
 msgstr "Realiza ``os.dup2(fd, new_fd)``."
 
 #: ../Doc/library/os.rst:4679
-#, fuzzy
 msgid "(``os.POSIX_SPAWN_CLOSEFROM``, *fd*)"
-msgstr "(``os.POSIX_SPAWN_CLOSE``, *fd*)"
+msgstr "(``os.POSIX_SPAWN_CLOSEFROM``, *fd*)"
 
 #: ../Doc/library/os.rst:4681
 #, fuzzy
@@ -7213,6 +7464,9 @@ msgid ""
 "on platforms where :c:func:`!posix_spawn_file_actions_addclosefrom_np` "
 "exists."
 msgstr ""
+"El parámetro *env* acepta ``None``. ``os.POSIX_SPAWN_CLOSEFROM`` está "
+"disponible en plataformas donde existe :c:func:`!"
+"posix_spawn_file_actions_addclosefrom_np`."
 
 #: ../Doc/library/os.rst:4740
 #, fuzzy
@@ -7418,6 +7672,11 @@ msgid ""
 "L = ['cp', 'index.html', '/dev/null']\n"
 "os.spawnvpe(os.P_WAIT, 'cp', L, os.environ)"
 msgstr ""
+"import os\n"
+"os.spawnlp(os.P_WAIT, 'cp', 'cp', 'index.html', '/dev/null')\n"
+"\n"
+"L = ['cp', 'index.html', '/dev/null']\n"
+"os.spawnvpe(os.P_WAIT, 'cp', L, os.environ)"
 
 #: ../Doc/library/os.rst:4850
 msgid ""
@@ -7747,7 +8006,7 @@ msgstr ""
 msgid ""
 "If there are no children that could be waited for, :exc:`ChildProcessError` "
 "is raised."
-msgstr ""
+msgstr "Si no hay niños a los que esperar, se genera :exc:`ChildProcessError`."
 
 #: ../Doc/library/os.rst:5017 ../Doc/library/os.rst:5092
 msgid ""
@@ -7769,7 +8028,7 @@ msgstr ""
 
 #: ../Doc/library/os.rst:5031
 msgid "Wait for the completion of a child process."
-msgstr ""
+msgstr "Esperar a que se complete un proceso secundario."
 
 #: ../Doc/library/os.rst:5033
 msgid ""
@@ -7777,6 +8036,9 @@ msgid ""
 "data:`P_PIDFD`. The interpretation of *id* depends on it; see their "
 "individual descriptions."
 msgstr ""
+"*idtype* puede ser :data:`P_PID`, :data:`P_PGID`, :data:`P_ALL` o (en "
+"Linux) :data:`P_PIDFD`. La interpretación de *id* depende de ello; consulte "
+"sus descripciones individuales."
 
 #: ../Doc/library/os.rst:5036
 msgid ""
@@ -7784,34 +8046,43 @@ msgid ""
 "data:`WSTOPPED` or :data:`WCONTINUED` is required; :data:`WNOHANG` and :data:"
 "`WNOWAIT` are additional optional flags."
 msgstr ""
+"*options* es una combinación OR de indicadores. Se requiere al menos uno de :"
+"data:`WEXITED`, :data:`WSTOPPED` o :data:`WCONTINUED`; :data:`WNOHANG` y :"
+"data:`WNOWAIT` son indicadores opcionales adicionales."
 
 #: ../Doc/library/os.rst:5040
 msgid ""
 "The return value is an object representing the data contained in the :c:type:"
 "`siginfo_t` structure with the following attributes:"
 msgstr ""
+"El valor de retorno es un objeto que representa los datos contenidos en la "
+"estructura :c:type:`siginfo_t` con los siguientes atributos:"
 
 #: ../Doc/library/os.rst:5043
 msgid ":attr:`!si_pid` (process ID)"
-msgstr ""
+msgstr ":attr:`!si_pid` (identificación del proceso)"
 
 #: ../Doc/library/os.rst:5044
 msgid ":attr:`!si_uid` (real user ID of the child)"
-msgstr ""
+msgstr ":attr:`!si_uid` (ID de usuario real del niño)"
 
 #: ../Doc/library/os.rst:5045
 msgid ":attr:`!si_signo` (always :const:`~signal.SIGCHLD`)"
-msgstr ""
+msgstr ":attr:`!si_signo` (siempre :const:`~signal.SIGCHLD`)"
 
 #: ../Doc/library/os.rst:5046
 msgid ""
 ":attr:`!si_status` (the exit status or signal number, depending on :attr:`!"
 "si_code`)"
 msgstr ""
+":attr:`!si_status` (el estado de salida o el número de señal, según :attr:`!"
+"si_code`)"
 
 #: ../Doc/library/os.rst:5047
 msgid ":attr:`!si_code` (see :data:`CLD_EXITED` for possible values)"
 msgstr ""
+":attr:`!si_code` (consulte :data:`CLD_EXITED` para conocer los posibles "
+"valores)"
 
 #: ../Doc/library/os.rst:5049
 msgid ""
@@ -7819,6 +8090,10 @@ msgid ""
 "requested state, ``None`` is returned. Otherwise, if there are no matching "
 "children that could be waited for, :exc:`ChildProcessError` is raised."
 msgstr ""
+"Si se especifica :data:`WNOHANG` y no hay elementos secundarios coincidentes "
+"en el estado solicitado, se devuelve ``None``. De lo contrario, si no hay "
+"elementos secundarios coincidentes que se puedan esperar, se genera :exc:"
+"`ChildProcessError`."
 
 #: ../Doc/library/os.rst:5058
 #, fuzzy
@@ -7869,6 +8144,11 @@ msgid ""
 "for, :exc:`ChildProcessError` is raised.  Other options that can be used "
 "are :data:`WUNTRACED` and :data:`WCONTINUED`."
 msgstr ""
+"*options* es una combinación OR de indicadores. Si contiene :data:`WNOHANG` "
+"y no hay hijos coincidentes en el estado solicitado, se devuelve ``(0, 0)``. "
+"De lo contrario, si no hay hijos coincidentes que se puedan esperar, se "
+"genera :exc:`ChildProcessError`. Otras opciones que se pueden utilizar son :"
+"data:`WUNTRACED` y :data:`WCONTINUED`."
 
 #: ../Doc/library/os.rst:5084
 msgid ""
@@ -7943,25 +8223,29 @@ msgstr ""
 
 #: ../Doc/library/os.rst:5140
 msgid ":data:`!P_PID` - wait for the child whose PID is *id*."
-msgstr ""
+msgstr ":data:`!P_PID`: espera al niño cuyo PID es *id*."
 
 #: ../Doc/library/os.rst:5141
 msgid ":data:`!P_PGID` - wait for any child whose progress group ID is *id*."
 msgstr ""
+":data:`!P_PGID`: espera a cualquier niño cuyo ID de grupo de progreso sea "
+"*id*."
 
 #: ../Doc/library/os.rst:5142
 msgid ":data:`!P_ALL` - wait for any child; *id* is ignored."
-msgstr ""
+msgstr ":data:`!P_ALL` - espera a cualquier hijo; *id* se ignora."
 
 #: ../Doc/library/os.rst:5143
 msgid ""
 ":data:`!P_PIDFD` - wait for the child identified by the file descriptor *id* "
 "(a process file descriptor created with :func:`pidfd_open`)."
 msgstr ""
+":data:`!P_PIDFD`: espera al niño identificado por el descriptor de archivo "
+"*id* (un descriptor de archivo de proceso creado con :func:`pidfd_open`)."
 
 #: ../Doc/library/os.rst:5148
 msgid ":data:`!P_PIDFD` is only available on Linux >= 5.4."
-msgstr ""
+msgstr ":data:`!P_PIDFD` solo está disponible en Linux >= 5.4."
 
 #: ../Doc/library/os.rst:5151
 #, fuzzy
@@ -7984,18 +8268,24 @@ msgid ""
 "This *options* flag for :func:`waitid` causes child processes that have "
 "terminated to be reported."
 msgstr ""
+"Esta bandera *options* para :func:`waitid` hace que se informen los procesos "
+"secundarios que han finalizado."
 
 #: ../Doc/library/os.rst:5169
 msgid ""
 "The other ``wait*`` functions always report children that have terminated, "
 "so this option is not available for them."
 msgstr ""
+"Las demás funciones ``wait*`` siempre informan sobre los hijos que han "
+"finalizado, por lo que esta opción no está disponible para ellos."
 
 #: ../Doc/library/os.rst:5179
 msgid ""
 "This *options* flag for :func:`waitid` causes child processes that have been "
 "stopped by the delivery of a signal to be reported."
 msgstr ""
+"Esta bandera *options* para :func:`waitid` hace que se informen los procesos "
+"secundarios que se han detenido por la entrega de una señal."
 
 #: ../Doc/library/os.rst:5182 ../Doc/library/os.rst:5214
 #, fuzzy
@@ -8023,6 +8313,9 @@ msgid ""
 "and :func:`waitid` to return right away if no child process status is "
 "available immediately."
 msgstr ""
+"Esta bandera *options* hace que :func:`waitpid`, :func:`wait3`, :func:"
+"`wait4` y :func:`waitid` regresen inmediatamente si no hay ningún estado de "
+"proceso secundario disponible inmediatamente."
 
 #: ../Doc/library/os.rst:5211
 msgid ""
@@ -8030,6 +8323,9 @@ msgid ""
 "state, so that a later :func:`!wait*` call can be used to retrieve the child "
 "status information again."
 msgstr ""
+"Esta bandera *options* hace que :func:`waitid` deje al niño en un estado de "
+"espera, de modo que se pueda usar una llamada :func:`!wait*` posterior para "
+"recuperar nuevamente la información del estado del niño."
 
 #: ../Doc/library/os.rst:5226
 #, fuzzy
@@ -8440,12 +8736,17 @@ msgid ""
 "The :func:`process_cpu_count` function can be used to get the number of "
 "logical CPUs usable by the calling thread of the **current process**."
 msgstr ""
+"La función :func:`process_cpu_count` se puede utilizar para obtener la "
+"cantidad de CPU lógicas que puede utilizar el hilo que llama a **current "
+"process**."
 
 #: ../Doc/library/os.rst:5518
 msgid ""
 "If :option:`-X cpu_count <-X>` is given or :envvar:`PYTHON_CPU_COUNT` is "
 "set, :func:`cpu_count` returns the overridden value *n*."
 msgstr ""
+"Si se proporciona :option:`-X cpu_count <-X>` o se establece :envvar:"
+"`PYTHON_CPU_COUNT`, :func:`cpu_count` devuelve el valor anulado *n*."
 
 #: ../Doc/library/os.rst:5525
 msgid ""
@@ -8463,18 +8764,25 @@ msgid ""
 "process**. Returns ``None`` if undetermined. It can be less than :func:"
 "`cpu_count` depending on the CPU affinity."
 msgstr ""
+"Obtiene la cantidad de CPU lógicas que puede utilizar el subproceso que "
+"realiza la llamada a **current process**. Devuelve ``None`` si no se "
+"determina. Puede ser menor que :func:`cpu_count` según la afinidad de la CPU."
 
 #: ../Doc/library/os.rst:5538
 msgid ""
 "The :func:`cpu_count` function can be used to get the number of logical CPUs "
 "in the **system**."
 msgstr ""
+"La función :func:`cpu_count` se puede utilizar para obtener la cantidad de "
+"CPU lógicas en **system**."
 
 #: ../Doc/library/os.rst:5541
 msgid ""
 "If :option:`-X cpu_count <-X>` is given or :envvar:`PYTHON_CPU_COUNT` is "
 "set, :func:`process_cpu_count` returns the overridden value *n*."
 msgstr ""
+"Si se proporciona :option:`-X cpu_count <-X>` o se establece :envvar:"
+"`PYTHON_CPU_COUNT`, :func:`process_cpu_count` devuelve el valor anulado *n*."
 
 #: ../Doc/library/os.rst:5544
 #, fuzzy
@@ -8689,7 +8997,6 @@ msgstr ""
 "pages/man2/getrandom.2.html>`_."
 
 #: ../Doc/library/os.rst:5688
-#, fuzzy
 msgid ":ref:`Availability <availability>`: Linux >= 3.17."
 msgstr ":ref:`Disponibilidad <availability>`: Linux >= 3.17."
 
@@ -8817,30 +9124,30 @@ msgstr ""
 #: ../Doc/library/os.rst:363 ../Doc/library/os.rst:529
 #: ../Doc/library/os.rst:731
 msgid "user"
-msgstr ""
+msgstr "usuario"
 
 #: ../Doc/library/os.rst:363
 msgid "effective id"
-msgstr ""
+msgstr "identificación efectiva"
 
 #: ../Doc/library/os.rst:372 ../Doc/library/os.rst:438
 #: ../Doc/library/os.rst:447 ../Doc/library/os.rst:456
 #: ../Doc/library/os.rst:470 ../Doc/library/os.rst:666
 #: ../Doc/library/os.rst:4522 ../Doc/library/os.rst:4549
 msgid "process"
-msgstr ""
+msgstr "proceso"
 
 #: ../Doc/library/os.rst:372 ../Doc/library/os.rst:438
 msgid "group"
-msgstr ""
+msgstr "grupo"
 
 #: ../Doc/library/os.rst:447 ../Doc/library/os.rst:529
 msgid "id"
-msgstr ""
+msgstr "id"
 
 #: ../Doc/library/os.rst:456
 msgid "id of parent"
-msgstr ""
+msgstr "identificación del padre"
 
 #: ../Doc/library/os.rst:470 ../Doc/library/os.rst:666
 #, fuzzy
@@ -8849,112 +9156,112 @@ msgstr "La política de programación predeterminada."
 
 #: ../Doc/library/os.rst:552 ../Doc/library/os.rst:801
 msgid "environment variables"
-msgstr ""
+msgstr "variables de entorno"
 
 #: ../Doc/library/os.rst:552
 msgid "setting"
-msgstr ""
+msgstr "configuración"
 
 #: ../Doc/library/os.rst:731
 msgid "id, setting"
-msgstr ""
+msgstr "identificación, configuración"
 
 #: ../Doc/library/os.rst:764
 msgid "gethostname() (in module socket)"
-msgstr ""
+msgstr "gethostname() (en el socket del módulo)"
 
 #: ../Doc/library/os.rst:764
 msgid "gethostbyaddr() (in module socket)"
-msgstr ""
+msgstr "gethostbyaddr() (en el socket del módulo)"
 
 #: ../Doc/library/os.rst:801 ../Doc/library/os.rst:2658
 msgid "deleting"
-msgstr ""
+msgstr "borrando"
 
 #: ../Doc/library/os.rst:1360 ../Doc/library/os.rst:3028
 msgid "module"
-msgstr ""
+msgstr "módulo"
 
 #: ../Doc/library/os.rst:1360
 msgid "pty"
-msgstr ""
+msgstr "pty"
 
 #: ../Doc/library/os.rst:2045 ../Doc/library/os.rst:2457
 #: ../Doc/library/os.rst:2658 ../Doc/library/os.rst:3562
 #: ../Doc/library/os.rst:3661
 msgid "directory"
-msgstr ""
+msgstr "directorio"
 
 #: ../Doc/library/os.rst:2045
 msgid "changing"
-msgstr ""
+msgstr "cambio"
 
 #: ../Doc/library/os.rst:2457
 msgid "creating"
-msgstr ""
+msgstr "creando"
 
 #: ../Doc/library/os.rst:2457
 msgid "UNC paths"
-msgstr ""
+msgstr "rutas UNC"
 
 #: ../Doc/library/os.rst:2457
 msgid "and os.makedirs()"
-msgstr ""
+msgstr "y os.makedirs()"
 
 #: ../Doc/library/os.rst:3028
 msgid "stat"
-msgstr ""
+msgstr "estadística"
 
 #: ../Doc/library/os.rst:3562 ../Doc/library/os.rst:3661
 msgid "walking"
-msgstr ""
+msgstr "caminando"
 
 #: ../Doc/library/os.rst:3562 ../Doc/library/os.rst:3661
 msgid "traversal"
-msgstr ""
+msgstr "Travesía"
 
 #: ../Doc/library/os.rst:4522 ../Doc/library/os.rst:4549
 msgid "killing"
-msgstr ""
+msgstr "asesinato"
 
 #: ../Doc/library/os.rst:4522 ../Doc/library/os.rst:4549
 msgid "signalling"
-msgstr ""
+msgstr "señalización"
 
 #: ../Doc/library/os.rst:5576 ../Doc/library/os.rst:5612
 msgid ". (dot)"
-msgstr ""
+msgstr ". (punto)"
 
 #: ../Doc/library/os.rst:5576 ../Doc/library/os.rst:5584
 #: ../Doc/library/os.rst:5592 ../Doc/library/os.rst:5603
 #: ../Doc/library/os.rst:5612
 msgid "in pathnames"
-msgstr ""
+msgstr "en nombres de ruta"
 
 #: ../Doc/library/os.rst:5584
 msgid ".."
-msgstr ""
+msgstr ".."
 
 #: ../Doc/library/os.rst:5592 ../Doc/library/os.rst:5603
 msgid "/ (slash)"
-msgstr ""
+msgstr "/ (barra)"
 
 #: ../Doc/library/os.rst:5593
 msgid "\\ (backslash)"
-msgstr ""
+msgstr "\\ (barra inversa)"
 
 #: ../Doc/library/os.rst:5593
 msgid "in pathnames (Windows)"
-msgstr ""
+msgstr "en nombres de ruta (Windows)"
 
 #: ../Doc/library/os.rst:5619
 msgid ": (colon)"
-msgstr ""
+msgstr ": (dos puntos)"
 
 #: ../Doc/library/os.rst:5619
 msgid "path separator (POSIX)"
-msgstr ""
+msgstr "separador de ruta (POSIX)"
 
 #: ../Doc/library/os.rst:5619
 msgid "; (semicolon)"
-msgstr ""
+msgstr "; (punto y coma)"
