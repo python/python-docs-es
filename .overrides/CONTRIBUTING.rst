@@ -119,6 +119,11 @@ Paso 2: ¡Comienza a traducir!
    .. note:: Si estás en Windows y tienes problemas, mira los comentarios de
              :ref:`powrap_windows` para más información.
 
+   .. note:: En 3.13 notamos un problema de inconsistencia en las versiones
+             de powrap que podrían ser utilizadas, con lo que la verificación
+             del CI fue deshabilitada, pero te recomendamos que puedas ejecutar
+             `powrap` localmente de todas formas.
+
 #. **Corrección ortográfica**: Para verificar la ortografía de tu archivo
    puedes utilizar la herramienta pospell_ para que verifiques que todas las
    palabras están aceptadas o incluidas en diccionarios. Para ello tenemos
@@ -134,6 +139,14 @@ Paso 2: ¡Comienza a traducir!
 
    .. note:: Si estás en Windows y tienes problemas, mira los comentarios de
              :ref:`pospell_windows` para más información.
+
+   .. note:: En 3.13 los trozos de código ahora pueden ser traducidos,
+             con lo cual esperamos que puedas traducir solo los comentarios
+             de dichos códigos. Es probable que `check_spell.py` falle con
+             algunas entradas, esto se debe a que pospell (docutils) no tienen
+             compatibilidad para entender líneas de código. La solución temporal
+             es **no traducir** las entradas que `check_spell.py` genere errores
+             con el mensaje **Unexpected identation**.
 
 #. Cuando hayas terminado tu sesión, debes guardar tus cambios y enviarlos a
    GitHub (No olvides añadir tu nombre al archivo ``TRANSLATORS``).
