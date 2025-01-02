@@ -44,7 +44,7 @@ build: setup do_build
 .PHONY: do_build
 do_build:
 	# Normal build
-	PYTHONWARNINGS=ignore::FutureWarning,ignore::RuntimeWarning $(VENV)/bin/sphinx-build -j $(SPHINX_JOBS) -W --keep-going -b html -d $(OUTPUT_DOCTREE) -D language=$(LANGUAGE) . $(OUTPUT_HTML) && \
+	$(VENV)/bin/sphinx-build -j $(SPHINX_JOBS) -W --keep-going -b html -d $(OUTPUT_DOCTREE) -D language=$(LANGUAGE) . $(OUTPUT_HTML) && \
 		echo "Success! Open file://`pwd`/$(OUTPUT_HTML)/index.html, " \
 			"or run 'make serve' to see them in http://localhost:8000";
 
