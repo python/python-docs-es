@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-21 16:38-0300\n"
-"PO-Revision-Date: 2025-01-07 16:12-0600\n"
+"PO-Revision-Date: 2025-01-11 17:24-0600\n"
 "Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
 "Language-Team: python-doc-es\n"
 "Language: es\n"
@@ -1663,6 +1663,9 @@ msgid ""
 "resolution order for its instances.  It is called at class instantiation, "
 "and its result is stored in :attr:`~type.__mro__`."
 msgstr ""
+"Este método se puede anular por una metaclase para personalizar el orden de "
+"resolución de métodos para sus instancias. Se llama en la instanciación de "
+"la clase, y su resultado se almacena en :attr:`~type.__mro__`."
 
 #: ../Doc/reference/datamodel.rst:1062
 msgid ""
@@ -1670,6 +1673,9 @@ msgid ""
 "method returns a list of all those references still alive. The list is in "
 "definition order. Example:"
 msgstr ""
+"Cada clase mantiene una lista de referencias débiles a sus subclases "
+"inmediatas. Este método retorna una lista de todas esas referencias aún "
+"vivas. La lista está en orden de definición. Ejemplo:"
 
 #: ../Doc/reference/datamodel.rst:1066
 msgid ""
@@ -1678,13 +1684,16 @@ msgid ""
 ">>> A.__subclasses__()\n"
 "[<class 'B'>]"
 msgstr ""
+">>> class A: pass\n"
+">>> class B(A): pass\n"
+">>> A.__subclasses__()\n"
+"[<class 'B'>]"
 
 #: ../Doc/reference/datamodel.rst:1074
 msgid "Class instances"
 msgstr "Instancias de clase"
 
 #: ../Doc/reference/datamodel.rst:1082
-#, fuzzy
 msgid ""
 "A class instance is created by calling a class object (see above).  A class "
 "instance has a namespace implemented as a dictionary which is the first "
@@ -1707,14 +1716,14 @@ msgstr ""
 "instancia tiene un atributo con ese nombre, la búsqueda continúa con los "
 "atributos de la clase. Si se encuentra un atributo de clase que es un objeto "
 "de función definido por el usuario, se transforma en un objeto de método de "
-"instancia cuyo atributo :attr:`__self__` es la instancia. Los objetos de "
-"métodos estáticos y de clases también se transforman; consulte más arriba en "
-"\"Clases\". Consulte la sección :ref:`descriptors` para conocer otra forma "
-"en la que los atributos de una clase recuperados a través de sus instancias "
-"pueden diferir de los objetos realmente almacenados en el :attr:`~object."
-"__dict__` de la clase. Si no se encuentra ningún atributo de clase y la "
-"clase del objeto tiene un método :meth:`~object.__getattr__`, se llama para "
-"satisfacer la búsqueda."
+"instancia cuyo atributo :attr:`~method.__self__` es la instancia. Los "
+"objetos de métodos estáticos y de clases también se transforman; consulte "
+"más arriba en \"Clases\". Consulte la sección :ref:`descriptors` para "
+"conocer otra forma en la que los atributos de una clase recuperados a través "
+"de sus instancias pueden diferir de los objetos realmente almacenados en el :"
+"attr:`~object.__dict__` de la clase. Si no se encuentra ningún atributo de "
+"clase y la clase del objeto tiene un método :meth:`~object.__getattr__`, se "
+"llama para satisfacer la búsqueda."
 
 #: ../Doc/reference/datamodel.rst:1098
 msgid ""
@@ -1739,7 +1748,7 @@ msgstr ""
 
 #: ../Doc/reference/datamodel.rst:1120
 msgid "The class to which a class instance belongs."
-msgstr ""
+msgstr "La clase a la que pertenece una instancia de clase."
 
 #: ../Doc/reference/datamodel.rst:1124
 msgid ""
@@ -1747,6 +1756,9 @@ msgid ""
 "attributes. Not all instances have a :attr:`!__dict__` attribute; see the "
 "section on :ref:`slots` for more details."
 msgstr ""
+"Un diccionario u otro objeto de mapeo utilizado para almacenar los atributos "
+"(escribibles) de un objeto. No todas las instancias tienen un atributo :attr:"
+"`!__dict__`; vea la sección sobre :ref:`slots` para más detalles."
 
 #: ../Doc/reference/datamodel.rst:1130
 msgid "I/O objects (also known as file objects)"
@@ -1820,14 +1832,12 @@ msgstr ""
 "objetos mutables."
 
 #: ../Doc/reference/datamodel.rst:1211
-#, fuzzy
 msgid "The function name"
-msgstr "El nombre de la función."
+msgstr "El nombre de la función"
 
 #: ../Doc/reference/datamodel.rst:1214
-#, fuzzy
 msgid "The fully qualified function name"
-msgstr "El nombre de la función."
+msgstr "El nombre de la función completamente calificado"
 
 #: ../Doc/reference/datamodel.rst:1219
 msgid ""
@@ -1835,91 +1845,118 @@ msgid ""
 "positional-only parameters and parameters with default values) that the "
 "function has"
 msgstr ""
+"El número total de :term:`parámetros <parameter>` posicionales (incluye los "
+"parámetros solo posicionales y los parámetros con valores predeterminados) "
+"que tiene la función"
 
 #: ../Doc/reference/datamodel.rst:1224
 msgid ""
 "The number of positional-only :term:`parameters <parameter>` (including "
 "arguments with default values) that the function has"
 msgstr ""
+"El número de :term:`parámetros <parameter>` solo posicionales (incluye "
+"argumentos con valores predeterminados) que tiene la función"
 
 #: ../Doc/reference/datamodel.rst:1228
 msgid ""
 "The number of keyword-only :term:`parameters <parameter>` (including "
 "arguments with default values) that the function has"
 msgstr ""
+"El número de :term:`parámetros <parameter>` de solo palabras clave (incluye "
+"argumentos con valores predeterminados) que tiene la función"
 
 #: ../Doc/reference/datamodel.rst:1232
 msgid ""
 "The number of :ref:`local variables <naming>` used by the function "
 "(including parameters)"
 msgstr ""
+"El número de :ref:`variables locales <naming>` utilizadas por la función "
+"(incluye los parámetros)"
 
 #: ../Doc/reference/datamodel.rst:1236
 msgid ""
 "A :class:`tuple` containing the names of the local variables in the function "
 "(starting with the parameter names)"
 msgstr ""
+"Un objeto :class:`tuple` que contiene los nombres de las variables locales "
+"en la función (empezando por los nombres de los parámetros)"
 
 #: ../Doc/reference/datamodel.rst:1240
 msgid ""
 "A :class:`tuple` containing the names of :ref:`local variables <naming>` "
 "that are referenced by nested functions inside the function"
 msgstr ""
+"Un objeto :class:`tuple` que contiene los nombres de las :ref:`variables "
+"locales <naming>` a las que hacen referencia las funciones anidadas dentro "
+"de la función"
 
 #: ../Doc/reference/datamodel.rst:1244
 msgid "A :class:`tuple` containing the names of free variables in the function"
 msgstr ""
+"Un objeto :class:`tuple` que contiene los nombres de las variables libres en "
+"la función"
 
 #: ../Doc/reference/datamodel.rst:1247
 msgid ""
 "A string representing the sequence of :term:`bytecode` instructions in the "
 "function"
 msgstr ""
+"Una cadena de caracteres que representa la secuencia de instrucciones :term:"
+"`bytecode` en la función"
 
 #: ../Doc/reference/datamodel.rst:1251
 msgid ""
 "A :class:`tuple` containing the literals used by the :term:`bytecode` in the "
 "function"
 msgstr ""
+"Un objeto :class:`tuple` que contiene los literales utilizados por :term:"
+"`bytecode` en la función"
 
 #: ../Doc/reference/datamodel.rst:1255
 msgid ""
 "A :class:`tuple` containing the names used by the :term:`bytecode` in the "
 "function"
 msgstr ""
+"Un objeto :class:`tuple` que contiene los nombres utilizados por :term:"
+"`bytecode` en la función"
 
 #: ../Doc/reference/datamodel.rst:1259
-#, fuzzy
 msgid "The name of the file from which the code was compiled"
-msgstr "El nombre del módulo en el que se definió la clase."
+msgstr "El nombre del archivo en el que se compiló el código"
 
 #: ../Doc/reference/datamodel.rst:1262
 msgid "The line number of the first line of the function"
-msgstr ""
+msgstr "El número de línea de la primer línea de la función"
 
 #: ../Doc/reference/datamodel.rst:1265
 msgid ""
 "A string encoding the mapping from :term:`bytecode` offsets to line numbers. "
 "For details, see the source code of the interpreter."
 msgstr ""
+"Una cadena de caracteres que codifica la asignación de las compensaciones "
+"de :term:`bytecode` a los números de línea. Para obtener más detalles, vea "
+"el código fuente del intérprete."
 
 #: ../Doc/reference/datamodel.rst:1268
 msgid ""
 "This attribute of code objects is deprecated, and may be removed in Python "
 "3.14."
 msgstr ""
+"Este atributo de los objetos de código está obsoleto, y puede ser eliminado "
+"en Python 3.14."
 
 #: ../Doc/reference/datamodel.rst:1273
 msgid "The required stack size of the code object"
-msgstr ""
+msgstr "El tamaño de pila requerido del objeto de código"
 
 #: ../Doc/reference/datamodel.rst:1276
 msgid ""
 "An :class:`integer <int>` encoding a number of flags for the interpreter."
 msgstr ""
+"Un :class:`entero <int>` que codifica un número de banderas para el "
+"intérprete."
 
 #: ../Doc/reference/datamodel.rst:1281
-#, fuzzy
 msgid ""
 "The following flag bits are defined for :attr:`~codeobject.co_flags`: bit "
 "``0x04`` is set if the function uses the ``*arguments`` syntax to accept an "
@@ -1929,15 +1966,16 @@ msgid ""
 "`inspect-module-co-flags` for details on the semantics of each flags that "
 "might be present."
 msgstr ""
-"Los siguientes bits de bandera son definidos por :attr:`co_flags` : bit "
-"``0x04`` es establecido si la función utiliza la sintaxis ``*arguments`` "
-"para aceptar un número arbitrario de argumentos posicionales; bit ``0x08`` "
-"es establecido si la función utiliza la sintaxis ``**keywords`` para aceptar "
-"argumentos de palabras clave arbitrarios; bit ``0x20`` es establecido si la "
-"función es un generador."
+"Los siguientes bits de bandera son definidos por :attr:`~codeobject."
+"co_flags`: el bit ``0x04`` es establecido si la función utiliza la sintaxis "
+"``*arguments`` para aceptar un número arbitrario de argumentos posicionales; "
+"el bit ``0x08`` es establecido si la función utiliza la sintaxis "
+"``**keywords`` para aceptar argumentos de palabras clave arbitrarios; el bit "
+"``0x20`` es establecido si la función es un generador. Vea :ref:`inspect-"
+"module-co-flags` para más detalles sobre la semántica de cada bandera que "
+"pueda estar presente."
 
 #: ../Doc/reference/datamodel.rst:1289
-#, fuzzy
 msgid ""
 "Future feature declarations (``from __future__ import division``) also use "
 "bits in :attr:`~codeobject.co_flags` to indicate whether a code object was "
@@ -1946,56 +1984,52 @@ msgid ""
 "``0x1000`` were used in earlier versions of Python."
 msgstr ""
 "Declaraciones de características futuras (``from __future__ import "
-"division``) también utiliza bits en :attr:`co_flags` para indicar si el "
-"objeto de código fue compilado con alguna característica particular "
-"habilitada: el bit ``0x2000`` es establecido si la función fue compilada con "
-"división futura habilitada; los bits ``0x10`` y ``0x1000`` fueron utilizados "
-"en versiones previas de Python."
+"division``) también utiliza bits en :attr:`~codeobject.co_flags` para "
+"indicar si el objeto de código fue compilado con alguna característica "
+"particular habilitada: el bit ``0x2000`` es establecido si la función fue "
+"compilada con división futura habilitada; los bits ``0x10`` y ``0x1000`` "
+"fueron utilizados en versiones previas de Python."
 
 #: ../Doc/reference/datamodel.rst:1295
-#, fuzzy
 msgid ""
 "Other bits in :attr:`~codeobject.co_flags` are reserved for internal use."
-msgstr "Otros bits en :attr:`co_flags` son reservados para uso interno."
+msgstr ""
+"Otros bits en :attr:`~codeobject.co_flags` son reservados para uso interno."
 
 #: ../Doc/reference/datamodel.rst:1299
-#, fuzzy
 msgid ""
 "If a code object represents a function, the first item in :attr:`~codeobject."
 "co_consts` is the documentation string of the function, or ``None`` if "
 "undefined."
 msgstr ""
 "Si un objeto de código representa una función, el primer elemento en :attr:"
-"`co_consts` es la cadena de documentación de la función, o ``None`` si no "
-"está definido."
+"`~codeobject.co_consts` es la cadena de documentación de la función, o "
+"``None`` si no está definido."
 
 #: ../Doc/reference/datamodel.rst:1304
-#, fuzzy
 msgid "Methods on code objects"
-msgstr "Objetos de código"
+msgstr "Métodos en objetos de código"
 
 #: ../Doc/reference/datamodel.rst:1308
-#, fuzzy
 msgid ""
 "Returns an iterable over the source code positions of each :term:`bytecode` "
 "instruction in the code object."
 msgstr ""
 "Retorna un iterable sobre las posiciones del código fuente de cada "
-"instrucción de código de bytes en el objeto de código."
+"instrucción de :term:`bytecode` en el objeto de código."
 
 #: ../Doc/reference/datamodel.rst:1311
-#, fuzzy
 msgid ""
 "The iterator returns :class:`tuple`\\s containing the ``(start_line, "
 "end_line, start_column, end_column)``. The *i-th* tuple corresponds to the "
 "position of the source code that compiled to the *i-th* code unit. Column "
 "information is 0-indexed utf-8 byte offsets on the given source line."
 msgstr ""
-"El iterador retorna tuplas que contienen ``(start_line, end_line, "
-"start_column, end_column)``. La tupla *i-th* corresponde a la posición del "
-"código fuente que se compiló en la instrucción *i-th*. La información de la "
-"columna son compensaciones de utf-8 bytes indexadas en 0 en la línea de "
-"origen dada."
+"El iterador retorna objetos :class:`tuple` que contienen ``(start_line, "
+"end_line, start_column, end_column)``. La tupla *i-ésima* corresponde a la "
+"posición del código fuente que se compiló en la unidad de código *i-ésima*. "
+"La información de la columna son compensaciones de utf-8 bytes indexadas en "
+"0 en la línea de origen dada."
 
 #: ../Doc/reference/datamodel.rst:1317
 msgid ""
@@ -2057,18 +2091,25 @@ msgid ""
 "`bytecode`\\s. Each item yielded is a ``(start, end, lineno)`` :class:"
 "`tuple`:"
 msgstr ""
+"Retorna un iterador que produce información sobre rangos sucesivos de "
+"objetos :term:`bytecode`. Cada elemento que se produjo es un objeto :class:"
+"`tuple`: ``(start, end, lineno)``:"
 
 #: ../Doc/reference/datamodel.rst:1345
 msgid ""
 "``start`` (an :class:`int`) represents the offset (inclusive) of the start "
 "of the :term:`bytecode` range"
 msgstr ""
+"``start`` (un objeto :class:`int`) representa la compensación (incluido) del "
+"inicio del rango de :term:`bytecode`"
 
 #: ../Doc/reference/datamodel.rst:1347
 msgid ""
 "``end`` (an :class:`int`) represents the offset (exclusive) of the end of "
 "the :term:`bytecode` range"
 msgstr ""
+"``end`` (un objeto :class:`int`) representa el desplazamiento (excluido) del "
+"final del rango de :term:`bytecode`"
 
 #: ../Doc/reference/datamodel.rst:1349
 msgid ""
@@ -2076,14 +2117,17 @@ msgid ""
 "`bytecode` range, or ``None`` if the bytecodes in the given range have no "
 "line number"
 msgstr ""
+"``lineno`` es un objeto :class:`int` que representa el número de línea del "
+"rango de :term:`bytecode`, o ``None`` si los códigos de bytes en el rango "
+"dado no tienen número de línea"
 
 #: ../Doc/reference/datamodel.rst:1353
 msgid "The items yielded will have the following properties:"
-msgstr ""
+msgstr "Los elementos producidos tendrán las siguientes propiedades:"
 
 #: ../Doc/reference/datamodel.rst:1355
 msgid "The first range yielded will have a ``start`` of 0."
-msgstr ""
+msgstr "El primer rango producido tendrá un elemento ``start`` de 0."
 
 #: ../Doc/reference/datamodel.rst:1356
 msgid ""
@@ -2091,16 +2135,21 @@ msgid ""
 "for any pair of :class:`tuple`\\s, the ``start`` of the second will be equal "
 "to the ``end`` of the first."
 msgstr ""
+"Los rangos ``(start, end)`` serán no decrecientes y consecutivos. Esto es, "
+"para cualquier par de objetos :class:`tuple`, el elemento ``start`` del "
+"segundo será igual al elemento ``end`` del primero."
 
 #: ../Doc/reference/datamodel.rst:1359
 msgid "No range will be backwards: ``end >= start`` for all triples."
-msgstr ""
+msgstr "Ningún rango será inverso: ``end >= start`` para todas las tripletas."
 
 #: ../Doc/reference/datamodel.rst:1360
 msgid ""
 "The last :class:`tuple` yielded will have ``end`` equal to the size of the :"
 "term:`bytecode`."
 msgstr ""
+"El último objeto :class:`tuple` producido tendrá el elemento ``end`` igual "
+"al tamaño de :term:`bytecode`."
 
 #: ../Doc/reference/datamodel.rst:1363
 msgid ""
@@ -2108,38 +2157,45 @@ msgid ""
 "are used for lines that are present in the source code, but have been "
 "eliminated by the :term:`bytecode` compiler."
 msgstr ""
+"Se permiten rangos de ancho cero, donde ``start == end``. Los rangos de "
+"ancho cero se utilizan para las líneas que están presentes en el código "
+"fuente, pero que han sido eliminadas por el compilador :term:`bytecode`."
 
 #: ../Doc/reference/datamodel.rst:1371
 msgid ":pep:`626` - Precise line numbers for debugging and other tools."
 msgstr ""
+":pep:`626` - Números de línea precisos para depuración y otras herramientas."
 
 #: ../Doc/reference/datamodel.rst:1372
 msgid "The PEP that introduced the :meth:`!co_lines` method."
-msgstr ""
+msgstr "El PEP que introdujo el método :meth:`!co_lines`."
 
 #: ../Doc/reference/datamodel.rst:1376
 msgid ""
 "Return a copy of the code object with new values for the specified fields."
 msgstr ""
+"Retorna una copia del objeto de código con nuevos valores para los campos "
+"especificados."
 
 #: ../Doc/reference/datamodel.rst:1378
 msgid ""
 "Code objects are also supported by the generic function :func:`copy.replace`."
 msgstr ""
+"Los objetos de código también son compatibles con la función genérica :func:"
+"`copy.replace`."
 
 #: ../Doc/reference/datamodel.rst:1386
 msgid "Frame objects"
 msgstr "Objetos de marco"
 
 #: ../Doc/reference/datamodel.rst:1390
-#, fuzzy
 msgid ""
 "Frame objects represent execution frames.  They may occur in :ref:`traceback "
 "objects <traceback-objects>`, and are also passed to registered trace "
 "functions."
 msgstr ""
-"Los objetos de marco representan marcos de ejecución. Pueden ocurrir en "
-"objetos de rastreo (ver a continuación), y son también pasados hacia "
+"Los objetos de marco representan marcos de ejecución. Pueden ocurrir en :ref:"
+"`objetos de rastreo <traceback-objects>`, y son también pasados hacia "
 "funciones de rastreo registradas."
 
 #: ../Doc/reference/datamodel.rst:1408
@@ -2147,24 +2203,30 @@ msgid ""
 "Points to the previous stack frame (towards the caller), or ``None`` if this "
 "is the bottom stack frame"
 msgstr ""
+"Apunta al marco de pila anterior (hacia el que hace la llamada), o ``None`` "
+"si este es el marco de pila inferior"
 
 #: ../Doc/reference/datamodel.rst:1412
-#, fuzzy
 msgid ""
 "The :ref:`code object <code-objects>` being executed in this frame. "
 "Accessing this attribute raises an :ref:`auditing event <auditing>` ``object."
 "__getattr__`` with arguments ``obj`` and ``\"f_code\"``."
 msgstr ""
-"Para ciertos accesos a atributos sensibles, lanza un :ref:`evento de "
-"auditoría <auditing>` ``object.__getattr__`` con los argumentos ``obj`` y "
-"``name``."
+"El :ref:`objeto de código <code-objects>` que se está ejecutando en este "
+"marco. Al acceder a este atributo se lanza un :ref:`evento de auditoría "
+"<auditing>` ``object.__getattr__`` con los argumentos ``obj`` y "
+"``\"f_code\"``."
 
+# Cómo puede quedar esta traducción, para que no quede como: "hace referencia a un :term:`optimized scope`"?
 #: ../Doc/reference/datamodel.rst:1417
 msgid ""
 "The mapping used by the frame to look up :ref:`local variables <naming>`. If "
 "the frame refers to an :term:`optimized scope`, this may return a write-"
 "through proxy object."
 msgstr ""
+"La asignación que utiliza el marco para buscar :ref:`variables locales "
+"<naming>`. Si el marco hace referencia a un :term:`optimized scope`, esto "
+"puede retornar un objeto proxy de escritura directa."
 
 #: ../Doc/reference/datamodel.rst:1422
 msgid "Return a proxy for optimized scopes."
