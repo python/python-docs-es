@@ -56,6 +56,9 @@ do_build:
 setup: venv
 	git submodule sync
 	git submodule update --init --force --depth 1 $(CPYTHON_PATH)
+	# Now that we've initialized the submodules, install all requirements necessary for the build
+	$(VENV)/bin/python -m pip install -q -r requirements.txt
+	
 
 
 # venv: create a virtual environment which will be used by almost every
@@ -66,7 +69,7 @@ venv:
 		$(PYTHON) -m venv --prompt $(LANGUAGE_TEAM) $(VENV);             \
 	fi
 
-	$(VENV)/bin/python -m pip install -q -r requirements.txt
+	$(VENV)/bin/python -m pip install -q -r requirements-own.txt
 
 
 # serve: serve the documentation in a simple local web server, using cpython
