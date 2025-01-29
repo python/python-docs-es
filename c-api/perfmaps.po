@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Python en Español 3.12\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-21 16:38-0300\n"
-"PO-Revision-Date: 2025-01-28 17:53-0300\n"
+"PO-Revision-Date: 2025-01-29 12:14-0300\n"
 "Last-Translator: srmorita <fr.morac@duocuc.cl>\n"
 "Language-Team: es <LL@li.org>\n"
 "Language: es\n"
@@ -21,9 +21,10 @@ msgstr ""
 "Generated-By: Babel 2.16.0\n"
 "X-Generator: Poedit 3.5\n"
 
+# No estoy seguro de traducir Perfs a Perfiles. No encuentro traducciones similares. Creo debe quedar en Inglés.
 #: ../Doc/c-api/perfmaps.rst:6
 msgid "Support for Perf Maps"
-msgstr ""
+msgstr "Soporte para Mapeos Perfs"
 
 #: ../Doc/c-api/perfmaps.rst:8
 msgid ""
@@ -36,18 +37,31 @@ msgid ""
 "Perf tool <https://git.kernel.org/pub/scm/linux/ kernel/git/torvalds/"
 "linux.git/tree/tools/perf/Documentation/jit-interface.txt>`_."
 msgstr ""
+"En las plataformas soportadas (en el momento de escribir esto, sólo Linux), "
+"el tiempo de ejecución puede aprovechar *perf map files* para hacer que las "
+"funciones de Python sean visibles para una herramienta externa de perfiles "
+"(como `perf <https://perf.wiki.kernel.org/index.php/Main_Page>`_). Un "
+"proceso en ejecución puede crear un fichero en el directorio ``/tmp``, que "
+"contiene entradas que pueden asignar una sección de código ejecutable a un "
+"nombre. Esta interfaz se describe en la `documentación de la herramienta "
+"Perf de Linux <https://git.kernel.org/pub/scm/linux/ kernel/git/torvalds/"
+"linux.git/tree/tools/perf/Documentation/jit-interface.txt>`_."
 
 #: ../Doc/c-api/perfmaps.rst:16
 msgid ""
 "In Python, these helper APIs can be used by libraries and features that rely "
 "on generating machine code on the fly."
 msgstr ""
+"En Python, estas API auxiliares pueden ser utilizadas por bibliotecas y "
+"funciones que dependen de la generación de código de máquina sobre la marcha."
 
 #: ../Doc/c-api/perfmaps.rst:19
 msgid ""
 "Note that holding the Global Interpreter Lock (GIL) is not required for "
 "these APIs."
 msgstr ""
+"Tenga en cuenta que para estas APIs no es necesario mantener el Bloqueo "
+"Global del Intérprete (GIL)."
 
 #: ../Doc/c-api/perfmaps.rst:23
 msgid ""
@@ -58,8 +72,17 @@ msgid ""
 "use :c:func:`PyUnstable_WritePerfMapEntry` and it will initialize the state "
 "on first call."
 msgstr ""
+"Abra el archivo ``/tmp/perf-$pid.map``, a menos que ya esté abierto, y crea "
+"un bloqueo para garantizar escrituras seguras para hilos en el archivo "
+"(siempre que las escrituras se realicen "
+"mediante :c:func:`PyUnstable_WritePerfMapEntry`). Normalmente, no es "
+"necesario llamar a esto explícitamente; solo "
+"use :c:func:`PyUnstable_WritePerfMapEntry` e inicializará el estado en la "
+"primera llamada."
 
+# Usando el script para otros usos, se indica como bloueante o bloqueo.
 #: ../Doc/c-api/perfmaps.rst:29
+#, fuzzy
 msgid ""
 "Returns ``0`` on success, ``-1`` on failure to create/open the perf map "
 "file, or ``-2`` on failure to create a lock. Check ``errno`` for more "
@@ -69,17 +92,18 @@ msgstr ""
 "fichero perf map, o ``-2`` en caso de fallo al crear un bloqueo. Comprueba "
 "``errno`` para más información sobre la causa de un fallo."
 
+# Revisando el script y memoria de traducción creo que la traducción quedaría así.
 #: ../Doc/c-api/perfmaps.rst:35
+#, fuzzy
 msgid ""
 "Write one single entry to the ``/tmp/perf-$pid.map`` file. This function is "
 "thread safe. Here is what an example entry looks like::"
 msgstr ""
 "Escribe una única entrada en el fichero ``/tmp/perf-$pid.map``. Esta función "
-"es de hilo seguro. Aquí hay un ejemplo de entrada::"
+"es segura para hilos. Aquí hay un ejemplo de entrada::"
 
 # creo que esto debe quedar igual. Es solo código fuente.
 #: ../Doc/c-api/perfmaps.rst:38
-#, fuzzy
 msgid ""
 "# address      size  name\n"
 "7f3529fcf759 b     py::bar:/run/t.py"
