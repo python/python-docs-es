@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-21 16:38-0300\n"
-"PO-Revision-Date: 2025-02-05 16:21-0300\n"
+"PO-Revision-Date: 2025-02-05 16:53-0300\n"
 "Last-Translator: srmorita <fr.morac@duocuc.cl>\n"
 "Language-Team: python-doc-es (https://mail.python.org/mailman3/lists/docs-"
 "es.python.org)\n"
@@ -84,7 +84,6 @@ msgstr ""
 "``NULL``, esto retornará ``NULL`` y causará un :exc:`TypeError`."
 
 #: ../Doc/c-api/weakref.rst:44
-#, fuzzy
 msgid ""
 "Return a weak reference proxy object for the object *ob*.  This will always "
 "return a new reference, but is not guaranteed to create a new object; an "
@@ -103,7 +102,7 @@ msgstr ""
 "aceptar un solo parámetro, el cual será el mismo objeto de referencia débil. "
 "*callback* también puede ser ``None`` o ``NULL``. Si *ob* no es un objeto "
 "que puede ser referido de forma débil, o si *callback* no es invocable, "
-"``None``, o ``NULL``, esto retornará ``NULL``  y causará un :exc:`TypeError`."
+"``None``, o ``NULL``, esto retornará ``NULL`` y causará un :exc:`TypeError`."
 
 #: ../Doc/c-api/weakref.rst:56
 msgid ""
@@ -118,24 +117,26 @@ msgid ""
 "On success, set *\\*pobj* to a new :term:`strong reference` to the "
 "referenced object and return 1."
 msgstr ""
+"En caso de éxito, asigna *\\*pobj* en un nuevo :term:`strong reference` al "
+"objeto referenciado y asigna 1."
 
 #: ../Doc/c-api/weakref.rst:61
 msgid "If the reference is dead, set *\\*pobj* to ``NULL`` and return 0."
 msgstr ""
-"Si la referencia está inactiva, asigna *\\*pobj* to ``NULL`` y retorna 0."
+"Si la referencia está inactiva, asigna *\\*pobj* a ``NULL`` y retorna 0."
 
 #: ../Doc/c-api/weakref.rst:62
 msgid "On error, raise an exception and return -1."
 msgstr "En caso de error, lanza una excepción y devuelve -1."
 
 #: ../Doc/c-api/weakref.rst:69
-#, fuzzy
 msgid ""
 "Return a :term:`borrowed reference` to the referenced object from a weak "
 "reference, *ref*.  If the referent is no longer live, returns ``Py_None``."
 msgstr ""
-"Retorna el objeto referenciado desde una referencia débil, *ref*. Si el "
-"referente no está vivo, retornará :const:`Py_None`."
+"Retorna un :term:`borrowed reference` del objeto referenciado desde una "
+"referencia débil, *ref*. Si el referente ya no está activo, retorna "
+"``Py_None``."
 
 #: ../Doc/c-api/weakref.rst:74
 msgid ""
@@ -146,7 +147,7 @@ msgid ""
 msgstr ""
 "Esta función retorna una referencia :term:`borrowed reference` al objeto "
 "referenciado. Esto significa que siempre debe llamar a :c:func:`Py_INCREF` "
-"sobre el objeto, excepto cuando no pueda ser destruido antes del último uso "
+"sobre el objeto excepto cuando no pueda ser destruido antes del último uso "
 "de la referencia prestada."
 
 #: ../Doc/c-api/weakref.rst:79 ../Doc/c-api/weakref.rst:87
@@ -154,11 +155,10 @@ msgid "Use :c:func:`PyWeakref_GetRef` instead."
 msgstr "Utiliza :c:func:`PyWeakref_GetRef` en su lugar."
 
 #: ../Doc/c-api/weakref.rst:85
-#, fuzzy
 msgid "Similar to :c:func:`PyWeakref_GetObject`, but does no error checking."
 msgstr ""
-"Similar a :c:func:`PyWeakref_GetObject`, pero implementado como un macro que "
-"no verifica errores."
+"Similar a :c:func:`PyWeakref_GetObject`, pero no realiza ninguna "
+"comprobación de errores."
 
 #: ../Doc/c-api/weakref.rst:93
 msgid ""
@@ -174,10 +174,13 @@ msgid ""
 "for those references which have one. It returns when all callbacks have been "
 "attempted."
 msgstr ""
+"Esto recorre las referencias débiles de *object* e invoca retrollamadas para "
+"aquellas referencias que tengan una. Retorna cuando se han intentado todas "
+"las retrollamadas."
 
 #: ../Doc/c-api/weakref.rst:103
 msgid "Clears the weakrefs for *object* without calling the callbacks."
-msgstr ""
+msgstr "Borra las weakrefs para *object* sin llamar a las retrollamadas."
 
 #: ../Doc/c-api/weakref.rst:105
 msgid ""
@@ -187,6 +190,12 @@ msgid ""
 "and call their callbacks, then the finalizer, and finally this function to "
 "clear any weakrefs that may have been created by the finalizer."
 msgstr ""
+"Esta función es invocada por el gestor :c:member:`~PyTypeObject.tp_dealloc` "
+"para tipos con finalizadores (i.e., :meth:`~object.__del__`). El gestor de "
+"esos objetos primero llama a :c:func:`PyObject_ClearWeakRefs` para borrar "
+"las weakrefs y llamar a sus callbacks, luego al finalizador, y finalmente a "
+"esta función para borrar cualquier weakref que pueda haber sido creada por "
+"el finalizador."
 
 #: ../Doc/c-api/weakref.rst:111
 msgid ""
@@ -194,3 +203,6 @@ msgid ""
 "use :c:func:`PyObject_ClearWeakRefs` to clear weakrefs instead of this "
 "function."
 msgstr ""
+"En la mayoría de los casos, es más apropiado "
+"utilizar :c:func:`PyObject_ClearWeakRefs` para borrar las weakrefs en lugar "
+"de esta función."
