@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-21 16:38-0300\n"
-"PO-Revision-Date: 2024-11-18 15:17-0300\n"
+"PO-Revision-Date: 2025-01-01 17:41-0500\n"
 "Last-Translator: Carlos A. Crespo <lvccrespo@gmail.com>\n"
-"Language: es_AR\n"
 "Language-Team: python-doc-es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es_AR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.16.0\n"
+"X-Generator: Poedit 3.5\n"
 
 #: ../Doc/reference/compound_stmts.rst:5
 msgid "Compound statements"
@@ -84,7 +85,7 @@ msgstr ""
 
 #: ../Doc/reference/compound_stmts.rst:37
 msgid "if test1: if test2: print(x)"
-msgstr ""
+msgstr "if test1: if test2: print(x)"
 
 #: ../Doc/reference/compound_stmts.rst:39
 msgid ""
@@ -98,7 +99,7 @@ msgstr ""
 
 #: ../Doc/reference/compound_stmts.rst:43
 msgid "if x < y < z: print(x); print(y); print(z)"
-msgstr ""
+msgstr "if x < y < z: print(x); print(y); print(z)"
 
 #: ../Doc/reference/compound_stmts.rst:45
 msgid "Summarizing:"
@@ -243,6 +244,8 @@ msgstr ""
 "sobrescribe todas las asignaciones anteriores a esas variables, incluidas "
 "las realizadas en la suite del bucle ``for``::"
 
+# No se pueden traducir los commentarios hasta que pospell tenga la habilidad
+# de entender líneas de código.
 #: ../Doc/reference/compound_stmts.rst:183
 msgid ""
 "for i in range(10):\n"
@@ -251,6 +254,11 @@ msgid ""
 "                      # because i will be overwritten with the next\n"
 "                      # index in the range"
 msgstr ""
+"for i in range(10):\n"
+"    print(i)\n"
+"    i = 5             # this will not affect the for-loop\n"
+"                      # because i will be overwritten with the next\n"
+"                      # index in the range"
 
 #: ../Doc/reference/compound_stmts.rst:193
 msgid ""
@@ -299,7 +307,6 @@ msgid ":keyword:`!except` clause"
 msgstr "Cláusula :keyword:`!except`"
 
 #: ../Doc/reference/compound_stmts.rst:241
-#, fuzzy
 msgid ""
 "The :keyword:`!except` clause(s) specify one or more exception handlers. "
 "When no exception occurs in the :keyword:`try` clause, no exception handler "
@@ -316,13 +323,7 @@ msgstr ""
 "controlador de excepciones. Esta búsqueda inspecciona las cláusulas :keyword:"
 "`!except` a su vez hasta que se encuentra una que coincida con la excepción. "
 "Una cláusula :keyword:`!except` sin expresión, si está presente, debe ser la "
-"última; coincide con cualquier excepción. Para una cláusula :keyword:`!"
-"except` con una expresión, esa expresión se evalúa y la cláusula coincide "
-"con la excepción si el objeto resultante es \"compatible\" con la excepción. "
-"Un objeto es compatible con una excepción si el objeto es la clase o un :"
-"term:`non-virtual base class <abstract base class>` del objeto de excepción, "
-"o una tupla que contiene un elemento que es la clase o una clase base no "
-"virtual del objeto de excepción."
+"última; coincide con cualquier excepción."
 
 #: ../Doc/reference/compound_stmts.rst:249
 msgid ""
@@ -332,6 +333,11 @@ msgid ""
 "the class or a :term:`non-virtual base class <abstract base class>` of the "
 "exception object, or to a tuple that contains such a class."
 msgstr ""
+"Para una cláusula de :keyword:`!except`con una expresión, la expresión debe "
+"evaluar a un tipo de excepción o un tupla de tipos de excepciones. La "
+"excepción generada coincide con una cláusula :keyword:`!except` cuya "
+"expresión evaluá a la clase o una :term:`clase base no virtual <abstract "
+"base class>` del objeto excepción, o una tupla que contiene dicha clase."
 
 #: ../Doc/reference/compound_stmts.rst:255
 msgid ""
@@ -393,6 +399,8 @@ msgid ""
 "except E as N:\n"
 "    foo"
 msgstr ""
+"except E as N:\n"
+"    foo"
 
 #: ../Doc/reference/compound_stmts.rst:284
 msgid "was translated to ::"
@@ -406,6 +414,11 @@ msgid ""
 "    finally:\n"
 "        del N"
 msgstr ""
+"except E as N:\n"
+"    try:\n"
+"        foo\n"
+"    finally:\n"
+"        del N"
 
 #: ../Doc/reference/compound_stmts.rst:292
 msgid ""
@@ -457,6 +470,23 @@ msgid ""
 ">>> print(sys.exception())\n"
 "None"
 msgstr ""
+">>> print(sys.exception())\n"
+"None\n"
+">>> try:\n"
+"...     raise TypeError\n"
+"... except:\n"
+"...     print(repr(sys.exception()))\n"
+"...     try:\n"
+"...          raise ValueError\n"
+"...     except:\n"
+"...         print(repr(sys.exception()))\n"
+"...     print(repr(sys.exception()))\n"
+"...\n"
+"TypeError()\n"
+"ValueError()\n"
+"TypeError()\n"
+">>> print(sys.exception())\n"
+"None"
 
 #: ../Doc/reference/compound_stmts.rst:333
 msgid ":keyword:`!except*` clause"
@@ -464,15 +494,15 @@ msgstr "Cláusula :keyword:`!except*`"
 
 #: ../Doc/reference/compound_stmts.rst:335
 msgid ""
-"The :keyword:`!except*` clause(s) are used for handling :exc:"
-"`ExceptionGroup`\\s. The exception type for matching is interpreted as in "
-"the case of :keyword:`except`, but in the case of exception groups we can "
-"have partial matches when the type matches some of the exceptions in the "
-"group. This means that multiple :keyword:`!except*` clauses can execute, "
-"each handling part of the exception group. Each clause executes at most once "
-"and handles an exception group of all matching exceptions.  Each exception "
-"in the group is handled by at most one :keyword:`!except*` clause, the first "
-"that matches it. ::"
+"The :keyword:`!except*` clause(s) are used for handling :exc:`ExceptionGroup`"
+"\\s. The exception type for matching is interpreted as in the case of :"
+"keyword:`except`, but in the case of exception groups we can have partial "
+"matches when the type matches some of the exceptions in the group. This "
+"means that multiple :keyword:`!except*` clauses can execute, each handling "
+"part of the exception group. Each clause executes at most once and handles "
+"an exception group of all matching exceptions.  Each exception in the group "
+"is handled by at most one :keyword:`!except*` clause, the first that matches "
+"it. ::"
 msgstr ""
 "La(s) cláusula(s) :keyword:`!except*` se utilizan para manejar :exc:"
 "`ExceptionGroup`\\s. El tipo de excepción para la coincidencia se interpreta "
@@ -504,6 +534,22 @@ msgid ""
 "    | ValueError: 1\n"
 "    +------------------------------------"
 msgstr ""
+">>> try:\n"
+"...     raise ExceptionGroup(\"eg\",\n"
+"...         [ValueError(1), TypeError(2), OSError(3), OSError(4)])\n"
+"... except* TypeError as e:\n"
+"...     print(f'caught {type(e)} with nested {e.exceptions}')\n"
+"... except* OSError as e:\n"
+"...     print(f'caught {type(e)} with nested {e.exceptions}')\n"
+"...\n"
+"caught <class 'ExceptionGroup'> with nested (TypeError(2),)\n"
+"caught <class 'ExceptionGroup'> with nested (OSError(3), OSError(4))\n"
+"  + Exception Group Traceback (most recent call last):\n"
+"  |   File \"<stdin>\", line 2, in <module>\n"
+"  | ExceptionGroup: eg\n"
+"  +-+---------------- 1 ----------------\n"
+"    | ValueError: 1\n"
+"    +------------------------------------"
 
 #: ../Doc/reference/compound_stmts.rst:363
 msgid ""
@@ -537,6 +583,12 @@ msgid ""
 "...\n"
 "ExceptionGroup('', (BlockingIOError()))"
 msgstr ""
+">>> try:\n"
+"...     raise BlockingIOError\n"
+"... except* BlockingIOError as e:\n"
+"...     print(repr(e))\n"
+"...\n"
+"ExceptionGroup('', (BlockingIOError()))"
 
 #: ../Doc/reference/compound_stmts.rst:380
 msgid ""
@@ -544,19 +596,19 @@ msgid ""
 "``except*:``. Furthermore, this expression cannot contain exception group "
 "types, because that would have ambiguous semantics."
 msgstr ""
+"Una cláusula :keyword:`!except*` debe tener una expresión coincidente; no "
+"puede ser ``except*:``. Además, esta expresión no puede contener tipos de "
+"excepción grupal. porque esto tendría semánticas ambiguas."
 
 #: ../Doc/reference/compound_stmts.rst:384
-#, fuzzy
 msgid ""
 "It is not possible to mix :keyword:`except` and :keyword:`!except*` in the "
 "same :keyword:`try`. :keyword:`break`, :keyword:`continue` and :keyword:"
 "`return` cannot appear in an :keyword:`!except*` clause."
 msgstr ""
-"Una cláusula :keyword:`!except*` debe tener un tipo coincidente y este tipo "
-"no puede ser una subclase de :exc:`BaseExceptionGroup`. No es posible "
-"mezclar :keyword:`except` y :keyword:`!except*` en el mismo :keyword:`try`. :"
-"keyword:`break`, :keyword:`continue` y :keyword:`return` no pueden aparecer "
-"en una cláusula :keyword:`!except*`."
+"No se puede mezclar :keyword:`except` y :keyword:`!except*` en el mismo "
+":keyword:`try`. :keyword:`break`, :keyword:`continue` y :keyword:`return` no "
+"puede aparecer en una cláusula :keyword:`!except*`."
 
 #: ../Doc/reference/compound_stmts.rst:399
 msgid ":keyword:`!else` clause"
@@ -615,6 +667,14 @@ msgid ""
 ">>> f()\n"
 "42"
 msgstr ""
+">>> def f():\n"
+"...     try:\n"
+"...         1/0\n"
+"...     finally:\n"
+"...         return 42\n"
+"...\n"
+">>> f()\n"
+"42"
 
 #: ../Doc/reference/compound_stmts.rst:434
 msgid ""
@@ -659,6 +719,14 @@ msgid ""
 ">>> foo()\n"
 "'finally'"
 msgstr ""
+">>> def foo():\n"
+"...     try:\n"
+"...         return 'try'\n"
+"...     finally:\n"
+"...         return 'finally'\n"
+"...\n"
+">>> foo()\n"
+"'finally'"
 
 #: ../Doc/reference/compound_stmts.rst:460
 msgid ""
@@ -702,35 +770,30 @@ msgstr ""
 "with_item`) se evalúa para obtener un administrador de contexto."
 
 #: ../Doc/reference/compound_stmts.rst:493
-#, fuzzy
 msgid ""
 "The context manager's :meth:`~object.__enter__` is loaded for later use."
 msgstr ""
-"El administrador de contexto :meth:`__enter__` se carga para su uso "
+"El administrador de contexto :meth:`~object.__enter__` se carga para su uso "
 "posterior."
 
 #: ../Doc/reference/compound_stmts.rst:495
-#, fuzzy
 msgid "The context manager's :meth:`~object.__exit__` is loaded for later use."
 msgstr ""
-"El administrador de contexto :meth:`__exit__` se carga para su uso posterior."
+"El administrador de contexto :meth:`~object.__exit__` se carga para su uso posterior."
 
 #: ../Doc/reference/compound_stmts.rst:497
-#, fuzzy
 msgid "The context manager's :meth:`~object.__enter__` method is invoked."
-msgstr "Se invoca el método del administrador de contexto :meth:`__enter__`."
+msgstr "Se invoca el método :meth:`__enter__` del administrador de contexto."
 
 #: ../Doc/reference/compound_stmts.rst:499
-#, fuzzy
 msgid ""
 "If a target was included in the :keyword:`with` statement, the return value "
 "from :meth:`~object.__enter__` is assigned to it."
 msgstr ""
-"Si se incluyó el destino en la sentencia :keyword:`with`, se le asigna el "
-"valor de retorno de :meth:`__enter__`."
+"Si se incluyó el destino en la declaración :keyword:`with`, se le asigna el "
+"valor de retorno de :meth:`~object.__enter__`."
 
 #: ../Doc/reference/compound_stmts.rst:504
-#, fuzzy
 msgid ""
 "The :keyword:`with` statement guarantees that if the :meth:`~object."
 "__enter__` method returns without an error, then :meth:`~object.__exit__` "
@@ -738,31 +801,29 @@ msgid ""
 "target list, it will be treated the same as an error occurring within the "
 "suite would be. See step 7 below."
 msgstr ""
-"La sentencia :keyword:`with` garantiza que si el método :meth:`__enter__` "
-"regresa sin error, entonces siempre se llamará a :meth:`__exit__`. Por lo "
-"tanto, si se produce un error durante la asignación a la lista de destino, "
-"se tratará de la misma manera que si el error ocurriera dentro del bloque de "
-"instrucciones. Vea el paso 7 a continuación."
+"La declaración :keyword:`with` garantiza que si el método :meth:`~object."
+"__enter__` regresa sin error, entonces siempre se llamará a :meth:`~object."
+"__exit__`. Por lo tanto, si se produce un error durante la asignación a la "
+"lista de destino, se trataría de la misma manera que si el error ocurriera "
+"dentro del suite. Consulte el paso 7 a continuación."
 
 #: ../Doc/reference/compound_stmts.rst:510
 msgid "The suite is executed."
 msgstr "La suite se ejecuta."
 
 #: ../Doc/reference/compound_stmts.rst:512
-#, fuzzy
 msgid ""
 "The context manager's :meth:`~object.__exit__` method is invoked.  If an "
 "exception caused the suite to be exited, its type, value, and traceback are "
 "passed as arguments to :meth:`~object.__exit__`. Otherwise, three :const:"
 "`None` arguments are supplied."
 msgstr ""
-"Se invoca el método del administrador de contexto :meth:`__exit__`. Si una "
-"excepción causó la salida de la suite, su tipo, valor y rastreo se pasan "
-"como argumentos a :meth:`__exit__`. De lo contrario, se proporcionan tres "
-"argumentos :const:`None`."
+"Se invoca el método :meth:`~object.__exit__` del administrador de contexto. "
+"Si una excepción causó la salida de la suite, su tipo, valor y rastreo se "
+"pasan como argumentos a :meth:`~object.__exit__`. De lo contrario, se "
+"proporcionan tres argumentos :const:`None`."
 
 #: ../Doc/reference/compound_stmts.rst:517
-#, fuzzy
 msgid ""
 "If the suite was exited due to an exception, and the return value from the :"
 "meth:`~object.__exit__` method was false, the exception is reraised.  If the "
@@ -770,20 +831,20 @@ msgid ""
 "with the statement following the :keyword:`with` statement."
 msgstr ""
 "Si se salió de la suite debido a una excepción, y el valor de retorno del "
-"método :meth:`__exit__` fue falso, la excepción se vuelve a plantear. Si el "
-"valor de retorno era verdadero, la excepción se suprime y la ejecución "
-"continúa con la sentencia que sigue a la sentencia :keyword:`with`."
+"método :meth:`~object.__exit__` fue falso, la excepción se vuelve a "
+"plantear. Si el valor de retorno era verdadero, la excepción se suprime y la "
+"ejecución continúa con la declaración que sigue a la declaración :keyword:"
+"`with`."
 
 #: ../Doc/reference/compound_stmts.rst:522
-#, fuzzy
 msgid ""
 "If the suite was exited for any reason other than an exception, the return "
 "value from :meth:`~object.__exit__` is ignored, and execution proceeds at "
 "the normal location for the kind of exit that was taken."
 msgstr ""
 "Si se salió de la suite por cualquier motivo que no sea una excepción, el "
-"valor de retorno de :meth:`__exit__` se ignora y la ejecución continúa en la "
-"ubicación normal para el tipo de salida que se tomó."
+"valor de retorno de :meth:`~object.__exit__` se ignora y la ejecución continúa en "
+"la ubicación normal para el tipo de salida que se tomó."
 
 #: ../Doc/reference/compound_stmts.rst:526
 #: ../Doc/reference/compound_stmts.rst:1547
@@ -796,6 +857,8 @@ msgid ""
 "with EXPRESSION as TARGET:\n"
 "    SUITE"
 msgstr ""
+"with EXPRESSION as TARGET:\n"
+"    SUITE"
 
 #: ../Doc/reference/compound_stmts.rst:531
 #: ../Doc/reference/compound_stmts.rst:556
@@ -822,6 +885,22 @@ msgid ""
 "    if not hit_except:\n"
 "        exit(manager, None, None, None)"
 msgstr ""
+"manager = (EXPRESSION)\n"
+"enter = type(manager).__enter__\n"
+"exit = type(manager).__exit__\n"
+"value = enter(manager)\n"
+"hit_except = False\n"
+"\n"
+"try:\n"
+"    TARGET = value\n"
+"    SUITE\n"
+"except:\n"
+"    hit_except = True\n"
+"    if not exit(manager, *sys.exc_info()):\n"
+"        raise\n"
+"finally:\n"
+"    if not hit_except:\n"
+"        exit(manager, None, None, None)"
 
 #: ../Doc/reference/compound_stmts.rst:550
 msgid ""
@@ -836,6 +915,8 @@ msgid ""
 "with A() as a, B() as b:\n"
 "    SUITE"
 msgstr ""
+"with A() as a, B() as b:\n"
+"    SUITE"
 
 #: ../Doc/reference/compound_stmts.rst:558
 msgid ""
@@ -843,6 +924,9 @@ msgid ""
 "    with B() as b:\n"
 "        SUITE"
 msgstr ""
+"with A() as a:\n"
+"    with B() as b:\n"
+"        SUITE"
 
 #: ../Doc/reference/compound_stmts.rst:562
 msgid ""
@@ -860,6 +944,11 @@ msgid ""
 "):\n"
 "    SUITE"
 msgstr ""
+"with (\n"
+"    A() as a,\n"
+"    B() as b,\n"
+"):\n"
+"    SUITE"
 
 #: ../Doc/reference/compound_stmts.rst:571
 msgid "Support for multiple context expressions."
@@ -1058,6 +1147,18 @@ msgid ""
 "...\n"
 "Case 3, y: 200"
 msgstr ""
+">>> flag = False\n"
+">>> match (100, 200):\n"
+"...    case (100, 300):  # No coinciden: 200 != 300\n"
+"...        print('Case 1')\n"
+"...    case (100, 200) if flag:  # Coinciden, pero la guardia falla\n"
+"...        print('Case 2')\n"
+"...    case (100, y):  # Coinciden, y vincula `y` a 200\n"
+"...        print(f'Case 3, y: {y}')\n"
+"...    case _:  # Patrón no se intentó\n"
+"...        print('Case 4, I match anything!')\n"
+"...\n"
+"Case 3, y: 200"
 
 #: ../Doc/reference/compound_stmts.rst:687
 msgid ""
@@ -1721,7 +1822,6 @@ msgstr ""
 "duplicados; o un :exc:`ValueError` para claves con nombre del mismo valor."
 
 #: ../Doc/reference/compound_stmts.rst:1059
-#, fuzzy
 msgid ""
 "Key-value pairs are matched using the two-argument form of the mapping "
 "subject's ``get()`` method.  Matched key-value pairs must already be present "
@@ -1729,9 +1829,10 @@ msgid ""
 "`~object.__getitem__`."
 msgstr ""
 "Los pares clave-valor se hacen coincidir utilizando la forma de dos "
-"argumentos del método ``get()`` del sujeto de mapeo. Los pares clave-valor "
-"coincidentes ya deben estar presentes en la asignación y no deben crearse "
-"sobre la marcha a través de :meth:`__missing__` o :meth:`__getitem__`."
+"argumentos del método ``get()`` del sujeto de asignación. Los pares clave-"
+"valor coincidentes ya deben estar presentes en la asignación y no deben "
+"crearse sobre la marcha a través de :meth:`__missing__` o :meth:"
+"`~object.__getitem__`."
 
 #: ../Doc/reference/compound_stmts.rst:1064
 msgid ""
@@ -2082,6 +2183,9 @@ msgid ""
 "@f2\n"
 "def func(): pass"
 msgstr ""
+"@f1(arg)\n"
+"@f2\n"
+"def func(): pass"
 
 #: ../Doc/reference/compound_stmts.rst:1251
 #: ../Doc/reference/compound_stmts.rst:1446
@@ -2093,6 +2197,8 @@ msgid ""
 "def func(): pass\n"
 "func = f1(arg)(f2(func))"
 msgstr ""
+"def func(): pass\n"
+"func = f1(arg)(f2(func))"
 
 #: ../Doc/reference/compound_stmts.rst:1256
 msgid ""
@@ -2113,7 +2219,6 @@ msgstr ""
 "restrictiva; ver :pep:`614` para más detalles."
 
 #: ../Doc/reference/compound_stmts.rst:1263
-#, fuzzy
 msgid ""
 "A list of :ref:`type parameters <type-params>` may be given in square "
 "brackets between the function's name and the opening parenthesis for its "
@@ -2122,12 +2227,12 @@ msgid ""
 "function's :attr:`~function.__type_params__` attribute. See :ref:`generic-"
 "functions` for more."
 msgstr ""
-"Se puede dar una :ref:`type parameters <type-params>`  entre corchetes entre "
-"el nombre de la función y el paréntesis de apertura para su lista de "
-"parámetros. Esto indica a los verificadores de tipo estático que la función "
-"es genérica. En ejecución, los parámetros de tipo pueden recuperarse del "
-"atributo ``__type_params__``. Mirar :ref:`generic-functions` para más "
-"información."
+"Una lista de :ref:`parámetros del tipo <type-params>` se puede dar entre "
+"corchetes entre el nombre de la función y el paréntesis de apertura para su "
+"lista de parámetros. Esto indica a los verificadores de tipo estático que la "
+"función es genérica. En ejecución, los parámetros de tipo pueden recuperarse "
+"del atributo :attr:`~function.__type_params__`. Consulte :ref:`generic-"
+"functions` para más información."
 
 #: ../Doc/reference/compound_stmts.rst:1270
 #: ../Doc/reference/compound_stmts.rst:1465
@@ -2185,6 +2290,11 @@ msgid ""
 "    penguin.append(\"property of the zoo\")\n"
 "    return penguin"
 msgstr ""
+"def whats_on_the_telly(penguin=None):\n"
+"    if penguin is None:\n"
+"        penguin = []\n"
+"    penguin.append(\"property of the zoo\")\n"
+"    return penguin"
 
 #: ../Doc/reference/compound_stmts.rst:1307
 msgid ""
@@ -2210,9 +2320,9 @@ msgstr ""
 "por defecto en la tupla vacía. Si el formulario \"``**identifier``\" está "
 "presente, se inicializa a una nueva asignación ordenada que recibe cualquier "
 "exceso de argumentos por palabra clave, por defecto a una nueva asignación "
-"vacía del mismo tipo. Los parámetros después de \"``*``\" o "
-"\"``*identifier``\" son parámetros solo por palabra clave y solo pueden "
-"pasarse con argumentos de palabras claves usadas."
+"vacía del mismo tipo. Los parámetros después de \"``*``\" o \"``*identifier``"
+"\" son parámetros solo por palabra clave y solo pueden pasarse con "
+"argumentos de palabras claves usadas."
 
 #: ../Doc/reference/compound_stmts.rst:1319
 msgid ""
@@ -2224,7 +2334,6 @@ msgstr ""
 "detalles."
 
 #: ../Doc/reference/compound_stmts.rst:1328
-#, fuzzy
 msgid ""
 "Parameters may have an :term:`annotation <function annotation>` of the form "
 "\"``: expression``\" following the parameter name.  Any parameter may have "
@@ -2245,12 +2354,14 @@ msgstr ""
 "Los parámetros pueden tener :term:`annotation <function annotation>` de la "
 "forma \"``: expression``\" que sigue al nombre del parámetro. Cualquier "
 "parámetro puede tener una anotación, incluso las de la forma ``*identifier`` "
-"o ``** identifier``. Las funciones pueden tener una anotación \"return\" de "
-"la forma \"``-> expression``\" después de la lista de parámetros. Estas "
-"anotaciones pueden ser cualquier expresión válida de Python. La presencia de "
-"anotaciones no cambia la semántica de una función. Los valores de anotación "
-"están disponibles como valores de un diccionario con los nombres de los "
-"parámetros en el atributo :attr:`__annotations__` del objeto de la función. "
+"o ``** identifier``. (Como caso especial, parámetros de la forma "
+"``*identifier`` puede tener una anotación \"``: *expression``\".) Las "
+"funciones pueden tener una anotación \"return\" de la forma \"``-> "
+"expression``\" después de la lista de parámetros. Estas anotaciones pueden "
+"ser cualquier expresión válida de Python. La presencia de anotaciones no "
+"cambia la semántica de una función. Los valores de anotación están "
+"disponibles como valores de un diccionario con los nombres de los parámetros "
+"como claves en el atributo :attr:`__annotations__` del objeto de la función. "
 "Si se usa ``annotations`` importada desde :mod:`__future__`, las anotaciones "
 "se conservan como cadenas de caracteres en tiempo de ejecución que permiten "
 "la evaluación pospuesta. De lo contrario, se evalúan cuando se ejecuta la "
@@ -2262,6 +2373,8 @@ msgid ""
 "Parameters of the form \"``*identifier``\" may have an annotation \"``: "
 "*expression``\". See :pep:`646`."
 msgstr ""
+"Parámetros de la forma \"``*identifier``\" puede tener una anotación "
+"\"``: *expression``\". Consulte :pep:`646`."
 
 #: ../Doc/reference/compound_stmts.rst:1348
 msgid ""
@@ -2320,13 +2433,12 @@ msgid ":pep:`526` - Syntax for Variable Annotations"
 msgstr ":pep:`526` - Sintaxis para anotaciones variables"
 
 #: ../Doc/reference/compound_stmts.rst:1371
-#, fuzzy
 msgid ""
 "Ability to type hint variable declarations, including class variables and "
 "instance variables."
 msgstr ""
-"Capacidad para escribir declaraciones de variables indirectas, incluidas "
-"variables de clase y variables de instancia"
+"Capacidad para escribir anotaciones de tipo para declaraciones de variables, "
+"incluidas variables de clase y variables de instancia."
 
 #: ../Doc/reference/compound_stmts.rst:1376
 msgid ":pep:`563` - Postponed Evaluation of Annotations"
@@ -2342,18 +2454,14 @@ msgstr ""
 "de una evaluación apresurada."
 
 #: ../Doc/reference/compound_stmts.rst:1379
-#, fuzzy
 msgid ":pep:`318` - Decorators for Functions and Methods"
-msgstr ":pep:`3107` - Anotaciones de funciones"
+msgstr ":pep:`318` - Decoradores para Funciones y Métodos"
 
 #: ../Doc/reference/compound_stmts.rst:1379
-#, fuzzy
 msgid ""
 "Function and method decorators were introduced. Class decorators were "
 "introduced in :pep:`3129`."
-msgstr ""
-"La propuesta que agregó decoradores de clase. Los decoradores de funciones y "
-"métodos se introdujeron en :pep:`318`."
+msgstr "Decoradores de función y método se introdujeron en :pep:`3129`."
 
 #: ../Doc/reference/compound_stmts.rst:1385
 msgid "Class definitions"
@@ -2384,6 +2492,8 @@ msgid ""
 "class Foo:\n"
 "    pass"
 msgstr ""
+"class Foo:\n"
+"    pass"
 
 #: ../Doc/reference/compound_stmts.rst:1416
 msgid "is equivalent to ::"
@@ -2394,6 +2504,8 @@ msgid ""
 "class Foo(object):\n"
 "    pass"
 msgstr ""
+"class Foo(object):\n"
+"    pass"
 
 #: ../Doc/reference/compound_stmts.rst:1421
 msgid ""
@@ -2417,7 +2529,6 @@ msgstr ""
 "de clase en el espacio de nombres local original."
 
 #: ../Doc/reference/compound_stmts.rst:1430
-#, fuzzy
 msgid ""
 "The order in which attributes are defined in the class body is preserved in "
 "the new class's :attr:`~type.__dict__`.  Note that this is reliable only "
@@ -2425,9 +2536,9 @@ msgid ""
 "using the definition syntax."
 msgstr ""
 "El orden en que se definen los atributos en el cuerpo de la clase se "
-"conserva en el ``__dict__`` de la nueva clase. Tenga en cuenta que esto es "
-"confiable solo justo después de crear la clase y solo para las clases que se "
-"definieron utilizando la sintaxis de definición."
+"conserva en el :attr:`~type.__dict__` de la nueva clase. Tenga en cuenta que "
+"esto es confiable solo justo después de crear la clase y solo para las "
+"clases que se definieron utilizando la sintaxis de definición."
 
 #: ../Doc/reference/compound_stmts.rst:1435
 msgid ""
@@ -2449,12 +2560,17 @@ msgid ""
 "@f2\n"
 "class Foo: pass"
 msgstr ""
+"@f1(arg)\n"
+"@f2\n"
+"class Foo: pass"
 
 #: ../Doc/reference/compound_stmts.rst:1448
 msgid ""
 "class Foo: pass\n"
 "Foo = f1(arg)(f2(Foo))"
 msgstr ""
+"class Foo: pass\n"
+"Foo = f1(arg)(f2(Foo))"
 
 #: ../Doc/reference/compound_stmts.rst:1451
 msgid ""
@@ -2476,7 +2592,6 @@ msgstr ""
 "restrictiva; ver :pep:`614` para más detalles."
 
 #: ../Doc/reference/compound_stmts.rst:1459
-#, fuzzy
 msgid ""
 "A list of :ref:`type parameters <type-params>` may be given in square "
 "brackets immediately after the class's name. This indicates to static type "
@@ -2484,11 +2599,11 @@ msgid ""
 "retrieved from the class's :attr:`~type.__type_params__` attribute. See :ref:"
 "`generic-classes` for more."
 msgstr ""
-"Una lista de :ref:`type parameters <type-params>` definida inmediatamente "
+"Una lista de :ref:`parámetros del tipo <type-params>` definida inmediatamente "
 "después de un nombre de clase debe ir entre corchetes. Esto indica a los "
 "verificadores de tipo estático que la clase es genérica. En ejecución, el "
-"tipo de parámetros puede retirarse de la clase  ``__type_params__`` . Para "
-"más información ver :ref:`generic-classes` ."
+"tipo de parámetros puede retirarse del atributo de la clase :attr:`~type."
+"__type_params__`. Para más información consulte :ref:`generic-classes`."
 
 #: ../Doc/reference/compound_stmts.rst:1468
 msgid ""
@@ -2583,6 +2698,9 @@ msgid ""
 "    do_stuff()\n"
 "    await some_coroutine()"
 msgstr ""
+"async def func(param1, param2):\n"
+"    do_stuff()\n"
+"    await some_coroutine()"
 
 #: ../Doc/reference/compound_stmts.rst:1527
 msgid ""
@@ -2621,6 +2739,10 @@ msgid ""
 "else:\n"
 "    SUITE2"
 msgstr ""
+"async for TARGET in ITER:\n"
+"    SUITE\n"
+"else:\n"
+"    SUITE2"
 
 #: ../Doc/reference/compound_stmts.rst:1554
 msgid "Is semantically equivalent to::"
@@ -2642,6 +2764,19 @@ msgid ""
 "else:\n"
 "    SUITE2"
 msgstr ""
+"iter = (ITER)\n"
+"iter = type(iter).__aiter__(iter)\n"
+"running = True\n"
+"\n"
+"while running:\n"
+"    try:\n"
+"        TARGET = await type(iter).__anext__(iter)\n"
+"    except StopAsyncIteration:\n"
+"        running = False\n"
+"    else:\n"
+"        SUITE\n"
+"else:\n"
+"    SUITE2"
 
 #: ../Doc/reference/compound_stmts.rst:1570
 msgid ""
@@ -2675,6 +2810,8 @@ msgid ""
 "async with EXPRESSION as TARGET:\n"
 "    SUITE"
 msgstr ""
+"async with EXPRESSION as TARGET:\n"
+"    SUITE"
 
 #: ../Doc/reference/compound_stmts.rst:1595
 msgid ""
@@ -2695,6 +2832,22 @@ msgid ""
 "    if not hit_except:\n"
 "        await aexit(manager, None, None, None)"
 msgstr ""
+"manager = (EXPRESSION)\n"
+"aenter = type(manager).__aenter__\n"
+"aexit = type(manager).__aexit__\n"
+"value = await aenter(manager)\n"
+"hit_except = False\n"
+"\n"
+"try:\n"
+"    TARGET = value\n"
+"    SUITE\n"
+"except:\n"
+"    hit_except = True\n"
+"    if not await aexit(manager, *sys.exc_info()):\n"
+"        raise\n"
+"finally:\n"
+"    if not hit_except:\n"
+"        await aexit(manager, None, None, None)"
 
 #: ../Doc/reference/compound_stmts.rst:1612
 msgid ""
@@ -2731,6 +2884,7 @@ msgstr "Listas de tipo parámetro"
 #: ../Doc/reference/compound_stmts.rst:1630
 msgid "Support for default values was added (see :pep:`696`)."
 msgstr ""
+"Compatibilidad para valores predeterminados se añadió (Consulte :pep:`696`)."
 
 #: ../Doc/reference/compound_stmts.rst:1643
 msgid ""
@@ -2759,6 +2913,20 @@ msgid ""
 "\n"
 "type ListOrSet[T] = list[T] | set[T]"
 msgstr ""
+"def max[T](args: list[T]) -> T:\n"
+"    ...\n"
+"\n"
+"async def amax[T](args: list[T]) -> T:\n"
+"    ...\n"
+"\n"
+"class Bag[T]:\n"
+"    def __iter__(self) -> Iterator[T]:\n"
+"        ...\n"
+"\n"
+"    def add(self, arg: T) -> None:\n"
+"        ...\n"
+"\n"
+"type ListOrSet[T] = list[T] | set[T]"
 
 #: ../Doc/reference/compound_stmts.rst:1662
 msgid ""
@@ -2790,16 +2958,15 @@ msgstr ""
 "``T`` no está disponible en el ámbito del módulo. A continuación, se "
 "describe con más precisión la semántica de los objetos genéricos. El ámbito "
 "de los parámetros de tipo se modela con una función especial (técnicamente, "
-"una :ref:`annotation scope <annotation-scopes>`) que envuelve la creación "
+"una :ref:`ámbito de anotación <annotation-scopes>`) que envuelve la creación "
 "del objeto genérico."
 
 #: ../Doc/reference/compound_stmts.rst:1676
-#, fuzzy
 msgid ""
 "Generic functions, classes, and type aliases have a :attr:`~definition."
 "__type_params__` attribute listing their type parameters."
 msgstr ""
-"Las funciones genéricas, clases y alias de tipo tienen un atributo :attr:`!"
+"Funciones genéricas, clases y aliases de tipo tienen un atributo ::attr:`~definition."
 "__type_params__` que lista sus parámetros de tipo."
 
 #: ../Doc/reference/compound_stmts.rst:1679
@@ -2891,6 +3058,16 @@ msgid ""
 "default value is specified for a type parameter, the ``__default__`` "
 "attribute is set to the special sentinel object :data:`typing.NoDefault`."
 msgstr ""
+"Los tres sabores de parámetros de tipo también pueden tener un *valor "
+"predeterminado*, lo que se usa cuando el parámetro de tipo no se proporciona "
+"explícitamente. Esto se añade adjuntando un solo signo igual (``=``) seguido "
+"por una expresión. Como los límites y restricciones del tipo variables, el "
+"valor predeterminado no se evalúa cuando el objeto se crea, solamente "
+"cuando se accede el atributo  ``__default__`` del parámetro del tipo. Con "
+"este fin, el valor predeterminado se evalúa en un :ref:`ámbito de anotación "
+"<annotation-scopes>` separado. Si no se especifica un valor predeterminado "
+"para un parámetro de tipo, el atributo ``__default__`` se establece en el "
+"objeto de centinela especial :data:`typing.NoDefault`."
 
 #: ../Doc/reference/compound_stmts.rst:1717
 msgid ""
@@ -2917,6 +3094,20 @@ msgid ""
 "   *e: SimpleTypeVarTuple,\n"
 "): ..."
 msgstr ""
+"def overly_generic[\n"
+"   SimpleTypeVar,\n"
+"   TypeVarWithDefault = int,\n"
+"   TypeVarWithBound: int,\n"
+"   TypeVarWithConstraints: (str, bytes),\n"
+"   *SimpleTypeVarTuple = (int, float),\n"
+"   **SimpleParamSpec = (str, bytearray),\n"
+"](\n"
+"   a: SimpleTypeVar,\n"
+"   b: TypeVarWithDefault,\n"
+"   c: TypeVarWithBound,\n"
+"   d: Callable[SimpleParamSpec, TypeVarWithConstraints],\n"
+"   *e: SimpleTypeVarTuple,\n"
+"): ..."
 
 #: ../Doc/reference/compound_stmts.rst:1737
 msgid "Generic functions"
@@ -2928,7 +3119,7 @@ msgstr "Las funciones genéricas son declaradas de la siguiente forma::"
 
 #: ../Doc/reference/compound_stmts.rst:1741
 msgid "def func[T](arg: T): ..."
-msgstr ""
+msgstr "def func[T](arg: T): ..."
 
 #: ../Doc/reference/compound_stmts.rst:1743
 #: ../Doc/reference/compound_stmts.rst:1803
@@ -2944,6 +3135,12 @@ msgid ""
 "    return func\n"
 "func = TYPE_PARAMS_OF_func()"
 msgstr ""
+"annotation-def TYPE_PARAMS_OF_func():\n"
+"    T = typing.TypeVar(\"T\")\n"
+"    def func(arg: T): ...\n"
+"    func.__type_params__ = (T,)\n"
+"    return func\n"
+"func = TYPE_PARAMS_OF_func()"
 
 #: ../Doc/reference/compound_stmts.rst:1752
 msgid ""
@@ -2953,7 +3150,7 @@ msgid ""
 "attribute access on the :mod:`typing` module, but creates an instance of :"
 "data:`typing.TypeVar` directly.)"
 msgstr ""
-"Aquí ``annotation-def`` indica un :ref:`annotation scope <annotation-"
+"Aquí ``annotation-def`` indica un :ref:`ámbito de anotación <annotation-"
 "scopes>`, que en realidad no está vinculado a ningún nombre en tiempo de "
 "ejecución. (Se ha tomado otra libertad en la traducción: la sintaxis no pasa "
 "por el acceso a atributos en el módulo :mod:`typing`, sino que crea una "
@@ -2983,6 +3180,9 @@ msgid ""
 "def func[T: int, *Ts, **P](*args: *Ts, arg: Callable[P, T] = some_default):\n"
 "    ..."
 msgstr ""
+"@decorator\n"
+"def func[T: int, *Ts, **P](*args: *Ts, arg: Callable[P, T] = some_default):\n"
+"    ..."
 
 #: ../Doc/reference/compound_stmts.rst:1769
 msgid ""
@@ -2992,6 +3192,8 @@ msgstr ""
 "Excepto para la :ref:`lazy-evaluation <lazy-evaluation>` del :class:`~typing."
 "TypeVar` vinculada, esto es equivalente a::"
 
+# No se pueden traducir los commentarios hasta que pospell tenga la habilidad
+# de entender líneas de código.
 #: ../Doc/reference/compound_stmts.rst:1772
 msgid ""
 "DEFAULT_OF_arg = some_default\n"
@@ -3013,6 +3215,24 @@ msgid ""
 "    return func\n"
 "func = decorator(TYPE_PARAMS_OF_func())"
 msgstr ""
+"DEFAULT_OF_arg = some_default\n"
+"\n"
+"annotation-def TYPE_PARAMS_OF_func():\n"
+"\n"
+"    annotation-def BOUND_OF_T():\n"
+"        return int\n"
+"    # In reality, BOUND_OF_T() is evaluated only on demand.\n"
+"    T = typing.TypeVar(\"T\", bound=BOUND_OF_T())\n"
+"\n"
+"    Ts = typing.TypeVarTuple(\"Ts\")\n"
+"    P = typing.ParamSpec(\"P\")\n"
+"\n"
+"    def func(*args: *Ts, arg: Callable[P, T] = DEFAULT_OF_arg):\n"
+"        ...\n"
+"\n"
+"    func.__type_params__ = (T, Ts, P)\n"
+"    return func\n"
+"func = decorator(TYPE_PARAMS_OF_func())"
 
 #: ../Doc/reference/compound_stmts.rst:1791
 msgid ""
@@ -3032,7 +3252,7 @@ msgstr "Las clases genéricas son declaradas de la siguiente forma::"
 
 #: ../Doc/reference/compound_stmts.rst:1801
 msgid "class Bag[T]: ..."
-msgstr ""
+msgstr "class Bag[T]: ..."
 
 #: ../Doc/reference/compound_stmts.rst:1805
 msgid ""
@@ -3044,6 +3264,13 @@ msgid ""
 "    return Bag\n"
 "Bag = TYPE_PARAMS_OF_Bag()"
 msgstr ""
+"annotation-def TYPE_PARAMS_OF_Bag():\n"
+"    T = typing.TypeVar(\"T\")\n"
+"    class Bag(typing.Generic[T]):\n"
+"        __type_params__ = (T,)\n"
+"        ...\n"
+"    return Bag\n"
+"Bag = TYPE_PARAMS_OF_Bag()"
 
 #: ../Doc/reference/compound_stmts.rst:1813
 msgid ""
@@ -3052,7 +3279,7 @@ msgid ""
 "is not actually bound at runtime."
 msgstr ""
 "Aquí de nuevo ``annotation-def`` (no es una palabra clave real) indica un :"
-"ref:`annotation scope <annotation-scopes>`, y el nombre "
+"ref:`ámbito de anotación <annotation-scopes>`, y el nombre "
 "``TYPE_PARAMS_OF_Bag`` no está vinculado en tiempo de ejecución."
 
 #: ../Doc/reference/compound_stmts.rst:1817
@@ -3073,6 +3300,8 @@ msgid ""
 "@decorator\n"
 "class Bag(Base[T], arg=T): ..."
 msgstr ""
+"@decorator\n"
+"class Bag(Base[T], arg=T): ..."
 
 #: ../Doc/reference/compound_stmts.rst:1826
 msgid "This is equivalent to::"
@@ -3088,6 +3317,13 @@ msgid ""
 "    return Bag\n"
 "Bag = decorator(TYPE_PARAMS_OF_Bag())"
 msgstr ""
+"annotation-def TYPE_PARAMS_OF_Bag():\n"
+"    T = typing.TypeVar(\"T\")\n"
+"    class Bag(Base[T], typing.Generic[T], arg=T):\n"
+"        __type_params__ = (T,)\n"
+"        ...\n"
+"    return Bag\n"
+"Bag = decorator(TYPE_PARAMS_OF_Bag())"
 
 #: ../Doc/reference/compound_stmts.rst:1839
 msgid "Generic type aliases"
@@ -3103,7 +3339,7 @@ msgstr ""
 
 #: ../Doc/reference/compound_stmts.rst:1843
 msgid "type ListOrSet[T] = list[T] | set[T]"
-msgstr ""
+msgstr "type ListOrSet[T] = list[T] | set[T]"
 
 #: ../Doc/reference/compound_stmts.rst:1845
 msgid ""
@@ -3113,6 +3349,8 @@ msgstr ""
 "Excepto para la :ref:`evaluación perezosa <lazy-evaluation>` del valor, esto "
 "es equivalente a::"
 
+# No se pueden traducir los commentarios hasta que pospell tenga la habilidad
+# de entender líneas de código.
 #: ../Doc/reference/compound_stmts.rst:1848
 msgid ""
 "annotation-def TYPE_PARAMS_OF_ListOrSet():\n"
@@ -3125,6 +3363,15 @@ msgid ""
 "type_params=(T,))\n"
 "ListOrSet = TYPE_PARAMS_OF_ListOrSet()"
 msgstr ""
+"annotation-def TYPE_PARAMS_OF_ListOrSet():\n"
+"    T = typing.TypeVar(\"T\")\n"
+"\n"
+"    annotation-def VALUE_OF_ListOrSet():\n"
+"        return list[T] | set[T]\n"
+"    # In reality, the value is lazily evaluated\n"
+"    return typing.TypeAliasType(\"ListOrSet\", VALUE_OF_ListOrSet(), "
+"type_params=(T,))\n"
+"ListOrSet = TYPE_PARAMS_OF_ListOrSet()"
 
 #: ../Doc/reference/compound_stmts.rst:1857
 msgid ""
@@ -3133,7 +3380,7 @@ msgid ""
 "``TYPE_PARAMS_OF_ListOrSet`` are not actually bound at runtime."
 msgstr ""
 "Aquí, ``annotation-def`` (no es una palabra clave real) indica un :ref:"
-"`annotation scope <annotation-scopes>`. Los nombres en mayúsculas como "
+"`ámbito de anotación <annotation-scopes>`. Los nombres en mayúsculas como "
 "``TYPE_PARAMS_OF_ListOrSet`` no están vinculados en tiempo de ejecución."
 
 #: ../Doc/reference/compound_stmts.rst:1862
@@ -3240,26 +3487,24 @@ msgstr ""
 "MappingProxyType` son asignaciones."
 
 #: ../Doc/reference/compound_stmts.rst:1896
-#, fuzzy
 msgid ""
 "A string literal appearing as the first statement in the function body is "
 "transformed into the function's :attr:`~function.__doc__` attribute and "
 "therefore the function's :term:`docstring`."
 msgstr ""
-"Una cadena de caracteres literal que aparece como la primera sentencia en el "
-"cuerpo de la función se transforma en el atributo ``__doc__`` de la función "
-"y, por lo tanto, en funciones :term:`docstring`."
+"Una cadena de caracteres literal que aparece como la primera declaración en "
+"el cuerpo de la función se transforma en el atributo :attr:`~function."
+"__doc__` y por lo tanto en :term:`docstring` de la función."
 
 #: ../Doc/reference/compound_stmts.rst:1900
-#, fuzzy
 msgid ""
 "A string literal appearing as the first statement in the class body is "
 "transformed into the namespace's :attr:`~type.__doc__` item and therefore "
 "the class's :term:`docstring`."
 msgstr ""
-"Una cadena de caracteres literal que aparece como la primera sentencia en el "
-"cuerpo de la clase se transforma en el elemento del espacio de nombre "
-"``__doc__`` y, por lo tanto, de la clase :term:`docstring`."
+"Una cadena de caracteres literal que aparece como la primera declaración en "
+"el cuerpo de la clase se transforma en el elemento del espacio de nombre :"
+"attr:`~type.__doc__` y, por lo tanto, de la clase :term:`docstring`."
 
 #: ../Doc/reference/compound_stmts.rst:7
 msgid "compound"
