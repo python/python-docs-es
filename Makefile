@@ -44,7 +44,7 @@ build: setup do_build
 .PHONY: do_build
 do_build:
 	# Normal build
-	PYTHONWARNINGS=ignore::FutureWarning,ignore::RuntimeWarning $(VENV)/bin/sphinx-build -j $(SPHINX_JOBS) -W --keep-going -b html -d $(OUTPUT_DOCTREE) -D language=$(LANGUAGE) . $(OUTPUT_HTML) && \
+	$(VENV)/bin/sphinx-build -j $(SPHINX_JOBS) -W --keep-going -b html -d $(OUTPUT_DOCTREE) -D language=$(LANGUAGE) . $(OUTPUT_HTML) && \
 		echo "Success! Open file://`pwd`/$(OUTPUT_HTML)/index.html, " \
 			"or run 'make serve' to see them in http://localhost:8000";
 
@@ -56,6 +56,9 @@ do_build:
 setup: venv
 	git submodule sync
 	git submodule update --init --force --depth 1 $(CPYTHON_PATH)
+	# Now that we've initialized the submodules, install all requirements necessary for the build
+	$(VENV)/bin/python -m pip install -q -r requirements.txt
+	
 
 
 # venv: create a virtual environment which will be used by almost every
@@ -66,7 +69,7 @@ venv:
 		$(PYTHON) -m venv --prompt $(LANGUAGE_TEAM) $(VENV);             \
 	fi
 
-	$(VENV)/bin/python -m pip install -q -r requirements.txt
+	$(VENV)/bin/python -m pip install -q -r requirements-own.txt
 
 
 # serve: serve the documentation in a simple local web server, using cpython
