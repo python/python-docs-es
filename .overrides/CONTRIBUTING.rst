@@ -54,9 +54,9 @@ podrás realizar todas las contribuciones que quieras.
 
 #. (Opcional) Crea un entorno virtual y actívalo::
 
-     python -m venv env
-     source env/bin/activate   # macOS y Linux
-     env\Scripts\activate.bat  # Windows
+     python -m venv venv
+     source venv/bin/activate   # macOS y Linux
+     venv\Scripts\activate.bat  # Windows
 
 #. (Opcional) Instala los requerimientos del proyecto::
 
