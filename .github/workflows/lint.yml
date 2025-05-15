@@ -1,0 +1,27 @@
+name: Linting Workflow
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        version: [ 3.13, 3.12, 3.11, 3.10 ]
+    continue-on-error: true
+    steps:
+      - uses: actions/setup-python@master
+        with:
+          python-version: 3
+      - run: pip install sphinx-lint
+      - uses: actions/checkout@master
+        with:
+          ref: ${{ matrix.version }}
+      - uses: rffontenelle/sphinx-lint-problem-matcher@v1.0.0
+      - run: sphinx-lint
