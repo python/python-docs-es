@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-21 16:38-0300\n"
 "PO-Revision-Date: 2022-10-31 19:22-0300\n"
-"Last-Translator: Sofía Denner <sofi.denner@gmail.com>\n"
+"Last-Translator: Erick G. Islas-Osuna <erickisos653@gmail.com>\n"
 "Language: es\n"
 "Language-Team: python-doc-es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -27,27 +27,27 @@ msgstr "Protocolo de objeto"
 
 #: ../Doc/c-api/object.rst:11
 msgid "Get a :term:`strong reference` to a constant."
-msgstr ""
+msgstr "Obtiene una :term:`referencia fuerte` a una constante."
 
 #: ../Doc/c-api/object.rst:13
 msgid "Set an exception and return ``NULL`` if *constant_id* is invalid."
-msgstr ""
+msgstr "Establece una excepción y retorna ``NULL`` si *constant_id* es inválido."
 
 #: ../Doc/c-api/object.rst:15
 msgid "*constant_id* must be one of these constant identifiers:"
-msgstr ""
+msgstr "*constant_id* debe ser uno de estos identificadores constantes:"
 
 #: ../Doc/c-api/object.rst:20
 msgid "Constant Identifier"
-msgstr ""
+msgstr "Identificador de constante"
 
 #: ../Doc/c-api/object.rst:20
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
 #: ../Doc/c-api/object.rst:20
 msgid "Returned object"
-msgstr ""
+msgstr "Objeto retornado"
 
 #: ../Doc/c-api/object.rst:22 ../Doc/c-api/object.rst:27
 msgid "``0``"
@@ -126,27 +126,34 @@ msgid ""
 "Numeric values are only given for projects which cannot use the constant "
 "identifiers."
 msgstr ""
+"Los valores numéricos solo se proporcionan para proyectos que no pueden usar "
+"los identificadores constantes."
 
 #: ../Doc/c-api/object.rst:42
 msgid "In CPython, all of these constants are :term:`immortal`."
-msgstr ""
+msgstr "En CPython, todas estas constantes son :term:`inmortales <immortal>`."
 
 #: ../Doc/c-api/object.rst:47
 msgid ""
 "Similar to :c:func:`Py_GetConstant`, but return a :term:`borrowed reference`."
 msgstr ""
+"Similar a :c:func:`Py_GetConstant`, pero retorna una :term:`referencia prestada`."
 
 #: ../Doc/c-api/object.rst:50
 msgid ""
 "This function is primarily intended for backwards compatibility: using :c:"
 "func:`Py_GetConstant` is recommended for new code."
 msgstr ""
+"Esta función está destinada principalmente para compatibilidad hacia atrás: "
+"se recomienda usar :c:func:`Py_GetConstant` para código nuevo."
 
 #: ../Doc/c-api/object.rst:53
 msgid ""
 "The reference is borrowed from the interpreter, and is valid until the "
 "interpreter finalization."
 msgstr ""
+"La referencia es prestada del intérprete, y es válida hasta la finalización "
+"del intérprete."
 
 #: ../Doc/c-api/object.rst:61
 msgid ""
@@ -157,15 +164,14 @@ msgstr ""
 "está implementada para la combinación de tipos dada."
 
 #: ../Doc/c-api/object.rst:67
-#, fuzzy
 msgid ""
 "Properly handle returning :c:data:`Py_NotImplemented` from within a C "
 "function (that is, create a new :term:`strong reference` to :const:"
 "`NotImplemented` and return it)."
 msgstr ""
-"Maneja adecuadamente el retorno :c:data:`Py_NotImplemented` desde una "
-"función C (es decir, incremente el recuento de referencias de "
-"*NotImplemented* y lo retorna)."
+"Maneja adecuadamente el retorno de :c:data:`Py_NotImplemented` desde una "
+"función C (es decir, crea una nueva :term:`referencia fuerte` a :const:"
+"`NotImplemented` y lo retorna)."
 
 #: ../Doc/c-api/object.rst:74
 msgid ""
@@ -173,9 +179,11 @@ msgid ""
 "`PyObject_Print` and :c:func:`PyFile_WriteObject`). If passed, these "
 "function would use the :func:`str` of the object instead of the :func:`repr`."
 msgstr ""
+"Bandera (*flag*) para usar con múltiples funciones que imprimen el objeto "
+"(como :c:func:`PyObject_Print` y :c:func:`PyFile_WriteObject`). Si se pasa, "
+"estas funciones usarían el :func:`str` del objeto en lugar del :func:`repr`."
 
 #: ../Doc/c-api/object.rst:82
-#, fuzzy
 msgid ""
 "Print an object *o*, on file *fp*.  Returns ``-1`` on error.  The flags "
 "argument is used to enable certain printing options.  The only option "
@@ -184,11 +192,10 @@ msgid ""
 msgstr ""
 "Imprime un objeto *o*, en el archivo *fp*. Retorna ``-1`` en caso de error. "
 "El argumento de las banderas se usa para habilitar ciertas opciones de "
-"impresión. La única opción actualmente admitida es :const:`Py_PRINT_RAW`; si "
+"impresión. La única opción actualmente admitida es :c:macro:`Py_PRINT_RAW`; si "
 "se proporciona, se escribe :func:`str` del objeto en lugar de :func:`repr`."
 
 #: ../Doc/c-api/object.rst:90
-#, fuzzy
 msgid ""
 "Returns ``1`` if *o* has the attribute *attr_name*, and ``0`` otherwise. "
 "This is equivalent to the Python expression ``hasattr(o, attr_name)``. On "
@@ -196,7 +203,7 @@ msgid ""
 msgstr ""
 "Retorna ``1`` si *o* tiene el atributo *attr_name*, y ``0`` en caso "
 "contrario. Esto es equivalente a la expresión de Python ``hasattr(o, "
-"attr_name)``. Esta función siempre finaliza exitosamente."
+"attr_name)``. En caso de error, retorna ``-1``."
 
 #: ../Doc/c-api/object.rst:99
 msgid ""
@@ -206,26 +213,25 @@ msgid ""
 msgstr ""
 
 #: ../Doc/c-api/object.rst:108
-#, fuzzy
 msgid ""
 "Returns ``1`` if *o* has the attribute *attr_name*, and ``0`` otherwise. "
 "This function always succeeds."
 msgstr ""
 "Retorna ``1`` si *o* tiene el atributo *attr_name*, y ``0`` en caso "
-"contrario. Esto es equivalente a la expresión de Python ``hasattr(o, "
-"attr_name)``. Esta función siempre finaliza exitosamente."
+"contrario. Esta función siempre tiene éxito."
 
 #: ../Doc/c-api/object.rst:113
-#, fuzzy
 msgid ""
 "Exceptions that occur when this calls :meth:`~object.__getattr__` and :meth:"
 "`~object.__getattribute__` methods are silently ignored. For proper error "
 "handling, use :c:func:`PyObject_HasAttrWithError`, :c:func:"
 "`PyObject_GetOptionalAttr` or :c:func:`PyObject_GetAttr` instead."
 msgstr ""
-"Tenga en cuenta que las excepciones que se producen al llamar a los métodos "
-"a :meth:`__getattr__` y :meth:`__getattribute__` se suprimirán. Para obtener "
-"informe de errores, utilice :c:func:`PyObject_GetAttr()` alternativamente."
+"Las excepciones que ocurren cuando esto llama a los métodos :meth:"
+"`~object.__getattr__` y :meth:`~object.__getattribute__` se ignoran "
+"silenciosamente. Para un manejo adecuado de errores, use :c:func:"
+"`PyObject_HasAttrWithError`, :c:func:`PyObject_GetOptionalAttr` o :c:func:"
+"`PyObject_GetAttr` en su lugar."
 
 #: ../Doc/c-api/object.rst:121
 msgid ""
