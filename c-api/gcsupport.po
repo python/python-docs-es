@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-21 16:38-0300\n"
-"PO-Revision-Date: 2021-10-26 08:09+0200\n"
+"PO-Revision-Date: 2025-10-07 00:51-0600\n"
 "Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
-"Language: es\n"
 "Language-Team: python-doc-es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.16.0\n"
+"X-Generator: Poedit 3.7\n"
 
 #: ../Doc/c-api/gcsupport.rst:6
 msgid "Supporting Cyclic Garbage Collection"
@@ -42,7 +43,6 @@ msgstr ""
 "proporcionar ningún soporte explícito para la recolección de basura."
 
 #: ../Doc/c-api/gcsupport.rst:15
-#, fuzzy
 msgid ""
 "To create a container type, the :c:member:`~PyTypeObject.tp_flags` field of "
 "the type object must include the :c:macro:`Py_TPFLAGS_HAVE_GC` and provide "
@@ -51,14 +51,14 @@ msgid ""
 "implementation must also be provided."
 msgstr ""
 "Para crear un tipo de contenedor, el campo :c:member:`~PyTypeObject."
-"tp_flags` del objeto tipo debe incluir :const:`Py_TPFLAGS_HAVE_GC` y "
+"tp_flags` del objeto tipo debe incluir :c:macro:`Py_TPFLAGS_HAVE_GC` y "
 "proporcionar una implementación del manejador :c:member:`~PyTypeObject."
-"tp_traverse` . Si las instancias del tipo son mutables, también se debe "
+"tp_traverse`. Si las instancias del tipo son mutables, también se debe "
 "proporcionar una implementación a :c:member:`~PyTypeObject.tp_clear`."
 
 #: ../Doc/c-api/gcsupport.rst:24
 msgid ":c:macro:`Py_TPFLAGS_HAVE_GC`"
-msgstr ""
+msgstr ":c:macro:`Py_TPFLAGS_HAVE_GC`"
 
 #: ../Doc/c-api/gcsupport.rst:22
 msgid ""
@@ -76,13 +76,12 @@ msgstr ""
 "Los constructores para tipos de contenedores deben cumplir con dos reglas:"
 
 #: ../Doc/c-api/gcsupport.rst:28
-#, fuzzy
 msgid ""
 "The memory for the object must be allocated using :c:macro:`PyObject_GC_New` "
 "or :c:macro:`PyObject_GC_NewVar`."
 msgstr ""
-"La memoria para el objeto debe asignarse usando :c:func:`PyObject_GC_New` o :"
-"c:func:`PyObject_GC_NewVar`."
+"La memoria para el objeto debe asignarse usando :c:macro:`PyObject_GC_New` "
+"o :c:macro:`PyObject_GC_NewVar`."
 
 #: ../Doc/c-api/gcsupport.rst:31
 msgid ""
@@ -126,7 +125,6 @@ msgstr ""
 "de su subclase o subclases."
 
 #: ../Doc/c-api/gcsupport.rst:47
-#, fuzzy
 msgid ""
 "When calling :c:func:`PyType_Ready` or some of the APIs that indirectly call "
 "it like :c:func:`PyType_FromSpecWithBases` or :c:func:`PyType_FromSpec` the "
@@ -140,27 +138,25 @@ msgstr ""
 "lo llaman como :c:func:`PyType_FromSpecWithBases` o :c:func:"
 "`PyType_FromSpec` el intérprete automáticamente llenara los campos :c:member:"
 "`~PyTypeObject.tp_flags`, :c:member:`~PyTypeObject.tp_traverse` y :c:member:"
-"`~PyTypeObject.tp_clear` si el tipo si el tipo hereda de una clase que "
-"implementa el protocolo del recolector de basura y la clase secundaria *no* "
-"incluye el *flag* :const:`Py_TPFLAGS_HAVE_GC`."
+"`~PyTypeObject.tp_clear` si el tipo hereda de una clase que implementa el "
+"protocolo del recolector de basura y la clase secundaria *no* incluye el "
+"*flag* :c:macro:`Py_TPFLAGS_HAVE_GC`."
 
 #: ../Doc/c-api/gcsupport.rst:57
-#, fuzzy
 msgid ""
 "Analogous to :c:macro:`PyObject_New` but for container objects with the :c:"
 "macro:`Py_TPFLAGS_HAVE_GC` flag set."
 msgstr ""
-"Análogo a :c:func:`PyObject_New` pero para objetos de contenedor con el "
-"*flag* :const:`Py_TPFLAGS_HAVE_GC` establecido."
+"Análogo a :c:macro:`PyObject_New` pero para objetos de contenedor con el "
+"*flag* :c:macro:`Py_TPFLAGS_HAVE_GC` establecido."
 
 #: ../Doc/c-api/gcsupport.rst:62
-#, fuzzy
 msgid ""
 "Analogous to :c:macro:`PyObject_NewVar` but for container objects with the :"
 "c:macro:`Py_TPFLAGS_HAVE_GC` flag set."
 msgstr ""
-"Análogo a :c:func:`PyObject_NewVar` pero para objetos de contenedor con el "
-"*flag* :const:`Py_TPFLAGS_HAVE_GC` establecido."
+"Análogo a :c:macro:`PyObject_NewVar` pero para objetos de contenedor con el "
+"*flag* :c:macro:`Py_TPFLAGS_HAVE_GC` establecido."
 
 #: ../Doc/c-api/gcsupport.rst:67
 msgid ""
@@ -169,12 +165,18 @@ msgid ""
 "The allocated memory is initialized to zeros, except for the :c:type:`Python "
 "object header <PyObject>`."
 msgstr ""
+"Análogo a :c:macro:`PyObject_GC_New` pero asigna bytes de *extra_size* al "
+"final del objeto (en el desplazamiento :c:member:`~PyTypeObject."
+"tp_basicsize`). La memoria asignada se inicializa a ceros, excepto para el :"
+"c:type:`encabezado del objeto Python <PyObject>`."
 
 #: ../Doc/c-api/gcsupport.rst:73
 msgid ""
 "The extra data will be deallocated with the object, but otherwise it is not "
 "managed by Python."
 msgstr ""
+"Los datos extra se reasignarán con el objeto, pero por lo demás no se "
+"gestionan por Python."
 
 #: ../Doc/c-api/gcsupport.rst:77
 msgid ""
@@ -183,23 +185,28 @@ msgid ""
 "number of fields, prefer using :c:type:`PyVarObject` and :c:member:"
 "`~PyTypeObject.tp_itemsize` instead."
 msgstr ""
+"La función está marcada como inestable porque aún no se ha decidido el "
+"mecanismo final para reservar datos extra después de una instancia. Para "
+"asignar un número variable de campos, se recomienda usar en su lugar :c:type:"
+"`PyVarObject` y :c:member:`~PyTypeObject.tp_itemsize`."
 
 #: ../Doc/c-api/gcsupport.rst:88
-#, fuzzy
 msgid ""
 "Resize an object allocated by :c:macro:`PyObject_NewVar`. Returns the "
 "resized object of type ``TYPE*`` (refers to any C type) or ``NULL`` on "
 "failure."
 msgstr ""
-"Cambia el tamaño de un objeto asignado por :c:func:`PyObject_NewVar`. "
-"Retorna el objeto redimensionado o ``NULL`` en caso de falla. *op* aún no "
-"debe ser rastreado por el recolector de basura."
+"Cambia el tamaño de un objeto asignado por :c:macro:`PyObject_NewVar`. "
+"Retorna el objeto redimensionado de tipo ``TYPE*`` (se refiere a cualquier "
+"tipo de C) o ``NULL`` en caso de falla."
 
 #: ../Doc/c-api/gcsupport.rst:92
 msgid ""
 "*op* must be of type :c:expr:`PyVarObject *` and must not be tracked by the "
 "collector yet. *newsize* must be of type :c:type:`Py_ssize_t`."
 msgstr ""
+"*op* debe ser de tipo :c:expr:`PyVarObject *` y aún no debe ser rastreado "
+"por el recolector. *newsize* debe ser de tipo :c:type:`Py_ssize_t`."
 
 #: ../Doc/c-api/gcsupport.rst:99
 msgid ""
@@ -257,13 +264,12 @@ msgid "This is analogous to the Python function :func:`gc.is_finalized`."
 msgstr "Esto es análogo a la función de Python :func:`gc.is_finalized`."
 
 #: ../Doc/c-api/gcsupport.rst:136
-#, fuzzy
 msgid ""
 "Releases memory allocated to an object using :c:macro:`PyObject_GC_New` or :"
 "c:macro:`PyObject_GC_NewVar`."
 msgstr ""
-"Libera memoria asignada a un objeto usando :c:func:`PyObject_GC_New` o :c:"
-"func:`PyObject_GC_NewVar`."
+"Libera memoria asignada a un objeto usando :c:macro:`PyObject_GC_New` o :c:"
+"macro:`PyObject_GC_NewVar`."
 
 #: ../Doc/c-api/gcsupport.rst:142
 msgid ""
@@ -283,13 +289,12 @@ msgstr ""
 "`~PyTypeObject.tp_traverse` no sea válido."
 
 #: ../Doc/c-api/gcsupport.rst:151
-#, fuzzy
 msgid ""
 "The :c:func:`!_PyObject_GC_TRACK` and :c:func:`!_PyObject_GC_UNTRACK` macros "
 "have been removed from the public C API."
 msgstr ""
-"Los macros :c:func:`_PyObject_GC_TRACK` y :c:func:`_PyObject_GC_UNTRACK` se "
-"han eliminado de la API pública de C."
+"Los macros :c:func:`!_PyObject_GC_TRACK` y :c:func:`!_PyObject_GC_UNTRACK` "
+"se han eliminado de la API pública de C."
 
 #: ../Doc/c-api/gcsupport.rst:154
 msgid ""
@@ -372,6 +377,13 @@ msgid ""
 "    return 0;\n"
 "}"
 msgstr ""
+"static int\n"
+"my_traverse(Noddy *self, visitproc visit, void *arg)\n"
+"{\n"
+"    Py_VISIT(self->foo);\n"
+"    Py_VISIT(self->bar);\n"
+"    return 0;\n"
+"}"
 
 #: ../Doc/c-api/gcsupport.rst:198
 msgid ""
@@ -456,30 +468,32 @@ msgstr ""
 "Retorna el estado actual, 0 para deshabilitado y 1 para habilitado."
 
 #: ../Doc/c-api/gcsupport.rst:256
-#, fuzzy
 msgid "Querying Garbage Collector State"
-msgstr "Controlar el estado del recolector de basura"
+msgstr "Consultar el estado del recolector de basura"
 
 #: ../Doc/c-api/gcsupport.rst:258
-#, fuzzy
 msgid ""
 "The C-API provides the following interface for querying information about "
 "the garbage collector."
 msgstr ""
-"La C-API proporciona las siguientes funciones para controlar las ejecuciones "
-"de recolección de basura."
+"La C-API proporciona la siguiente interfaz para consultar información sobre "
+"el recolector de basura."
 
 #: ../Doc/c-api/gcsupport.rst:263
 msgid ""
 "Run supplied *callback* on all live GC-capable objects. *arg* is passed "
 "through to all invocations of *callback*."
 msgstr ""
+"Ejecuta la *callback* suministrada en todos los objetos activos con "
+"capacidad para GC. *arg* se pasa a todas las invocaciones de *callback*."
 
 #: ../Doc/c-api/gcsupport.rst:267
 msgid ""
 "If new objects are (de)allocated by the callback it is undefined if they "
 "will be visited."
 msgstr ""
+"Si la devolución de llamada (des)asigna nuevos objetos, no está definido si "
+"serán visitados."
 
 #: ../Doc/c-api/gcsupport.rst:270
 msgid ""
@@ -487,6 +501,10 @@ msgid ""
 "collection in the callback may lead to undefined behaviour e.g. visiting the "
 "same objects multiple times or not at all."
 msgstr ""
+"La recolección de basura está deshabilitada durante la operación. Ejecutar "
+"una recolección explícitamente en la devolución de llamada puede provocar un "
+"comportamiento indefinido, por ejemplo, visitar los mismos objetos varias "
+"veces o no visitarlos en absoluto."
 
 #: ../Doc/c-api/gcsupport.rst:278
 msgid ""
@@ -496,3 +514,9 @@ msgid ""
 "``1`` to stop iteration. Other return values are reserved for now so "
 "behavior on returning anything else is undefined."
 msgstr ""
+"Tipo de la función de visitante que se pasará a :c:func:"
+"`PyUnstable_GC_VisitObjects`. *arg* es el mismo que el *arg* pasado a "
+"``PyUnstable_GC_VisitObjects``. Retorna ``0`` para continuar la iteración, "
+"retorna ``1`` para detener la iteración. Los demás valores de retorno se "
+"reservan por ahora, por lo que el comportamiento al retornar cualquier otro "
+"valor no está definido."
