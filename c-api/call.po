@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: Python en Español 3.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-21 16:38-0300\n"
-"PO-Revision-Date: 2021-12-09 10:27+0800\n"
+"PO-Revision-Date: 2025-10-13 01:01-0600\n"
 "Last-Translator: Rodrigo Tobar <rtobarc@gmail.com>\n"
-"Language: es\n"
 "Language-Team: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.16.0\n"
+"X-Generator: Poedit 3.7\n"
 
 #: ../Doc/c-api/call.rst:6
 msgid "Call Protocol"
@@ -45,6 +46,7 @@ msgstr ""
 msgid ""
 "PyObject *tp_call(PyObject *callable, PyObject *args, PyObject *kwargs);"
 msgstr ""
+"PyObject *tp_call(PyObject *callable, PyObject *args, PyObject *kwargs);"
 
 #: ../Doc/c-api/call.rst:19
 msgid ""
@@ -69,13 +71,12 @@ msgstr ""
 "manera."
 
 #: ../Doc/c-api/call.rst:29
-#, fuzzy
 msgid ""
 "To call an object, use :c:func:`PyObject_Call` or another :ref:`call API "
 "<capi-call>`."
 msgstr ""
-"Para llamar a un objeto, use :c:func:`PyObject_Call` u otro :ref:`call API "
-"<capi-call>`."
+"Para llamar a un objeto, use :c:func:`PyObject_Call` u otra :ref:`llamada a "
+"la API <capi-call>`."
 
 #: ../Doc/c-api/call.rst:36
 msgid "The Vectorcall Protocol"
@@ -127,6 +128,12 @@ msgid ""
 "versions, vectorcall should only be used with :c:macro:`immutable "
 "<Py_TPFLAGS_IMMUTABLETYPE>` or static types."
 msgstr ""
+"Ahora el indicador :c:macro:`Py_TPFLAGS_HAVE_VECTORCALL` se elimina de una "
+"clase cuando se reasigna el método de la clase :py:meth:`~object.__call__`. "
+"(Esto configura internamente solo :c:member:`~PyTypeObject.tp_call` y, por "
+"lo tanto, puede hacer que se comporte de forma diferente a la función "
+"vectorcall.) En versiones anteriores de Python, vectorcall solo debería "
+"usarse con :c:macro:`immutable <Py_TPFLAGS_IMMUTABLETYPE>` o tipos estáticos."
 
 #: ../Doc/c-api/call.rst:69
 msgid ""
@@ -141,7 +148,6 @@ msgstr ""
 "tiene sentido implementar vectorcall."
 
 #: ../Doc/c-api/call.rst:74
-#, fuzzy
 msgid ""
 "Classes can implement the vectorcall protocol by enabling the :c:macro:"
 "`Py_TPFLAGS_HAVE_VECTORCALL` flag and setting :c:member:`~PyTypeObject."
@@ -150,7 +156,7 @@ msgid ""
 "signature:"
 msgstr ""
 "Las clases pueden implementar el protocolo vectorcall habilitando el "
-"indicador :const:`Py_TPFLAGS_HAVE_VECTORCALL` y la configuración :c:member:"
+"indicador :c:macro:`Py_TPFLAGS_HAVE_VECTORCALL` y la configuración :c:member:"
 "`~PyTypeObject.tp_vectorcall_offset` al desplazamiento dentro de la "
 "estructura del objeto donde aparece un *vectorcallfunc*. Este es un puntero "
 "a una función con la siguiente firma:"
@@ -179,13 +185,13 @@ msgid "*nargsf* is the number of positional arguments plus possibly the"
 msgstr "*nargsf* es el número de argumentos posicionales más posiblemente el"
 
 #: ../Doc/c-api/call.rst:87
-#, fuzzy
 msgid ""
 ":c:macro:`PY_VECTORCALL_ARGUMENTS_OFFSET` flag. To get the actual number of "
 "positional arguments from *nargsf*, use :c:func:`PyVectorcall_NARGS`."
 msgstr ""
-"flag :const:`PY_VECTORCALL_ARGUMENTS_OFFSET`. Para obtener el número real de "
-"argumentos posicionales de *nargsf*, use :c:func:`PyVectorcall_NARGS`."
+"indicador :c:macro:`PY_VECTORCALL_ARGUMENTS_OFFSET`. Para obtener el número "
+"real de argumentos posicionales de *nargsf*, use :c:func:"
+"`PyVectorcall_NARGS`."
 
 #: ../Doc/c-api/call.rst:94
 msgid "*kwnames* is a tuple containing the names of the keyword arguments;"
@@ -210,7 +216,7 @@ msgid ""
 "argument 1 (not 0) in the allocated vector. The callee must restore the "
 "value of ``args[-1]`` before returning."
 msgstr ""
-"Si este flag se establece en un argumento vectorcall *nargsf*, el "
+"Si este indicador se establece en un argumento vectorcall *nargsf*, el "
 "destinatario de la llamada puede cambiar temporalmente ``args[-1]``. En "
 "otras palabras, *args* apunta al argumento 1 (no 0) en el vector asignado. "
 "El destinatario de la llamada debe restaurar el valor de ``args[-1]`` antes "
@@ -221,11 +227,10 @@ msgid ""
 "For :c:func:`PyObject_VectorcallMethod`, this flag means instead that "
 "``args[0]`` may be changed."
 msgstr ""
-"Para :c:func:`PyObject_VectorcallMethod`, este flag significa en cambio que "
-"``args[0]`` puede cambiarse."
+"Para :c:func:`PyObject_VectorcallMethod`, este indicador significa en cambio "
+"que ``args[0]`` puede cambiarse."
 
 #: ../Doc/c-api/call.rst:106
-#, fuzzy
 msgid ""
 "Whenever they can do so cheaply (without additional allocation), callers are "
 "encouraged to use :c:macro:`PY_VECTORCALL_ARGUMENTS_OFFSET`. Doing so will "
@@ -233,7 +238,7 @@ msgid ""
 "include a prepended *self* argument) very efficiently."
 msgstr ""
 "Siempre que puedan hacerlo de forma económica (sin asignación adicional), se "
-"anima a las personas que llaman a utilizar :const:"
+"anima a las personas que llaman a utilizar :c:macro:"
 "`PY_VECTORCALL_ARGUMENTS_OFFSET`. Si lo hace, permitirá que las personas que "
 "llaman, como los métodos enlazados, realicen sus llamadas posteriores (que "
 "incluyen un argumento *self* antepuesto) de manera muy eficiente."
@@ -286,7 +291,7 @@ msgstr ""
 
 #: ../Doc/c-api/call.rst:140
 msgid "(Py_ssize_t)(nargsf & ~PY_VECTORCALL_ARGUMENTS_OFFSET)"
-msgstr ""
+msgstr "(Py_ssize_t)(nargsf & ~PY_VECTORCALL_ARGUMENTS_OFFSET)"
 
 #: ../Doc/c-api/call.rst:142
 msgid ""
@@ -325,7 +330,6 @@ msgstr ""
 "posicionales y de palabras clave dados en una tupla y dict, respectivamente."
 
 #: ../Doc/c-api/call.rst:164
-#, fuzzy
 msgid ""
 "This is a specialized function, intended to be put in the :c:member:"
 "`~PyTypeObject.tp_call` slot or be used in an implementation of ``tp_call``. "
@@ -334,8 +338,8 @@ msgid ""
 msgstr ""
 "Esta es una función especializada, destinada a colocarse en el slot :c:"
 "member:`~PyTypeObject.tp_call` o usarse en una implementación de "
-"``tp_call``. No comprueba el flag :const:`Py_TPFLAGS_HAVE_VECTORCALL` y no "
-"vuelve a ``tp_call``."
+"``tp_call``. No comprueba el indicador :c:macro:`Py_TPFLAGS_HAVE_VECTORCALL` "
+"y no vuelve a ``tp_call``."
 
 #: ../Doc/c-api/call.rst:175
 msgid "Object Calling API"
@@ -567,12 +571,11 @@ msgstr ""
 "ser *NULL*, lo que indica que no se proporcionan argumentos."
 
 #: ../Doc/c-api/call.rst:276
-#, fuzzy
 msgid ""
 "Note that if you only pass :c:expr:`PyObject *` args, :c:func:"
 "`PyObject_CallFunctionObjArgs` is a faster alternative."
 msgstr ""
-"Tenga en cuenta que si solo pasa :c:type:`PyObject *` args, :c:func:"
+"Tenga en cuenta que si solo pasa :c:expr:`PyObject *` args, :c:func:"
 "`PyObject_CallFunctionObjArgs` es una alternativa más rápida."
 
 #: ../Doc/c-api/call.rst:279
@@ -603,12 +606,11 @@ msgstr ""
 "arg2, ...)``."
 
 #: ../Doc/c-api/call.rst:297
-#, fuzzy
 msgid ""
 "Note that if you only pass :c:expr:`PyObject *` args, :c:func:"
 "`PyObject_CallMethodObjArgs` is a faster alternative."
 msgstr ""
-"Tenga en cuenta que si solo pasa :c:type:`PyObject *` args, :c:func:"
+"Tenga en cuenta que si solo pasa :c:expr:`PyObject *` args, :c:func:"
 "`PyObject_CallMethodObjArgs` es una alternativa más rápida."
 
 #: ../Doc/c-api/call.rst:300
@@ -616,14 +618,13 @@ msgid "The types of *name* and *format* were changed from ``char *``."
 msgstr "Los tipos de *name* y *format* se cambiaron desde ``char *``."
 
 #: ../Doc/c-api/call.rst:306
-#, fuzzy
 msgid ""
 "Call a callable Python object *callable*, with a variable number of :c:expr:"
 "`PyObject *` arguments.  The arguments are provided as a variable number of "
 "parameters followed by *NULL*."
 msgstr ""
-"Llame a un objeto de Python invocable *callable*, con un número variable de "
-"argumentos :c:type:`PyObject *`. Los argumentos se proporcionan como un "
+"Llama a un objeto de Python invocable *callable*, con un número variable de "
+"argumentos :c:expr:`PyObject *`. Los argumentos se proporcionan como un "
 "número variable de parámetros seguidos de *NULL*."
 
 #: ../Doc/c-api/call.rst:313
@@ -635,7 +636,6 @@ msgstr ""
 "arg2, ...)``."
 
 #: ../Doc/c-api/call.rst:319
-#, fuzzy
 msgid ""
 "Call a method of the Python object *obj*, where the name of the method is "
 "given as a Python string object in *name*.  It is called with a variable "
@@ -644,7 +644,7 @@ msgid ""
 msgstr ""
 "Llama a un método del objeto de Python *obj*, donde el nombre del método se "
 "proporciona como un objeto de cadena de caracteres de Python en *name*. Se "
-"llama con un número variable de argumentos :c:type:`PyObject *`. Los "
+"llama con un número variable de argumentos :c:expr:`PyObject *`. Los "
 "argumentos se proporcionan como un número variable de parámetros seguidos de "
 "*NULL*."
 
@@ -662,7 +662,7 @@ msgid ""
 "*arg*, where the name of the method is given as a Python string object in "
 "*name*."
 msgstr ""
-"Llame a un método del objeto de Python *obj* con un único argumento "
+"Llama a un método del objeto de Python *obj* con un único argumento "
 "posicional *arg*, donde el nombre del método se proporciona como un objeto "
 "de cadena de caracteres de Python en *name*."
 
@@ -701,7 +701,6 @@ msgstr ""
 "posicionales."
 
 #: ../Doc/c-api/call.rst:379
-#, fuzzy
 msgid ""
 "Call a method using the vectorcall calling convention. The name of the "
 "method is given as a Python string *name*. The object whose method is called "
@@ -713,23 +712,22 @@ msgid ""
 "`PyObject_Vectorcall`."
 msgstr ""
 "Llama a un método usando la convención de llamada vectorcall. El nombre del "
-"método se proporciona como una cadena de Python *name*. El objeto cuyo "
-"método se llama es *args[0]*, y el arreglo *args* que comienza en *args [1]* "
-"representa los argumentos de la llamada. Debe haber al menos un argumento "
-"posicional. *nargsf* es el número de argumentos posicionales que incluyen "
-"*args [0]*, más :const:`PY_VECTORCALL_ARGUMENTS_OFFSET` si el valor de "
-"``args[0]`` puede cambiarse temporalmente. Los argumentos de palabras clave "
-"se pueden pasar como en :c:func:`PyObject_Vectorcall`."
+"método se proporciona como una cadena de caracteres de Python *name*. El "
+"objeto cuyo método se llama es *args[0]*, y el arreglo *args* que comienza "
+"en *args [1]* representa los argumentos de la llamada. Debe haber al menos "
+"un argumento posicional. *nargsf* es el número de argumentos posicionales "
+"que incluyen *args [0]*, más :c:macro:`PY_VECTORCALL_ARGUMENTS_OFFSET` si el "
+"valor de ``args[0]`` puede cambiarse temporalmente. Los argumentos de "
+"palabras clave se pueden pasar como en :c:func:`PyObject_Vectorcall`."
 
 #: ../Doc/c-api/call.rst:388
-#, fuzzy
 msgid ""
 "If the object has the :c:macro:`Py_TPFLAGS_METHOD_DESCRIPTOR` feature, this "
 "will call the unbound method object with the full *args* vector as arguments."
 msgstr ""
-"Si el objeto tiene la característica :const:`Py_TPFLAGS_METHOD_DESCRIPTOR`, "
-"esto llamará al objeto de método independiente con el vector *args* completo "
-"como argumentos."
+"Si el objeto tiene la característica :c:macro:"
+"`Py_TPFLAGS_METHOD_DESCRIPTOR`, esto llamará al objeto de método "
+"independiente con el vector *args* completo como argumentos."
 
 #: ../Doc/c-api/call.rst:399
 msgid "Call Support API"
