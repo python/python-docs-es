@@ -21,7 +21,9 @@ from pathlib import Path
 sys.path.append(os.path.abspath('cpython/Doc/tools/extensions'))
 sys.path.append(os.path.abspath('cpython/Doc/includes'))
 
-# Import all the Sphinx settings from cpython
+# Import all the Sphinx settings from cpython.
+# Warning: calling 'eval' and 'compile' is usually not recommended, but in this case
+# we are relying on the official sphinx configuration from cpython.
 cpython_sphinx_conf = Path(os.path.abspath('cpython/Doc/conf.py'))
 eval(compile(cpython_sphinx_conf.read_bytes(), str(cpython_sphinx_conf), "exec"), globals())
 
