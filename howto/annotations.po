@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: Python en Español 3.10\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-21 16:38-0300\n"
-"PO-Revision-Date: 2023-10-17 22:46-0500\n"
+"PO-Revision-Date: 2024-11-26 13:30-0600\n"
 "Last-Translator: José Luis Salgado Banda <josephLSalgado@outlook.com>\n"
-"Language: es\n"
 "Language-Team: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.16.0\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: ../Doc/howto/annotations.rst:5
 msgid "Annotations Best Practices"
@@ -197,6 +198,14 @@ msgid ""
 "\n"
 "print(Derived.__annotations__)"
 msgstr ""
+"class Base:\n"
+"    a: int = 3\n"
+"    b: str = 'abc'\n"
+"\n"
+"class Derived(Base):\n"
+"    pass\n"
+"\n"
+"print(Derived.__annotations__)"
 
 #: ../Doc/howto/annotations.rst:98
 msgid "This will print the annotations dict from ``Base``, not ``Derived``."
@@ -204,7 +213,6 @@ msgstr ""
 "Esto imprimirá el diccionario de anotaciones de ``Base``, no de ``Derived``."
 
 #: ../Doc/howto/annotations.rst:101
-#, fuzzy
 msgid ""
 "Your code will have to have a separate code path if the object you're "
 "examining is a class (``isinstance(o, type)``). In that case, best practice "
@@ -217,9 +225,9 @@ msgstr ""
 "examinando es una clase (``isinstance(o, type)``). En este caso, la práctica "
 "recomendada se basa en un detalle de implementación de las versiones de "
 "Python 3.9 y anteriores: si una clase tiene anotaciones definidas, se "
-"almacenan en el diccionario ``__dict__`` de la clase. Dado que la clase "
-"puede o no tener anotaciones definidas, la mejor práctica es llamar al "
-"método ``get`` en el diccionario de la clase."
+"almacenan en el diccionario :attr:`~type.__dict__` de la clase. Dado que la "
+"clase puede o no tener anotaciones definidas, la mejor práctica es llamar al "
+"método :meth:`~dict.get` en el diccionario de la clase."
 
 #: ../Doc/howto/annotations.rst:109
 msgid ""
@@ -238,6 +246,10 @@ msgid ""
 "else:\n"
 "    ann = getattr(o, '__annotations__', None)"
 msgstr ""
+"if isinstance(o, type):\n"
+"    ann = o.__dict__.get('__annotations__', None)\n"
+"else:\n"
+"    ann = getattr(o, '__annotations__', None)"
 
 #: ../Doc/howto/annotations.rst:118
 msgid ""
@@ -250,15 +262,15 @@ msgstr ""
 "func:`isinstance` antes de un examen más detenido."
 
 #: ../Doc/howto/annotations.rst:123
-#, fuzzy
 msgid ""
 "Note that some exotic or malformed type objects may not have a :attr:`~type."
 "__dict__` attribute, so for extra safety you may also wish to use :func:"
 "`getattr` to access :attr:`!__dict__`."
 msgstr ""
 "Tome en cuenta que algunos objetos de tipo exótico o con formato incorrecto "
-"pueden no tener un atributo ``__dict__``, así que para mayor seguridad, "
-"también puede usar :func:`getattr` para acceder a ``__dict__``."
+"pueden no tener un atributo :attr:`~type.__dict__` , así que para mayor "
+"seguridad, también puede usar :func:`getattr` para acceder a  :attr:`!"
+"__dict__`."
 
 #: ../Doc/howto/annotations.rst:129
 msgid "Manually Un-Stringizing Stringized Annotations"
@@ -326,13 +338,12 @@ msgstr ""
 "corresponda, hasta que haya encontrado la función raíz sin envolver."
 
 #: ../Doc/howto/annotations.rst:155
-#, fuzzy
 msgid ""
 "If ``o`` is a callable (but not a class), use :attr:`o.__globals__ <function."
 "__globals__>` as the globals when calling :func:`eval`."
 msgstr ""
-"Si ``o`` es un invocable (pero no una clase), use ``o.__globals__`` como "
-"``globals`` cuando llame a :func:`eval`."
+"Si ``o`` es un invocable (pero no una clase), use :attr:`o.__globals__ "
+"<function.__globals__>` como globales cuando llame a :func:`eval`."
 
 #: ../Doc/howto/annotations.rst:159
 msgid ""
@@ -488,6 +499,10 @@ msgid ""
 "\n"
 "print(foo.__annotations__)"
 msgstr ""
+"from __future__ import annotations\n"
+"def foo(a: \"str\"): pass\n"
+"\n"
+"print(foo.__annotations__)"
 
 #: ../Doc/howto/annotations.rst:232
 msgid ""

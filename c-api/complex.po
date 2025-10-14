@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-21 16:38-0300\n"
-"PO-Revision-Date: 2021-12-09 10:18+0800\n"
+"PO-Revision-Date: 2025-10-07 00:11-0600\n"
 "Last-Translator: Rodrigo Tobar <rtobarc@gmail.com>\n"
-"Language: es\n"
 "Language-Team: python-doc-es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.16.0\n"
+"X-Generator: Poedit 3.7\n"
 
 #: ../Doc/c-api/complex.rst:6
 msgid "Complex Number Objects"
@@ -53,7 +54,6 @@ msgstr ""
 "desreferenciarlas a través de punteros. Esto es consistente en toda la API."
 
 #: ../Doc/c-api/complex.rst:26
-#, fuzzy
 msgid ""
 "The C structure which corresponds to the value portion of a Python complex "
 "number object.  Most of the functions for dealing with complex number "
@@ -63,11 +63,11 @@ msgstr ""
 "La estructura C que corresponde a la porción de valor de un objeto de número "
 "complejo de Python. La mayoría de las funciones para tratar con objetos de "
 "números complejos utilizan estructuras de este tipo como valores de entrada "
-"o salida, según corresponda. Se define como::"
+"o salida, según corresponda."
 
 #: ../Doc/c-api/complex.rst:33
 msgid "The structure is defined as::"
-msgstr ""
+msgstr "La estructura se define como::"
 
 #: ../Doc/c-api/complex.rst:35
 msgid ""
@@ -76,6 +76,10 @@ msgid ""
 "    double imag;\n"
 "} Py_complex;"
 msgstr ""
+"typedef struct {\n"
+"    double real;\n"
+"    double imag;\n"
+"} Py_complex;"
 
 #: ../Doc/c-api/complex.rst:43
 msgid ""
@@ -118,13 +122,12 @@ msgstr ""
 "C :c:type:`Py_complex`."
 
 #: ../Doc/c-api/complex.rst:70
-#, fuzzy
 msgid ""
 "If *divisor* is null, this method returns zero and sets :c:data:`errno` to :"
 "c:macro:`!EDOM`."
 msgstr ""
 "Si *divisor* es nulo, este método retorna cero y establece :c:data:`errno` "
-"en :c:data:`EDOM`."
+"en :c:macro:`!EDOM`."
 
 #: ../Doc/c-api/complex.rst:76
 msgid ""
@@ -135,13 +138,12 @@ msgstr ""
 "C :c:type:`Py_complex`."
 
 #: ../Doc/c-api/complex.rst:79
-#, fuzzy
 msgid ""
 "If *num* is null and *exp* is not a positive real number, this method "
 "returns zero and sets :c:data:`errno` to :c:macro:`!EDOM`."
 msgstr ""
 "Si *num* es nulo y *exp* no es un número real positivo, este método retorna "
-"cero y establece :c:data:`errno` a :c:data:`EDOM`."
+"cero y establece :c:data:`errno` a :c:macro:`!EDOM`."
 
 #: ../Doc/c-api/complex.rst:84
 msgid "Complex Numbers as Python Objects"
@@ -182,28 +184,27 @@ msgstr ""
 "éxito."
 
 #: ../Doc/c-api/complex.rst:112
-#, fuzzy
 msgid ""
 "Create a new Python complex number object from a C :c:type:`Py_complex` "
 "value. Return ``NULL`` with an exception set on error."
 msgstr ""
 "Crea un nuevo objeto de número complejo de Python a partir de un valor C :c:"
-"type:`Py_complex`."
+"type:`Py_complex`. Retorna ``NULL`` con una excepción establecida en caso de "
+"error."
 
 #: ../Doc/c-api/complex.rst:118
-#, fuzzy
 msgid ""
 "Return a new :c:type:`PyComplexObject` object from *real* and *imag*. Return "
 "``NULL`` with an exception set on error."
-msgstr "Retorna un nuevo objeto :c:type:`PyComplexObject` de *real* e *imag*."
+msgstr ""
+"Retorna un nuevo objeto :c:type:`PyComplexObject` de *real* e *imag*. "
+"Retorna ``NULL`` con una excepción establecida en caso de error."
 
 #: ../Doc/c-api/complex.rst:124
-#, fuzzy
 msgid "Return the real part of *op* as a C :c:expr:`double`."
-msgstr "Retorna la parte real de *op* como :c:type:`double` en C."
+msgstr "Retorna la parte real de *op* como :c:expr:`double` en C."
 
 #: ../Doc/c-api/complex.rst:126
-#, fuzzy
 msgid ""
 "If *op* is not a Python complex number object but has a :meth:`~object."
 "__complex__` method, this method will first be called to convert *op* to a "
@@ -211,30 +212,29 @@ msgid ""
 "it falls back to call :c:func:`PyFloat_AsDouble` and returns its result."
 msgstr ""
 "Si *op* no es un objeto de número complejo de Python pero tiene un método :"
-"meth:`__complex__`, primero se llamará a este método para convertir *op* en "
-"un objeto de número complejo de Python. Si ``__complex__()`` no está "
-"definido, vuelve a :meth:`__float__`. Si ``__float__()`` no está definido, "
-"entonces recurre a :meth:`__index__`. En caso de falla, este método retorna "
-"``-1.0`` como un valor real."
+"meth:`~object.__complex__`, primero se llamará a este método para convertir "
+"*op* en un objeto de número complejo de Python. Si :meth:`!__complex__` no "
+"está definido, entonces recurre a :c:func:`PyFloat_AsDouble` y retorna su "
+"resultado."
 
 #: ../Doc/c-api/complex.rst:132 ../Doc/c-api/complex.rst:148
 msgid ""
 "Upon failure, this method returns ``-1.0`` with an exception set, so one "
 "should call :c:func:`PyErr_Occurred` to check for errors."
 msgstr ""
+"En caso de falla, este método retorna ``-1.0`` con una excepción "
+"establecida, por lo que se debe llamar :c:func:`PyErr_Occurred` para "
+"verificar si hay errores."
 
 #: ../Doc/c-api/complex.rst:135 ../Doc/c-api/complex.rst:151
-#, fuzzy
 msgid "Use :meth:`~object.__complex__` if available."
-msgstr "Use :meth:`__index__` si está disponible."
+msgstr "Use :meth:`~object.__complex__` si está disponible."
 
 #: ../Doc/c-api/complex.rst:140
-#, fuzzy
 msgid "Return the imaginary part of *op* as a C :c:expr:`double`."
-msgstr "Retorna la parte imaginaria de *op* como un :c:type:`double` de C."
+msgstr "Retorna la parte imaginaria de *op* como un :c:expr:`double` de C."
 
 #: ../Doc/c-api/complex.rst:142
-#, fuzzy
 msgid ""
 "If *op* is not a Python complex number object but has a :meth:`~object."
 "__complex__` method, this method will first be called to convert *op* to a "
@@ -243,18 +243,16 @@ msgid ""
 "success."
 msgstr ""
 "Si *op* no es un objeto de número complejo de Python pero tiene un método :"
-"meth:`__complex__`, primero se llamará a este método para convertir *op* en "
-"un objeto de número complejo de Python. Si ``__complex__()`` no está "
-"definido, vuelve a :meth:`__float__`. Si ``__float__()`` no está definido, "
-"entonces recurre a :meth:`__index__`. En caso de falla, este método retorna "
-"``-1.0`` como un valor real."
+"meth:`~object.__complex__`, primero se llamará a este método para convertir "
+"*op* en un objeto de número complejo de Python. Si :meth:`!__complex__` no "
+"está definido, entonces recurre a :c:func:`PyFloat_AsDouble` y retorna "
+"``0.0`` en caso de éxito."
 
 #: ../Doc/c-api/complex.rst:156
 msgid "Return the :c:type:`Py_complex` value of the complex number *op*."
 msgstr "Retorna el valor :c:type:`Py_complex` del número complejo *op*."
 
 #: ../Doc/c-api/complex.rst:158
-#, fuzzy
 msgid ""
 "If *op* is not a Python complex number object but has a :meth:`~object."
 "__complex__` method, this method will first be called to convert *op* to a "
@@ -263,11 +261,10 @@ msgid ""
 "defined then it falls back to :meth:`~object.__index__`."
 msgstr ""
 "Si *op* no es un objeto de número complejo de Python pero tiene un método :"
-"meth:`__complex__`, primero se llamará a este método para convertir *op* en "
-"un objeto de número complejo de Python. Si ``__complex__()`` no está "
-"definido, vuelve a :meth:`__float__`. Si ``__float__()`` no está definido, "
-"entonces recurre a :meth:`__index__`. En caso de falla, este método retorna "
-"``-1.0`` como un valor real."
+"meth:`~object.__complex__`, primero se llamará a este método para convertir "
+"*op* en un objeto de número complejo de Python. Si :meth:`!__complex__` no "
+"está definido, entonces recurre a :meth:`~object.__float__`. Si :meth:`!"
+"__float__` no está definido, entonces recurre a :meth:`~object.__index__`."
 
 #: ../Doc/c-api/complex.rst:164
 msgid ""
@@ -275,17 +272,19 @@ msgid ""
 "`~Py_complex.real` set to ``-1.0`` and with an exception set, so one should "
 "call :c:func:`PyErr_Occurred` to check for errors."
 msgstr ""
+"En caso de falla, este método retorna :c:type:`Py_complex` con :c:member:"
+"`~Py_complex.real` establecido en ``-1.0`` y con una excepción establecida, "
+"por lo que se debe llamar a :c:func:`PyErr_Occurred` para verificar si hay "
+"errores."
 
 #: ../Doc/c-api/complex.rst:168
-#, fuzzy
 msgid "Use :meth:`~object.__index__` if available."
-msgstr "Use :meth:`__index__` si está disponible."
+msgstr "Use :meth:`~object.__index__` si está disponible."
 
 #: ../Doc/c-api/complex.rst:8
 msgid "object"
-msgstr ""
+msgstr "object"
 
 #: ../Doc/c-api/complex.rst:8
-#, fuzzy
 msgid "complex number"
-msgstr "Objetos de números complejos"
+msgstr "complex number"
