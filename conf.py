@@ -22,12 +22,8 @@ sys.path.append(os.path.abspath('cpython/Doc/tools/extensions'))
 sys.path.append(os.path.abspath('cpython/Doc/includes'))
 
 # Import all the Sphinx settings from cpython
-# This import will trigger warnings on the 'Include/patchlevel.h'
-# not being found, because it execute the content of the whole file,
-# and there there is a local call to 'get_header_version' like the one
-# we have in a few lines.
-sys.path.insert(0, os.path.abspath('cpython/Doc'))
-from conf import *
+cpython_sphinx_conf = Path(os.path.abspath('cpython/Doc/conf.py'))
+eval(compile(cpython_sphinx_conf.read_bytes(), str(cpython_sphinx_conf), "exec"), globals())
 
 project = 'Python en Español'
 
