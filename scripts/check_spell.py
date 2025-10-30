@@ -4,6 +4,7 @@ on the custom dictionaries under the 'dictionaries/' directory.
 """
 
 from pathlib import Path
+import shutil
 import sys
 import tempfile
 
@@ -43,7 +44,7 @@ def check_spell(po_files=None):
 
     # Run pospell either against all files or the file given on the command line
     if not po_files:
-        po_files = Path(".").glob("*/*.po")
+        po_files = list(Path(".").glob("*/*.po"))
 
     # Workaround issue #3324 FIXME
     # It seems that all code snippets have line breaks '\n'. This causes the
@@ -52,10 +53,9 @@ def check_spell(po_files=None):
     # Create temporary copies of the original files.
     po_files_tmp = []
     for po_file in po_files:
-        with open(tempfile.mktemp(), "w") as temp_file:
-            # Copy content of the .po file
-            with open(po_file, "r", encoding="utf-8") as f:
-                temp_file.write(f.read())
+        with open(tempfile.mktemp(), "wb") as temp_file:
+            with open(po_file, "rb") as original_file:
+                shutil.copyfileobj(original_file, temp_file)
                 po_files_tmp.append(temp_file.name)
 
         # Don't translate probably code entries
@@ -66,8 +66,9 @@ def check_spell(po_files=None):
         polib_temp_file.save()
 
     detected_errors = pospell.spell_check(po_files_tmp, personal_dict=output_filename, language="es_ES")
-    for tmp, orig in zip(po_files_tmp, po_files):
-        print(tmp, " == ", orig)
+    if detected_errors:
+        for tmp, orig in zip(po_files_tmp, po_files):
+            print(tmp, " == ", orig)
     return detected_errors
 
 

@@ -90,6 +90,14 @@ latex_documents = [
 ]
 
 
+# autorun is used, among other things, to run potodo, which generates non-ascii output
+# starting with 0.30. autorun OTOH defaults to use ascii to decode console/python output.
+# Let's switch to utf-8 instead.
+autorun_languages = {
+    "console_output_encoding": "utf-8",
+    "pycon_output_encoding": "utf-8",
+}
+
 def setup(app):
 
     def add_contributing_banner(app, doctree):
