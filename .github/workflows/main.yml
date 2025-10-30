@@ -88,6 +88,13 @@ jobs:
         if: steps.po-files-to-check.outputs.any_po_files_to_check == 'true'
         run: python scripts/check_spell.py ${{ steps.po-files-to-check.outputs.po_files_to_check }}
 
+      # Usa un caché para restaurar el doctree generado por builds anteriores
+      - name: Prepara caché para documentación
+        uses: actions/cache@v4
+        with:
+          key: sphinx-generated-doctree
+          path: cpython/Doc/_build/doctree
+
       # Construcción de la documentación
       - name: Construir documentación
         run: |
