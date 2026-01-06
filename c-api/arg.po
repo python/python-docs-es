@@ -85,6 +85,10 @@ msgid ""
 "formats (``s#``, ``y#``, etc.) explained below. This is not necessary on "
 "Python 3.13 and later."
 msgstr ""
+"En Python 3.12 y versiones anteriores, la macro :c:macro:`!PY_SSIZE_T_CLEAN` "
+"debe estar definida antes de incluir :file:`Python.h` para usar todas las "
+"variantes ``#`` de formatos (``s#``, ``y#``, etc.) explicadas a continuación. "
+"Esto no es necesario en Python 3.13 y versiones posteriores."
 
 #: ../Doc/c-api/arg.rst:42
 msgid ""
@@ -103,7 +107,7 @@ msgstr ""
 
 #: ../Doc/c-api/arg.rst:48
 msgid "There are three ways strings and buffers can be converted to C:"
-msgstr ""
+msgstr "Hay tres formas en que las cadenas de caracteres y los búferes pueden convertirse a C:"
 
 #: ../Doc/c-api/arg.rst:50
 #, fuzzy
@@ -129,6 +133,9 @@ msgid ""
 "**You have to call** :c:func:`PyMem_Free` after you have finished processing "
 "the data (or in any early abort case)."
 msgstr ""
+"Los formatos ``es``, ``es#``, ``et`` y ``et#`` asignan el búfer de resultado. "
+"**Debe llamar** :c:func:`PyMem_Free` después de haber terminado de procesar "
+"los datos (o en cualquier caso de aborto temprano)."
 
 #: ../Doc/c-api/arg.rst:63
 msgid ""
@@ -138,6 +145,12 @@ msgid ""
 "corresponding Python object, and shares the lifetime of this object. You "
 "won't have to release any memory yourself."
 msgstr ""
+"Otros formatos toman un :class:`str` o un :term:`objeto de tipo bytes <bytes-"
+"like object>` de solo lectura, como :class:`bytes`, y proporcionan un "
+"puntero ``const char *`` a su búfer. En este caso el búfer es \"prestado\" "
+"(*borrowed*): es gestionado por el objeto Python correspondiente y comparte "
+"el tiempo de vida de este objeto. No tendrá que liberar ninguna memoria "
+"usted mismo."
 
 #: ../Doc/c-api/arg.rst:70
 msgid ""
@@ -146,6 +159,11 @@ msgid ""
 "disallows common mutable objects such as :class:`bytearray`, but also some "
 "read-only objects such as :class:`memoryview` of :class:`bytes`."
 msgstr ""
+"Para asegurar que el búfer subyacente pueda ser prestado de forma segura, el "
+"campo :c:member:`PyBufferProcs.bf_releasebuffer` del objeto debe ser ``NULL``. "
+"Esto desautoriza objetos mutables comunes como :class:`bytearray`, pero "
+"también algunos objetos de solo lectura como :class:`memoryview` de :class:"
+"`bytes`."
 
 #: ../Doc/c-api/arg.rst:76
 msgid ""
@@ -153,6 +171,9 @@ msgid ""
 "whether the input object is immutable (e.g. whether it would honor a request "
 "for a writable buffer, or whether another thread can mutate the data)."
 msgstr ""
+"Además de este requisito de ``bf_releasebuffer``, no hay verificación para "
+"comprobar si el objeto de entrada es inmutable (por ejemplo, si respetaría "
+"una solicitud de un búfer escribible, o si otro hilo puede mutar los datos)."
 
 #: ../Doc/c-api/arg.rst:98
 msgid "``s`` (:class:`str`) [const char \\*]"
@@ -564,6 +585,8 @@ msgid ""
 "``u``, ``u#``, ``Z``, and ``Z#`` are removed because they used a legacy "
 "``Py_UNICODE*`` representation."
 msgstr ""
+"``u``, ``u#``, ``Z`` y ``Z#`` fueron eliminados porque usaban una "
+"representación heredada ``Py_UNICODE*``."
 
 #: ../Doc/c-api/arg.rst:230
 msgid "Numbers"
