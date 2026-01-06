@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       # Obtención del código
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           submodules: 'true'
           # Necesario para que tj-actions/changed-files se ejecute
@@ -24,7 +24,7 @@ jobs:
 
       # Instalación de dependencias
       - name: Preparar Python v3.13
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.13"
           cache: "pip"
@@ -52,7 +52,7 @@ jobs:
       - name: Obtiene la lista de archivos .po con cambios (sólo en PRs)
         if: github.event_name == 'pull_request'
         id: changed-po-files
-        uses: tj-actions/changed-files@v46
+        uses: tj-actions/changed-files@v47
         with:
           files: |
              **/*.po
@@ -92,3 +92,9 @@ jobs:
       - name: Construir documentación
         run: |
           sphinx-build -j auto -W --keep-going -b html -d cpython/Doc/_build/doctree -D language=es . cpython/Doc/_build/html
+
+      # Publica la documentación recién construida para poder descargarla de ser necesario
+      - uses: actions/upload-artifact@v6
+        with:
+          path: cpython/Doc/_build/html
+          name: documentación-html
