@@ -21,13 +21,11 @@ from pathlib import Path
 sys.path.append(os.path.abspath('cpython/Doc/tools/extensions'))
 sys.path.append(os.path.abspath('cpython/Doc/includes'))
 
-# Import all the Sphinx settings from cpython
-# This import will trigger warnings on the 'Include/patchlevel.h'
-# not being found, because it execute the content of the whole file,
-# and there there is a local call to 'get_header_version' like the one
-# we have in a few lines.
-sys.path.insert(0, os.path.abspath('cpython/Doc'))
-from conf import *
+# Import all the Sphinx settings from cpython.
+# Warning: calling 'eval' and 'compile' is usually not recommended, but in this case
+# we are relying on the official sphinx configuration from cpython.
+cpython_sphinx_conf = Path(os.path.abspath('cpython/Doc/conf.py'))
+eval(compile(cpython_sphinx_conf.read_bytes(), str(cpython_sphinx_conf), "exec"), globals())
 
 project = 'Python en Español'
 
@@ -91,6 +89,14 @@ latex_documents = [
      _stdauthor, 'manual'),
 ]
 
+
+# autorun is used, among other things, to run potodo, which generates non-ascii output
+# starting with 0.30. autorun OTOH defaults to use ascii to decode console/python output.
+# Let's switch to utf-8 instead.
+autorun_languages = {
+    "console_output_encoding": "utf-8",
+    "pycon_output_encoding": "utf-8",
+}
 
 def setup(app):
 
