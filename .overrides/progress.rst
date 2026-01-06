@@ -20,7 +20,7 @@ Muestra los porcentajes completados por directorio y solo los archivos que no es
 
 .. runblock:: console
 
-    $ potodo --path .
+    $ potodo .
 
 
 Completados
