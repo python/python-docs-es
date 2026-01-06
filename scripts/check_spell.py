@@ -4,9 +4,11 @@ on the custom dictionaries under the 'dictionaries/' directory.
 """
 
 from pathlib import Path
+import shutil
 import sys
 import tempfile
 
+import polib
 import pospell
 
 
@@ -42,9 +44,31 @@ def check_spell(po_files=None):
 
     # Run pospell either against all files or the file given on the command line
     if not po_files:
-        po_files = Path(".").glob("*/*.po")
+        po_files = list(Path(".").glob("*/*.po"))
 
-    detected_errors = pospell.spell_check(po_files, personal_dict=output_filename, language="es_ES")
+    # Workaround issue #3324 FIXME
+    # It seems that all code snippets have line breaks '\n'. This causes the
+    # currently indentation issues.
+
+    # Create temporary copies of the original files.
+    po_files_tmp = []
+    for po_file in po_files:
+        with open(tempfile.mktemp(), "wb") as temp_file:
+            with open(po_file, "rb") as original_file:
+                shutil.copyfileobj(original_file, temp_file)
+                po_files_tmp.append(temp_file.name)
+
+        # Don't translate probably code entries
+        polib_temp_file = polib.pofile(temp_file.name)
+        for entry in polib_temp_file:
+            if "\n" in entry.msgid:
+                entry.msgstr = ""
+        polib_temp_file.save()
+
+    detected_errors = pospell.spell_check(po_files_tmp, personal_dict=output_filename, language="es_ES")
+    if detected_errors:
+        for tmp, orig in zip(po_files_tmp, po_files):
+            print(tmp, " == ", orig)
     return detected_errors
 
 
