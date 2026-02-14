@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: Python en Español 3.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-21 16:38-0300\n"
-"PO-Revision-Date: 2022-10-31 20:56-0300\n"
-"Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
-"Language: es\n"
+"PO-Revision-Date: 2026-02-13 23:38-0300\n"
+"Last-Translator: Carlos A. Crespo <lvccrespo@gmail.com>\n"
 "Language-Team: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.16.0\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: ../Doc/c-api/init_config.rst:7
 msgid "Python Initialization Configuration"
@@ -25,58 +26,45 @@ msgstr "Configuración de inicialización de Python"
 
 #: ../Doc/c-api/init_config.rst:11
 msgid ""
-"Python can be initialized with :c:func:`Py_InitializeFromConfig` and the :c:"
-"type:`PyConfig` structure. It can be preinitialized with :c:func:"
-"`Py_PreInitialize` and the :c:type:`PyPreConfig` structure."
+"Python can be initialized with :c:func:`Py_InitializeFromConfig` and the :c:type:`PyConfig` "
+"structure. It can be preinitialized with :c:func:`Py_PreInitialize` and the :c:type:`PyPreConfig` "
+"structure."
 msgstr ""
-"Python se puede inicializar con :c:func:`Py_InitializeFromConfig` y la "
-"estructura :c:type:`PyConfig`. Se puede preinicializar con :c:func:"
-"`Py_PreInitialize` y la estructura :c:type:`PyPreConfig`."
+"Python se puede inicializar con :c:func:`Py_InitializeFromConfig` y la estructura :c:type:`PyConfig`. "
+"Se puede preinicializar con :c:func:`Py_PreInitialize` y la estructura :c:type:`PyPreConfig`."
 
 #: ../Doc/c-api/init_config.rst:15
 msgid "There are two kinds of configuration:"
 msgstr "Hay dos tipos de configuración:"
 
 #: ../Doc/c-api/init_config.rst:17
-#, fuzzy
 msgid ""
-"The :ref:`Python Configuration <init-python-config>` can be used to build a "
-"customized Python which behaves as the regular Python. For example, "
-"environment variables and command line arguments are used to configure "
-"Python."
+"The :ref:`Python Configuration <init-python-config>` can be used to build a customized Python which "
+"behaves as the regular Python. For example, environment variables and command line arguments are used "
+"to configure Python."
 msgstr ""
-"La :ref:`Configuración de Python <init-python-config>` se puede utilizar "
-"para crear un Python personalizado que se comporte como el Python normal. "
-"Por ejemplo, las variables de entorno y los argumentos de la línea de "
-"comandos se utilizan para configurar Python."
+"La :ref:`Configuración de Python <init-python-config>` se puede utilizar para crear un Python "
+"personalizado que se comporte como el Python normal. Por ejemplo, las variables de entorno y los "
+"argumentos de la línea de comandos se utilizan para configurar Python."
 
 #: ../Doc/c-api/init_config.rst:22
-#, fuzzy
 msgid ""
-"The :ref:`Isolated Configuration <init-isolated-conf>` can be used to embed "
-"Python into an application. It isolates Python from the system. For example, "
-"environment variables are ignored, the LC_CTYPE locale is left unchanged and "
-"no signal handler is registered."
+"The :ref:`Isolated Configuration <init-isolated-conf>` can be used to embed Python into an "
+"application. It isolates Python from the system. For example, environment variables are ignored, the "
+"LC_CTYPE locale is left unchanged and no signal handler is registered."
 msgstr ""
-"La :ref:`Configuración Aislada <init-isolated-conf>` se puede utilizar para "
-"incrustar Python en una aplicación. Aísla a Python del sistema. Por ejemplo, "
-"las variables de entorno se ignoran, la configuración regional LC_CTYPE se "
-"deja sin cambios y no se registra ningún manejador de señales."
+"La :ref:`Configuración Aislada <init-isolated-conf>` se puede utilizar para incrustar Python en una "
+"aplicación. Aísla a Python del sistema. Por ejemplo, las variables de entorno se ignoran, la "
+"configuración regional LC_CTYPE se deja sin cambios y no se registra ningún manejador de señales."
 
 #: ../Doc/c-api/init_config.rst:27
-msgid ""
-"The :c:func:`Py_RunMain` function can be used to write a customized Python "
-"program."
+msgid "The :c:func:`Py_RunMain` function can be used to write a customized Python program."
 msgstr ""
-"La función :c:func:`Py_RunMain` se puede utilizar para escribir un programa "
-"Python personalizado."
+"La función :c:func:`Py_RunMain` se puede utilizar para escribir un programa Python personalizado."
 
 #: ../Doc/c-api/init_config.rst:30
-msgid ""
-"See also :ref:`Initialization, Finalization, and Threads <initialization>`."
-msgstr ""
-"Consulte también :ref:`Inicialización, finalización y subprocesos "
-"<initialization>`."
+msgid "See also :ref:`Initialization, Finalization, and Threads <initialization>`."
+msgstr "Consulte también :ref:`Inicialización, finalización y subprocesos <initialization>`."
 
 #: ../Doc/c-api/init_config.rst:33
 msgid ":pep:`587` \"Python Initialization Configuration\"."
@@ -88,8 +76,7 @@ msgstr "Ejemplo"
 
 #: ../Doc/c-api/init_config.rst:39
 msgid "Example of customized Python always running in isolated mode::"
-msgstr ""
-"Ejemplo de Python personalizado que siempre se ejecuta en modo aislado::"
+msgstr "Ejemplo de Python personalizado que siempre se ejecuta en modo aislado::"
 
 #: ../Doc/c-api/init_config.rst:41
 msgid ""
@@ -126,6 +113,38 @@ msgid ""
 "    Py_ExitStatusException(status);\n"
 "}"
 msgstr ""
+"int main(int argc, char **argv)\n"
+"{\n"
+"    PyStatus status;\n"
+"\n"
+"    PyConfig config;\n"
+"    PyConfig_InitPythonConfig(&config);\n"
+"    config.isolated = 1;\n"
+"\n"
+"    /* Decode command line arguments.\n"
+"       Implicitly preinitialize Python (in isolated mode). */\n"
+"    status = PyConfig_SetBytesArgv(&config, argc, argv);\n"
+"    if (PyStatus_Exception(status)) {\n"
+"        goto exception;\n"
+"    }\n"
+"\n"
+"    status = Py_InitializeFromConfig(&config);\n"
+"    if (PyStatus_Exception(status)) {\n"
+"        goto exception;\n"
+"    }\n"
+"    PyConfig_Clear(&config);\n"
+"\n"
+"    return Py_RunMain();\n"
+"\n"
+"exception:\n"
+"    PyConfig_Clear(&config);\n"
+"    if (PyStatus_IsExit(status)) {\n"
+"        return status.exitcode;\n"
+"    }\n"
+"    /* Display the error message and exit the process with\n"
+"       non-zero exit code */\n"
+"    Py_ExitStatusException(status);\n"
+"}"
 
 #: ../Doc/c-api/init_config.rst:76
 msgid "PyWideStringList"
@@ -136,12 +155,10 @@ msgid "List of ``wchar_t*`` strings."
 msgstr "Lista de cadenas de caracteres ``wchar_t*``."
 
 #: ../Doc/c-api/init_config.rst:82
-msgid ""
-"If *length* is non-zero, *items* must be non-``NULL`` and all strings must "
-"be non-``NULL``."
+msgid "If *length* is non-zero, *items* must be non-``NULL`` and all strings must be non-``NULL``."
 msgstr ""
-"Si *length* no es cero, *items* no deben ser ``NULL`` y todas las cadenas de "
-"caracteres deben ser no ``NULL``."
+"Si *length* no es cero, *items* no deben ser ``NULL`` y todas las cadenas de caracteres deben ser no "
+"``NULL``."
 
 #: ../Doc/c-api/init_config.rst:87
 msgid "Methods:"
@@ -160,19 +177,15 @@ msgid "Insert *item* into *list* at *index*."
 msgstr "Inserta *item* en *list* en *index*."
 
 #: ../Doc/c-api/init_config.rst:99
-msgid ""
-"If *index* is greater than or equal to *list* length, append *item* to "
-"*list*."
-msgstr ""
-"Si *index* es mayor o igual que el largo de *list*, agrega *item* a *list*."
+msgid "If *index* is greater than or equal to *list* length, append *item* to *list*."
+msgstr "Si *index* es mayor o igual que el largo de *list*, agrega *item* a *list*."
 
 #: ../Doc/c-api/init_config.rst:102
-#, fuzzy
 msgid "*index* must be greater than or equal to ``0``."
-msgstr "*index* debe ser mayor o igual que 0."
+msgstr "*index* debe ser mayor o igual que ``0``."
 
-#: ../Doc/c-api/init_config.rst:108 ../Doc/c-api/init_config.rst:128
-#: ../Doc/c-api/init_config.rst:235 ../Doc/c-api/init_config.rst:554
+#: ../Doc/c-api/init_config.rst:108 ../Doc/c-api/init_config.rst:128 ../Doc/c-api/init_config.rst:235
+#: ../Doc/c-api/init_config.rst:554
 msgid "Structure fields:"
 msgstr "Campos de estructura:"
 
@@ -189,16 +202,12 @@ msgid "PyStatus"
 msgstr "PyStatus"
 
 #: ../Doc/c-api/init_config.rst:123
-msgid ""
-"Structure to store an initialization function status: success, error or exit."
-msgstr ""
-"Estructura para almacenar el estado de una función de inicialización: éxito, "
-"error o salida."
+msgid "Structure to store an initialization function status: success, error or exit."
+msgstr "Estructura para almacenar el estado de una función de inicialización: éxito, error o salida."
 
 #: ../Doc/c-api/init_config.rst:126
 msgid "For an error, it can store the C function name which created the error."
-msgstr ""
-"Para un error, puede almacenar el nombre de la función C que creó el error."
+msgstr "Para un error, puede almacenar el nombre de la función C que creó el error."
 
 #: ../Doc/c-api/init_config.rst:132
 msgid "Exit code. Argument passed to ``exit()``."
@@ -242,11 +251,11 @@ msgstr "Funciones para manejar un estado:"
 
 #: ../Doc/c-api/init_config.rst:168
 msgid ""
-"Is the status an error or an exit? If true, the exception must be handled; "
-"by calling :c:func:`Py_ExitStatusException` for example."
+"Is the status an error or an exit? If true, the exception must be handled; by calling :c:func:"
+"`Py_ExitStatusException` for example."
 msgstr ""
-"¿Es el estado un error o una salida? Si es verdadero, la excepción debe ser "
-"manejada; por ejemplo llamando a :c:func:`Py_ExitStatusException`."
+"¿Es el estado un error o una salida? Si es verdadero, la excepción debe ser manejada; por ejemplo "
+"llamando a :c:func:`Py_ExitStatusException`."
 
 #: ../Doc/c-api/init_config.rst:173
 msgid "Is the result an error?"
@@ -258,21 +267,20 @@ msgstr "¿El resultado es una salida?"
 
 #: ../Doc/c-api/init_config.rst:181
 msgid ""
-"Call ``exit(exitcode)`` if *status* is an exit. Print the error message and "
-"exit with a non-zero exit code if *status* is an error.  Must only be called "
-"if ``PyStatus_Exception(status)`` is non-zero."
+"Call ``exit(exitcode)`` if *status* is an exit. Print the error message and exit with a non-zero exit "
+"code if *status* is an error.  Must only be called if ``PyStatus_Exception(status)`` is non-zero."
 msgstr ""
-"Llama a ``exit(exitcode)`` si *status* es una salida. Imprime el mensaje de "
-"error y sale con un código de salida distinto de cero si *status* es un "
-"error. Solo se debe llamar si ``PyStatus_Exception(status)`` no es cero."
+"Llama a ``exit(exitcode)`` si *status* es una salida. Imprime el mensaje de error y sale con un "
+"código de salida distinto de cero si *status* es un error. Solo se debe llamar si "
+"``PyStatus_Exception(status)`` no es cero."
 
 #: ../Doc/c-api/init_config.rst:186
 msgid ""
-"Internally, Python uses macros which set ``PyStatus.func``, whereas "
-"functions to create a status set ``func`` to ``NULL``."
+"Internally, Python uses macros which set ``PyStatus.func``, whereas functions to create a status set "
+"``func`` to ``NULL``."
 msgstr ""
-"Internamente, Python usa macros que establecen ``PyStatus.func``, mientras "
-"que las funciones para crear un estado establecen ``func`` en ``NULL``."
+"Internamente, Python usa macros que establecen ``PyStatus.func``, mientras que las funciones para "
+"crear un estado establecen ``func`` en ``NULL``."
 
 #: ../Doc/c-api/init_config.rst:189
 msgid "Example::"
@@ -300,6 +308,25 @@ msgid ""
 "    return 0;\n"
 "}"
 msgstr ""
+"PyStatus alloc(void **ptr, size_t size)\n"
+"{\n"
+"    *ptr = PyMem_RawMalloc(size);\n"
+"    if (*ptr == NULL) {\n"
+"        return PyStatus_NoMemory();\n"
+"    }\n"
+"    return PyStatus_Ok();\n"
+"}\n"
+"\n"
+"int main(int argc, char **argv)\n"
+"{\n"
+"    void *ptr;\n"
+"    PyStatus status = alloc(&ptr, 16);\n"
+"    if (PyStatus_Exception(status)) {\n"
+"        Py_ExitStatusException(status);\n"
+"    }\n"
+"    PyMem_Free(ptr);\n"
+"    return 0;\n"
+"}"
 
 #: ../Doc/c-api/init_config.rst:213
 msgid "PyPreConfig"
@@ -314,117 +341,92 @@ msgid "Function to initialize a preconfiguration:"
 msgstr "Función para inicializar una preconfiguración:"
 
 #: ../Doc/c-api/init_config.rst:225
-msgid ""
-"Initialize the preconfiguration with :ref:`Python Configuration <init-python-"
-"config>`."
-msgstr ""
-"Inicializa la preconfiguración con :ref:`Configuración de Python <init-"
-"python-config>`."
+msgid "Initialize the preconfiguration with :ref:`Python Configuration <init-python-config>`."
+msgstr "Inicializa la preconfiguración con :ref:`Configuración de Python <init-python-config>`."
 
 #: ../Doc/c-api/init_config.rst:230
-msgid ""
-"Initialize the preconfiguration with :ref:`Isolated Configuration <init-"
-"isolated-conf>`."
-msgstr ""
-"Inicializa la preconfiguración con :ref:`Configuración aislada <init-"
-"isolated-conf>`."
+msgid "Initialize the preconfiguration with :ref:`Isolated Configuration <init-isolated-conf>`."
+msgstr "Inicializa la preconfiguración con :ref:`Configuración aislada <init-isolated-conf>`."
 
 #: ../Doc/c-api/init_config.rst:239
 msgid "Name of the Python memory allocators:"
 msgstr "Nombre de los asignadores de memoria de Python:"
 
 #: ../Doc/c-api/init_config.rst:241
-msgid ""
-"``PYMEM_ALLOCATOR_NOT_SET`` (``0``): don't change memory allocators (use "
-"defaults)."
+msgid "``PYMEM_ALLOCATOR_NOT_SET`` (``0``): don't change memory allocators (use defaults)."
 msgstr ""
-"``PYMEM_ALLOCATOR_NOT_SET`` (``0``): no cambia asignadores de memoria (usa "
-"los valores predeterminados)"
+"``PYMEM_ALLOCATOR_NOT_SET`` (``0``): no cambia asignadores de memoria (usa los valores "
+"predeterminados)"
 
 #: ../Doc/c-api/init_config.rst:243
 msgid ""
-"``PYMEM_ALLOCATOR_DEFAULT`` (``1``): :ref:`default memory allocators "
-"<default-memory-allocators>`."
+"``PYMEM_ALLOCATOR_DEFAULT`` (``1``): :ref:`default memory allocators <default-memory-allocators>`."
 msgstr ""
-"``PYMEM_ALLOCATOR_DEFAULT`` (``1``): :ref:`asignadores de memoria "
-"predeterminados <default-memory-allocators>`."
+"``PYMEM_ALLOCATOR_DEFAULT`` (``1``): :ref:`asignadores de memoria predeterminados <default-memory-"
+"allocators>`."
 
 #: ../Doc/c-api/init_config.rst:245
 msgid ""
-"``PYMEM_ALLOCATOR_DEBUG`` (``2``): :ref:`default memory allocators <default-"
-"memory-allocators>` with :ref:`debug hooks <pymem-debug-hooks>`."
+"``PYMEM_ALLOCATOR_DEBUG`` (``2``): :ref:`default memory allocators <default-memory-allocators>` with :"
+"ref:`debug hooks <pymem-debug-hooks>`."
 msgstr ""
-"``PYMEM_ALLOCATOR_DEBUG`` (``2``): :ref:`asignadores de memoria "
-"predeterminados <default-memory-allocators>` con :ref:`ganchos de depuración "
-"<pymem-debug-hooks>`."
+"``PYMEM_ALLOCATOR_DEBUG`` (``2``): :ref:`asignadores de memoria predeterminados <default-memory-"
+"allocators>` con :ref:`ganchos de depuración <pymem-debug-hooks>`."
 
 #: ../Doc/c-api/init_config.rst:248
 msgid "``PYMEM_ALLOCATOR_MALLOC`` (``3``): use ``malloc()`` of the C library."
-msgstr ""
-"``PYMEM_ALLOCATOR_MALLOC`` (``3``): usa ``malloc()`` de la biblioteca C."
+msgstr "``PYMEM_ALLOCATOR_MALLOC`` (``3``): usa ``malloc()`` de la biblioteca C."
 
 #: ../Doc/c-api/init_config.rst:249
 msgid ""
-"``PYMEM_ALLOCATOR_MALLOC_DEBUG`` (``4``): force usage of ``malloc()`` with :"
-"ref:`debug hooks <pymem-debug-hooks>`."
+"``PYMEM_ALLOCATOR_MALLOC_DEBUG`` (``4``): force usage of ``malloc()`` with :ref:`debug hooks <pymem-"
+"debug-hooks>`."
 msgstr ""
-"``PYMEM_ALLOCATOR_MALLOC_DEBUG`` (``4``): fuerza el uso de ``malloc()`` con :"
-"ref:`ganchos de depuración <pymem-debug-hooks>`."
+"``PYMEM_ALLOCATOR_MALLOC_DEBUG`` (``4``): fuerza el uso de ``malloc()`` con :ref:`ganchos de "
+"depuración <pymem-debug-hooks>`."
 
 #: ../Doc/c-api/init_config.rst:251
-msgid ""
-"``PYMEM_ALLOCATOR_PYMALLOC`` (``5``): :ref:`Python pymalloc memory allocator "
-"<pymalloc>`."
+msgid "``PYMEM_ALLOCATOR_PYMALLOC`` (``5``): :ref:`Python pymalloc memory allocator <pymalloc>`."
 msgstr ""
-"``PYMEM_ALLOCATOR_PYMALLOC`` (``5``): :ref:`asignador de memoria pymalloc de "
-"Python <pymalloc>`"
+"``PYMEM_ALLOCATOR_PYMALLOC`` (``5``): :ref:`asignador de memoria pymalloc de Python <pymalloc>`."
 
 #: ../Doc/c-api/init_config.rst:253
 msgid ""
-"``PYMEM_ALLOCATOR_PYMALLOC_DEBUG`` (``6``): :ref:`Python pymalloc memory "
-"allocator <pymalloc>` with :ref:`debug hooks <pymem-debug-hooks>`."
+"``PYMEM_ALLOCATOR_PYMALLOC_DEBUG`` (``6``): :ref:`Python pymalloc memory allocator <pymalloc>` with :"
+"ref:`debug hooks <pymem-debug-hooks>`."
 msgstr ""
-"``PYMEM_ALLOCATOR_PYMALLOC_DEBUG`` (``6``): :ref:`asignador de memoria "
-"pymalloc de Python <pymalloc>` con :ref:`ganchos de depuración <pymem-debug-"
-"hooks>`."
+"``PYMEM_ALLOCATOR_PYMALLOC_DEBUG`` (``6``): :ref:`asignador de memoria pymalloc de Python <pymalloc>` "
+"con :ref:`ganchos de depuración <pymem-debug-hooks>`."
 
 #: ../Doc/c-api/init_config.rst:256
-#, fuzzy
-msgid ""
-"``PYMEM_ALLOCATOR_MIMALLOC`` (``6``): use ``mimalloc``, a fast malloc "
-"replacement."
-msgstr ""
-"``PYMEM_ALLOCATOR_MALLOC`` (``3``): usa ``malloc()`` de la biblioteca C."
+msgid "``PYMEM_ALLOCATOR_MIMALLOC`` (``6``): use ``mimalloc``, a fast malloc replacement."
+msgstr "``PYMEM_ALLOCATOR_MIMALLOC`` (``6``): usa ``mimalloc``, un reemplazo rápido de malloc."
 
 #: ../Doc/c-api/init_config.rst:258
-#, fuzzy
 msgid ""
-"``PYMEM_ALLOCATOR_MIMALLOC_DEBUG`` (``7``): use ``mimalloc``, a fast malloc "
-"replacement with :ref:`debug hooks <pymem-debug-hooks>`."
+"``PYMEM_ALLOCATOR_MIMALLOC_DEBUG`` (``7``): use ``mimalloc``, a fast malloc replacement with :ref:"
+"`debug hooks <pymem-debug-hooks>`."
 msgstr ""
-"``PYMEM_ALLOCATOR_MALLOC_DEBUG`` (``4``): fuerza el uso de ``malloc()`` con :"
-"ref:`ganchos de depuración <pymem-debug-hooks>`."
+"``PYMEM_ALLOCATOR_MIMALLOC_DEBUG`` (``7``): usa ``mimalloc``, un reemplazo rápido de malloc con :ref:"
+"`ganchos de depuración <pymem-debug-hooks>`."
 
 #: ../Doc/c-api/init_config.rst:262
 msgid ""
-"``PYMEM_ALLOCATOR_PYMALLOC`` and ``PYMEM_ALLOCATOR_PYMALLOC_DEBUG`` are not "
-"supported if Python is :option:`configured using --without-pymalloc <--"
-"without-pymalloc>`."
+"``PYMEM_ALLOCATOR_PYMALLOC`` and ``PYMEM_ALLOCATOR_PYMALLOC_DEBUG`` are not supported if Python is :"
+"option:`configured using --without-pymalloc <--without-pymalloc>`."
 msgstr ""
-"``PYMEM_ALLOCATOR_PYMALLOC`` y ``PYMEM_ALLOCATOR_PYMALLOC_DEBUG`` no son "
-"compatibles si Python es :option:`configurado usando --without-pymalloc <--"
-"without-pymalloc>`."
+"``PYMEM_ALLOCATOR_PYMALLOC`` y ``PYMEM_ALLOCATOR_PYMALLOC_DEBUG`` no son compatibles si Python es :"
+"option:`configurado usando --without-pymalloc <--without-pymalloc>`."
 
 #: ../Doc/c-api/init_config.rst:266
-#, fuzzy
 msgid ""
-"``PYMEM_ALLOCATOR_MIMALLOC`` and ``PYMEM_ALLOCATOR_MIMALLOC_DEBUG`` are not "
-"supported if Python is :option:`configured using --without-mimalloc <--"
-"without-mimalloc>` or if the underlying atomic support isn't available."
+"``PYMEM_ALLOCATOR_MIMALLOC`` and ``PYMEM_ALLOCATOR_MIMALLOC_DEBUG`` are not supported if Python is :"
+"option:`configured using --without-mimalloc <--without-mimalloc>` or if the underlying atomic support "
+"isn't available."
 msgstr ""
-"``PYMEM_ALLOCATOR_PYMALLOC`` y ``PYMEM_ALLOCATOR_PYMALLOC_DEBUG`` no son "
-"compatibles si Python es :option:`configurado usando --without-pymalloc <--"
-"without-pymalloc>`."
+"``PYMEM_ALLOCATOR_MIMALLOC`` y ``PYMEM_ALLOCATOR_MIMALLOC_DEBUG`` no son compatibles si Python es :"
+"option:`configurado usando --without-mimalloc <--without-mimalloc>` o si el soporte atómico "
+"subyacente no está disponible."
 
 #: ../Doc/c-api/init_config.rst:271
 msgid "See :ref:`Memory Management <memory>`."
@@ -435,68 +437,47 @@ msgid "Default: ``PYMEM_ALLOCATOR_NOT_SET``."
 msgstr "Predeterminado: ``PYMEM_ALLOCATOR_NOT_SET``."
 
 #: ../Doc/c-api/init_config.rst:277
-#, fuzzy
 msgid "Set the LC_CTYPE locale to the user preferred locale."
-msgstr ""
-"¿Establecer la configuración regional LC_CTYPE en la configuración regional "
-"preferida del usuario?"
+msgstr "Establece la configuración regional LC_CTYPE a la configuración regional preferida del usuario."
 
 #: ../Doc/c-api/init_config.rst:279
-#, fuzzy
 msgid ""
-"If equals to ``0``, set :c:member:`~PyPreConfig.coerce_c_locale` and :c:"
-"member:`~PyPreConfig.coerce_c_locale_warn` members to ``0``."
+"If equals to ``0``, set :c:member:`~PyPreConfig.coerce_c_locale` and :c:member:`~PyPreConfig."
+"coerce_c_locale_warn` members to ``0``."
 msgstr ""
-"Si es igual a 0, establezca los miembros :c:member:`~PyPreConfig."
-"coerce_c_locale` y :c:member:`~PyPreConfig.coerce_c_locale_warn` en 0."
+"Si es igual a ``0``, establece los miembros :c:member:`~PyPreConfig.coerce_c_locale` y :c:member:"
+"`~PyPreConfig.coerce_c_locale_warn` a ``0``."
 
 #: ../Doc/c-api/init_config.rst:282 ../Doc/c-api/init_config.rst:293
 msgid "See the :term:`locale encoding`."
 msgstr "Vea el :term:`locale encoding`."
 
-#: ../Doc/c-api/init_config.rst:284 ../Doc/c-api/init_config.rst:339
-#: ../Doc/c-api/init_config.rst:710
+#: ../Doc/c-api/init_config.rst:284 ../Doc/c-api/init_config.rst:339 ../Doc/c-api/init_config.rst:710
 msgid "Default: ``1`` in Python config, ``0`` in isolated config."
-msgstr ""
-"Predeterminado: ``1`` en la configuración de Python, ``0`` en la "
-"configuración aislada."
+msgstr "Predeterminado: ``1`` en la configuración de Python, ``0`` en la configuración aislada."
 
 #: ../Doc/c-api/init_config.rst:288
-#, fuzzy
 msgid "If equals to ``2``, coerce the C locale."
-msgstr "Si es igual a 2, imponga la configuración regional C."
+msgstr "Si es igual a ``2``, imponga la configuración regional C."
 
 #: ../Doc/c-api/init_config.rst:290
-#, fuzzy
-msgid ""
-"If equals to ``1``, read the LC_CTYPE locale to decide if it should be "
-"coerced."
-msgstr ""
-"Si es igual a 1, lea la configuración regional LC_CTYPE para decidir si debe "
-"ser coaccionado."
+msgid "If equals to ``1``, read the LC_CTYPE locale to decide if it should be coerced."
+msgstr "Si es igual a ``1``, lee la configuración regional LC_CTYPE para decidir si debe ser forzada."
 
 #: ../Doc/c-api/init_config.rst:295 ../Doc/c-api/init_config.rst:301
 msgid "Default: ``-1`` in Python config, ``0`` in isolated config."
-msgstr ""
-"Predeterminado: ``-1`` en la configuración de Python, ``0`` en la "
-"configuración aislada."
+msgstr "Predeterminado: ``-1`` en la configuración de Python, ``0`` en la configuración aislada."
 
 #: ../Doc/c-api/init_config.rst:299
 msgid "If non-zero, emit a warning if the C locale is coerced."
-msgstr ""
-"Si no es cero, emita una advertencia si la configuración regional C está "
-"coaccionada."
+msgstr "Si no es cero, emita una advertencia si la configuración regional C está coaccionada."
 
 #: ../Doc/c-api/init_config.rst:305
-#, fuzzy
-msgid ""
-":ref:`Python Development Mode <devmode>`: see :c:member:`PyConfig.dev_mode`."
-msgstr ""
-"Si es distinto de cero, habilita el :ref:`Modo de desarrollo de Python "
-"<devmode>`: consulte :c:member:`PyConfig.dev_mode`."
+msgid ":ref:`Python Development Mode <devmode>`: see :c:member:`PyConfig.dev_mode`."
+msgstr ":ref:`Modo de desarrollo de Python <devmode>`: consulte :c:member:`PyConfig.dev_mode`."
 
-#: ../Doc/c-api/init_config.rst:308 ../Doc/c-api/init_config.rst:719
-#: ../Doc/c-api/init_config.rst:765 ../Doc/c-api/init_config.rst:1244
+#: ../Doc/c-api/init_config.rst:308 ../Doc/c-api/init_config.rst:719 ../Doc/c-api/init_config.rst:765
+#: ../Doc/c-api/init_config.rst:1244
 msgid "Default: ``-1`` in Python mode, ``0`` in isolated mode."
 msgstr "Por defecto: ``-1`` en modo Python, ``0`` en modo aislado."
 
@@ -525,83 +506,62 @@ msgid "Set :c:member:`PyConfig.filesystem_errors` to ``\"replace\"``."
 msgstr "Establezca :c:member:`PyConfig.filesystem_errors` en ``\"replace\"``."
 
 #: ../Doc/c-api/init_config.rst:324
-#, fuzzy
-msgid ""
-"Initialized from the :envvar:`PYTHONLEGACYWINDOWSFSENCODING` environment "
-"variable value."
-msgstr ""
-"Inicializado desde valor de variable de entorno :envvar:"
-"`PYTHONLEGACYWINDOWSFSENCODING`."
+msgid "Initialized from the :envvar:`PYTHONLEGACYWINDOWSFSENCODING` environment variable value."
+msgstr "Inicializado desde el valor de la variable de entorno :envvar:`PYTHONLEGACYWINDOWSFSENCODING`."
 
 #: ../Doc/c-api/init_config.rst:327 ../Doc/c-api/init_config.rst:935
-msgid ""
-"Only available on Windows. ``#ifdef MS_WINDOWS`` macro can be used for "
-"Windows specific code."
+msgid "Only available on Windows. ``#ifdef MS_WINDOWS`` macro can be used for Windows specific code."
 msgstr ""
-"Solo disponible en Windows. La macro ``#ifdef MS_WINDOWS`` se puede usar "
-"para el código específico de Windows."
+"Solo disponible en Windows. La macro ``#ifdef MS_WINDOWS`` se puede usar para el código específico de "
+"Windows."
 
-#: ../Doc/c-api/init_config.rst:330 ../Doc/c-api/init_config.rst:658
-#: ../Doc/c-api/init_config.rst:665 ../Doc/c-api/init_config.rst:732
-#: ../Doc/c-api/init_config.rst:843 ../Doc/c-api/init_config.rst:857
-#: ../Doc/c-api/init_config.rst:871 ../Doc/c-api/init_config.rst:938
-#: ../Doc/c-api/init_config.rst:952 ../Doc/c-api/init_config.rst:1012
-#: ../Doc/c-api/init_config.rst:1064 ../Doc/c-api/init_config.rst:1126
-#: ../Doc/c-api/init_config.rst:1180 ../Doc/c-api/init_config.rst:1209
-#: ../Doc/c-api/init_config.rst:1298
+#: ../Doc/c-api/init_config.rst:330 ../Doc/c-api/init_config.rst:658 ../Doc/c-api/init_config.rst:665
+#: ../Doc/c-api/init_config.rst:732 ../Doc/c-api/init_config.rst:843 ../Doc/c-api/init_config.rst:857
+#: ../Doc/c-api/init_config.rst:871 ../Doc/c-api/init_config.rst:938 ../Doc/c-api/init_config.rst:952
+#: ../Doc/c-api/init_config.rst:1012 ../Doc/c-api/init_config.rst:1064 ../Doc/c-api/init_config.rst:1126
+#: ../Doc/c-api/init_config.rst:1180 ../Doc/c-api/init_config.rst:1209 ../Doc/c-api/init_config.rst:1298
 msgid "Default: ``0``."
 msgstr "Predeterminado: ``0``."
 
 #: ../Doc/c-api/init_config.rst:334
 msgid ""
-"If non-zero, :c:func:`Py_PreInitializeFromArgs` and :c:func:"
-"`Py_PreInitializeFromBytesArgs` parse their ``argv`` argument the same way "
-"the regular Python parses command line arguments: see :ref:`Command Line "
-"Arguments <using-on-cmdline>`."
+"If non-zero, :c:func:`Py_PreInitializeFromArgs` and :c:func:`Py_PreInitializeFromBytesArgs` parse "
+"their ``argv`` argument the same way the regular Python parses command line arguments: see :ref:"
+"`Command Line Arguments <using-on-cmdline>`."
 msgstr ""
-"Si no es cero, :c:func:`Py_PreInitializeFromArgs` y :c:func:"
-"`Py_PreInitializeFromBytesArgs` analizan su argumento ``argv`` de la misma "
-"manera que Python analiza los argumentos de la línea de comandos: ver :ref:"
-"`Argumentos de línea de comandos <using-on-cmdline>`."
+"Si no es cero, :c:func:`Py_PreInitializeFromArgs` y :c:func:`Py_PreInitializeFromBytesArgs` analizan "
+"su argumento ``argv`` de la misma manera que Python analiza los argumentos de la línea de comandos: "
+"ver :ref:`Argumentos de línea de comandos <using-on-cmdline>`."
 
 #: ../Doc/c-api/init_config.rst:343
-msgid ""
-"Use :ref:`environment variables <using-on-envvars>`? See :c:member:`PyConfig."
-"use_environment`."
+msgid "Use :ref:`environment variables <using-on-envvars>`? See :c:member:`PyConfig.use_environment`."
 msgstr ""
-"¿Utiliza :ref:`variables de entorno <using-on-envvars>`? Consulte :c:member:"
-"`PyConfig.use_environment`."
+"¿Utiliza :ref:`variables de entorno <using-on-envvars>`? Consulte :c:member:`PyConfig."
+"use_environment`."
 
 #: ../Doc/c-api/init_config.rst:346 ../Doc/c-api/init_config.rst:1272
 msgid "Default: ``1`` in Python config and ``0`` in isolated config."
-msgstr ""
-"Predeterminado: ``1`` en la configuración de Python y ``0`` en la "
-"configuración aislada."
+msgstr "Predeterminado: ``1`` en la configuración de Python y ``0`` en la configuración aislada."
 
 #: ../Doc/c-api/init_config.rst:350
 msgid "If non-zero, enable the :ref:`Python UTF-8 Mode <utf8-mode>`."
 msgstr "Si es distinto de cero, habilite :ref:`Python UTF-8 Mode <utf8-mode>`."
 
 #: ../Doc/c-api/init_config.rst:352
-#, fuzzy
 msgid ""
-"Set to ``0`` or ``1`` by the :option:`-X utf8 <-X>` command line option and "
-"the :envvar:`PYTHONUTF8` environment variable."
+"Set to ``0`` or ``1`` by the :option:`-X utf8 <-X>` command line option and the :envvar:`PYTHONUTF8` "
+"environment variable."
 msgstr ""
-"Establecido por la opción de línea de comando :option:`-X utf8 <-X>` y la "
-"variable de entorno :envvar:`PYTHONUTF8`."
+"Establecido a ``0`` o ``1`` por la opción de línea de comandos :option:`-X utf8 <-X>` y la variable "
+"de entorno :envvar:`PYTHONUTF8`."
 
 #: ../Doc/c-api/init_config.rst:355
 msgid "Also set to ``1`` if the ``LC_CTYPE`` locale is ``C`` or ``POSIX``."
-msgstr ""
-"También se pone a ``1`` si la configuración regional ``LC_CTYPE`` es ``C`` o "
-"``POSIX``."
+msgstr "También se pone a ``1`` si la configuración regional ``LC_CTYPE`` es ``C`` o ``POSIX``."
 
 #: ../Doc/c-api/init_config.rst:357
 msgid "Default: ``-1`` in Python config and ``0`` in isolated config."
-msgstr ""
-"Predeterminado: ``-1`` en la configuración de Python y ``0`` en la "
-"configuración aislada."
+msgstr "Predeterminado: ``-1`` en la configuración de Python y ``0`` en la configuración aislada."
 
 #: ../Doc/c-api/init_config.rst:363
 msgid "Preinitialize Python with PyPreConfig"
@@ -613,120 +573,94 @@ msgstr "La preinicialización de Python:"
 
 #: ../Doc/c-api/init_config.rst:367
 msgid "Set the Python memory allocators (:c:member:`PyPreConfig.allocator`)"
-msgstr ""
-"Establecer los asignadores de memoria de Python (:c:member:`PyPreConfig."
-"allocator`)"
+msgstr "Establecer los asignadores de memoria de Python (:c:member:`PyPreConfig.allocator`)"
 
 #: ../Doc/c-api/init_config.rst:368
 msgid "Configure the LC_CTYPE locale (:term:`locale encoding`)"
-msgstr ""
-"Configurar la configuración regional LC_CTYPE (:term:`locale encoding`)"
+msgstr "Configurar la configuración regional LC_CTYPE (:term:`locale encoding`)"
 
 #: ../Doc/c-api/init_config.rst:369
-msgid ""
-"Set the :ref:`Python UTF-8 Mode <utf8-mode>` (:c:member:`PyPreConfig."
-"utf8_mode`)"
-msgstr ""
-"Establecer el :ref:`Python UTF-8 Mode <utf8-mode>` (:c:member:`PyPreConfig."
-"utf8_mode`)"
+msgid "Set the :ref:`Python UTF-8 Mode <utf8-mode>` (:c:member:`PyPreConfig.utf8_mode`)"
+msgstr "Establecer el :ref:`Python UTF-8 Mode <utf8-mode>` (:c:member:`PyPreConfig.utf8_mode`)"
 
 #: ../Doc/c-api/init_config.rst:372
-msgid ""
-"The current preconfiguration (``PyPreConfig`` type) is stored in "
-"``_PyRuntime.preconfig``."
-msgstr ""
-"La preconfiguración actual (tipo ``PyPreConfig``) se almacena en "
-"``_PyRuntime.preconfig``."
+msgid "The current preconfiguration (``PyPreConfig`` type) is stored in ``_PyRuntime.preconfig``."
+msgstr "La preconfiguración actual (tipo ``PyPreConfig``) se almacena en ``_PyRuntime.preconfig``."
 
 #: ../Doc/c-api/init_config.rst:375
 msgid "Functions to preinitialize Python:"
 msgstr "Funciones para preinicializar Python:"
 
-#: ../Doc/c-api/init_config.rst:379 ../Doc/c-api/init_config.rst:385
-#: ../Doc/c-api/init_config.rst:394
+#: ../Doc/c-api/init_config.rst:379 ../Doc/c-api/init_config.rst:385 ../Doc/c-api/init_config.rst:394
 msgid "Preinitialize Python from *preconfig* preconfiguration."
 msgstr "Preinicializa Python desde la preconfiguración *preconfig*."
 
-#: ../Doc/c-api/init_config.rst:381 ../Doc/c-api/init_config.rst:390
-#: ../Doc/c-api/init_config.rst:399
+#: ../Doc/c-api/init_config.rst:381 ../Doc/c-api/init_config.rst:390 ../Doc/c-api/init_config.rst:399
 msgid "*preconfig* must not be ``NULL``."
 msgstr "*preconfig* no debe ser ``NULL``."
 
 #: ../Doc/c-api/init_config.rst:387
 msgid ""
-"Parse *argv* command line arguments (bytes strings) if :c:member:"
-"`~PyPreConfig.parse_argv` of *preconfig* is non-zero."
+"Parse *argv* command line arguments (bytes strings) if :c:member:`~PyPreConfig.parse_argv` of "
+"*preconfig* is non-zero."
 msgstr ""
-"Analice los argumentos de la línea de comando *argv* (cadenas de bytes) si :"
-"c:member:`~PyPreConfig.parse_argv` de *preconfig* no es cero."
+"Analice los argumentos de la línea de comando *argv* (cadenas de bytes) si :c:member:`~PyPreConfig."
+"parse_argv` de *preconfig* no es cero."
 
 #: ../Doc/c-api/init_config.rst:396
 msgid ""
-"Parse *argv* command line arguments (wide strings) if :c:member:"
-"`~PyPreConfig.parse_argv` of *preconfig* is non-zero."
+"Parse *argv* command line arguments (wide strings) if :c:member:`~PyPreConfig.parse_argv` of "
+"*preconfig* is non-zero."
 msgstr ""
-"Analice los argumentos de la línea de comando *argv* (cadenas anchas) si :c:"
-"member:`~PyPreConfig.parse_argv` de *preconfig* no es cero."
+"Analice los argumentos de la línea de comando *argv* (cadenas anchas) si :c:member:`~PyPreConfig."
+"parse_argv` de *preconfig* no es cero."
 
 #: ../Doc/c-api/init_config.rst:401 ../Doc/c-api/init_config.rst:1360
 msgid ""
-"The caller is responsible to handle exceptions (error or exit) using :c:func:"
-"`PyStatus_Exception` and :c:func:`Py_ExitStatusException`."
+"The caller is responsible to handle exceptions (error or exit) using :c:func:`PyStatus_Exception` "
+"and :c:func:`Py_ExitStatusException`."
 msgstr ""
-"La persona que llama es responsable de manejar las excepciones (error o "
-"salida) usando :c:func:`PyStatus_Exception` y :c:func:"
-"`Py_ExitStatusException`."
+"La persona que llama es responsable de manejar las excepciones (error o salida) usando :c:func:"
+"`PyStatus_Exception` y :c:func:`Py_ExitStatusException`."
 
 #: ../Doc/c-api/init_config.rst:404
 msgid ""
-"For :ref:`Python Configuration <init-python-config>` (:c:func:"
-"`PyPreConfig_InitPythonConfig`), if Python is initialized with command line "
-"arguments, the command line arguments must also be passed to preinitialize "
-"Python, since they have an effect on the pre-configuration like encodings. "
-"For example, the :option:`-X utf8 <-X>` command line option enables the :ref:"
-"`Python UTF-8 Mode <utf8-mode>`."
+"For :ref:`Python Configuration <init-python-config>` (:c:func:`PyPreConfig_InitPythonConfig`), if "
+"Python is initialized with command line arguments, the command line arguments must also be passed to "
+"preinitialize Python, since they have an effect on the pre-configuration like encodings. For example, "
+"the :option:`-X utf8 <-X>` command line option enables the :ref:`Python UTF-8 Mode <utf8-mode>`."
 msgstr ""
-"Para :ref:`Configuración de Python <init-python-config>` (:c:func:"
-"`PyPreConfig_InitPythonConfig`), si Python se inicializa con argumentos de "
-"línea de comando, los argumentos de la línea de comando también deben "
-"pasarse para preinicializar Python, ya que tienen un efecto en la "
-"preconfiguración como codificaciones. Por ejemplo, la opción de línea de "
-"comando :option:`-X utf8 <-X>` habilita el :ref:`Python UTF-8 Mode <utf8-"
-"mode>`."
+"Para :ref:`Configuración de Python <init-python-config>` (:c:func:`PyPreConfig_InitPythonConfig`), si "
+"Python se inicializa con argumentos de línea de comando, los argumentos de la línea de comando "
+"también deben pasarse para preinicializar Python, ya que tienen un efecto en la preconfiguración como "
+"codificaciones. Por ejemplo, la opción de línea de comando :option:`-X utf8 <-X>` habilita el :ref:"
+"`Python UTF-8 Mode <utf8-mode>`."
 
 #: ../Doc/c-api/init_config.rst:411
 msgid ""
-"``PyMem_SetAllocator()`` can be called after :c:func:`Py_PreInitialize` and "
-"before :c:func:`Py_InitializeFromConfig` to install a custom memory "
-"allocator. It can be called before :c:func:`Py_PreInitialize` if :c:member:"
-"`PyPreConfig.allocator` is set to ``PYMEM_ALLOCATOR_NOT_SET``."
+"``PyMem_SetAllocator()`` can be called after :c:func:`Py_PreInitialize` and before :c:func:"
+"`Py_InitializeFromConfig` to install a custom memory allocator. It can be called before :c:func:"
+"`Py_PreInitialize` if :c:member:`PyPreConfig.allocator` is set to ``PYMEM_ALLOCATOR_NOT_SET``."
 msgstr ""
-"``PyMem_SetAllocator()`` se puede llamar después de :c:func:"
-"`Py_PreInitialize` y antes :c:func:`Py_InitializeFromConfig` para instalar "
-"un asignador de memoria personalizado. Se puede llamar antes :c:func:"
-"`Py_PreInitialize` si :c:member:`PyPreConfig.allocator` está configurado en "
+"``PyMem_SetAllocator()`` se puede llamar después de :c:func:`Py_PreInitialize` y antes :c:func:"
+"`Py_InitializeFromConfig` para instalar un asignador de memoria personalizado. Se puede llamar antes :"
+"c:func:`Py_PreInitialize` si :c:member:`PyPreConfig.allocator` está configurado en "
 "``PYMEM_ALLOCATOR_NOT_SET``."
 
 #: ../Doc/c-api/init_config.rst:416
 msgid ""
-"Python memory allocation functions like :c:func:`PyMem_RawMalloc` must not "
-"be used before the Python preinitialization, whereas calling directly "
-"``malloc()`` and ``free()`` is always safe. :c:func:`Py_DecodeLocale` must "
-"not be called before the Python preinitialization."
+"Python memory allocation functions like :c:func:`PyMem_RawMalloc` must not be used before the Python "
+"preinitialization, whereas calling directly ``malloc()`` and ``free()`` is always safe. :c:func:"
+"`Py_DecodeLocale` must not be called before the Python preinitialization."
 msgstr ""
-"Las funciones de asignación de memoria de Python como :c:func:"
-"`PyMem_RawMalloc` no deben usarse antes de la preinicialización de Python, "
-"mientras que llamar directamente a ``malloc()`` y ``free()`` siempre es "
-"seguro. No se debe llamar a :c:func:`Py_DecodeLocale` antes de la "
-"preinicialización de Python."
+"Las funciones de asignación de memoria de Python como :c:func:`PyMem_RawMalloc` no deben usarse antes "
+"de la preinicialización de Python, mientras que llamar directamente a ``malloc()`` y ``free()`` "
+"siempre es seguro. No se debe llamar a :c:func:`Py_DecodeLocale` antes de la preinicialización de "
+"Python."
 
 #: ../Doc/c-api/init_config.rst:421
-msgid ""
-"Example using the preinitialization to enable the :ref:`Python UTF-8 Mode "
-"<utf8-mode>`::"
-msgstr ""
-"Ejemplo usando la preinicialización para habilitar el :ref:`Python UTF-8 "
-"Mode <utf8-mode>` ::"
+msgid "Example using the preinitialization to enable the :ref:`Python UTF-8 Mode <utf8-mode>`::"
+msgstr "Ejemplo usando la preinicialización para habilitar el :ref:`Python UTF-8 Mode <utf8-mode>` ::"
 
 #: ../Doc/c-api/init_config.rst:424
 msgid ""
@@ -747,6 +681,22 @@ msgid ""
 "/* ... use Python API here ... */\n"
 "Py_Finalize();"
 msgstr ""
+"PyStatus status;\n"
+"PyPreConfig preconfig;\n"
+"PyPreConfig_InitPythonConfig(&preconfig);\n"
+"\n"
+"preconfig.utf8_mode = 1;\n"
+"\n"
+"status = Py_PreInitialize(&preconfig);\n"
+"if (PyStatus_Exception(status)) {\n"
+"    Py_ExitStatusException(status);\n"
+"}\n"
+"\n"
+"/* at this point, Python speaks UTF-8 */\n"
+"\n"
+"Py_Initialize();\n"
+"/* ... use Python API here ... */\n"
+"Py_Finalize();"
 
 #: ../Doc/c-api/init_config.rst:443
 msgid "PyConfig"
@@ -754,79 +704,60 @@ msgstr "PyConfig"
 
 #: ../Doc/c-api/init_config.rst:447
 msgid "Structure containing most parameters to configure Python."
-msgstr ""
-"Estructura que contiene la mayoría de los parámetros para configurar Python."
+msgstr "Estructura que contiene la mayoría de los parámetros para configurar Python."
 
 #: ../Doc/c-api/init_config.rst:449
 msgid ""
-"When done, the :c:func:`PyConfig_Clear` function must be used to release the "
-"configuration memory."
+"When done, the :c:func:`PyConfig_Clear` function must be used to release the configuration memory."
 msgstr ""
-"Cuando termine, se debe utilizar la función :c:func:`PyConfig_Clear` para "
-"liberar la memoria de configuración."
+"Cuando termine, se debe utilizar la función :c:func:`PyConfig_Clear` para liberar la memoria de "
+"configuración."
 
 #: ../Doc/c-api/init_config.rst:454
 msgid "Structure methods:"
 msgstr "Métodos de estructura:"
 
 #: ../Doc/c-api/init_config.rst:458
-msgid ""
-"Initialize configuration with the :ref:`Python Configuration <init-python-"
-"config>`."
-msgstr ""
-"Inicialice la configuración con la :ref:`Configuración de Python <init-"
-"python-config>`."
+msgid "Initialize configuration with the :ref:`Python Configuration <init-python-config>`."
+msgstr "Inicialice la configuración con la :ref:`Configuración de Python <init-python-config>`."
 
 #: ../Doc/c-api/init_config.rst:463
-msgid ""
-"Initialize configuration with the :ref:`Isolated Configuration <init-"
-"isolated-conf>`."
-msgstr ""
-"Inicialice la configuración con la :ref:`Configuración Aislada <init-"
-"isolated-conf>`."
+msgid "Initialize configuration with the :ref:`Isolated Configuration <init-isolated-conf>`."
+msgstr "Inicialice la configuración con la :ref:`Configuración Aislada <init-isolated-conf>`."
 
 #: ../Doc/c-api/init_config.rst:468
 msgid "Copy the wide character string *str* into ``*config_str``."
 msgstr "Copia la cadena de caracteres anchos *str* en ``*config_str``."
 
-#: ../Doc/c-api/init_config.rst:470 ../Doc/c-api/init_config.rst:477
-#: ../Doc/c-api/init_config.rst:484 ../Doc/c-api/init_config.rst:492
-#: ../Doc/c-api/init_config.rst:498 ../Doc/c-api/init_config.rst:515
+#: ../Doc/c-api/init_config.rst:470 ../Doc/c-api/init_config.rst:477 ../Doc/c-api/init_config.rst:484
+#: ../Doc/c-api/init_config.rst:492 ../Doc/c-api/init_config.rst:498 ../Doc/c-api/init_config.rst:515
 msgid ":ref:`Preinitialize Python <c-preinit>` if needed."
 msgstr ":ref:`Preinicializa Python <c-preinit>` si es necesario."
 
 #: ../Doc/c-api/init_config.rst:474
-msgid ""
-"Decode *str* using :c:func:`Py_DecodeLocale` and set the result into "
-"``*config_str``."
+msgid "Decode *str* using :c:func:`Py_DecodeLocale` and set the result into ``*config_str``."
 msgstr ""
-"Decodifique *str* usando :c:func:`Py_DecodeLocale` y establezca el resultado "
-"en ``*config_str``."
+"Decodifique *str* usando :c:func:`Py_DecodeLocale` y establezca el resultado en ``*config_str``."
 
 #: ../Doc/c-api/init_config.rst:481
 msgid ""
-"Set command line arguments (:c:member:`~PyConfig.argv` member of *config*) "
-"from the *argv* list of wide character strings."
+"Set command line arguments (:c:member:`~PyConfig.argv` member of *config*) from the *argv* list of "
+"wide character strings."
 msgstr ""
-"Configure los argumentos de la línea de comando (miembro :c:member:"
-"`~PyConfig.argv` de *config*) de la lista *argv* de cadenas de caracteres "
-"anchas."
+"Configure los argumentos de la línea de comando (miembro :c:member:`~PyConfig.argv` de *config*) de "
+"la lista *argv* de cadenas de caracteres anchas."
 
 #: ../Doc/c-api/init_config.rst:488
 msgid ""
-"Set command line arguments (:c:member:`~PyConfig.argv` member of *config*) "
-"from the *argv* list of bytes strings. Decode bytes using :c:func:"
-"`Py_DecodeLocale`."
+"Set command line arguments (:c:member:`~PyConfig.argv` member of *config*) from the *argv* list of "
+"bytes strings. Decode bytes using :c:func:`Py_DecodeLocale`."
 msgstr ""
-"Establezca argumentos de línea de comando (miembro :c:member:`~PyConfig."
-"argv` de *config*) de la lista *argv* de cadenas de bytes. Decodifica bytes "
-"usando :c:func:`Py_DecodeLocale`."
+"Establezca argumentos de línea de comando (miembro :c:member:`~PyConfig.argv` de *config*) de la "
+"lista *argv* de cadenas de bytes. Decodifica bytes usando :c:func:`Py_DecodeLocale`."
 
 #: ../Doc/c-api/init_config.rst:496
 msgid "Set the list of wide strings *list* to *length* and *items*."
-msgstr ""
-"Establece la lista de cadenas de caracteres anchas *list* a *length* y "
-"*items*."
+msgstr "Establece la lista de cadenas de caracteres anchas *list* a *length* y *items*."
 
 #: ../Doc/c-api/init_config.rst:502
 msgid "Read all Python configuration."
@@ -838,47 +769,43 @@ msgstr "Los campos que ya están inicializados no se modifican."
 
 #: ../Doc/c-api/init_config.rst:506
 msgid ""
-"Fields for :ref:`path configuration <init-path-config>` are no longer "
-"calculated or modified when calling this function, as of Python 3.11."
+"Fields for :ref:`path configuration <init-path-config>` are no longer calculated or modified when "
+"calling this function, as of Python 3.11."
 msgstr ""
-"Los campos para la :ref:`configuración de ruta <init-path-config>` ya no se "
-"calculan ni modifican al llamar a esta función, a partir de Python 3.11."
+"Los campos para la :ref:`configuración de ruta <init-path-config>` ya no se calculan ni modifican al "
+"llamar a esta función, a partir de Python 3.11."
 
 #: ../Doc/c-api/init_config.rst:509 ../Doc/c-api/init_config.rst:1041
-#, fuzzy
 msgid ""
-"The :c:func:`PyConfig_Read` function only parses :c:member:`PyConfig.argv` "
-"arguments once: :c:member:`PyConfig.parse_argv` is set to ``2`` after "
-"arguments are parsed. Since Python arguments are stripped from :c:member:"
-"`PyConfig.argv`, parsing arguments twice would parse the application options "
-"as Python options."
+"The :c:func:`PyConfig_Read` function only parses :c:member:`PyConfig.argv` arguments once: :c:member:"
+"`PyConfig.parse_argv` is set to ``2`` after arguments are parsed. Since Python arguments are stripped "
+"from :c:member:`PyConfig.argv`, parsing arguments twice would parse the application options as Python "
+"options."
 msgstr ""
-"La función :c:func:`PyConfig_Read` solo analiza los argumentos :c:member:"
-"`PyConfig.argv` una vez: :c:member:`PyConfig.parse_argv` se establece en "
-"``2`` después de analizar los argumentos. Dado que los argumentos de Python "
-"se eliminan de :c:member:`PyConfig.argv`, analizar los argumentos dos veces "
+"La función :c:func:`PyConfig_Read` solo analiza los argumentos :c:member:`PyConfig.argv` una vez: :c:"
+"member:`PyConfig.parse_argv` se establece en ``2`` después de que se analizan los argumentos. Como "
+"los argumentos de Python se eliminan de :c:member:`PyConfig.argv`, analizar los argumentos dos veces "
 "analizaría las opciones de la aplicación como opciones de Python."
 
 #: ../Doc/c-api/init_config.rst:517
 msgid ""
-"The :c:member:`PyConfig.argv` arguments are now only parsed once, :c:member:"
-"`PyConfig.parse_argv` is set to ``2`` after arguments are parsed, and "
-"arguments are only parsed if :c:member:`PyConfig.parse_argv` equals ``1``."
+"The :c:member:`PyConfig.argv` arguments are now only parsed once, :c:member:`PyConfig.parse_argv` is "
+"set to ``2`` after arguments are parsed, and arguments are only parsed if :c:member:`PyConfig."
+"parse_argv` equals ``1``."
 msgstr ""
-"Los argumentos :c:member:`PyConfig.argv` ahora solo se analizan una vez, :c:"
-"member:`PyConfig.parse_argv` se establece en ``2`` después de analizar los "
-"argumentos y los argumentos solo se analizan si :c:member:`PyConfig."
-"parse_argv` es igual a ``1``."
+"Los argumentos :c:member:`PyConfig.argv` ahora solo se analizan una vez, :c:member:`PyConfig."
+"parse_argv` se establece en ``2`` después de analizar los argumentos y los argumentos solo se "
+"analizan si :c:member:`PyConfig.parse_argv` es igual a ``1``."
 
 #: ../Doc/c-api/init_config.rst:523
 msgid ""
-":c:func:`PyConfig_Read` no longer calculates all paths, and so fields listed "
-"under :ref:`Python Path Configuration <init-path-config>` may no longer be "
-"updated until :c:func:`Py_InitializeFromConfig` is called."
+":c:func:`PyConfig_Read` no longer calculates all paths, and so fields listed under :ref:`Python Path "
+"Configuration <init-path-config>` may no longer be updated until :c:func:`Py_InitializeFromConfig` is "
+"called."
 msgstr ""
-":c:func:`PyConfig_Read` ya no calcula todas las rutas, por lo que los campos "
-"listados en :ref:`Python Path Configuration <init-path-config>` ya no pueden "
-"ser actualizados hasta que se llame a :c:func:`Py_InitializeFromConfig`."
+":c:func:`PyConfig_Read` ya no calcula todas las rutas, por lo que los campos listados en :ref:`Python "
+"Path Configuration <init-path-config>` ya no pueden ser actualizados hasta que se llame a :c:func:"
+"`Py_InitializeFromConfig`."
 
 #: ../Doc/c-api/init_config.rst:531
 msgid "Release configuration memory."
@@ -886,18 +813,15 @@ msgstr "Libera memoria de configuración."
 
 #: ../Doc/c-api/init_config.rst:533
 msgid ""
-"Most ``PyConfig`` methods :ref:`preinitialize Python <c-preinit>` if needed. "
-"In that case, the Python preinitialization configuration (:c:type:"
-"`PyPreConfig`) in based on the :c:type:`PyConfig`. If configuration fields "
-"which are in common with :c:type:`PyPreConfig` are tuned, they must be set "
+"Most ``PyConfig`` methods :ref:`preinitialize Python <c-preinit>` if needed. In that case, the Python "
+"preinitialization configuration (:c:type:`PyPreConfig`) in based on the :c:type:`PyConfig`. If "
+"configuration fields which are in common with :c:type:`PyPreConfig` are tuned, they must be set "
 "before calling a :c:type:`PyConfig` method:"
 msgstr ""
-"La mayoría de los método ``PyConfig`` :ref:`preinitializan Python <c-"
-"preinit>` si es necesario. En ese caso, la configuración de "
-"preinicialización de Python (:c:type:`PyPreConfig`) se basa en :c:type:"
-"`PyConfig`. Si se ajustan los campos de configuración que son comunes con :c:"
-"type:`PyPreConfig`, deben establecerse antes de llamar a un método :c:type:"
-"`PyConfig`:"
+"La mayoría de los método ``PyConfig`` :ref:`preinitializan Python <c-preinit>` si es necesario. En "
+"ese caso, la configuración de preinicialización de Python (:c:type:`PyPreConfig`) se basa en :c:type:"
+"`PyConfig`. Si se ajustan los campos de configuración que son comunes con :c:type:`PyPreConfig`, "
+"deben establecerse antes de llamar a un método :c:type:`PyConfig`:"
 
 #: ../Doc/c-api/init_config.rst:539
 msgid ":c:member:`PyConfig.dev_mode`"
@@ -916,64 +840,60 @@ msgid ":c:member:`PyConfig.use_environment`"
 msgstr ":c:member:`PyConfig.use_environment`"
 
 #: ../Doc/c-api/init_config.rst:544
-#, fuzzy
 msgid ""
-"Moreover, if :c:func:`PyConfig_SetArgv` or :c:func:`PyConfig_SetBytesArgv` "
-"is used, this method must be called before other methods, since the "
-"preinitialization configuration depends on command line arguments (if :c:"
-"member:`~PyConfig.parse_argv` is non-zero)."
+"Moreover, if :c:func:`PyConfig_SetArgv` or :c:func:`PyConfig_SetBytesArgv` is used, this method must "
+"be called before other methods, since the preinitialization configuration depends on command line "
+"arguments (if :c:member:`~PyConfig.parse_argv` is non-zero)."
 msgstr ""
-"Además, si se usa :c:func:`PyConfig_SetArgv` o :c:func:"
-"`PyConfig_SetBytesArgv`, este método debe llamarse antes que otros métodos, "
-"ya que la configuración de preinicialización depende de los argumentos de la "
-"línea de comando (si :c:member:`parse_argv` no es cero)."
+"Además, si se usa :c:func:`PyConfig_SetArgv` o :c:func:`PyConfig_SetBytesArgv`, este método debe "
+"llamarse antes que otros métodos, ya que la configuración de preinicialización depende de los "
+"argumentos de la línea de comando (si :c:member:`~PyConfig.parse_argv` no es cero)."
 
 #: ../Doc/c-api/init_config.rst:549
 msgid ""
-"The caller of these methods is responsible to handle exceptions (error or "
-"exit) using ``PyStatus_Exception()`` and ``Py_ExitStatusException()``."
+"The caller of these methods is responsible to handle exceptions (error or exit) using "
+"``PyStatus_Exception()`` and ``Py_ExitStatusException()``."
 msgstr ""
-"Quien llama de estos métodos es responsable de manejar las excepciones "
-"(error o salida) usando ``PyStatus_Exception()`` y "
-"``Py_ExitStatusException()``."
+"Quien llama de estos métodos es responsable de manejar las excepciones (error o salida) usando "
+"``PyStatus_Exception()`` y ``Py_ExitStatusException()``."
 
 #: ../Doc/c-api/init_config.rst:562
 msgid ""
-"Set :data:`sys.argv` command line arguments based on :c:member:`~PyConfig."
-"argv`.  These parameters are similar to those passed to the program's :c:"
-"func:`main` function with the difference that the first entry should refer "
-"to the script file to be executed rather than the executable hosting the "
-"Python interpreter.  If there isn't a script that will be run, the first "
-"entry in :c:member:`~PyConfig.argv` can be an empty string."
+"Set :data:`sys.argv` command line arguments based on :c:member:`~PyConfig.argv`.  These parameters "
+"are similar to those passed to the program's :c:func:`main` function with the difference that the "
+"first entry should refer to the script file to be executed rather than the executable hosting the "
+"Python interpreter.  If there isn't a script that will be run, the first entry in :c:member:"
+"`~PyConfig.argv` can be an empty string."
 msgstr ""
+"Establece los argumentos de la línea de comandos :data:`sys.argv` basados en :c:member:`~PyConfig."
+"argv`. Estos parámetros son similares a los pasados a la función :c:func:`main` del programa con la "
+"diferencia de que la primera entrada debe referirse al archivo de script a ejecutar en lugar del "
+"ejecutable que aloja al intérprete de Python. Si no hay un script que se vaya a ejecutar, la primera "
+"entrada en :c:member:`~PyConfig.argv` puede ser una cadena vacía."
 
 #: ../Doc/c-api/init_config.rst:570
 msgid ""
-"Set :c:member:`~PyConfig.parse_argv` to ``1`` to parse :c:member:`~PyConfig."
-"argv` the same way the regular Python parses Python command line arguments "
-"and then to strip Python arguments from :c:member:`~PyConfig.argv`."
+"Set :c:member:`~PyConfig.parse_argv` to ``1`` to parse :c:member:`~PyConfig.argv` the same way the "
+"regular Python parses Python command line arguments and then to strip Python arguments from :c:member:"
+"`~PyConfig.argv`."
 msgstr ""
-"Configure :c:member:`~PyConfig.parse_argv` en ``1`` para analizar :c:member:"
-"`~PyConfig.argv` de la misma manera que Python normal analiza los argumentos "
-"de la línea de comandos de Python y luego quita los argumentos de Python de :"
-"c:member:`~PyConfig.argv`."
+"Configure :c:member:`~PyConfig.parse_argv` en ``1`` para analizar :c:member:`~PyConfig.argv` de la "
+"misma manera que Python normal analiza los argumentos de la línea de comandos de Python y luego quita "
+"los argumentos de Python de :c:member:`~PyConfig.argv`."
 
 #: ../Doc/c-api/init_config.rst:575
 msgid ""
-"If :c:member:`~PyConfig.argv` is empty, an empty string is added to ensure "
-"that :data:`sys.argv` always exists and is never empty."
+"If :c:member:`~PyConfig.argv` is empty, an empty string is added to ensure that :data:`sys.argv` "
+"always exists and is never empty."
 msgstr ""
-"Si :c:member:`~PyConfig.argv` está vacío, se agrega una cadena vacía para "
-"garantizar que :data:`sys.argv` siempre exista y nunca esté vacío."
+"Si :c:member:`~PyConfig.argv` está vacío, se agrega una cadena vacía para garantizar que :data:`sys."
+"argv` siempre exista y nunca esté vacío."
 
-#: ../Doc/c-api/init_config.rst:578 ../Doc/c-api/init_config.rst:605
-#: ../Doc/c-api/init_config.rst:619 ../Doc/c-api/init_config.rst:629
-#: ../Doc/c-api/init_config.rst:739 ../Doc/c-api/init_config.rst:750
-#: ../Doc/c-api/init_config.rst:832 ../Doc/c-api/init_config.rst:982
-#: ../Doc/c-api/init_config.rst:1083 ../Doc/c-api/init_config.rst:1102
-#: ../Doc/c-api/init_config.rst:1117 ../Doc/c-api/init_config.rst:1134
-#: ../Doc/c-api/init_config.rst:1147 ../Doc/c-api/init_config.rst:1155
-#: ../Doc/c-api/init_config.rst:1169
+#: ../Doc/c-api/init_config.rst:578 ../Doc/c-api/init_config.rst:605 ../Doc/c-api/init_config.rst:619
+#: ../Doc/c-api/init_config.rst:629 ../Doc/c-api/init_config.rst:739 ../Doc/c-api/init_config.rst:750
+#: ../Doc/c-api/init_config.rst:832 ../Doc/c-api/init_config.rst:982 ../Doc/c-api/init_config.rst:1083
+#: ../Doc/c-api/init_config.rst:1102 ../Doc/c-api/init_config.rst:1117 ../Doc/c-api/init_config.rst:1134
+#: ../Doc/c-api/init_config.rst:1147 ../Doc/c-api/init_config.rst:1155 ../Doc/c-api/init_config.rst:1169
 msgid "Default: ``NULL``."
 msgstr "Valor predeterminado: ``NULL``."
 
@@ -983,69 +903,60 @@ msgstr "Consulte también el miembro :c:member:`~PyConfig.orig_argv`."
 
 #: ../Doc/c-api/init_config.rst:584
 msgid ""
-"If equals to zero, ``Py_RunMain()`` prepends a potentially unsafe path to :"
-"data:`sys.path` at startup:"
+"If equals to zero, ``Py_RunMain()`` prepends a potentially unsafe path to :data:`sys.path` at startup:"
 msgstr ""
-"Si es igual a cero, ``Py_RunMain()`` agrega una ruta potencialmente insegura "
-"a :data:`sys.path` al inicio:"
+"Si es igual a cero, ``Py_RunMain()`` agrega una ruta potencialmente insegura a :data:`sys.path` al "
+"inicio:"
 
 #: ../Doc/c-api/init_config.rst:587
 msgid ""
-"If :c:member:`argv[0] <PyConfig.argv>` is equal to ``L\"-m\"`` (``python -m "
-"module``), prepend the current working directory."
+"If :c:member:`argv[0] <PyConfig.argv>` is equal to ``L\"-m\"`` (``python -m module``), prepend the "
+"current working directory."
 msgstr ""
-"Si :c:member:`argv[0] <PyConfig.argv>` es igual a ``L\"-m\"`` (``python -m "
-"module``), añade el directorio de trabajo actual."
+"Si :c:member:`argv[0] <PyConfig.argv>` es igual a ``L\"-m\"`` (``python -m module``), añade el "
+"directorio de trabajo actual."
 
 #: ../Doc/c-api/init_config.rst:589
-#, fuzzy
 msgid ""
-"If running a script (``python script.py``), prepend the script's directory.  "
-"If it's a symbolic link, resolve symbolic links."
+"If running a script (``python script.py``), prepend the script's directory.  If it's a symbolic link, "
+"resolve symbolic links."
 msgstr ""
-"Si se ejecuta el script (``python script.py``), añade el directorio del "
-"script.  Si es un enlace simbólico, resuelve los enlaces simbólicos."
+"Si se ejecuta un script (``python script.py``), anteponer el directorio del script. Si es un enlace "
+"simbólico, resuelve los enlaces simbólicos."
 
 #: ../Doc/c-api/init_config.rst:591
 msgid ""
-"Otherwise (``python -c code`` and ``python``), prepend an empty string, "
-"which means the current working directory."
+"Otherwise (``python -c code`` and ``python``), prepend an empty string, which means the current "
+"working directory."
 msgstr ""
-"En caso contrario (``python -c code`` and ``python``), añade una cadena "
-"vacía, que significa el directorio de trabajo actual."
+"En caso contrario (``python -c code`` and ``python``), añade una cadena vacía, que significa el "
+"directorio de trabajo actual."
 
 #: ../Doc/c-api/init_config.rst:594
-#, fuzzy
 msgid ""
-"Set to ``1`` by the :option:`-P` command line option and the :envvar:"
-"`PYTHONSAFEPATH` environment variable."
+"Set to ``1`` by the :option:`-P` command line option and the :envvar:`PYTHONSAFEPATH` environment "
+"variable."
 msgstr ""
-"Establecido en 0 por la opción de línea de comando :option:`-u` y la "
-"variable de entorno :envvar:`PYTHONUNBUFFERED`."
+"Establecido en ``1`` por la opción de la línea de comandos :option:`-P` y la variable de entorno :"
+"envvar:`PYTHONSAFEPATH`."
 
 #: ../Doc/c-api/init_config.rst:597
-#, fuzzy
 msgid "Default: ``0`` in Python config, ``1`` in isolated config."
-msgstr ""
-"Predeterminado: ``1`` en la configuración de Python, ``0`` en la "
-"configuración aislada."
+msgstr "Predeterminado: ``0`` en la configuración de Python, ``1`` en la configuración aislada."
 
 #: ../Doc/c-api/init_config.rst:603
 msgid ":data:`sys.base_exec_prefix`."
 msgstr ":data:`sys.base_exec_prefix`."
 
-#: ../Doc/c-api/init_config.rst:607 ../Doc/c-api/init_config.rst:621
-#: ../Doc/c-api/init_config.rst:631 ../Doc/c-api/init_config.rst:741
-#: ../Doc/c-api/init_config.rst:752 ../Doc/c-api/init_config.rst:999
+#: ../Doc/c-api/init_config.rst:607 ../Doc/c-api/init_config.rst:621 ../Doc/c-api/init_config.rst:631
+#: ../Doc/c-api/init_config.rst:741 ../Doc/c-api/init_config.rst:752 ../Doc/c-api/init_config.rst:999
 #: ../Doc/c-api/init_config.rst:1085
 msgid "Part of the :ref:`Python Path Configuration <init-path-config>` output."
-msgstr ""
-"Parte de la salida :ref:`Python Path Configuration <init-path-config>`."
+msgstr "Parte de la salida :ref:`Python Path Configuration <init-path-config>`."
 
 #: ../Doc/c-api/init_config.rst:609
-#, fuzzy
 msgid "See also :c:member:`PyConfig.exec_prefix`."
-msgstr ":c:member:`PyConfig.exec_prefix`"
+msgstr "Consulte también :c:member:`PyConfig.exec_prefix`."
 
 #: ../Doc/c-api/init_config.rst:613
 msgid "Python base executable: :data:`sys._base_executable`."
@@ -1060,63 +971,53 @@ msgid "Set from :c:member:`PyConfig.executable` if ``NULL``."
 msgstr "Establecido desde :c:member:`PyConfig.executable` si ``NULL``."
 
 #: ../Doc/c-api/init_config.rst:623
-#, fuzzy
 msgid "See also :c:member:`PyConfig.executable`."
-msgstr ":c:member:`PyConfig.executable`"
+msgstr "Consulte también :c:member:`PyConfig.executable`."
 
 #: ../Doc/c-api/init_config.rst:627
 msgid ":data:`sys.base_prefix`."
 msgstr ":data:`sys.base_prefix`."
 
 #: ../Doc/c-api/init_config.rst:633
-#, fuzzy
 msgid "See also :c:member:`PyConfig.prefix`."
-msgstr ":c:member:`PyConfig.prefix`"
+msgstr "Consulte también :c:member:`PyConfig.prefix`."
 
 #: ../Doc/c-api/init_config.rst:637
-#, fuzzy
 msgid ""
-"If equals to ``0`` and :c:member:`~PyConfig.configure_c_stdio` is non-zero, "
-"disable buffering on the C streams stdout and stderr."
+"If equals to ``0`` and :c:member:`~PyConfig.configure_c_stdio` is non-zero, disable buffering on the "
+"C streams stdout and stderr."
 msgstr ""
-"Si es igual a 0 y :c:member:`~PyConfig.configure_c_stdio` no es cero, "
-"deshabilite el almacenamiento en búfer en las secuencias C stdout y stderr."
+"Si es igual a ``0`` y :c:member:`~PyConfig.configure_c_stdio` no es cero, deshabilite el "
+"almacenamiento en búfer en las secuencias C stdout y stderr."
 
 #: ../Doc/c-api/init_config.rst:640
-#, fuzzy
 msgid ""
-"Set to ``0`` by the :option:`-u` command line option and the :envvar:"
-"`PYTHONUNBUFFERED` environment variable."
+"Set to ``0`` by the :option:`-u` command line option and the :envvar:`PYTHONUNBUFFERED` environment "
+"variable."
 msgstr ""
-"Establecido en 0 por la opción de línea de comando :option:`-u` y la "
-"variable de entorno :envvar:`PYTHONUNBUFFERED`."
+"Establecido en ``0`` por la opción de línea de comando :option:`-u` y la variable de entorno :envvar:"
+"`PYTHONUNBUFFERED`."
 
 #: ../Doc/c-api/init_config.rst:643
 msgid "stdin is always opened in buffered mode."
 msgstr "stdin siempre se abre en modo de búfer."
 
-#: ../Doc/c-api/init_config.rst:645 ../Doc/c-api/init_config.rst:678
-#: ../Doc/c-api/init_config.rst:1197 ../Doc/c-api/init_config.rst:1330
+#: ../Doc/c-api/init_config.rst:645 ../Doc/c-api/init_config.rst:678 ../Doc/c-api/init_config.rst:1197
+#: ../Doc/c-api/init_config.rst:1330
 msgid "Default: ``1``."
 msgstr "Predeterminado: ``1``."
 
 #: ../Doc/c-api/init_config.rst:649
-#, fuzzy
 msgid ""
-"If equals to ``1``, issue a warning when comparing :class:`bytes` or :class:"
-"`bytearray` with :class:`str`, or comparing :class:`bytes` with :class:`int`."
+"If equals to ``1``, issue a warning when comparing :class:`bytes` or :class:`bytearray` with :class:"
+"`str`, or comparing :class:`bytes` with :class:`int`."
 msgstr ""
-"Si es igual a 1, emite una advertencia al comparar :class:`bytes` o :class:"
-"`bytearray` con :class:`str`, o al comparar :class:`bytes` con :class:`int`."
+"Si es igual a ``1``, emite una advertencia al comparar :class:`bytes` o :class:`bytearray` con :class:"
+"`str`, o al comparar :class:`bytes` con :class:`int`."
 
 #: ../Doc/c-api/init_config.rst:653
-#, fuzzy
-msgid ""
-"If equal or greater to ``2``, raise a :exc:`BytesWarning` exception in these "
-"cases."
-msgstr ""
-"Si es igual o mayor a 2, lanza una excepción :exc:`BytesWarning` en estos "
-"casos."
+msgid "If equal or greater to ``2``, raise a :exc:`BytesWarning` exception in these cases."
+msgstr "Si es igual o mayor a ``2``, lanza una excepción :exc:`BytesWarning` en estos casos."
 
 #: ../Doc/c-api/init_config.rst:656
 msgid "Incremented by the :option:`-b` command line option."
@@ -1124,42 +1025,36 @@ msgstr "Incrementado por la opción de línea de comando :option:`-b`."
 
 #: ../Doc/c-api/init_config.rst:662
 msgid ""
-"If non-zero, emit a :exc:`EncodingWarning` warning when :class:`io."
-"TextIOWrapper` uses its default encoding. See :ref:`io-encoding-warning` for "
-"details."
+"If non-zero, emit a :exc:`EncodingWarning` warning when :class:`io.TextIOWrapper` uses its default "
+"encoding. See :ref:`io-encoding-warning` for details."
 msgstr ""
-"Si no es cero, emite una advertencia :exc:`EncodingWarning` cuando :class:"
-"`io.TextIOWrapper` usa su codificación predeterminada. Consulte :ref:`io-"
-"encoding-warning` para obtener más detalles."
+"Si no es cero, emite una advertencia :exc:`EncodingWarning` cuando :class:`io.TextIOWrapper` usa su "
+"codificación predeterminada. Consulte :ref:`io-encoding-warning` para obtener más detalles."
 
 #: ../Doc/c-api/init_config.rst:671
-#, fuzzy
 msgid ""
-"If equals to ``0``, disables the inclusion of the end line and column "
-"mappings in code objects. Also disables traceback printing carets to "
-"specific error locations."
+"If equals to ``0``, disables the inclusion of the end line and column mappings in code objects. Also "
+"disables traceback printing carets to specific error locations."
 msgstr ""
-"Si es igual a ``0``, desactiva la inclusión de fin de línea y los mapeos de "
-"columna en los objetos de código. También desactiva la impresión de caretas "
-"(*^*) de rastreo en lugares de error específicos."
+"Si es igual a ``0``, desactiva la inclusión de la línea final y las asignaciones de columna en los "
+"objetos de código. También desactiva la impresión de indicadores de rastreo a ubicaciones de error "
+"específicas."
 
 #: ../Doc/c-api/init_config.rst:675
-#, fuzzy
 msgid ""
-"Set to ``0`` by the :envvar:`PYTHONNODEBUGRANGES` environment variable and "
-"by the :option:`-X no_debug_ranges <-X>` command line option."
+"Set to ``0`` by the :envvar:`PYTHONNODEBUGRANGES` environment variable and by the :option:`-X "
+"no_debug_ranges <-X>` command line option."
 msgstr ""
-"Establecido en ``0`` por las opciones de línea de comando :option:`-s` y :"
-"option:`-I`."
+"Establecido en ``0`` por la variable de entorno :envvar:`PYTHONNODEBUGRANGES` y por la opción de "
+"línea de comando :option:`-X no_debug_ranges <-X>`."
 
 #: ../Doc/c-api/init_config.rst:684
 msgid ""
-"Control the validation behavior of hash-based ``.pyc`` files: value of the :"
-"option:`--check-hash-based-pycs` command line option."
+"Control the validation behavior of hash-based ``.pyc`` files: value of the :option:`--check-hash-"
+"based-pycs` command line option."
 msgstr ""
-"Controla el comportamiento de validación de archivos ``.pyc`` basados en "
-"hash: valor de la opción de línea de comando :option:`--check-hash-based-"
-"pycs`."
+"Controla el comportamiento de validación de archivos ``.pyc`` basados en hash: valor de la opción de "
+"línea de comando :option:`--check-hash-based-pycs`."
 
 #: ../Doc/c-api/init_config.rst:687
 msgid "Valid values:"
@@ -1167,24 +1062,19 @@ msgstr "Valores válidos:"
 
 #: ../Doc/c-api/init_config.rst:689
 msgid ""
-"``L\"always\"``: Hash the source file for invalidation regardless of value "
-"of the 'check_source' flag."
+"``L\"always\"``: Hash the source file for invalidation regardless of value of the 'check_source' flag."
 msgstr ""
-"``L\"always\"``: Calcula el hash el archivo fuente para invalidación "
-"independientemente del valor de la marca 'check_source'."
+"``L\"always\"``: Calcula el hash el archivo fuente para invalidación independientemente del valor de "
+"la marca 'check_source'."
 
 #: ../Doc/c-api/init_config.rst:691
 msgid "``L\"never\"``: Assume that hash-based pycs always are valid."
-msgstr ""
-"``L\"never\"``: suponga que los pycs basados en hash siempre son válidos."
+msgstr "``L\"never\"``: suponga que los pycs basados en hash siempre son válidos."
 
 #: ../Doc/c-api/init_config.rst:692
-msgid ""
-"``L\"default\"``: The 'check_source' flag in hash-based pycs determines "
-"invalidation."
+msgid "``L\"default\"``: The 'check_source' flag in hash-based pycs determines invalidation."
 msgstr ""
-"``L\"default\"``: El indicador 'check_source' en pycs basados en hash "
-"determina la invalidación."
+"``L\"default\"``: El indicador 'check_source' en pycs basados en hash determina la invalidación."
 
 #: ../Doc/c-api/init_config.rst:695
 msgid "Default: ``L\"default\"``."
@@ -1199,93 +1089,75 @@ msgid "If non-zero, configure C standard streams:"
 msgstr "Si es distinto de cero, configure los flujos estándar de C:"
 
 #: ../Doc/c-api/init_config.rst:703
-msgid ""
-"On Windows, set the binary mode (``O_BINARY``) on stdin, stdout and stderr."
-msgstr ""
-"En Windows, configure el modo binario (``O_BINARY``) en stdin, stdout y "
-"stderr."
+msgid "On Windows, set the binary mode (``O_BINARY``) on stdin, stdout and stderr."
+msgstr "En Windows, configure el modo binario (``O_BINARY``) en stdin, stdout y stderr."
 
 #: ../Doc/c-api/init_config.rst:705
 msgid ""
-"If :c:member:`~PyConfig.buffered_stdio` equals zero, disable buffering of "
-"stdin, stdout and stderr streams."
+"If :c:member:`~PyConfig.buffered_stdio` equals zero, disable buffering of stdin, stdout and stderr "
+"streams."
 msgstr ""
-"Si :c:member:`~PyConfig.buffered_stdio` es igual a cero, deshabilite el "
-"almacenamiento en búfer de los flujos stdin, stdout y stderr."
+"Si :c:member:`~PyConfig.buffered_stdio` es igual a cero, deshabilite el almacenamiento en búfer de "
+"los flujos stdin, stdout y stderr."
 
 #: ../Doc/c-api/init_config.rst:707
 msgid ""
-"If :c:member:`~PyConfig.interactive` is non-zero, enable stream buffering on "
-"stdin and stdout (only stdout on Windows)."
+"If :c:member:`~PyConfig.interactive` is non-zero, enable stream buffering on stdin and stdout (only "
+"stdout on Windows)."
 msgstr ""
-"Si :c:member:`~PyConfig.interactive` no es cero, habilite el almacenamiento "
-"en búfer de flujo en stdin y stdout (solo stdout en Windows)."
+"Si :c:member:`~PyConfig.interactive` no es cero, habilite el almacenamiento en búfer de flujo en "
+"stdin y stdout (solo stdout en Windows)."
 
 #: ../Doc/c-api/init_config.rst:714
 msgid "If non-zero, enable the :ref:`Python Development Mode <devmode>`."
-msgstr ""
-"Si es distinto de cero, habilita :ref:`Modo de desarrollo de Python "
-"<devmode>`."
+msgstr "Si es distinto de cero, habilita :ref:`Modo de desarrollo de Python <devmode>`."
 
 #: ../Doc/c-api/init_config.rst:716
-#, fuzzy
 msgid ""
-"Set to ``1`` by the :option:`-X dev <-X>` option and the :envvar:"
-"`PYTHONDEVMODE` environment variable."
+"Set to ``1`` by the :option:`-X dev <-X>` option and the :envvar:`PYTHONDEVMODE` environment variable."
 msgstr ""
-"Configure el ``1`` mediante la opción :option:`-X importtime <-X>` y la "
-"variable de entorno :envvar:`PYTHONPROFILEIMPORTTIME`."
+"Establecido en ``1`` por la opción :option:`-X dev <-X>` y la variable de entorno :envvar:"
+"`PYTHONDEVMODE`."
 
 #: ../Doc/c-api/init_config.rst:723
-#, fuzzy
 msgid "Dump Python references?"
 msgstr "¿Volcar referencias de Python?"
 
 #: ../Doc/c-api/init_config.rst:725
 msgid "If non-zero, dump all objects which are still alive at exit."
-msgstr ""
-"Si no es cero, volcar todos los objetos que aún están vivos en la salida."
+msgstr "Si no es cero, volcar todos los objetos que aún están vivos en la salida."
 
 #: ../Doc/c-api/init_config.rst:727
 msgid "Set to ``1`` by the :envvar:`PYTHONDUMPREFS` environment variable."
-msgstr ""
-"Establecido en ``1`` por la variable de entorno :envvar:`PYTHONDUMPREFS`."
+msgstr "Establecido en ``1`` por la variable de entorno :envvar:`PYTHONDUMPREFS`."
 
 #: ../Doc/c-api/init_config.rst:729
-#, fuzzy
 msgid ""
-"Needs a special build of Python with the ``Py_TRACE_REFS`` macro defined: "
-"see the :option:`configure --with-trace-refs option <--with-trace-refs>`."
+"Needs a special build of Python with the ``Py_TRACE_REFS`` macro defined: see the :option:`configure "
+"--with-trace-refs option <--with-trace-refs>`."
 msgstr ""
-"Necesita una compilación especial de Python con la macro ``Py_TRACE_REFS`` "
-"definida: consulte la :option:`opción de configure --with-trace-refs option "
-"<--with-trace-refs>`."
+"Necesita una compilación especial de Python con la macro ``Py_TRACE_REFS`` definida: consulte la "
+"opción :option:`configure --with-trace-refs <--with-trace-refs>`."
 
 #: ../Doc/c-api/init_config.rst:736
 msgid ""
-"The site-specific directory prefix where the platform-dependent Python files "
-"are installed: :data:`sys.exec_prefix`."
+"The site-specific directory prefix where the platform-dependent Python files are installed: :data:"
+"`sys.exec_prefix`."
 msgstr ""
-"El prefijo de directorio específico del sitio donde se instalan los archivos "
-"Python dependientes de la plataforma: :data:`sys.exec_prefix`."
+"El prefijo de directorio específico del sitio donde se instalan los archivos Python dependientes de "
+"la plataforma: :data:`sys.exec_prefix`."
 
 #: ../Doc/c-api/init_config.rst:743
-#, fuzzy
 msgid "See also :c:member:`PyConfig.base_exec_prefix`."
-msgstr ":c:member:`PyConfig.base_exec_prefix`"
+msgstr "Consulte también :c:member:`PyConfig.base_exec_prefix`."
 
 #: ../Doc/c-api/init_config.rst:747
-msgid ""
-"The absolute path of the executable binary for the Python interpreter: :data:"
-"`sys.executable`."
-msgstr ""
-"La ruta absoluta del binario ejecutable para el intérprete de Python: :data:"
-"`sys.executable`."
+msgid "The absolute path of the executable binary for the Python interpreter: :data:`sys.executable`."
+msgstr "La ruta absoluta del binario ejecutable para el intérprete de Python: :data:`sys.executable`."
 
 #: ../Doc/c-api/init_config.rst:754
-#, fuzzy
 msgid "See also :c:member:`PyConfig.base_executable`."
-msgstr ":c:member:`PyConfig.base_executable`"
+msgstr "Consulte también :c:member:`PyConfig.base_executable`."
 
 #: ../Doc/c-api/init_config.rst:758
 msgid "Enable faulthandler?"
@@ -1297,34 +1169,31 @@ msgstr "Si no es cero, llama a :func:`faulthandler.enable` al inicio."
 
 #: ../Doc/c-api/init_config.rst:762
 msgid ""
-"Set to ``1`` by :option:`-X faulthandler <-X>` and the :envvar:"
-"`PYTHONFAULTHANDLER` environment variable."
+"Set to ``1`` by :option:`-X faulthandler <-X>` and the :envvar:`PYTHONFAULTHANDLER` environment "
+"variable."
 msgstr ""
-"Establecido en ``1`` por :option:`-X faulthandler <-X>` y la variable de "
-"entorno :envvar:`PYTHONFAULTHANDLER`."
+"Establecido en ``1`` por :option:`-X faulthandler <-X>` y la variable de entorno :envvar:"
+"`PYTHONFAULTHANDLER`."
 
 #: ../Doc/c-api/init_config.rst:769
 msgid ""
-":term:`Filesystem encoding <filesystem encoding and error handler>`: :func:"
-"`sys.getfilesystemencoding`."
+":term:`Filesystem encoding <filesystem encoding and error handler>`: :func:`sys."
+"getfilesystemencoding`."
 msgstr ""
-":term:`Codificación del sistema de archvios <filesystem encoding and error "
-"handler>`: :func:`sys.getfilesystemencoding`."
+":term:`Codificación del sistema de archvios <filesystem encoding and error handler>`: :func:`sys."
+"getfilesystemencoding`."
 
 #: ../Doc/c-api/init_config.rst:772
 msgid "On macOS, Android and VxWorks: use ``\"utf-8\"`` by default."
-msgstr ""
-"En macOS, Android y VxWorks: use ``\"utf-8\"`` de forma predeterminada."
+msgstr "En macOS, Android y VxWorks: use ``\"utf-8\"`` de forma predeterminada."
 
 #: ../Doc/c-api/init_config.rst:774
 msgid ""
-"On Windows: use ``\"utf-8\"`` by default, or ``\"mbcs\"`` if :c:member:"
-"`~PyPreConfig.legacy_windows_fs_encoding` of :c:type:`PyPreConfig` is non-"
-"zero."
+"On Windows: use ``\"utf-8\"`` by default, or ``\"mbcs\"`` if :c:member:`~PyPreConfig."
+"legacy_windows_fs_encoding` of :c:type:`PyPreConfig` is non-zero."
 msgstr ""
-"En Windows: utilice ``\"utf-8\"`` de forma predeterminada o ``\"mbcs\"`` si :"
-"c:member:`~PyPreConfig.legacy_windows_fs_encoding` de :c:type:`PyPreConfig` "
-"no es cero."
+"En Windows: utilice ``\"utf-8\"`` de forma predeterminada o ``\"mbcs\"`` si :c:member:`~PyPreConfig."
+"legacy_windows_fs_encoding` de :c:type:`PyPreConfig` no es cero."
 
 #: ../Doc/c-api/init_config.rst:778
 msgid "Default encoding on other platforms:"
@@ -1332,40 +1201,31 @@ msgstr "Codificación predeterminada en otras plataformas:"
 
 #: ../Doc/c-api/init_config.rst:780
 msgid "``\"utf-8\"`` if :c:member:`PyPreConfig.utf8_mode` is non-zero."
-msgstr ""
-"``\"utf-8\"`` si :c:member:`PyPreConfig.utf8_mode` es distinto de cero."
+msgstr "``\"utf-8\"`` si :c:member:`PyPreConfig.utf8_mode` es distinto de cero."
 
 #: ../Doc/c-api/init_config.rst:781
-#, fuzzy
 msgid ""
-"``\"ascii\"`` if Python detects that ``nl_langinfo(CODESET)`` announces the "
-"ASCII encoding, whereas the ``mbstowcs()`` function decodes from a different "
-"encoding (usually Latin1)."
+"``\"ascii\"`` if Python detects that ``nl_langinfo(CODESET)`` announces the ASCII encoding, whereas "
+"the ``mbstowcs()`` function decodes from a different encoding (usually Latin1)."
 msgstr ""
-"``\"ascii\"`` si Python detecta que ``nl_langinfo(CODESET)`` anuncia la "
-"codificación ASCII (o la codificación Roman8 en HP-UX), mientras que la "
-"función ``mbstowcs()`` descodifica a partir de una codificación diferente "
-"(generalmente Latin1)."
+"``\"ascii\"`` si Python detecta que ``nl_langinfo(CODESET)`` anuncia la codificación ASCII, mientras "
+"que la función ``mbstowcs()`` decodifica desde una codificación diferente (usualmente Latin1)."
 
 #: ../Doc/c-api/init_config.rst:784
 msgid "``\"utf-8\"`` if ``nl_langinfo(CODESET)`` returns an empty string."
 msgstr "``\"utf-8\"`` si ``nl_langinfo(CODESET)`` retorna una cadena vacía."
 
 #: ../Doc/c-api/init_config.rst:785
-msgid ""
-"Otherwise, use the :term:`locale encoding`: ``nl_langinfo(CODESET)`` result."
-msgstr ""
-"De lo contrario, utilice el resultado :term:`locale encoding`: "
-"``nl_langinfo(CODESET)``."
+msgid "Otherwise, use the :term:`locale encoding`: ``nl_langinfo(CODESET)`` result."
+msgstr "De lo contrario, utilice el resultado :term:`locale encoding`: ``nl_langinfo(CODESET)``."
 
 #: ../Doc/c-api/init_config.rst:788
 msgid ""
-"At Python startup, the encoding name is normalized to the Python codec name. "
-"For example, ``\"ANSI_X3.4-1968\"`` is replaced with ``\"ascii\"``."
+"At Python startup, the encoding name is normalized to the Python codec name. For example, "
+"``\"ANSI_X3.4-1968\"`` is replaced with ``\"ascii\"``."
 msgstr ""
-"Al inicio de Python, el nombre de codificación se normaliza al nombre del "
-"códec de Python. Por ejemplo, ``\"ANSI_X3.4-1968\"`` se reemplaza por "
-"``\"ascii\"``."
+"Al inicio de Python, el nombre de codificación se normaliza al nombre del códec de Python. Por "
+"ejemplo, ``\"ANSI_X3.4-1968\"`` se reemplaza por ``\"ascii\"``."
 
 #: ../Doc/c-api/init_config.rst:791
 msgid "See also the :c:member:`~PyConfig.filesystem_errors` member."
@@ -1373,27 +1233,23 @@ msgstr "Consulte también el miembro :c:member:`~PyConfig.filesystem_errors`."
 
 #: ../Doc/c-api/init_config.rst:795
 msgid ""
-":term:`Filesystem error handler <filesystem encoding and error handler>`: :"
-"func:`sys.getfilesystemencodeerrors`."
+":term:`Filesystem error handler <filesystem encoding and error handler>`: :func:`sys."
+"getfilesystemencodeerrors`."
 msgstr ""
-":term:`Manejador de errores del sistema de archivos <filesystem encoding and "
-"error handler>`: :func:`sys.getfilesystemencodeerrors`."
+":term:`Manejador de errores del sistema de archivos <filesystem encoding and error handler>`: :func:"
+"`sys.getfilesystemencodeerrors`."
 
 #: ../Doc/c-api/init_config.rst:798
 msgid ""
-"On Windows: use ``\"surrogatepass\"`` by default, or ``\"replace\"``  if :c:"
-"member:`~PyPreConfig.legacy_windows_fs_encoding` of :c:type:`PyPreConfig` is "
-"non-zero."
+"On Windows: use ``\"surrogatepass\"`` by default, or ``\"replace\"``  if :c:member:`~PyPreConfig."
+"legacy_windows_fs_encoding` of :c:type:`PyPreConfig` is non-zero."
 msgstr ""
-"En Windows: utilice ``\"surrogatepass\"`` de forma predeterminada o "
-"``\"replace\"`` si :c:member:`~PyPreConfig.legacy_windows_fs_encoding` de :c:"
-"type:`PyPreConfig` no es cero."
+"En Windows: utilice ``\"surrogatepass\"`` de forma predeterminada o ``\"replace\"`` si :c:member:"
+"`~PyPreConfig.legacy_windows_fs_encoding` de :c:type:`PyPreConfig` no es cero."
 
 #: ../Doc/c-api/init_config.rst:802
 msgid "On other platforms: use ``\"surrogateescape\"`` by default."
-msgstr ""
-"En otras plataformas: utilice ``\"surrogateescape\"`` de forma "
-"predeterminada."
+msgstr "En otras plataformas: utilice ``\"surrogateescape\"`` de forma predeterminada."
 
 #: ../Doc/c-api/init_config.rst:804
 msgid "Supported error handlers:"
@@ -1421,39 +1277,36 @@ msgstr "Funciones de semillas aleatorias hash."
 
 #: ../Doc/c-api/init_config.rst:817
 msgid ""
-"If :c:member:`~PyConfig.use_hash_seed` is zero, a seed is chosen randomly at "
-"Python startup, and :c:member:`~PyConfig.hash_seed` is ignored."
+"If :c:member:`~PyConfig.use_hash_seed` is zero, a seed is chosen randomly at Python startup, and :c:"
+"member:`~PyConfig.hash_seed` is ignored."
 msgstr ""
-"Si :c:member:`~PyConfig.use_hash_seed` es cero, se elige una semilla al azar "
-"en el inicio de Python y se ignora :c:member:`~PyConfig.hash_seed`."
+"Si :c:member:`~PyConfig.use_hash_seed` es cero, se elige una semilla al azar en el inicio de Python y "
+"se ignora :c:member:`~PyConfig.hash_seed`."
 
 #: ../Doc/c-api/init_config.rst:820
 msgid "Set by the :envvar:`PYTHONHASHSEED` environment variable."
 msgstr "Establecido por la variable de entorno :envvar:`PYTHONHASHSEED`."
 
 #: ../Doc/c-api/init_config.rst:822
-msgid ""
-"Default *use_hash_seed* value: ``-1`` in Python mode, ``0`` in isolated mode."
-msgstr ""
-"Valor predeterminado de *use_hash_seed*: ``-1`` en modo Python, ``0`` en "
-"modo aislado."
+msgid "Default *use_hash_seed* value: ``-1`` in Python mode, ``0`` in isolated mode."
+msgstr "Valor predeterminado de *use_hash_seed*: ``-1`` en modo Python, ``0`` en modo aislado."
 
 #: ../Doc/c-api/init_config.rst:827
 msgid ""
-"Set the default Python \"home\" directory, that is, the location of the "
-"standard Python libraries (see :envvar:`PYTHONHOME`)."
+"Set the default Python \"home\" directory, that is, the location of the standard Python libraries "
+"(see :envvar:`PYTHONHOME`)."
 msgstr ""
+"Establece el directorio \"home\" de Python por defecto, es decir, la ubicación de las bibliotecas "
+"estándar de Python (ver :envvar:`PYTHONHOME`)."
 
 #: ../Doc/c-api/init_config.rst:830
 msgid "Set by the :envvar:`PYTHONHOME` environment variable."
 msgstr "Establecido por la variable de entorno :envvar:`PYTHONHOME`."
 
-#: ../Doc/c-api/init_config.rst:834 ../Doc/c-api/init_config.rst:964
-#: ../Doc/c-api/init_config.rst:984 ../Doc/c-api/init_config.rst:1073
-#: ../Doc/c-api/init_config.rst:1104
+#: ../Doc/c-api/init_config.rst:834 ../Doc/c-api/init_config.rst:964 ../Doc/c-api/init_config.rst:984
+#: ../Doc/c-api/init_config.rst:1073 ../Doc/c-api/init_config.rst:1104
 msgid "Part of the :ref:`Python Path Configuration <init-path-config>` input."
-msgstr ""
-"Parte de la entrada :ref:`Python Path Configuration <init-path-config>`."
+msgstr "Parte de la entrada :ref:`Python Path Configuration <init-path-config>`."
 
 #: ../Doc/c-api/init_config.rst:838
 msgid "If non-zero, profile import time."
@@ -1461,51 +1314,46 @@ msgstr "Si no es cero, el tiempo de importación del perfil."
 
 #: ../Doc/c-api/init_config.rst:840
 msgid ""
-"Set the ``1`` by the :option:`-X importtime <-X>` option and the :envvar:"
-"`PYTHONPROFILEIMPORTTIME` environment variable."
+"Set the ``1`` by the :option:`-X importtime <-X>` option and the :envvar:`PYTHONPROFILEIMPORTTIME` "
+"environment variable."
 msgstr ""
-"Configure el ``1`` mediante la opción :option:`-X importtime <-X>` y la "
-"variable de entorno :envvar:`PYTHONPROFILEIMPORTTIME`."
+"Configure el ``1`` mediante la opción :option:`-X importtime <-X>` y la variable de entorno :envvar:"
+"`PYTHONPROFILEIMPORTTIME`."
 
 #: ../Doc/c-api/init_config.rst:847
 msgid "Enter interactive mode after executing a script or a command."
-msgstr ""
-"Ingresa al modo interactivo después de ejecutar un script o un comando."
+msgstr "Ingresa al modo interactivo después de ejecutar un script o un comando."
 
 #: ../Doc/c-api/init_config.rst:849
-#, fuzzy
 msgid ""
-"If greater than ``0``, enable inspect: when a script is passed as first "
-"argument or the -c option is used, enter interactive mode after executing "
-"the script or the command, even when :data:`sys.stdin` does not appear to be "
-"a terminal."
+"If greater than ``0``, enable inspect: when a script is passed as first argument or the -c option is "
+"used, enter interactive mode after executing the script or the command, even when :data:`sys.stdin` "
+"does not appear to be a terminal."
 msgstr ""
-"Si es mayor que 0, habilite inspeccionar: cuando se pasa una secuencia de "
-"comandos como primer argumento o se usa la opción -c, ingrese al modo "
-"interactivo después de ejecutar la secuencia de comandos o el comando, "
-"incluso cuando :data:`sys.stdin` no parezca ser una terminal."
+"Si es mayor que ``0``, habilite la inspección: cuando se pasa un script como primer argumento o se "
+"usa la opción -c, ingrese al modo interactivo después de ejecutar el script o el comando, incluso "
+"cuando :data:`sys.stdin` no parezca ser una terminal."
 
 #: ../Doc/c-api/init_config.rst:854
 msgid ""
-"Incremented by the :option:`-i` command line option. Set to ``1`` if the :"
-"envvar:`PYTHONINSPECT` environment variable is non-empty."
+"Incremented by the :option:`-i` command line option. Set to ``1`` if the :envvar:`PYTHONINSPECT` "
+"environment variable is non-empty."
 msgstr ""
-"Incrementado por la opción de línea de comando :option:`-i`. Establecido en "
-"``1`` si la variable de entorno :envvar:`PYTHONINSPECT` no está vacía."
+"Incrementado por la opción de línea de comando :option:`-i`. Establecido en ``1`` si la variable de "
+"entorno :envvar:`PYTHONINSPECT` no está vacía."
 
 #: ../Doc/c-api/init_config.rst:861
 msgid "Install Python signal handlers?"
 msgstr "¿Instalar controladores de señales de Python?"
 
-#: ../Doc/c-api/init_config.rst:863 ../Doc/c-api/init_config.rst:1047
-#: ../Doc/c-api/init_config.rst:1071 ../Doc/c-api/init_config.rst:1282
+#: ../Doc/c-api/init_config.rst:863 ../Doc/c-api/init_config.rst:1047 ../Doc/c-api/init_config.rst:1071
+#: ../Doc/c-api/init_config.rst:1282
 msgid "Default: ``1`` in Python mode, ``0`` in isolated mode."
 msgstr "Por defecto: ``1`` en modo Python, ``0`` en modo aislado."
 
 #: ../Doc/c-api/init_config.rst:867
-#, fuzzy
 msgid "If greater than ``0``, enable the interactive mode (REPL)."
-msgstr "Si es mayor que 0, habilita el modo interactivo (REPL)."
+msgstr "Si es mayor que ``0``, habilita el modo interactivo (REPL)."
 
 #: ../Doc/c-api/init_config.rst:869
 msgid "Incremented by the :option:`-i` command line option."
@@ -1513,195 +1361,169 @@ msgstr "Incrementado por la opción de línea de comando :option:`-i`."
 
 #: ../Doc/c-api/init_config.rst:875
 msgid ""
-"Configures the :ref:`integer string conversion length limitation "
-"<int_max_str_digits>`.  An initial value of ``-1`` means the value will be "
-"taken from the command line or environment or otherwise default to 4300 (:"
-"data:`sys.int_info.default_max_str_digits`).  A value of ``0`` disables the "
+"Configures the :ref:`integer string conversion length limitation <int_max_str_digits>`.  An initial "
+"value of ``-1`` means the value will be taken from the command line or environment or otherwise "
+"default to 4300 (:data:`sys.int_info.default_max_str_digits`).  A value of ``0`` disables the "
 "limitation.  Values greater than zero but less than 640 (:data:`sys.int_info."
 "str_digits_check_threshold`) are unsupported and will produce an error."
 msgstr ""
+"Configura la :ref:`limitación de la longitud de conversión de entero a cadena <int_max_str_digits>`. "
+"Un valor inicial de ``-1`` significa que el valor se tomará de la línea de comandos o del entorno o, "
+"de lo contrario, será por defecto 4300 (:data:`sys.int_info.default_max_str_digits`). Un valor de "
+"``0`` deshabilita la limitación. Los valores mayores que cero pero menores que 640 (:data:`sys."
+"int_info.str_digits_check_threshold`) no son compatibles y producirán un error."
 
 #: ../Doc/c-api/init_config.rst:883
-#, fuzzy
 msgid ""
-"Configured by the :option:`-X int_max_str_digits <-X>` command line flag or "
-"the :envvar:`PYTHONINTMAXSTRDIGITS` environment variable."
+"Configured by the :option:`-X int_max_str_digits <-X>` command line flag or the :envvar:"
+"`PYTHONINTMAXSTRDIGITS` environment variable."
 msgstr ""
-"Establecido por la opción de línea de comando :option:`-X "
-"pycache_prefix=PATH <-X>` y la variable de entorno :envvar:"
-"`PYTHONPYCACHEPREFIX`."
+"Configurado por la bandera de línea de comandos :option:`-X int_max_str_digits <-X>` o la variable de "
+"entorno :envvar:`PYTHONINTMAXSTRDIGITS`."
 
 #: ../Doc/c-api/init_config.rst:886
-#, fuzzy
 msgid ""
-"Default: ``-1`` in Python mode.  4300 (:data:`sys.int_info."
-"default_max_str_digits`) in isolated mode."
-msgstr "Por defecto: ``-1`` en modo Python, ``0`` en modo aislado."
+"Default: ``-1`` in Python mode.  4300 (:data:`sys.int_info.default_max_str_digits`) in isolated mode."
+msgstr ""
+"Predeterminado: ``-1`` en modo Python. 4300 (:data:`sys.int_info.default_max_str_digits`) en modo "
+"aislado."
 
 #: ../Doc/c-api/init_config.rst:893
 msgid ""
-"If the value of :c:member:`~PyConfig.cpu_count` is not ``-1`` then it will "
-"override the return values of :func:`os.cpu_count`, :func:`os."
-"process_cpu_count`, and :func:`multiprocessing.cpu_count`."
+"If the value of :c:member:`~PyConfig.cpu_count` is not ``-1`` then it will override the return values "
+"of :func:`os.cpu_count`, :func:`os.process_cpu_count`, and :func:`multiprocessing.cpu_count`."
 msgstr ""
+"Si el valor de :c:member:`~PyConfig.cpu_count` no es ``-1``, entonces anulará los valores de retorno "
+"de :func:`os.cpu_count`, :func:`os.process_cpu_count` y :func:`multiprocessing.cpu_count`."
 
 #: ../Doc/c-api/init_config.rst:897
-#, fuzzy
 msgid ""
-"Configured by the :samp:`-X cpu_count={n|default}` command line flag or the :"
-"envvar:`PYTHON_CPU_COUNT` environment variable."
+"Configured by the :samp:`-X cpu_count={n|default}` command line flag or the :envvar:"
+"`PYTHON_CPU_COUNT` environment variable."
 msgstr ""
-"Establecido por la opción de línea de comando :option:`-X "
-"pycache_prefix=PATH <-X>` y la variable de entorno :envvar:"
-"`PYTHONPYCACHEPREFIX`."
+"Configurado por la bandera de línea de comandos :samp:`-X cpu_count={n|default}` o la variable de "
+"entorno :envvar:`PYTHON_CPU_COUNT`."
 
 #: ../Doc/c-api/init_config.rst:900 ../Doc/c-api/init_config.rst:1259
-#, fuzzy
 msgid "Default: ``-1``."
-msgstr "Predeterminado: ``1``."
+msgstr "Predeterminado: ``-1``."
 
 #: ../Doc/c-api/init_config.rst:906
-#, fuzzy
 msgid "If greater than ``0``, enable isolated mode:"
-msgstr "Si es mayor que 0, habilite el modo aislado:"
+msgstr "Si es mayor que ``0``, habilite el modo aislado:"
 
 #: ../Doc/c-api/init_config.rst:908
-#, fuzzy
 msgid ""
-"Set :c:member:`~PyConfig.safe_path` to ``1``: don't prepend a potentially "
-"unsafe path to :data:`sys.path` at Python startup, such as the current "
-"directory, the script's directory or an empty string."
+"Set :c:member:`~PyConfig.safe_path` to ``1``: don't prepend a potentially unsafe path to :data:`sys."
+"path` at Python startup, such as the current directory, the script's directory or an empty string."
 msgstr ""
-"Poner :c:member:`~PyConfig.safe_path` to ``1``: no anteponer una ruta "
-"potencialmente insegura a :data:`sys.path` al inicio de Python."
+"Establezca :c:member:`~PyConfig.safe_path` en ``1``: no anteponga una ruta potencialmente insegura a :"
+"data:`sys.path` al inicio de Python, como el directorio actual, el directorio del script o una cadena "
+"vacía."
 
 #: ../Doc/c-api/init_config.rst:912
-#, fuzzy
-msgid ""
-"Set :c:member:`~PyConfig.use_environment` to ``0``: ignore ``PYTHON`` "
-"environment variables."
-msgstr ":c:member:`PyConfig.use_environment`"
+msgid "Set :c:member:`~PyConfig.use_environment` to ``0``: ignore ``PYTHON`` environment variables."
+msgstr ""
+"Establezca :c:member:`~PyConfig.use_environment` en ``0``: ignore las variables de entorno ``PYTHON``."
 
 #: ../Doc/c-api/init_config.rst:914
-#, fuzzy
 msgid ""
-"Set :c:member:`~PyConfig.user_site_directory` to ``0``: don't add the user "
-"site directory to :data:`sys.path`."
-msgstr ""
-"Si es distinto de cero, agregue el directorio del sitio del usuario a :data:"
+"Set :c:member:`~PyConfig.user_site_directory` to ``0``: don't add the user site directory to :data:"
 "`sys.path`."
+msgstr ""
+"Establezca :c:member:`~PyConfig.user_site_directory` en ``0``: no agregue el directorio del sitio del "
+"usuario a :data:`sys.path`."
 
 #: ../Doc/c-api/init_config.rst:916
 msgid ""
-"Python REPL doesn't import :mod:`readline` nor enable default readline "
-"configuration on interactive prompts."
+"Python REPL doesn't import :mod:`readline` nor enable default readline configuration on interactive "
+"prompts."
 msgstr ""
-"Python REPL no importa :mod:`readline` ni habilita la configuración "
-"predeterminada de readline en mensajes interactivos."
+"Python REPL no importa :mod:`readline` ni habilita la configuración predeterminada de readline en "
+"mensajes interactivos."
 
 #: ../Doc/c-api/init_config.rst:919
-#, fuzzy
 msgid "Set to ``1`` by the :option:`-I` command line option."
-msgstr ""
-"Establecido en ``1`` mediante la opción de línea de comando :option:`-x`."
+msgstr "Establecido en ``1`` por la opción de línea de comando :option:`-I`."
 
 #: ../Doc/c-api/init_config.rst:923
-#, fuzzy
 msgid ""
-"See also the :ref:`Isolated Configuration <init-isolated-conf>` and :c:"
-"member:`PyPreConfig.isolated`."
+"See also the :ref:`Isolated Configuration <init-isolated-conf>` and :c:member:`PyPreConfig.isolated`."
 msgstr ""
-"Inicialice la configuración con la :ref:`Configuración Aislada <init-"
-"isolated-conf>`."
+"Consulte también la :ref:`Configuración Aislada <init-isolated-conf>` y :c:member:`PyPreConfig."
+"isolated`."
 
 #: ../Doc/c-api/init_config.rst:928
-#, fuzzy
 msgid ""
-"If non-zero, use :class:`io.FileIO` instead of :class:`!io."
-"_WindowsConsoleIO` for :data:`sys.stdin`, :data:`sys.stdout` and :data:`sys."
-"stderr`."
+"If non-zero, use :class:`io.FileIO` instead of :class:`!io._WindowsConsoleIO` for :data:`sys.stdin`, :"
+"data:`sys.stdout` and :data:`sys.stderr`."
 msgstr ""
-"Si no es cero, usa :class:`io.FileIO` en lugar de :class:`io."
-"WindowsConsoleIO` para :data:`sys.stdin`, :data:`sys.stdout` y :data:`sys."
-"stderr`."
+"Si no es cero, use :class:`io.FileIO` en lugar de :class:`!io._WindowsConsoleIO` para :data:`sys."
+"stdin`, :data:`sys.stdout` y :data:`sys.stderr`."
 
 #: ../Doc/c-api/init_config.rst:932
 msgid ""
-"Set to ``1`` if the :envvar:`PYTHONLEGACYWINDOWSSTDIO` environment variable "
-"is set to a non-empty string."
+"Set to ``1`` if the :envvar:`PYTHONLEGACYWINDOWSSTDIO` environment variable is set to a non-empty "
+"string."
 msgstr ""
-"Establecido en ``1`` si la variable de entorno :envvar:"
-"`PYTHONLEGACYWINDOWSSTDIO` está establecida en una cadena no vacía."
+"Establecido en ``1`` si la variable de entorno :envvar:`PYTHONLEGACYWINDOWSSTDIO` está establecida en "
+"una cadena no vacía."
 
 #: ../Doc/c-api/init_config.rst:940
 msgid "See also the :pep:`528` (Change Windows console encoding to UTF-8)."
-msgstr ""
-"Consulte también :pep:`528` (Cambiar la codificación de la consola de "
-"Windows a UTF-8)."
+msgstr "Consulte también :pep:`528` (Cambiar la codificación de la consola de Windows a UTF-8)."
 
 #: ../Doc/c-api/init_config.rst:944
-msgid ""
-"If non-zero, dump statistics on :ref:`Python pymalloc memory allocator "
-"<pymalloc>` at exit."
+msgid "If non-zero, dump statistics on :ref:`Python pymalloc memory allocator <pymalloc>` at exit."
 msgstr ""
-"Si no es cero, volcar las estadísticas en :ref:`Asignador de memoria Python "
-"pymalloc <pymalloc>` en la salida."
+"Si no es cero, volcar las estadísticas en :ref:`Asignador de memoria Python pymalloc <pymalloc>` en "
+"la salida."
 
 #: ../Doc/c-api/init_config.rst:947
 msgid "Set to ``1`` by the :envvar:`PYTHONMALLOCSTATS` environment variable."
-msgstr ""
-"Establecido en ``1`` por la variable de entorno :envvar:`PYTHONMALLOCSTATS`."
+msgstr "Establecido en ``1`` por la variable de entorno :envvar:`PYTHONMALLOCSTATS`."
 
 #: ../Doc/c-api/init_config.rst:949
 msgid ""
-"The option is ignored if Python is :option:`configured using the --without-"
-"pymalloc option <--without-pymalloc>`."
+"The option is ignored if Python is :option:`configured using the --without-pymalloc option <--without-"
+"pymalloc>`."
 msgstr ""
-"La opción se ignora si Python es :option:`configurado usando la opción --"
-"without-pymalloc <--without-pymalloc>`."
+"La opción se ignora si Python es :option:`configurado usando la opción --without-pymalloc <--without-"
+"pymalloc>`."
 
 #: ../Doc/c-api/init_config.rst:956
 msgid "Platform library directory name: :data:`sys.platlibdir`."
-msgstr ""
-"Nombre del directorio de la biblioteca de la plataforma: :data:`sys."
-"platlibdir`."
+msgstr "Nombre del directorio de la biblioteca de la plataforma: :data:`sys.platlibdir`."
 
 #: ../Doc/c-api/init_config.rst:958
 msgid "Set by the :envvar:`PYTHONPLATLIBDIR` environment variable."
 msgstr "Establecido por la variable de entorno :envvar:`PYTHONPLATLIBDIR`."
 
 #: ../Doc/c-api/init_config.rst:960
-#, fuzzy
 msgid ""
-"Default: value of the ``PLATLIBDIR`` macro which is set by the :option:"
-"`configure --with-platlibdir option <--with-platlibdir>` (default: "
-"``\"lib\"``, or ``\"DLLs\"`` on Windows)."
+"Default: value of the ``PLATLIBDIR`` macro which is set by the :option:`configure --with-platlibdir "
+"option <--with-platlibdir>` (default: ``\"lib\"``, or ``\"DLLs\"`` on Windows)."
 msgstr ""
-"Predeterminado: valor de la macro ``PLATLIBDIR`` que establece la :option:"
-"`opción configure --with-platlibdir <--with-platlibdir>` (predeterminado: "
-"``\"lib\"``)."
+"Predeterminado: valor de la macro ``PLATLIBDIR`` que se establece mediante la opción :option:"
+"`configure --with-platlibdir <--with-platlibdir>` (predeterminado: ``\"lib\"``, o ``\"DLLs\"`` en "
+"Windows)."
 
 #: ../Doc/c-api/init_config.rst:968
 msgid ""
-"This macro is now used on Windows to locate the standard library extension "
-"modules, typically under ``DLLs``. However, for compatibility, note that "
-"this value is ignored for any non-standard layouts, including in-tree builds "
-"and virtual environments."
+"This macro is now used on Windows to locate the standard library extension modules, typically under "
+"``DLLs``. However, for compatibility, note that this value is ignored for any non-standard layouts, "
+"including in-tree builds and virtual environments."
 msgstr ""
-"Esta macro se utiliza ahora en Windows para localizar los módulos de "
-"extensión de la biblioteca estándar, normalmente en ``DLLs``. Sin embargo, "
-"por compatibilidad, tenga en cuenta que este valor se ignora para cualquier "
-"disposición no estándar, incluyendo las construcciones dentro del árbol y "
-"los entornos virtuales."
+"Esta macro se utiliza ahora en Windows para localizar los módulos de extensión de la biblioteca "
+"estándar, normalmente en ``DLLs``. Sin embargo, por compatibilidad, tenga en cuenta que este valor se "
+"ignora para cualquier disposición no estándar, incluyendo las construcciones dentro del árbol y los "
+"entornos virtuales."
 
 #: ../Doc/c-api/init_config.rst:977
-#, fuzzy
-msgid ""
-"Module search paths (:data:`sys.path`) as a string separated by ``DELIM`` (:"
-"data:`os.pathsep`)."
+msgid "Module search paths (:data:`sys.path`) as a string separated by ``DELIM`` (:data:`os.pathsep`)."
 msgstr ""
-"Rutas de búsqueda de módulos (:data:`sys.path`) como una cadena separada por "
-"``DELIM`` (:data:`os.path.pathsep`)."
+"Rutas de búsqueda de módulos (:data:`sys.path`) como una cadena separada por ``DELIM`` (:data:`os."
+"pathsep`)."
 
 #: ../Doc/c-api/init_config.rst:980
 msgid "Set by the :envvar:`PYTHONPATH` environment variable."
@@ -1712,25 +1534,18 @@ msgid "Module search paths: :data:`sys.path`."
 msgstr "Rutas de búsqueda del módulo: :data:`sys.path`."
 
 #: ../Doc/c-api/init_config.rst:991
-#, fuzzy
 msgid ""
-"If :c:member:`~PyConfig.module_search_paths_set` is equal to ``0``, :c:func:"
-"`Py_InitializeFromConfig` will replace :c:member:`~PyConfig."
-"module_search_paths` and sets :c:member:`~PyConfig.module_search_paths_set` "
-"to ``1``."
+"If :c:member:`~PyConfig.module_search_paths_set` is equal to ``0``, :c:func:`Py_InitializeFromConfig` "
+"will replace :c:member:`~PyConfig.module_search_paths` and sets :c:member:`~PyConfig."
+"module_search_paths_set` to ``1``."
 msgstr ""
-"Si :c:member:`~PyConfig.module_search_paths_set` es igual a 0, la función "
-"que calcula :ref:`Python Path Configuration <init-path-config>` anula :c:"
-"member:`~PyConfig.module_search_paths` y establece :c:member:`~PyConfig."
+"Si :c:member:`~PyConfig.module_search_paths_set` es igual a ``0``, :c:func:`Py_InitializeFromConfig` "
+"reemplazará :c:member:`~PyConfig.module_search_paths` y establecerá :c:member:`~PyConfig."
 "module_search_paths_set` en ``1``."
 
 #: ../Doc/c-api/init_config.rst:996
-msgid ""
-"Default: empty list (``module_search_paths``) and ``0`` "
-"(``module_search_paths_set``)."
-msgstr ""
-"Por defecto: lista vacía (``module_search_paths``) y ``0`` "
-"(``module_search_paths_set``)."
+msgid "Default: empty list (``module_search_paths``) and ``0`` (``module_search_paths_set``)."
+msgstr "Por defecto: lista vacía (``module_search_paths``) y ``0`` (``module_search_paths_set``)."
 
 #: ../Doc/c-api/init_config.rst:1003
 msgid "Compilation optimization level:"
@@ -1742,8 +1557,7 @@ msgstr "``0``: Optimizador de mirilla, configure ``__debug__`` en ``True``."
 
 #: ../Doc/c-api/init_config.rst:1006
 msgid "``1``: Level 0, remove assertions, set ``__debug__`` to ``False``."
-msgstr ""
-"``1``: Nivel 0, elimina las aserciones, establece ``__debug__`` en ``False``."
+msgstr "``1``: Nivel 0, elimina las aserciones, establece ``__debug__`` en ``False``."
 
 #: ../Doc/c-api/init_config.rst:1007
 msgid "``2``: Level 1, strip docstrings."
@@ -1751,44 +1565,37 @@ msgstr "``2``: Nivel 1, elimina docstrings."
 
 #: ../Doc/c-api/init_config.rst:1009
 msgid ""
-"Incremented by the :option:`-O` command line option. Set to the :envvar:"
-"`PYTHONOPTIMIZE` environment variable value."
+"Incremented by the :option:`-O` command line option. Set to the :envvar:`PYTHONOPTIMIZE` environment "
+"variable value."
 msgstr ""
-"Incrementado por la opción de línea de comando :option:`-O`. Establecido en "
-"el valor de la variable de entorno :envvar:`PYTHONOPTIMIZE`."
+"Incrementado por la opción de línea de comando :option:`-O`. Establecido en el valor de la variable "
+"de entorno :envvar:`PYTHONOPTIMIZE`."
 
 #: ../Doc/c-api/init_config.rst:1016
 msgid ""
-"The list of the original command line arguments passed to the Python "
-"executable: :data:`sys.orig_argv`."
+"The list of the original command line arguments passed to the Python executable: :data:`sys."
+"orig_argv`."
 msgstr ""
-"La lista de los argumentos originales de la línea de comandos pasados al "
-"ejecutable de Python: :data:`sys.orig_argv`."
+"La lista de los argumentos originales de la línea de comandos pasados al ejecutable de Python: :data:"
+"`sys.orig_argv`."
 
 #: ../Doc/c-api/init_config.rst:1019
 msgid ""
-"If :c:member:`~PyConfig.orig_argv` list is empty and :c:member:`~PyConfig."
-"argv` is not a list only containing an empty string, :c:func:`PyConfig_Read` "
-"copies :c:member:`~PyConfig.argv` into :c:member:`~PyConfig.orig_argv` "
-"before modifying :c:member:`~PyConfig.argv` (if :c:member:`~PyConfig."
+"If :c:member:`~PyConfig.orig_argv` list is empty and :c:member:`~PyConfig.argv` is not a list only "
+"containing an empty string, :c:func:`PyConfig_Read` copies :c:member:`~PyConfig.argv` into :c:member:"
+"`~PyConfig.orig_argv` before modifying :c:member:`~PyConfig.argv` (if :c:member:`~PyConfig."
 "parse_argv` is non-zero)."
 msgstr ""
-"Si la lista :c:member:`~PyConfig.orig_argv` está vacía y :c:member:"
-"`~PyConfig.argv` no es una lista que solo contiene una cadena vacía, :c:func:"
-"`PyConfig_Read` copia :c:member:`~PyConfig.argv` en :c:member:`~PyConfig."
-"orig_argv` antes de modificar :c:member:`~PyConfig.argv` (si :c:member:"
-"`~PyConfig.parse_argv` no es cero)."
+"Si la lista :c:member:`~PyConfig.orig_argv` está vacía y :c:member:`~PyConfig.argv` no es una lista "
+"que solo contiene una cadena vacía, :c:func:`PyConfig_Read` copia :c:member:`~PyConfig.argv` en :c:"
+"member:`~PyConfig.orig_argv` antes de modificar :c:member:`~PyConfig.argv` (si :c:member:`~PyConfig."
+"parse_argv` no es cero)."
 
 #: ../Doc/c-api/init_config.rst:1026
-msgid ""
-"See also the :c:member:`~PyConfig.argv` member and the :c:func:"
-"`Py_GetArgcArgv` function."
-msgstr ""
-"Consulte también el miembro :c:member:`~PyConfig.argv` y la función :c:func:"
-"`Py_GetArgcArgv`."
+msgid "See also the :c:member:`~PyConfig.argv` member and the :c:func:`Py_GetArgcArgv` function."
+msgstr "Consulte también el miembro :c:member:`~PyConfig.argv` y la función :c:func:`Py_GetArgcArgv`."
 
-#: ../Doc/c-api/init_config.rst:1029 ../Doc/c-api/init_config.rst:1317
-#: ../Doc/c-api/init_config.rst:1336
+#: ../Doc/c-api/init_config.rst:1029 ../Doc/c-api/init_config.rst:1317 ../Doc/c-api/init_config.rst:1336
 msgid "Default: empty list."
 msgstr "Predeterminado: lista vacía."
 
@@ -1798,58 +1605,51 @@ msgstr "¿Analizar los argumentos de la línea de comando?"
 
 #: ../Doc/c-api/init_config.rst:1037
 msgid ""
-"If equals to ``1``, parse :c:member:`~PyConfig.argv` the same way the "
-"regular Python parses :ref:`command line arguments <using-on-cmdline>`, and "
-"strip Python arguments from :c:member:`~PyConfig.argv`."
+"If equals to ``1``, parse :c:member:`~PyConfig.argv` the same way the regular Python parses :ref:"
+"`command line arguments <using-on-cmdline>`, and strip Python arguments from :c:member:`~PyConfig."
+"argv`."
 msgstr ""
-"Si es igual a ``1``, analiza :c:member:`~PyConfig.argv` de la misma forma "
-"que Python normal analiza :ref:`argumentos de línea de comando <using-on-"
-"cmdline>` y elimina los argumentos de Python de :c:member:`~PyConfig.argv`."
+"Si es igual a ``1``, analiza :c:member:`~PyConfig.argv` de la misma forma que Python normal analiza :"
+"ref:`argumentos de línea de comando <using-on-cmdline>` y elimina los argumentos de Python de :c:"
+"member:`~PyConfig.argv`."
 
 #: ../Doc/c-api/init_config.rst:1049
 msgid ""
-"The :c:member:`PyConfig.argv` arguments are now only parsed if :c:member:"
-"`PyConfig.parse_argv` equals to ``1``."
+"The :c:member:`PyConfig.argv` arguments are now only parsed if :c:member:`PyConfig.parse_argv` equals "
+"to ``1``."
 msgstr ""
-"Los argumentos :c:member:`PyConfig.argv` ahora solo se analizan si :c:member:"
-"`PyConfig.parse_argv` es igual a ``1``."
+"Los argumentos :c:member:`PyConfig.argv` ahora solo se analizan si :c:member:`PyConfig.parse_argv` es "
+"igual a ``1``."
 
 #: ../Doc/c-api/init_config.rst:1055
-#, fuzzy
 msgid ""
-"Parser debug mode. If greater than ``0``, turn on parser debugging output "
-"(for expert only, depending on compilation options)."
+"Parser debug mode. If greater than ``0``, turn on parser debugging output (for expert only, depending "
+"on compilation options)."
 msgstr ""
-"Modo de depuración del analizador. Si es mayor que 0, active la salida de "
-"depuración del analizador (solo para expertos, según las opciones de "
-"compilación)."
+"Modo de depuración del analizador. Si es mayor que ``0``, active la salida de depuración del "
+"analizador (solo para expertos, dependiendo de las opciones de compilación)."
 
 #: ../Doc/c-api/init_config.rst:1058
 msgid ""
-"Incremented by the :option:`-d` command line option. Set to the :envvar:"
-"`PYTHONDEBUG` environment variable value."
+"Incremented by the :option:`-d` command line option. Set to the :envvar:`PYTHONDEBUG` environment "
+"variable value."
 msgstr ""
-"Incrementado por la opción de línea de comando :option:`-d`. Establecido en "
-"el valor de la variable de entorno :envvar:`PYTHONDEBUG`."
+"Incrementado por la opción de línea de comando :option:`-d`. Establecido en el valor de la variable "
+"de entorno :envvar:`PYTHONDEBUG`."
 
 #: ../Doc/c-api/init_config.rst:1061 ../Doc/c-api/init_config.rst:1166
-#, fuzzy
-msgid ""
-"Needs a :ref:`debug build of Python <debug-build>` (the ``Py_DEBUG`` macro "
-"must be defined)."
+msgid "Needs a :ref:`debug build of Python <debug-build>` (the ``Py_DEBUG`` macro must be defined)."
 msgstr ""
-"Necesita una :ref:`compilación de depuración de Python <debug-build>` (se "
-"debe definir la macro ``Py_REF_DEBUG``)."
+"Necesita una :ref:`compilación de depuración de Python <debug-build>` (se debe definir la macro "
+"``Py_DEBUG``)."
 
 #: ../Doc/c-api/init_config.rst:1068
-#, fuzzy
 msgid ""
-"If non-zero, calculation of path configuration is allowed to log warnings "
-"into ``stderr``. If equals to ``0``, suppress these warnings."
+"If non-zero, calculation of path configuration is allowed to log warnings into ``stderr``. If equals "
+"to ``0``, suppress these warnings."
 msgstr ""
-"En Unix, si es distinto de cero, el cálculo de :ref:`Python Path "
-"Configuration <init-path-config>` puede registrar advertencias en "
-"``stderr``. Si es igual a 0, suprima estas advertencias."
+"Si no es cero, se permite que el cálculo de la configuración de ruta registre advertencias en "
+"``stderr``. Si es igual a ``0``, suprima estas advertencias."
 
 #: ../Doc/c-api/init_config.rst:1075
 msgid "Now also applies on Windows."
@@ -1857,86 +1657,68 @@ msgstr "Ahora también se aplica en Windows."
 
 #: ../Doc/c-api/init_config.rst:1080
 msgid ""
-"The site-specific directory prefix where the platform independent Python "
-"files are installed: :data:`sys.prefix`."
+"The site-specific directory prefix where the platform independent Python files are installed: :data:"
+"`sys.prefix`."
 msgstr ""
-"El prefijo de directorio específico del sitio donde se instalan los archivos "
-"Python independientes de la plataforma: :data:`sys.prefix`."
+"El prefijo de directorio específico del sitio donde se instalan los archivos Python independientes de "
+"la plataforma: :data:`sys.prefix`."
 
 #: ../Doc/c-api/init_config.rst:1087
-#, fuzzy
 msgid "See also :c:member:`PyConfig.base_prefix`."
-msgstr ":c:member:`PyConfig.base_prefix`"
+msgstr "Consulte también :c:member:`PyConfig.base_prefix`."
 
 #: ../Doc/c-api/init_config.rst:1091
 msgid ""
-"Program name used to initialize :c:member:`~PyConfig.executable` and in "
-"early error messages during Python initialization."
+"Program name used to initialize :c:member:`~PyConfig.executable` and in early error messages during "
+"Python initialization."
 msgstr ""
-"Nombre del programa utilizado para inicializar :c:member:`~PyConfig."
-"executable` y en los primeros mensajes de error durante la inicialización de "
-"Python."
+"Nombre del programa utilizado para inicializar :c:member:`~PyConfig.executable` y en los primeros "
+"mensajes de error durante la inicialización de Python."
 
 #: ../Doc/c-api/init_config.rst:1094
 msgid "On macOS, use :envvar:`PYTHONEXECUTABLE` environment variable if set."
-msgstr ""
-"En macOS, usa la variable de entorno :envvar:`PYTHONEXECUTABLE` si está "
-"configurada."
+msgstr "En macOS, usa la variable de entorno :envvar:`PYTHONEXECUTABLE` si está configurada."
 
 #: ../Doc/c-api/init_config.rst:1095
 msgid ""
-"If the ``WITH_NEXT_FRAMEWORK`` macro is defined, use :envvar:"
-"`__PYVENV_LAUNCHER__` environment variable if set."
+"If the ``WITH_NEXT_FRAMEWORK`` macro is defined, use :envvar:`__PYVENV_LAUNCHER__` environment "
+"variable if set."
 msgstr ""
-"Si se define la macro ``WITH_NEXT_FRAMEWORK``, utiliza la variable de "
-"entorno :envvar:`__PYVENV_LAUNCHER__` si está configurada."
+"Si se define la macro ``WITH_NEXT_FRAMEWORK``, utiliza la variable de entorno :envvar:"
+"`__PYVENV_LAUNCHER__` si está configurada."
 
 #: ../Doc/c-api/init_config.rst:1097
-msgid ""
-"Use ``argv[0]`` of :c:member:`~PyConfig.argv` if available and non-empty."
-msgstr ""
-"Utiliza ``argv[0]`` de :c:member:`~PyConfig.argv` si está disponible y no "
-"está vacío."
+msgid "Use ``argv[0]`` of :c:member:`~PyConfig.argv` if available and non-empty."
+msgstr "Utiliza ``argv[0]`` de :c:member:`~PyConfig.argv` si está disponible y no está vacío."
 
 #: ../Doc/c-api/init_config.rst:1099
-msgid ""
-"Otherwise, use ``L\"python\"`` on Windows, or ``L\"python3\"`` on other "
-"platforms."
-msgstr ""
-"De lo contrario, utiliza ``L\"python\"`` en Windows o ``L\"python3\"`` en "
-"otras plataformas."
+msgid "Otherwise, use ``L\"python\"`` on Windows, or ``L\"python3\"`` on other platforms."
+msgstr "De lo contrario, utiliza ``L\"python\"`` en Windows o ``L\"python3\"`` en otras plataformas."
 
 #: ../Doc/c-api/init_config.rst:1108
-msgid ""
-"Directory where cached ``.pyc`` files are written: :data:`sys."
-"pycache_prefix`."
+msgid "Directory where cached ``.pyc`` files are written: :data:`sys.pycache_prefix`."
 msgstr ""
-"Directorio donde se escriben los archivos ``.pyc`` almacenados en caché: :"
-"data:`sys.pycache_prefix`."
+"Directorio donde se escriben los archivos ``.pyc`` almacenados en caché: :data:`sys.pycache_prefix`."
 
 #: ../Doc/c-api/init_config.rst:1111
-#, fuzzy
 msgid ""
-"Set by the :option:`-X pycache_prefix=PATH <-X>` command line option and "
-"the :envvar:`PYTHONPYCACHEPREFIX` environment variable. The command-line "
-"option takes precedence."
+"Set by the :option:`-X pycache_prefix=PATH <-X>` command line option and the :envvar:"
+"`PYTHONPYCACHEPREFIX` environment variable. The command-line option takes precedence."
 msgstr ""
-"Establecido por la opción de línea de comando :option:`-X "
-"pycache_prefix=PATH <-X>` y la variable de entorno :envvar:"
-"`PYTHONPYCACHEPREFIX`."
+"Establecido por la opción de línea de comando :option:`-X pycache_prefix=PATH <-X>` y la variable de "
+"entorno :envvar:`PYTHONPYCACHEPREFIX`. La opción de línea de comandos tiene prioridad."
 
 #: ../Doc/c-api/init_config.rst:1115
 msgid "If ``NULL``, :data:`sys.pycache_prefix` is set to ``None``."
 msgstr "Si ``NULL``, :data:`sys.pycache_prefix` es establecido a ``None``."
 
 #: ../Doc/c-api/init_config.rst:1121
-#, fuzzy
 msgid ""
-"Quiet mode. If greater than ``0``, don't display the copyright and version "
-"at Python startup in interactive mode."
+"Quiet mode. If greater than ``0``, don't display the copyright and version at Python startup in "
+"interactive mode."
 msgstr ""
-"Modo silencioso. Si es mayor que 0, no muestre los derechos de autor y la "
-"versión al inicio de Python en modo interactivo."
+"Modo silencioso. Si es mayor que ``0``, no muestre los derechos de autor y la versión al inicio de "
+"Python en modo interactivo."
 
 #: ../Doc/c-api/init_config.rst:1124
 msgid "Incremented by the :option:`-q` command line option."
@@ -1951,70 +1733,51 @@ msgid "Used by :c:func:`Py_RunMain`."
 msgstr "Usado por :c:func:`Py_RunMain`."
 
 #: ../Doc/c-api/init_config.rst:1138
-#, fuzzy
 msgid ""
-"Filename passed on the command line: trailing command line argument without :"
-"option:`-c` or :option:`-m`. It is used by the :c:func:`Py_RunMain` function."
+"Filename passed on the command line: trailing command line argument without :option:`-c` or :option:`-"
+"m`. It is used by the :c:func:`Py_RunMain` function."
 msgstr ""
-"Nombre de archivo pasado en la línea de comando: argumento de línea de "
-"comando final sin :option:`-c` o :option:`-m`."
+"Nombre de archivo pasado en la línea de comandos: argumento final de la línea de comandos sin :option:"
+"`-c` o :option:`-m`. Es utilizado por la función :c:func:`Py_RunMain`."
 
 #: ../Doc/c-api/init_config.rst:1142
-#, fuzzy
-msgid ""
-"For example, it is set to ``script.py`` by the ``python3 script.py arg`` "
-"command line."
+msgid "For example, it is set to ``script.py`` by the ``python3 script.py arg`` command line."
 msgstr ""
-"Por ejemplo, el comando ``python3 script.py arg`` lo establece en ``script."
-"py``."
+"Por ejemplo, se establece en ``script.py`` mediante la línea de comandos ``python3 script.py arg``."
 
 #: ../Doc/c-api/init_config.rst:1145
-#, fuzzy
 msgid "See also the :c:member:`PyConfig.skip_source_first_line` option."
-msgstr "Consulte también el miembro :c:member:`~PyConfig.orig_argv`."
+msgstr "Consulte también la opción :c:member:`PyConfig.skip_source_first_line`."
 
 #: ../Doc/c-api/init_config.rst:1151
 msgid "Value of the :option:`-m` command line option."
 msgstr "Valor de la opción de línea de comando :option:`-m`."
 
 #: ../Doc/c-api/init_config.rst:1159
-msgid ""
-"``package.module`` path to module that should be imported before ``site.py`` "
-"is run."
-msgstr ""
+msgid "``package.module`` path to module that should be imported before ``site.py`` is run."
+msgstr "Ruta ``package.module`` al módulo que debe ser importado antes de que se ejecute ``site.py``."
 
 #: ../Doc/c-api/init_config.rst:1162
-#, fuzzy
 msgid ""
-"Set by the :option:`-X presite=package.module <-X>` command-line option and "
-"the :envvar:`PYTHON_PRESITE` environment variable. The command-line option "
-"takes precedence."
+"Set by the :option:`-X presite=package.module <-X>` command-line option and the :envvar:"
+"`PYTHON_PRESITE` environment variable. The command-line option takes precedence."
 msgstr ""
-"Establecido por la opción de línea de comando :option:`-X "
-"pycache_prefix=PATH <-X>` y la variable de entorno :envvar:"
-"`PYTHONPYCACHEPREFIX`."
+"Establecido por la opción de línea de comandos :option:`-X presite=package.module <-X>` y la variable "
+"de entorno :envvar:`PYTHON_PRESITE`. La opción de línea de comandos tiene precedencia."
 
 #: ../Doc/c-api/init_config.rst:1173
-#, fuzzy
-msgid ""
-"Show total reference count at exit (excluding :term:`immortal` objects)?"
-msgstr "¿Mostrar el recuento de referencia total en la salida?"
+msgid "Show total reference count at exit (excluding :term:`immortal` objects)?"
+msgstr "¿Mostrar el recuento total de referencias al salir (excluyendo objetos :term:`immortal`)?"
 
 #: ../Doc/c-api/init_config.rst:1175
-#, fuzzy
 msgid "Set to ``1`` by :option:`-X showrefcount <-X>` command line option."
-msgstr ""
-"Establecido en 1 por la opción de línea de comandos :option:`-X showrefcount "
-"<-X>`."
+msgstr "Establecido en ``1`` por la opción de línea de comando :option:`-X showrefcount <-X>`."
 
 #: ../Doc/c-api/init_config.rst:1177
-#, fuzzy
-msgid ""
-"Needs a :ref:`debug build of Python <debug-build>` (the ``Py_REF_DEBUG`` "
-"macro must be defined)."
+msgid "Needs a :ref:`debug build of Python <debug-build>` (the ``Py_REF_DEBUG`` macro must be defined)."
 msgstr ""
-"Necesita una :ref:`compilación de depuración de Python <debug-build>` (se "
-"debe definir la macro ``Py_REF_DEBUG``)."
+"Necesita una :ref:`compilación de depuración de Python <debug-build>` (la macro ``Py_REF_DEBUG`` debe "
+"estar definida)."
 
 #: ../Doc/c-api/init_config.rst:1184
 msgid "Import the :mod:`site` module at startup?"
@@ -2022,70 +1785,58 @@ msgstr "¿Importar el módulo :mod:`site` al inicio?"
 
 #: ../Doc/c-api/init_config.rst:1186
 msgid ""
-"If equal to zero, disable the import of the module site and the site-"
-"dependent manipulations of :data:`sys.path` that it entails."
+"If equal to zero, disable the import of the module site and the site-dependent manipulations of :data:"
+"`sys.path` that it entails."
 msgstr ""
-"Si es igual a cero, desactive la importación del sitio del módulo y las "
-"manipulaciones dependientes del sitio de :data:`sys.path` que conlleva."
+"Si es igual a cero, desactive la importación del sitio del módulo y las manipulaciones dependientes "
+"del sitio de :data:`sys.path` que conlleva."
 
 #: ../Doc/c-api/init_config.rst:1189
 msgid ""
-"Also disable these manipulations if the :mod:`site` module is explicitly "
-"imported later (call :func:`site.main` if you want them to be triggered)."
+"Also disable these manipulations if the :mod:`site` module is explicitly imported later (call :func:"
+"`site.main` if you want them to be triggered)."
 msgstr ""
-"También deshabilite estas manipulaciones si el módulo :mod:`site` se importa "
-"explícitamente más tarde (llame a :func:`site.main` si desea que se activen)."
+"También deshabilite estas manipulaciones si el módulo :mod:`site` se importa explícitamente más tarde "
+"(llame a :func:`site.main` si desea que se activen)."
 
 #: ../Doc/c-api/init_config.rst:1192
 msgid "Set to ``0`` by the :option:`-S` command line option."
-msgstr ""
-"Establecido en ``0`` mediante la opción de línea de comando :option:`-S`."
+msgstr "Establecido en ``0`` mediante la opción de línea de comando :option:`-S`."
 
 #: ../Doc/c-api/init_config.rst:1194
-#, fuzzy
 msgid ""
-":data:`sys.flags.no_site <sys.flags>` is set to the inverted value of :c:"
-"member:`~PyConfig.site_import`."
+":data:`sys.flags.no_site <sys.flags>` is set to the inverted value of :c:member:`~PyConfig."
+"site_import`."
 msgstr ""
-":data:`sys.flags.no_site` se establece en el valor invertido de :c:member:"
-"`~PyConfig.site_import`."
+":data:`sys.flags.no_site <sys.flags>` se establece en el valor invertido de :c:member:`~PyConfig."
+"site_import`."
 
 #: ../Doc/c-api/init_config.rst:1201
-msgid ""
-"If non-zero, skip the first line of the :c:member:`PyConfig.run_filename` "
-"source."
-msgstr ""
-"Si no es cero, omita la primera línea de la fuente :c:member:`PyConfig."
-"run_filename`."
+msgid "If non-zero, skip the first line of the :c:member:`PyConfig.run_filename` source."
+msgstr "Si no es cero, omita la primera línea de la fuente :c:member:`PyConfig.run_filename`."
 
 #: ../Doc/c-api/init_config.rst:1204
 msgid ""
-"It allows the usage of non-Unix forms of ``#!cmd``. This is intended for a "
-"DOS specific hack only."
+"It allows the usage of non-Unix forms of ``#!cmd``. This is intended for a DOS specific hack only."
 msgstr ""
-"Permite el uso de formas de ``#!cmd`` que no son Unix. Esto está destinado "
-"únicamente a un truco específico de DOS."
+"Permite el uso de formas de ``#!cmd`` que no son Unix. Esto está destinado únicamente a un truco "
+"específico de DOS."
 
 #: ../Doc/c-api/init_config.rst:1207
 msgid "Set to ``1`` by the :option:`-x` command line option."
-msgstr ""
-"Establecido en ``1`` mediante la opción de línea de comando :option:`-x`."
+msgstr "Establecido en ``1`` mediante la opción de línea de comando :option:`-x`."
 
 #: ../Doc/c-api/init_config.rst:1214
 msgid ""
-"Encoding and encoding errors of :data:`sys.stdin`, :data:`sys.stdout` and :"
-"data:`sys.stderr` (but :data:`sys.stderr` always uses "
-"``\"backslashreplace\"`` error handler)."
+"Encoding and encoding errors of :data:`sys.stdin`, :data:`sys.stdout` and :data:`sys.stderr` (but :"
+"data:`sys.stderr` always uses ``\"backslashreplace\"`` error handler)."
 msgstr ""
-"Codificación y errores de codificación de :data:`sys.stdin`, :data:`sys."
-"stdout` y :data:`sys.stderr` (pero :data:`sys.stderr` siempre usa el "
-"controlador de errores ``\"backslashreplace\"``)."
+"Codificación y errores de codificación de :data:`sys.stdin`, :data:`sys.stdout` y :data:`sys.stderr` "
+"(pero :data:`sys.stderr` siempre usa el controlador de errores ``\"backslashreplace\"``)."
 
 #: ../Doc/c-api/init_config.rst:1218
-msgid ""
-"Use the :envvar:`PYTHONIOENCODING` environment variable if it is non-empty."
-msgstr ""
-"Utilice la variable de entorno :envvar:`PYTHONIOENCODING` si no está vacía."
+msgid "Use the :envvar:`PYTHONIOENCODING` environment variable if it is non-empty."
+msgstr "Utilice la variable de entorno :envvar:`PYTHONIOENCODING` si no está vacía."
 
 #: ../Doc/c-api/init_config.rst:1221
 msgid "Default encoding:"
@@ -2093,8 +1844,7 @@ msgstr "Codificación predeterminada:"
 
 #: ../Doc/c-api/init_config.rst:1223
 msgid "``\"UTF-8\"`` if :c:member:`PyPreConfig.utf8_mode` is non-zero."
-msgstr ""
-"``\"UTF-8\"`` si :c:member:`PyPreConfig.utf8_mode` es distinto de cero."
+msgstr "``\"UTF-8\"`` si :c:member:`PyPreConfig.utf8_mode` es distinto de cero."
 
 #: ../Doc/c-api/init_config.rst:1224
 msgid "Otherwise, use the :term:`locale encoding`."
@@ -2110,20 +1860,19 @@ msgstr "En Windows: use ``\"surrogateescape\"``."
 
 #: ../Doc/c-api/init_config.rst:1229
 msgid ""
-"``\"surrogateescape\"`` if :c:member:`PyPreConfig.utf8_mode` is non-zero, or "
-"if the LC_CTYPE locale is \"C\" or \"POSIX\"."
+"``\"surrogateescape\"`` if :c:member:`PyPreConfig.utf8_mode` is non-zero, or if the LC_CTYPE locale "
+"is \"C\" or \"POSIX\"."
 msgstr ""
-"``\"surrogateescape\"`` si :c:member:`PyPreConfig.utf8_mode` no es cero o si "
-"la configuración regional LC_CTYPE es \"C\" o \"POSIX\"."
+"``\"surrogateescape\"`` si :c:member:`PyPreConfig.utf8_mode` no es cero o si la configuración "
+"regional LC_CTYPE es \"C\" o \"POSIX\"."
 
 #: ../Doc/c-api/init_config.rst:1231
 msgid "``\"strict\"`` otherwise."
 msgstr "``\"strict\"`` de lo contrario."
 
 #: ../Doc/c-api/init_config.rst:1233
-#, fuzzy
 msgid "See also :c:member:`PyConfig.legacy_windows_stdio`."
-msgstr "Ver también el miembro :c:member:`PyConfig.orig_argv`."
+msgstr "Consulte también :c:member:`PyConfig.legacy_windows_stdio`."
 
 #: ../Doc/c-api/init_config.rst:1237
 msgid "Enable tracemalloc?"
@@ -2135,185 +1884,157 @@ msgstr "Si no es cero, llama a :func:`tracemalloc.start` al inicio."
 
 #: ../Doc/c-api/init_config.rst:1241
 msgid ""
-"Set by :option:`-X tracemalloc=N <-X>` command line option and by the :"
-"envvar:`PYTHONTRACEMALLOC` environment variable."
+"Set by :option:`-X tracemalloc=N <-X>` command line option and by the :envvar:`PYTHONTRACEMALLOC` "
+"environment variable."
 msgstr ""
-"Establecido por la opción de línea de comando :option:`-X tracemalloc=N <-"
-"X>` y por la variable de entorno :envvar:`PYTHONTRACEMALLOC`."
+"Establecido por la opción de línea de comando :option:`-X tracemalloc=N <-X>` y por la variable de "
+"entorno :envvar:`PYTHONTRACEMALLOC`."
 
 #: ../Doc/c-api/init_config.rst:1248
 msgid "Enable compatibility mode with the perf profiler?"
-msgstr ""
+msgstr "¿Activar el modo de compatibilidad con el generador de perfiles perf?"
 
 #: ../Doc/c-api/init_config.rst:1250
-msgid ""
-"If non-zero, initialize the perf trampoline. See :ref:`perf_profiling` for "
-"more information."
+msgid "If non-zero, initialize the perf trampoline. See :ref:`perf_profiling` for more information."
 msgstr ""
+"Si no es cero, inicializa el trampolín de perf. Consulte :ref:`perf_profiling` para obtener más "
+"información."
 
 #: ../Doc/c-api/init_config.rst:1253
 msgid ""
-"Set by :option:`-X perf <-X>` command-line option and by the :envvar:"
-"`PYTHON_PERF_JIT_SUPPORT` environment variable for perf support with stack "
-"pointers and :option:`-X perf_jit <-X>` command-line option and by the :"
-"envvar:`PYTHON_PERF_JIT_SUPPORT` environment variable for perf support with "
-"DWARF JIT information."
+"Set by :option:`-X perf <-X>` command-line option and by the :envvar:`PYTHON_PERF_JIT_SUPPORT` "
+"environment variable for perf support with stack pointers and :option:`-X perf_jit <-X>` command-line "
+"option and by the :envvar:`PYTHON_PERF_JIT_SUPPORT` environment variable for perf support with DWARF "
+"JIT information."
 msgstr ""
+"Establecido por la opción de línea de comandos :option:`-X perf <-X>` y por la variable de entorno :"
+"envvar:`PYTHON_PERF_JIT_SUPPORT` para el soporte de perf con punteros de pila y la opción de línea de "
+"comandos :option:`-X perf_jit <-X>` y por la variable de entorno :envvar:`PYTHON_PERF_JIT_SUPPORT` "
+"para el soporte de perf con información DWARF JIT."
 
 #: ../Doc/c-api/init_config.rst:1265
 msgid "Use :ref:`environment variables <using-on-envvars>`?"
 msgstr "¿Utiliza :ref:`variables de entorno <using-on-envvars>`?"
 
 #: ../Doc/c-api/init_config.rst:1267
-msgid ""
-"If equals to zero, ignore the :ref:`environment variables <using-on-"
-"envvars>`."
-msgstr ""
-"Si es igual a cero, ignora las :ref:`variables de entorno <using-on-"
-"envvars>`."
+msgid "If equals to zero, ignore the :ref:`environment variables <using-on-envvars>`."
+msgstr "Si es igual a cero, ignora las :ref:`variables de entorno <using-on-envvars>`."
 
 #: ../Doc/c-api/init_config.rst:1270
-#, fuzzy
 msgid "Set to ``0`` by the :option:`-E` environment variable."
-msgstr ""
-"Establecido en ``0`` por la variable de entorno :envvar:`PYTHONNOUSERSITE`."
+msgstr "Establecido en ``0`` por la variable de entorno :option:`-E`."
 
 #: ../Doc/c-api/init_config.rst:1276
 msgid "If non-zero, add the user site directory to :data:`sys.path`."
-msgstr ""
-"Si es distinto de cero, agregue el directorio del sitio del usuario a :data:"
-"`sys.path`."
+msgstr "Si es distinto de cero, agregue el directorio del sitio del usuario a :data:`sys.path`."
 
 #: ../Doc/c-api/init_config.rst:1278
 msgid "Set to ``0`` by the :option:`-s` and :option:`-I` command line options."
-msgstr ""
-"Establecido en ``0`` por las opciones de línea de comando :option:`-s` y :"
-"option:`-I`."
+msgstr "Establecido en ``0`` por las opciones de línea de comando :option:`-s` y :option:`-I`."
 
 #: ../Doc/c-api/init_config.rst:1280
 msgid "Set to ``0`` by the :envvar:`PYTHONNOUSERSITE` environment variable."
-msgstr ""
-"Establecido en ``0`` por la variable de entorno :envvar:`PYTHONNOUSERSITE`."
+msgstr "Establecido en ``0`` por la variable de entorno :envvar:`PYTHONNOUSERSITE`."
 
 #: ../Doc/c-api/init_config.rst:1286
-#, fuzzy
 msgid ""
-"Verbose mode. If greater than ``0``, print a message each time a module is "
-"imported, showing the place (filename or built-in module) from which it is "
-"loaded."
+"Verbose mode. If greater than ``0``, print a message each time a module is imported, showing the "
+"place (filename or built-in module) from which it is loaded."
 msgstr ""
-"Modo detallado. Si es mayor que 0, imprima un mensaje cada vez que se "
-"importe un módulo, mostrando el lugar (nombre de archivo o módulo integrado) "
-"desde el que se carga."
+"Modo detallado. Si es mayor que ``0``, imprime un mensaje cada vez que se importa un módulo, "
+"mostrando el lugar (nombre de archivo o módulo incorporado) desde el que se carga."
 
 #: ../Doc/c-api/init_config.rst:1290
-#, fuzzy
 msgid ""
-"If greater than or equal to ``2``, print a message for each file that is "
-"checked for when searching for a module. Also provides information on module "
-"cleanup at exit."
+"If greater than or equal to ``2``, print a message for each file that is checked for when searching "
+"for a module. Also provides information on module cleanup at exit."
 msgstr ""
-"Si es mayor o igual a 2, imprima un mensaje para cada archivo que se "
-"compruebe al buscar un módulo. También proporciona información sobre la "
-"limpieza del módulo al salir."
+"Si es mayor o igual a ``2``, imprime un mensaje para cada archivo que se verifica al buscar un "
+"módulo. También proporciona información sobre la limpieza del módulo al salir."
 
 #: ../Doc/c-api/init_config.rst:1294
 msgid "Incremented by the :option:`-v` command line option."
 msgstr "Incrementado por la opción de línea de comando :option:`-v`."
 
 #: ../Doc/c-api/init_config.rst:1296
-#, fuzzy
 msgid "Set by the :envvar:`PYTHONVERBOSE` environment variable value."
-msgstr ""
-"Establecido en el valor de la variable de entorno :envvar:`PYTHONVERBOSE`."
+msgstr "Establecido por el valor de la variable de entorno :envvar:`PYTHONVERBOSE`."
 
 #: ../Doc/c-api/init_config.rst:1302
 msgid ""
-"Options of the :mod:`warnings` module to build warnings filters, lowest to "
-"highest priority: :data:`sys.warnoptions`."
+"Options of the :mod:`warnings` module to build warnings filters, lowest to highest priority: :data:"
+"`sys.warnoptions`."
 msgstr ""
-"Opciones del módulo :mod:`warnings` para crear filtros de advertencias, de "
-"menor a mayor prioridad: :data:`sys.warnoptions`."
+"Opciones del módulo :mod:`warnings` para crear filtros de advertencias, de menor a mayor prioridad: :"
+"data:`sys.warnoptions`."
 
 #: ../Doc/c-api/init_config.rst:1305
 msgid ""
-"The :mod:`warnings` module adds :data:`sys.warnoptions` in the reverse "
-"order: the last :c:member:`PyConfig.warnoptions` item becomes the first item "
-"of :data:`warnings.filters` which is checked first (highest priority)."
+"The :mod:`warnings` module adds :data:`sys.warnoptions` in the reverse order: the last :c:member:"
+"`PyConfig.warnoptions` item becomes the first item of :data:`warnings.filters` which is checked first "
+"(highest priority)."
 msgstr ""
-"El módulo :mod:`warnings` agrega :data:`sys.warnoptions` en el orden "
-"inverso: el último elemento :c:member:`PyConfig.warnoptions` se convierte en "
-"el primer elemento de :data:`warnings.filters` que es verificado primero "
-"(máxima prioridad)."
+"El módulo :mod:`warnings` agrega :data:`sys.warnoptions` en el orden inverso: el último elemento :c:"
+"member:`PyConfig.warnoptions` se convierte en el primer elemento de :data:`warnings.filters` que es "
+"verificado primero (máxima prioridad)."
 
 #: ../Doc/c-api/init_config.rst:1310
 msgid ""
-"The :option:`-W` command line options adds its value to :c:member:`~PyConfig."
-"warnoptions`, it can be used multiple times."
+"The :option:`-W` command line options adds its value to :c:member:`~PyConfig.warnoptions`, it can be "
+"used multiple times."
 msgstr ""
-"Las opciones de la línea de comando :option:`-W` agregan su valor a :c:"
-"member:`~PyConfig.warnoptions`, se puede usar varias veces."
+"Las opciones de la línea de comando :option:`-W` agregan su valor a :c:member:`~PyConfig."
+"warnoptions`, se puede usar varias veces."
 
 #: ../Doc/c-api/init_config.rst:1313
 msgid ""
-"The :envvar:`PYTHONWARNINGS` environment variable can also be used to add "
-"warning options. Multiple options can be specified, separated by commas (``,"
-"``)."
+"The :envvar:`PYTHONWARNINGS` environment variable can also be used to add warning options. Multiple "
+"options can be specified, separated by commas (``,``)."
 msgstr ""
-"La variable de entorno :envvar:`PYTHONWARNINGS` también se puede utilizar "
-"para agregar opciones de advertencia. Se pueden especificar varias opciones, "
-"separadas por comas (``,``)."
+"La variable de entorno :envvar:`PYTHONWARNINGS` también se puede utilizar para agregar opciones de "
+"advertencia. Se pueden especificar varias opciones, separadas por comas (``,``)."
 
 #: ../Doc/c-api/init_config.rst:1321
-#, fuzzy
-msgid ""
-"If equal to ``0``, Python won't try to write ``.pyc`` files on the import of "
-"source modules."
-msgstr ""
-"Si es igual a 0, Python no intentará escribir archivos ``.pyc`` en la "
-"importación de módulos fuente."
+msgid "If equal to ``0``, Python won't try to write ``.pyc`` files on the import of source modules."
+msgstr "Si es igual a ``0``, Python no intentará escribir archivos ``.pyc`` al importar módulos fuente."
 
 #: ../Doc/c-api/init_config.rst:1324
 msgid ""
-"Set to ``0`` by the :option:`-B` command line option and the :envvar:"
-"`PYTHONDONTWRITEBYTECODE` environment variable."
+"Set to ``0`` by the :option:`-B` command line option and the :envvar:`PYTHONDONTWRITEBYTECODE` "
+"environment variable."
 msgstr ""
-"Establecido en ``0`` por la opción de línea de comando :option:`-B` y la "
-"variable de entorno :envvar:`PYTHONDONTWRITEBYTECODE`."
+"Establecido en ``0`` por la opción de línea de comando :option:`-B` y la variable de entorno :envvar:"
+"`PYTHONDONTWRITEBYTECODE`."
 
 #: ../Doc/c-api/init_config.rst:1327
 msgid ""
-":data:`sys.dont_write_bytecode` is initialized to the inverted value of :c:"
-"member:`~PyConfig.write_bytecode`."
+":data:`sys.dont_write_bytecode` is initialized to the inverted value of :c:member:`~PyConfig."
+"write_bytecode`."
 msgstr ""
-":data:`sys.dont_write_bytecode` se inicializa al valor invertido de :c:"
-"member:`~PyConfig.write_bytecode`."
+":data:`sys.dont_write_bytecode` se inicializa al valor invertido de :c:member:`~PyConfig."
+"write_bytecode`."
 
 #: ../Doc/c-api/init_config.rst:1334
 msgid "Values of the :option:`-X` command line options: :data:`sys._xoptions`."
-msgstr ""
-"Valores de las opciones de la línea de comando :option:`-X`: :data:`sys."
-"_xoptions`."
+msgstr "Valores de las opciones de la línea de comando :option:`-X`: :data:`sys._xoptions`."
 
 #: ../Doc/c-api/init_config.rst:1338
 msgid ""
-"If :c:member:`~PyConfig.parse_argv` is non-zero, :c:member:`~PyConfig.argv` "
-"arguments are parsed the same way the regular Python parses :ref:`command "
-"line arguments <using-on-cmdline>`, and Python arguments are stripped from :"
-"c:member:`~PyConfig.argv`."
+"If :c:member:`~PyConfig.parse_argv` is non-zero, :c:member:`~PyConfig.argv` arguments are parsed the "
+"same way the regular Python parses :ref:`command line arguments <using-on-cmdline>`, and Python "
+"arguments are stripped from :c:member:`~PyConfig.argv`."
 msgstr ""
-"Si :c:member:`~PyConfig.parse_argv` no es cero, los argumentos de :c:member:"
-"`~PyConfig.argv` se analizan de la misma forma que Python normal analiza :"
-"ref:`argumentos de línea de comando <using-on-cmdline>`, y los argumentos de "
-"Python se eliminan de :c:member:`~PyConfig.argv`."
+"Si :c:member:`~PyConfig.parse_argv` no es cero, los argumentos de :c:member:`~PyConfig.argv` se "
+"analizan de la misma forma que Python normal analiza :ref:`argumentos de línea de comando <using-on-"
+"cmdline>`, y los argumentos de Python se eliminan de :c:member:`~PyConfig.argv`."
 
 #: ../Doc/c-api/init_config.rst:1343
 msgid ""
-"The :c:member:`~PyConfig.xoptions` options are parsed to set other options: "
-"see the :option:`-X` command line option."
+"The :c:member:`~PyConfig.xoptions` options are parsed to set other options: see the :option:`-X` "
+"command line option."
 msgstr ""
-"Las opciones de :c:member:`~PyConfig.xoptions` se analizan para establecer "
-"otras opciones: consulte la opción de línea de comando :option:`-X`."
+"Las opciones de :c:member:`~PyConfig.xoptions` se analizan para establecer otras opciones: consulte "
+"la opción de línea de comando :option:`-X`."
 
 #: ../Doc/c-api/init_config.rst:1348
 msgid "The ``show_alloc_count`` field has been removed."
@@ -2333,26 +2054,20 @@ msgstr "Inicializa Python desde la configuración *config*."
 
 #: ../Doc/c-api/init_config.rst:1363
 msgid ""
-"If :c:func:`PyImport_FrozenModules`, :c:func:`PyImport_AppendInittab` or :c:"
-"func:`PyImport_ExtendInittab` are used, they must be set or called after "
-"Python preinitialization and before the Python initialization. If Python is "
-"initialized multiple times, :c:func:`PyImport_AppendInittab` or :c:func:"
-"`PyImport_ExtendInittab` must be called before each Python initialization."
+"If :c:func:`PyImport_FrozenModules`, :c:func:`PyImport_AppendInittab` or :c:func:"
+"`PyImport_ExtendInittab` are used, they must be set or called after Python preinitialization and "
+"before the Python initialization. If Python is initialized multiple times, :c:func:"
+"`PyImport_AppendInittab` or :c:func:`PyImport_ExtendInittab` must be called before each Python "
+"initialization."
 msgstr ""
-"Si se utilizan :c:func:`PyImport_FrozenModules`, :c:func:"
-"`PyImport_AppendInittab` o :c:func:`PyImport_ExtendInittab`, deben "
-"establecerse o llamarse después de la preinicialización de Python y antes de "
-"la inicialización de Python. Si Python se inicializa varias veces, se debe "
-"llamar a :c:func:`PyImport_AppendInittab` o :c:func:`PyImport_ExtendInittab` "
-"antes de cada inicialización de Python."
+"Si se utilizan :c:func:`PyImport_FrozenModules`, :c:func:`PyImport_AppendInittab` o :c:func:"
+"`PyImport_ExtendInittab`, deben establecerse o llamarse después de la preinicialización de Python y "
+"antes de la inicialización de Python. Si Python se inicializa varias veces, se debe llamar a :c:func:"
+"`PyImport_AppendInittab` o :c:func:`PyImport_ExtendInittab` antes de cada inicialización de Python."
 
 #: ../Doc/c-api/init_config.rst:1370
-msgid ""
-"The current configuration (``PyConfig`` type) is stored in "
-"``PyInterpreterState.config``."
-msgstr ""
-"La configuración actual (tipo ``PyConfig``) se almacena en "
-"``PyInterpreterState.config``."
+msgid "The current configuration (``PyConfig`` type) is stored in ``PyInterpreterState.config``."
+msgstr "La configuración actual (tipo ``PyConfig``) se almacena en ``PyInterpreterState.config``."
 
 #: ../Doc/c-api/init_config.rst:1373
 msgid "Example setting the program name::"
@@ -2386,22 +2101,44 @@ msgid ""
 "    Py_ExitStatusException(status);\n"
 "}"
 msgstr ""
+"void init_python(void)\n"
+"{\n"
+"    PyStatus status;\n"
+"\n"
+"    PyConfig config;\n"
+"    PyConfig_InitPythonConfig(&config);\n"
+"\n"
+"    /* Set the program name. Implicitly preinitialize Python. */\n"
+"    status = PyConfig_SetString(&config, &config.program_name,\n"
+"                                L\"/path/to/my_program\");\n"
+"    if (PyStatus_Exception(status)) {\n"
+"        goto exception;\n"
+"    }\n"
+"\n"
+"    status = Py_InitializeFromConfig(&config);\n"
+"    if (PyStatus_Exception(status)) {\n"
+"        goto exception;\n"
+"    }\n"
+"    PyConfig_Clear(&config);\n"
+"    return;\n"
+"\n"
+"exception:\n"
+"    PyConfig_Clear(&config);\n"
+"    Py_ExitStatusException(status);\n"
+"}"
 
 #: ../Doc/c-api/init_config.rst:1401
-#, fuzzy
 msgid ""
-"More complete example modifying the default configuration, read the "
-"configuration, and then override some parameters. Note that since 3.11, many "
-"parameters are not calculated until initialization, and so values cannot be "
-"read from the configuration structure. Any values set before initialize is "
-"called will be left unchanged by initialization::"
+"More complete example modifying the default configuration, read the configuration, and then override "
+"some parameters. Note that since 3.11, many parameters are not calculated until initialization, and "
+"so values cannot be read from the configuration structure. Any values set before initialize is called "
+"will be left unchanged by initialization::"
 msgstr ""
-"Ejemplo más completo modificando la configuración por defecto, leer la "
-"configuración, y luego anular algunos parámetros. Tenga en cuenta que desde "
-"la versión 3.11, muchos parámetros no se calculan hasta la inicialización, "
-"por lo que los valores no pueden ser leídos desde la estructura de "
-"configuración. Cualquier valor establecido antes de llamar a la "
-"inicialización se dejará sin modificar por initialization::"
+"Ejemplo más completo modificando la configuración predeterminada, lee la configuración y luego anula "
+"algunos parámetros. Ten en cuenta que, desde la versión 3.11, muchos parámetros no se calculan hasta "
+"la inicialización, por lo que los valores no se pueden leer desde la estructura de configuración. "
+"Cualquier valor establecido antes de llamar a la inicialización se dejará sin cambios por la "
+"inicialización::"
 
 #: ../Doc/c-api/init_config.rst:1408
 msgid ""
@@ -2457,6 +2194,57 @@ msgid ""
 "    return status;\n"
 "}"
 msgstr ""
+"PyStatus init_python(const char *program_name)\n"
+"{\n"
+"    PyStatus status;\n"
+"\n"
+"    PyConfig config;\n"
+"    PyConfig_InitPythonConfig(&config);\n"
+"\n"
+"    /* Set the program name before reading the configuration\n"
+"       (decode byte string from the locale encoding).\n"
+"\n"
+"       Implicitly preinitialize Python. */\n"
+"    status = PyConfig_SetBytesString(&config, &config.program_name,\n"
+"                                     program_name);\n"
+"    if (PyStatus_Exception(status)) {\n"
+"        goto done;\n"
+"    }\n"
+"\n"
+"    /* Read all configuration at once */\n"
+"    status = PyConfig_Read(&config);\n"
+"    if (PyStatus_Exception(status)) {\n"
+"        goto done;\n"
+"    }\n"
+"\n"
+"    /* Specify sys.path explicitly */\n"
+"    /* If you want to modify the default set of paths, finish\n"
+"       initialization first and then use PySys_GetObject(\"path\") */\n"
+"    config.module_search_paths_set = 1;\n"
+"    status = PyWideStringList_Append(&config.module_search_paths,\n"
+"                                     L\"/path/to/stdlib\");\n"
+"    if (PyStatus_Exception(status)) {\n"
+"        goto done;\n"
+"    }\n"
+"    status = PyWideStringList_Append(&config.module_search_paths,\n"
+"                                     L\"/path/to/more/modules\");\n"
+"    if (PyStatus_Exception(status)) {\n"
+"        goto done;\n"
+"    }\n"
+"\n"
+"    /* Override executable computed by PyConfig_Read() */\n"
+"    status = PyConfig_SetString(&config, &config.executable,\n"
+"                                L\"/path/to/my_executable\");\n"
+"    if (PyStatus_Exception(status)) {\n"
+"        goto done;\n"
+"    }\n"
+"\n"
+"    status = Py_InitializeFromConfig(&config);\n"
+"\n"
+"done:\n"
+"    PyConfig_Clear(&config);\n"
+"    return status;\n"
+"}"
 
 #: ../Doc/c-api/init_config.rst:1464
 msgid "Isolated Configuration"
@@ -2464,38 +2252,32 @@ msgstr "Configuración aislada"
 
 #: ../Doc/c-api/init_config.rst:1466
 msgid ""
-":c:func:`PyPreConfig_InitIsolatedConfig` and :c:func:"
-"`PyConfig_InitIsolatedConfig` functions create a configuration to isolate "
-"Python from the system. For example, to embed Python into an application."
+":c:func:`PyPreConfig_InitIsolatedConfig` and :c:func:`PyConfig_InitIsolatedConfig` functions create a "
+"configuration to isolate Python from the system. For example, to embed Python into an application."
 msgstr ""
-":c:func:`PyPreConfig_InitIsolatedConfig` y las funciones :c:func:"
-"`PyConfig_InitIsolatedConfig` crean una configuración para aislar Python del "
-"sistema. Por ejemplo, para incrustar Python en una aplicación."
+":c:func:`PyPreConfig_InitIsolatedConfig` y las funciones :c:func:`PyConfig_InitIsolatedConfig` crean "
+"una configuración para aislar Python del sistema. Por ejemplo, para incrustar Python en una "
+"aplicación."
 
 #: ../Doc/c-api/init_config.rst:1471
-#, fuzzy
 msgid ""
-"This configuration ignores global configuration variables, environment "
-"variables, command line arguments (:c:member:`PyConfig.argv` is not parsed) "
-"and user site directory. The C standard streams (ex: ``stdout``) and the "
-"LC_CTYPE locale are left unchanged. Signal handlers are not installed."
+"This configuration ignores global configuration variables, environment variables, command line "
+"arguments (:c:member:`PyConfig.argv` is not parsed) and user site directory. The C standard streams "
+"(ex: ``stdout``) and the LC_CTYPE locale are left unchanged. Signal handlers are not installed."
 msgstr ""
-"Esta configuración ignora las variables de configuración global, las "
-"variables de entorno, los argumentos de la línea de comandos (:c:member:"
-"`PyConfig.argv` no se analiza) y el directorio del sitio del usuario. Las "
-"transmisiones estándar C (por ejemplo, ``stdout``) y el entorno local "
-"LC_CTYPE no se modifican. Los manejadores de señal no están instalados."
+"Esta configuración ignora las variables de configuración global, las variables de entorno, los "
+"argumentos de la línea de comandos (:c:member:`PyConfig.argv` no se analizan) y el directorio del "
+"sitio del usuario. Los flujos estándar de C (por ejemplo, ``stdout``) y la configuración regional "
+"LC_CTYPE no se modifican. Los manejadores de señales no están instalados."
 
 #: ../Doc/c-api/init_config.rst:1476
 msgid ""
-"Configuration files are still used with this configuration to determine "
-"paths that are unspecified. Ensure :c:member:`PyConfig.home` is specified to "
-"avoid computing the default path configuration."
+"Configuration files are still used with this configuration to determine paths that are unspecified. "
+"Ensure :c:member:`PyConfig.home` is specified to avoid computing the default path configuration."
 msgstr ""
-"Los archivos de configuración se siguen utilizando con esta configuración "
-"para determinar las rutas que no se especifican. Asegúrese de que se "
-"especifica :c:member:`PyConfig.home` para evitar que se calcule la "
-"configuración de la ruta por defecto."
+"Los archivos de configuración se siguen utilizando con esta configuración para determinar las rutas "
+"que no se especifican. Asegúrese de que se especifica :c:member:`PyConfig.home` para evitar que se "
+"calcule la configuración de la ruta por defecto."
 
 #: ../Doc/c-api/init_config.rst:1484
 msgid "Python Configuration"
@@ -2503,33 +2285,29 @@ msgstr "Configuración de Python"
 
 #: ../Doc/c-api/init_config.rst:1486
 msgid ""
-":c:func:`PyPreConfig_InitPythonConfig` and :c:func:"
-"`PyConfig_InitPythonConfig` functions create a configuration to build a "
-"customized Python which behaves as the regular Python."
+":c:func:`PyPreConfig_InitPythonConfig` and :c:func:`PyConfig_InitPythonConfig` functions create a "
+"configuration to build a customized Python which behaves as the regular Python."
 msgstr ""
-":c:func:`PyPreConfig_InitPythonConfig` y las funciones :c:func:"
-"`PyConfig_InitPythonConfig` crean una configuración para construir un Python "
-"personalizado que se comporta como el Python normal."
+":c:func:`PyPreConfig_InitPythonConfig` y las funciones :c:func:`PyConfig_InitPythonConfig` crean una "
+"configuración para construir un Python personalizado que se comporta como el Python normal."
 
 #: ../Doc/c-api/init_config.rst:1490
 msgid ""
-"Environments variables and command line arguments are used to configure "
-"Python, whereas global configuration variables are ignored."
+"Environments variables and command line arguments are used to configure Python, whereas global "
+"configuration variables are ignored."
 msgstr ""
-"Las variables de entorno y los argumentos de la línea de comandos se "
-"utilizan para configurar Python, mientras que las variables de configuración "
-"global se ignoran."
+"Las variables de entorno y los argumentos de la línea de comandos se utilizan para configurar Python, "
+"mientras que las variables de configuración global se ignoran."
 
 #: ../Doc/c-api/init_config.rst:1493
 msgid ""
-"This function enables C locale coercion (:pep:`538`) and :ref:`Python UTF-8 "
-"Mode <utf8-mode>` (:pep:`540`) depending on the LC_CTYPE locale, :envvar:"
-"`PYTHONUTF8` and :envvar:`PYTHONCOERCECLOCALE` environment variables."
+"This function enables C locale coercion (:pep:`538`) and :ref:`Python UTF-8 Mode <utf8-mode>` (:pep:"
+"`540`) depending on the LC_CTYPE locale, :envvar:`PYTHONUTF8` and :envvar:`PYTHONCOERCECLOCALE` "
+"environment variables."
 msgstr ""
-"Esta función habilita la coerción de configuración regional C (:pep:`538`) "
-"y :ref:`Python UTF-8 Mode <utf8-mode>` (:pep:`540`) según la configuración "
-"regional LC_CTYPE, las variables de entorno :envvar:`PYTHONUTF8` y :envvar:"
-"`PYTHONCOERCECLOCALE`."
+"Esta función habilita la coerción de configuración regional C (:pep:`538`) y :ref:`Python UTF-8 Mode "
+"<utf8-mode>` (:pep:`540`) según la configuración regional LC_CTYPE, las variables de entorno :envvar:"
+"`PYTHONUTF8` y :envvar:`PYTHONCOERCECLOCALE`."
 
 #: ../Doc/c-api/init_config.rst:1502
 msgid "Python Path Configuration"
@@ -2537,8 +2315,7 @@ msgstr "Configuración de la ruta de Python"
 
 #: ../Doc/c-api/init_config.rst:1504
 msgid ":c:type:`PyConfig` contains multiple fields for the path configuration:"
-msgstr ""
-":c:type:`PyConfig` contiene múltiples campos para la configuración de ruta:"
+msgstr ":c:type:`PyConfig` contiene múltiples campos para la configuración de ruta:"
 
 #: ../Doc/c-api/init_config.rst:1506
 msgid "Path configuration inputs:"
@@ -2570,11 +2347,10 @@ msgstr "directorio de trabajo actual: para obtener rutas absolutas"
 
 #: ../Doc/c-api/init_config.rst:1514
 msgid ""
-"``PATH`` environment variable to get the program full path (from :c:member:"
-"`PyConfig.program_name`)"
+"``PATH`` environment variable to get the program full path (from :c:member:`PyConfig.program_name`)"
 msgstr ""
-"Variable de entorno ``PATH`` para obtener la ruta completa del programa (de :"
-"c:member:`PyConfig.program_name`)"
+"Variable de entorno ``PATH`` para obtener la ruta completa del programa (de :c:member:`PyConfig."
+"program_name`)"
 
 #: ../Doc/c-api/init_config.rst:1516
 msgid "``__PYVENV_LAUNCHER__`` environment variable"
@@ -2582,13 +2358,11 @@ msgstr "Variable de entorno ``__PYVENV_LAUNCHER__``"
 
 #: ../Doc/c-api/init_config.rst:1517
 msgid ""
-"(Windows only) Application paths in the registry under "
-"\"Software\\Python\\PythonCore\\X.Y\\PythonPath\" of HKEY_CURRENT_USER and "
-"HKEY_LOCAL_MACHINE (where X.Y is the Python version)."
+"(Windows only) Application paths in the registry under \"Software\\Python\\PythonCore\\X."
+"Y\\PythonPath\" of HKEY_CURRENT_USER and HKEY_LOCAL_MACHINE (where X.Y is the Python version)."
 msgstr ""
-"(Solo Windows) Rutas de aplicación en el registro en "
-"\"Software\\Python\\PythonCore\\X.Y\\PythonPath\" de HKEY_CURRENT_USER y "
-"HKEY_LOCAL_MACHINE (donde X.Y es la versión de Python)."
+"(Solo Windows) Rutas de aplicación en el registro en \"Software\\Python\\PythonCore\\X."
+"Y\\PythonPath\" de HKEY_CURRENT_USER y HKEY_LOCAL_MACHINE (donde X.Y es la versión de Python)."
 
 #: ../Doc/c-api/init_config.rst:1521
 msgid "Path configuration output fields:"
@@ -2615,12 +2389,8 @@ msgid ":c:member:`PyConfig.executable`"
 msgstr ":c:member:`PyConfig.executable`"
 
 #: ../Doc/c-api/init_config.rst:1528
-msgid ""
-":c:member:`PyConfig.module_search_paths_set`, :c:member:`PyConfig."
-"module_search_paths`"
-msgstr ""
-":c:member:`PyConfig.module_search_paths_set`, :c:member:`PyConfig."
-"module_search_paths`"
+msgid ":c:member:`PyConfig.module_search_paths_set`, :c:member:`PyConfig.module_search_paths`"
+msgstr ":c:member:`PyConfig.module_search_paths_set`, :c:member:`PyConfig.module_search_paths`"
 
 #: ../Doc/c-api/init_config.rst:1530
 msgid ":c:member:`PyConfig.prefix`"
@@ -2628,56 +2398,45 @@ msgstr ":c:member:`PyConfig.prefix`"
 
 #: ../Doc/c-api/init_config.rst:1532
 msgid ""
-"If at least one \"output field\" is not set, Python calculates the path "
-"configuration to fill unset fields. If :c:member:`~PyConfig."
-"module_search_paths_set` is equal to ``0``, :c:member:`~PyConfig."
-"module_search_paths` is overridden and :c:member:`~PyConfig."
-"module_search_paths_set` is set to ``1``."
+"If at least one \"output field\" is not set, Python calculates the path configuration to fill unset "
+"fields. If :c:member:`~PyConfig.module_search_paths_set` is equal to ``0``, :c:member:`~PyConfig."
+"module_search_paths` is overridden and :c:member:`~PyConfig.module_search_paths_set` is set to ``1``."
 msgstr ""
-"Si al menos un \"campo de salida\" no está establecido, Python calcula la "
-"configuración de la ruta para rellenar los campos no establecidos. Si :c:"
-"member:`~PyConfig.module_search_paths_set` es igual a ``0``, :c:member:"
-"`~PyConfig.module_search_paths` se anula y :c:member:`~PyConfig."
+"Si al menos un \"campo de salida\" no está establecido, Python calcula la configuración de la ruta "
+"para rellenar los campos no establecidos. Si :c:member:`~PyConfig.module_search_paths_set` es igual a "
+"``0``, :c:member:`~PyConfig.module_search_paths` se anula y :c:member:`~PyConfig."
 "module_search_paths_set` se establece en ``1``."
 
 #: ../Doc/c-api/init_config.rst:1538
-#, fuzzy
 msgid ""
-"It is possible to completely ignore the function calculating the default "
-"path configuration by setting explicitly all path configuration output "
-"fields listed above. A string is considered as set even if it is non-empty. "
-"``module_search_paths`` is considered as set if ``module_search_paths_set`` "
-"is set to ``1``. In this case, ``module_search_paths`` will be used without "
-"modification."
+"It is possible to completely ignore the function calculating the default path configuration by "
+"setting explicitly all path configuration output fields listed above. A string is considered as set "
+"even if it is non-empty. ``module_search_paths`` is considered as set if ``module_search_paths_set`` "
+"is set to ``1``. In this case, ``module_search_paths`` will be used without modification."
 msgstr ""
-"Es posible ignorar por completo la función que calcula la configuración de "
-"ruta predeterminada al establecer explícitamente todos los campos de salida "
-"de configuración de ruta enumerados anteriormente. Una cadena de caracteres "
-"se considera como un conjunto, incluso si no está vacía. "
-"``module_search_paths`` se considera como establecido si "
-"``module_search_paths_set`` se establece en 1. En este caso, los campos de "
-"entrada de configuración de ruta también se ignoran."
+"Es posible ignorar completamente la función que calcula la configuración de ruta predeterminada "
+"estableciendo explícitamente todos los campos de salida de configuración de ruta mencionados "
+"anteriormente. Una cadena se considera establecida incluso si no está vacía. ``module_search_paths`` "
+"se considera establecido si ``module_search_paths_set`` se establece en ``1``. En este caso, "
+"``module_search_paths`` se utilizará sin modificaciones."
 
 #: ../Doc/c-api/init_config.rst:1545
-#, fuzzy
 msgid ""
-"Set :c:member:`~PyConfig.pathconfig_warnings` to ``0`` to suppress warnings "
-"when calculating the path configuration (Unix only, Windows does not log any "
-"warning)."
+"Set :c:member:`~PyConfig.pathconfig_warnings` to ``0`` to suppress warnings when calculating the path "
+"configuration (Unix only, Windows does not log any warning)."
 msgstr ""
-"Establezca :c:member:`~PyConfig.pathconfig_warnings` en 0 para suprimir las "
-"advertencias al calcular la configuración de la ruta (solo Unix, Windows no "
-"registra ninguna advertencia)."
+"Establezca :c:member:`~PyConfig.pathconfig_warnings` en ``0`` para suprimir las advertencias al "
+"calcular la configuración de la ruta (solo Unix, Windows no registra ninguna advertencia)."
 
 #: ../Doc/c-api/init_config.rst:1548
 msgid ""
-"If :c:member:`~PyConfig.base_prefix` or :c:member:`~PyConfig."
-"base_exec_prefix` fields are not set, they inherit their value from :c:"
-"member:`~PyConfig.prefix` and :c:member:`~PyConfig.exec_prefix` respectively."
+"If :c:member:`~PyConfig.base_prefix` or :c:member:`~PyConfig.base_exec_prefix` fields are not set, "
+"they inherit their value from :c:member:`~PyConfig.prefix` and :c:member:`~PyConfig.exec_prefix` "
+"respectively."
 msgstr ""
-"Si :c:member:`~PyConfig.base_prefix` o los campos :c:member:`~PyConfig."
-"base_exec_prefix` no están establecidos, heredan su valor de :c:member:"
-"`~PyConfig.prefix` y :c:member:`~PyConfig.exec_prefix` respectivamente."
+"Si :c:member:`~PyConfig.base_prefix` o los campos :c:member:`~PyConfig.base_exec_prefix` no están "
+"establecidos, heredan su valor de :c:member:`~PyConfig.prefix` y :c:member:`~PyConfig.exec_prefix` "
+"respectivamente."
 
 #: ../Doc/c-api/init_config.rst:1552
 msgid ":c:func:`Py_RunMain` and :c:func:`Py_Main` modify :data:`sys.path`:"
@@ -2685,13 +2444,11 @@ msgstr ":c:func:`Py_RunMain` y :c:func:`Py_Main` modifican :data:`sys.path`:"
 
 #: ../Doc/c-api/init_config.rst:1554
 msgid ""
-"If :c:member:`~PyConfig.run_filename` is set and is a directory which "
-"contains a ``__main__.py`` script, prepend :c:member:`~PyConfig."
-"run_filename` to :data:`sys.path`."
+"If :c:member:`~PyConfig.run_filename` is set and is a directory which contains a ``__main__.py`` "
+"script, prepend :c:member:`~PyConfig.run_filename` to :data:`sys.path`."
 msgstr ""
-"Si :c:member:`~PyConfig.run_filename` está configurado y es un directorio "
-"que contiene un script ``__main__.py``, anteponga :c:member:`~PyConfig."
-"run_filename` a :data:`sys.path`."
+"Si :c:member:`~PyConfig.run_filename` está configurado y es un directorio que contiene un script "
+"``__main__.py``, anteponga :c:member:`~PyConfig.run_filename` a :data:`sys.path`."
 
 #: ../Doc/c-api/init_config.rst:1557
 msgid "If :c:member:`~PyConfig.isolated` is zero:"
@@ -2699,44 +2456,39 @@ msgstr "Si :c:member:`~PyConfig.isolated` es cero:"
 
 #: ../Doc/c-api/init_config.rst:1559
 msgid ""
-"If :c:member:`~PyConfig.run_module` is set, prepend the current directory "
-"to :data:`sys.path`. Do nothing if the current directory cannot be read."
+"If :c:member:`~PyConfig.run_module` is set, prepend the current directory to :data:`sys.path`. Do "
+"nothing if the current directory cannot be read."
 msgstr ""
-"Si :c:member:`~PyConfig.run_module` está configurado, anteponga el "
-"directorio actual a :data:`sys.path`. No haga nada si el directorio actual "
-"no se puede leer."
+"Si :c:member:`~PyConfig.run_module` está configurado, anteponga el directorio actual a :data:`sys."
+"path`. No haga nada si el directorio actual no se puede leer."
 
 #: ../Doc/c-api/init_config.rst:1561
 msgid ""
-"If :c:member:`~PyConfig.run_filename` is set, prepend the directory of the "
-"filename to :data:`sys.path`."
+"If :c:member:`~PyConfig.run_filename` is set, prepend the directory of the filename to :data:`sys."
+"path`."
 msgstr ""
-"Si :c:member:`~PyConfig.run_filename` está configurado, anteponga el "
-"directorio del nombre del archivo a :data:`sys.path`."
+"Si :c:member:`~PyConfig.run_filename` está configurado, anteponga el directorio del nombre del "
+"archivo a :data:`sys.path`."
 
 #: ../Doc/c-api/init_config.rst:1563
 msgid "Otherwise, prepend an empty string to :data:`sys.path`."
-msgstr ""
-"De lo contrario, anteponga una cadena de caracteres vacía a :data:`sys.path`."
+msgstr "De lo contrario, anteponga una cadena de caracteres vacía a :data:`sys.path`."
 
 #: ../Doc/c-api/init_config.rst:1565
 msgid ""
-"If :c:member:`~PyConfig.site_import` is non-zero, :data:`sys.path` can be "
-"modified by the :mod:`site` module. If :c:member:`~PyConfig."
-"user_site_directory` is non-zero and the user's site-package directory "
-"exists, the :mod:`site` module appends the user's site-package directory to :"
-"data:`sys.path`."
+"If :c:member:`~PyConfig.site_import` is non-zero, :data:`sys.path` can be modified by the :mod:`site` "
+"module. If :c:member:`~PyConfig.user_site_directory` is non-zero and the user's site-package "
+"directory exists, the :mod:`site` module appends the user's site-package directory to :data:`sys."
+"path`."
 msgstr ""
-"Si :c:member:`~PyConfig.site_import` no es cero, :data:`sys.path` puede ser "
-"modificado por el módulo :mod:`site`. Si :c:member:`~PyConfig."
-"user_site_directory` no es cero y el directorio del paquete del sitio del "
-"usuario existe, el módulo :mod:`site` agrega el directorio del paquete del "
-"sitio del usuario a :data:`sys.path`."
+"Si :c:member:`~PyConfig.site_import` no es cero, :data:`sys.path` puede ser modificado por el módulo :"
+"mod:`site`. Si :c:member:`~PyConfig.user_site_directory` no es cero y el directorio del paquete del "
+"sitio del usuario existe, el módulo :mod:`site` agrega el directorio del paquete del sitio del "
+"usuario a :data:`sys.path`."
 
 #: ../Doc/c-api/init_config.rst:1571
 msgid "The following configuration files are used by the path configuration:"
-msgstr ""
-"La configuración de ruta utiliza los siguientes archivos de configuración:"
+msgstr "La configuración de ruta utiliza los siguientes archivos de configuración:"
 
 #: ../Doc/c-api/init_config.rst:1573
 msgid "``pyvenv.cfg``"
@@ -2755,33 +2507,27 @@ msgid "If a ``._pth`` file is present:"
 msgstr "Si un archivo ``._pth`` está presente:"
 
 #: ../Doc/c-api/init_config.rst:1579
-#, fuzzy
 msgid "Set :c:member:`~PyConfig.isolated` to ``1``."
-msgstr ":c:member:`PyConfig.isolated`"
+msgstr "Establezca :c:member:`~PyConfig.isolated` en ``1``."
 
 #: ../Doc/c-api/init_config.rst:1580
-#, fuzzy
 msgid "Set :c:member:`~PyConfig.use_environment` to ``0``."
-msgstr ":c:member:`PyConfig.use_environment`"
+msgstr "Establezca :c:member:`~PyConfig.use_environment` en ``0``."
 
 #: ../Doc/c-api/init_config.rst:1581
-#, fuzzy
 msgid "Set :c:member:`~PyConfig.site_import` to ``0``."
-msgstr "Establezca :c:member:`PyPreConfig.utf8_mode` en ``0``,"
+msgstr "Establezca :c:member:`~PyConfig.site_import` en ``0``."
 
 #: ../Doc/c-api/init_config.rst:1582
-#, fuzzy
 msgid "Set :c:member:`~PyConfig.safe_path` to ``1``."
-msgstr "Establezca :c:member:`PyPreConfig.utf8_mode` en ``0``,"
+msgstr "Establezca :c:member:`~PyConfig.safe_path` en ``1``."
 
 #: ../Doc/c-api/init_config.rst:1584
-#, fuzzy
 msgid ""
-"The ``__PYVENV_LAUNCHER__`` environment variable is used to set :c:member:"
-"`PyConfig.base_executable`."
+"The ``__PYVENV_LAUNCHER__`` environment variable is used to set :c:member:`PyConfig.base_executable`."
 msgstr ""
-"La variable de entorno ``__PYVENV_LAUNCHER__`` se usa para establecer :c:"
-"member:`PyConfig.base_executable`"
+"La variable de entorno ``__PYVENV_LAUNCHER__`` se usa para establecer :c:member:`PyConfig."
+"base_executable`."
 
 #: ../Doc/c-api/init_config.rst:1589
 msgid "Py_RunMain()"
@@ -2789,13 +2535,13 @@ msgstr "Py_RunMain()"
 
 #: ../Doc/c-api/init_config.rst:1593
 msgid ""
-"Execute the command (:c:member:`PyConfig.run_command`), the script (:c:"
-"member:`PyConfig.run_filename`) or the module (:c:member:`PyConfig."
-"run_module`) specified on the command line or in the configuration."
+"Execute the command (:c:member:`PyConfig.run_command`), the script (:c:member:`PyConfig."
+"run_filename`) or the module (:c:member:`PyConfig.run_module`) specified on the command line or in "
+"the configuration."
 msgstr ""
-"Ejecuta el comando (:c:member:`PyConfig.run_command`), el script (:c:member:"
-"`PyConfig.run_filename`) o el módulo (:c:member:`PyConfig.run_module`) "
-"especificado en la línea de comando o en la configuración."
+"Ejecuta el comando (:c:member:`PyConfig.run_command`), el script (:c:member:`PyConfig.run_filename`) "
+"o el módulo (:c:member:`PyConfig.run_module`) especificado en la línea de comando o en la "
+"configuración."
 
 #: ../Doc/c-api/init_config.rst:1598
 msgid "By default and when if :option:`-i` option is used, run the REPL."
@@ -2803,20 +2549,17 @@ msgstr "Por defecto y cuando se usa la opción :option:`-i`, ejecuta el REPL."
 
 #: ../Doc/c-api/init_config.rst:1600
 msgid ""
-"Finally, finalizes Python and returns an exit status that can be passed to "
-"the ``exit()`` function."
+"Finally, finalizes Python and returns an exit status that can be passed to the ``exit()`` function."
 msgstr ""
-"Finalmente, finaliza Python y retorna un estado de salida que se puede pasar "
-"a la función ``exit()``."
+"Finalmente, finaliza Python y retorna un estado de salida que se puede pasar a la función ``exit()``."
 
 #: ../Doc/c-api/init_config.rst:1603
 msgid ""
-"See :ref:`Python Configuration <init-python-config>` for an example of "
-"customized Python always running in isolated mode using :c:func:`Py_RunMain`."
+"See :ref:`Python Configuration <init-python-config>` for an example of customized Python always "
+"running in isolated mode using :c:func:`Py_RunMain`."
 msgstr ""
-"Consulte :ref:`Configuración de Python <init-python-config>` para ver un "
-"ejemplo de Python personalizado que siempre se ejecuta en modo aislado "
-"usando :c:func:`Py_RunMain`."
+"Consulte :ref:`Configuración de Python <init-python-config>` para ver un ejemplo de Python "
+"personalizado que siempre se ejecuta en modo aislado usando :c:func:`Py_RunMain`."
 
 #: ../Doc/c-api/init_config.rst:1609
 msgid "Py_GetArgcArgv()"
@@ -2824,9 +2567,7 @@ msgstr "Py_GetArgcArgv()"
 
 #: ../Doc/c-api/init_config.rst:1613
 msgid "Get the original command line arguments, before Python modified them."
-msgstr ""
-"Obtiene los argumentos originales de la línea de comandos, antes de que "
-"Python los modificara."
+msgstr "Obtiene los argumentos originales de la línea de comandos, antes de que Python los modificara."
 
 #: ../Doc/c-api/init_config.rst:1615
 msgid "See also :c:member:`PyConfig.orig_argv` member."
@@ -2837,13 +2578,12 @@ msgid "Multi-Phase Initialization Private Provisional API"
 msgstr "API Provisional Privada de Inicialización Multifásica"
 
 #: ../Doc/c-api/init_config.rst:1621
-#, fuzzy
 msgid ""
-"This section is a private provisional API introducing multi-phase "
-"initialization, the core feature of :pep:`432`:"
+"This section is a private provisional API introducing multi-phase initialization, the core feature "
+"of :pep:`432`:"
 msgstr ""
-"Esta sección es una API provisional privada que presenta la inicialización "
-"de múltiples fases, la característica principal de :pep:`432`:"
+"Esta sección es una API provisional privada que introduce la inicialización multifase, la "
+"característica principal de :pep:`432`:"
 
 #: ../Doc/c-api/init_config.rst:1624
 msgid "\"Core\" initialization phase, \"bare minimum Python\":"
@@ -2862,17 +2602,13 @@ msgid "Builtin and frozen modules;"
 msgstr "Módulos incorporados y congelados;"
 
 #: ../Doc/c-api/init_config.rst:1629
-msgid ""
-"The :mod:`sys` module is only partially initialized (ex: :data:`sys.path` "
-"doesn't exist yet)."
+msgid "The :mod:`sys` module is only partially initialized (ex: :data:`sys.path` doesn't exist yet)."
 msgstr ""
-"El módulo :mod:`sys` solo se inicializa parcialmente (por ejemplo :data:`sys."
-"path` aún no existe)."
+"El módulo :mod:`sys` solo se inicializa parcialmente (por ejemplo :data:`sys.path` aún no existe)."
 
 #: ../Doc/c-api/init_config.rst:1632
 msgid "\"Main\" initialization phase, Python is fully initialized:"
-msgstr ""
-"Fase de inicialización \"principal\", Python está completamente inicializado:"
+msgstr "Fase de inicialización \"principal\", Python está completamente inicializado:"
 
 #: ../Doc/c-api/init_config.rst:1634
 msgid "Install and configure :mod:`importlib`;"
@@ -2887,19 +2623,14 @@ msgid "Install signal handlers;"
 msgstr "Instala manejadores de señal;"
 
 #: ../Doc/c-api/init_config.rst:1637
-msgid ""
-"Finish :mod:`sys` module initialization (ex: create :data:`sys.stdout` and :"
-"data:`sys.path`);"
+msgid "Finish :mod:`sys` module initialization (ex: create :data:`sys.stdout` and :data:`sys.path`);"
 msgstr ""
-"Finaliza la inicialización del módulo :mod:`sys` (por ejemplo: crea :data:"
-"`sys.stdout` y :data:`sys.path`);"
+"Finaliza la inicialización del módulo :mod:`sys` (por ejemplo: crea :data:`sys.stdout` y :data:`sys."
+"path`);"
 
 #: ../Doc/c-api/init_config.rst:1639
-msgid ""
-"Enable optional features like :mod:`faulthandler` and :mod:`tracemalloc`;"
-msgstr ""
-"Habilita características opcionales como :mod:`faulthandler` y :mod:"
-"`tracemalloc`;"
+msgid "Enable optional features like :mod:`faulthandler` and :mod:`tracemalloc`;"
+msgstr "Habilita características opcionales como :mod:`faulthandler` y :mod:`tracemalloc`;"
 
 #: ../Doc/c-api/init_config.rst:1640
 msgid "Import the :mod:`site` module;"
@@ -2914,67 +2645,52 @@ msgid "Private provisional API:"
 msgstr "API provisional privada:"
 
 #: ../Doc/c-api/init_config.rst:1645
-#, fuzzy
 msgid ""
-":c:member:`PyConfig._init_main`: if set to ``0``, :c:func:"
-"`Py_InitializeFromConfig` stops at the \"Core\" initialization phase."
+":c:member:`PyConfig._init_main`: if set to ``0``, :c:func:`Py_InitializeFromConfig` stops at the "
+"\"Core\" initialization phase."
 msgstr ""
-":c:member:`PyConfig._init_main`: si se establece en 0, :c:func:"
-"`Py_InitializeFromConfig` se detiene en la fase de inicialización \"Core\"."
+":c:member:`PyConfig._init_main`: si se establece en ``0``, :c:func:`Py_InitializeFromConfig` se "
+"detiene en la fase de inicialización \"Core\"."
 
 #: ../Doc/c-api/init_config.rst:1650
-msgid ""
-"Move to the \"Main\" initialization phase, finish the Python initialization."
-msgstr ""
-"Vaya a la fase de inicialización \"Principal\", finalice la inicialización "
-"de Python."
+msgid "Move to the \"Main\" initialization phase, finish the Python initialization."
+msgstr "Vaya a la fase de inicialización \"Principal\", finalice la inicialización de Python."
 
 #: ../Doc/c-api/init_config.rst:1652
 msgid ""
-"No module is imported during the \"Core\" phase and the ``importlib`` module "
-"is not configured: the :ref:`Path Configuration <init-path-config>` is only "
-"applied during the \"Main\" phase. It may allow to customize Python in "
-"Python to override or tune the :ref:`Path Configuration <init-path-config>`, "
+"No module is imported during the \"Core\" phase and the ``importlib`` module is not configured: the :"
+"ref:`Path Configuration <init-path-config>` is only applied during the \"Main\" phase. It may allow "
+"to customize Python in Python to override or tune the :ref:`Path Configuration <init-path-config>`, "
 "maybe install a custom :data:`sys.meta_path` importer or an import hook, etc."
 msgstr ""
-"No se importa ningún módulo durante la fase \"Core\" y el módulo "
-"``importlib`` no está configurado: la :ref:`Configuración de ruta <init-path-"
-"config>` solo se aplica durante la fase \"Principal\". Puede permitir "
-"personalizar Python en Python para anular o ajustar :ref:`Configuración de "
-"ruta <init-path-config>`, tal vez instale un importador personalizado :data:"
-"`sys.meta_path` o un enlace de importación, etc."
+"No se importa ningún módulo durante la fase \"Core\" y el módulo ``importlib`` no está configurado: "
+"la :ref:`Configuración de ruta <init-path-config>` solo se aplica durante la fase \"Principal\". "
+"Puede permitir personalizar Python en Python para anular o ajustar :ref:`Configuración de ruta <init-"
+"path-config>`, tal vez instale un importador personalizado :data:`sys.meta_path` o un enlace de "
+"importación, etc."
 
 #: ../Doc/c-api/init_config.rst:1658
-#, fuzzy
 msgid ""
-"It may become possible to calculate the :ref:`Path Configuration <init-path-"
-"config>` in Python, after the Core phase and before the Main phase, which is "
-"one of the :pep:`432` motivation."
+"It may become possible to calculate the :ref:`Path Configuration <init-path-config>` in Python, after "
+"the Core phase and before the Main phase, which is one of the :pep:`432` motivation."
 msgstr ""
-"Puede ser posible calcular :ref:`Configuración de ruta <init-path-config>` "
-"en Python, después de la fase Core y antes de la fase Main, que es una de "
-"las motivaciones :pep:`432`."
+"Puede ser posible calcular la :ref:`Configuración de ruta <init-path-config>` en Python, después de "
+"la fase Core y antes de la fase Main, lo cual es una de las motivaciones de :pep:`432`."
 
 #: ../Doc/c-api/init_config.rst:1662
 msgid ""
-"The \"Core\" phase is not properly defined: what should be and what should "
-"not be available at this phase is not specified yet. The API is marked as "
-"private and provisional: the API can be modified or even be removed anytime "
-"until a proper public API is designed."
+"The \"Core\" phase is not properly defined: what should be and what should not be available at this "
+"phase is not specified yet. The API is marked as private and provisional: the API can be modified or "
+"even be removed anytime until a proper public API is designed."
 msgstr ""
-"La fase \"Núcleo\" no está definida correctamente: lo que debería estar y lo "
-"que no debería estar disponible en esta fase aún no se ha especificado. La "
-"API está marcada como privada y provisional: la API se puede modificar o "
-"incluso eliminar en cualquier momento hasta que se diseñe una API pública "
+"La fase \"Núcleo\" no está definida correctamente: lo que debería estar y lo que no debería estar "
+"disponible en esta fase aún no se ha especificado. La API está marcada como privada y provisional: la "
+"API se puede modificar o incluso eliminar en cualquier momento hasta que se diseñe una API pública "
 "adecuada."
 
 #: ../Doc/c-api/init_config.rst:1667
-msgid ""
-"Example running Python code between \"Core\" and \"Main\" initialization "
-"phases::"
-msgstr ""
-"Ejemplo de ejecución de código Python entre las fases de inicialización "
-"\"Core\" y \"Main\"::"
+msgid "Example running Python code between \"Core\" and \"Main\" initialization phases::"
+msgstr "Ejemplo de ejecución de código Python entre las fases de inicialización \"Core\" y \"Main\"::"
 
 #: ../Doc/c-api/init_config.rst:1670
 msgid ""
@@ -3012,12 +2728,44 @@ msgid ""
 "    }\n"
 "}"
 msgstr ""
+"void init_python(void)\n"
+"{\n"
+"    PyStatus status;\n"
+"\n"
+"    PyConfig config;\n"
+"    PyConfig_InitPythonConfig(&config);\n"
+"    config._init_main = 0;\n"
+"\n"
+"    /* ... customize 'config' configuration ... */\n"
+"\n"
+"    status = Py_InitializeFromConfig(&config);\n"
+"    PyConfig_Clear(&config);\n"
+"    if (PyStatus_Exception(status)) {\n"
+"        Py_ExitStatusException(status);\n"
+"    }\n"
+"\n"
+"    /* Use sys.stderr because sys.stdout is only created\n"
+"       by _Py_InitializeMain() */\n"
+"    int res = PyRun_SimpleString(\n"
+"        \"import sys; \"\n"
+"        \"print('Run Python code before _Py_InitializeMain', \"\n"
+"               \"file=sys.stderr)\");\n"
+"    if (res < 0) {\n"
+"        exit(1);\n"
+"    }\n"
+"\n"
+"    /* ... put more configuration code here ... */\n"
+"\n"
+"    status = _Py_InitializeMain();\n"
+"    if (PyStatus_Exception(status)) {\n"
+"        Py_ExitStatusException(status);\n"
+"    }\n"
+"}"
 
 #: ../Doc/c-api/init_config.rst:558
-#, fuzzy
 msgid "main()"
-msgstr "Py_RunMain()"
+msgstr "main()"
 
 #: ../Doc/c-api/init_config.rst:558
 msgid "argv (in module sys)"
-msgstr ""
+msgstr "argv (en el módulo sys)"
