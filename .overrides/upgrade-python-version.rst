@@ -1,27 +1,27 @@
 :orphan:
 
-How to update to a new Python version
-=====================================
+How to upgrade to a new Python version
+======================================
 
-We are currently in branch 3.12, and we want to update the strings from 3.13.
+We are currently in branch 3.13, and we want to update the strings from 3.14.
 
-#. Make sure you are in a clean state of the branch 3.12
+#. Make sure you are in a clean state of the branch 3.13
 
-#. Create a new branch called ``3.13``
+#. Create a new branch called ``3.14``
 
 #. Initialize the submodules::
 
      git submodule init
      git submodule update
 
-#. Fetch the `latest release tag of 3.12  <https://github.com/python/cpython/releases/tag/v3.13.0>`_::
+#. Fetch the `latest release tag of 3.14  <https://github.com/python/cpython/releases/tag/v3.14.0>`_::
 
      cd cpython/
-     git fetch --depth 1 origin tags/v3.13.0
+     git fetch --depth 1 origin refs/tags/v3.14.0:refs/tags/v3.14.0
 
 #. Checkout that commit locally::
 
-     git checkout tags/v3.13.0 -b 3.13.0
+     git checkout tags/v3.14.0 -b 3.14.0
 
 #. Update the branch on the ``Makefile``
 
@@ -71,13 +71,13 @@ We are currently in branch 3.12, and we want to update the strings from 3.13.
       in the next step. It's included here because it might be a leftover
       from previous attempts on your machine.
 
-#. Create the .po files from the new source code. This will generate all the .po files for version 3.11::
+#. Create the .po files from the new source code. This will generate all the .po files for version 3.14::
 
      SPHINX_GETTEXT=True sphinx-build -j auto -b gettext -d _build/doctrees . cpython/python-docs-es-pot
 
    .. note::
 
-      In ``cpython/python-docs-es-pot`` directory, we will have the new .pot files with new strings from 3.13 branch.
+      In ``cpython/python-docs-es-pot`` directory, we will have the new .pot files with new strings from 3.14 branch.
       All these strings will be *untranslated* at this point.
 
 #. Now, we update our translated files form the source language (English) with new strings::
@@ -104,14 +104,14 @@ We are currently in branch 3.12, and we want to update the strings from 3.13.
 **Once the process is completely and you are happy with the results,
 there are a few extra steps to finish the process**
 
-#. Upgrade GitHub Actions to use Python 3.13, by updating Python version to 3.13 in the ``.github/workflows/main.yml`` file.
+#. Upgrade GitHub Actions to use Python 3.14, by updating Python version to 3.14 in the ``.github/workflows/main.yml`` file.
 
-#. Update the *Read the Docs* project to use 3.13 in the build and also as default branch/version.
+#. Update the *Read the Docs* project to use 3.14 in the build and also as default branch/version.
 	
 #. Commit all the newly created files locally.
 	
-#. Create branch 3.13 in the repository in order to merge changes there.
+#. Create branch 3.14 in the repository in order to merge changes there.
 	
-#. Inside the github project settings, set 3.13 branch as the default branch for the repository.
+#. Inside the github project settings, set 3.14 branch as the default branch for the repository.
 
 #. Create GitHub issues with [the script](../scripts/create_issue.py) 
