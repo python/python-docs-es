@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-21 16:38-0300\n"
+"POT-Creation-Date: 2026-02-26 18:44-0300\n"
 "PO-Revision-Date: 2021-08-07 15:44+0200\n"
 "Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: ../Doc/library/contextvars.rst:2
 #, fuzzy
@@ -187,7 +187,28 @@ msgstr ""
 "le pueden dar al método :meth:`ContextVar.reset` para restablecer el valor "
 "de la variable al que estuviese dado antes del *set* correspondiente."
 
-#: ../Doc/library/contextvars.rst:106
+#: ../Doc/library/contextvars.rst:104
+msgid ""
+"The token supports :ref:`context manager protocol <context-managers>` to "
+"restore the corresponding context variable value at the exit from :keyword:"
+"`with` block::"
+msgstr ""
+
+#: ../Doc/library/contextvars.rst:108
+msgid ""
+"var = ContextVar('var', default='default value')\n"
+"\n"
+"with var.set('new value'):\n"
+"    assert var.get() == 'new value'\n"
+"\n"
+"assert var.get() == 'default value'"
+msgstr ""
+
+#: ../Doc/library/contextvars.rst:117
+msgid "Added support for usage as a context manager."
+msgstr ""
+
+#: ../Doc/library/contextvars.rst:121
 msgid ""
 "A read-only property.  Points to the :class:`ContextVar` object that created "
 "the token."
@@ -195,7 +216,7 @@ msgstr ""
 "Propiedad de sólo lectura. Apunta al objeto :class:`ContextVar` que creó el "
 "*token*."
 
-#: ../Doc/library/contextvars.rst:111
+#: ../Doc/library/contextvars.rst:126
 msgid ""
 "A read-only property.  Set to the value the variable had before the :meth:"
 "`ContextVar.set` method call that created the token. It points to :attr:"
@@ -205,19 +226,19 @@ msgstr ""
 "al método :meth:`ContextVar.set` que creó el *token*. Apunta a :attr:`Token."
 "MISSING` si la variable no estaba establecida antes de la llamada."
 
-#: ../Doc/library/contextvars.rst:118
+#: ../Doc/library/contextvars.rst:133
 msgid "A marker object used by :attr:`Token.old_value`."
 msgstr "Marcador utilizado por :attr:`Token.old_value`."
 
-#: ../Doc/library/contextvars.rst:122
+#: ../Doc/library/contextvars.rst:137
 msgid "Manual Context Management"
 msgstr "Gestión de contexto manual"
 
-#: ../Doc/library/contextvars.rst:126
+#: ../Doc/library/contextvars.rst:141
 msgid "Returns a copy of the current :class:`~contextvars.Context` object."
 msgstr "Retorna una copia del objeto :class:`~contextvars.Context` actual."
 
-#: ../Doc/library/contextvars.rst:128
+#: ../Doc/library/contextvars.rst:143
 msgid ""
 "The following snippet gets a copy of the current context and prints all "
 "variables and their values that are set in it::"
@@ -225,13 +246,13 @@ msgstr ""
 "El siguiente código obtiene una copia del contexto actual e imprime todas "
 "las variables y sus valores establecidos en el contexto::"
 
-#: ../Doc/library/contextvars.rst:131
+#: ../Doc/library/contextvars.rst:146
 msgid ""
 "ctx: Context = copy_context()\n"
 "print(list(ctx.items()))"
 msgstr ""
 
-#: ../Doc/library/contextvars.rst:134
+#: ../Doc/library/contextvars.rst:149
 #, fuzzy
 msgid ""
 "The function has an *O*\\ (1) complexity, i.e. works equally fast for "
@@ -241,11 +262,11 @@ msgstr ""
 "La función tiene una complejidad de O(1); es decir, trabaja a la misma "
 "velocidad en contextos con pocas o con muchas variables de contexto."
 
-#: ../Doc/library/contextvars.rst:141
+#: ../Doc/library/contextvars.rst:156
 msgid "A mapping of :class:`ContextVars <ContextVar>` to their values."
 msgstr "Mapeo de :class:`ContextVars <ContextVar>` con sus valores."
 
-#: ../Doc/library/contextvars.rst:143
+#: ../Doc/library/contextvars.rst:158
 msgid ""
 "``Context()`` creates an empty context with no values in it. To get a copy "
 "of the current context use the :func:`~contextvars.copy_context` function."
@@ -254,57 +275,102 @@ msgstr ""
 "contexto actual, se puede utilizar la función :func:`~contextvars."
 "copy_context`."
 
-#: ../Doc/library/contextvars.rst:147
+#: ../Doc/library/contextvars.rst:162
+msgid ""
+"Each thread has its own effective stack of :class:`!Context` objects.  The :"
+"term:`current context` is the :class:`!Context` object at the top of the "
+"current thread's stack.  All :class:`!Context` objects in the stacks are "
+"considered to be *entered*."
+msgstr ""
+
+#: ../Doc/library/contextvars.rst:167
+msgid ""
+"*Entering* a context, which can be done by calling its :meth:`~Context.run` "
+"method, makes the context the current context by pushing it onto the top of "
+"the current thread's context stack."
+msgstr ""
+
+#: ../Doc/library/contextvars.rst:171
+msgid ""
+"*Exiting* from the current context, which can be done by returning from the "
+"callback passed to the :meth:`~Context.run` method, restores the current "
+"context to what it was before the context was entered by popping the context "
+"off the top of the context stack."
+msgstr ""
+
+#: ../Doc/library/contextvars.rst:176
 #, fuzzy
 msgid ""
-"Every thread will have a different top-level :class:`~contextvars.Context` "
-"object. This means that a :class:`ContextVar` object behaves in a similar "
-"fashion to :func:`threading.local` when values are assigned in different "
-"threads."
+"Since each thread has its own context stack, :class:`ContextVar` objects "
+"behave in a similar fashion to :func:`threading.local` when values are "
+"assigned in different threads."
 msgstr ""
 "Cada hilo tendrá un objecto de nivel superior :class:`~contextvars.Context`. "
 "Esto significa que un objeto :class:`ContextVar` se comporta de una manera "
 "similar a :func:`threading.local()` cuando los valores están asignados desde "
 "hilos diferentes"
 
-#: ../Doc/library/contextvars.rst:152
+#: ../Doc/library/contextvars.rst:180
+msgid ""
+"Attempting to enter an already entered context, including contexts entered "
+"in other threads, raises a :exc:`RuntimeError`."
+msgstr ""
+
+#: ../Doc/library/contextvars.rst:183
+msgid "After exiting a context, it can later be re-entered (from any thread)."
+msgstr ""
+
+#: ../Doc/library/contextvars.rst:185
+msgid ""
+"Any changes to :class:`ContextVar` values via the :meth:`ContextVar.set` "
+"method are recorded in the current context.  The :meth:`ContextVar.get` "
+"method returns the value associated with the current context.  Exiting a "
+"context effectively reverts any changes made to context variables while the "
+"context was entered (if needed, the values can be restored by re-entering "
+"the context)."
+msgstr ""
+
+#: ../Doc/library/contextvars.rst:192
 msgid "Context implements the :class:`collections.abc.Mapping` interface."
 msgstr "*Context* implementa la interfaz :class:`collections.abc.Mapping`."
 
-#: ../Doc/library/contextvars.rst:156
+#: ../Doc/library/contextvars.rst:196
+#, fuzzy
 msgid ""
-"Execute ``callable(*args, **kwargs)`` code in the context object the *run* "
-"method is called on.  Return the result of the execution or propagate an "
-"exception if one occurred."
+"Enters the Context, executes ``callable(*args, **kwargs)``, then exits the "
+"Context.  Returns *callable*'s return value, or propagates an exception if "
+"one occurred."
 msgstr ""
 "Ejecuta el código de ``callable(*args, **kwargs)`` en el objeto de contexto "
 "del cual se llama al método *run*. Retorna el resultado de la ejecución, o "
 "propaga una excepción si alguna ocurre."
 
-#: ../Doc/library/contextvars.rst:160
-msgid ""
-"Any changes to any context variables that *callable* makes will be contained "
-"in the context object::"
-msgstr ""
-"Cualquier cambio realizado por *callable* sobre cualquier variable de "
-"contexto será contenido en el objeto de contexto::"
+#: ../Doc/library/contextvars.rst:200
+#, fuzzy
+msgid "Example:"
+msgstr "Por ejemplo::"
 
-#: ../Doc/library/contextvars.rst:163
+#: ../Doc/library/contextvars.rst:202
 msgid ""
-"var = ContextVar('var')\n"
+"import contextvars\n"
+"\n"
+"var = contextvars.ContextVar('var')\n"
 "var.set('spam')\n"
+"print(var.get())  # 'spam'\n"
+"\n"
+"ctx = contextvars.copy_context()\n"
 "\n"
 "def main():\n"
 "    # 'var' was set to 'spam' before\n"
 "    # calling 'copy_context()' and 'ctx.run(main)', so:\n"
-"    # var.get() == ctx[var] == 'spam'\n"
+"    print(var.get())  # 'spam'\n"
+"    print(ctx[var])  # 'spam'\n"
 "\n"
 "    var.set('ham')\n"
 "\n"
 "    # Now, after setting 'var' to 'ham':\n"
-"    # var.get() == ctx[var] == 'ham'\n"
-"\n"
-"ctx = copy_context()\n"
+"    print(var.get())  # 'ham'\n"
+"    print(ctx[var])  # 'ham'\n"
 "\n"
 "# Any changes that the 'main' function makes to 'var'\n"
 "# will be contained in 'ctx'.\n"
@@ -312,26 +378,17 @@ msgid ""
 "\n"
 "# The 'main()' function was run in the 'ctx' context,\n"
 "# so changes to 'var' are contained in it:\n"
-"# ctx[var] == 'ham'\n"
+"print(ctx[var])  # 'ham'\n"
 "\n"
 "# However, outside of 'ctx', 'var' is still set to 'spam':\n"
-"# var.get() == 'spam'"
+"print(var.get())  # 'spam'"
 msgstr ""
 
-#: ../Doc/library/contextvars.rst:189
-msgid ""
-"The method raises a :exc:`RuntimeError` when called on the same context "
-"object from more than one OS thread, or when called recursively."
-msgstr ""
-"El método lanzará :exc:`RuntimeError` cuando es llamado desde el mismo "
-"objeto de contexto desde más de un hilo del sistema operativo, o si se llama "
-"recursivamente."
-
-#: ../Doc/library/contextvars.rst:195
+#: ../Doc/library/contextvars.rst:248
 msgid "Return a shallow copy of the context object."
 msgstr "Retorna una copia superficial (*shallow copy*) del objeto de contexto."
 
-#: ../Doc/library/contextvars.rst:199
+#: ../Doc/library/contextvars.rst:252
 msgid ""
 "Return ``True`` if the *context* has a value for *var* set; return ``False`` "
 "otherwise."
@@ -339,7 +396,7 @@ msgstr ""
 "Retorna ``True`` si *context* tiene un valor establecido para *var*; de lo "
 "contrario, retorna ``False``."
 
-#: ../Doc/library/contextvars.rst:204
+#: ../Doc/library/contextvars.rst:257
 msgid ""
 "Return the value of the *var* :class:`ContextVar` variable. If the variable "
 "is not set in the context object, a :exc:`KeyError` is raised."
@@ -347,7 +404,7 @@ msgstr ""
 "Retorna el valor de la variable :class:`ContextVar` *var*. Si la variable no "
 "está establecida en el contexto actual, se lanzará :exc:`KeyError`."
 
-#: ../Doc/library/contextvars.rst:210
+#: ../Doc/library/contextvars.rst:263
 msgid ""
 "Return the value for *var* if *var* has the value in the context object.  "
 "Return *default* otherwise.  If *default* is not given, return ``None``."
@@ -356,26 +413,26 @@ msgstr ""
 "de lo contrario, retorna *default*. Si *default* no es dado, retorna "
 "``None``."
 
-#: ../Doc/library/contextvars.rst:216
+#: ../Doc/library/contextvars.rst:269
 msgid "Return an iterator over the variables stored in the context object."
 msgstr ""
 "Retorna un iterador de las variables almacenadas en el objeto de contexto."
 
-#: ../Doc/library/contextvars.rst:221
+#: ../Doc/library/contextvars.rst:274
 msgid "Return the number of variables set in the context object."
 msgstr "Retorna el número de variables establecidas en el objeto de contexto."
 
-#: ../Doc/library/contextvars.rst:225
+#: ../Doc/library/contextvars.rst:278
 msgid "Return a list of all variables in the context object."
 msgstr "Retorna un listado de todas las variables en el objeto de contexto."
 
-#: ../Doc/library/contextvars.rst:229
+#: ../Doc/library/contextvars.rst:282
 msgid "Return a list of all variables' values in the context object."
 msgstr ""
 "Retorna un listado de los valores de todas las variables en el objeto de "
 "contexto."
 
-#: ../Doc/library/contextvars.rst:234
+#: ../Doc/library/contextvars.rst:287
 msgid ""
 "Return a list of 2-tuples containing all variables and their values in the "
 "context object."
@@ -383,11 +440,11 @@ msgstr ""
 "Retorna un listado de dos tuplas que contienen todas las variables y sus "
 "variables en el contexto actual."
 
-#: ../Doc/library/contextvars.rst:239
+#: ../Doc/library/contextvars.rst:292
 msgid "asyncio support"
 msgstr "Soporte asyncio"
 
-#: ../Doc/library/contextvars.rst:241
+#: ../Doc/library/contextvars.rst:294
 msgid ""
 "Context variables are natively supported in :mod:`asyncio` and are ready to "
 "be used without any extra configuration.  For example, here is a simple echo "
@@ -400,7 +457,8 @@ msgstr ""
 "variable de contexto que hace que la dirección del cliente remoto esté "
 "disponible en la *Task* que gestiona al cliente::"
 
-#: ../Doc/library/contextvars.rst:247
+#: ../Doc/library/contextvars.rst:300
+#, python-brace-format
 msgid ""
 "import asyncio\n"
 "import contextvars\n"
@@ -445,3 +503,18 @@ msgid ""
 "#     telnet 127.0.0.1 8081\n"
 "#     curl 127.0.0.1:8081"
 msgstr ""
+
+#~ msgid ""
+#~ "Any changes to any context variables that *callable* makes will be "
+#~ "contained in the context object::"
+#~ msgstr ""
+#~ "Cualquier cambio realizado por *callable* sobre cualquier variable de "
+#~ "contexto será contenido en el objeto de contexto::"
+
+#~ msgid ""
+#~ "The method raises a :exc:`RuntimeError` when called on the same context "
+#~ "object from more than one OS thread, or when called recursively."
+#~ msgstr ""
+#~ "El método lanzará :exc:`RuntimeError` cuando es llamado desde el mismo "
+#~ "objeto de contexto desde más de un hilo del sistema operativo, o si se "
+#~ "llama recursivamente."

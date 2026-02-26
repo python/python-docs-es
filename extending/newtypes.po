@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-21 16:38-0300\n"
+"POT-Creation-Date: 2026-02-26 18:44-0300\n"
 "PO-Revision-Date: 2021-10-19 20:28-0500\n"
 "Last-Translator: Cristián Maureira-Fredes <cmaureirafredes@gmail.com>\n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: ../Doc/extending/newtypes.rst:7
 msgid "Defining Extension Types: Assorted Topics"
@@ -42,6 +42,7 @@ msgstr ""
 "solo se usan en las :ref:`versiones de depuración <debug-build>` omitidas:"
 
 #: ../Doc/extending/newtypes.rst:17
+#, python-brace-format
 msgid ""
 "typedef struct _typeobject {\n"
 "    PyObject_VAR_HEAD\n"
@@ -99,11 +100,11 @@ msgid ""
 "    iternextfunc tp_iternext;\n"
 "\n"
 "    /* Attribute descriptor and subclassing stuff */\n"
-"    struct PyMethodDef *tp_methods;\n"
-"    struct PyMemberDef *tp_members;\n"
-"    struct PyGetSetDef *tp_getset;\n"
+"    PyMethodDef *tp_methods;\n"
+"    PyMemberDef *tp_members;\n"
+"    PyGetSetDef *tp_getset;\n"
 "    // Strong reference on a heap type, borrowed reference on a static type\n"
-"    struct _typeobject *tp_base;\n"
+"    PyTypeObject *tp_base;\n"
 "    PyObject *tp_dict;\n"
 "    descrgetfunc tp_descr_get;\n"
 "    descrsetfunc tp_descr_set;\n"
@@ -115,12 +116,14 @@ msgid ""
 "    inquiry tp_is_gc; /* For PyObject_IS_GC */\n"
 "    PyObject *tp_bases;\n"
 "    PyObject *tp_mro; /* method resolution order */\n"
-"    PyObject *tp_cache;\n"
-"    PyObject *tp_subclasses;\n"
-"    PyObject *tp_weaklist;\n"
+"    PyObject *tp_cache; /* no longer used */\n"
+"    void *tp_subclasses;  /* for static builtin types this is an index */\n"
+"    PyObject *tp_weaklist; /* not used for static builtin types */\n"
 "    destructor tp_del;\n"
 "\n"
-"    /* Type attribute cache version tag. Added in version 2.6 */\n"
+"    /* Type attribute cache version tag. Added in version 2.6.\n"
+"     * If zero, the cache is invalid and must be initialized.\n"
+"     */\n"
 "    unsigned int tp_version_tag;\n"
 "\n"
 "    destructor tp_finalize;\n"
@@ -128,6 +131,13 @@ msgid ""
 "\n"
 "    /* bitset of which type-watchers care about this type */\n"
 "    unsigned char tp_watched;\n"
+"\n"
+"    /* Number of tp_version_tag values used.\n"
+"     * Set to _Py_ATTR_CACHE_UNUSED if the attribute cache is\n"
+"     * disabled for this type (e.g. due to custom MRO entries).\n"
+"     * Otherwise, limited to MAX_VERSIONS_PER_CLASS (defined elsewhere).\n"
+"     */\n"
+"    uint16_t tp_versions_used;\n"
 "} PyTypeObject;\n"
 msgstr ""
 
@@ -233,16 +243,18 @@ msgstr ""
 "ejemplo de esta función::"
 
 #: ../Doc/extending/newtypes.rst:72
+#, python-brace-format
 msgid ""
 "static void\n"
-"newdatatype_dealloc(newdatatypeobject *obj)\n"
+"newdatatype_dealloc(PyObject *op)\n"
 "{\n"
-"    free(obj->obj_UnderlyingDatatypePtr);\n"
-"    Py_TYPE(obj)->tp_free((PyObject *)obj);\n"
+"    newdatatypeobject *self = (newdatatypeobject *) op;\n"
+"    free(self->obj_UnderlyingDatatypePtr);\n"
+"    Py_TYPE(self)->tp_free(self);\n"
 "}"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:79
+#: ../Doc/extending/newtypes.rst:80
 msgid ""
 "If your type supports garbage collection, the destructor should call :c:func:"
 "`PyObject_GC_UnTrack` before clearing any member fields::"
@@ -250,19 +262,21 @@ msgstr ""
 "Si su tipo admite la recolección de basura, el destructor debe llamar a :c:"
 "func:`PyObject_GC_UnTrack` antes de borrar cualquier campo miembro:"
 
-#: ../Doc/extending/newtypes.rst:82
+#: ../Doc/extending/newtypes.rst:83
+#, python-brace-format
 msgid ""
 "static void\n"
-"newdatatype_dealloc(newdatatypeobject *obj)\n"
+"newdatatype_dealloc(PyObject *op)\n"
 "{\n"
-"    PyObject_GC_UnTrack(obj);\n"
-"    Py_CLEAR(obj->other_obj);\n"
+"    newdatatypeobject *self = (newdatatypeobject *) op;\n"
+"    PyObject_GC_UnTrack(op);\n"
+"    Py_CLEAR(self->other_obj);\n"
 "    ...\n"
-"    Py_TYPE(obj)->tp_free((PyObject *)obj);\n"
+"    Py_TYPE(self)->tp_free(self);\n"
 "}"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:95
+#: ../Doc/extending/newtypes.rst:97
 msgid ""
 "One important requirement of the deallocator function is that it leaves any "
 "pending exceptions alone.  This is important since deallocators are "
@@ -289,7 +303,7 @@ msgstr ""
 "la acción insegura y restaurarla cuando haya terminado. Esto se puede hacer "
 "usando las funciones :c:func:`PyErr_Fetch` y :c:func:`PyErr_Restore`::"
 
-#: ../Doc/extending/newtypes.rst:107
+#: ../Doc/extending/newtypes.rst:109
 msgid ""
 "static void\n"
 "my_dealloc(PyObject *obj)\n"
@@ -304,21 +318,23 @@ msgid ""
 "        PyErr_Fetch(&err_type, &err_value, &err_traceback);\n"
 "\n"
 "        cbresult = PyObject_CallNoArgs(self->my_callback);\n"
-"        if (cbresult == NULL)\n"
-"            PyErr_WriteUnraisable(self->my_callback);\n"
-"        else\n"
+"        if (cbresult == NULL) {\n"
+"           PyErr_WriteUnraisable(self->my_callback);\n"
+"        }\n"
+"        else {\n"
 "            Py_DECREF(cbresult);\n"
+"        }\n"
 "\n"
 "        /* This restores the saved exception state */\n"
 "        PyErr_Restore(err_type, err_value, err_traceback);\n"
 "\n"
 "        Py_DECREF(self->my_callback);\n"
 "    }\n"
-"    Py_TYPE(obj)->tp_free((PyObject*)self);\n"
+"    Py_TYPE(self)->tp_free(self);\n"
 "}"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:134
+#: ../Doc/extending/newtypes.rst:138
 msgid ""
 "There are limitations to what you can safely do in a deallocator function. "
 "First, if your type supports garbage collection (using :c:member:"
@@ -341,7 +357,7 @@ msgstr ""
 "terminar llamando :c:member:`~PyTypeObject.tp_dealloc` nuevamente, causando "
 "una doble liberación y un bloqueo."
 
-#: ../Doc/extending/newtypes.rst:143
+#: ../Doc/extending/newtypes.rst:147
 msgid ""
 "Starting with Python 3.4, it is recommended not to put any complex "
 "finalization code in :c:member:`~PyTypeObject.tp_dealloc`, and instead use "
@@ -351,15 +367,15 @@ msgstr ""
 "finalización complejo en :c:member:`~PyTypeObject.tp_dealloc`, y en su lugar "
 "use el nuevo método de tipo :c:member:`~PyTypeObject.tp_finalize`."
 
-#: ../Doc/extending/newtypes.rst:148
+#: ../Doc/extending/newtypes.rst:152
 msgid ":pep:`442` explains the new finalization scheme."
 msgstr ":pep:`442` explica el nuevo esquema de finalización."
 
-#: ../Doc/extending/newtypes.rst:155
+#: ../Doc/extending/newtypes.rst:159
 msgid "Object Presentation"
 msgstr "Presentación de objetos"
 
-#: ../Doc/extending/newtypes.rst:157
+#: ../Doc/extending/newtypes.rst:161
 msgid ""
 "In Python, there are two ways to generate a textual representation of an "
 "object: the :func:`repr` function, and the :func:`str` function.  (The :func:"
@@ -369,13 +385,13 @@ msgstr ""
 "objeto: la función :func:`repr`, y la función :func:`str`. (La función :func:"
 "`print` solo llama a :func:`str`.) Estos controladores son opcionales."
 
-#: ../Doc/extending/newtypes.rst:163
+#: ../Doc/extending/newtypes.rst:167
 msgid ""
 "reprfunc tp_repr;\n"
 "reprfunc tp_str;"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:166
+#: ../Doc/extending/newtypes.rst:170
 msgid ""
 "The :c:member:`~PyTypeObject.tp_repr` handler should return a string object "
 "containing a representation of the instance for which it is called.  Here is "
@@ -385,18 +401,19 @@ msgstr ""
 "cadena que contenga una representación de la instancia para la que se llama. "
 "Aquí hay un ejemplo simple::"
 
-#: ../Doc/extending/newtypes.rst:170
+#: ../Doc/extending/newtypes.rst:174
 #, python-format
 msgid ""
 "static PyObject *\n"
-"newdatatype_repr(newdatatypeobject *obj)\n"
+"newdatatype_repr(PyObject *op)\n"
 "{\n"
+"    newdatatypeobject *self = (newdatatypeobject *) op;\n"
 "    return PyUnicode_FromFormat(\"Repr-ified_newdatatype{{size:%d}}\",\n"
-"                                obj->obj_UnderlyingDatatypePtr->size);\n"
+"                                self->obj_UnderlyingDatatypePtr->size);\n"
 "}"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:177
+#: ../Doc/extending/newtypes.rst:182
 msgid ""
 "If no :c:member:`~PyTypeObject.tp_repr` handler is specified, the "
 "interpreter will supply a representation that uses the type's :c:member:"
@@ -407,7 +424,7 @@ msgstr ""
 "`~PyTypeObject.tp_name` del tipo y un valor de identificación exclusivo para "
 "el objeto."
 
-#: ../Doc/extending/newtypes.rst:181
+#: ../Doc/extending/newtypes.rst:186
 msgid ""
 "The :c:member:`~PyTypeObject.tp_str` handler is to :func:`str` what the :c:"
 "member:`~PyTypeObject.tp_repr` handler described above is to :func:`repr`; "
@@ -425,26 +442,27 @@ msgstr ""
 "consumo humano. Si :c:member:`~PyTypeObject.tp_str` no se especifica, en su "
 "lugar se utiliza el controlador :c:member:`~PyTypeObject.tp_repr`."
 
-#: ../Doc/extending/newtypes.rst:188
+#: ../Doc/extending/newtypes.rst:193
 msgid "Here is a simple example::"
 msgstr "Aquí hay un ejemplo simple::"
 
-#: ../Doc/extending/newtypes.rst:190
+#: ../Doc/extending/newtypes.rst:195
 #, python-format
 msgid ""
 "static PyObject *\n"
-"newdatatype_str(newdatatypeobject *obj)\n"
+"newdatatype_str(PyObject *op)\n"
 "{\n"
+"    newdatatypeobject *self = (newdatatypeobject *) op;\n"
 "    return PyUnicode_FromFormat(\"Stringified_newdatatype{{size:%d}}\",\n"
-"                                obj->obj_UnderlyingDatatypePtr->size);\n"
+"                                self->obj_UnderlyingDatatypePtr->size);\n"
 "}"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:200
+#: ../Doc/extending/newtypes.rst:206
 msgid "Attribute Management"
 msgstr "Gestión de atributos"
 
-#: ../Doc/extending/newtypes.rst:202
+#: ../Doc/extending/newtypes.rst:208
 msgid ""
 "For every object which can support attributes, the corresponding type must "
 "provide the functions that control how the attributes are resolved.  There "
@@ -460,7 +478,7 @@ msgstr ""
 "atributos). La eliminación de un atributo es un caso especial, para el cual "
 "el nuevo valor pasado al controlador es ``NULL``."
 
-#: ../Doc/extending/newtypes.rst:208
+#: ../Doc/extending/newtypes.rst:214
 msgid ""
 "Python supports two pairs of attribute handlers; a type that supports "
 "attributes only needs to implement the functions for one pair.  The "
@@ -474,7 +492,7 @@ msgstr ""
 "que el otro acepta un :c:expr:`PyObject*`. Cada tipo puede usar cualquier "
 "par que tenga más sentido para la conveniencia de la implementación. ::"
 
-#: ../Doc/extending/newtypes.rst:214
+#: ../Doc/extending/newtypes.rst:220
 msgid ""
 "getattrfunc  tp_getattr;        /* char * version */\n"
 "setattrfunc  tp_setattr;\n"
@@ -483,7 +501,7 @@ msgid ""
 "setattrofunc tp_setattro;"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:220
+#: ../Doc/extending/newtypes.rst:226
 msgid ""
 "If accessing attributes of an object is always a simple operation (this will "
 "be explained shortly), there are generic implementations which can be used "
@@ -501,11 +519,11 @@ msgstr ""
 "Python 2.2, aunque hay muchos ejemplos que no se han actualizado para usar "
 "algunos de los nuevos mecanismos genéricos disponibles."
 
-#: ../Doc/extending/newtypes.rst:231
+#: ../Doc/extending/newtypes.rst:237
 msgid "Generic Attribute Management"
 msgstr "Gestión de atributos genéricos"
 
-#: ../Doc/extending/newtypes.rst:233
+#: ../Doc/extending/newtypes.rst:239
 msgid ""
 "Most extension types only use *simple* attributes.  So, what makes the "
 "attributes simple?  There are only a couple of conditions that must be met:"
@@ -514,7 +532,7 @@ msgstr ""
 "¿qué hace que los atributos sean simples? Solo hay un par de condiciones que "
 "se deben cumplir:"
 
-#: ../Doc/extending/newtypes.rst:236
+#: ../Doc/extending/newtypes.rst:242
 msgid ""
 "The name of the attributes must be known when :c:func:`PyType_Ready` is "
 "called."
@@ -522,7 +540,7 @@ msgstr ""
 "El nombre de los atributos debe ser conocido cuando :c:func:`PyType_Ready` "
 "es llamado."
 
-#: ../Doc/extending/newtypes.rst:239
+#: ../Doc/extending/newtypes.rst:245
 msgid ""
 "No special processing is needed to record that an attribute was looked up or "
 "set, nor do actions need to be taken based on the value."
@@ -530,7 +548,7 @@ msgstr ""
 "No se necesita un procesamiento especial para registrar que un atributo se "
 "buscó o se configuró, ni se deben tomar acciones basadas en el valor."
 
-#: ../Doc/extending/newtypes.rst:242
+#: ../Doc/extending/newtypes.rst:248
 msgid ""
 "Note that this list does not place any restrictions on the values of the "
 "attributes, when the values are computed, or how relevant data is stored."
@@ -539,7 +557,7 @@ msgstr ""
 "atributos, cuándo se calculan los valores o cómo se almacenan los datos "
 "relevantes."
 
-#: ../Doc/extending/newtypes.rst:245
+#: ../Doc/extending/newtypes.rst:251
 msgid ""
 "When :c:func:`PyType_Ready` is called, it uses three tables referenced by "
 "the type object to create :term:`descriptor`\\s which are placed in the "
@@ -559,18 +577,18 @@ msgstr ""
 "tp_getattro` y los campos :c:member:`~PyTypeObject.tp_setattro` ``NULL`` "
 "también, permitiendo que el tipo base maneje los atributos."
 
-#: ../Doc/extending/newtypes.rst:253
+#: ../Doc/extending/newtypes.rst:259
 msgid "The tables are declared as three fields of the type object::"
 msgstr "Las tablas se declaran como tres campos del tipo objeto::"
 
-#: ../Doc/extending/newtypes.rst:255
+#: ../Doc/extending/newtypes.rst:261
 msgid ""
 "struct PyMethodDef *tp_methods;\n"
 "struct PyMemberDef *tp_members;\n"
 "struct PyGetSetDef *tp_getset;"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:259
+#: ../Doc/extending/newtypes.rst:265
 msgid ""
 "If :c:member:`~PyTypeObject.tp_methods` is not ``NULL``, it must refer to an "
 "array of :c:type:`PyMethodDef` structures.  Each entry in the table is an "
@@ -580,7 +598,8 @@ msgstr ""
 "arreglo de estructuras :c:type:`PyMethodDef`. Cada entrada en la tabla es "
 "una instancia de esta estructura::"
 
-#: ../Doc/extending/newtypes.rst:263
+#: ../Doc/extending/newtypes.rst:269
+#, python-brace-format
 msgid ""
 "typedef struct PyMethodDef {\n"
 "    const char  *ml_name;       /* method name */\n"
@@ -590,7 +609,7 @@ msgid ""
 "} PyMethodDef;"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:270
+#: ../Doc/extending/newtypes.rst:276
 #, fuzzy
 msgid ""
 "One entry should be defined for each method provided by the type; no entries "
@@ -603,7 +622,7 @@ msgstr ""
 "necesita una entrada adicional al final; es un centinela el que marca el "
 "final del arreglo. El campo :attr:`ml_name` del centinela debe ser ``NULL``."
 
-#: ../Doc/extending/newtypes.rst:275
+#: ../Doc/extending/newtypes.rst:281
 msgid ""
 "The second table is used to define attributes which map directly to data "
 "stored in the instance.  A variety of primitive C types are supported, and "
@@ -615,7 +634,8 @@ msgstr ""
 "de tipos C primitivos, y el acceso puede ser de solo lectura o lectura-"
 "escritura. Las estructuras en la tabla se definen como::"
 
-#: ../Doc/extending/newtypes.rst:279
+#: ../Doc/extending/newtypes.rst:285
+#, python-brace-format
 msgid ""
 "typedef struct PyMemberDef {\n"
 "    const char *name;\n"
@@ -626,7 +646,7 @@ msgid ""
 "} PyMemberDef;"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:287
+#: ../Doc/extending/newtypes.rst:293
 #, fuzzy
 msgid ""
 "For each entry in the table, a :term:`descriptor` will be constructed and "
@@ -646,7 +666,7 @@ msgstr ""
 "C. El campo :attr:`flags` se usa para almacenar flags que controlan cómo se "
 "puede acceder al atributo."
 
-#: ../Doc/extending/newtypes.rst:295
+#: ../Doc/extending/newtypes.rst:301
 #, fuzzy
 msgid ""
 "An interesting advantage of using the :c:member:`~PyTypeObject.tp_members` "
@@ -663,7 +683,7 @@ msgstr ""
 "puede usar la API de introspección para recuperar el descriptor del objeto "
 "de clase y obtener el docstring utilizando su atributo :attr:`__doc__`."
 
-#: ../Doc/extending/newtypes.rst:301
+#: ../Doc/extending/newtypes.rst:307
 #, fuzzy
 msgid ""
 "As with the :c:member:`~PyTypeObject.tp_methods` table, a sentinel entry "
@@ -672,11 +692,11 @@ msgstr ""
 "Al igual que con la tabla :c:member:`~PyTypeObject.tp_methods`, se requiere "
 "una entrada de centinela con un valor :attr:`name` de ``NULL``."
 
-#: ../Doc/extending/newtypes.rst:315
+#: ../Doc/extending/newtypes.rst:321
 msgid "Type-specific Attribute Management"
 msgstr "Gestión de atributos específicos de tipo"
 
-#: ../Doc/extending/newtypes.rst:317
+#: ../Doc/extending/newtypes.rst:323
 msgid ""
 "For simplicity, only the :c:expr:`char\\*` version will be demonstrated "
 "here; the type of the name parameter is the only difference between the :c:"
@@ -694,7 +714,7 @@ msgstr ""
 "controlador, de modo que si necesita ampliar su funcionalidad, comprenderá "
 "lo que debe hacerse."
 
-#: ../Doc/extending/newtypes.rst:325
+#: ../Doc/extending/newtypes.rst:331
 #, fuzzy
 msgid ""
 "The :c:member:`~PyTypeObject.tp_getattr` handler is called when the object "
@@ -705,29 +725,29 @@ msgstr ""
 "requiere una búsqueda de atributo. Se llama en las mismas situaciones donde "
 "se llamaría el método :meth:`__getattr__` de una clase."
 
-#: ../Doc/extending/newtypes.rst:329
+#: ../Doc/extending/newtypes.rst:335
 msgid "Here is an example::"
 msgstr "Aquí hay un ejemplo::"
 
-#: ../Doc/extending/newtypes.rst:331
+#: ../Doc/extending/newtypes.rst:337
 #, python-format
 msgid ""
 "static PyObject *\n"
-"newdatatype_getattr(newdatatypeobject *obj, char *name)\n"
+"newdatatype_getattr(PyObject *op, char *name)\n"
 "{\n"
-"    if (strcmp(name, \"data\") == 0)\n"
-"    {\n"
-"        return PyLong_FromLong(obj->data);\n"
+"    newdatatypeobject *self = (newdatatypeobject *) op;\n"
+"    if (strcmp(name, \"data\") == 0) {\n"
+"        return PyLong_FromLong(self->data);\n"
 "    }\n"
 "\n"
 "    PyErr_Format(PyExc_AttributeError,\n"
 "                 \"'%.100s' object has no attribute '%.400s'\",\n"
-"                 Py_TYPE(obj)->tp_name, name);\n"
+"                 Py_TYPE(self)->tp_name, name);\n"
 "    return NULL;\n"
 "}"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:345
+#: ../Doc/extending/newtypes.rst:351
 #, fuzzy
 msgid ""
 "The :c:member:`~PyTypeObject.tp_setattr` handler is called when the :meth:"
@@ -744,26 +764,26 @@ msgstr ""
 "fuera realmente todo lo que deseaba, el controlador :c:member:`~PyTypeObject."
 "tp_setattr` debería establecerse en ``NULL``. ::"
 
-#: ../Doc/extending/newtypes.rst:351
-#, python-format
+#: ../Doc/extending/newtypes.rst:357
+#, python-format, python-brace-format
 msgid ""
 "static int\n"
-"newdatatype_setattr(newdatatypeobject *obj, char *name, PyObject *v)\n"
+"newdatatype_setattr(PyObject *op, char *name, PyObject *v)\n"
 "{\n"
 "    PyErr_Format(PyExc_RuntimeError, \"Read-only attribute: %s\", name);\n"
 "    return -1;\n"
 "}"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:359
+#: ../Doc/extending/newtypes.rst:365
 msgid "Object Comparison"
 msgstr "Comparación de Objetos"
 
-#: ../Doc/extending/newtypes.rst:363
+#: ../Doc/extending/newtypes.rst:369
 msgid "richcmpfunc tp_richcompare;"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:365
+#: ../Doc/extending/newtypes.rst:371
 #, fuzzy
 msgid ""
 "The :c:member:`~PyTypeObject.tp_richcompare` handler is called when "
@@ -776,7 +796,7 @@ msgstr ""
 "<richcmpfuncs>`, como :meth:`__lt__`, y también llamado por :c:func:"
 "`PyObject_RichCompare` y :c:func:`PyObject_RichCompareBool`."
 
-#: ../Doc/extending/newtypes.rst:370
+#: ../Doc/extending/newtypes.rst:376
 msgid ""
 "This function is called with two Python objects and the operator as "
 "arguments, where the operator is one of ``Py_EQ``, ``Py_NE``, ``Py_LE``, "
@@ -794,7 +814,7 @@ msgstr ""
 "comparación no está implementada y se debe probar el método de comparación "
 "del otro objeto, o ``NULL`` si se estableció una excepción."
 
-#: ../Doc/extending/newtypes.rst:378
+#: ../Doc/extending/newtypes.rst:384
 msgid ""
 "Here is a sample implementation, for a datatype that is considered equal if "
 "the size of an internal pointer is equal::"
@@ -802,12 +822,13 @@ msgstr ""
 "Aquí hay una implementación de muestra, para un tipo de datos que se "
 "considera igual si el tamaño de un puntero interno es igual:"
 
-#: ../Doc/extending/newtypes.rst:381
+#: ../Doc/extending/newtypes.rst:387
 msgid ""
 "static PyObject *\n"
-"newdatatype_richcmp(newdatatypeobject *obj1, newdatatypeobject *obj2, int "
-"op)\n"
+"newdatatype_richcmp(PyObject *lhs, PyObject *rhs, int op)\n"
 "{\n"
+"    newdatatypeobject *obj1 = (newdatatypeobject *) lhs;\n"
+"    newdatatypeobject *obj2 = (newdatatypeobject *) rhs;\n"
 "    PyObject *result;\n"
 "    int c, size1, size2;\n"
 "\n"
@@ -826,16 +847,15 @@ msgid ""
 "    case Py_GE: c = size1 >= size2; break;\n"
 "    }\n"
 "    result = c ? Py_True : Py_False;\n"
-"    Py_INCREF(result);\n"
-"    return result;\n"
+"    return Py_NewRef(result);\n"
 " }"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:408
+#: ../Doc/extending/newtypes.rst:415
 msgid "Abstract Protocol Support"
 msgstr "Soporte de protocolo abstracto"
 
-#: ../Doc/extending/newtypes.rst:410
+#: ../Doc/extending/newtypes.rst:417
 msgid ""
 "Python supports a variety of *abstract* 'protocols;' the specific interfaces "
 "provided to use these interfaces are documented in :ref:`abstract`."
@@ -844,7 +864,7 @@ msgstr ""
 "específicas proporcionadas para usar estas interfaces están documentadas en :"
 "ref:`abstract`."
 
-#: ../Doc/extending/newtypes.rst:414
+#: ../Doc/extending/newtypes.rst:421
 msgid ""
 "A number of these abstract interfaces were defined early in the development "
 "of the Python implementation.  In particular, the number, mapping, and "
@@ -872,14 +892,14 @@ msgstr ""
 "indicador puede establecerse para indicar la presencia de un intervalo, pero "
 "un intervalo aún puede estar vacío.)::"
 
-#: ../Doc/extending/newtypes.rst:425
+#: ../Doc/extending/newtypes.rst:432
 msgid ""
 "PyNumberMethods   *tp_as_number;\n"
 "PySequenceMethods *tp_as_sequence;\n"
 "PyMappingMethods  *tp_as_mapping;"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:429
+#: ../Doc/extending/newtypes.rst:436
 msgid ""
 "If you wish your object to be able to act like a number, a sequence, or a "
 "mapping object, then you place the address of a structure that implements "
@@ -897,11 +917,11 @@ msgstr ""
 "de cada uno de estos en el directorio :file:`Objects` de la distribución "
 "fuente de Python. ::"
 
-#: ../Doc/extending/newtypes.rst:436
+#: ../Doc/extending/newtypes.rst:443
 msgid "hashfunc tp_hash;"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:438
+#: ../Doc/extending/newtypes.rst:445
 msgid ""
 "This function, if you choose to provide it, should return a hash number for "
 "an instance of your data type. Here is a simple example::"
@@ -909,20 +929,22 @@ msgstr ""
 "Esta función, si elige proporcionarla, debería retornar un número hash para "
 "una instancia de su tipo de datos. Aquí hay un ejemplo simple::"
 
-#: ../Doc/extending/newtypes.rst:441
+#: ../Doc/extending/newtypes.rst:448
 msgid ""
 "static Py_hash_t\n"
-"newdatatype_hash(newdatatypeobject *obj)\n"
+"newdatatype_hash(PyObject *op)\n"
 "{\n"
+"    newdatatypeobject *self = (newdatatypeobject *) op;\n"
 "    Py_hash_t result;\n"
-"    result = obj->some_size + 32767 * obj->some_number;\n"
-"    if (result == -1)\n"
-"       result = -2;\n"
+"    result = self->some_size + 32767 * self->some_number;\n"
+"    if (result == -1) {\n"
+"        result = -2;\n"
+"    }\n"
 "    return result;\n"
 "}"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:451
+#: ../Doc/extending/newtypes.rst:460
 msgid ""
 ":c:type:`Py_hash_t` is a signed integer type with a platform-varying width. "
 "Returning ``-1`` from :c:member:`~PyTypeObject.tp_hash` indicates an error, "
@@ -934,11 +956,11 @@ msgstr ""
 "tp_hash` indica un error, por lo que debe tener cuidado de evitar retornarlo "
 "cuando el cálculo de hash sea exitoso, como se vio anteriormente."
 
-#: ../Doc/extending/newtypes.rst:458
+#: ../Doc/extending/newtypes.rst:467
 msgid "ternaryfunc tp_call;"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:460
+#: ../Doc/extending/newtypes.rst:469
 msgid ""
 "This function is called when an instance of your data type is \"called\", "
 "for example, if ``obj1`` is an instance of your data type and the Python "
@@ -950,11 +972,11 @@ msgstr ""
 "Python contiene ``obj1('hello')``, el controlador :c:member:`~PyTypeObject."
 "tp_call` se invoca."
 
-#: ../Doc/extending/newtypes.rst:464
+#: ../Doc/extending/newtypes.rst:473
 msgid "This function takes three arguments:"
 msgstr "Esta función toma tres argumentos:"
 
-#: ../Doc/extending/newtypes.rst:466
+#: ../Doc/extending/newtypes.rst:475
 msgid ""
 "*self* is the instance of the data type which is the subject of the call. If "
 "the call is ``obj1('hello')``, then *self* is ``obj1``."
@@ -962,7 +984,7 @@ msgstr ""
 "*self* es la instancia del tipo de datos que es el sujeto de la llamada. Si "
 "la llamada es ``obj1('hola')``, entonces *self* es ``obj1``."
 
-#: ../Doc/extending/newtypes.rst:469
+#: ../Doc/extending/newtypes.rst:478
 msgid ""
 "*args* is a tuple containing the arguments to the call.  You can use :c:func:"
 "`PyArg_ParseTuple` to extract the arguments."
@@ -970,7 +992,7 @@ msgstr ""
 "*args* es una tupla que contiene los argumentos de la llamada. Puede usar :c:"
 "func:`PyArg_ParseTuple` para extraer los argumentos."
 
-#: ../Doc/extending/newtypes.rst:472
+#: ../Doc/extending/newtypes.rst:481
 msgid ""
 "*kwds* is a dictionary of keyword arguments that were passed. If this is non-"
 "``NULL`` and you support keyword arguments, use :c:func:"
@@ -985,16 +1007,17 @@ msgstr ""
 "`TypeError` con un mensaje que indique que los argumentos de palabras clave "
 "no son compatibles."
 
-#: ../Doc/extending/newtypes.rst:478
+#: ../Doc/extending/newtypes.rst:487
 msgid "Here is a toy ``tp_call`` implementation::"
 msgstr "Aquí hay una implementación de juguete ``tp_call``::"
 
-#: ../Doc/extending/newtypes.rst:480
+#: ../Doc/extending/newtypes.rst:489
 #, python-format
 msgid ""
 "static PyObject *\n"
-"newdatatype_call(newdatatypeobject *obj, PyObject *args, PyObject *kwds)\n"
+"newdatatype_call(PyObject *op, PyObject *args, PyObject *kwds)\n"
 "{\n"
+"    newdatatypeobject *self = (newdatatypeobject *) op;\n"
 "    PyObject *result;\n"
 "    const char *arg1;\n"
 "    const char *arg2;\n"
@@ -1005,20 +1028,20 @@ msgid ""
 "    }\n"
 "    result = PyUnicode_FromFormat(\n"
 "        \"Returning -- value: [%d] arg1: [%s] arg2: [%s] arg3: [%s]\\n\",\n"
-"        obj->obj_UnderlyingDatatypePtr->size,\n"
+"        self->obj_UnderlyingDatatypePtr->size,\n"
 "        arg1, arg2, arg3);\n"
 "    return result;\n"
 "}"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:500
+#: ../Doc/extending/newtypes.rst:510
 msgid ""
 "/* Iterators */\n"
 "getiterfunc tp_iter;\n"
 "iternextfunc tp_iternext;"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:504
+#: ../Doc/extending/newtypes.rst:514
 #, fuzzy
 msgid ""
 "These functions provide support for the iterator protocol.  Both handlers "
@@ -1037,7 +1060,7 @@ msgstr ""
 "member:`~PyTypeObject.tp_iternext` corresponde al método Python :meth:"
 "`~iterator.__next__`."
 
-#: ../Doc/extending/newtypes.rst:511
+#: ../Doc/extending/newtypes.rst:521
 msgid ""
 "Any :term:`iterable` object must implement the :c:member:`~PyTypeObject."
 "tp_iter` handler, which must return an :term:`iterator` object.  Here the "
@@ -1047,7 +1070,7 @@ msgstr ""
 "`~PyTypeObject.tp_iter`, que debe retornar un objeto :term:`iterator`. Aquí "
 "se aplican las mismas pautas que para las clases de Python:"
 
-#: ../Doc/extending/newtypes.rst:515
+#: ../Doc/extending/newtypes.rst:525
 msgid ""
 "For collections (such as lists and tuples) which can support multiple "
 "independent iterators, a new iterator should be created and returned by each "
@@ -1057,7 +1080,7 @@ msgstr ""
 "iteradores independientes, cada llamada debe crear y retornar un nuevo "
 "iterador a :c:member:`~PyTypeObject.tp_iter`."
 
-#: ../Doc/extending/newtypes.rst:518
+#: ../Doc/extending/newtypes.rst:528
 msgid ""
 "Objects which can only be iterated over once (usually due to side effects of "
 "iteration, such as file objects) can implement :c:member:`~PyTypeObject."
@@ -1070,7 +1093,7 @@ msgstr ""
 "referencia a ellos mismos y, por lo tanto, también deben implementar el "
 "manejador :c:member:`~PyTypeObject.tp_iternext`."
 
-#: ../Doc/extending/newtypes.rst:523
+#: ../Doc/extending/newtypes.rst:533
 msgid ""
 "Any :term:`iterator` object should implement both :c:member:`~PyTypeObject."
 "tp_iter` and :c:member:`~PyTypeObject.tp_iternext`.  An iterator's :c:member:"
@@ -1096,11 +1119,11 @@ msgstr ""
 "mejor. Si se produce un error real, :c:member:`~PyTypeObject.tp_iternext` "
 "siempre debe establecer una excepción y retornar ``NULL``."
 
-#: ../Doc/extending/newtypes.rst:539
+#: ../Doc/extending/newtypes.rst:549
 msgid "Weak Reference Support"
 msgstr "Soporte de referencia débil"
 
-#: ../Doc/extending/newtypes.rst:541
+#: ../Doc/extending/newtypes.rst:551
 msgid ""
 "One of the goals of Python's weak reference implementation is to allow any "
 "type to participate in the weak reference mechanism without incurring the "
@@ -1111,11 +1134,11 @@ msgstr ""
 "sin incurrir en la sobrecarga de objetos críticos para el rendimiento (como "
 "los números)."
 
-#: ../Doc/extending/newtypes.rst:546
+#: ../Doc/extending/newtypes.rst:556
 msgid "Documentation for the :mod:`weakref` module."
 msgstr "Documentación para el módulo :mod:`weakref`."
 
-#: ../Doc/extending/newtypes.rst:548
+#: ../Doc/extending/newtypes.rst:558
 msgid ""
 "For an object to be weakly referenceable, the extension type must set the "
 "``Py_TPFLAGS_MANAGED_WEAKREF`` bit of the :c:member:`~PyTypeObject.tp_flags` "
@@ -1123,14 +1146,15 @@ msgid ""
 "be left as zero."
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:553
+#: ../Doc/extending/newtypes.rst:563
 #, fuzzy
 msgid ""
 "Concretely, here is how the statically declared type object would look::"
 msgstr ""
 "Y el miembro correspondiente en el objeto de tipo declarado estáticamente:"
 
-#: ../Doc/extending/newtypes.rst:555
+#: ../Doc/extending/newtypes.rst:565
+#, python-brace-format
 msgid ""
 "static PyTypeObject TrivialType = {\n"
 "    PyVarObject_HEAD_INIT(NULL, 0)\n"
@@ -1139,7 +1163,7 @@ msgid ""
 "};"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:562
+#: ../Doc/extending/newtypes.rst:572
 #, fuzzy
 msgid ""
 "The only further addition is that ``tp_dealloc`` needs to clear any weak "
@@ -1149,23 +1173,24 @@ msgstr ""
 "referencia débil (llamando a :c:func:`PyObject_ClearWeakRefs`) si el campo "
 "no es ``NULL`` ::"
 
-#: ../Doc/extending/newtypes.rst:565
+#: ../Doc/extending/newtypes.rst:575
+#, python-brace-format
 msgid ""
 "static void\n"
-"Trivial_dealloc(TrivialObject *self)\n"
+"Trivial_dealloc(PyObject *op)\n"
 "{\n"
 "    /* Clear weakrefs first before calling any destructors */\n"
-"    PyObject_ClearWeakRefs((PyObject *) self);\n"
+"    PyObject_ClearWeakRefs(op);\n"
 "    /* ... remainder of destruction code omitted for brevity ... */\n"
-"    Py_TYPE(self)->tp_free((PyObject *) self);\n"
+"    Py_TYPE(op)->tp_free(op);\n"
 "}"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:576
+#: ../Doc/extending/newtypes.rst:586
 msgid "More Suggestions"
 msgstr "Más Sugerencias"
 
-#: ../Doc/extending/newtypes.rst:578
+#: ../Doc/extending/newtypes.rst:588
 msgid ""
 "In order to learn how to implement any specific method for your new data "
 "type, get the :term:`CPython` source code.  Go to the :file:`Objects` "
@@ -1179,7 +1204,7 @@ msgstr ""
 "desee (por ejemplo, ``tp_richcompare``). Encontrará ejemplos de la función "
 "que desea implementar."
 
-#: ../Doc/extending/newtypes.rst:584
+#: ../Doc/extending/newtypes.rst:594
 msgid ""
 "When you need to verify that an object is a concrete instance of the type "
 "you are implementing, use the :c:func:`PyObject_TypeCheck` function.  A "
@@ -1189,7 +1214,8 @@ msgstr ""
 "que está implementando, use la función :c:func:`PyObject_TypeCheck`. Una "
 "muestra de su uso podría ser algo como lo siguiente::"
 
-#: ../Doc/extending/newtypes.rst:588
+#: ../Doc/extending/newtypes.rst:598
+#, python-brace-format
 msgid ""
 "if (!PyObject_TypeCheck(some_object, &MyType)) {\n"
 "    PyErr_SetString(PyExc_TypeError, \"arg #1 not a mything\");\n"
@@ -1197,22 +1223,22 @@ msgid ""
 "}"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:595
+#: ../Doc/extending/newtypes.rst:604
 msgid "Download CPython source releases."
 msgstr "Descargue las versiones de origen de CPython."
 
-#: ../Doc/extending/newtypes.rst:595
+#: ../Doc/extending/newtypes.rst:605
 msgid "https://www.python.org/downloads/source/"
 msgstr "https://www.python.org/downloads/source/"
 
-#: ../Doc/extending/newtypes.rst:597
+#: ../Doc/extending/newtypes.rst:607
 msgid ""
 "The CPython project on GitHub, where the CPython source code is developed."
 msgstr ""
 "El proyecto CPython en GitHub, donde se desarrolla el código fuente de "
 "CPython."
 
-#: ../Doc/extending/newtypes.rst:598
+#: ../Doc/extending/newtypes.rst:608
 msgid "https://github.com/python/cpython"
 msgstr "https://github.com/python/cpython"
 
@@ -1237,27 +1263,27 @@ msgstr ""
 msgid "finalization, of objects"
 msgstr "Finalización y desasignación"
 
-#: ../Doc/extending/newtypes.rst:91
+#: ../Doc/extending/newtypes.rst:93
 msgid "PyErr_Fetch (C function)"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:91
+#: ../Doc/extending/newtypes.rst:93
 msgid "PyErr_Restore (C function)"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:150
+#: ../Doc/extending/newtypes.rst:154
 msgid "string"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:150
+#: ../Doc/extending/newtypes.rst:154
 #, fuzzy
 msgid "object representation"
 msgstr "Presentación de objetos"
 
-#: ../Doc/extending/newtypes.rst:150
+#: ../Doc/extending/newtypes.rst:154
 msgid "built-in function"
 msgstr ""
 
-#: ../Doc/extending/newtypes.rst:150
+#: ../Doc/extending/newtypes.rst:154
 msgid "repr"
 msgstr ""

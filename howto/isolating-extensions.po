@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python en Español 3.11\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-21 16:38-0300\n"
+"POT-Creation-Date: 2026-02-26 18:44-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: ../Doc/howto/isolating-extensions.rst:7
 msgid "Isolating Extension Modules"
@@ -337,11 +337,12 @@ msgstr ""
 "no es posible, considere el bloqueo explícito."
 
 #: ../Doc/howto/isolating-extensions.rst:168
+#, fuzzy
 msgid ""
 "If it is necessary to use process-global state, the simplest way to avoid "
 "issues with multiple interpreters is to explicitly prevent a module from "
-"being loaded more than once per process—see `Opt-Out: Limiting to One Module "
-"Object per Process`_."
+"being loaded more than once per process—see :ref:`isolating-extensions-"
+"optout`."
 msgstr ""
 "Si es necesario usar el estado global del proceso, la forma más sencilla de "
 "evitar problemas con varios intérpretes es evitar explícitamente que un "
@@ -428,11 +429,11 @@ msgstr ""
 "xxlimited.c>`__; ejemplo de inicialización del módulo que se muestra en la "
 "parte inferior del archivo."
 
-#: ../Doc/howto/isolating-extensions.rst:211
+#: ../Doc/howto/isolating-extensions.rst:213
 msgid "Opt-Out: Limiting to One Module Object per Process"
 msgstr "Exclusión voluntaria: limitación a un objeto de módulo por proceso"
 
-#: ../Doc/howto/isolating-extensions.rst:213
+#: ../Doc/howto/isolating-extensions.rst:215
 msgid ""
 "A non-negative ``PyModuleDef.m_size`` signals that a module supports "
 "multiple interpreters correctly. If this is not yet the case for your "
@@ -444,28 +445,44 @@ msgstr ""
 "hacer que su módulo se pueda cargar explícitamente solo una vez por proceso. "
 "Por ejemplo::"
 
-#: ../Doc/howto/isolating-extensions.rst:218
+#: ../Doc/howto/isolating-extensions.rst:220
 msgid ""
+"// A process-wide flag\n"
 "static int loaded = 0;\n"
+"\n"
+"// Mutex to provide thread safety (only needed for free-threaded Python)\n"
+"static PyMutex modinit_mutex = {0};\n"
 "\n"
 "static int\n"
 "exec_module(PyObject* module)\n"
 "{\n"
+"    PyMutex_Lock(&modinit_mutex);\n"
 "    if (loaded) {\n"
+"        PyMutex_Unlock(&modinit_mutex);\n"
 "        PyErr_SetString(PyExc_ImportError,\n"
 "                        \"cannot load module more than once per process\");\n"
 "        return -1;\n"
 "    }\n"
 "    loaded = 1;\n"
+"    PyMutex_Unlock(&modinit_mutex);\n"
 "    // ... rest of initialization\n"
 "}"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:234
+#: ../Doc/howto/isolating-extensions.rst:242
+msgid ""
+"If your module's :c:member:`PyModuleDef.m_clear` function is able to prepare "
+"for future re-initialization, it should clear the ``loaded`` flag. In this "
+"case, your module won't support multiple instances existing *concurrently*, "
+"but it will, for example, support being loaded after Python runtime shutdown "
+"(:c:func:`Py_FinalizeEx`) and re-initialization (:c:func:`Py_Initialize`)."
+msgstr ""
+
+#: ../Doc/howto/isolating-extensions.rst:251
 msgid "Module State Access from Functions"
 msgstr "Acceso al estado del módulo desde las funciones"
 
-#: ../Doc/howto/isolating-extensions.rst:236
+#: ../Doc/howto/isolating-extensions.rst:253
 msgid ""
 "Accessing the state from module-level functions is straightforward. "
 "Functions get the module object as their first argument; for extracting the "
@@ -475,7 +492,7 @@ msgstr ""
 "funciones obtienen el objeto del módulo como su primer argumento; para "
 "extraer el estado, puede usar ``PyModule_GetState``::"
 
-#: ../Doc/howto/isolating-extensions.rst:240
+#: ../Doc/howto/isolating-extensions.rst:257
 msgid ""
 "static PyObject *\n"
 "func(PyObject *module, PyObject *args)\n"
@@ -488,7 +505,7 @@ msgid ""
 "}"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:251
+#: ../Doc/howto/isolating-extensions.rst:268
 msgid ""
 "``PyModule_GetState`` may return ``NULL`` without setting an exception if "
 "there is no module state, i.e. ``PyModuleDef.m_size`` was zero. In your own "
@@ -499,11 +516,11 @@ msgstr ""
 "su propio módulo, tiene el control de ``m_size``, por lo que es fácil de "
 "evitar."
 
-#: ../Doc/howto/isolating-extensions.rst:258
+#: ../Doc/howto/isolating-extensions.rst:275
 msgid "Heap Types"
 msgstr "Tipos Heap"
 
-#: ../Doc/howto/isolating-extensions.rst:260
+#: ../Doc/howto/isolating-extensions.rst:277
 msgid ""
 "Traditionally, types defined in C code are *static*; that is, ``static "
 "PyTypeObject`` structures defined directly in code and initialized using "
@@ -513,7 +530,7 @@ msgstr ""
 "estructuras ``static PyTypeObject`` definidas directamente en el código e "
 "inicializadas mediante ``PyType_Ready()``."
 
-#: ../Doc/howto/isolating-extensions.rst:264
+#: ../Doc/howto/isolating-extensions.rst:281
 msgid ""
 "Such types are necessarily shared across the process. Sharing them between "
 "module objects requires paying attention to any state they own or access. To "
@@ -526,7 +543,7 @@ msgstr ""
 "tipos estáticos son inmutables en el nivel de Python: por ejemplo, no puede "
 "configurar ``str.myattribute = 123``."
 
-#: ../Doc/howto/isolating-extensions.rst:270
+#: ../Doc/howto/isolating-extensions.rst:287
 msgid ""
 "Sharing truly immutable objects between interpreters is fine, as long as "
 "they don't provide access to mutable objects. However, in CPython, every "
@@ -543,7 +560,7 @@ msgstr ""
 "entre intérpretes depende implícitamente del GIL actual de todo el proceso "
 "de CPython."
 
-#: ../Doc/howto/isolating-extensions.rst:277
+#: ../Doc/howto/isolating-extensions.rst:294
 msgid ""
 "Because they are immutable and process-global, static types cannot access "
 "\"their\" module state. If any method of such a type requires access to "
@@ -558,17 +575,17 @@ msgstr ""
 "corresponden más estrechamente con las clases creadas por la instrucción "
 "``class`` de Python."
 
-#: ../Doc/howto/isolating-extensions.rst:284
+#: ../Doc/howto/isolating-extensions.rst:301
 msgid "For new modules, using heap types by default is a good rule of thumb."
 msgstr ""
 "Para los módulos nuevos, usar tipos heap de forma predeterminada es una "
 "buena regla general."
 
-#: ../Doc/howto/isolating-extensions.rst:288
+#: ../Doc/howto/isolating-extensions.rst:305
 msgid "Changing Static Types to Heap Types"
 msgstr "Cambio de tipos estáticos a tipos heap"
 
-#: ../Doc/howto/isolating-extensions.rst:290
+#: ../Doc/howto/isolating-extensions.rst:307
 msgid ""
 "Static types can be converted to heap types, but note that the heap type API "
 "was not designed for \"lossless\" conversion from static types—that is, "
@@ -585,7 +602,7 @@ msgstr ""
 "(por ejemplo, capacidad de selección o espacios heredados). Siempre pruebe "
 "los detalles que son importantes para usted."
 
-#: ../Doc/howto/isolating-extensions.rst:299
+#: ../Doc/howto/isolating-extensions.rst:316
 msgid ""
 "Watch out for the following two points in particular (but note that this is "
 "not a comprehensive list):"
@@ -593,7 +610,7 @@ msgstr ""
 "Tenga cuidado con los siguientes dos puntos en particular (pero tenga en "
 "cuenta que esta no es una lista completa):"
 
-#: ../Doc/howto/isolating-extensions.rst:302
+#: ../Doc/howto/isolating-extensions.rst:319
 #, fuzzy
 msgid ""
 "Unlike static types, heap type objects are mutable by default. Use the :c:"
@@ -603,7 +620,7 @@ msgstr ""
 "de forma predeterminada. Utilice el indicador :c:data:"
 "`Py_TPFLAGS_IMMUTABLETYPE` para evitar la mutabilidad."
 
-#: ../Doc/howto/isolating-extensions.rst:304
+#: ../Doc/howto/isolating-extensions.rst:321
 #, fuzzy
 msgid ""
 "Heap types inherit :c:member:`~PyTypeObject.tp_new` by default, so it may "
@@ -615,11 +632,11 @@ msgstr ""
 "código de Python. Puede evitar esto con el indicador :c:data:"
 "`Py_TPFLAGS_DISALLOW_INSTANTIATION`."
 
-#: ../Doc/howto/isolating-extensions.rst:310
+#: ../Doc/howto/isolating-extensions.rst:327
 msgid "Defining Heap Types"
 msgstr "Definición de tipos heap"
 
-#: ../Doc/howto/isolating-extensions.rst:312
+#: ../Doc/howto/isolating-extensions.rst:329
 msgid ""
 "Heap types can be created by filling a :c:struct:`PyType_Spec` structure, a "
 "description or \"blueprint\" of a class, and calling :c:func:"
@@ -629,7 +646,7 @@ msgstr ""
 "`PyType_Spec`, una descripción o \"modelo\" de una clase y llamando a :c:"
 "func:`PyType_FromModuleAndSpec` para construir un nuevo objeto de clase."
 
-#: ../Doc/howto/isolating-extensions.rst:317
+#: ../Doc/howto/isolating-extensions.rst:334
 msgid ""
 "Other functions, like :c:func:`PyType_FromSpec`, can also create heap types, "
 "but :c:func:`PyType_FromModuleAndSpec` associates the module with the class, "
@@ -639,7 +656,7 @@ msgstr ""
 "heap, pero :c:func:`PyType_FromModuleAndSpec` asocia el módulo con la clase, "
 "lo que permite el acceso al estado del módulo desde los métodos."
 
-#: ../Doc/howto/isolating-extensions.rst:321
+#: ../Doc/howto/isolating-extensions.rst:338
 msgid ""
 "The class should generally be stored in *both* the module state (for safe "
 "access from C) and the module's ``__dict__`` (for access from Python code)."
@@ -648,11 +665,11 @@ msgstr ""
 "(para acceso seguro desde C) y el ``__dict__`` del módulo (para acceso desde "
 "código Python)."
 
-#: ../Doc/howto/isolating-extensions.rst:327
+#: ../Doc/howto/isolating-extensions.rst:344
 msgid "Garbage-Collection Protocol"
 msgstr "Protocolo de recolección de basura"
 
-#: ../Doc/howto/isolating-extensions.rst:329
+#: ../Doc/howto/isolating-extensions.rst:346
 msgid ""
 "Instances of heap types hold a reference to their type. This ensures that "
 "the type isn't destroyed before all its instances are, but may result in "
@@ -663,7 +680,7 @@ msgstr ""
 "instancias, pero puede generar ciclos de referencia que el recolector de "
 "elementos no utilizados debe interrumpir."
 
-#: ../Doc/howto/isolating-extensions.rst:334
+#: ../Doc/howto/isolating-extensions.rst:351
 msgid ""
 "To avoid memory leaks, instances of heap types must implement the garbage "
 "collection protocol. That is, heap types should:"
@@ -672,12 +689,12 @@ msgstr ""
 "implementar el protocolo de recolección de elementos no utilizados. Es "
 "decir, los tipos heap deben:"
 
-#: ../Doc/howto/isolating-extensions.rst:338
+#: ../Doc/howto/isolating-extensions.rst:355
 #, fuzzy
 msgid "Have the :c:macro:`Py_TPFLAGS_HAVE_GC` flag."
 msgstr "Tener la bandera :c:data:`Py_TPFLAGS_HAVE_GC`."
 
-#: ../Doc/howto/isolating-extensions.rst:339
+#: ../Doc/howto/isolating-extensions.rst:356
 #, fuzzy
 msgid ""
 "Define a traverse function using ``Py_tp_traverse``, which visits the type "
@@ -686,7 +703,7 @@ msgstr ""
 "Defina una función transversal usando ``Py_tp_traverse``, que visita el tipo "
 "(por ejemplo, usando :c:expr:`Py_VISIT(Py_TYPE(self))`)."
 
-#: ../Doc/howto/isolating-extensions.rst:342
+#: ../Doc/howto/isolating-extensions.rst:359
 #, fuzzy
 msgid ""
 "Please refer to the documentation of :c:macro:`Py_TPFLAGS_HAVE_GC` and :c:"
@@ -696,25 +713,25 @@ msgstr ""
 "`Py_TPFLAGS_HAVE_GC` y :c:member:`~PyTypeObject.tp_traverse` para obtener "
 "consideraciones adicionales."
 
-#: ../Doc/howto/isolating-extensions.rst:346
+#: ../Doc/howto/isolating-extensions.rst:363
 msgid ""
 "The API for defining heap types grew organically, leaving it somewhat "
 "awkward to use in its current state. The following sections will guide you "
 "through common issues."
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:352
+#: ../Doc/howto/isolating-extensions.rst:369
 msgid "``tp_traverse`` in Python 3.8 and lower"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:354
+#: ../Doc/howto/isolating-extensions.rst:371
 msgid ""
 "The requirement to visit the type from ``tp_traverse`` was added in Python "
 "3.9. If you support Python 3.8 and lower, the traverse function must *not* "
 "visit the type, so it must be more complicated::"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:358
+#: ../Doc/howto/isolating-extensions.rst:375
 msgid ""
 "static int my_traverse(PyObject *self, visitproc visit, void *arg)\n"
 "{\n"
@@ -725,27 +742,27 @@ msgid ""
 "}"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:366
+#: ../Doc/howto/isolating-extensions.rst:383
 msgid ""
 "Unfortunately, :c:data:`Py_Version` was only added in Python 3.11. As a "
 "replacement, use:"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:369
+#: ../Doc/howto/isolating-extensions.rst:386
 msgid ":c:macro:`PY_VERSION_HEX`, if not using the stable ABI, or"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:370
+#: ../Doc/howto/isolating-extensions.rst:387
 msgid ""
 ":py:data:`sys.version_info` (via :c:func:`PySys_GetObject` and :c:func:"
 "`PyArg_ParseTuple`)."
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:375
+#: ../Doc/howto/isolating-extensions.rst:392
 msgid "Delegating ``tp_traverse``"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:377
+#: ../Doc/howto/isolating-extensions.rst:394
 #, fuzzy
 msgid ""
 "If your traverse function delegates to the :c:member:`~PyTypeObject."
@@ -758,20 +775,20 @@ msgstr ""
 "cuenta que solo se espera que el tipo de montón visite el tipo en "
 "``tp_traverse``."
 
-#: ../Doc/howto/isolating-extensions.rst:382
+#: ../Doc/howto/isolating-extensions.rst:399
 msgid "For example, if your traverse function includes::"
 msgstr "Por ejemplo, si su función poligonal incluye:"
 
-#: ../Doc/howto/isolating-extensions.rst:384
+#: ../Doc/howto/isolating-extensions.rst:401
 msgid "base->tp_traverse(self, visit, arg)"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:386
+#: ../Doc/howto/isolating-extensions.rst:403
 msgid "...and ``base`` may be a static type, then it should also include::"
 msgstr ""
 "...y ``base`` puede ser un tipo estático, entonces también debe incluir:"
 
-#: ../Doc/howto/isolating-extensions.rst:388
+#: ../Doc/howto/isolating-extensions.rst:405
 msgid ""
 "if (base->tp_flags & Py_TPFLAGS_HEAPTYPE) {\n"
 "    // a heap type's tp_traverse already visited Py_TYPE(self)\n"
@@ -782,7 +799,7 @@ msgid ""
 "}"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:396
+#: ../Doc/howto/isolating-extensions.rst:413
 #, fuzzy
 msgid ""
 "It is not necessary to handle the type's reference count in :c:member:"
@@ -791,32 +808,33 @@ msgstr ""
 "No es necesario manejar el recuento de referencias del tipo en ``tp_new`` y "
 "``tp_clear``."
 
-#: ../Doc/howto/isolating-extensions.rst:401
+#: ../Doc/howto/isolating-extensions.rst:418
 msgid "Defining ``tp_dealloc``"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:403
+#: ../Doc/howto/isolating-extensions.rst:420
 msgid ""
 "If your type has a custom :c:member:`~PyTypeObject.tp_dealloc` function, it "
 "needs to:"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:406
+#: ../Doc/howto/isolating-extensions.rst:423
 msgid ""
 "call :c:func:`PyObject_GC_UnTrack` before any fields are invalidated, and"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:407
+#: ../Doc/howto/isolating-extensions.rst:424
 msgid "decrement the reference count of the type."
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:409
+#: ../Doc/howto/isolating-extensions.rst:426
 msgid ""
 "To keep the type valid while ``tp_free`` is called, the type's refcount "
 "needs to be decremented *after* the instance is deallocated. For example::"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:412
+#: ../Doc/howto/isolating-extensions.rst:429
+#, python-brace-format
 msgid ""
 "static void my_dealloc(PyObject *self)\n"
 "{\n"
@@ -828,68 +846,68 @@ msgid ""
 "}"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:421
+#: ../Doc/howto/isolating-extensions.rst:438
 msgid ""
 "The default ``tp_dealloc`` function does this, so if your type does *not* "
 "override ``tp_dealloc`` you don't need to add it."
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:427
+#: ../Doc/howto/isolating-extensions.rst:444
 msgid "Not overriding ``tp_free``"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:429
+#: ../Doc/howto/isolating-extensions.rst:446
 msgid ""
 "The :c:member:`~PyTypeObject.tp_free` slot of a heap type must be set to :c:"
 "func:`PyObject_GC_Del`. This is the default; do not override it."
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:435
+#: ../Doc/howto/isolating-extensions.rst:452
 msgid "Avoiding ``PyObject_New``"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:437
+#: ../Doc/howto/isolating-extensions.rst:454
 msgid "GC-tracked objects need to be allocated using GC-aware functions."
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:439
-msgid "If you use use :c:func:`PyObject_New` or :c:func:`PyObject_NewVar`:"
+#: ../Doc/howto/isolating-extensions.rst:456
+msgid "If you use :c:func:`PyObject_New` or :c:func:`PyObject_NewVar`:"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:441
+#: ../Doc/howto/isolating-extensions.rst:458
 msgid ""
 "Get and call type's :c:member:`~PyTypeObject.tp_alloc` slot, if possible. "
 "That is, replace ``TYPE *o = PyObject_New(TYPE, typeobj)`` with::"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:444
+#: ../Doc/howto/isolating-extensions.rst:461
 msgid "TYPE *o = typeobj->tp_alloc(typeobj, 0);"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:446
+#: ../Doc/howto/isolating-extensions.rst:463
 msgid ""
 "Replace ``o = PyObject_NewVar(TYPE, typeobj, size)`` with the same, but use "
 "size instead of the 0."
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:449
+#: ../Doc/howto/isolating-extensions.rst:466
 msgid ""
 "If the above is not possible (e.g. inside a custom ``tp_alloc``), call :c:"
 "func:`PyObject_GC_New` or :c:func:`PyObject_GC_NewVar`::"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:452
+#: ../Doc/howto/isolating-extensions.rst:469
 msgid ""
 "TYPE *o = PyObject_GC_New(TYPE, typeobj);\n"
 "\n"
 "TYPE *o = PyObject_GC_NewVar(TYPE, typeobj, size);"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:458
+#: ../Doc/howto/isolating-extensions.rst:475
 msgid "Module State Access from Classes"
 msgstr "Acceso al estado del módulo desde las clases"
 
-#: ../Doc/howto/isolating-extensions.rst:460
+#: ../Doc/howto/isolating-extensions.rst:477
 msgid ""
 "If you have a type object defined with :c:func:`PyType_FromModuleAndSpec`, "
 "you can call :c:func:`PyType_GetModule` to get the associated module, and "
@@ -899,7 +917,7 @@ msgstr ""
 "puede llamar a :c:func:`PyType_GetModule` para obtener el módulo asociado y "
 "luego a :c:func:`PyModule_GetState` para obtener el estado del módulo."
 
-#: ../Doc/howto/isolating-extensions.rst:464
+#: ../Doc/howto/isolating-extensions.rst:481
 msgid ""
 "To save a some tedious error-handling boilerplate code, you can combine "
 "these two steps with :c:func:`PyType_GetModuleState`, resulting in::"
@@ -908,7 +926,8 @@ msgstr ""
 "combinar estos dos pasos con :c:func:`PyType_GetModuleState`, lo que da como "
 "resultado:"
 
-#: ../Doc/howto/isolating-extensions.rst:467
+#: ../Doc/howto/isolating-extensions.rst:484
+#, python-brace-format
 msgid ""
 "my_struct *state = (my_struct*)PyType_GetModuleState(type);\n"
 "if (state == NULL) {\n"
@@ -916,11 +935,11 @@ msgid ""
 "}"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:474
+#: ../Doc/howto/isolating-extensions.rst:491
 msgid "Module State Access from Regular Methods"
 msgstr "Acceso al estado del módulo desde métodos regulares"
 
-#: ../Doc/howto/isolating-extensions.rst:476
+#: ../Doc/howto/isolating-extensions.rst:493
 msgid ""
 "Accessing the module-level state from methods of a class is somewhat more "
 "complicated, but is possible thanks to API introduced in Python 3.9. To get "
@@ -932,7 +951,7 @@ msgstr ""
 "Para obtener el estado, primero debe obtener la *clase de definición* y "
 "luego obtener el estado del módulo."
 
-#: ../Doc/howto/isolating-extensions.rst:481
+#: ../Doc/howto/isolating-extensions.rst:498
 msgid ""
 "The largest roadblock is getting *the class a method was defined in*, or "
 "that method's \"defining class\" for short. The defining class can have a "
@@ -942,7 +961,7 @@ msgstr ""
 "método*, o la \"clase de definición\" de ese método para abreviar. La clase "
 "de definición puede tener una referencia al módulo del que forma parte."
 
-#: ../Doc/howto/isolating-extensions.rst:485
+#: ../Doc/howto/isolating-extensions.rst:502
 #, fuzzy
 msgid ""
 "Do not confuse the defining class with ``Py_TYPE(self)``. If the method is "
@@ -953,7 +972,7 @@ msgstr ""
 "al método en una *subclase* de su tipo, ``Py_TYPE(self)`` se referirá a esa "
 "subclase, que puede estar definida en un módulo diferente al suyo."
 
-#: ../Doc/howto/isolating-extensions.rst:490
+#: ../Doc/howto/isolating-extensions.rst:507
 msgid ""
 "The following Python code can illustrate the concept. ``Base."
 "get_defining_class`` returns ``Base`` even if ``type(self) == Sub``:"
@@ -961,7 +980,7 @@ msgstr ""
 "El siguiente código de Python puede ilustrar el concepto. ``Base."
 "get_defining_class`` retorna ``Base`` incluso si ``type(self) == Sub``:"
 
-#: ../Doc/howto/isolating-extensions.rst:494
+#: ../Doc/howto/isolating-extensions.rst:511
 msgid ""
 "class Base:\n"
 "    def get_type_of_self(self):\n"
@@ -974,7 +993,7 @@ msgid ""
 "    pass"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:506
+#: ../Doc/howto/isolating-extensions.rst:523
 #, fuzzy
 msgid ""
 "For a method to get its \"defining class\", it must use the :ref:"
@@ -986,7 +1005,7 @@ msgstr ""
 "`METH_METHOD | METH_FASTCALL | METH_KEYWORDS` :c:type:`calling convention "
 "<PyMethodDef>` y la firma :c:type:`PyCMethod` correspondiente:"
 
-#: ../Doc/howto/isolating-extensions.rst:511
+#: ../Doc/howto/isolating-extensions.rst:528
 msgid ""
 "PyObject *PyCMethod(\n"
 "    PyObject *self,               // object the method was called on\n"
@@ -996,7 +1015,7 @@ msgid ""
 "    PyObject *kwnames)            // NULL, or dict of keyword arguments"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:518
+#: ../Doc/howto/isolating-extensions.rst:535
 msgid ""
 "Once you have the defining class, call :c:func:`PyType_GetModuleState` to "
 "get the state of its associated module."
@@ -1004,11 +1023,11 @@ msgstr ""
 "Una vez que tenga la clase de definición, llame a :c:func:"
 "`PyType_GetModuleState` para obtener el estado de su módulo asociado."
 
-#: ../Doc/howto/isolating-extensions.rst:521
+#: ../Doc/howto/isolating-extensions.rst:538
 msgid "For example::"
 msgstr "Por ejemplo::"
 
-#: ../Doc/howto/isolating-extensions.rst:523
+#: ../Doc/howto/isolating-extensions.rst:540
 msgid ""
 "static PyObject *\n"
 "example_method(PyObject *self,\n"
@@ -1035,15 +1054,15 @@ msgid ""
 "}"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:549
+#: ../Doc/howto/isolating-extensions.rst:566
 msgid "Module State Access from Slot Methods, Getters and Setters"
 msgstr "Acceso al estado del módulo desde métodos de Slot, Getters y Setters"
 
-#: ../Doc/howto/isolating-extensions.rst:553
+#: ../Doc/howto/isolating-extensions.rst:570
 msgid "This is new in Python 3.11."
 msgstr "Esto es nuevo en Python 3.11."
 
-#: ../Doc/howto/isolating-extensions.rst:561
+#: ../Doc/howto/isolating-extensions.rst:578
 #, fuzzy
 msgid ""
 "Slot methods—the fast C equivalents for special methods, such as :c:member:"
@@ -1060,7 +1079,7 @@ msgstr ""
 "`PyCMethod`. Lo mismo ocurre con los getters y setters definidos con :c:type:"
 "`PyGetSetDef`."
 
-#: ../Doc/howto/isolating-extensions.rst:568
+#: ../Doc/howto/isolating-extensions.rst:585
 msgid ""
 "To access the module state in these cases, use the :c:func:"
 "`PyType_GetModuleByDef` function, and pass in the module definition. Once "
@@ -1070,7 +1089,8 @@ msgstr ""
 "`PyType_GetModuleByDef` y pase la definición del módulo. Una vez que tenga "
 "el módulo, llame a :c:func:`PyModule_GetState` para obtener el estado:"
 
-#: ../Doc/howto/isolating-extensions.rst:573
+#: ../Doc/howto/isolating-extensions.rst:590
+#, python-brace-format
 msgid ""
 "PyObject *module = PyType_GetModuleByDef(Py_TYPE(self), &module_def);\n"
 "my_struct *state = (my_struct*)PyModule_GetState(module);\n"
@@ -1079,7 +1099,7 @@ msgid ""
 "}"
 msgstr ""
 
-#: ../Doc/howto/isolating-extensions.rst:579
+#: ../Doc/howto/isolating-extensions.rst:596
 #, fuzzy
 msgid ""
 ":c:func:`!PyType_GetModuleByDef` works by searching the :term:`method "
@@ -1090,7 +1110,7 @@ msgstr ""
 "order` (es decir, todas las superclases) la primera superclase que tiene un "
 "módulo correspondiente."
 
-#: ../Doc/howto/isolating-extensions.rst:585
+#: ../Doc/howto/isolating-extensions.rst:602
 #, fuzzy
 msgid ""
 "In very exotic cases (inheritance chains spanning multiple modules created "
@@ -1104,11 +1124,11 @@ msgstr ""
 "definición. Sin embargo, siempre retornará un módulo con la misma "
 "definición, lo que garantiza un diseño de memoria C compatible."
 
-#: ../Doc/howto/isolating-extensions.rst:593
+#: ../Doc/howto/isolating-extensions.rst:610
 msgid "Lifetime of the Module State"
 msgstr "Vida útil del estado del módulo"
 
-#: ../Doc/howto/isolating-extensions.rst:595
+#: ../Doc/howto/isolating-extensions.rst:612
 msgid ""
 "When a module object is garbage-collected, its module state is freed. For "
 "each pointer to (a part of) the module state, you must hold a reference to "
@@ -1118,7 +1138,7 @@ msgstr ""
 "módulo. Para cada puntero a (una parte de) el estado del módulo, debe tener "
 "una referencia al objeto del módulo."
 
-#: ../Doc/howto/isolating-extensions.rst:599
+#: ../Doc/howto/isolating-extensions.rst:616
 msgid ""
 "Usually this is not an issue, because types created with :c:func:"
 "`PyType_FromModuleAndSpec`, and their instances, hold a reference to the "
@@ -1132,31 +1152,31 @@ msgstr ""
 "hace referencia al estado del módulo desde otros lugares, como devoluciones "
 "de llamada para bibliotecas externas."
 
-#: ../Doc/howto/isolating-extensions.rst:608
+#: ../Doc/howto/isolating-extensions.rst:625
 msgid "Open Issues"
 msgstr "Problemas abiertos"
 
-#: ../Doc/howto/isolating-extensions.rst:610
+#: ../Doc/howto/isolating-extensions.rst:627
 msgid "Several issues around per-module state and heap types are still open."
 msgstr ""
 "Varios problemas relacionados con el estado por módulo y los tipos heap "
 "todavía están abiertos."
 
-#: ../Doc/howto/isolating-extensions.rst:612
+#: ../Doc/howto/isolating-extensions.rst:629
+#, fuzzy
 msgid ""
-"Discussions about improving the situation are best held on the `capi-sig "
-"mailing list <https://mail.python.org/mailman3/lists/capi-sig.python.org/"
-">`__."
+"Discussions about improving the situation are best held on the `discuss "
+"forum under c-api tag <https://discuss.python.org/c/core-dev/c-api/30>`__."
 msgstr ""
 "Las discusiones sobre cómo mejorar la situación se llevan a cabo mejor en el "
 "`capi-sig mailing list <https://mail.python.org/mailman3/lists/capi-sig."
 "python.org/>`__."
 
-#: ../Doc/howto/isolating-extensions.rst:617
+#: ../Doc/howto/isolating-extensions.rst:633
 msgid "Per-Class Scope"
 msgstr "Alcance por clase"
 
-#: ../Doc/howto/isolating-extensions.rst:619
+#: ../Doc/howto/isolating-extensions.rst:635
 msgid ""
 "It is currently (as of Python 3.11) not possible to attach state to "
 "individual *types* without relying on CPython implementation details (which "
@@ -1168,11 +1188,11 @@ msgstr ""
 "CPython (que pueden cambiar en el futuro, tal vez, irónicamente, para "
 "permitir una solución adecuada para el alcance por clase)."
 
-#: ../Doc/howto/isolating-extensions.rst:626
+#: ../Doc/howto/isolating-extensions.rst:642
 msgid "Lossless Conversion to Heap Types"
 msgstr "Conversión sin pérdidas a tipos heap"
 
-#: ../Doc/howto/isolating-extensions.rst:628
+#: ../Doc/howto/isolating-extensions.rst:644
 msgid ""
 "The heap type API was not designed for \"lossless\" conversion from static "
 "types; that is, creating a type that works exactly like a given static type."

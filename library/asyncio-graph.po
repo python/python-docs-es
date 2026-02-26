@@ -1,0 +1,204 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2001 Python Software Foundation
+# This file is distributed under the same license as the Python en Español
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Python en Español 3.14\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-26 18:44-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: es\n"
+"Language-Team: es <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../Doc/library/asyncio-graph.rst:8
+msgid "Call Graph Introspection"
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:10
+msgid "**Source code:** :source:`Lib/asyncio/graph.py`"
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:14
+msgid ""
+"asyncio has powerful runtime call graph introspection utilities to trace the "
+"entire call graph of a running *coroutine* or *task*, or a suspended "
+"*future*.  These utilities and the underlying machinery can be used from "
+"within a Python program or by external profilers and debuggers."
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:25
+msgid ""
+"Print the async call graph for the current task or the provided :class:"
+"`Task` or :class:`Future`."
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:28
+msgid ""
+"This function prints entries starting from the top frame and going down "
+"towards the invocation point."
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:31
+msgid ""
+"The function receives an optional *future* argument. If not passed, the "
+"current running task will be used."
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:34 ../Doc/library/asyncio-graph.rst:93
+msgid ""
+"If the function is called on *the current task*, the optional keyword-only "
+"*depth* argument can be used to skip the specified number of frames from top "
+"of the stack."
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:38
+msgid ""
+"If the optional keyword-only *limit* argument is provided, each call stack "
+"in the resulting graph is truncated to include at most ``abs(limit)`` "
+"entries. If *limit* is positive, the entries left are the closest to the "
+"invocation point. If *limit* is negative, the topmost entries are left. If "
+"*limit* is omitted or ``None``, all entries are present. If *limit* is "
+"``0``, the call stack is not printed at all, only \"awaited by\" information "
+"is printed."
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:46
+msgid ""
+"If *file* is omitted or ``None``, the function will print to :data:`sys."
+"stdout`."
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:49
+msgid "**Example:**"
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:51
+msgid "The following Python code:"
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:53
+msgid ""
+"import asyncio\n"
+"\n"
+"async def test():\n"
+"    asyncio.print_call_graph()\n"
+"\n"
+"async def main():\n"
+"    async with asyncio.TaskGroup() as g:\n"
+"        g.create_task(test(), name='test')\n"
+"\n"
+"asyncio.run(main())"
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:66
+msgid "will print::"
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:68
+msgid ""
+"* Task(name='test', id=0x1039f0fe0)\n"
+"+ Call stack:\n"
+"|   File 't2.py', line 4, in async test()\n"
+"+ Awaited by:\n"
+"   * Task(name='Task-1', id=0x103a5e060)\n"
+"      + Call stack:\n"
+"      |   File 'taskgroups.py', line 107, in async TaskGroup.__aexit__()\n"
+"      |   File 't2.py', line 7, in async main()"
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:79
+msgid ""
+"Like :func:`print_call_graph`, but returns a string. If *future* is ``None`` "
+"and there's no current task, the function returns an empty string."
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:86
+msgid ""
+"Capture the async call graph for the current task or the provided :class:"
+"`Task` or :class:`Future`."
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:89
+msgid ""
+"The function receives an optional *future* argument. If not passed, the "
+"current running task will be used. If there's no current task, the function "
+"returns ``None``."
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:97
+msgid "Returns a ``FutureCallGraph`` data class object:"
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:99
+msgid "``FutureCallGraph(future, call_stack, awaited_by)``"
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:101
+msgid ""
+"Where *future* is a reference to a :class:`Future` or a :class:`Task` (or "
+"their subclasses.)"
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:104
+msgid "``call_stack`` is a tuple of ``FrameCallGraphEntry`` objects."
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:106
+msgid "``awaited_by`` is a tuple of ``FutureCallGraph`` objects."
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:108
+msgid "``FrameCallGraphEntry(frame)``"
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:110
+msgid ""
+"Where *frame* is a frame object of a regular Python function in the call "
+"stack."
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:115
+msgid "Low level utility functions"
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:117
+msgid ""
+"To introspect an async call graph asyncio requires cooperation from control "
+"flow structures, such as :func:`shield` or :class:`TaskGroup`. Any time an "
+"intermediate :class:`Future` object with low-level APIs like :meth:`Future."
+"add_done_callback() <asyncio.Future.add_done_callback>` is involved, the "
+"following two functions should be used to inform asyncio about how exactly "
+"such intermediate future objects are connected with the tasks they wrap or "
+"control."
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:128
+msgid "Record that *future* is awaited on by *waiter*."
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:130 ../Doc/library/asyncio-graph.rst:143
+msgid ""
+"Both *future* and *waiter* must be instances of :class:`Future` or :class:"
+"`Task` or their subclasses, otherwise the call would have no effect."
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:134
+msgid ""
+"A call to ``future_add_to_awaited_by()`` must be followed by an eventual "
+"call to the :func:`future_discard_from_awaited_by` function with the same "
+"arguments."
+msgstr ""
+
+#: ../Doc/library/asyncio-graph.rst:141
+msgid "Record that *future* is no longer awaited on by *waiter*."
+msgstr ""

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-21 16:38-0300\n"
+"POT-Creation-Date: 2026-02-26 18:44-0300\n"
 "PO-Revision-Date: 2022-10-31 15:59-0400\n"
 "Last-Translator: José Luis Salgado Banda <josephLSalgado@outlook.com>\n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: ../Doc/c-api/structures.rst:6
 msgid "Common Object Structures"
@@ -65,8 +65,7 @@ msgid ""
 "In a normal \"release\" build, it contains only the object's reference count "
 "and a pointer to the corresponding type object. Nothing is actually declared "
 "to be a :c:type:`PyObject`, but every pointer to a Python object can be cast "
-"to a :c:expr:`PyObject*`.  Access to the members must be done by using the "
-"macros :c:macro:`Py_REFCNT` and :c:macro:`Py_TYPE`."
+"to a :c:expr:`PyObject*`."
 msgstr ""
 "Todos los tipos de objetos son extensiones de este tipo. Este es un tipo que "
 "contiene la información que Python necesita para tratar un puntero a un "
@@ -77,14 +76,37 @@ msgstr ""
 "una :c:type:`PyObject*`. El acceso a los miembros debe hacerse mediante el "
 "uso de las macros :c:macro:`Py_REFCNT` y :c:macro:`Py_TYPE`."
 
+#: ../Doc/c-api/structures.rst:33
+msgid ""
+"The members must not be accessed directly; instead use macros such as :c:"
+"macro:`Py_REFCNT` and :c:macro:`Py_TYPE`."
+msgstr ""
+
 #: ../Doc/c-api/structures.rst:38
+msgid ""
+"The object's reference count, as returned by :c:macro:`Py_REFCNT`. Do not "
+"use this field directly; instead use functions and macros such as :c:macro:`!"
+"Py_REFCNT`, :c:func:`Py_INCREF` and :c:func:`Py_DecRef`."
+msgstr ""
+
+#: ../Doc/c-api/structures.rst:42
+msgid ""
+"The field type may be different from ``Py_ssize_t``, depending on build "
+"configuration and platform."
+msgstr ""
+
+#: ../Doc/c-api/structures.rst:47
+msgid ""
+"The object's type. Do not use this field directly; use :c:macro:`Py_TYPE` "
+"and :c:func:`Py_SET_TYPE` instead."
+msgstr ""
+
+#: ../Doc/c-api/structures.rst:54
 #, fuzzy
 msgid ""
-"This is an extension of :c:type:`PyObject` that adds the :c:member:"
-"`~PyVarObject.ob_size` field.  This is only used for objects that have some "
-"notion of *length*. This type does not often appear in the Python/C API. "
-"Access to the members must be done by using the macros :c:macro:"
-"`Py_REFCNT`, :c:macro:`Py_TYPE`, and :c:macro:`Py_SIZE`."
+"An extension of :c:type:`PyObject` that adds the :c:member:`~PyVarObject."
+"ob_size` field. This is intended for objects that have some notion of "
+"*length*."
 msgstr ""
 "Esta es una extensión de :c:type:`PyObject` que se suma el campo :attr:"
 "`ob_size`. Esto sólo se utiliza para objetos que tienen cierta noción de "
@@ -92,7 +114,38 @@ msgstr ""
 "acceso a los miembros debe hacerse mediante el uso de las macros :c:macro:"
 "`Py_REFCNT`, :c:macro:`Py_TYPE`, y :c:macro:`Py_SIZE`."
 
-#: ../Doc/c-api/structures.rst:47
+#: ../Doc/c-api/structures.rst:58
+msgid ""
+"As with :c:type:`!PyObject`, the members must not be accessed directly; "
+"instead use macros such as :c:macro:`Py_SIZE`, :c:macro:`Py_REFCNT` and :c:"
+"macro:`Py_TYPE`."
+msgstr ""
+
+#: ../Doc/c-api/structures.rst:64
+msgid ""
+"A size field, whose contents should be considered an object's internal "
+"implementation detail."
+msgstr ""
+
+#: ../Doc/c-api/structures.rst:67
+msgid "Do not use this field directly; use :c:macro:`Py_SIZE` instead."
+msgstr ""
+
+#: ../Doc/c-api/structures.rst:69
+msgid ""
+"Object creation functions such as :c:func:`PyObject_NewVar` will generally "
+"set this field to the requested size (number of items). After creation, "
+"arbitrary values can be stored in :c:member:`!ob_size` using :c:macro:"
+"`Py_SET_SIZE`."
+msgstr ""
+
+#: ../Doc/c-api/structures.rst:74
+msgid ""
+"To get an object's publicly exposed length, as returned by the Python "
+"function :py:func:`len`, use :c:func:`PyObject_Length` instead."
+msgstr ""
+
+#: ../Doc/c-api/structures.rst:81
 msgid ""
 "This is a macro used when declaring new types which represent objects "
 "without a varying length.  The PyObject_HEAD macro expands to::"
@@ -100,16 +153,16 @@ msgstr ""
 "Esta es una macro utilizado cuando se declara nuevos tipos que representan "
 "objetos sin una longitud variable. La macro PyObject_HEAD se expande a::"
 
-#: ../Doc/c-api/structures.rst:50
+#: ../Doc/c-api/structures.rst:84
 msgid "PyObject ob_base;"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:52
+#: ../Doc/c-api/structures.rst:86
 msgid "See documentation of :c:type:`PyObject` above."
 msgstr ""
 "Consulte la documentación de :c:type:`PyObject` en secciones anteriores."
 
-#: ../Doc/c-api/structures.rst:57
+#: ../Doc/c-api/structures.rst:91
 msgid ""
 "This is a macro used when declaring new types which represent objects with a "
 "length that varies from instance to instance. The PyObject_VAR_HEAD macro "
@@ -119,21 +172,26 @@ msgstr ""
 "objetos con una longitud que varía de una instancia a otra instancia. La "
 "macro PyObject_VAR_HEAD se expande a::"
 
-#: ../Doc/c-api/structures.rst:61
+#: ../Doc/c-api/structures.rst:95
 msgid "PyVarObject ob_base;"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:63
+#: ../Doc/c-api/structures.rst:97
 msgid "See documentation of :c:type:`PyVarObject` above."
 msgstr "Consulte la documentación de :c:type:`PyVarObject` anteriormente."
 
-#: ../Doc/c-api/structures.rst:68
+#: ../Doc/c-api/structures.rst:102
+msgid ""
+"The base class of all other objects, the same as :class:`object` in Python."
+msgstr ""
+
+#: ../Doc/c-api/structures.rst:107
 msgid ""
 "Test if the *x* object is the *y* object, the same as ``x is y`` in Python."
 msgstr ""
 "Prueba si el objeto *x* es el objeto *y*, lo mismo que ``x is y`` en Python."
 
-#: ../Doc/c-api/structures.rst:75
+#: ../Doc/c-api/structures.rst:114
 msgid ""
 "Test if an object is the ``None`` singleton, the same as ``x is None`` in "
 "Python."
@@ -141,7 +199,7 @@ msgstr ""
 "Prueba si un objeto es la instancia única ``None``, lo mismo que ``x is "
 "None`` en Python."
 
-#: ../Doc/c-api/structures.rst:83
+#: ../Doc/c-api/structures.rst:122
 msgid ""
 "Test if an object is the ``True`` singleton, the same as ``x is True`` in "
 "Python."
@@ -149,7 +207,7 @@ msgstr ""
 "Prueba si un objeto es la instancia única ``True``, lo mismo que ``x is "
 "True`` en Python."
 
-#: ../Doc/c-api/structures.rst:91
+#: ../Doc/c-api/structures.rst:130
 msgid ""
 "Test if an object is the ``False`` singleton, the same as ``x is False`` in "
 "Python."
@@ -157,22 +215,17 @@ msgstr ""
 "Prueba si un objeto es la instancia única ``False``, lo mismo que ``x is "
 "False`` en Python."
 
-#: ../Doc/c-api/structures.rst:99
+#: ../Doc/c-api/structures.rst:138
 msgid "Get the type of the Python object *o*."
 msgstr "Obtiene el tipo de objeto Python *o*."
 
-#: ../Doc/c-api/structures.rst:101
-msgid "Return a :term:`borrowed reference`."
-msgstr "Retorna una referencia prestada (:term:`borrowed reference`)."
-
-#: ../Doc/c-api/structures.rst:103
-#, fuzzy
-msgid "Use the :c:func:`Py_SET_TYPE` function to set an object type."
+#: ../Doc/c-api/structures.rst:140
+msgid ""
+"The returned reference is :term:`borrowed <borrowed reference>` from *o*. Do "
+"not release it with :c:func:`Py_DECREF` or similar."
 msgstr ""
-"Debe utilizarse la función :c:func:`Py_SET_TYPE` para establecer un tipo de "
-"objeto."
 
-#: ../Doc/c-api/structures.rst:105
+#: ../Doc/c-api/structures.rst:143
 msgid ""
 ":c:func:`Py_TYPE()` is changed to an inline static function. The parameter "
 "type is no longer :c:expr:`const PyObject*`."
@@ -180,7 +233,7 @@ msgstr ""
 ":c:func:`Py_TYPE()` se cambia a una función estática inline. El tipo de "
 "parámetro ya no es :c:expr:`const PyObject*`."
 
-#: ../Doc/c-api/structures.rst:112
+#: ../Doc/c-api/structures.rst:150
 msgid ""
 "Return non-zero if the object *o* type is *type*. Return zero otherwise. "
 "Equivalent to: ``Py_TYPE(o) == type``."
@@ -188,22 +241,36 @@ msgstr ""
 "Retorna un valor distinto de cero si el objeto *o* tipo es *type*. Retorna "
 "cero en caso contrario. Equivalente a: ``Py_TYPE(o) == type``."
 
-#: ../Doc/c-api/structures.rst:120
-msgid "Set the object *o* type to *type*."
-msgstr "Establece el tipo del objeto *o* a *type*."
-
-#: ../Doc/c-api/structures.rst:127
-msgid "Get the size of the Python object *o*."
-msgstr "Obtiene el tamaño del objeto Python *o*."
-
-#: ../Doc/c-api/structures.rst:129
-#, fuzzy
-msgid "Use the :c:func:`Py_SET_SIZE` function to set an object size."
+#: ../Doc/c-api/structures.rst:158
+msgid ""
+"Set the type of object *o* to *type*, without any checking or reference "
+"counting."
 msgstr ""
-"Debe utilizarse la función :c:func:`Py_SET_SIZE` para establecer un tamaño "
-"de objeto."
 
-#: ../Doc/c-api/structures.rst:131
+#: ../Doc/c-api/structures.rst:161
+msgid ""
+"This is a very low-level operation. Consider instead setting the Python "
+"attribute :attr:`~object.__class__` using :c:func:`PyObject_SetAttrString` "
+"or similar."
+msgstr ""
+
+#: ../Doc/c-api/structures.rst:165
+msgid ""
+"Note that assigning an incompatible type can lead to undefined behavior."
+msgstr ""
+
+#: ../Doc/c-api/structures.rst:167
+msgid ""
+"If *type* is a :ref:`heap type <heap-types>`, the caller must create a new "
+"reference to it. Similarly, if the old type of *o* is a heap type, the "
+"caller must release a reference to that type."
+msgstr ""
+
+#: ../Doc/c-api/structures.rst:177
+msgid "Get the :c:member:`~PyVarObject.ob_size` field of *o*."
+msgstr ""
+
+#: ../Doc/c-api/structures.rst:179
 msgid ""
 ":c:func:`Py_SIZE()` is changed to an inline static function. The parameter "
 "type is no longer :c:expr:`const PyVarObject*`."
@@ -211,11 +278,11 @@ msgstr ""
 ":c:func:`Py_SIZE()` se cambia a una función estática inline. El tipo de "
 "parámetro ya no es :c:expr:`const PyVarObject*`."
 
-#: ../Doc/c-api/structures.rst:138
-msgid "Set the object *o* size to *size*."
-msgstr "Establece el tamaño del objeto *o* a *size*."
+#: ../Doc/c-api/structures.rst:186
+msgid "Set the :c:member:`~PyVarObject.ob_size` field of *o* to *size*."
+msgstr ""
 
-#: ../Doc/c-api/structures.rst:145
+#: ../Doc/c-api/structures.rst:193
 msgid ""
 "This is a macro which expands to initialization values for a new :c:type:"
 "`PyObject` type.  This macro expands to::"
@@ -223,13 +290,13 @@ msgstr ""
 "Esta es una macro que se expande para valores de inicialización para un "
 "nuevo tipo :c:type:`PyObject`. Esta macro expande::"
 
-#: ../Doc/c-api/structures.rst:148
+#: ../Doc/c-api/structures.rst:196
 msgid ""
 "_PyObject_EXTRA_INIT\n"
 "1, type,"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:154
+#: ../Doc/c-api/structures.rst:202
 #, fuzzy
 msgid ""
 "This is a macro which expands to initialization values for a new :c:type:"
@@ -240,17 +307,17 @@ msgstr ""
 "nuevo tipo :c:type:`PyVarObject`, incluyendo el campo :attr:`ob_size`. Esta "
 "macro se expande a::"
 
-#: ../Doc/c-api/structures.rst:158
+#: ../Doc/c-api/structures.rst:206
 msgid ""
 "_PyObject_EXTRA_INIT\n"
 "1, type, size,"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:163
+#: ../Doc/c-api/structures.rst:211
 msgid "Implementing functions and methods"
 msgstr "Implementando funciones y métodos"
 
-#: ../Doc/c-api/structures.rst:167
+#: ../Doc/c-api/structures.rst:215
 #, fuzzy
 msgid ""
 "Type of the functions used to implement most Python callables in C. "
@@ -267,17 +334,17 @@ msgstr ""
 "interpreta como el valor de retorno de la función que se expone en Python. "
 "La función debe retornar una nueva referencia."
 
-#: ../Doc/c-api/structures.rst:174
+#: ../Doc/c-api/structures.rst:222
 msgid "The function signature is::"
 msgstr "La firma de la función es::"
 
-#: ../Doc/c-api/structures.rst:176
+#: ../Doc/c-api/structures.rst:224
 msgid ""
 "PyObject *PyCFunction(PyObject *self,\n"
 "                      PyObject *args);"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:181
+#: ../Doc/c-api/structures.rst:229
 #, fuzzy
 msgid ""
 "Type of the functions used to implement Python callables in C with "
@@ -288,14 +355,14 @@ msgstr ""
 "C con la firma :const:`METH_VARARGS | METH_KEYWORDS`. La firma de la función "
 "es::"
 
-#: ../Doc/c-api/structures.rst:185
+#: ../Doc/c-api/structures.rst:233
 msgid ""
 "PyObject *PyCFunctionWithKeywords(PyObject *self,\n"
 "                                  PyObject *args,\n"
 "                                  PyObject *kwargs);"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:192
+#: ../Doc/c-api/structures.rst:240
 #, fuzzy
 msgid ""
 "Type of the functions used to implement Python callables in C with "
@@ -304,14 +371,14 @@ msgstr ""
 "Tipo de las funciones que se utilizan para implementar invocables Python en "
 "C con la firma :const:`METH_FASTCALL`. La firma de la función es::"
 
-#: ../Doc/c-api/structures.rst:196
+#: ../Doc/c-api/structures.rst:244
 msgid ""
 "PyObject *PyCFunctionFast(PyObject *self,\n"
 "                          PyObject *const *args,\n"
 "                          Py_ssize_t nargs);"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:202
+#: ../Doc/c-api/structures.rst:250
 #, fuzzy
 msgid ""
 "Type of the functions used to implement Python callables in C with "
@@ -322,7 +389,7 @@ msgstr ""
 "C con la firma :const:`METH_FASTCALL | METH_KEYWORDS`. La firma de la "
 "función es::"
 
-#: ../Doc/c-api/structures.rst:206
+#: ../Doc/c-api/structures.rst:254
 msgid ""
 "PyObject *PyCFunctionFastWithKeywords(PyObject *self,\n"
 "                                      PyObject *const *args,\n"
@@ -330,7 +397,7 @@ msgid ""
 "                                      PyObject *kwnames);"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:213
+#: ../Doc/c-api/structures.rst:261
 #, fuzzy
 msgid ""
 "Type of the functions used to implement Python callables in C with "
@@ -341,7 +408,7 @@ msgstr ""
 "C con la firma :const:`METH_METHOD | METH_FASTCALL | METH_KEYWORDS`. La "
 "firma de la función es::"
 
-#: ../Doc/c-api/structures.rst:217
+#: ../Doc/c-api/structures.rst:265
 msgid ""
 "PyObject *PyCMethod(PyObject *self,\n"
 "                    PyTypeObject *defining_class,\n"
@@ -350,7 +417,7 @@ msgid ""
 "                    PyObject *kwnames)"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:228
+#: ../Doc/c-api/structures.rst:276
 msgid ""
 "Structure used to describe a method of an extension type.  This structure "
 "has four fields:"
@@ -358,27 +425,27 @@ msgstr ""
 "Estructura utiliza para describir un método de un tipo de extensión. Esta "
 "estructura tiene cuatro campos:"
 
-#: ../Doc/c-api/structures.rst:233
+#: ../Doc/c-api/structures.rst:281
 #, fuzzy
 msgid "Name of the method."
 msgstr "nombre del método"
 
-#: ../Doc/c-api/structures.rst:237
+#: ../Doc/c-api/structures.rst:285
 #, fuzzy
 msgid "Pointer to the C implementation."
 msgstr "puntero a la implementación en C"
 
-#: ../Doc/c-api/structures.rst:241
+#: ../Doc/c-api/structures.rst:289
 #, fuzzy
 msgid "Flags bits indicating how the call should be constructed."
 msgstr "*flag* bits que indican cómo debe ser construida la llamada"
 
-#: ../Doc/c-api/structures.rst:245
+#: ../Doc/c-api/structures.rst:293
 #, fuzzy
 msgid "Points to the contents of the docstring."
 msgstr "puntos a los contenidos del docstring"
 
-#: ../Doc/c-api/structures.rst:247
+#: ../Doc/c-api/structures.rst:295
 #, fuzzy
 msgid ""
 "The :c:member:`~PyMethodDef.ml_meth` is a C function pointer. The functions "
@@ -395,7 +462,7 @@ msgstr ""
 "primer parámetro como :c:type:`PyObject*`, es común que la implementación "
 "del método utiliza el tipo específico C del objeto *self*."
 
-#: ../Doc/c-api/structures.rst:255
+#: ../Doc/c-api/structures.rst:303
 #, fuzzy
 msgid ""
 "The :c:member:`~PyMethodDef.ml_flags` field is a bitfield which can include "
@@ -406,11 +473,11 @@ msgstr ""
 "siguientes *flags*. Las *flags* individuales indican o bien una convención "
 "de llamada o una convención vinculante."
 
-#: ../Doc/c-api/structures.rst:260
+#: ../Doc/c-api/structures.rst:308
 msgid "There are these calling conventions:"
 msgstr "Existen estas convenciones de llamada:"
 
-#: ../Doc/c-api/structures.rst:264
+#: ../Doc/c-api/structures.rst:312
 #, fuzzy
 msgid ""
 "This is the typical calling convention, where the methods have the type :c:"
@@ -428,7 +495,7 @@ msgstr ""
 "procesa típicamente usando :c:func:`PyArg_ParseTuple` o :c:func:"
 "`PyArg_UnpackTuple`."
 
-#: ../Doc/c-api/structures.rst:274
+#: ../Doc/c-api/structures.rst:322
 msgid ""
 "Can only be used in certain combinations with other flags: :ref:"
 "`METH_VARARGS | METH_KEYWORDS <METH_VARARGS-METH_KEYWORDS>`, :ref:"
@@ -437,11 +504,11 @@ msgid ""
 "METH_KEYWORDS>`."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:288
+#: ../Doc/c-api/structures.rst:330
 msgid ":c:expr:`METH_VARARGS | METH_KEYWORDS`"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:283
+#: ../Doc/c-api/structures.rst:331
 msgid ""
 "Methods with these flags must be of type :c:type:`PyCFunctionWithKeywords`. "
 "The function expects three parameters: *self*, *args*, *kwargs* where "
@@ -456,7 +523,7 @@ msgstr ""
 "clave. Los parámetros se procesan típicamente usando :c:func:"
 "`PyArg_ParseTupleAndKeywords`."
 
-#: ../Doc/c-api/structures.rst:292
+#: ../Doc/c-api/structures.rst:340
 #, fuzzy
 msgid ""
 "Fast calling convention supporting only positional arguments. The methods "
@@ -471,16 +538,16 @@ msgstr ""
 "que indican los argumentos y el tercer parámetro es el número de argumentos "
 "(la longitud del arreglo)."
 
-#: ../Doc/c-api/structures.rst:302
+#: ../Doc/c-api/structures.rst:350
 #, fuzzy
 msgid "``METH_FASTCALL`` is now part of the :ref:`stable ABI <stable-abi>`."
 msgstr "Ahora ``METH_FASTCALL`` es parte de la ABI estable."
 
-#: ../Doc/c-api/structures.rst:319
+#: ../Doc/c-api/structures.rst:355
 msgid ":c:expr:`METH_FASTCALL | METH_KEYWORDS`"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:308
+#: ../Doc/c-api/structures.rst:356
 #, fuzzy
 msgid ""
 "Extension of :c:macro:`METH_FASTCALL` supporting also keyword arguments, "
@@ -501,17 +568,17 @@ msgstr ""
 "clave. Los valores de los argumentos de palabras clave se almacenan en el "
 "arreglo *args*, después de los argumentos posicionales."
 
-#: ../Doc/c-api/structures.rst:323
+#: ../Doc/c-api/structures.rst:371
 msgid ""
 "Can only be used in the combination with other flags: :ref:`METH_METHOD | "
 "METH_FASTCALL | METH_KEYWORDS <METH_METHOD-METH_FASTCALL-METH_KEYWORDS>`."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:340
+#: ../Doc/c-api/structures.rst:377
 msgid ":c:expr:`METH_METHOD | METH_FASTCALL | METH_KEYWORDS`"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:330
+#: ../Doc/c-api/structures.rst:378
 #, fuzzy
 msgid ""
 "Extension of :ref:`METH_FASTCALL | METH_KEYWORDS <METH_FASTCALL-"
@@ -523,7 +590,7 @@ msgstr ""
 "definitoria*, es decir, la clase que contiene el método en cuestión. La "
 "clase definitoria podría ser una superclase de ``Py_TYPE(self)``."
 
-#: ../Doc/c-api/structures.rst:335
+#: ../Doc/c-api/structures.rst:383
 msgid ""
 "The method needs to be of type :c:type:`PyCMethod`, the same as for "
 "``METH_FASTCALL | METH_KEYWORDS`` with ``defining_class`` argument added "
@@ -533,7 +600,7 @@ msgstr ""
 "``METH_FASTCALL | METH_KEYWORDS`` con el argumento ``defining_clase`` "
 "añadido después de ``self``."
 
-#: ../Doc/c-api/structures.rst:344
+#: ../Doc/c-api/structures.rst:392
 #, fuzzy
 msgid ""
 "Methods without parameters don't need to check whether arguments are given "
@@ -548,7 +615,7 @@ msgstr ""
 "*self* y llevará a cabo una referencia a la instancia módulo u objeto. En "
 "todos los casos el segundo parámetro será ``NULL``."
 
-#: ../Doc/c-api/structures.rst:350
+#: ../Doc/c-api/structures.rst:398
 msgid ""
 "The function must have 2 parameters. Since the second parameter is unused, :"
 "c:macro:`Py_UNUSED` can be used to prevent a compiler warning."
@@ -557,7 +624,7 @@ msgstr ""
 "usa, :c:macro:`Py_UNUSED` se puede usar para evitar una advertencia del "
 "compilador."
 
-#: ../Doc/c-api/structures.rst:356
+#: ../Doc/c-api/structures.rst:404
 #, fuzzy
 msgid ""
 "Methods with a single object argument can be listed with the :c:macro:"
@@ -571,7 +638,7 @@ msgstr ""
 "argumento ``\"O\"``. Tienen el tipo :c:type:`PyCFunction`, con el parámetro "
 "*self*, y un parámetro :c:type:`PyObject*` que representa el único argumento."
 
-#: ../Doc/c-api/structures.rst:362
+#: ../Doc/c-api/structures.rst:410
 msgid ""
 "These two constants are not used to indicate the calling convention but the "
 "binding when use with methods of classes.  These may not be used for "
@@ -583,7 +650,7 @@ msgstr ""
 "pueden usar para funciones definidas para módulos. A lo sumo uno de estos "
 "*flags* puede establecerse en un método dado."
 
-#: ../Doc/c-api/structures.rst:372
+#: ../Doc/c-api/structures.rst:420
 msgid ""
 "The method will be passed the type object as the first parameter rather than "
 "an instance of the type.  This is used to create *class methods*, similar to "
@@ -594,7 +661,7 @@ msgstr ""
 "methods*), similar a lo que se crea cuando se utiliza la función :func:"
 "`classmethod` incorporada."
 
-#: ../Doc/c-api/structures.rst:382
+#: ../Doc/c-api/structures.rst:430
 msgid ""
 "The method will be passed ``NULL`` as the first parameter rather than an "
 "instance of the type.  This is used to create *static methods*, similar to "
@@ -605,7 +672,7 @@ msgstr ""
 "similar a lo que se crea cuando se utiliza la función :func:`staticmethod` "
 "incorporada."
 
-#: ../Doc/c-api/structures.rst:386
+#: ../Doc/c-api/structures.rst:434
 msgid ""
 "One other constant controls whether a method is loaded in place of another "
 "definition with the same method name."
@@ -613,7 +680,7 @@ msgstr ""
 "En otros controles constantes dependiendo si se carga un método en su lugar "
 "(*in place*) de otra definición con el mismo nombre del método."
 
-#: ../Doc/c-api/structures.rst:392
+#: ../Doc/c-api/structures.rst:440
 #, fuzzy
 msgid ""
 "The method will be loaded in place of existing definitions.  Without "
@@ -636,20 +703,20 @@ msgstr ""
 "coexistirá con la ranura. Esto es útil porque las llamadas a PyCFunctions se "
 "optimizan más que las llamadas a objetos envolvente."
 
-#: ../Doc/c-api/structures.rst:404
+#: ../Doc/c-api/structures.rst:452
 msgid ""
 "Turn *ml* into a Python :term:`callable` object. The caller must ensure that "
 "*ml* outlives the :term:`callable`. Typically, *ml* is defined as a static "
 "variable."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:408
+#: ../Doc/c-api/structures.rst:456
 msgid ""
 "The *self* parameter will be passed as the *self* argument to the C function "
 "in ``ml->ml_meth`` when invoked. *self* can be ``NULL``."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:412
+#: ../Doc/c-api/structures.rst:460
 msgid ""
 "The :term:`callable` object's ``__module__`` attribute can be set from the "
 "given *module* argument. *module* should be a Python string, which will be "
@@ -657,29 +724,29 @@ msgid ""
 "can be set to :const:`None` or ``NULL``."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:418
+#: ../Doc/c-api/structures.rst:466
 msgid ":attr:`function.__module__`"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:420
+#: ../Doc/c-api/structures.rst:468
 msgid ""
 "The *cls* parameter will be passed as the *defining_class* argument to the C "
 "function. Must be set if :c:macro:`METH_METHOD` is set on ``ml->ml_flags``."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:429
+#: ../Doc/c-api/structures.rst:477
 msgid "Equivalent to ``PyCMethod_New(ml, self, module, NULL)``."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:434
+#: ../Doc/c-api/structures.rst:482
 msgid "Equivalent to ``PyCMethod_New(ml, self, NULL, NULL)``."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:438
+#: ../Doc/c-api/structures.rst:486
 msgid "Accessing attributes of extension types"
 msgstr "Acceder a atributos de tipos de extensión"
 
-#: ../Doc/c-api/structures.rst:442
+#: ../Doc/c-api/structures.rst:490
 #, fuzzy
 msgid ""
 "Structure which describes an attribute of a type which corresponds to a C "
@@ -689,26 +756,26 @@ msgstr ""
 "Estructura que describe un atributo de un tipo que corresponde a un miembro "
 "de la estructura de C. Sus campos son:"
 
-#: ../Doc/c-api/structures.rst:447
+#: ../Doc/c-api/structures.rst:495
 msgid "Its fields are, in order:"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:451
+#: ../Doc/c-api/structures.rst:499
 msgid ""
 "Name of the member. A NULL value marks the end of a ``PyMemberDef[]`` array."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:454
+#: ../Doc/c-api/structures.rst:502
 msgid "The string should be static, no copy is made of it."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:458
+#: ../Doc/c-api/structures.rst:506
 msgid ""
 "The type of the member in the C struct. See :ref:`PyMemberDef-types` for the "
 "possible values."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:463
+#: ../Doc/c-api/structures.rst:511
 #, fuzzy
 msgid ""
 "The offset in bytes that the member is located on the type’s object struct."
@@ -716,18 +783,18 @@ msgstr ""
 "el desplazamiento en bytes que el miembro se encuentra en la estructura de "
 "objetos tipo"
 
-#: ../Doc/c-api/structures.rst:467
+#: ../Doc/c-api/structures.rst:515
 msgid ""
 "Zero or more of the :ref:`PyMemberDef-flags`, combined using bitwise OR."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:471
+#: ../Doc/c-api/structures.rst:519
 msgid ""
 "The docstring, or NULL. The string should be static, no copy is made of it. "
 "Typically, it is defined using :c:macro:`PyDoc_STR`."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:475
+#: ../Doc/c-api/structures.rst:523
 msgid ""
 "By default (when :c:member:`~PyMemberDef.flags` is ``0``), members allow "
 "both read and write access. Use the :c:macro:`Py_READONLY` flag for read-"
@@ -736,14 +803,15 @@ msgid ""
 "`T_OBJECT`) members can be deleted."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:484
+#: ../Doc/c-api/structures.rst:532
 #, fuzzy
 msgid ""
 "For heap-allocated types (created using :c:func:`PyType_FromSpec` or "
 "similar), ``PyMemberDef`` may contain a definition for the special member "
 "``\"__vectorcalloffset__\"``, corresponding to :c:member:`~PyTypeObject."
-"tp_vectorcall_offset` in type objects. These must be defined with "
-"``Py_T_PYSSIZET`` and ``Py_READONLY``, for example::"
+"tp_vectorcall_offset` in type objects. This member must be defined with "
+"``Py_T_PYSSIZET``, and either ``Py_READONLY`` or ``Py_READONLY | "
+"Py_RELATIVE_OFFSET``. For example::"
 msgstr ""
 "Los tipos asignados al heap (creados usando :c:func:`PyType_FromSpec` o "
 "similar), ``PyMemberDef`` pueden contener definiciones para los miembros "
@@ -753,7 +821,7 @@ msgstr ""
 "`~PyTypeObject.tp_vectorcall_offset` en objetos de tipo. Estos deben "
 "definirse con ``T_PYSSIZET`` y ``READONLY``, por ejemplo::"
 
-#: ../Doc/c-api/structures.rst:490
+#: ../Doc/c-api/structures.rst:539
 msgid ""
 "static PyMemberDef spam_type_members[] = {\n"
 "    {\"__vectorcalloffset__\", Py_T_PYSSIZET,\n"
@@ -762,11 +830,11 @@ msgid ""
 "};"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:496
+#: ../Doc/c-api/structures.rst:545
 msgid "(You may need to ``#include <stddef.h>`` for :c:func:`!offsetof`.)"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:498
+#: ../Doc/c-api/structures.rst:547
 msgid ""
 "The legacy offsets :c:member:`~PyTypeObject.tp_dictoffset` and :c:member:"
 "`~PyTypeObject.tp_weaklistoffset` can be defined similarly using "
@@ -775,13 +843,20 @@ msgid ""
 "and :c:macro:`Py_TPFLAGS_MANAGED_WEAKREF` instead."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:506
+#: ../Doc/c-api/structures.rst:555
 msgid ""
 "``PyMemberDef`` is always available. Previously, it required including "
 "``\"structmember.h\"``."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:511
+#: ../Doc/c-api/structures.rst:560
+msgid ""
+":c:macro:`Py_RELATIVE_OFFSET` is now allowed for "
+"``\"__vectorcalloffset__\"``, ``\"__dictoffset__\"`` and "
+"``\"__weaklistoffset__\"``."
+msgstr ""
+
+#: ../Doc/c-api/structures.rst:566
 msgid ""
 "Get an attribute belonging to the object at address *obj_addr*.  The "
 "attribute is described by ``PyMemberDef`` *m*.  Returns ``NULL`` on error."
@@ -790,13 +865,13 @@ msgstr ""
 "atributo se describe por ``PyMemberDef`` *m*. Retorna ``NULL`` en caso de "
 "error."
 
-#: ../Doc/c-api/structures.rst:517
+#: ../Doc/c-api/structures.rst:572
 msgid ""
 "``PyMember_GetOne`` is always available. Previously, it required including "
 "``\"structmember.h\"``."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:522
+#: ../Doc/c-api/structures.rst:577
 msgid ""
 "Set an attribute belonging to the object at address *obj_addr* to object "
 "*o*. The attribute to set is described by ``PyMemberDef`` *m*.  Returns "
@@ -806,52 +881,52 @@ msgstr ""
 "objeto *o*. El atributo a establecer se describe por ``PyMemberDef`` *m*. "
 "Retorna ``0`` si tiene éxito y un valor negativo si falla."
 
-#: ../Doc/c-api/structures.rst:528
+#: ../Doc/c-api/structures.rst:583
 msgid ""
 "``PyMember_SetOne`` is always available. Previously, it required including "
 "``\"structmember.h\"``."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:534
+#: ../Doc/c-api/structures.rst:589
 msgid "Member flags"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:536
+#: ../Doc/c-api/structures.rst:591
 msgid "The following flags can be used with :c:member:`PyMemberDef.flags`:"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:540
+#: ../Doc/c-api/structures.rst:595
 msgid "Not writable."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:544
+#: ../Doc/c-api/structures.rst:599
 msgid ""
 "Emit an ``object.__getattr__`` :ref:`audit event <audit-events>` before "
 "reading."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:549
+#: ../Doc/c-api/structures.rst:604
 msgid ""
 "Indicates that the :c:member:`~PyMemberDef.offset` of this ``PyMemberDef`` "
 "entry indicates an offset from the subclass-specific data, rather than from "
 "``PyObject``."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:553
+#: ../Doc/c-api/structures.rst:608
 msgid ""
 "Can only be used as part of :c:member:`Py_tp_members <PyTypeObject."
 "tp_members>` :c:type:`slot <PyType_Slot>` when creating a class using "
 "negative :c:member:`~PyType_Spec.basicsize`. It is mandatory in that case."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:558
+#: ../Doc/c-api/structures.rst:613
 msgid ""
 "This flag is only used in :c:type:`PyType_Slot`. When setting :c:member:"
 "`~PyTypeObject.tp_members` during class creation, Python clears it and sets :"
 "c:member:`PyMemberDef.offset` to the offset from the ``PyObject`` struct."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:570
+#: ../Doc/c-api/structures.rst:625
 msgid ""
 "The :c:macro:`!RESTRICTED`, :c:macro:`!READ_RESTRICTED` and :c:macro:`!"
 "WRITE_RESTRICTED` macros available with ``#include \"structmember.h\"`` are "
@@ -860,7 +935,7 @@ msgid ""
 "nothing."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:581
+#: ../Doc/c-api/structures.rst:636
 msgid ""
 "The :c:macro:`!READONLY` macro was renamed to :c:macro:`Py_READONLY`. The :c:"
 "macro:`!PY_AUDIT_READ` macro was renamed with the ``Py_`` prefix. The new "
@@ -869,11 +944,11 @@ msgid ""
 "names."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:590
+#: ../Doc/c-api/structures.rst:645
 msgid "Member types"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:592
+#: ../Doc/c-api/structures.rst:647
 msgid ""
 ":c:member:`PyMemberDef.type` can be one of the following macros "
 "corresponding to various C types. When the member is accessed in Python, it "
@@ -882,157 +957,157 @@ msgid ""
 "exception such as :exc:`TypeError` or :exc:`ValueError` is raised."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:600
+#: ../Doc/c-api/structures.rst:655
 msgid ""
 "Unless marked (D), attributes defined this way cannot be deleted using e.g. :"
 "keyword:`del` or :py:func:`delattr`."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:604
+#: ../Doc/c-api/structures.rst:659
 msgid "Macro name"
 msgstr "Nombre de la macro"
 
-#: ../Doc/c-api/structures.rst:604
+#: ../Doc/c-api/structures.rst:659
 msgid "C type"
 msgstr "Tipo C"
 
-#: ../Doc/c-api/structures.rst:604
+#: ../Doc/c-api/structures.rst:659
 msgid "Python type"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:606
+#: ../Doc/c-api/structures.rst:661
 msgid ":c:expr:`char`"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:606 ../Doc/c-api/structures.rst:607
-#: ../Doc/c-api/structures.rst:608 ../Doc/c-api/structures.rst:609
-#: ../Doc/c-api/structures.rst:610 ../Doc/c-api/structures.rst:611
-#: ../Doc/c-api/structures.rst:612 ../Doc/c-api/structures.rst:613
-#: ../Doc/c-api/structures.rst:614 ../Doc/c-api/structures.rst:615
-#: ../Doc/c-api/structures.rst:616
+#: ../Doc/c-api/structures.rst:661 ../Doc/c-api/structures.rst:662
+#: ../Doc/c-api/structures.rst:663 ../Doc/c-api/structures.rst:664
+#: ../Doc/c-api/structures.rst:665 ../Doc/c-api/structures.rst:666
+#: ../Doc/c-api/structures.rst:667 ../Doc/c-api/structures.rst:668
+#: ../Doc/c-api/structures.rst:669 ../Doc/c-api/structures.rst:670
+#: ../Doc/c-api/structures.rst:671
 msgid ":py:class:`int`"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:607
+#: ../Doc/c-api/structures.rst:662
 msgid ":c:expr:`short`"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:608
+#: ../Doc/c-api/structures.rst:663
 msgid ":c:expr:`int`"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:609
+#: ../Doc/c-api/structures.rst:664
 msgid ":c:expr:`long`"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:610
+#: ../Doc/c-api/structures.rst:665
 #, fuzzy
 msgid ":c:expr:`long long`"
 msgstr "long long"
 
-#: ../Doc/c-api/structures.rst:611
+#: ../Doc/c-api/structures.rst:666
 #, fuzzy
 msgid ":c:expr:`unsigned char`"
 msgstr "unsigned char"
 
-#: ../Doc/c-api/structures.rst:612
+#: ../Doc/c-api/structures.rst:667
 #, fuzzy
 msgid ":c:expr:`unsigned int`"
 msgstr "unsigned int"
 
-#: ../Doc/c-api/structures.rst:613
+#: ../Doc/c-api/structures.rst:668
 #, fuzzy
 msgid ":c:expr:`unsigned short`"
 msgstr "unsigned short"
 
-#: ../Doc/c-api/structures.rst:614
+#: ../Doc/c-api/structures.rst:669
 #, fuzzy
 msgid ":c:expr:`unsigned long`"
 msgstr "unsigned long"
 
-#: ../Doc/c-api/structures.rst:615
+#: ../Doc/c-api/structures.rst:670
 #, fuzzy
 msgid ":c:expr:`unsigned long long`"
 msgstr "unsigned long long"
 
-#: ../Doc/c-api/structures.rst:616
+#: ../Doc/c-api/structures.rst:671
 #, fuzzy
 msgid ":c:expr:`Py_ssize_t`"
 msgstr "Py_ssize_t"
 
-#: ../Doc/c-api/structures.rst:617
+#: ../Doc/c-api/structures.rst:672
 msgid ":c:expr:`float`"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:617 ../Doc/c-api/structures.rst:618
+#: ../Doc/c-api/structures.rst:672 ../Doc/c-api/structures.rst:673
 msgid ":py:class:`float`"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:618
+#: ../Doc/c-api/structures.rst:673
 msgid ":c:expr:`double`"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:619
+#: ../Doc/c-api/structures.rst:674
 msgid ":c:expr:`char` (written as 0 or 1)"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:619
+#: ../Doc/c-api/structures.rst:674
 msgid ":py:class:`bool`"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:621
+#: ../Doc/c-api/structures.rst:676
 #, fuzzy
 msgid ":c:expr:`const char *` (*)"
 msgstr "const char \\*"
 
-#: ../Doc/c-api/structures.rst:621 ../Doc/c-api/structures.rst:622
+#: ../Doc/c-api/structures.rst:676 ../Doc/c-api/structures.rst:677
 msgid ":py:class:`str` (RO)"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:622
+#: ../Doc/c-api/structures.rst:677
 #, fuzzy
 msgid ":c:expr:`const char[]` (*)"
 msgstr "const char \\*"
 
-#: ../Doc/c-api/structures.rst:623
+#: ../Doc/c-api/structures.rst:678
 msgid ":c:expr:`char` (0-127)"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:623
+#: ../Doc/c-api/structures.rst:678
 msgid ":py:class:`str` (**)"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:624
+#: ../Doc/c-api/structures.rst:679
 #, fuzzy
 msgid ":c:expr:`PyObject *`"
 msgstr "PyObject \\*"
 
-#: ../Doc/c-api/structures.rst:624
+#: ../Doc/c-api/structures.rst:679
 msgid ":py:class:`object` (D)"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:627
+#: ../Doc/c-api/structures.rst:682
 msgid ""
 "(*): Zero-terminated, UTF8-encoded C string. With :c:macro:`!Py_T_STRING` "
 "the C representation is a pointer; with :c:macro:`!Py_T_STRING_INPLACE` the "
 "string is stored directly in the structure."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:632
+#: ../Doc/c-api/structures.rst:687
 msgid "(**): String of length 1. Only ASCII is accepted."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:634
+#: ../Doc/c-api/structures.rst:689
 msgid "(RO): Implies :c:macro:`Py_READONLY`."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:636
+#: ../Doc/c-api/structures.rst:691
 msgid ""
 "(D): Can be deleted, in which case the pointer is set to ``NULL``. Reading a "
 "``NULL`` pointer raises :py:exc:`AttributeError`."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:662
+#: ../Doc/c-api/structures.rst:717
 msgid ""
 "In previous versions, the macros were only available with ``#include "
 "\"structmember.h\"`` and were named without the ``Py_`` prefix (e.g. as "
@@ -1040,22 +1115,22 @@ msgid ""
 "with the following deprecated types:"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:670
+#: ../Doc/c-api/structures.rst:725
 msgid ""
 "Like ``Py_T_OBJECT_EX``, but ``NULL`` is converted to ``None``. This results "
 "in surprising behavior in Python: deleting the attribute effectively sets it "
 "to ``None``."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:676
+#: ../Doc/c-api/structures.rst:731
 msgid "Always ``None``. Must be used with :c:macro:`Py_READONLY`."
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:679
+#: ../Doc/c-api/structures.rst:734
 msgid "Defining Getters and Setters"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:683
+#: ../Doc/c-api/structures.rst:738
 msgid ""
 "Structure to define property-like access for a type. See also description of "
 "the :c:member:`PyTypeObject.tp_getset` slot."
@@ -1063,16 +1138,16 @@ msgstr ""
 "Estructura para definir el acceso para un tipo como el de una propiedad. "
 "Véase también la descripción de la ranura :c:member:`PyTypeObject.tp_getset`."
 
-#: ../Doc/c-api/structures.rst:688
+#: ../Doc/c-api/structures.rst:743
 msgid "attribute name"
 msgstr "nombre del atributo"
 
-#: ../Doc/c-api/structures.rst:692
+#: ../Doc/c-api/structures.rst:747
 #, fuzzy
 msgid "C function to get the attribute."
 msgstr "Función C para obtener el atributo"
 
-#: ../Doc/c-api/structures.rst:696
+#: ../Doc/c-api/structures.rst:751
 #, fuzzy
 msgid ""
 "Optional C function to set or delete the attribute. If ``NULL``, the "
@@ -1081,11 +1156,11 @@ msgstr ""
 "función opcional C para establecer o eliminar el atributo, si se omite el "
 "atributo es de sólo lectura"
 
-#: ../Doc/c-api/structures.rst:701
+#: ../Doc/c-api/structures.rst:756
 msgid "optional docstring"
 msgstr "docstring opcional"
 
-#: ../Doc/c-api/structures.rst:705
+#: ../Doc/c-api/structures.rst:760
 #, fuzzy
 msgid ""
 "Optional user data pointer, providing additional data for getter and setter."
@@ -1093,7 +1168,7 @@ msgstr ""
 "puntero de función opcional, proporcionar datos adicionales para *getter* y "
 "*setter*"
 
-#: ../Doc/c-api/structures.rst:709
+#: ../Doc/c-api/structures.rst:764
 #, fuzzy
 msgid ""
 "The ``get`` function takes one :c:expr:`PyObject*` parameter (the instance) "
@@ -1102,7 +1177,7 @@ msgstr ""
 "La función ``get`` toma un parámetro :c:type:`PyObject*` (la instancia) y un "
 "puntero de función (el ``closure`` asociado)::"
 
-#: ../Doc/c-api/structures.rst:712
+#: ../Doc/c-api/structures.rst:767
 msgid ""
 "It should return a new reference on success or ``NULL`` with a set exception "
 "on failure."
@@ -1110,7 +1185,7 @@ msgstr ""
 "Debe retornar una nueva referencia en caso de éxito o ``NULL`` con una "
 "excepción establecida en caso de error."
 
-#: ../Doc/c-api/structures.rst:717
+#: ../Doc/c-api/structures.rst:772
 #, fuzzy
 msgid ""
 "``set`` functions take two :c:expr:`PyObject*` parameters (the instance and "
@@ -1120,7 +1195,7 @@ msgstr ""
 "y el valor a ser establecido) y un puntero de función (el ``closure`` "
 "asociado)::"
 
-#: ../Doc/c-api/structures.rst:720
+#: ../Doc/c-api/structures.rst:775
 msgid ""
 "In case the attribute should be deleted the second parameter is ``NULL``. "
 "Should return ``0`` on success or ``-1`` with a set exception on failure."
@@ -1129,114 +1204,136 @@ msgstr ""
 "Debe retornar ``0`` en caso de éxito o ``-1`` con una excepción explícita en "
 "caso de fallo."
 
-#: ../Doc/c-api/structures.rst:370 ../Doc/c-api/structures.rst:380
+#: ../Doc/c-api/structures.rst:418 ../Doc/c-api/structures.rst:428
 msgid "built-in function"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:370
+#: ../Doc/c-api/structures.rst:418
 msgid "classmethod"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:380
+#: ../Doc/c-api/structures.rst:428
 msgid "staticmethod"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:563
+#: ../Doc/c-api/structures.rst:618
 msgid "READ_RESTRICTED (C macro)"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:563
+#: ../Doc/c-api/structures.rst:618
 msgid "WRITE_RESTRICTED (C macro)"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:563
+#: ../Doc/c-api/structures.rst:618
 msgid "RESTRICTED (C macro)"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:576
+#: ../Doc/c-api/structures.rst:631
 msgid "READONLY (C macro)"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:639
+#: ../Doc/c-api/structures.rst:694
 msgid "T_BYTE (C macro)"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:639
+#: ../Doc/c-api/structures.rst:694
 msgid "T_SHORT (C macro)"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:639
+#: ../Doc/c-api/structures.rst:694
 msgid "T_INT (C macro)"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:639
+#: ../Doc/c-api/structures.rst:694
 msgid "T_LONG (C macro)"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:639
+#: ../Doc/c-api/structures.rst:694
 #, fuzzy
 msgid "T_LONGLONG (C macro)"
 msgstr "T_LONGLONG"
 
-#: ../Doc/c-api/structures.rst:639
+#: ../Doc/c-api/structures.rst:694
 msgid "T_UBYTE (C macro)"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:639
+#: ../Doc/c-api/structures.rst:694
 #, fuzzy
 msgid "T_USHORT (C macro)"
 msgstr "T_USHORT"
 
-#: ../Doc/c-api/structures.rst:639
+#: ../Doc/c-api/structures.rst:694
 msgid "T_UINT (C macro)"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:639
+#: ../Doc/c-api/structures.rst:694
 msgid "T_ULONG (C macro)"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:639
+#: ../Doc/c-api/structures.rst:694
 #, fuzzy
 msgid "T_ULONGULONG (C macro)"
 msgstr "T_ULONGLONG"
 
-#: ../Doc/c-api/structures.rst:639
+#: ../Doc/c-api/structures.rst:694
 #, fuzzy
 msgid "T_PYSSIZET (C macro)"
 msgstr "T_PYSSIZET"
 
-#: ../Doc/c-api/structures.rst:639
+#: ../Doc/c-api/structures.rst:694
 msgid "T_FLOAT (C macro)"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:639
+#: ../Doc/c-api/structures.rst:694
 #, fuzzy
 msgid "T_DOUBLE (C macro)"
 msgstr "T_DOUBLE"
 
-#: ../Doc/c-api/structures.rst:639
+#: ../Doc/c-api/structures.rst:694
 msgid "T_BOOL (C macro)"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:639
+#: ../Doc/c-api/structures.rst:694
 msgid "T_CHAR (C macro)"
 msgstr ""
 
-#: ../Doc/c-api/structures.rst:639
+#: ../Doc/c-api/structures.rst:694
 #, fuzzy
 msgid "T_STRING (C macro)"
 msgstr "T_STRING"
 
-#: ../Doc/c-api/structures.rst:639
+#: ../Doc/c-api/structures.rst:694
 #, fuzzy
 msgid "T_STRING_INPLACE (C macro)"
 msgstr "T_STRING"
 
-#: ../Doc/c-api/structures.rst:639
+#: ../Doc/c-api/structures.rst:694
 #, fuzzy
 msgid "T_OBJECT_EX (C macro)"
 msgstr "T_OBJECT_EX"
 
-#: ../Doc/c-api/structures.rst:639
+#: ../Doc/c-api/structures.rst:694
 msgid "structmember.h"
 msgstr ""
+
+#~ msgid "Return a :term:`borrowed reference`."
+#~ msgstr "Retorna una referencia prestada (:term:`borrowed reference`)."
+
+#~ msgid "Use the :c:func:`Py_SET_TYPE` function to set an object type."
+#~ msgstr ""
+#~ "Debe utilizarse la función :c:func:`Py_SET_TYPE` para establecer un tipo "
+#~ "de objeto."
+
+#~ msgid "Set the object *o* type to *type*."
+#~ msgstr "Establece el tipo del objeto *o* a *type*."
+
+#~ msgid "Get the size of the Python object *o*."
+#~ msgstr "Obtiene el tamaño del objeto Python *o*."
+
+#~ msgid "Use the :c:func:`Py_SET_SIZE` function to set an object size."
+#~ msgstr ""
+#~ "Debe utilizarse la función :c:func:`Py_SET_SIZE` para establecer un "
+#~ "tamaño de objeto."
+
+#~ msgid "Set the object *o* size to *size*."
+#~ msgstr "Establece el tamaño del objeto *o* a *size*."
