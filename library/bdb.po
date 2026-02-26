@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-21 16:38-0300\n"
+"POT-Creation-Date: 2026-02-26 18:44-0300\n"
 "PO-Revision-Date: 2022-10-29 22:37-0500\n"
 "Last-Translator: José Luis Salgado Banda\n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: ../Doc/library/bdb.rst:2
 #, fuzzy
@@ -239,22 +239,39 @@ msgstr ""
 "globales del marco de ejecución dado."
 
 #: ../Doc/library/bdb.rst:135
+msgid ""
+"The *backend* argument specifies the backend to use for :class:`Bdb`. It can "
+"be either ``'settrace'`` or ``'monitoring'``. ``'settrace'`` uses :func:`sys."
+"settrace` which has the best backward compatibility. The ``'monitoring'`` "
+"backend uses the new :mod:`sys.monitoring` that was introduced in Python "
+"3.12, which can be much more efficient because it can disable unused events. "
+"We are trying to keep the exact interfaces for both backends, but there are "
+"some differences. The debugger developers are encouraged to use the "
+"``'monitoring'`` backend to achieve better performance."
+msgstr ""
+
+#: ../Doc/library/bdb.rst:145
 #, fuzzy
 msgid "Added the *skip* parameter."
 msgstr "El argumento *skip*."
 
-#: ../Doc/library/bdb.rst:138
+#: ../Doc/library/bdb.rst:148
+#, fuzzy
+msgid "Added the *backend* parameter."
+msgstr "El argumento *skip*."
+
+#: ../Doc/library/bdb.rst:151
 msgid ""
 "The following methods of :class:`Bdb` normally don't need to be overridden."
 msgstr ""
 "Los siguientes métodos de la clase :class:`Bdb` normalmente no necesitan ser "
 "redefinidos."
 
-#: ../Doc/library/bdb.rst:142
+#: ../Doc/library/bdb.rst:155
 msgid "Return canonical form of *filename*."
 msgstr "Retorna la forma canónica de *filename*."
 
-#: ../Doc/library/bdb.rst:144
+#: ../Doc/library/bdb.rst:157
 msgid ""
 "For real file names, the canonical form is an operating-system-dependent, :"
 "func:`case-normalized <os.path.normcase>` :func:`absolute path <os.path."
@@ -267,7 +284,19 @@ msgstr ""
 "corchetes angulares, como ``\"<stdin>\"`` generado en modo interactivo, se "
 "retorna sin cambios."
 
-#: ../Doc/library/bdb.rst:151
+#: ../Doc/library/bdb.rst:164
+msgid ""
+"Start tracing. For ``'settrace'`` backend, this method is equivalent to "
+"``sys.settrace(self.trace_dispatch)``"
+msgstr ""
+
+#: ../Doc/library/bdb.rst:171
+msgid ""
+"Stop tracing. For ``'settrace'`` backend, this method is equivalent to ``sys."
+"settrace(None)``"
+msgstr ""
+
+#: ../Doc/library/bdb.rst:178
 #, fuzzy
 msgid ""
 "Set the :attr:`!botframe`, :attr:`!stopframe`, :attr:`!returnframe` and :"
@@ -278,7 +307,7 @@ msgstr ""
 "`returnframe` y :attr:`quitting` con valores preparados para comenzar la "
 "depuración."
 
-#: ../Doc/library/bdb.rst:156
+#: ../Doc/library/bdb.rst:183
 msgid ""
 "This function is installed as the trace function of debugged frames.  Its "
 "return value is the new trace function (in most cases, that is, itself)."
@@ -287,7 +316,7 @@ msgstr ""
 "ejecución depurados. Su valor de retorno es la nueva función de seguimiento "
 "a usar (en la mayoría de los casos, ella misma)."
 
-#: ../Doc/library/bdb.rst:159
+#: ../Doc/library/bdb.rst:186
 msgid ""
 "The default implementation decides how to dispatch a frame, depending on the "
 "type of event (passed as a string) that is about to be executed. *event* can "
@@ -297,11 +326,11 @@ msgstr ""
 "ejecución, dependiendo del tipo de evento (pasado como una cadena) que está "
 "a punto de ejecutarse. *event* puede tomar uno de los siguientes valores:"
 
-#: ../Doc/library/bdb.rst:163
+#: ../Doc/library/bdb.rst:190
 msgid "``\"line\"``: A new line of code is going to be executed."
 msgstr "``\"line\"``: Se va a ejecutar una nueva línea de código."
 
-#: ../Doc/library/bdb.rst:164
+#: ../Doc/library/bdb.rst:191
 msgid ""
 "``\"call\"``: A function is about to be called, or another code block "
 "entered."
@@ -309,28 +338,28 @@ msgstr ""
 "``\"call\"``: Está a punto de llamarse a una función o se ha entrado en otro "
 "bloque de código."
 
-#: ../Doc/library/bdb.rst:166
+#: ../Doc/library/bdb.rst:193
 msgid "``\"return\"``: A function or other code block is about to return."
 msgstr ""
 "``\"return\"``: Una función u otro bloque de código está a punto de retornar."
 
-#: ../Doc/library/bdb.rst:167
+#: ../Doc/library/bdb.rst:194
 msgid "``\"exception\"``: An exception has occurred."
 msgstr "``\"exception\"``: Ha ocurrido una excepción."
 
-#: ../Doc/library/bdb.rst:168
+#: ../Doc/library/bdb.rst:195
 msgid "``\"c_call\"``: A C function is about to be called."
 msgstr "``\"c_call\"``: Una función de C está a punto de llamarse ."
 
-#: ../Doc/library/bdb.rst:169
+#: ../Doc/library/bdb.rst:196
 msgid "``\"c_return\"``: A C function has returned."
 msgstr "``\"c_return\"``: Una función de C ha retornado."
 
-#: ../Doc/library/bdb.rst:170
+#: ../Doc/library/bdb.rst:197
 msgid "``\"c_exception\"``: A C function has raised an exception."
 msgstr "``\"c_exception\"``: Una función de C ha lanzado una excepción."
 
-#: ../Doc/library/bdb.rst:172
+#: ../Doc/library/bdb.rst:199
 msgid ""
 "For the Python events, specialized functions (see below) are called.  For "
 "the C events, no action is taken."
@@ -338,11 +367,11 @@ msgstr ""
 "Para los eventos de Python, son llamadas funciones especializadas (ver más "
 "abajo). En cambio, para los eventos de C no se realiza ninguna acción."
 
-#: ../Doc/library/bdb.rst:175
+#: ../Doc/library/bdb.rst:202
 msgid "The *arg* parameter depends on the previous event."
 msgstr "El parámetro *arg* depende del evento previo."
 
-#: ../Doc/library/bdb.rst:177
+#: ../Doc/library/bdb.rst:204
 msgid ""
 "See the documentation for :func:`sys.settrace` for more information on the "
 "trace function.  For more information on code and frame objects, refer to :"
@@ -352,7 +381,7 @@ msgstr ""
 "información sobre la función de seguimiento. Para obtener más información "
 "sobre los objetos código y los objetos marco consulte :ref:`types`."
 
-#: ../Doc/library/bdb.rst:183
+#: ../Doc/library/bdb.rst:210
 #, fuzzy
 msgid ""
 "If the debugger should stop on the current line, invoke the :meth:"
@@ -368,7 +397,7 @@ msgstr ""
 "método :meth:`trace_dispatch` para realizar un seguimiento adicional en ese "
 "ámbito."
 
-#: ../Doc/library/bdb.rst:191
+#: ../Doc/library/bdb.rst:218
 #, fuzzy
 msgid ""
 "If the debugger should stop on this function call, invoke the :meth:"
@@ -384,7 +413,7 @@ msgstr ""
 "al método :meth:`trace_dispatch` para realizar un seguimiento adicional en "
 "ese ámbito."
 
-#: ../Doc/library/bdb.rst:199
+#: ../Doc/library/bdb.rst:226
 #, fuzzy
 msgid ""
 "If the debugger should stop on this function return, invoke the :meth:"
@@ -400,7 +429,7 @@ msgstr ""
 "referencia al método :meth:`trace_dispatch` para realizar un seguimiento "
 "adicional en ese ámbito."
 
-#: ../Doc/library/bdb.rst:207
+#: ../Doc/library/bdb.rst:234
 #, fuzzy
 msgid ""
 "If the debugger should stop at this exception, invokes the :meth:"
@@ -416,7 +445,7 @@ msgstr ""
 "al método :meth:`trace_dispatch` para realizar un seguimiento adicional en "
 "ese ámbito."
 
-#: ../Doc/library/bdb.rst:213
+#: ../Doc/library/bdb.rst:240
 msgid ""
 "Normally derived classes don't override the following methods, but they may "
 "if they want to redefine the definition of stopping and breakpoints."
@@ -425,22 +454,22 @@ msgstr ""
 "métodos, pero pueden hacerlo si necesitan redefinir la definición de parada "
 "y los puntos de interrupción."
 
-#: ../Doc/library/bdb.rst:218
+#: ../Doc/library/bdb.rst:245
 #, fuzzy
 msgid "Return ``True`` if *module_name* matches any skip pattern."
 msgstr "Retorna True si *module_name* coincide con cualquier patrón de salto."
 
-#: ../Doc/library/bdb.rst:222
+#: ../Doc/library/bdb.rst:249
 #, fuzzy
 msgid "Return ``True`` if *frame* is below the starting frame in the stack."
 msgstr "Retorna True si *frame* está debajo del marco inicial en la pila."
 
-#: ../Doc/library/bdb.rst:226
+#: ../Doc/library/bdb.rst:253
 #, fuzzy
 msgid "Return ``True`` if there is an effective breakpoint for this line."
 msgstr "Retorna True si hay un punto de interrupción efectivo para esta línea."
 
-#: ../Doc/library/bdb.rst:228
+#: ../Doc/library/bdb.rst:255
 msgid ""
 "Check whether a line or function breakpoint exists and is in effect.  Delete "
 "temporary breakpoints based on information from :func:`effective`."
@@ -449,14 +478,14 @@ msgstr ""
 "está en vigor. Elimina puntos de interrupción temporales basados en la "
 "información de :func:`effective`."
 
-#: ../Doc/library/bdb.rst:233
+#: ../Doc/library/bdb.rst:260
 #, fuzzy
 msgid "Return ``True`` if any breakpoint exists for *frame*'s filename."
 msgstr ""
 "Retorna True si existe algún punto de interrupción para el nombre de archivo "
 "de *frame*."
 
-#: ../Doc/library/bdb.rst:235
+#: ../Doc/library/bdb.rst:262
 msgid ""
 "Derived classes should override these methods to gain control over debugger "
 "operation."
@@ -464,7 +493,7 @@ msgstr ""
 "Las clases derivadas deben redefinir estos métodos para adquirir el control "
 "sobre las operaciones de depuración."
 
-#: ../Doc/library/bdb.rst:240
+#: ../Doc/library/bdb.rst:267
 msgid ""
 "Called from :meth:`dispatch_call` if a break might stop inside the called "
 "function."
@@ -472,13 +501,13 @@ msgstr ""
 "Se llama desde :meth:`dispatch_call` si una interrupción puede detenerse "
 "dentro de la función llamada."
 
-#: ../Doc/library/bdb.rst:243
+#: ../Doc/library/bdb.rst:270
 msgid ""
 "*argument_list* is not used anymore and will always be ``None``. The "
 "argument is kept for backwards compatibility."
 msgstr ""
 
-#: ../Doc/library/bdb.rst:248
+#: ../Doc/library/bdb.rst:275
 msgid ""
 "Called from :meth:`dispatch_line` when either :meth:`stop_here` or :meth:"
 "`break_here` returns ``True``."
@@ -486,14 +515,14 @@ msgstr ""
 "Se llama desde :meth:`dispatch_line` cuando :meth:`stop_here` o :meth:"
 "`break_here` retornan ``True``."
 
-#: ../Doc/library/bdb.rst:253
+#: ../Doc/library/bdb.rst:280
 msgid ""
 "Called from :meth:`dispatch_return` when :meth:`stop_here` returns ``True``."
 msgstr ""
 "Se llama desde :meth:`dispatch_return` cuando :meth:`stop_here` retorna "
 "``True``."
 
-#: ../Doc/library/bdb.rst:257
+#: ../Doc/library/bdb.rst:284
 msgid ""
 "Called from :meth:`dispatch_exception` when :meth:`stop_here` returns "
 "``True``."
@@ -501,16 +530,16 @@ msgstr ""
 "Se llama desde :meth:`dispatch_exception` cuando :meth:`stop_here` retorna "
 "``True``."
 
-#: ../Doc/library/bdb.rst:262
+#: ../Doc/library/bdb.rst:289
 msgid "Handle how a breakpoint must be removed when it is a temporary one."
 msgstr ""
 "Maneja cómo un punto de interrupción debe ser eliminado cuando es temporal."
 
-#: ../Doc/library/bdb.rst:264
+#: ../Doc/library/bdb.rst:291
 msgid "This method must be implemented by derived classes."
 msgstr "Este método debe ser implementado por las clases derivadas."
 
-#: ../Doc/library/bdb.rst:267
+#: ../Doc/library/bdb.rst:294
 msgid ""
 "Derived classes and clients can call the following methods to affect the "
 "stepping state."
@@ -518,21 +547,21 @@ msgstr ""
 "Las clases derivadas y los clientes pueden llamar a los siguientes métodos "
 "para influir en el estado de transición."
 
-#: ../Doc/library/bdb.rst:272
+#: ../Doc/library/bdb.rst:299
 msgid "Stop after one line of code."
 msgstr "Se detiene después de una línea de código."
 
-#: ../Doc/library/bdb.rst:276
+#: ../Doc/library/bdb.rst:303
 msgid "Stop on the next line in or below the given frame."
 msgstr ""
 "Se detiene en la siguiente línea del marco de ejecución dado o en la de uno "
 "inferior."
 
-#: ../Doc/library/bdb.rst:280
+#: ../Doc/library/bdb.rst:307
 msgid "Stop when returning from the given frame."
 msgstr "Se detiene cuando se retorna desde el marco de ejecución dado."
 
-#: ../Doc/library/bdb.rst:284
+#: ../Doc/library/bdb.rst:311
 msgid ""
 "Stop when the line with the *lineno* greater than the current one is reached "
 "or when returning from current frame."
@@ -540,7 +569,7 @@ msgstr ""
 "Se detiene cuando se alcanza la línea con el *lineno* mayor que el actual o "
 "al retornar desde el marco actual."
 
-#: ../Doc/library/bdb.rst:289
+#: ../Doc/library/bdb.rst:316
 msgid ""
 "Start debugging from *frame*.  If *frame* is not specified, debugging starts "
 "from caller's frame."
@@ -549,13 +578,13 @@ msgstr ""
 "especifica, la depuración se inicia desde el marco de ejecución que produce "
 "la llamada."
 
-#: ../Doc/library/bdb.rst:292
+#: ../Doc/library/bdb.rst:319
 msgid ""
 ":func:`set_trace` will enter the debugger immediately, rather than on the "
 "next line of code to be executed."
 msgstr ""
 
-#: ../Doc/library/bdb.rst:298
+#: ../Doc/library/bdb.rst:325
 msgid ""
 "Stop only at breakpoints or when finished.  If there are no breakpoints, set "
 "the system trace function to ``None``."
@@ -564,7 +593,7 @@ msgstr ""
 "hay puntos de interrupción, se configura la función de seguimiento del "
 "sistema en ``None``."
 
-#: ../Doc/library/bdb.rst:305
+#: ../Doc/library/bdb.rst:332
 #, fuzzy
 msgid ""
 "Set the :attr:`!quitting` attribute to ``True``.  This raises :exc:`BdbQuit` "
@@ -574,7 +603,7 @@ msgstr ""
 "excepción :exc:`BdbQuit` en la siguiente llamada a uno de los métodos :meth:"
 "`dispatch_\\*` que tenga lugar."
 
-#: ../Doc/library/bdb.rst:309
+#: ../Doc/library/bdb.rst:336
 msgid ""
 "Derived classes and clients can call the following methods to manipulate "
 "breakpoints.  These methods return a string containing an error message if "
@@ -585,7 +614,7 @@ msgstr ""
 "de caracteres que contiene un mensaje de error si algo fue mal, o ``None`` "
 "si todo fue correctamente."
 
-#: ../Doc/library/bdb.rst:315
+#: ../Doc/library/bdb.rst:342
 msgid ""
 "Set a new breakpoint.  If the *lineno* line doesn't exist for the *filename* "
 "passed as argument, return an error message.  The *filename* should be in "
@@ -596,7 +625,7 @@ msgstr ""
 "argumento, se retorna un mensaje de error. *filename* debe estar en su forma "
 "canónica, tal como se describe en el método :meth:`canonic`."
 
-#: ../Doc/library/bdb.rst:321
+#: ../Doc/library/bdb.rst:348
 msgid ""
 "Delete the breakpoints in *filename* and *lineno*.  If none were set, return "
 "an error message."
@@ -604,7 +633,7 @@ msgstr ""
 "Elimina los puntos de interrupción en *filename* y *lineno*. Si no se "
 "estableció ninguno, se retorna un mensaje de error."
 
-#: ../Doc/library/bdb.rst:326
+#: ../Doc/library/bdb.rst:353
 msgid ""
 "Delete the breakpoint which has the index *arg* in the :attr:`Breakpoint."
 "bpbynumber`.  If *arg* is not numeric or out of range, return an error "
@@ -614,7 +643,7 @@ msgstr ""
 "`Breakpoint.bpbynumber`. Si *arg* no es un valor numérico o es un indice "
 "fuera de rango, se retorna un mensaje de error."
 
-#: ../Doc/library/bdb.rst:332
+#: ../Doc/library/bdb.rst:359
 msgid ""
 "Delete all breakpoints in *filename*.  If none were set, return an error "
 "message."
@@ -622,14 +651,14 @@ msgstr ""
 "Elimina todos los puntos de interrupción en *filename*. Si no se estableció "
 "ninguno, se retorna un mensaje de error."
 
-#: ../Doc/library/bdb.rst:337
+#: ../Doc/library/bdb.rst:364
 msgid ""
 "Delete all existing breakpoints.  If none were set, return an error message."
 msgstr ""
 "Elimina todos los puntos de interrupción. Si no se estableció ninguno, se "
 "retorna un mensaje de error."
 
-#: ../Doc/library/bdb.rst:342
+#: ../Doc/library/bdb.rst:369
 msgid ""
 "Return a breakpoint specified by the given number.  If *arg* is a string, it "
 "will be converted to a number.  If *arg* is a non-numeric string, if the "
@@ -641,13 +670,13 @@ msgstr ""
 "cadena no numérica, o el punto de interrupción dado nunca existió o ya ha "
 "sido eliminado, se lanza una excepción :exc:`ValueError`."
 
-#: ../Doc/library/bdb.rst:351
+#: ../Doc/library/bdb.rst:378
 #, fuzzy
 msgid "Return ``True`` if there is a breakpoint for *lineno* in *filename*."
 msgstr ""
 "Retorna True si hay un punto de interrupción para *lineno* en *filename*."
 
-#: ../Doc/library/bdb.rst:355
+#: ../Doc/library/bdb.rst:382
 msgid ""
 "Return all breakpoints for *lineno* in *filename*, or an empty list if none "
 "are set."
@@ -655,17 +684,39 @@ msgstr ""
 "Retorna todos los puntos de interrupción en la línea número *lineno* del "
 "archivo *filename*, o una lista vacía si no se ha establecido ninguno."
 
-#: ../Doc/library/bdb.rst:360
+#: ../Doc/library/bdb.rst:387
 msgid "Return all breakpoints in *filename*, or an empty list if none are set."
 msgstr ""
 "Retorna todos los puntos de interrupción en el archivo *filename*, o una "
 "lista vacía si no hay ninguno establecido."
 
-#: ../Doc/library/bdb.rst:364
+#: ../Doc/library/bdb.rst:391
 msgid "Return all breakpoints that are set."
 msgstr "Retorna todos los puntos de interrupción establecidos."
 
-#: ../Doc/library/bdb.rst:367
+#: ../Doc/library/bdb.rst:394
+msgid ""
+"Derived classes and clients can call the following methods to disable and "
+"restart events to achieve better performance. These methods only work when "
+"using the ``'monitoring'`` backend."
+msgstr ""
+
+#: ../Doc/library/bdb.rst:400
+msgid ""
+"Disable the current event until the next time :func:`restart_events` is "
+"called. This is helpful when the debugger is not interested in the current "
+"line."
+msgstr ""
+
+#: ../Doc/library/bdb.rst:408
+msgid ""
+"Restart all the disabled events. This function is automatically called in "
+"``dispatch_*`` methods after ``user_*`` methods are called. If the "
+"``dispatch_*`` methods are not overridden, the disabled events will be "
+"restarted after each user interaction."
+msgstr ""
+
+#: ../Doc/library/bdb.rst:416
 msgid ""
 "Derived classes and clients can call the following methods to get a data "
 "structure representing a stack trace."
@@ -673,13 +724,13 @@ msgstr ""
 "Las clases derivadas y clientes pueden llamar los siguientes métodos para "
 "obtener una estructura de datos que representa un seguimiento de pila."
 
-#: ../Doc/library/bdb.rst:372
+#: ../Doc/library/bdb.rst:421
 msgid "Return a list of (frame, lineno) tuples in a stack trace, and a size."
 msgstr ""
 "Retorna una lista de tuplas (frame, lineno) en un seguimiento de pila y un "
 "tamaño."
 
-#: ../Doc/library/bdb.rst:374
+#: ../Doc/library/bdb.rst:423
 msgid ""
 "The most recently called frame is last in the list. The size is the number "
 "of frames below the frame where the debugger was invoked."
@@ -687,7 +738,7 @@ msgstr ""
 "El marco llamado más recientemente es el último en la lista. El tamaño es el "
 "número de marcos por debajo del marco en el que se invocó el depurador."
 
-#: ../Doc/library/bdb.rst:379
+#: ../Doc/library/bdb.rst:428
 msgid ""
 "Return a string with information about a stack entry, which is a ``(frame, "
 "lineno)`` tuple.  The return string contains:"
@@ -696,27 +747,27 @@ msgstr ""
 "identificada por una tupla de la forma ``(frame, lineno)``. La cadena de "
 "caracteres que retorna contiene:"
 
-#: ../Doc/library/bdb.rst:382
+#: ../Doc/library/bdb.rst:431
 msgid "The canonical filename which contains the frame."
 msgstr "El nombre de archivo canónico que contiene el marco de ejecución."
 
-#: ../Doc/library/bdb.rst:383
+#: ../Doc/library/bdb.rst:432
 msgid "The function name or ``\"<lambda>\"``."
 msgstr "El nombre de la función o ``\"<lambda>\"``."
 
-#: ../Doc/library/bdb.rst:384
+#: ../Doc/library/bdb.rst:433
 msgid "The input arguments."
 msgstr "Los argumentos de entrada."
 
-#: ../Doc/library/bdb.rst:385
+#: ../Doc/library/bdb.rst:434
 msgid "The return value."
 msgstr "El valor de retorno."
 
-#: ../Doc/library/bdb.rst:386
+#: ../Doc/library/bdb.rst:435
 msgid "The line of code (if it exists)."
 msgstr "La linea de código (si existe)."
 
-#: ../Doc/library/bdb.rst:389
+#: ../Doc/library/bdb.rst:438
 msgid ""
 "The following two methods can be called by clients to use a debugger to "
 "debug a :term:`statement`, given as a string."
@@ -725,7 +776,7 @@ msgstr ""
 "clientes para usar un depurador que se encargue de depurar un :term:"
 "`statement`, proporcionado como una cadena de caracteres."
 
-#: ../Doc/library/bdb.rst:394
+#: ../Doc/library/bdb.rst:443
 #, fuzzy
 msgid ""
 "Debug a statement executed via the :func:`exec` function.  *globals* "
@@ -735,7 +786,7 @@ msgstr ""
 "*globals* por defecto es :attr:`__main __.__ dict__`, mientras que *locals* "
 "es *globals* por defecto."
 
-#: ../Doc/library/bdb.rst:399
+#: ../Doc/library/bdb.rst:448
 msgid ""
 "Debug an expression executed via the :func:`eval` function.  *globals* and "
 "*locals* have the same meaning as in :meth:`run`."
@@ -743,21 +794,21 @@ msgstr ""
 "Depura una expresión ejecutada mediante la función :func:`eval`. *globals* y "
 "*locals* tienen el mismo significado que en :meth:`run`."
 
-#: ../Doc/library/bdb.rst:404
+#: ../Doc/library/bdb.rst:453
 msgid "For backwards compatibility.  Calls the :meth:`run` method."
 msgstr ""
 "Definido solo por compatibilidad con versiones anteriores. Llama al método :"
 "meth:`run`."
 
-#: ../Doc/library/bdb.rst:408
+#: ../Doc/library/bdb.rst:457
 msgid "Debug a single function call, and return its result."
 msgstr "Depura una única llamada a función y retorna su resultado."
 
-#: ../Doc/library/bdb.rst:411
+#: ../Doc/library/bdb.rst:460
 msgid "Finally, the module defines the following functions:"
 msgstr "Por último, el módulo también define las siguientes funciones:"
 
-#: ../Doc/library/bdb.rst:415
+#: ../Doc/library/bdb.rst:464
 #, fuzzy
 msgid ""
 "Return ``True`` if we should break here, depending on the way the :class:"
@@ -767,7 +818,7 @@ msgstr ""
 "dependiendo de la forma en que se estableció la clase :class:`Breakpoint` "
 "*b*."
 
-#: ../Doc/library/bdb.rst:418
+#: ../Doc/library/bdb.rst:467
 msgid ""
 "If it was set via line number, it checks if :attr:`b.line <bdb.Breakpoint."
 "line>` is the same as the one in *frame*. If the breakpoint was set via :"
@@ -781,7 +832,7 @@ msgstr ""
 "Breakpoint.funcname>`, se tiene que comprobar que estamos en el *frame* "
 "correcto (la función correcta) y si se está en su primera línea ejecutable."
 
-#: ../Doc/library/bdb.rst:427
+#: ../Doc/library/bdb.rst:476
 msgid ""
 "Return ``(active breakpoint, delete temporary flag)`` or ``(None, None)`` as "
 "the breakpoint to act upon."
@@ -789,7 +840,7 @@ msgstr ""
 "Retorna ``(active breakpoint, delete temporary flag)`` o ``(None, None)`` "
 "como el punto de interrupción para actuar."
 
-#: ../Doc/library/bdb.rst:430
+#: ../Doc/library/bdb.rst:479
 #, fuzzy
 msgid ""
 "The *active breakpoint* is the first entry in :attr:`bplist <bdb.Breakpoint."
@@ -812,17 +863,17 @@ msgstr ""
 "evaluar :attr:`cond <bdb.Breakpoint.cond>` (en cuyo caso, se ignora el "
 "conteo :attr:`ignore <bdb.Breakpoint.ignore>`)."
 
-#: ../Doc/library/bdb.rst:441
+#: ../Doc/library/bdb.rst:490
 #, fuzzy
 msgid "If no such entry exists, then ``(None, None)`` is returned."
 msgstr "Si no existe tal entrada, entonces retorna (None, None)."
 
-#: ../Doc/library/bdb.rst:446
+#: ../Doc/library/bdb.rst:495
 msgid "Start debugging with a :class:`Bdb` instance from caller's frame."
 msgstr ""
 "Inicia la depuración usando una instancia de :class:`Bdb`, partiendo desde "
 "el marco de ejecución que realiza la llamada."
 
-#: ../Doc/library/bdb.rst:303
+#: ../Doc/library/bdb.rst:330
 msgid "quitting (bdb.Bdb attribute)"
 msgstr ""

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-21 16:38-0300\n"
+"POT-Creation-Date: 2026-02-26 18:44-0300\n"
 "PO-Revision-Date: 2023-11-01 13:57+0100\n"
 "Last-Translator: Marcos Medrano <marcosmedrano0@gmail.com>\n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: ../Doc/library/asyncio-dev.rst:7
 msgid "Developing with asyncio"
@@ -106,16 +106,6 @@ msgstr "Cuando el modo depuración está habilitado:"
 
 #: ../Doc/library/asyncio-dev.rst:49
 msgid ""
-"asyncio checks for :ref:`coroutines that were not awaited <asyncio-coroutine-"
-"not-scheduled>` and logs them; this mitigates the \"forgotten await\" "
-"pitfall."
-msgstr ""
-"asyncio comprueba las :ref:`corrutinas que no son esperadas <asyncio-"
-"coroutine-not-scheduled>` y las registra; esto mitiga la dificultad de las "
-"\"esperas olvidadas\"."
-
-#: ../Doc/library/asyncio-dev.rst:53
-msgid ""
 "Many non-threadsafe asyncio APIs (such as :meth:`loop.call_soon` and :meth:"
 "`loop.call_at` methods) raise an exception if they are called from a wrong "
 "thread."
@@ -124,7 +114,7 @@ msgstr ""
 "`loop.call_soon` y :meth:`loop.call_at`) generan una excepción si son "
 "llamados desde un hilo equivocado."
 
-#: ../Doc/library/asyncio-dev.rst:57
+#: ../Doc/library/asyncio-dev.rst:53
 msgid ""
 "The execution time of the I/O selector is logged if it takes too long to "
 "perform an I/O operation."
@@ -132,7 +122,7 @@ msgstr ""
 "El tiempo de ejecución del selector E/S es registrado si tarda demasiado "
 "tiempo en realizar una operación E/S."
 
-#: ../Doc/library/asyncio-dev.rst:60
+#: ../Doc/library/asyncio-dev.rst:56
 msgid ""
 "Callbacks taking longer than 100 milliseconds are logged.  The :attr:`loop."
 "slow_callback_duration` attribute can be used to set the minimum execution "
@@ -142,11 +132,11 @@ msgstr ""
 "`loop.slow_callback_duration` puede ser usado para definir la duración "
 "mínima de ejecución en segundos que se considere como \"lenta\"."
 
-#: ../Doc/library/asyncio-dev.rst:68
+#: ../Doc/library/asyncio-dev.rst:64
 msgid "Concurrency and Multithreading"
 msgstr "Concurrencia y multihilo"
 
-#: ../Doc/library/asyncio-dev.rst:70
+#: ../Doc/library/asyncio-dev.rst:66
 msgid ""
 "An event loop runs in a thread (typically the main thread) and executes all "
 "callbacks and Tasks in its thread.  While a Task is running in the event "
@@ -160,7 +150,7 @@ msgstr ""
 "el mismo hilo. Cuando una Tarea ejecuta una expresión ``await``, la Tarea en "
 "ejecución se suspende y el bucle de eventos ejecuta la siguiente Tarea."
 
-#: ../Doc/library/asyncio-dev.rst:76
+#: ../Doc/library/asyncio-dev.rst:72
 msgid ""
 "To schedule a :term:`callback` from another OS thread, the :meth:`loop."
 "call_soon_threadsafe` method should be used. Example::"
@@ -168,11 +158,11 @@ msgstr ""
 "Para programar un :term:`callback` desde otro hilo del SO, se debe usar el "
 "método :meth:`loop.call_soon_threadsafe`. Ejemplo::"
 
-#: ../Doc/library/asyncio-dev.rst:79
+#: ../Doc/library/asyncio-dev.rst:75
 msgid "loop.call_soon_threadsafe(callback, *args)"
 msgstr ""
 
-#: ../Doc/library/asyncio-dev.rst:81
+#: ../Doc/library/asyncio-dev.rst:77
 msgid ""
 "Almost all asyncio objects are not thread safe, which is typically not a "
 "problem unless there is code that works with them from outside of a Task or "
@@ -185,11 +175,11 @@ msgstr ""
 "a la API de asyncio de bajo nivel, se debe usar el método :meth:`loop."
 "call_soon_threadsafe`, por ejemplo::"
 
-#: ../Doc/library/asyncio-dev.rst:87
+#: ../Doc/library/asyncio-dev.rst:83
 msgid "loop.call_soon_threadsafe(fut.cancel)"
 msgstr ""
 
-#: ../Doc/library/asyncio-dev.rst:89
+#: ../Doc/library/asyncio-dev.rst:85
 msgid ""
 "To schedule a coroutine object from a different OS thread, the :func:"
 "`run_coroutine_threadsafe` function should be used. It returns a :class:"
@@ -199,7 +189,7 @@ msgstr ""
 "operativo se debe usar la función :func:`run_coroutine_threadsafe`. Esta "
 "retorna un :class:`concurrent.futures.Future` para acceder al resultado::"
 
-#: ../Doc/library/asyncio-dev.rst:93
+#: ../Doc/library/asyncio-dev.rst:89
 msgid ""
 "async def coro_func():\n"
 "     return await asyncio.sleep(1, 42)\n"
@@ -211,25 +201,26 @@ msgid ""
 "result = future.result()"
 msgstr ""
 
-#: ../Doc/library/asyncio-dev.rst:102
+#: ../Doc/library/asyncio-dev.rst:98
 msgid "To handle signals the event loop must be run in the main thread."
 msgstr ""
 "Para manejar señales el bucle de eventos debe ser ejecutado en el hilo "
 "principal."
 
-#: ../Doc/library/asyncio-dev.rst:105
+#: ../Doc/library/asyncio-dev.rst:101
+#, fuzzy
 msgid ""
 "The :meth:`loop.run_in_executor` method can be used with a :class:"
-"`concurrent.futures.ThreadPoolExecutor` to execute blocking code in a "
-"different OS thread without blocking the OS thread that the event loop runs "
-"in."
+"`concurrent.futures.ThreadPoolExecutor` or :class:`~concurrent.futures."
+"InterpreterPoolExecutor` to execute blocking code in a different OS thread "
+"without blocking the OS thread that the event loop runs in."
 msgstr ""
 "El método :meth:`loop.run_in_executor` puede ser usado con un :class:"
 "`concurrent.futures.ThreadPoolExecutor` para ejecutar código bloqueante en "
 "un hilo diferente del sistema operativo sin bloquear el hilo del sistema "
 "operativo en el que el bucle de eventos está siendo ejecutado."
 
-#: ../Doc/library/asyncio-dev.rst:110
+#: ../Doc/library/asyncio-dev.rst:107
 msgid ""
 "There is currently no way to schedule coroutines or callbacks directly from "
 "a different process (such as one started with :mod:`multiprocessing`). The :"
@@ -252,11 +243,11 @@ msgstr ""
 "un :class:`concurrent.futures.ProcessPoolExecutor` para ejecutar código en "
 "un proceso diferente."
 
-#: ../Doc/library/asyncio-dev.rst:124
+#: ../Doc/library/asyncio-dev.rst:121
 msgid "Running Blocking Code"
 msgstr "Ejecutando código bloqueante"
 
-#: ../Doc/library/asyncio-dev.rst:126
+#: ../Doc/library/asyncio-dev.rst:123
 msgid ""
 "Blocking (CPU-bound) code should not be called directly.  For example, if a "
 "function performs a CPU-intensive calculation for 1 second, all concurrent "
@@ -267,22 +258,24 @@ msgstr ""
 "CPU durante 1 segundo, todas las Tareas y operaciones de Entrada/Salida (IO) "
 "concurrentes se retrasarían 1 segundo."
 
-#: ../Doc/library/asyncio-dev.rst:131
+#: ../Doc/library/asyncio-dev.rst:128
+#, fuzzy
 msgid ""
-"An executor can be used to run a task in a different thread or even in a "
-"different process to avoid blocking the OS thread with the event loop.  See "
-"the :meth:`loop.run_in_executor` method for more details."
+"An executor can be used to run a task in a different thread, including in a "
+"different interpreter, or even in a different process to avoid blocking the "
+"OS thread with the event loop.  See the :meth:`loop.run_in_executor` method "
+"for more details."
 msgstr ""
 "Un ejecutor puede ser usado para ejecutar una tarea en un hilo diferente o "
 "incluso en un proceso diferente para evitar bloquear el hilo del sistema "
 "operativo con el bucle de eventos. Consulte el método :meth:`loop."
 "run_in_executor` para más detalles."
 
-#: ../Doc/library/asyncio-dev.rst:140
+#: ../Doc/library/asyncio-dev.rst:138
 msgid "Logging"
 msgstr "Logueando"
 
-#: ../Doc/library/asyncio-dev.rst:142
+#: ../Doc/library/asyncio-dev.rst:140
 msgid ""
 "asyncio uses the :mod:`logging` module and all logging is performed via the "
 "``\"asyncio\"`` logger."
@@ -290,7 +283,7 @@ msgstr ""
 "asyncio usa el módulo :mod:`logging` y todo el logueo es realizado mediante "
 "el logger ``\"asyncio\"``."
 
-#: ../Doc/library/asyncio-dev.rst:145
+#: ../Doc/library/asyncio-dev.rst:143
 msgid ""
 "The default log level is :py:const:`logging.INFO`, which can be easily "
 "adjusted::"
@@ -298,11 +291,11 @@ msgstr ""
 "El nivel de log por defecto es :py:const:`logging.INFO`, el cual puede ser "
 "fácilmente ajustado::"
 
-#: ../Doc/library/asyncio-dev.rst:148
+#: ../Doc/library/asyncio-dev.rst:146
 msgid "logging.getLogger(\"asyncio\").setLevel(logging.WARNING)"
 msgstr ""
 
-#: ../Doc/library/asyncio-dev.rst:151
+#: ../Doc/library/asyncio-dev.rst:149
 msgid ""
 "Network logging can block the event loop. It is recommended to use a "
 "separate thread for handling logs or use non-blocking IO. For example, see :"
@@ -312,11 +305,11 @@ msgstr ""
 "subproceso separado para manejar registros o usar sin bloqueo IO. Por "
 "ejemplo, consulte :ref:`blocking-handlers`."
 
-#: ../Doc/library/asyncio-dev.rst:159
+#: ../Doc/library/asyncio-dev.rst:157
 msgid "Detect never-awaited coroutines"
 msgstr "Detectar corrutinas no esperadas"
 
-#: ../Doc/library/asyncio-dev.rst:161
+#: ../Doc/library/asyncio-dev.rst:159
 msgid ""
 "When a coroutine function is called, but not awaited (e.g. ``coro()`` "
 "instead of ``await coro()``) or the coroutine is not scheduled with :meth:"
@@ -326,7 +319,7 @@ msgstr ""
 "``coro()`` en lugar de ``await coro()``) o la corrutina no es programada "
 "con :meth:`asyncio.create_task`, asyncio emitirá una :exc:`RuntimeWarning`::"
 
-#: ../Doc/library/asyncio-dev.rst:166
+#: ../Doc/library/asyncio-dev.rst:164
 msgid ""
 "import asyncio\n"
 "\n"
@@ -339,21 +332,21 @@ msgid ""
 "asyncio.run(main())"
 msgstr ""
 
-#: ../Doc/library/asyncio-dev.rst:176 ../Doc/library/asyncio-dev.rst:221
+#: ../Doc/library/asyncio-dev.rst:174 ../Doc/library/asyncio-dev.rst:219
 msgid "Output::"
 msgstr "Salida::"
 
-#: ../Doc/library/asyncio-dev.rst:178
+#: ../Doc/library/asyncio-dev.rst:176
 msgid ""
 "test.py:7: RuntimeWarning: coroutine 'test' was never awaited\n"
 "  test()"
 msgstr ""
 
-#: ../Doc/library/asyncio-dev.rst:181 ../Doc/library/asyncio-dev.rst:237
+#: ../Doc/library/asyncio-dev.rst:179 ../Doc/library/asyncio-dev.rst:235
 msgid "Output in debug mode::"
 msgstr "Salida en modo depuración::"
 
-#: ../Doc/library/asyncio-dev.rst:183
+#: ../Doc/library/asyncio-dev.rst:181
 msgid ""
 "test.py:7: RuntimeWarning: coroutine 'test' was never awaited\n"
 "Coroutine created at (most recent call last)\n"
@@ -367,7 +360,7 @@ msgid ""
 "  test()"
 msgstr ""
 
-#: ../Doc/library/asyncio-dev.rst:194
+#: ../Doc/library/asyncio-dev.rst:192
 msgid ""
 "The usual fix is to either await the coroutine or call the :meth:`asyncio."
 "create_task` function::"
@@ -375,17 +368,17 @@ msgstr ""
 "La solución habitual es esperar la corrutina o llamar a la función :meth:"
 "`asyncio.create_task`::"
 
-#: ../Doc/library/asyncio-dev.rst:197
+#: ../Doc/library/asyncio-dev.rst:195
 msgid ""
 "async def main():\n"
 "    await test()"
 msgstr ""
 
-#: ../Doc/library/asyncio-dev.rst:202
+#: ../Doc/library/asyncio-dev.rst:200
 msgid "Detect never-retrieved exceptions"
 msgstr "Detectar excepciones nunca recuperadas"
 
-#: ../Doc/library/asyncio-dev.rst:204
+#: ../Doc/library/asyncio-dev.rst:202
 msgid ""
 "If a :meth:`Future.set_exception` is called but the Future object is never "
 "awaited on, the exception would never be propagated to the user code.  In "
@@ -397,11 +390,11 @@ msgstr ""
 "este caso, asyncio emitiría un mensaje de registro cuando el objeto Futuro "
 "fuera recolectado como basura."
 
-#: ../Doc/library/asyncio-dev.rst:209
+#: ../Doc/library/asyncio-dev.rst:207
 msgid "Example of an unhandled exception::"
 msgstr "Ejemplo de una excepción no manejada::"
 
-#: ../Doc/library/asyncio-dev.rst:211
+#: ../Doc/library/asyncio-dev.rst:209
 msgid ""
 "import asyncio\n"
 "\n"
@@ -414,7 +407,7 @@ msgid ""
 "asyncio.run(main())"
 msgstr ""
 
-#: ../Doc/library/asyncio-dev.rst:223
+#: ../Doc/library/asyncio-dev.rst:221
 msgid ""
 "Task exception was never retrieved\n"
 "future: <Task finished coro=<bug() done, defined at test.py:3>\n"
@@ -426,7 +419,7 @@ msgid ""
 "Exception: not consumed"
 msgstr ""
 
-#: ../Doc/library/asyncio-dev.rst:232
+#: ../Doc/library/asyncio-dev.rst:230
 msgid ""
 ":ref:`Enable the debug mode <asyncio-debug-mode>` to get the traceback where "
 "the task was created::"
@@ -434,11 +427,11 @@ msgstr ""
 ":ref:`Habilita el modo depuración <asyncio-debug-mode>` para obtener el "
 "seguimiento de pila (*traceback*) donde la tarea fue creada::"
 
-#: ../Doc/library/asyncio-dev.rst:235
+#: ../Doc/library/asyncio-dev.rst:233
 msgid "asyncio.run(main(), debug=True)"
 msgstr ""
 
-#: ../Doc/library/asyncio-dev.rst:239
+#: ../Doc/library/asyncio-dev.rst:237
 msgid ""
 "Task exception was never retrieved\n"
 "future: <Task finished coro=<bug() done, defined at test.py:3>\n"
@@ -455,3 +448,12 @@ msgid ""
 "    raise Exception(\"not consumed\")\n"
 "Exception: not consumed"
 msgstr ""
+
+#~ msgid ""
+#~ "asyncio checks for :ref:`coroutines that were not awaited <asyncio-"
+#~ "coroutine-not-scheduled>` and logs them; this mitigates the \"forgotten "
+#~ "await\" pitfall."
+#~ msgstr ""
+#~ "asyncio comprueba las :ref:`corrutinas que no son esperadas <asyncio-"
+#~ "coroutine-not-scheduled>` y las registra; esto mitiga la dificultad de "
+#~ "las \"esperas olvidadas\"."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python en Español 3.11\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-21 16:38-0300\n"
+"POT-Creation-Date: 2026-02-26 18:44-0300\n"
 "PO-Revision-Date: 2022-10-29 11:15-0300\n"
 "Last-Translator: Carlos A. Crespo <lvccrespo@gmail.com>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: ../Doc/library/sys_path_init.rst:4
 msgid "The initialization of the :data:`sys.path` module search path"
@@ -99,6 +99,7 @@ msgstr ""
 "la búsqueda. La ubicación del ejecutable de Python se llama ``home``."
 
 #: ../Doc/library/sys_path_init.rst:37
+#, python-brace-format
 msgid ""
 "Once ``home`` is determined, the ``prefix`` directory is found by first "
 "looking for :file:`python{majorversion}{minorversion}.zip` (``python311."
@@ -131,14 +132,25 @@ msgstr ""
 "`PYTHONPLATLIBDIR`."
 
 #: ../Doc/library/sys_path_init.rst:50
+#, fuzzy
 msgid ""
 "Once found, ``prefix`` and ``exec_prefix`` are available at :data:`sys."
-"prefix` and :data:`sys.exec_prefix` respectively."
+"base_prefix` and :data:`sys.base_exec_prefix` respectively."
 msgstr ""
 "Una vez encontrados, ``prefix`` y ``exec_prefix`` están disponibles en :data:"
 "`sys.prefix` y :data:`sys.exec_prefix` respectivamente."
 
 #: ../Doc/library/sys_path_init.rst:53
+msgid ""
+"If :envvar:`PYTHONHOME` is not set, and a ``pyvenv.cfg`` file is found "
+"alongside the main executable, or in its parent directory, :data:`sys."
+"prefix` and :data:`sys.exec_prefix` get set to the directory containing "
+"``pyvenv.cfg``, otherwise they are set to the same value as :data:`sys."
+"base_prefix` and :data:`sys.base_exec_prefix`, respectively. This is used "
+"by :ref:`sys-path-init-virtual-environments`."
+msgstr ""
+
+#: ../Doc/library/sys_path_init.rst:60
 msgid ""
 "Finally, the :mod:`site` module is processed and :file:`site-packages` "
 "directories are added to the module search path. A common way to customize "
@@ -151,7 +163,7 @@ msgstr ""
 "mod:`usercustomize` como se describe en la documentación del módulo :mod:"
 "`site`."
 
-#: ../Doc/library/sys_path_init.rst:60
+#: ../Doc/library/sys_path_init.rst:67
 msgid ""
 "Certain command line options may further affect path calculations. See :"
 "option:`-E`, :option:`-I`, :option:`-s` and :option:`-S` for further details."
@@ -160,43 +172,60 @@ msgstr ""
 "de ruta. Vea :option:`-E`, :option:`-I`, :option:`-s` y :option:`-S` para "
 "más detalles."
 
-#: ../Doc/library/sys_path_init.rst:64
-msgid "Virtual environments"
-msgstr "Entornos virtuales"
-
-#: ../Doc/library/sys_path_init.rst:66
-msgid ""
-"If Python is run in a virtual environment (as described at :ref:`tut-venv`) "
-"then ``prefix`` and ``exec_prefix`` are specific to the virtual environment."
-msgstr ""
-"Si Python se ejecuta en un entorno virtual (como se describe en :ref:`tut-"
-"venv`) entonces ``prefix`` y ``exec_prefix`` son específicos del entorno "
-"virtual."
-
-#: ../Doc/library/sys_path_init.rst:69
-msgid ""
-"If a ``pyvenv.cfg`` file is found alongside the main executable, or in the "
-"directory one level above the executable, the following variations apply:"
-msgstr ""
-"Si se encuentra un archivo ``pyvenv.cfg`` junto al ejecutable principal, o "
-"en el directorio un nivel por encima del ejecutable, se aplican las "
-"siguientes variaciones:"
-
 #: ../Doc/library/sys_path_init.rst:72
 msgid ""
-"If ``home`` is an absolute path and :envvar:`PYTHONHOME` is not set, this "
-"path is used instead of the path to the main executable when deducing "
-"``prefix`` and ``exec_prefix``."
+":data:`sys.prefix` and :data:`sys.exec_prefix` are now set to the ``pyvenv."
+"cfg`` directory during the path initialization. This was previously done by :"
+"mod:`site`, therefore affected by :option:`-S`."
 msgstr ""
-"Si ``home`` es una ruta absoluta y :envvar:`PYTHONHOME` no está establecido, "
-"esta ruta se utiliza en lugar de la ruta al ejecutable principal cuando se "
-"deduce ``prefix`` y ``exec_prefix``."
 
-#: ../Doc/library/sys_path_init.rst:77
+#: ../Doc/library/sys_path_init.rst:79
+#, fuzzy
+msgid "Virtual Environments"
+msgstr "Entornos virtuales"
+
+#: ../Doc/library/sys_path_init.rst:81
+msgid ""
+"Virtual environments place a ``pyvenv.cfg`` file in their prefix, which "
+"causes :data:`sys.prefix` and :data:`sys.exec_prefix` to point to them, "
+"instead of the base installation."
+msgstr ""
+
+#: ../Doc/library/sys_path_init.rst:85
+#, fuzzy
+msgid ""
+"The ``prefix`` and ``exec_prefix`` values of the base installation are "
+"available at :data:`sys.base_prefix` and :data:`sys.base_exec_prefix`."
+msgstr ""
+"Una vez encontrados, ``prefix`` y ``exec_prefix`` están disponibles en :data:"
+"`sys.prefix` y :data:`sys.exec_prefix` respectivamente."
+
+#: ../Doc/library/sys_path_init.rst:88
+msgid ""
+"As well as being used as a marker to identify virtual environments, ``pyvenv."
+"cfg`` may also be used to configure the :mod:`site` initialization. Please "
+"refer to :mod:`site`'s :ref:`virtual environments documentation <site-"
+"virtual-environments-configuration>`."
+msgstr ""
+
+#: ../Doc/library/sys_path_init.rst:95
+msgid ":envvar:`PYTHONHOME` overrides the ``pyvenv.cfg`` detection."
+msgstr ""
+
+#: ../Doc/library/sys_path_init.rst:99
+msgid ""
+"There are other ways how \"virtual environments\" could be implemented, this "
+"documentation refers implementations based on the ``pyvenv.cfg`` mechanism, "
+"such as :mod:`venv`. Most virtual environment implementations follow the "
+"model set by :mod:`venv`, but there may be exotic implementations that "
+"diverge from it."
+msgstr ""
+
+#: ../Doc/library/sys_path_init.rst:106
 msgid "_pth files"
 msgstr "Archivos _pth"
 
-#: ../Doc/library/sys_path_init.rst:79
+#: ../Doc/library/sys_path_init.rst:108
 msgid ""
 "To completely override :data:`sys.path` create a ``._pth`` file with the "
 "same name as the shared library or executable (``python._pth`` or "
@@ -215,7 +244,7 @@ msgstr ""
 "basado en el ejecutable, lo que permite restringir las rutas para cualquier "
 "programa en tiempo de ejecución si se desea."
 
-#: ../Doc/library/sys_path_init.rst:87
+#: ../Doc/library/sys_path_init.rst:116
 msgid ""
 "When the file exists, all registry and environment variables are ignored, "
 "isolated mode is enabled, and :mod:`site` is not imported unless one line in "
@@ -232,7 +261,7 @@ msgstr ""
 "importación distintas de ``site``, y no se puede especificar código "
 "arbitrario."
 
-#: ../Doc/library/sys_path_init.rst:94
+#: ../Doc/library/sys_path_init.rst:123
 msgid ""
 "Note that ``.pth`` files (without leading underscore) will be processed "
 "normally by the :mod:`site` module when ``import site`` has been specified."
@@ -241,11 +270,11 @@ msgstr ""
 "procesados normalmente por el módulo :mod:`site` cuando se haya especificado "
 "``import site``."
 
-#: ../Doc/library/sys_path_init.rst:98
+#: ../Doc/library/sys_path_init.rst:127
 msgid "Embedded Python"
 msgstr "Python embebido"
 
-#: ../Doc/library/sys_path_init.rst:100
+#: ../Doc/library/sys_path_init.rst:129
 #, fuzzy
 msgid ""
 "If Python is embedded within another application :c:func:"
@@ -260,10 +289,37 @@ msgstr ""
 "antigua :c:func:`Py_SetPath` para saltarse la inicialización de la ruta de "
 "búsqueda de módulo."
 
-#: ../Doc/library/sys_path_init.rst:106
+#: ../Doc/library/sys_path_init.rst:135
 msgid ":ref:`windows_finding_modules` for detailed Windows notes."
 msgstr ":ref:`windows_finding_modules` para las notas detalladas de Windows."
 
-#: ../Doc/library/sys_path_init.rst:107
+#: ../Doc/library/sys_path_init.rst:136
 msgid ":ref:`using-on-unix` for Unix details."
 msgstr ":ref:`using-on-unix` para los detalles de Unix."
+
+#~ msgid ""
+#~ "If Python is run in a virtual environment (as described at :ref:`tut-"
+#~ "venv`) then ``prefix`` and ``exec_prefix`` are specific to the virtual "
+#~ "environment."
+#~ msgstr ""
+#~ "Si Python se ejecuta en un entorno virtual (como se describe en :ref:`tut-"
+#~ "venv`) entonces ``prefix`` y ``exec_prefix`` son específicos del entorno "
+#~ "virtual."
+
+#~ msgid ""
+#~ "If a ``pyvenv.cfg`` file is found alongside the main executable, or in "
+#~ "the directory one level above the executable, the following variations "
+#~ "apply:"
+#~ msgstr ""
+#~ "Si se encuentra un archivo ``pyvenv.cfg`` junto al ejecutable principal, "
+#~ "o en el directorio un nivel por encima del ejecutable, se aplican las "
+#~ "siguientes variaciones:"
+
+#~ msgid ""
+#~ "If ``home`` is an absolute path and :envvar:`PYTHONHOME` is not set, this "
+#~ "path is used instead of the path to the main executable when deducing "
+#~ "``prefix`` and ``exec_prefix``."
+#~ msgstr ""
+#~ "Si ``home`` es una ruta absoluta y :envvar:`PYTHONHOME` no está "
+#~ "establecido, esta ruta se utiliza en lugar de la ruta al ejecutable "
+#~ "principal cuando se deduce ``prefix`` y ``exec_prefix``."

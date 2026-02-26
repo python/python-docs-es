@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-21 16:38-0300\n"
+"POT-Creation-Date: 2026-02-26 18:44-0300\n"
 "PO-Revision-Date: 2024-02-21 10:02-0300\n"
 "Last-Translator: zodac <zodac@duck.com>\n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: ../Doc/library/threading.rst:2
 #, fuzzy
@@ -38,11 +38,83 @@ msgstr ""
 "Este módulo construye interfaces de hilado de alto nivel sobre el módulo de "
 "más bajo nivel :mod:`_thread`."
 
-#: ../Doc/library/threading.rst:14
+#: ../Doc/includes/wasm-notavail.rst:3 ../Doc/library/threading.rst:194
+#: ../Doc/library/threading.rst:293 ../Doc/library/threading.rst:678
+msgid "Availability"
+msgstr ""
+
+#: ../Doc/includes/wasm-notavail.rst:5
+#, fuzzy
+msgid ""
+"This module does not work or is not available on WebAssembly. See :ref:`wasm-"
+"availability` for more information."
+msgstr ""
+"Este módulo no funciona o no está disponible en las plataformas WebAssembly "
+"``wasm32-emscripten`` y ``wasm32-wasi``. Consulte :ref:`wasm-availability` "
+"para obtener más información."
+
+#: ../Doc/library/threading.rst:17
+#, fuzzy
+msgid "Introduction"
+msgstr "trace function"
+
+#: ../Doc/library/threading.rst:19
+msgid ""
+"The :mod:`!threading` module provides a way to run multiple `threads "
+"<https://en.wikipedia.org/wiki/Thread_(computing)>`_ (smaller units of a "
+"process) concurrently within a single process. It allows for the creation "
+"and management of threads, making it possible to execute tasks in parallel, "
+"sharing memory space. Threads are particularly useful when tasks are I/O "
+"bound, such as file operations or making network requests, where much of the "
+"time is spent waiting for external resources."
+msgstr ""
+
+#: ../Doc/library/threading.rst:27
+msgid ""
+"A typical use case for :mod:`!threading` includes managing a pool of worker "
+"threads that can process multiple tasks concurrently.  Here's a basic "
+"example of creating and starting threads using :class:`~threading.Thread`::"
+msgstr ""
+
+#: ../Doc/library/threading.rst:31
+#, python-brace-format
+msgid ""
+"import threading\n"
+"import time\n"
+"\n"
+"def crawl(link, delay=3):\n"
+"    print(f\"crawl started for {link}\")\n"
+"    time.sleep(delay)  # Blocking I/O (simulating a network request)\n"
+"    print(f\"crawl ended for {link}\")\n"
+"\n"
+"links = [\n"
+"    \"https://python.org\",\n"
+"    \"https://docs.python.org\",\n"
+"    \"https://peps.python.org\",\n"
+"]\n"
+"\n"
+"# Start threads for each link\n"
+"threads = []\n"
+"for link in links:\n"
+"    # Using `args` to pass positional arguments and `kwargs` for keyword "
+"arguments\n"
+"    t = threading.Thread(target=crawl, args=(link,), kwargs={\"delay\": 2})\n"
+"    threads.append(t)\n"
+"\n"
+"# Start each thread\n"
+"for t in threads:\n"
+"    t.start()\n"
+"\n"
+"# Wait for all threads to finish\n"
+"for t in threads:\n"
+"    t.join()"
+msgstr ""
+
+#: ../Doc/library/threading.rst:60
 msgid "This module used to be optional, it is now always available."
 msgstr "Este módulo solía ser opcional, ahora está siempre disponible."
 
-#: ../Doc/library/threading.rst:19
+#: ../Doc/library/threading.rst:65
 msgid ""
 ":class:`concurrent.futures.ThreadPoolExecutor` offers a higher level "
 "interface to push tasks to a background thread without blocking execution of "
@@ -54,7 +126,7 @@ msgstr ""
 "ejecución del hilo de llamada, pero manteniendo la capacidad de recuperar "
 "sus resultados cuando sea necesario."
 
-#: ../Doc/library/threading.rst:23
+#: ../Doc/library/threading.rst:69
 msgid ""
 ":mod:`queue` provides a thread-safe interface for exchanging data between "
 "running threads."
@@ -62,7 +134,7 @@ msgstr ""
 ":mod:`queue` proporciona una interfaz segura a nivel de hilos intercambiar "
 "datos entre hilos en ejecución."
 
-#: ../Doc/library/threading.rst:26
+#: ../Doc/library/threading.rst:72
 msgid ""
 ":mod:`asyncio` offers an alternative approach to achieving task level "
 "concurrency without requiring the use of multiple operating system threads."
@@ -71,7 +143,7 @@ msgstr ""
 "nivel de tarea sin requerir el uso de múltiples subprocesos del sistema "
 "operativo."
 
-#: ../Doc/library/threading.rst:31
+#: ../Doc/library/threading.rst:77
 msgid ""
 "In the Python 2.x series, this module contained ``camelCase`` names for some "
 "methods and functions. These are deprecated as of Python 3.10, but they are "
@@ -82,7 +154,7 @@ msgstr ""
 "pero aún son compatibles por compatibilidad con Python 2.5 y versiones "
 "anteriores."
 
-#: ../Doc/library/threading.rst:38
+#: ../Doc/library/threading.rst:84
 msgid ""
 "In CPython, due to the :term:`Global Interpreter Lock <global interpreter "
 "lock>`, only one thread can execute Python code at once (even though certain "
@@ -101,26 +173,37 @@ msgstr ""
 "embargo, el subproceso sigue siendo un modelo apropiado si desea ejecutar "
 "varias tareas vinculadas a E/S simultáneamente."
 
-#: ../Doc/includes/wasm-notavail.rst:3
-#, fuzzy
-msgid ":ref:`Availability <availability>`: not WASI."
-msgstr ":ref:`Disponibilidad <availability>`: no Emscripten, no WASI."
-
-#: ../Doc/includes/wasm-notavail.rst:5
-#, fuzzy
-msgid ""
-"This module does not work or is not available on WebAssembly. See :ref:`wasm-"
-"availability` for more information."
+#: ../Doc/library/threading.rst:95
+msgid "GIL and performance considerations"
 msgstr ""
-"Este módulo no funciona o no está disponible en las plataformas WebAssembly "
-"``wasm32-emscripten`` y ``wasm32-wasi``. Consulte :ref:`wasm-availability` "
-"para obtener más información."
 
-#: ../Doc/library/threading.rst:50
+#: ../Doc/library/threading.rst:97
+msgid ""
+"Unlike the :mod:`multiprocessing` module, which uses separate processes to "
+"bypass the :term:`global interpreter lock` (GIL), the threading module "
+"operates within a single process, meaning that all threads share the same "
+"memory space. However, the GIL limits the performance gains of threading "
+"when it comes to CPU-bound tasks, as only one thread can execute Python "
+"bytecode at a time. Despite this, threads remain a useful tool for achieving "
+"concurrency in many scenarios."
+msgstr ""
+
+#: ../Doc/library/threading.rst:105
+msgid ""
+"As of Python 3.13, :term:`free-threaded <free threading>` builds can disable "
+"the GIL, enabling true parallel execution of threads, but this feature is "
+"not available by default (see :pep:`703`)."
+msgstr ""
+
+#: ../Doc/library/threading.rst:112
+msgid "Reference"
+msgstr ""
+
+#: ../Doc/library/threading.rst:114
 msgid "This module defines the following functions:"
 msgstr "Este módulo define las siguientes funciones:"
 
-#: ../Doc/library/threading.rst:55
+#: ../Doc/library/threading.rst:119
 msgid ""
 "Return the number of :class:`Thread` objects currently alive.  The returned "
 "count is equal to the length of the list returned by :func:`.enumerate`."
@@ -128,15 +211,16 @@ msgstr ""
 "Retorna el número de objetos :class:`Thread` actualmente con vida. La cuenta "
 "retornada es igual al largo de la lista retornada por :func:`.enumerate`."
 
-#: ../Doc/library/threading.rst:58
+#: ../Doc/library/threading.rst:122
 msgid "The function ``activeCount`` is a deprecated alias for this function."
 msgstr "La función ``activeCount`` es un alias obsoleto para esta función."
 
-#: ../Doc/library/threading.rst:63
+#: ../Doc/library/threading.rst:127
+#, fuzzy
 msgid ""
 "Return the current :class:`Thread` object, corresponding to the caller's "
 "thread of control.  If the caller's thread of control was not created "
-"through the :mod:`threading` module, a dummy thread object with limited "
+"through the :mod:`!threading` module, a dummy thread object with limited "
 "functionality is returned."
 msgstr ""
 "Retorna el objeto :class:`Thread` actual, correspondiente al hilo de control "
@@ -144,35 +228,35 @@ msgstr ""
 "del módulo :mod:`threading`, se retorna un objeto hilo *dummy* con "
 "funcionalidad limitada."
 
-#: ../Doc/library/threading.rst:68
+#: ../Doc/library/threading.rst:132
 msgid "The function ``currentThread`` is a deprecated alias for this function."
 msgstr "La función ``currentThread`` es un alias obsoleto para esta función."
 
-#: ../Doc/library/threading.rst:73
+#: ../Doc/library/threading.rst:137
 msgid "Handle uncaught exception raised by :func:`Thread.run`."
 msgstr "Gestiona una excepción lanzada por :func:`Thread.run`."
 
-#: ../Doc/library/threading.rst:75
+#: ../Doc/library/threading.rst:139
 msgid "The *args* argument has the following attributes:"
 msgstr "El argumento *args* posee los siguientes atributos:"
 
-#: ../Doc/library/threading.rst:77
+#: ../Doc/library/threading.rst:141
 msgid "*exc_type*: Exception type."
 msgstr "*exc_type*: Tipo de excepción."
 
-#: ../Doc/library/threading.rst:78
+#: ../Doc/library/threading.rst:142
 msgid "*exc_value*: Exception value, can be ``None``."
 msgstr "*exc_value*: Valor de la excepción, puede ser ``None``."
 
-#: ../Doc/library/threading.rst:79
+#: ../Doc/library/threading.rst:143
 msgid "*exc_traceback*: Exception traceback, can be ``None``."
 msgstr "*exc_traceback*: Rastreo de la excepción, puede ser ``None``."
 
-#: ../Doc/library/threading.rst:80
+#: ../Doc/library/threading.rst:144
 msgid "*thread*: Thread which raised the exception, can be ``None``."
 msgstr "*thread*: El hilo que ha lanzado la excepción, puede ser ``None``."
 
-#: ../Doc/library/threading.rst:82
+#: ../Doc/library/threading.rst:146
 msgid ""
 "If *exc_type* is :exc:`SystemExit`, the exception is silently ignored. "
 "Otherwise, the exception is printed out on :data:`sys.stderr`."
@@ -180,7 +264,7 @@ msgstr ""
 "Si *exc_type* es :exc:`SystemExit`, la excepción es silenciosamente "
 "ignorada. De otro modo, la excepción se imprime en :data:`sys.stderr`."
 
-#: ../Doc/library/threading.rst:85
+#: ../Doc/library/threading.rst:149
 msgid ""
 "If  this function raises an exception, :func:`sys.excepthook` is called to "
 "handle it."
@@ -188,7 +272,7 @@ msgstr ""
 "Si esta función lanza una excepción, se llama a :func:`sys.excepthook` para "
 "manejarla."
 
-#: ../Doc/library/threading.rst:88
+#: ../Doc/library/threading.rst:152
 msgid ""
 ":func:`threading.excepthook` can be overridden to control how uncaught "
 "exceptions raised by :func:`Thread.run` are handled."
@@ -196,7 +280,7 @@ msgstr ""
 ":func:`threading.excepthook` se puede sobrescribir para controlar cómo se "
 "gestionan las excepciones levantadas por :func:`Thread.run`."
 
-#: ../Doc/library/threading.rst:91
+#: ../Doc/library/threading.rst:155
 msgid ""
 "Storing *exc_value* using a custom hook can create a reference cycle. It "
 "should be cleared explicitly to break the reference cycle when the exception "
@@ -206,7 +290,7 @@ msgstr ""
 "referencias. Debe ser aclarado explícitamente que se rompa el ciclo de "
 "referencias cuando la excepción ya no se necesite."
 
-#: ../Doc/library/threading.rst:95
+#: ../Doc/library/threading.rst:159
 msgid ""
 "Storing *thread* using a custom hook can resurrect it if it is set to an "
 "object which is being finalized. Avoid storing *thread* after the custom "
@@ -217,11 +301,11 @@ msgstr ""
 "almacenado después de que el *hook* personalizado se complete para evitar "
 "resucitar objetos."
 
-#: ../Doc/library/threading.rst:100
+#: ../Doc/library/threading.rst:164
 msgid ":func:`sys.excepthook` handles uncaught exceptions."
 msgstr ":func:`sys.excepthook` gestiona excepciones no capturadas."
 
-#: ../Doc/library/threading.rst:106
+#: ../Doc/library/threading.rst:170
 msgid ""
 "Holds the original value of :func:`threading.excepthook`. It is saved so "
 "that the original value can be restored in case they happen to get replaced "
@@ -231,7 +315,7 @@ msgstr ""
 "que se pueda restaurar el valor original en caso de que se reemplacen con "
 "objetos rotos o alternativos."
 
-#: ../Doc/library/threading.rst:114
+#: ../Doc/library/threading.rst:178
 msgid ""
 "Return the 'thread identifier' of the current thread.  This is a nonzero "
 "integer.  Its value has no direct meaning; it is intended as a magic cookie "
@@ -245,7 +329,7 @@ msgstr ""
 "con datos específicos del hilo. Los identificadores de hilo pueden ser "
 "reciclados cuando se abandona un hilo y se crea otro hilo."
 
-#: ../Doc/library/threading.rst:125
+#: ../Doc/library/threading.rst:189
 msgid ""
 "Return the native integral Thread ID of the current thread assigned by the "
 "kernel. This is a non-negative integer. Its value may be used to uniquely "
@@ -258,20 +342,11 @@ msgstr ""
 "el sistema (hasta que el hilo termine, luego de lo cual el valor puede ser "
 "reciclado por el SO)."
 
-#: ../Doc/library/threading.rst:130
-#, fuzzy
-msgid ""
-":ref:`Availability <availability>`: Windows, FreeBSD, Linux, macOS, OpenBSD, "
-"NetBSD, AIX, DragonFlyBSD, GNU/kFreeBSD."
-msgstr ""
-":ref:`Disponibilidad <availability>`: Windows, FreeBSD, Linux, macOS, "
-"OpenBSD, NetBSD, AIX, DragonFlyBSD."
-
-#: ../Doc/library/threading.rst:134
+#: ../Doc/library/threading.rst:198
 msgid "Added support for GNU/kFreeBSD."
 msgstr ""
 
-#: ../Doc/library/threading.rst:140
+#: ../Doc/library/threading.rst:204
 msgid ""
 "Return a list of all :class:`Thread` objects currently active.  The list "
 "includes daemonic threads and dummy thread objects created by :func:"
@@ -285,7 +360,7 @@ msgstr ""
 "subprocesos que aún no se han iniciado. Sin embargo, el hilo principal "
 "siempre es parte del resultado, incluso cuando se termina."
 
-#: ../Doc/library/threading.rst:149
+#: ../Doc/library/threading.rst:213
 msgid ""
 "Return the main :class:`Thread` object.  In normal conditions, the main "
 "thread is the thread from which the Python interpreter was started."
@@ -294,9 +369,10 @@ msgstr ""
 "hilo principal es el hilo desde el que fue inicializado el intérprete de "
 "Python."
 
-#: ../Doc/library/threading.rst:160
+#: ../Doc/library/threading.rst:224
+#, fuzzy
 msgid ""
-"Set a trace function for all threads started from the :mod:`threading` "
+"Set a trace function for all threads started from the :mod:`!threading` "
 "module. The *func* will be passed to  :func:`sys.settrace` for each thread, "
 "before its :meth:`~Thread.run` method is called."
 msgstr ""
@@ -304,16 +380,17 @@ msgstr ""
 "módulo :mod:`threading` . La *func* se pasará a :func:`sys.settrace` por "
 "cada hilo, antes de que su método :meth:`~Thread.run` sea invocado."
 
-#: ../Doc/library/threading.rst:166
+#: ../Doc/library/threading.rst:230
+#, fuzzy
 msgid ""
-"Set a trace function for all threads started from the :mod:`threading` "
+"Set a trace function for all threads started from the :mod:`!threading` "
 "module and all Python threads that are currently executing."
 msgstr ""
 "Establece una función de seguimiento para todos los hilos iniciados desde el "
 "módulo :mod:`threading` y todos los hilos de Python que se estén ejecutando "
 "en ese momento."
 
-#: ../Doc/library/threading.rst:169
+#: ../Doc/library/threading.rst:233
 msgid ""
 "The *func* will be passed to  :func:`sys.settrace` for each thread, before "
 "its :meth:`~Thread.run` method is called."
@@ -321,14 +398,15 @@ msgstr ""
 "La *func* será pasada a :func:`sys.settrace` para cada hilo, antes de que su "
 "método :meth:`~Thread.run` sea invocado."
 
-#: ../Doc/library/threading.rst:180
+#: ../Doc/library/threading.rst:244
 msgid "Get the trace function as set by :func:`settrace`."
 msgstr ""
 "Obtiene la función de rastreo según lo establecido por :func:`settrace`."
 
-#: ../Doc/library/threading.rst:189
+#: ../Doc/library/threading.rst:253
+#, fuzzy
 msgid ""
-"Set a profile function for all threads started from the :mod:`threading` "
+"Set a profile function for all threads started from the :mod:`!threading` "
 "module. The *func* will be passed to  :func:`sys.setprofile` for each "
 "thread, before its :meth:`~Thread.run` method is called."
 msgstr ""
@@ -336,16 +414,17 @@ msgstr ""
 "módulo :mod:`threading`. La *func* se pasará a :func:`sys.setprofile` por "
 "cada hilo, antes de que se llame a su método :meth:`~Thread.run`."
 
-#: ../Doc/library/threading.rst:195
+#: ../Doc/library/threading.rst:259
+#, fuzzy
 msgid ""
-"Set a profile function for all threads started from the :mod:`threading` "
+"Set a profile function for all threads started from the :mod:`!threading` "
 "module and all Python threads that are currently executing."
 msgstr ""
 "Establece una función de perfil para todos los hilos iniciados desde el "
 "módulo :mod:`threading` y todos los hilos de Python que se estén ejecutando "
 "en ese momento."
 
-#: ../Doc/library/threading.rst:198
+#: ../Doc/library/threading.rst:262
 msgid ""
 "The *func* will be passed to  :func:`sys.setprofile` for each thread, before "
 "its :meth:`~Thread.run` method is called."
@@ -353,13 +432,13 @@ msgstr ""
 "La *func* se pasará a :func:`sys.setprofile` para cada hilo, antes de que se "
 "llame a su método :meth:`~Thread.run`."
 
-#: ../Doc/library/threading.rst:207
+#: ../Doc/library/threading.rst:271
 msgid "Get the profiler function as set by :func:`setprofile`."
 msgstr ""
 "Obtiene la función de generador de perfiles establecida por :func:"
 "`setprofile`."
 
-#: ../Doc/library/threading.rst:214
+#: ../Doc/library/threading.rst:278
 msgid ""
 "Return the thread stack size used when creating new threads.  The optional "
 "*size* argument specifies the stack size to be used for subsequently created "
@@ -394,19 +473,15 @@ msgstr ""
 "múltiplos de 4096 para el tamaño de pila en ausencia de información más "
 "específica)"
 
-#: ../Doc/library/threading.rst:229
-msgid ":ref:`Availability <availability>`: Windows, pthreads."
-msgstr ":ref:`Disponibilidad <availability>`: Windows, pthreads."
-
-#: ../Doc/library/threading.rst:231
+#: ../Doc/library/threading.rst:295
 msgid "Unix platforms with POSIX threads support."
 msgstr "Plataformas Unix con soporte para subprocesos POSIX."
 
-#: ../Doc/library/threading.rst:234
+#: ../Doc/library/threading.rst:298
 msgid "This module also defines the following constant:"
 msgstr "Este módulo también define la siguiente constante:"
 
-#: ../Doc/library/threading.rst:238
+#: ../Doc/library/threading.rst:302
 msgid ""
 "The maximum value allowed for the *timeout* parameter of blocking functions "
 "(:meth:`Lock.acquire`, :meth:`RLock.acquire`, :meth:`Condition.wait`, etc.). "
@@ -418,7 +493,7 @@ msgstr ""
 "wait`, etc.). La especificación de un tiempo de espera mayor a este valor "
 "lanzará un :exc:`OverflowError`."
 
-#: ../Doc/library/threading.rst:246
+#: ../Doc/library/threading.rst:310
 msgid ""
 "This module defines a number of classes, which are detailed in the sections "
 "below."
@@ -426,7 +501,7 @@ msgstr ""
 "Este módulo define un número de clases, las cuales son detalladas en las "
 "siguientes secciones."
 
-#: ../Doc/library/threading.rst:249
+#: ../Doc/library/threading.rst:313
 msgid ""
 "The design of this module is loosely based on Java's threading model. "
 "However, where Java makes locks and condition variables basic behavior of "
@@ -446,52 +521,231 @@ msgstr ""
 "Thread de Java, cuando se implementan, se asignan a funciones de nivel de "
 "módulo."
 
-#: ../Doc/library/threading.rst:257
+#: ../Doc/library/threading.rst:321
 msgid "All of the methods described below are executed atomically."
 msgstr "Todos los métodos descritos abajo son ejecutados de manera atómica."
 
-#: ../Doc/library/threading.rst:261
-msgid "Thread-Local Data"
+#: ../Doc/library/threading.rst:325
+#, fuzzy
+msgid "Thread-local data"
 msgstr "Datos locales del hilo"
 
-#: ../Doc/library/threading.rst:263
+#: ../Doc/library/threading.rst:327
+#, fuzzy
 msgid ""
-"Thread-local data is data whose values are thread specific.  To manage "
-"thread-local data, just create an instance of :class:`local` (or a subclass) "
-"and store attributes on it::"
+"Thread-local data is data whose values are thread specific. If you have data "
+"that you want to be local to a thread, create a :class:`local` object and "
+"use its attributes::"
 msgstr ""
 "Los datos locales de hilo son datos cuyos valores son específicos a cada "
 "hilo. Para manejar los datos locales de hilos, simplemente crear una "
 "instancia de :class:`local` (o una subclase) y almacenar los atributos en "
 "ella::"
 
-#: ../Doc/library/threading.rst:267
+#: ../Doc/library/threading.rst:331
 msgid ""
-"mydata = threading.local()\n"
-"mydata.x = 1"
+">>> mydata = local()\n"
+">>> mydata.number = 42\n"
+">>> mydata.number\n"
+"42"
 msgstr ""
 
-#: ../Doc/library/threading.rst:270
-msgid "The instance's values will be different for separate threads."
-msgstr "Los valores de instancia serán diferentes para hilos distintos."
+#: ../Doc/library/threading.rst:336
+msgid "You can also access the :class:`local`-object's dictionary::"
+msgstr ""
 
-#: ../Doc/library/threading.rst:275
+#: ../Doc/library/threading.rst:338
+#, python-brace-format
+msgid ""
+">>> mydata.__dict__\n"
+"{'number': 42}\n"
+">>> mydata.__dict__.setdefault('widgets', [])\n"
+"[]\n"
+">>> mydata.widgets\n"
+"[]"
+msgstr ""
+
+#: ../Doc/library/threading.rst:345
+msgid "If we access the data in a different thread::"
+msgstr ""
+
+#: ../Doc/library/threading.rst:347
+msgid ""
+">>> log = []\n"
+">>> def f():\n"
+"...     items = sorted(mydata.__dict__.items())\n"
+"...     log.append(items)\n"
+"...     mydata.number = 11\n"
+"...     log.append(mydata.number)\n"
+"\n"
+">>> import threading\n"
+">>> thread = threading.Thread(target=f)\n"
+">>> thread.start()\n"
+">>> thread.join()\n"
+">>> log\n"
+"[[], 11]"
+msgstr ""
+
+#: ../Doc/library/threading.rst:361
+msgid ""
+"we get different data.  Furthermore, changes made in the other thread don't "
+"affect data seen in this thread::"
+msgstr ""
+
+#: ../Doc/library/threading.rst:364
+msgid ""
+">>> mydata.number\n"
+"42"
+msgstr ""
+
+#: ../Doc/library/threading.rst:367
+msgid ""
+"Of course, values you get from a :class:`local` object, including their :"
+"attr:`~object.__dict__` attribute, are for whatever thread was current at "
+"the time the attribute was read.  For that reason, you generally don't want "
+"to save these values across threads, as they apply only to the thread they "
+"came from."
+msgstr ""
+
+#: ../Doc/library/threading.rst:373
+msgid ""
+"You can create custom :class:`local` objects by subclassing the :class:"
+"`local` class::"
+msgstr ""
+
+#: ../Doc/library/threading.rst:376
+msgid ""
+">>> class MyLocal(local):\n"
+"...     number = 2\n"
+"...     def __init__(self, /, **kw):\n"
+"...         self.__dict__.update(kw)\n"
+"...     def squared(self):\n"
+"...         return self.number ** 2"
+msgstr ""
+
+#: ../Doc/library/threading.rst:383
+msgid ""
+"This can be useful to support default values, methods and initialization.  "
+"Note that if you define an :py:meth:`~object.__init__` method, it will be "
+"called each time the :class:`local` object is used in a separate thread.  "
+"This is necessary to initialize each thread's dictionary."
+msgstr ""
+
+#: ../Doc/library/threading.rst:389
+msgid "Now if we create a :class:`local` object::"
+msgstr ""
+
+#: ../Doc/library/threading.rst:391
+msgid ">>> mydata = MyLocal(color='red')"
+msgstr ""
+
+#: ../Doc/library/threading.rst:393
+msgid "we have a default number::"
+msgstr ""
+
+#: ../Doc/library/threading.rst:395
+msgid ""
+">>> mydata.number\n"
+"2"
+msgstr ""
+
+#: ../Doc/library/threading.rst:398
+msgid "an initial color::"
+msgstr ""
+
+#: ../Doc/library/threading.rst:400
+msgid ""
+">>> mydata.color\n"
+"'red'\n"
+">>> del mydata.color"
+msgstr ""
+
+#: ../Doc/library/threading.rst:404
+msgid "And a method that operates on the data::"
+msgstr ""
+
+#: ../Doc/library/threading.rst:406
+msgid ""
+">>> mydata.squared()\n"
+"4"
+msgstr ""
+
+#: ../Doc/library/threading.rst:409
+msgid "As before, we can access the data in a separate thread::"
+msgstr ""
+
+#: ../Doc/library/threading.rst:411
+msgid ""
+">>> log = []\n"
+">>> thread = threading.Thread(target=f)\n"
+">>> thread.start()\n"
+">>> thread.join()\n"
+">>> log\n"
+"[[('color', 'red')], 11]"
+msgstr ""
+
+#: ../Doc/library/threading.rst:418
+#, fuzzy
+msgid "without affecting this thread's data::"
+msgstr "Método que representa la actividad del hilo."
+
+#: ../Doc/library/threading.rst:420
+msgid ""
+">>> mydata.number\n"
+"2\n"
+">>> mydata.color\n"
+"Traceback (most recent call last):\n"
+"...\n"
+"AttributeError: 'MyLocal' object has no attribute 'color'"
+msgstr ""
+
+#: ../Doc/library/threading.rst:427
+msgid ""
+"Note that subclasses can define :term:`__slots__`, but they are not thread "
+"local. They are shared across threads::"
+msgstr ""
+
+#: ../Doc/library/threading.rst:430
+msgid ""
+">>> class MyLocal(local):\n"
+"...     __slots__ = 'number'\n"
+"\n"
+">>> mydata = MyLocal()\n"
+">>> mydata.number = 42\n"
+">>> mydata.color = 'red'"
+msgstr ""
+
+#: ../Doc/library/threading.rst:437
+msgid "So, the separate thread::"
+msgstr ""
+
+#: ../Doc/library/threading.rst:439
+msgid ""
+">>> thread = threading.Thread(target=f)\n"
+">>> thread.start()\n"
+">>> thread.join()"
+msgstr ""
+
+#: ../Doc/library/threading.rst:443
+msgid "affects what we see::"
+msgstr ""
+
+#: ../Doc/library/threading.rst:445
+msgid ""
+">>> mydata.number\n"
+"11"
+msgstr ""
+
+#: ../Doc/library/threading.rst:451
 msgid "A class that represents thread-local data."
 msgstr "Una clase que representa datos locales de hilo."
 
-#: ../Doc/library/threading.rst:277
-msgid ""
-"For more details and extensive examples, see the documentation string of "
-"the :mod:`!_threading_local` module: :source:`Lib/_threading_local.py`."
-msgstr ""
-"Para más detalles y ejemplos extensivos, véase la documentación del módulo :"
-"mod:`!_threading_local` module: :source:`Lib/_threading_local.py`."
-
-#: ../Doc/library/threading.rst:284
-msgid "Thread Objects"
+#: ../Doc/library/threading.rst:457
+#, fuzzy
+msgid "Thread objects"
 msgstr "Objetos tipo hilo"
 
-#: ../Doc/library/threading.rst:286
+#: ../Doc/library/threading.rst:459
 msgid ""
 "The :class:`Thread` class represents an activity that is run in a separate "
 "thread of control.  There are two ways to specify the activity: by passing a "
@@ -508,7 +762,7 @@ msgstr ""
 "sobrescribir los métodos  ``__init__()`` y :meth:`~Thread.run`  de esta "
 "clase."
 
-#: ../Doc/library/threading.rst:293
+#: ../Doc/library/threading.rst:466
 msgid ""
 "Once a thread object is created, its activity must be started by calling the "
 "thread's :meth:`~Thread.start` method.  This invokes the :meth:`~Thread.run` "
@@ -518,7 +772,7 @@ msgstr ""
 "llamando al método :meth:`~Thread.start` del hilo. Ésto invoca el método :"
 "meth:`~Thread.run` en un hilo de control separado."
 
-#: ../Doc/library/threading.rst:297
+#: ../Doc/library/threading.rst:470
 msgid ""
 "Once the thread's activity is started, the thread is considered 'alive'. It "
 "stops being alive when its :meth:`~Thread.run` method terminates -- either "
@@ -530,7 +784,7 @@ msgstr ""
 "ya sea normalmente, o por lanzar una excepción no manejada. El método  :meth:"
 "`~Thread.is_alive` verifica si acaso el hilo está vivo."
 
-#: ../Doc/library/threading.rst:302
+#: ../Doc/library/threading.rst:475
 msgid ""
 "Other threads can call a thread's :meth:`~Thread.join` method.  This blocks "
 "the calling thread until the thread whose :meth:`~Thread.join` method is "
@@ -540,7 +794,7 @@ msgstr ""
 "hilo que llama hasta que el hilo cuyo método :meth:`~Hilo.join` es llamado "
 "termina."
 
-#: ../Doc/library/threading.rst:306
+#: ../Doc/library/threading.rst:479
 msgid ""
 "A thread has a name.  The name can be passed to the constructor, and read or "
 "changed through the :attr:`~Thread.name` attribute."
@@ -548,7 +802,7 @@ msgstr ""
 "Un hilo tiene un nombre. El nombre puede ser pasado al constructor y leído o "
 "cambiado a través del atributo :attr:`~Thread.name`."
 
-#: ../Doc/library/threading.rst:309
+#: ../Doc/library/threading.rst:482
 msgid ""
 "If the :meth:`~Thread.run` method raises an exception, :func:`threading."
 "excepthook` is called to handle it. By default, :func:`threading.excepthook` "
@@ -558,7 +812,7 @@ msgstr ""
 "`threading.excepthook` para gestionarla. Por defecto, :func:`threading."
 "excepthook` ignora silenciosamente a :exc:`SystemExit`."
 
-#: ../Doc/library/threading.rst:313
+#: ../Doc/library/threading.rst:486
 msgid ""
 "A thread can be flagged as a \"daemon thread\".  The significance of this "
 "flag is that the entire Python program exits when only daemon threads are "
@@ -572,7 +826,7 @@ msgstr ""
 "marca puede ser establecida a través de la propiedad :attr:`~Thread.daemon` "
 "o del argumento *daemon* en el constructor."
 
-#: ../Doc/library/threading.rst:320
+#: ../Doc/library/threading.rst:493
 msgid ""
 "Daemon threads are abruptly stopped at shutdown.  Their resources (such as "
 "open files, database transactions, etc.) may not be released properly. If "
@@ -585,7 +839,7 @@ msgstr ""
 "detengan con gracia, háganse no-demoníacos y úsese un mecanismo de "
 "señalización adecuado tal como un :class:`Event`."
 
-#: ../Doc/library/threading.rst:325
+#: ../Doc/library/threading.rst:498
 msgid ""
 "There is a \"main thread\" object; this corresponds to the initial thread of "
 "control in the Python program.  It is not a daemon thread."
@@ -593,7 +847,7 @@ msgstr ""
 "Existe un objeto \"hilo principal\"; éste corresponde al hilo de control "
 "inicial del programa de Python. No es un hilo demonio."
 
-#: ../Doc/library/threading.rst:328
+#: ../Doc/library/threading.rst:501
 msgid ""
 "There is the possibility that \"dummy thread objects\" are created. These "
 "are thread objects corresponding to \"alien threads\", which are threads of "
@@ -611,7 +865,7 @@ msgstr ""
 "el método :ref:`joined <meth-thread-join>`. Nunca son eliminados, ya que es "
 "imposible detectar la terminación de hilos extranjeros."
 
-#: ../Doc/library/threading.rst:339
+#: ../Doc/library/threading.rst:512
 msgid ""
 "This constructor should always be called with keyword arguments.  Arguments "
 "are:"
@@ -619,7 +873,7 @@ msgstr ""
 "Este constructor siempre debe ser llamado con argumentos de palabra clave. "
 "Los argumentos son:"
 
-#: ../Doc/library/threading.rst:342
+#: ../Doc/library/threading.rst:515
 msgid ""
 "*group* should be ``None``; reserved for future extension when a :class:`!"
 "ThreadGroup` class is implemented."
@@ -627,7 +881,7 @@ msgstr ""
 "*group* debe ser `None`; reservado para una futura extensión cuando se "
 "implemente una clase :class:`!ThreadGroup`."
 
-#: ../Doc/library/threading.rst:345
+#: ../Doc/library/threading.rst:518
 msgid ""
 "*target* is the callable object to be invoked by the :meth:`run` method. "
 "Defaults to ``None``, meaning nothing is called."
@@ -635,7 +889,7 @@ msgstr ""
 "*target* es el objeto invocable a ser invocado por el método :meth:`run`. "
 "Por defecto es ``None``, lo que significa que nada es llamado."
 
-#: ../Doc/library/threading.rst:348
+#: ../Doc/library/threading.rst:521
 msgid ""
 "*name* is the thread name. By default, a unique name is constructed of the "
 "form \"Thread-*N*\" where *N* is a small decimal number, or \"Thread-*N* "
@@ -647,7 +901,7 @@ msgstr ""
 "pequeño, o \"Hilo-*N* (target)\" donde \"target\" es ``target.__name__`` si "
 "se especifica el argumento *target*."
 
-#: ../Doc/library/threading.rst:353
+#: ../Doc/library/threading.rst:526
 msgid ""
 "*args* is a list or tuple of arguments for the target invocation.  Defaults "
 "to ``()``."
@@ -655,7 +909,8 @@ msgstr ""
 "*args* es una lista o tupla de argumentos para la invocación de destino. Por "
 "defecto es ``()``."
 
-#: ../Doc/library/threading.rst:355
+#: ../Doc/library/threading.rst:528
+#, python-brace-format
 msgid ""
 "*kwargs* is a dictionary of keyword arguments for the target invocation. "
 "Defaults to ``{}``."
@@ -663,7 +918,7 @@ msgstr ""
 "*kwargs* es un diccionario de argumentos de palabra clave para la invocación "
 "objetivo. Por defecto es ``{}``."
 
-#: ../Doc/library/threading.rst:358
+#: ../Doc/library/threading.rst:531
 msgid ""
 "If not ``None``, *daemon* explicitly sets whether the thread is daemonic. If "
 "``None`` (the default), the daemonic property is inherited from the current "
@@ -673,7 +928,20 @@ msgstr ""
 "demoníaco. Si es ``None`` (el valor por defecto), la propiedad demoníaca es "
 "heredada del hilo actual."
 
-#: ../Doc/library/threading.rst:362
+#: ../Doc/library/threading.rst:535
+msgid ""
+"*context* is the :class:`~contextvars.Context` value to use when starting "
+"the thread.  The default value is ``None`` which indicates that the :data:"
+"`sys.flags.thread_inherit_context` flag controls the behaviour.  If the flag "
+"is true, threads will start with a copy of the context of the caller of :"
+"meth:`~Thread.start`.  If false, they will start with an empty context.  To "
+"explicitly start with an empty context, pass a new instance of :class:"
+"`~contextvars.Context()`.  To explicitly start with a copy of the current "
+"context, pass the value from :func:`~contextvars.copy_context`. The flag "
+"defaults true on free-threaded builds and false otherwise."
+msgstr ""
+
+#: ../Doc/library/threading.rst:545
 msgid ""
 "If the subclass overrides the constructor, it must make sure to invoke the "
 "base class constructor (``Thread.__init__()``) before doing anything else to "
@@ -683,20 +951,25 @@ msgstr ""
 "constructor de la clase base (``Thread.__init__()``) antes de hacer "
 "cualquier otra cosa al hilo."
 
-#: ../Doc/library/threading.rst:366
+#: ../Doc/library/threading.rst:549
 #, fuzzy
 msgid "Added the *daemon* parameter."
 msgstr "Se agregó el argumento *daemon*."
 
-#: ../Doc/library/threading.rst:369
+#: ../Doc/library/threading.rst:552
 msgid "Use the *target* name if *name* argument is omitted."
 msgstr "Utilice el nombre *target* si se omite el argumento *name*."
 
-#: ../Doc/library/threading.rst:374
+#: ../Doc/library/threading.rst:555
+#, fuzzy
+msgid "Added the *context* parameter."
+msgstr "Se agregó el argumento *daemon*."
+
+#: ../Doc/library/threading.rst:560
 msgid "Start the thread's activity."
 msgstr "Inicia la actividad del hilo."
 
-#: ../Doc/library/threading.rst:376
+#: ../Doc/library/threading.rst:562
 msgid ""
 "It must be called at most once per thread object.  It arranges for the "
 "object's :meth:`~Thread.run` method to be invoked in a separate thread of "
@@ -706,7 +979,7 @@ msgstr ""
 "método :meth:`~Thread.run` del objeto sea invocado en un hilo de control "
 "separado."
 
-#: ../Doc/library/threading.rst:380
+#: ../Doc/library/threading.rst:566
 msgid ""
 "This method will raise a :exc:`RuntimeError` if called more than once on the "
 "same thread object."
@@ -714,11 +987,22 @@ msgstr ""
 "Este método lanzará un :exc:`RuntimeError` si se llama más de una vez en el "
 "mismo objeto hilo."
 
-#: ../Doc/library/threading.rst:385
+#: ../Doc/library/threading.rst:569
+msgid ""
+"If supported, set the operating system thread name to :attr:`threading."
+"Thread.name`. The name can be truncated depending on the operating system "
+"thread name limits."
+msgstr ""
+
+#: ../Doc/library/threading.rst:573
+msgid "Set the operating system thread name."
+msgstr ""
+
+#: ../Doc/library/threading.rst:578
 msgid "Method representing the thread's activity."
 msgstr "Método que representa la actividad del hilo."
 
-#: ../Doc/library/threading.rst:387
+#: ../Doc/library/threading.rst:580
 msgid ""
 "You may override this method in a subclass.  The standard :meth:`run` method "
 "invokes the callable object passed to the object's constructor as the "
@@ -730,7 +1014,7 @@ msgstr ""
 "argumento *target*, si lo hay, con argumentos posicionales y de palabra "
 "clave tomados de los argumentos *args* y *kwargs*, respectivamente."
 
-#: ../Doc/library/threading.rst:392
+#: ../Doc/library/threading.rst:585
 msgid ""
 "Using list or tuple as the *args* argument which passed to the :class:"
 "`Thread` could achieve the same effect."
@@ -738,11 +1022,11 @@ msgstr ""
 "Usar una lista o tupla como el argumento *args* que se pasa a :class:"
 "`Thread` podría lograr el mismo efecto."
 
-#: ../Doc/library/threading.rst:395
+#: ../Doc/library/threading.rst:588
 msgid "Example::"
 msgstr "Ejemplo::"
 
-#: ../Doc/library/threading.rst:397
+#: ../Doc/library/threading.rst:590
 msgid ""
 ">>> from threading import Thread\n"
 ">>> t = Thread(target=print, args=[1])\n"
@@ -753,7 +1037,7 @@ msgid ""
 "1"
 msgstr ""
 
-#: ../Doc/library/threading.rst:409
+#: ../Doc/library/threading.rst:602
 msgid ""
 "Wait until the thread terminates. This blocks the calling thread until the "
 "thread whose :meth:`~Thread.join` method is called terminates -- either "
@@ -765,7 +1049,7 @@ msgstr ""
 "normalmente o a través de una excepción no gestionada -- o hasta que el "
 "tiempo de espera opcional caduque."
 
-#: ../Doc/library/threading.rst:414
+#: ../Doc/library/threading.rst:607
 #, fuzzy
 msgid ""
 "When the *timeout* argument is present and not ``None``, it should be a "
@@ -782,7 +1066,7 @@ msgstr ""
 "de :meth:`~Thread.join` para decidir si acaso caducó el tiempo de espera -- "
 "si el hilo todavía está vivo, la llamada a :meth:`~Thread.join` caducó."
 
-#: ../Doc/library/threading.rst:421
+#: ../Doc/library/threading.rst:614
 msgid ""
 "When the *timeout* argument is not present or ``None``, the operation will "
 "block until the thread terminates."
@@ -790,11 +1074,11 @@ msgstr ""
 "Cuando el argumento *timeout* no se presenta o es ``None``, la operación "
 "bloqueará hasta que el hilo termine."
 
-#: ../Doc/library/threading.rst:424
+#: ../Doc/library/threading.rst:617
 msgid "A thread can be joined many times."
 msgstr "Un hilo puede unirse varias veces."
 
-#: ../Doc/library/threading.rst:426
+#: ../Doc/library/threading.rst:619
 msgid ""
 ":meth:`~Thread.join` raises a :exc:`RuntimeError` if an attempt is made to "
 "join the current thread as that would cause a deadlock. It is also an error "
@@ -806,7 +1090,18 @@ msgstr ""
 "meth:`~Thread.join` a un hilo antes de que haya sido iniciado y los intentos "
 "de hacerlo lanzaran la misma excepción."
 
-#: ../Doc/library/threading.rst:433
+#: ../Doc/library/threading.rst:624
+msgid ""
+"If an attempt is made to join a running daemonic thread in late stages of :"
+"term:`Python finalization <interpreter shutdown>` :meth:`!join` raises a :"
+"exc:`PythonFinalizationError`."
+msgstr ""
+
+#: ../Doc/library/threading.rst:630
+msgid "May raise :exc:`PythonFinalizationError`."
+msgstr ""
+
+#: ../Doc/library/threading.rst:634
 msgid ""
 "A string used for identification purposes only. It has no semantics. "
 "Multiple threads may be given the same name.  The initial name is set by the "
@@ -816,7 +1111,22 @@ msgstr ""
 "Se puede dar el mismo nombre a múltiples hilos. El nombre inicial es "
 "establecido por el constructor."
 
-#: ../Doc/library/threading.rst:440
+#: ../Doc/library/threading.rst:638
+msgid ""
+"On some platforms, the thread name is set at the operating system level when "
+"the thread starts, so that it is visible in task managers. This name may be "
+"truncated to fit in a system-specific limit (for example, 15 bytes on Linux "
+"or 63 bytes on macOS)."
+msgstr ""
+
+#: ../Doc/library/threading.rst:643
+msgid ""
+"Changes to *name* are only reflected at the OS level when the currently "
+"running thread is renamed. (Setting the *name* attribute of a different "
+"thread only updates the Python Thread object.)"
+msgstr ""
+
+#: ../Doc/library/threading.rst:650
 msgid ""
 "Deprecated getter/setter API for :attr:`~Thread.name`; use it directly as a "
 "property instead."
@@ -824,7 +1134,7 @@ msgstr ""
 "API getter/setter obsoleta para :attr:`~Thread.name`; utilícelo directamente "
 "como una propiedad en su lugar."
 
-#: ../Doc/library/threading.rst:447
+#: ../Doc/library/threading.rst:657
 msgid ""
 "The 'thread identifier' of this thread or ``None`` if the thread has not "
 "been started.  This is a nonzero integer.  See the :func:`get_ident` "
@@ -838,7 +1148,7 @@ msgstr ""
 "otro hilo es creado. El identificador está disponible incuso después de que "
 "el hilo ha abandonado."
 
-#: ../Doc/library/threading.rst:455
+#: ../Doc/library/threading.rst:665
 msgid ""
 "The Thread ID (``TID``) of this thread, as assigned by the OS (kernel). This "
 "is a non-negative integer, or ``None`` if the thread has not been started. "
@@ -853,7 +1163,7 @@ msgstr ""
 "particular en todo el sistema (hasta que el hilo termine, después de lo cual "
 "el sistema operativo puede reciclar el valor)."
 
-#: ../Doc/library/threading.rst:464
+#: ../Doc/library/threading.rst:674
 msgid ""
 "Similar to Process IDs, Thread IDs are only valid (guaranteed unique system-"
 "wide) from the time the thread is created until the thread has been "
@@ -863,19 +1173,11 @@ msgstr ""
 "como únicas a través de todo el sistema) desde el momento en que se crea el "
 "hilo hasta que el hilo es finalizado."
 
-#: ../Doc/library/threading.rst:468
-msgid ""
-":ref:`Availability <availability>`: Windows, FreeBSD, Linux, macOS, OpenBSD, "
-"NetBSD, AIX, DragonFlyBSD."
-msgstr ""
-":ref:`Disponibilidad <availability>`: Windows, FreeBSD, Linux, macOS, "
-"OpenBSD, NetBSD, AIX, DragonFlyBSD."
-
-#: ../Doc/library/threading.rst:474
+#: ../Doc/library/threading.rst:684
 msgid "Return whether the thread is alive."
 msgstr "Retornar si acaso el hilo está vivo."
 
-#: ../Doc/library/threading.rst:476
+#: ../Doc/library/threading.rst:686
 msgid ""
 "This method returns ``True`` just before the :meth:`~Thread.run` method "
 "starts until just after the :meth:`~Thread.run` method terminates.  The "
@@ -886,7 +1188,7 @@ msgstr ""
 "termine. La función :func:`.enumerate` del módulo retorna una lista de todos "
 "los hilos vivos."
 
-#: ../Doc/library/threading.rst:482
+#: ../Doc/library/threading.rst:692
 msgid ""
 "A boolean value indicating whether this thread is a daemon thread (``True``) "
 "or not (``False``).  This must be set before :meth:`~Thread.start` is "
@@ -902,14 +1204,14 @@ msgstr ""
 "tanto todos los hilos creados en el hilo principal tienen por defecto un "
 "valor :attr:`~Thread.daemon` = ``False``."
 
-#: ../Doc/library/threading.rst:489
+#: ../Doc/library/threading.rst:699
 msgid ""
 "The entire Python program exits when no alive non-daemon threads are left."
 msgstr ""
 "El programa de Python en su totalidad finaliza cuando no queda ningún hilo "
 "no-demonio vivo."
 
-#: ../Doc/library/threading.rst:494
+#: ../Doc/library/threading.rst:704
 msgid ""
 "Deprecated getter/setter API for :attr:`~Thread.daemon`; use it directly as "
 "a property instead."
@@ -917,11 +1219,12 @@ msgstr ""
 "API getter/setter obsoleta para :attr:`~Thread.daemon`; utilícelo "
 "directamente como una propiedad en su lugar."
 
-#: ../Doc/library/threading.rst:503
-msgid "Lock Objects"
+#: ../Doc/library/threading.rst:713
+#, fuzzy
+msgid "Lock objects"
 msgstr "Objetos tipo *lock*"
 
-#: ../Doc/library/threading.rst:505
+#: ../Doc/library/threading.rst:715
 msgid ""
 "A primitive lock is a synchronization primitive that is not owned by a "
 "particular thread when locked.  In Python, it is currently the lowest level "
@@ -933,7 +1236,7 @@ msgstr ""
 "sincronización de más bajo nivel actualmente disponible, implementado "
 "directamente por el módulo de extensión :mod:`_thread`."
 
-#: ../Doc/library/threading.rst:510
+#: ../Doc/library/threading.rst:720
 msgid ""
 "A primitive lock is in one of two states, \"locked\" or \"unlocked\". It is "
 "created in the unlocked state.  It has two basic methods, :meth:`~Lock."
@@ -946,25 +1249,25 @@ msgid ""
 "state to unlocked and returns immediately. If an attempt is made to release "
 "an unlocked lock, a :exc:`RuntimeError` will be raised."
 msgstr ""
-"Una primitiva *lock* está en uno de dos estados, \"cerrado\" o \"abierto\" "
-"(*locked*/*unlocked*). Se crea en estado abierto. Tiene dos métodos "
-"básicos, :meth:`~Lock.acquire` (adquirir) y :meth:`~Lock.release` (liberar). "
-"Cuando el estado es *abierto*, :meth:`~Lock.acquire` cambia el estado a "
-"cerrado y retorna inmediatamente. Cuando el estado es *cerrado*, :meth:"
-"`~Lock.acquire` bloquea hasta que una llamada a :meth:`~Lock.release` en "
-"otro hilo lo cambie a abierto, luego la llamada a :meth:`~Lock.acquire` lo "
-"restablece a cerrado y retorna. El método :meth:`~Lock.release` sólo debe "
+"Una primitiva *lock* está en uno de dos estados, \"cerrado\" o "
+"\"abierto\" (*locked*/*unlocked*). Se crea en estado abierto. Tiene dos "
+"métodos básicos, :meth:`~Lock.acquire` (adquirir) y :meth:`~Lock.release` "
+"(liberar). Cuando el estado es *abierto*, :meth:`~Lock.acquire` cambia el "
+"estado a cerrado y retorna inmediatamente. Cuando el estado es *cerrado*, :"
+"meth:`~Lock.acquire` bloquea hasta que una llamada a :meth:`~Lock.release` "
+"en otro hilo lo cambie a abierto, luego la llamada a :meth:`~Lock.acquire` "
+"lo restablece a cerrado y retorna. El método :meth:`~Lock.release` sólo debe "
 "ser llamado en el estado cerrado; cambia el estado a abierto y retorna "
 "inmediatamente. Si se realiza un intento de liberar un *lock* abierto, se "
 "lanzará un :exc:`RuntimeError`."
 
-#: ../Doc/library/threading.rst:521
+#: ../Doc/library/threading.rst:731
 msgid "Locks also support the :ref:`context management protocol <with-locks>`."
 msgstr ""
 "Los *locks* también soportan el :ref:`protocolo de gestión de contexto <with-"
 "locks>`."
 
-#: ../Doc/library/threading.rst:523
+#: ../Doc/library/threading.rst:733
 msgid ""
 "When more than one thread is blocked in :meth:`~Lock.acquire` waiting for "
 "the state to turn to unlocked, only one thread proceeds when a :meth:`~Lock."
@@ -976,11 +1279,11 @@ msgstr ""
 "`~Lock.release` restablezca el estado a abierto; cuál de los hilos en espera "
 "procederá no está definido, y puede variar a través de las implementaciones."
 
-#: ../Doc/library/threading.rst:528
+#: ../Doc/library/threading.rst:738
 msgid "All methods are executed atomically."
 msgstr "Todos los métodos se ejecutan de manera atómica."
 
-#: ../Doc/library/threading.rst:533
+#: ../Doc/library/threading.rst:743
 msgid ""
 "The class implementing primitive lock objects.  Once a thread has acquired a "
 "lock, subsequent attempts to acquire it block, until it is released; any "
@@ -990,17 +1293,17 @@ msgstr ""
 "hilo ha adquirido un *lock*, intentos subsecuentes por adquirirlo "
 "bloquearán, hasta que sea liberado; cualquier hilo puede liberarlo."
 
-#: ../Doc/library/threading.rst:537
+#: ../Doc/library/threading.rst:747
 msgid ""
 "``Lock`` is now a class. In earlier Pythons, ``Lock`` was a factory function "
 "which returned an instance of the underlying private lock type."
 msgstr ""
 
-#: ../Doc/library/threading.rst:545 ../Doc/library/threading.rst:636
+#: ../Doc/library/threading.rst:755 ../Doc/library/threading.rst:849
 msgid "Acquire a lock, blocking or non-blocking."
 msgstr "Adquirir un *lock*, bloqueante o no bloqueante."
 
-#: ../Doc/library/threading.rst:547
+#: ../Doc/library/threading.rst:757
 msgid ""
 "When invoked with the *blocking* argument set to ``True`` (the default), "
 "block until the lock is unlocked, then set it to locked and return ``True``."
@@ -1009,7 +1312,7 @@ msgstr ""
 "valor por defecto), bloquea hasta que el *lock* se abra, luego lo establece "
 "como cerrado y retorna ``True``."
 
-#: ../Doc/library/threading.rst:550
+#: ../Doc/library/threading.rst:760
 msgid ""
 "When invoked with the *blocking* argument set to ``False``, do not block. If "
 "a call with *blocking* set to ``True`` would block, return ``False`` "
@@ -1019,7 +1322,7 @@ msgstr ""
 "Si una llamada con *blocking* establecido como ``True`` bloqueara, retorna "
 "``Falso`` inmediatamente; de otro modo, cierra el *lock* y retorna ``True``."
 
-#: ../Doc/library/threading.rst:554
+#: ../Doc/library/threading.rst:764
 msgid ""
 "When invoked with the floating-point *timeout* argument set to a positive "
 "value, block for at most the number of seconds specified by *timeout* and as "
@@ -1033,7 +1336,7 @@ msgstr ""
 "*timeout* de \"-1\" especifica una espera ilimitada. No está admitido "
 "especificar un *timeout* cuando *blocking* es ``False``."
 
-#: ../Doc/library/threading.rst:560
+#: ../Doc/library/threading.rst:770
 msgid ""
 "The return value is ``True`` if the lock is acquired successfully, ``False`` "
 "if not (for example if the *timeout* expired)."
@@ -1041,12 +1344,12 @@ msgstr ""
 "El valor de retorno es ``True`` si el *lock* es adquirido con éxito, "
 "``Falso`` si no (por ejemplo si *timeout* expiró)."
 
-#: ../Doc/library/threading.rst:563 ../Doc/library/threading.rst:674
-#: ../Doc/library/threading.rst:921
+#: ../Doc/library/threading.rst:773 ../Doc/library/threading.rst:887
+#: ../Doc/library/threading.rst:1147
 msgid "The *timeout* parameter is new."
 msgstr "El parámetro *timeout* es nuevo."
 
-#: ../Doc/library/threading.rst:566
+#: ../Doc/library/threading.rst:776
 msgid ""
 "Lock acquisition can now be interrupted by signals on POSIX if the "
 "underlying threading implementation supports it."
@@ -1054,7 +1357,14 @@ msgstr ""
 "La adquisición de un *lock* ahora puede ser interrumpida por señales en "
 "POSIX si la implementación de hilado subyacente lo soporta."
 
-#: ../Doc/library/threading.rst:573
+#: ../Doc/library/threading.rst:780
+#, fuzzy
+msgid "Lock acquisition can now be interrupted by signals on Windows."
+msgstr ""
+"La adquisición de un *lock* ahora puede ser interrumpida por señales en "
+"POSIX si la implementación de hilado subyacente lo soporta."
+
+#: ../Doc/library/threading.rst:786
 msgid ""
 "Release a lock.  This can be called from any thread, not only the thread "
 "which has acquired the lock."
@@ -1062,7 +1372,7 @@ msgstr ""
 "Libera un *lock*. Puede ser llamado desde cualquier hilo, no solo el hilo "
 "que ha adquirido el *lock*."
 
-#: ../Doc/library/threading.rst:576
+#: ../Doc/library/threading.rst:789
 msgid ""
 "When the lock is locked, reset it to unlocked, and return.  If any other "
 "threads are blocked waiting for the lock to become unlocked, allow exactly "
@@ -1072,24 +1382,25 @@ msgstr ""
 "cualquier otro hilo está bloqueado esperando que el *lock* se abra, permite "
 "que exactamente uno de ellos proceda."
 
-#: ../Doc/library/threading.rst:580
+#: ../Doc/library/threading.rst:793
 msgid "When invoked on an unlocked lock, a :exc:`RuntimeError` is raised."
 msgstr ""
 "Cuando se invoca en un *lock* abierto, se lanza un :exc:`RuntimeError`."
 
-#: ../Doc/library/threading.rst:582 ../Doc/library/threading.rst:690
+#: ../Doc/library/threading.rst:795 ../Doc/library/threading.rst:903
 msgid "There is no return value."
 msgstr "No hay valor de retorno."
 
-#: ../Doc/library/threading.rst:586
+#: ../Doc/library/threading.rst:799
 msgid "Return ``True`` if the lock is acquired."
 msgstr "Retorna ``True`` si se adquiere el bloqueo."
 
-#: ../Doc/library/threading.rst:593
-msgid "RLock Objects"
+#: ../Doc/library/threading.rst:806
+#, fuzzy
+msgid "RLock objects"
 msgstr "Objetos *Rlock*"
 
-#: ../Doc/library/threading.rst:595
+#: ../Doc/library/threading.rst:808
 msgid ""
 "A reentrant lock is a synchronization primitive that may be acquired "
 "multiple times by the same thread.  Internally, it uses the concepts of "
@@ -1104,13 +1415,13 @@ msgstr ""
 "cerrado, algún hilo es dueño del *lock*; si está en estado abierto, ningún "
 "hilo es dueño."
 
-#: ../Doc/library/threading.rst:601
+#: ../Doc/library/threading.rst:814
 msgid ""
 "Threads call a lock's :meth:`~RLock.acquire` method to lock it, and its :"
 "meth:`~Lock.release` method to unlock it."
 msgstr ""
 
-#: ../Doc/library/threading.rst:606
+#: ../Doc/library/threading.rst:819
 msgid ""
 "Reentrant locks support the :ref:`context management protocol <with-locks>`, "
 "so it is recommended to use :keyword:`with` instead of manually calling :"
@@ -1118,7 +1429,7 @@ msgid ""
 "releasing the lock for a block of code."
 msgstr ""
 
-#: ../Doc/library/threading.rst:611
+#: ../Doc/library/threading.rst:824
 #, fuzzy
 msgid ""
 "RLock's :meth:`~RLock.acquire`/:meth:`~RLock.release` call pairs may be "
@@ -1135,7 +1446,7 @@ msgstr ""
 "restablece el *lock* a abierto y permite que otro hilo bloqueado en :meth:"
 "`~Lock.acquire` proceda."
 
-#: ../Doc/library/threading.rst:617
+#: ../Doc/library/threading.rst:830
 msgid ""
 ":meth:`~RLock.acquire`/:meth:`~RLock.release` must be used in pairs: each "
 "acquire must have a release in the thread that has acquired the lock. "
@@ -1143,7 +1454,7 @@ msgid ""
 "deadlock."
 msgstr ""
 
-#: ../Doc/library/threading.rst:624
+#: ../Doc/library/threading.rst:837
 msgid ""
 "This class implements reentrant lock objects.  A reentrant lock must be "
 "released by the thread that acquired it.  Once a thread has acquired a "
@@ -1155,7 +1466,7 @@ msgstr ""
 "adquirido un *lock* reentrante, el mismo hilo puede adquirirlo otra vez sin "
 "bloquearse; el hilo debe liberarlo una vez por vez que lo adquiere."
 
-#: ../Doc/library/threading.rst:629
+#: ../Doc/library/threading.rst:842
 msgid ""
 "Note that ``RLock`` is actually a factory function which returns an instance "
 "of the most efficient version of the concrete RLock class that is supported "
@@ -1165,17 +1476,17 @@ msgstr ""
 "instancia de la versión más eficiente de la clase RLock concreta que sea "
 "soportada por la plataforma."
 
-#: ../Doc/library/threading.rst:641
+#: ../Doc/library/threading.rst:853
 msgid ":ref:`Using RLock as a context manager <with-locks>`"
 msgstr ""
 
-#: ../Doc/library/threading.rst:641
+#: ../Doc/library/threading.rst:854
 msgid ""
 "Recommended over manual :meth:`!acquire` and :meth:`release` calls whenever "
 "practical."
 msgstr ""
 
-#: ../Doc/library/threading.rst:645
+#: ../Doc/library/threading.rst:858
 #, fuzzy
 msgid ""
 "When invoked with the *blocking* argument set to ``True`` (the default):"
@@ -1184,17 +1495,17 @@ msgstr ""
 "valor por defecto), bloquea hasta que el *lock* se abra, luego lo establece "
 "como cerrado y retorna ``True``."
 
-#: ../Doc/library/threading.rst:647 ../Doc/library/threading.rst:659
+#: ../Doc/library/threading.rst:860 ../Doc/library/threading.rst:872
 msgid "If no thread owns the lock, acquire the lock and return immediately."
 msgstr ""
 
-#: ../Doc/library/threading.rst:649
+#: ../Doc/library/threading.rst:862
 msgid ""
 "If another thread owns the lock, block until we are able to acquire lock, or "
 "*timeout*, if set to a positive float value."
 msgstr ""
 
-#: ../Doc/library/threading.rst:652
+#: ../Doc/library/threading.rst:865
 msgid ""
 "If the same thread owns the lock, acquire the lock again, and return "
 "immediately. This is the difference between :class:`Lock` and :class:`!"
@@ -1202,36 +1513,36 @@ msgid ""
 "until the lock can be acquired."
 msgstr ""
 
-#: ../Doc/library/threading.rst:657
+#: ../Doc/library/threading.rst:870
 #, fuzzy
 msgid "When invoked with the *blocking* argument set to ``False``:"
 msgstr "Cuando se invoca sin argumentos:"
 
-#: ../Doc/library/threading.rst:661
+#: ../Doc/library/threading.rst:874
 msgid "If another thread owns the lock, return immediately."
 msgstr ""
 
-#: ../Doc/library/threading.rst:663
+#: ../Doc/library/threading.rst:876
 msgid ""
 "If the same thread owns the lock, acquire the lock again and return "
 "immediately."
 msgstr ""
 
-#: ../Doc/library/threading.rst:666
+#: ../Doc/library/threading.rst:879
 msgid ""
 "In all cases, if the thread was able to acquire the lock, return ``True``. "
 "If the thread was unable to acquire the lock (i.e. if not blocking or the "
 "timeout was reached) return ``False``."
 msgstr ""
 
-#: ../Doc/library/threading.rst:670
+#: ../Doc/library/threading.rst:883
 msgid ""
 "If called multiple times, failing to call :meth:`~RLock.release` as many "
 "times may lead to deadlock. Consider using :class:`!RLock` as a context "
 "manager rather than calling acquire/release directly."
 msgstr ""
 
-#: ../Doc/library/threading.rst:680
+#: ../Doc/library/threading.rst:893
 msgid ""
 "Release a lock, decrementing the recursion level.  If after the decrement it "
 "is zero, reset the lock to unlocked (not owned by any thread), and if any "
@@ -1246,7 +1557,7 @@ msgstr ""
 "disminución el nivel de recursividad todavía no es cero, el *lock* permanece "
 "cerrado y perteneciente al hilo llamador."
 
-#: ../Doc/library/threading.rst:686
+#: ../Doc/library/threading.rst:899
 #, fuzzy
 msgid ""
 "Only call this method when the calling thread owns the lock. A :exc:"
@@ -1257,11 +1568,16 @@ msgstr ""
 "lanza un :exc:`RuntimeError` si se llama este método cuando el *lock* esta "
 "abierto."
 
-#: ../Doc/library/threading.rst:696
-msgid "Condition Objects"
+#: ../Doc/library/threading.rst:908 ../Doc/library/threading.rst:1007
+msgid "Return a boolean indicating whether this object is locked right now."
+msgstr ""
+
+#: ../Doc/library/threading.rst:916
+#, fuzzy
+msgid "Condition objects"
 msgstr "Objetos condicionales"
 
-#: ../Doc/library/threading.rst:698
+#: ../Doc/library/threading.rst:918
 msgid ""
 "A condition variable is always associated with some kind of lock; this can "
 "be passed in or one will be created by default.  Passing one in is useful "
@@ -1273,7 +1589,7 @@ msgstr ""
 "varias variables de condición deben compartir el mismo *lock*. El *lock* es "
 "parte del objeto condicional: no es necesario rastrearlo por separado."
 
-#: ../Doc/library/threading.rst:703
+#: ../Doc/library/threading.rst:923
 msgid ""
 "A condition variable obeys the :ref:`context management protocol <with-"
 "locks>`: using the ``with`` statement acquires the associated lock for the "
@@ -1287,7 +1603,7 @@ msgstr ""
 "acquire` y :meth:`~Condition.release` también llaman los métodos "
 "correspondientes del *lock* asociado."
 
-#: ../Doc/library/threading.rst:709
+#: ../Doc/library/threading.rst:929
 msgid ""
 "Other methods must be called with the associated lock held.  The :meth:"
 "`~Condition.wait` method releases the lock, and then blocks until another "
@@ -1302,7 +1618,7 @@ msgstr ""
 "adquiere el *lock* y retorna. También es posible especificar un tiempo de "
 "espera."
 
-#: ../Doc/library/threading.rst:715
+#: ../Doc/library/threading.rst:935
 msgid ""
 "The :meth:`~Condition.notify` method wakes up one of the threads waiting for "
 "the condition variable, if any are waiting.  The :meth:`~Condition."
@@ -1313,7 +1629,7 @@ msgstr ""
 "`~Condition.notify_all` despierta a todos los hilos que estén esperando a la "
 "condición variable."
 
-#: ../Doc/library/threading.rst:719
+#: ../Doc/library/threading.rst:939
 msgid ""
 "Note: the :meth:`~Condition.notify` and :meth:`~Condition.notify_all` "
 "methods don't release the lock; this means that the thread or threads "
@@ -1328,7 +1644,7 @@ msgstr ""
 "`~Condition.notify` o :meth:`~Condition.notify_all` renuncie finalmente a la "
 "propiedad del *lock*."
 
-#: ../Doc/library/threading.rst:725
+#: ../Doc/library/threading.rst:945
 msgid ""
 "The typical programming style using condition variables uses the lock to "
 "synchronize access to some shared state; threads that are interested in a "
@@ -1349,7 +1665,7 @@ msgstr ""
 "espera. Por ejemplo, el siguiente código es una situación genérica de "
 "productor-consumidor con capacidad de búfer ilimitada::"
 
-#: ../Doc/library/threading.rst:734
+#: ../Doc/library/threading.rst:954
 msgid ""
 "# Consume one item\n"
 "with cv:\n"
@@ -1363,7 +1679,7 @@ msgid ""
 "    cv.notify()"
 msgstr ""
 
-#: ../Doc/library/threading.rst:745
+#: ../Doc/library/threading.rst:965
 msgid ""
 "The ``while`` loop checking for the application's condition is necessary "
 "because :meth:`~Condition.wait` can return after an arbitrary long time, and "
@@ -1380,7 +1696,7 @@ msgstr ""
 "para automatizar la revisión de condiciones, y facilita la computación de "
 "tiempos de espera::"
 
-#: ../Doc/library/threading.rst:752
+#: ../Doc/library/threading.rst:972
 msgid ""
 "# Consume an item\n"
 "with cv:\n"
@@ -1388,7 +1704,7 @@ msgid ""
 "    get_an_available_item()"
 msgstr ""
 
-#: ../Doc/library/threading.rst:757
+#: ../Doc/library/threading.rst:977
 msgid ""
 "To choose between :meth:`~Condition.notify` and :meth:`~Condition."
 "notify_all`, consider whether one state change can be interesting for only "
@@ -1401,7 +1717,7 @@ msgstr ""
 "hilos en espera. Por ejemplo en una típica situación productor-consumidor, "
 "agregar un elemento al búfer sólo necesita despertar un hilo consumidor."
 
-#: ../Doc/library/threading.rst:765
+#: ../Doc/library/threading.rst:985
 msgid ""
 "This class implements condition variable objects.  A condition variable "
 "allows one or more threads to wait until they are notified by another thread."
@@ -1409,7 +1725,7 @@ msgstr ""
 "Esta clase implementa objetos de condición variable. Una condición variable "
 "permite que uno o más hilos esperen hasta que sean notificados por otro hilo."
 
-#: ../Doc/library/threading.rst:768
+#: ../Doc/library/threading.rst:988
 msgid ""
 "If the *lock* argument is given and not ``None``, it must be a :class:`Lock` "
 "or :class:`RLock` object, and it is used as the underlying lock.  Otherwise, "
@@ -1420,13 +1736,13 @@ msgstr ""
 "otro modo, se crea un nuevo objeto :class:`RLock` y se utiliza como el "
 "*lock* subyacente."
 
-#: ../Doc/library/threading.rst:772 ../Doc/library/threading.rst:896
-#: ../Doc/library/threading.rst:942 ../Doc/library/threading.rst:994
-#: ../Doc/library/threading.rst:1062
+#: ../Doc/library/threading.rst:992 ../Doc/library/threading.rst:1122
+#: ../Doc/library/threading.rst:1168 ../Doc/library/threading.rst:1220
+#: ../Doc/library/threading.rst:1288
 msgid "changed from a factory function to a class."
 msgstr "cambiado de función de fábrica a una clase."
 
-#: ../Doc/library/threading.rst:777
+#: ../Doc/library/threading.rst:997
 msgid ""
 "Acquire the underlying lock. This method calls the corresponding method on "
 "the underlying lock; the return value is whatever that method returns."
@@ -1435,7 +1751,7 @@ msgstr ""
 "sobre el *lock* subyacente; el valor de retorno es lo que retorne aquel "
 "método."
 
-#: ../Doc/library/threading.rst:782
+#: ../Doc/library/threading.rst:1002
 msgid ""
 "Release the underlying lock. This method calls the corresponding method on "
 "the underlying lock; there is no return value."
@@ -1443,7 +1759,7 @@ msgstr ""
 "Libera el *lock* subyacente. Este método llama al método correspondiente en "
 "el *lock* subyacente; no tiene valor de retorno."
 
-#: ../Doc/library/threading.rst:787
+#: ../Doc/library/threading.rst:1013
 msgid ""
 "Wait until notified or until a timeout occurs. If the calling thread has not "
 "acquired the lock when this method is called, a :exc:`RuntimeError` is "
@@ -1453,7 +1769,7 @@ msgstr ""
 "hilo invocador no ha adquirido el *lock* cuando este método es llamado, se "
 "lanza un :exc:`RuntimeError`."
 
-#: ../Doc/library/threading.rst:791
+#: ../Doc/library/threading.rst:1017
 msgid ""
 "This method releases the underlying lock, and then blocks until it is "
 "awakened by a :meth:`notify` or :meth:`notify_all` call for the same "
@@ -1466,7 +1782,7 @@ msgstr ""
 "opcional se cumpla. Una vez que ha sido despertado o el tiempo de espera ha "
 "pasado, re-adquiere el *lock* y retorna."
 
-#: ../Doc/library/threading.rst:796
+#: ../Doc/library/threading.rst:1022
 #, fuzzy
 msgid ""
 "When the *timeout* argument is present and not ``None``, it should be a "
@@ -1477,7 +1793,7 @@ msgstr ""
 "número de punto flotante que especifique un tiempo de espera para la "
 "operación en segundos (o fracciones de segundo)."
 
-#: ../Doc/library/threading.rst:800
+#: ../Doc/library/threading.rst:1026
 msgid ""
 "When the underlying lock is an :class:`RLock`, it is not released using its :"
 "meth:`release` method, since this may not actually unlock the lock when it "
@@ -1494,7 +1810,7 @@ msgstr ""
 "interfaz interna se usa luego para restablecer el nivel de recursividad "
 "cuando el *lock* es readquirido."
 
-#: ../Doc/library/threading.rst:808
+#: ../Doc/library/threading.rst:1034
 msgid ""
 "The return value is ``True`` unless a given *timeout* expired, in which case "
 "it is ``False``."
@@ -1502,11 +1818,11 @@ msgstr ""
 "El valor de retorno es ``True`` a menos que un *timeout* dado haya expirado, "
 "en cuyo caso será ``False``."
 
-#: ../Doc/library/threading.rst:811 ../Doc/library/threading.rst:1027
+#: ../Doc/library/threading.rst:1037 ../Doc/library/threading.rst:1253
 msgid "Previously, the method always returned ``None``."
 msgstr "Previamente, el método siempre retornaba ``None``."
 
-#: ../Doc/library/threading.rst:816
+#: ../Doc/library/threading.rst:1042
 msgid ""
 "Wait until a condition evaluates to true.  *predicate* should be a callable "
 "which result will be interpreted as a boolean value. A *timeout* may be "
@@ -1516,7 +1832,7 @@ msgstr ""
 "invocable cuyo resultado se interpretará como un valor booleano. Se puede "
 "proveer un *timeout* que especifique el máximo tiempo de espera."
 
-#: ../Doc/library/threading.rst:820
+#: ../Doc/library/threading.rst:1046
 msgid ""
 "This utility method may call :meth:`wait` repeatedly until the predicate is "
 "satisfied, or until a timeout occurs. The return value is the last return "
@@ -1528,7 +1844,7 @@ msgstr ""
 "retorno es el último valor de retorno del predicado y se evaluará a "
 "``False`` si el método ha caducado."
 
-#: ../Doc/library/threading.rst:825
+#: ../Doc/library/threading.rst:1051
 msgid ""
 "Ignoring the timeout feature, calling this method is roughly equivalent to "
 "writing::"
@@ -1536,13 +1852,13 @@ msgstr ""
 "Al ignorar la propiedad *feature*, llamar a este método equivale vagamente a "
 "escribir::"
 
-#: ../Doc/library/threading.rst:828
+#: ../Doc/library/threading.rst:1054
 msgid ""
 "while not predicate():\n"
 "    cv.wait()"
 msgstr ""
 
-#: ../Doc/library/threading.rst:831
+#: ../Doc/library/threading.rst:1057
 msgid ""
 "Therefore, the same rules apply as with :meth:`wait`: The lock must be held "
 "when called and is re-acquired on return.  The predicate is evaluated with "
@@ -1552,7 +1868,7 @@ msgstr ""
 "conservado cuando se llame y es re-adquirido al momento del retorno. El "
 "predicado se evalúa con el *lock* conservado."
 
-#: ../Doc/library/threading.rst:839
+#: ../Doc/library/threading.rst:1065
 msgid ""
 "By default, wake up one thread waiting on this condition, if any.  If the "
 "calling thread has not acquired the lock when this method is called, a :exc:"
@@ -1562,7 +1878,7 @@ msgstr ""
 "lo existe. Si el hilo llamador no ha adquirido el *lock* cuando se llama "
 "este método, se lanza un :exc:`RuntimeError`."
 
-#: ../Doc/library/threading.rst:843
+#: ../Doc/library/threading.rst:1069
 msgid ""
 "This method wakes up at most *n* of the threads waiting for the condition "
 "variable; it is a no-op if no threads are waiting."
@@ -1570,7 +1886,7 @@ msgstr ""
 "Este método despierta como máximo *n* de los hilos que estén esperando por "
 "la condición variable; no es una opción si no hay hilos esperando."
 
-#: ../Doc/library/threading.rst:846
+#: ../Doc/library/threading.rst:1072
 msgid ""
 "The current implementation wakes up exactly *n* threads, if at least *n* "
 "threads are waiting.  However, it's not safe to rely on this behavior. A "
@@ -1582,7 +1898,7 @@ msgstr ""
 "comportamiento. A futuro, una implementación optimizada podría "
 "ocasionalmente despertar a más de *n* hilos."
 
-#: ../Doc/library/threading.rst:851
+#: ../Doc/library/threading.rst:1077
 msgid ""
 "Note: an awakened thread does not actually return from its :meth:`wait` call "
 "until it can reacquire the lock.  Since :meth:`notify` does not release the "
@@ -1592,7 +1908,7 @@ msgstr ""
 "meth:`wait` hasta que pueda readquirir el *lock*. Ya que :meth:`notify` no "
 "libera el *lock*, su llamador debiera hacerlo."
 
-#: ../Doc/library/threading.rst:857
+#: ../Doc/library/threading.rst:1083
 msgid ""
 "Wake up all threads waiting on this condition.  This method acts like :meth:"
 "`notify`, but wakes up all waiting threads instead of one. If the calling "
@@ -1604,15 +1920,16 @@ msgstr ""
 "de a uno. Si el hilo llamador no ha adquirido el *lock* cuando se llama a "
 "este método, se lanza un :exc:`RuntimeError`."
 
-#: ../Doc/library/threading.rst:862
+#: ../Doc/library/threading.rst:1088
 msgid "The method ``notifyAll`` is a deprecated alias for this method."
 msgstr "El método ``notifyAll`` es un alias obsoleto para este método."
 
-#: ../Doc/library/threading.rst:868
-msgid "Semaphore Objects"
+#: ../Doc/library/threading.rst:1094
+#, fuzzy
+msgid "Semaphore objects"
 msgstr "Objetos semáforo"
 
-#: ../Doc/library/threading.rst:870
+#: ../Doc/library/threading.rst:1096
 msgid ""
 "This is one of the oldest synchronization primitives in the history of "
 "computer science, invented by the early Dutch computer scientist Edsger W. "
@@ -1624,7 +1941,7 @@ msgstr ""
 "la computación holandés Edsger W. Dijkstra (él utilizó los nombres ``P()`` y "
 "``V()`` en lugar de :meth:`~Semaphore.acquire` y :meth:`~Semaphore.release`)"
 
-#: ../Doc/library/threading.rst:875
+#: ../Doc/library/threading.rst:1101
 msgid ""
 "A semaphore manages an internal counter which is decremented by each :meth:"
 "`~Semaphore.acquire` call and incremented by each :meth:`~Semaphore.release` "
@@ -1638,14 +1955,14 @@ msgstr ""
 "`~Semaphore.acquire` lo encuentra en cero, bloquea, esperando hasta que otro "
 "hilo llame :meth:`~Semaphore.release`."
 
-#: ../Doc/library/threading.rst:881
+#: ../Doc/library/threading.rst:1107
 msgid ""
 "Semaphores also support the :ref:`context management protocol <with-locks>`."
 msgstr ""
 "Los semáforos también tienen soporte para el :ref:`protocolo de gestión de "
 "contexto <with-locks>`."
 
-#: ../Doc/library/threading.rst:886
+#: ../Doc/library/threading.rst:1112
 msgid ""
 "This class implements semaphore objects.  A semaphore manages an atomic "
 "counter representing the number of :meth:`release` calls minus the number "
@@ -1659,7 +1976,7 @@ msgstr ""
 "`acquire` bloquea si es necesario, hasta que pueda retornar sin volver el "
 "contador negativo. Si no es provisto, el valor por defecto de *value* será 1."
 
-#: ../Doc/library/threading.rst:892
+#: ../Doc/library/threading.rst:1118
 msgid ""
 "The optional argument gives the initial *value* for the internal counter; it "
 "defaults to ``1``. If the *value* given is less than 0, :exc:`ValueError` is "
@@ -1668,15 +1985,15 @@ msgstr ""
 "El argumento opcional da el *value* inicial al contador interno; por defecto "
 "es ``1``. Si el *value* provisto es menor a 0; se lanza un :exc:`ValueError`."
 
-#: ../Doc/library/threading.rst:901
+#: ../Doc/library/threading.rst:1127
 msgid "Acquire a semaphore."
 msgstr "Adquirir un semáforo."
 
-#: ../Doc/library/threading.rst:903
+#: ../Doc/library/threading.rst:1129
 msgid "When invoked without arguments:"
 msgstr "Cuando se invoca sin argumentos:"
 
-#: ../Doc/library/threading.rst:905
+#: ../Doc/library/threading.rst:1131
 msgid ""
 "If the internal counter is larger than zero on entry, decrement it by one "
 "and return ``True`` immediately."
@@ -1684,7 +2001,7 @@ msgstr ""
 "Si el contador interno es mayor a cero de entrada, lo disminuye en uno y "
 "retorna ``True`` inmediatamente."
 
-#: ../Doc/library/threading.rst:907
+#: ../Doc/library/threading.rst:1133
 msgid ""
 "If the internal counter is zero on entry, block until awoken by a call to :"
 "meth:`~Semaphore.release`.  Once awoken (and the counter is greater than 0), "
@@ -1698,7 +2015,7 @@ msgstr ""
 "exactamente un hilo por cada llamada a :meth:`~Semaphore.release`. No "
 "debiese confiarse en el orden en que los hilos sean despertados."
 
-#: ../Doc/library/threading.rst:913
+#: ../Doc/library/threading.rst:1139
 msgid ""
 "When invoked with *blocking* set to ``False``, do not block.  If a call "
 "without an argument would block, return ``False`` immediately; otherwise, do "
@@ -1709,7 +2026,7 @@ msgstr ""
 "otro modo, hace lo mismo que cuando se llama sin argumentos, y retorna "
 "``True``."
 
-#: ../Doc/library/threading.rst:917
+#: ../Doc/library/threading.rst:1143
 msgid ""
 "When invoked with a *timeout* other than ``None``, it will block for at most "
 "*timeout* seconds.  If acquire does not complete successfully in that "
@@ -1720,7 +2037,7 @@ msgstr ""
 "exitosamente en ese intervalo, retorna ``False``. De otro modo retorna "
 "``True``."
 
-#: ../Doc/library/threading.rst:926
+#: ../Doc/library/threading.rst:1152
 msgid ""
 "Release a semaphore, incrementing the internal counter by *n*.  When it was "
 "zero on entry and other threads are waiting for it to become larger than "
@@ -1730,13 +2047,13 @@ msgstr ""
 "cero en la entrada y otros subprocesos están esperando que vuelva a ser "
 "mayor que cero, active *n* de esos subprocesos."
 
-#: ../Doc/library/threading.rst:930
+#: ../Doc/library/threading.rst:1156
 msgid "Added the *n* parameter to release multiple waiting threads at once."
 msgstr ""
 "Se agregó el parámetro *n* para liberar varios subprocesos en espera a la "
 "vez."
 
-#: ../Doc/library/threading.rst:936
+#: ../Doc/library/threading.rst:1162
 msgid ""
 "Class implementing bounded semaphore objects.  A bounded semaphore checks to "
 "make sure its current value doesn't exceed its initial value.  If it does, :"
@@ -1751,11 +2068,12 @@ msgstr ""
 "semáforo demasiadas veces es signo de un *bug*. Si no se provee, el valor "
 "por defecto de *value* será 1."
 
-#: ../Doc/library/threading.rst:949
-msgid ":class:`Semaphore` Example"
+#: ../Doc/library/threading.rst:1175
+#, fuzzy
+msgid ":class:`Semaphore` example"
 msgstr "Ejemplo de :class:`Semaphore`"
 
-#: ../Doc/library/threading.rst:951
+#: ../Doc/library/threading.rst:1177
 msgid ""
 "Semaphores are often used to guard resources with limited capacity, for "
 "example, a database server.  In any situation where the size of the resource "
@@ -1768,14 +2086,14 @@ msgstr ""
 "de generar cualquier hilo de trabajo, tu hilo principal debe inicializar el "
 "semáforo::"
 
-#: ../Doc/library/threading.rst:956
+#: ../Doc/library/threading.rst:1182
 msgid ""
 "maxconnections = 5\n"
 "# ...\n"
 "pool_sema = BoundedSemaphore(value=maxconnections)"
 msgstr ""
 
-#: ../Doc/library/threading.rst:960
+#: ../Doc/library/threading.rst:1186
 msgid ""
 "Once spawned, worker threads call the semaphore's acquire and release "
 "methods when they need to connect to the server::"
@@ -1783,7 +2101,7 @@ msgstr ""
 "Una vez que han sido generados, los hilos de trabajo llaman a los métodos "
 "*acquire* y *release* cuando necesitan conectarse al servidor::"
 
-#: ../Doc/library/threading.rst:963
+#: ../Doc/library/threading.rst:1189
 msgid ""
 "with pool_sema:\n"
 "    conn = connectdb()\n"
@@ -1793,7 +2111,7 @@ msgid ""
 "        conn.close()"
 msgstr ""
 
-#: ../Doc/library/threading.rst:970
+#: ../Doc/library/threading.rst:1196
 msgid ""
 "The use of a bounded semaphore reduces the chance that a programming error "
 "which causes the semaphore to be released more than it's acquired will go "
@@ -1803,11 +2121,12 @@ msgstr ""
 "inadvertido un error de programación que cause que el semáforo sea liberado "
 "más veces de las que sea adquirido."
 
-#: ../Doc/library/threading.rst:977
-msgid "Event Objects"
+#: ../Doc/library/threading.rst:1203
+#, fuzzy
+msgid "Event objects"
 msgstr "Objetos de eventos"
 
-#: ../Doc/library/threading.rst:979
+#: ../Doc/library/threading.rst:1205
 msgid ""
 "This is one of the simplest mechanisms for communication between threads: "
 "one thread signals an event and other threads wait for it."
@@ -1815,7 +2134,7 @@ msgstr ""
 "Éste es uno de los mecanismos más simples de comunicación entre hilos: un "
 "hilo señala un evento y otro hilo lo espera."
 
-#: ../Doc/library/threading.rst:982
+#: ../Doc/library/threading.rst:1208
 msgid ""
 "An event object manages an internal flag that can be set to true with the :"
 "meth:`~Event.set` method and reset to false with the :meth:`~Event.clear` "
@@ -1826,7 +2145,7 @@ msgstr ""
 "mediante el método :meth:`~Meth.clear`. El método :meth:`~Meth.wait` bloquea "
 "hasta que la marca sea *true*."
 
-#: ../Doc/library/threading.rst:989
+#: ../Doc/library/threading.rst:1215
 msgid ""
 "Class implementing event objects.  An event manages a flag that can be set "
 "to true with the :meth:`~Event.set` method and reset to false with the :meth:"
@@ -1839,15 +2158,15 @@ msgstr ""
 "bloquea hasta que el indicador sea verdadero. El indicador es inicialmente "
 "falso."
 
-#: ../Doc/library/threading.rst:999
+#: ../Doc/library/threading.rst:1225
 msgid "Return ``True`` if and only if the internal flag is true."
 msgstr "Retorna ``True`` exclusivamente si el indicador interno es verdadero."
 
-#: ../Doc/library/threading.rst:1001
+#: ../Doc/library/threading.rst:1227
 msgid "The method ``isSet`` is a deprecated alias for this method."
 msgstr "El método ``isSet`` es un alias obsoleto para este método."
 
-#: ../Doc/library/threading.rst:1005
+#: ../Doc/library/threading.rst:1231
 msgid ""
 "Set the internal flag to true. All threads waiting for it to become true are "
 "awakened. Threads that call :meth:`wait` once the flag is true will not "
@@ -1857,7 +2176,7 @@ msgstr ""
 "esperando que se vuelva verdadero serán despertados. Los hilos que llaman a :"
 "meth:`wait` una vez que el indicador marca verdadero no bloquearán."
 
-#: ../Doc/library/threading.rst:1011
+#: ../Doc/library/threading.rst:1237
 msgid ""
 "Reset the internal flag to false. Subsequently, threads calling :meth:`wait` "
 "will block until :meth:`.set` is called to set the internal flag to true "
@@ -1867,7 +2186,7 @@ msgstr ""
 "meth:`wait` bloquearán hasta que se llame a :meth:`set` para establecer el "
 "indicador interno a verdadero nuevamente."
 
-#: ../Doc/library/threading.rst:1017
+#: ../Doc/library/threading.rst:1243
 msgid ""
 "Block as long as the internal flag is false and the timeout, if given, has "
 "not expired. The return value represents the reason that this blocking "
@@ -1876,7 +2195,7 @@ msgid ""
 "become true within the given wait time."
 msgstr ""
 
-#: ../Doc/library/threading.rst:1023
+#: ../Doc/library/threading.rst:1249
 #, fuzzy
 msgid ""
 "When the timeout argument is present and not ``None``, it should be a "
@@ -1887,11 +2206,12 @@ msgstr ""
 "de ``None``, debe ser un número de punto flotante que especifique un tiempo "
 "de espera para la operación en segundos (o fracciones en su defecto)."
 
-#: ../Doc/library/threading.rst:1034
-msgid "Timer Objects"
+#: ../Doc/library/threading.rst:1260
+#, fuzzy
+msgid "Timer objects"
 msgstr "Objetos temporizadores"
 
-#: ../Doc/library/threading.rst:1036
+#: ../Doc/library/threading.rst:1262
 msgid ""
 "This class represents an action that should be run only after a certain "
 "amount of time has passed --- a timer.  :class:`Timer` is a subclass of :"
@@ -1903,7 +2223,7 @@ msgstr ""
 "una subclase de :class:`Thread` y en tanto tal también funciona como un "
 "ejemplo de creación de hilos personalizados."
 
-#: ../Doc/library/threading.rst:1040
+#: ../Doc/library/threading.rst:1266
 msgid ""
 "Timers are started, as with threads, by calling their :meth:`Timer.start "
 "<Thread.start>` method.  The timer can be stopped (before its action has "
@@ -1917,11 +2237,11 @@ msgstr ""
 "El intervalo que el temporizador esperará antes de ejecutar su acción puede "
 "no ser exactamente el mismo que el intervalo especificado por el usuario."
 
-#: ../Doc/library/threading.rst:1046
+#: ../Doc/library/threading.rst:1272
 msgid "For example::"
 msgstr "Por ejemplo:"
 
-#: ../Doc/library/threading.rst:1048
+#: ../Doc/library/threading.rst:1274
 msgid ""
 "def hello():\n"
 "    print(\"hello, world\")\n"
@@ -1930,7 +2250,7 @@ msgid ""
 "t.start()  # after 30 seconds, \"hello, world\" will be printed"
 msgstr ""
 
-#: ../Doc/library/threading.rst:1057
+#: ../Doc/library/threading.rst:1283
 msgid ""
 "Create a timer that will run *function* with arguments *args* and  keyword "
 "arguments *kwargs*, after *interval* seconds have passed. If *args* is "
@@ -1943,7 +2263,7 @@ msgstr ""
 "defecto) se utilizará una lista vacía. Si *kwargs* es ``None`` (por defecto) "
 "se utilizará un *dict* vacío."
 
-#: ../Doc/library/threading.rst:1067
+#: ../Doc/library/threading.rst:1293
 msgid ""
 "Stop the timer, and cancel the execution of the timer's action.  This will "
 "only work if the timer is still in its waiting stage."
@@ -1952,11 +2272,12 @@ msgstr ""
 "temporizador. Esto sólo funcionará si el temporizador está en etapa de "
 "espera."
 
-#: ../Doc/library/threading.rst:1072
-msgid "Barrier Objects"
+#: ../Doc/library/threading.rst:1298
+#, fuzzy
+msgid "Barrier objects"
 msgstr "Objetos de barrera"
 
-#: ../Doc/library/threading.rst:1076
+#: ../Doc/library/threading.rst:1302
 msgid ""
 "This class provides a simple synchronization primitive for use by a fixed "
 "number of threads that need to wait for each other.  Each of the threads "
@@ -1970,14 +2291,14 @@ msgstr ""
 "bloqueará hasta que todos los hilos hayan hecho sus respectivas llamadas a :"
 "meth:`~Barrier.wait`. En este punto, los hilos son liberados simultáneamente."
 
-#: ../Doc/library/threading.rst:1082
+#: ../Doc/library/threading.rst:1308
 msgid ""
 "The barrier can be reused any number of times for the same number of threads."
 msgstr ""
 "La barrera puede ser reutilizada cualquier número de veces para el mismo "
 "número de hilos."
 
-#: ../Doc/library/threading.rst:1084
+#: ../Doc/library/threading.rst:1310
 msgid ""
 "As an example, here is a simple way to synchronize a client and server "
 "thread::"
@@ -1985,7 +2306,7 @@ msgstr ""
 "Como ejemplo, aquí hay una manera simple de sincronizar un hilo cliente con "
 "uno servidor::"
 
-#: ../Doc/library/threading.rst:1086
+#: ../Doc/library/threading.rst:1312
 msgid ""
 "b = Barrier(2, timeout=5)\n"
 "\n"
@@ -2003,7 +2324,7 @@ msgid ""
 "        process_client_connection(connection)"
 msgstr ""
 
-#: ../Doc/library/threading.rst:1104
+#: ../Doc/library/threading.rst:1330
 msgid ""
 "Create a barrier object for *parties* number of threads.  An *action*, when "
 "provided, is a callable to be called by one of the threads when they are "
@@ -2015,7 +2336,7 @@ msgstr ""
 "sean liberados. *timeout* es el valor de tiempo de espera máximo por defecto "
 "si no se especifica uno en el método :meth:`wait`."
 
-#: ../Doc/library/threading.rst:1111
+#: ../Doc/library/threading.rst:1337
 msgid ""
 "Pass the barrier.  When all the threads party to the barrier have called "
 "this function, they are all released simultaneously.  If a *timeout* is "
@@ -2027,7 +2348,7 @@ msgstr ""
 "valor *timeout*, se utilizará con preferencia sobre cualquiera que haya sido "
 "suministrado al constructor de la clase."
 
-#: ../Doc/library/threading.rst:1116
+#: ../Doc/library/threading.rst:1342
 msgid ""
 "The return value is an integer in the range 0 to *parties* -- 1, different "
 "for each thread.  This can be used to select a thread to do some special "
@@ -2037,7 +2358,7 @@ msgstr ""
 "diferente para cada hilo. Puede ser utilizado para seleccionar a un hilo "
 "para que haga alguna limpieza especial, por ejemplo::"
 
-#: ../Doc/library/threading.rst:1120
+#: ../Doc/library/threading.rst:1346
 msgid ""
 "i = barrier.wait()\n"
 "if i == 0:\n"
@@ -2045,7 +2366,7 @@ msgid ""
 "    print(\"passed the barrier\")"
 msgstr ""
 
-#: ../Doc/library/threading.rst:1125
+#: ../Doc/library/threading.rst:1351
 msgid ""
 "If an *action* was provided to the constructor, one of the threads will have "
 "called it prior to being released.  Should this call raise an error, the "
@@ -2055,11 +2376,11 @@ msgstr ""
 "antes de ser liberado. Si acaso esta llamada lanzara un error, la barrera "
 "entra en estado *broken* (roto)."
 
-#: ../Doc/library/threading.rst:1129
+#: ../Doc/library/threading.rst:1355
 msgid "If the call times out, the barrier is put into the broken state."
 msgstr "Si se agota el tiempo de llamada, la barrera pasa al estado roto."
 
-#: ../Doc/library/threading.rst:1131
+#: ../Doc/library/threading.rst:1357
 msgid ""
 "This method may raise a :class:`BrokenBarrierError` exception if the barrier "
 "is broken or reset while a thread is waiting."
@@ -2067,7 +2388,7 @@ msgstr ""
 "Este método podría lanzar una excepción :class:`BrokenBarrierError` si la "
 "barrera está rota o si se reinicia mientras el hilo está esperando."
 
-#: ../Doc/library/threading.rst:1136
+#: ../Doc/library/threading.rst:1362
 msgid ""
 "Return the barrier to the default, empty state.  Any threads waiting on it "
 "will receive the :class:`BrokenBarrierError` exception."
@@ -2075,7 +2396,7 @@ msgstr ""
 "Retorna la barrera al estado por defecto, vacío. Cualquier hilo que esté a "
 "su espera recibirá la excepción :class:`BrokenBarrierError`."
 
-#: ../Doc/library/threading.rst:1139
+#: ../Doc/library/threading.rst:1365
 msgid ""
 "Note that using this function may require some external synchronization if "
 "there are other threads whose state is unknown.  If a barrier is broken it "
@@ -2085,7 +2406,7 @@ msgstr ""
 "externa si existen otros hilos cuyos estados sean desconocidos. Si una "
 "barrera se rompe puede ser mejor abandonarla y crear una nueva."
 
-#: ../Doc/library/threading.rst:1145
+#: ../Doc/library/threading.rst:1371
 msgid ""
 "Put the barrier into a broken state.  This causes any active or future calls "
 "to :meth:`wait` to fail with the :class:`BrokenBarrierError`.  Use this for "
@@ -2097,7 +2418,7 @@ msgstr ""
 "por ejemplo si uno de los hilos necesita abortar, para evitar que la "
 "aplicación quede en punto muerto."
 
-#: ../Doc/library/threading.rst:1150
+#: ../Doc/library/threading.rst:1376
 msgid ""
 "It may be preferable to simply create the barrier with a sensible *timeout* "
 "value to automatically guard against one of the threads going awry."
@@ -2105,20 +2426,20 @@ msgstr ""
 "Puede ser preferible simplemente crear la barrera con un valor *timeout* "
 "sensato para cuidarse automáticamente de que uno de los hilos falle."
 
-#: ../Doc/library/threading.rst:1156
+#: ../Doc/library/threading.rst:1382
 msgid "The number of threads required to pass the barrier."
 msgstr "El número de hilos requeridos para pasar la barrera."
 
-#: ../Doc/library/threading.rst:1160
+#: ../Doc/library/threading.rst:1386
 msgid "The number of threads currently waiting in the barrier."
 msgstr "El número de hilos actualmente esperando en la barrera."
 
-#: ../Doc/library/threading.rst:1164
+#: ../Doc/library/threading.rst:1390
 msgid "A boolean that is ``True`` if the barrier is in the broken state."
 msgstr ""
 "Un valor booleano que será ``True`` si la barrera está en el estado roto."
 
-#: ../Doc/library/threading.rst:1169
+#: ../Doc/library/threading.rst:1395
 msgid ""
 "This exception, a subclass of :exc:`RuntimeError`, is raised when the :class:"
 "`Barrier` object is reset or broken."
@@ -2126,13 +2447,13 @@ msgstr ""
 "Esta excepción, una subclase de :exc:`RuntimeError`, se lanza cuando el "
 "objeto :class:`Barrier` se restablece o se rompe."
 
-#: ../Doc/library/threading.rst:1176
+#: ../Doc/library/threading.rst:1402
 msgid ""
 "Using locks, conditions, and semaphores in the :keyword:`!with` statement"
 msgstr ""
 "Uso de *locks*, condiciones y semáforos en la declaración :keyword:`!with`"
 
-#: ../Doc/library/threading.rst:1178
+#: ../Doc/library/threading.rst:1404
 msgid ""
 "All of the objects provided by this module that have ``acquire`` and "
 "``release`` methods can be used as context managers for a :keyword:`with` "
@@ -2146,17 +2467,17 @@ msgstr ""
 "ingresa al bloque y el método ``release`` será llamado cuando se abandona el "
 "bloque. De ahí que, el siguiente fragmento::"
 
-#: ../Doc/library/threading.rst:1184
+#: ../Doc/library/threading.rst:1410
 msgid ""
 "with some_lock:\n"
 "    # do something..."
 msgstr ""
 
-#: ../Doc/library/threading.rst:1187
+#: ../Doc/library/threading.rst:1413
 msgid "is equivalent to::"
 msgstr "sea equivalente a::"
 
-#: ../Doc/library/threading.rst:1189
+#: ../Doc/library/threading.rst:1415
 msgid ""
 "some_lock.acquire()\n"
 "try:\n"
@@ -2165,7 +2486,7 @@ msgid ""
 "    some_lock.release()"
 msgstr ""
 
-#: ../Doc/library/threading.rst:1195
+#: ../Doc/library/threading.rst:1421
 msgid ""
 "Currently, :class:`Lock`, :class:`RLock`, :class:`Condition`, :class:"
 "`Semaphore`, and :class:`BoundedSemaphore` objects may be used as :keyword:"
@@ -2175,14 +2496,44 @@ msgstr ""
 "class:`Semaphore`, y :class:`BoundedSemaphore` pueden ser utilizados como "
 "gestores de contexto con declaraciones :keyword:`with`."
 
-#: ../Doc/library/threading.rst:158 ../Doc/library/threading.rst:176
+#: ../Doc/library/threading.rst:222 ../Doc/library/threading.rst:240
 msgid "trace function"
 msgstr "trace function"
 
-#: ../Doc/library/threading.rst:176
+#: ../Doc/library/threading.rst:240
 msgid "debugger"
 msgstr "debugger"
 
-#: ../Doc/library/threading.rst:187 ../Doc/library/threading.rst:205
+#: ../Doc/library/threading.rst:251 ../Doc/library/threading.rst:269
 msgid "profile function"
 msgstr "profile function"
+
+#~ msgid ":ref:`Availability <availability>`: not WASI."
+#~ msgstr ":ref:`Disponibilidad <availability>`: no Emscripten, no WASI."
+
+#~ msgid ""
+#~ ":ref:`Availability <availability>`: Windows, FreeBSD, Linux, macOS, "
+#~ "OpenBSD, NetBSD, AIX, DragonFlyBSD, GNU/kFreeBSD."
+#~ msgstr ""
+#~ ":ref:`Disponibilidad <availability>`: Windows, FreeBSD, Linux, macOS, "
+#~ "OpenBSD, NetBSD, AIX, DragonFlyBSD."
+
+#~ msgid ":ref:`Availability <availability>`: Windows, pthreads."
+#~ msgstr ":ref:`Disponibilidad <availability>`: Windows, pthreads."
+
+#~ msgid "The instance's values will be different for separate threads."
+#~ msgstr "Los valores de instancia serán diferentes para hilos distintos."
+
+#~ msgid ""
+#~ "For more details and extensive examples, see the documentation string of "
+#~ "the :mod:`!_threading_local` module: :source:`Lib/_threading_local.py`."
+#~ msgstr ""
+#~ "Para más detalles y ejemplos extensivos, véase la documentación del "
+#~ "módulo :mod:`!_threading_local` module: :source:`Lib/_threading_local.py`."
+
+#~ msgid ""
+#~ ":ref:`Availability <availability>`: Windows, FreeBSD, Linux, macOS, "
+#~ "OpenBSD, NetBSD, AIX, DragonFlyBSD."
+#~ msgstr ""
+#~ ":ref:`Disponibilidad <availability>`: Windows, FreeBSD, Linux, macOS, "
+#~ "OpenBSD, NetBSD, AIX, DragonFlyBSD."

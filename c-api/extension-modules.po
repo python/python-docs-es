@@ -1,0 +1,361 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2001 Python Software Foundation
+# This file is distributed under the same license as the Python en Español
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Python en Español 3.14\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-26 18:44-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: es\n"
+"Language-Team: es <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../Doc/c-api/extension-modules.rst:6
+msgid "Defining extension modules"
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:8
+msgid ""
+"A C extension for CPython is a shared library (for example, a ``.so`` file "
+"on Linux, ``.pyd`` DLL on Windows), which is loadable into the Python "
+"process (for example, it is compiled with compatible compiler settings), and "
+"which exports an :ref:`initialization function <extension-export-hook>`."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:13
+msgid ""
+"To be importable by default (that is, by :py:class:`importlib.machinery."
+"ExtensionFileLoader`), the shared library must be available on :py:attr:`sys."
+"path`, and must be named after the module name plus an extension listed in :"
+"py:attr:`importlib.machinery.EXTENSION_SUFFIXES`."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:21
+msgid ""
+"Building, packaging and distributing extension modules is best done with "
+"third-party tools, and is out of scope of this document. One suitable tool "
+"is Setuptools, whose documentation can be found at https://setuptools.pypa."
+"io/en/latest/setuptools.html."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:26
+msgid ""
+"Normally, the initialization function returns a module definition "
+"initialized using :c:func:`PyModuleDef_Init`. This allows splitting the "
+"creation process into several phases:"
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:30
+msgid ""
+"Before any substantial code is executed, Python can determine which "
+"capabilities the module supports, and it can adjust the environment or "
+"refuse loading an incompatible extension."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:33
+msgid ""
+"By default, Python itself creates the module object -- that is, it does the "
+"equivalent of :py:meth:`object.__new__` for classes. It also sets initial "
+"attributes like :attr:`~module.__package__` and :attr:`~module.__loader__`."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:37
+msgid ""
+"Afterwards, the module object is initialized using extension-specific code "
+"-- the equivalent of :py:meth:`~object.__init__` on classes."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:40
+msgid ""
+"This is called *multi-phase initialization* to distinguish it from the "
+"legacy (but still supported) *single-phase initialization* scheme, where the "
+"initialization function returns a fully constructed module. See the :ref:"
+"`single-phase-initialization section below <single-phase-initialization>` "
+"for details."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:48
+msgid "Added support for multi-phase initialization (:pep:`489`)."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:52
+msgid "Multiple module instances"
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:54
+msgid ""
+"By default, extension modules are not singletons. For example, if the :py:"
+"attr:`sys.modules` entry is removed and the module is re-imported, a new "
+"module object is created, and typically populated with fresh method and type "
+"objects. The old module is subject to normal garbage collection. This "
+"mirrors the behavior of pure-Python modules."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:61
+msgid ""
+"Additional module instances may be created in :ref:`sub-interpreters <sub-"
+"interpreter-support>` or after Python runtime reinitialization (:c:func:"
+"`Py_Finalize` and :c:func:`Py_Initialize`). In these cases, sharing Python "
+"objects between module instances would likely cause crashes or undefined "
+"behavior."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:68
+msgid ""
+"To avoid such issues, each instance of an extension module should be "
+"*isolated*: changes to one instance should not implicitly affect the others, "
+"and all state owned by the module, including references to Python objects, "
+"should be specific to a particular module instance. See :ref:`isolating-"
+"extensions-howto` for more details and a practical guide."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:74
+msgid ""
+"A simpler way to avoid these issues is :ref:`raising an error on repeated "
+"initialization <isolating-extensions-optout>`."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:77
+msgid ""
+"All modules are expected to support :ref:`sub-interpreters <sub-interpreter-"
+"support>`, or otherwise explicitly signal a lack of support. This is usually "
+"achieved by isolation or blocking repeated initialization, as above. A "
+"module may also be limited to the main interpreter using the :c:data:"
+"`Py_mod_multiple_interpreters` slot."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:89
+msgid "Initialization function"
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:91
+msgid ""
+"The initialization function defined by an extension module has the following "
+"signature:"
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:96
+#, python-brace-format
+msgid ""
+"Its name should be :samp:`PyInit_{<name>}`, with ``<name>`` replaced by the "
+"name of the module."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:99
+#, python-brace-format
+msgid ""
+"For modules with ASCII-only names, the function must instead be named :samp:"
+"`PyInit_{<name>}`, with ``<name>`` replaced by the name of the module. When "
+"using :ref:`multi-phase-initialization`, non-ASCII module names are allowed. "
+"In this case, the initialization function name is :samp:`PyInitU_{<name>}`, "
+"with ``<name>`` encoded using Python's *punycode* encoding with hyphens "
+"replaced by underscores. In Python:"
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:106
+msgid ""
+"def initfunc_name(name):\n"
+"    try:\n"
+"        suffix = b'_' + name.encode('ascii')\n"
+"    except UnicodeEncodeError:\n"
+"        suffix = b'U_' + name.encode('punycode').replace(b'-', b'_')\n"
+"    return b'PyInit' + suffix"
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:115
+msgid ""
+"It is recommended to define the initialization function using a helper macro:"
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:119
+msgid "Declare an extension module initialization function. This macro:"
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:122
+msgid "specifies the :c:expr:`PyObject*` return type,"
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:123
+msgid "adds any special linkage declarations required by the platform, and"
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:124
+msgid "for C++, declares the function as ``extern \"C\"``."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:126
+msgid "For example, a module called ``spam`` would be defined like this::"
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:128
+#, python-brace-format
+msgid ""
+"static struct PyModuleDef spam_module = {\n"
+"    .m_base = PyModuleDef_HEAD_INIT,\n"
+"    .m_name = \"spam\",\n"
+"    ...\n"
+"};\n"
+"\n"
+"PyMODINIT_FUNC\n"
+"PyInit_spam(void)\n"
+"{\n"
+"    return PyModuleDef_Init(&spam_module);\n"
+"}"
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:140
+msgid ""
+"It is possible to export multiple modules from a single shared library by "
+"defining multiple initialization functions. However, importing them requires "
+"using symbolic links or a custom importer, because by default only the "
+"function corresponding to the filename is found. See the `Multiple modules "
+"in one library <https://peps.python.org/pep-0489/#multiple-modules-in-one-"
+"library>`__ section in :pep:`489` for details."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:147
+msgid ""
+"The initialization function is typically the only non-\\ ``static`` item "
+"defined in the module's C source."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:154
+msgid "Multi-phase initialization"
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:156
+msgid ""
+"Normally, the :ref:`initialization function <extension-export-hook>` "
+"(``PyInit_modulename``) returns a :c:type:`PyModuleDef` instance with non-"
+"``NULL`` :c:member:`~PyModuleDef.m_slots`. Before it is returned, the "
+"``PyModuleDef`` instance must be initialized using the following function:"
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:165
+msgid ""
+"Ensure a module definition is a properly initialized Python object that "
+"correctly reports its type and a reference count."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:168
+msgid "Return *def* cast to ``PyObject*``, or ``NULL`` if an error occurred."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:170
+msgid ""
+"Calling this function is required for :ref:`multi-phase-initialization`. It "
+"should not be used in other contexts."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:173
+msgid ""
+"Note that Python assumes that ``PyModuleDef`` structures are statically "
+"allocated. This function may return either a new reference or a borrowed "
+"one; this reference must not be released."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:184
+msgid "Legacy single-phase initialization"
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:187
+msgid ""
+"Single-phase initialization is a legacy mechanism to initialize extension "
+"modules, with known drawbacks and design flaws. Extension module authors are "
+"encouraged to use multi-phase initialization instead."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:191
+msgid ""
+"In single-phase initialization, the :ref:`initialization function <extension-"
+"export-hook>` (``PyInit_modulename``) should create, populate and return a "
+"module object. This is typically done using :c:func:`PyModule_Create` and "
+"functions like :c:func:`PyModule_AddObjectRef`."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:197
+msgid ""
+"Single-phase initialization differs from the :ref:`default <multi-phase-"
+"initialization>` in the following ways:"
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:200
+msgid "Single-phase modules are, or rather *contain*, “singletons”."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:202
+msgid ""
+"When the module is first initialized, Python saves the contents of the "
+"module's ``__dict__`` (that is, typically, the module's functions and types)."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:206
+msgid ""
+"For subsequent imports, Python does not call the initialization function "
+"again. Instead, it creates a new module object with a new ``__dict__``, and "
+"copies the saved contents to it. For example, given a single-phase module "
+"``_testsinglephase`` [#testsinglephase]_ that defines a function ``sum`` and "
+"an exception class ``error``:"
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:214
+msgid ""
+">>> import sys\n"
+">>> import _testsinglephase as one\n"
+">>> del sys.modules['_testsinglephase']\n"
+">>> import _testsinglephase as two\n"
+">>> one is two\n"
+"False\n"
+">>> one.__dict__ is two.__dict__\n"
+"False\n"
+">>> one.sum is two.sum\n"
+"True\n"
+">>> one.error is two.error\n"
+"True"
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:229
+msgid ""
+"The exact behavior should be considered a CPython implementation detail."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:231
+msgid ""
+"To work around the fact that ``PyInit_modulename`` does not take a *spec* "
+"argument, some state of the import machinery is saved and applied to the "
+"first suitable module created during the ``PyInit_modulename`` call. "
+"Specifically, when a sub-module is imported, this mechanism prepends the "
+"parent package name to the name of the module."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:237
+msgid ""
+"A single-phase ``PyInit_modulename`` function should create “its” module "
+"object as soon as possible, before any other module objects can be created."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:240
+msgid "Non-ASCII module names (``PyInitU_modulename``) are not supported."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:242
+msgid ""
+"Single-phase modules support module lookup functions like :c:func:"
+"`PyState_FindModule`."
+msgstr ""
+
+#: ../Doc/c-api/extension-modules.rst:245
+msgid ""
+"``_testsinglephase`` is an internal module used in CPython's self-test "
+"suite; your installation may or may not include it."
+msgstr ""
