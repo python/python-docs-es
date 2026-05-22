@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-26 18:44-0300\n"
 "PO-Revision-Date: 2026-02-15 15:18-0300\n"
-"Last-Translator: Carlos A. Crespo <lvccrespo@gmail.com>\n"
+"Last-Translator: Mariana Garcia <mariana2906garcia@gmail.com>"
 "Language: es\n"
 "Language-Team: python-doc-es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -142,6 +142,9 @@ msgid ""
 "In free-threaded builds, :c:func:`PyType_AddWatcher` is not thread-safe, so "
 "it must be called at start up (before spawning the first thread)."
 msgstr ""
+"En compilaciones multi-hilo libres, :c:func:`PyType_AddWatcher` no es "
+"seguro para hilos, por lo que debe ser llamado al inicio (antes de crear el "
+"primer hilo)."
 
 #: ../Doc/c-api/type.rst:93
 msgid ""
@@ -234,7 +237,6 @@ msgstr ""
 "para hacer la misma verificación que :func:`issubclass` haría."
 
 #: ../Doc/c-api/type.rst:154
-#, fuzzy
 msgid ""
 "Generic handler for the :c:member:`~PyTypeObject.tp_alloc` slot of a type "
 "object.  Uses Python's default memory allocation mechanism to allocate "
@@ -243,14 +245,17 @@ msgid ""
 msgstr ""
 "Controlador genérico para la ranura :c:member:`~PyTypeObject.tp_alloc` de un "
 "objeto tipo. Usa el mecanismo de asignación de memoria predeterminado de "
-"Python para asignar una nueva instancia e inicializar todo su contenido a "
-"``NULL``."
+"Python para asignar memoria para una nueva instancia, pone la memoria a "
+"cero, e inicializa la memoria como si se llamara a :c:func:`PyObject_Init` "
+"o :c:func:`PyObject_InitVar`."
 
 #: ../Doc/c-api/type.rst:159
 msgid ""
 "Do not call this directly to allocate memory for an object; call the type's :"
 "c:member:`~PyTypeObject.tp_alloc` slot instead."
 msgstr ""
+"No llames a esto directamente para asignar memoria para un objeto; llama a "
+"la ranura :c:member:`~PyTypeObject.tp_alloc` del tipo en su lugar."
 
 #: ../Doc/c-api/type.rst:162
 msgid ""
@@ -263,17 +268,25 @@ msgid ""
 "the memory is guaranteed to be zeroed before initialization) and should be "
 "paired with :c:func:`PyObject_Free` in :c:member:`~PyTypeObject.tp_free`."
 msgstr ""
+"Para tipos que soportan recolección de basura (es decir, la bandera :c:macro:"
+"`Py_TPFLAGS_HAVE_GC` está establecida), esta función se comporta como :c:"
+"macro:`PyObject_GC_New` o :c:macro:`PyObject_GC_NewVar` (excepto que se "
+"garantiza que la memoria se pone a cero antes de la inicialización), y debe "
+"estar emparejada con :c:func:`PyObject_GC_Del` en :c:member:"
+"`~PyTypeObject.tp_free`. De lo contrario, se comporta como :c:macro:"
+"`PyObject_New` o :c:macro:`PyObject_NewVar` (excepto que se garantiza que la "
+"memoria se pone a cero antes de la inicialización) y debe estar emparejada "
+"con :c:func:`PyObject_Free` en :c:member:`~PyTypeObject.tp_free`."
 
 #: ../Doc/c-api/type.rst:174
-#, fuzzy
 msgid ""
 "Generic handler for the :c:member:`~PyTypeObject.tp_new` slot of a type "
 "object.  Creates a new instance using the type's :c:member:`~PyTypeObject."
 "tp_alloc` slot and returns the resulting object."
 msgstr ""
 "Controlador genérico para la ranura :c:member:`~PyTypeObject.tp_new` de un "
-"objeto tipo. Crea una nueva instancia utilizando la ranura del tipo :c:"
-"member:`~PyTypeObject.tp_alloc`."
+"objeto tipo. Crea una nueva instancia utilizando la ranura :c:member:"
+"`~PyTypeObject.tp_alloc` del tipo y retorna el objeto resultante."
 
 #: ../Doc/c-api/type.rst:180
 msgid ""
@@ -456,38 +469,49 @@ msgid ""
 "and will be valid as long as you hold a reference to *type*. Do not release "
 "it with :c:func:`Py_DECREF` or similar."
 msgstr ""
+"La referencia retornada es :term:`prestada <borrowed reference>` de *type*, "
+"y será válida mientras mantengas una referencia a *type*. No la liberes con :"
+"c:func:`Py_DECREF` o similar."
 
 #: ../Doc/c-api/type.rst:293
 msgid ""
 "Find the first superclass in *type*'s :term:`method resolution order` whose :"
 "c:macro:`Py_tp_token` token is equal to the given one."
 msgstr ""
+"Encuentra la primera superclase en el :term:`method resolution order` de "
+"*type* cuyo token :c:macro:`Py_tp_token` sea igual al dado."
 
 #: ../Doc/c-api/type.rst:296
 msgid ""
 "If found, set *\\*result* to a new :term:`strong reference` to it and return "
 "``1``."
 msgstr ""
+"Si se encuentra, establece *\\*result* en una nueva :term:`strong reference` "
+"a él y retorna ``1``."
 
 #: ../Doc/c-api/type.rst:298
 msgid "If not found, set *\\*result* to ``NULL`` and return ``0``."
-msgstr ""
+msgstr "Si no se encuentra, establece *\\*result* en ``NULL`` y retorna ``0``."
 
 #: ../Doc/c-api/type.rst:299
 msgid ""
 "On error, set *\\*result* to ``NULL`` and return ``-1`` with an exception "
 "set."
 msgstr ""
+"En caso de error, establece *\\*result* en ``NULL`` y retorna ``-1`` con una "
+"excepción establecida."
 
 #: ../Doc/c-api/type.rst:302
 msgid ""
 "The *result* argument may be ``NULL``, in which case *\\*result* is not set. "
 "Use this if you need only the return value."
 msgstr ""
+"El argumento *result* puede ser ``NULL``, en cuyo caso *\\*result* no se "
+"establece. Usa esto si solo necesitas el valor de retorno."
 
 #: ../Doc/c-api/type.rst:305
 msgid "The *token* argument may not be ``NULL``."
-msgstr ""
+msgstr "El argumento *token* no puede ser ``NULL``."
 
 #: ../Doc/c-api/type.rst:311
 msgid "Attempt to assign a version tag to the given type."
@@ -536,6 +560,8 @@ msgid ""
 "Metaclasses that override :c:member:`~PyTypeObject.tp_new` are not "
 "supported, except if ``tp_new`` is ``NULL``."
 msgstr ""
+"Las metaclases que sobreescriben :c:member:`~PyTypeObject.tp_new` no están "
+"soportadas, excepto si ``tp_new`` es ``NULL``."
 
 #: ../Doc/c-api/type.rst:337
 msgid ""
@@ -626,16 +652,14 @@ msgstr ""
 
 #: ../Doc/c-api/type.rst:383 ../Doc/c-api/type.rst:404
 #: ../Doc/c-api/type.rst:424
-#, fuzzy
 msgid ""
 "The :c:member:`~PyTypeObject.tp_new` of the metaclass is *ignored*. which "
 "may result in incomplete initialization. Creating classes whose metaclass "
 "overrides :c:member:`~PyTypeObject.tp_new` is deprecated."
 msgstr ""
-"El :c:member:`~PyTypeObject.tp_new` de la metaclase es *ignorado*. lo que "
-"puede resultar en una inicialización incompleta. La creación de clases cuya "
-"metaclase sobrescribe :c:member:`~PyTypeObject.tp_new` está obsoleta y en "
-"Python 3.14+ ya no será permitida."
+"El :c:member:`~PyTypeObject.tp_new` de la metaclase es *ignorado*, lo que "
+"puede resultar en una inicialización incompleta. Crear clases cuya metaclase "
+"sobreescribe :c:member:`~PyTypeObject.tp_new` está deprecado."
 
 #: ../Doc/c-api/type.rst:390 ../Doc/c-api/type.rst:411
 #: ../Doc/c-api/type.rst:431
@@ -643,6 +667,8 @@ msgid ""
 "Creating classes whose metaclass overrides :c:member:`~PyTypeObject.tp_new` "
 "is no longer allowed."
 msgstr ""
+"Ya no está permitido crear clases cuya metaclase sobreescriba :c:member:"
+"`~PyTypeObject.tp_new`."
 
 #: ../Doc/c-api/type.rst:395
 msgid "Equivalent to ``PyType_FromMetaclass(NULL, NULL, spec, bases)``."
@@ -663,24 +689,29 @@ msgstr ""
 "retornaban instancias de :class:`type`."
 
 #: ../Doc/c-api/type.rst:436
-#, fuzzy
 msgid ""
 "Make a type immutable: set the :c:macro:`Py_TPFLAGS_IMMUTABLETYPE` flag."
-msgstr "Con la bandera :c:macro:`Py_TPFLAGS_ITEMS_AT_END`."
+msgstr ""
+"Hace que un tipo sea inmutable: establece la bandera :c:macro:"
+"`Py_TPFLAGS_IMMUTABLETYPE`."
 
 #: ../Doc/c-api/type.rst:438
 msgid "All base classes of *type* must be immutable."
-msgstr ""
+msgstr "Todas las clases base de *type* deben ser inmutables."
 
 #: ../Doc/c-api/type.rst:440
 msgid "On success, return ``0``. On error, set an exception and return ``-1``."
 msgstr ""
+"En caso de éxito, retorna ``0``. En caso de error, establece una excepción y "
+"retorna ``-1``."
 
 #: ../Doc/c-api/type.rst:443
 msgid ""
 "The type must not be used before it's made immutable. For example, type "
 "instances must not be created before the type is made immutable."
 msgstr ""
+"El tipo no debe ser usado antes de que sea inmutable. Por ejemplo, las "
+"instancias de tipo no deben ser creadas antes de que el tipo sea inmutable."
 
 #: ../Doc/c-api/type.rst:459
 msgid "Structure defining a type's behavior."
@@ -708,7 +739,6 @@ msgstr ""
 "heredado."
 
 #: ../Doc/c-api/type.rst:473
-#, fuzzy
 msgid ""
 "If negative, the absolute value specifies how much space instances of the "
 "class need *in addition* to the superclass. Use :c:func:"
@@ -720,7 +750,9 @@ msgstr ""
 "Si es negativo, el valor absoluto especifica cuánto espacio necesitan las "
 "instancias de la clase *además* de la superclase. Use :c:func:"
 "`PyObject_GetTypeData` para obtener un puntero a la memoria específica de la "
-"subclase reservada de esta manera."
+"subclase reservada de esta manera. Para un :c:member:`!basicsize` negativo, "
+"Python insertará relleno cuando sea necesario para cumplir con los requisitos "
+"de alineación de :c:member:`~PyTypeObject.tp_basicsize`."
 
 #: ../Doc/c-api/type.rst:483
 msgid "Previously, this field could not be negative."
@@ -845,18 +877,19 @@ msgid ""
 "An additional slot is supported that does not correspond to a :c:type:`!"
 "PyTypeObject` struct field:"
 msgstr ""
+"Se soporta una ranura adicional que no corresponde a un campo de estructura :"
+"c:type:`!PyTypeObject`:"
 
 #: ../Doc/c-api/type.rst:549
 msgid ":c:data:`Py_tp_token`"
 msgstr ""
 
 #: ../Doc/c-api/type.rst:551
-#, fuzzy
 msgid ""
 "The following “offset” fields cannot be set using :c:type:`PyType_Slot`:"
 msgstr ""
-"Los siguientes campos de desplazamiento no se pueden configurar usando :c:"
-"type:`PyType_Slot`:"
+"Los siguientes campos de \"desplazamiento\" no se pueden configurar usando :"
+"c:type:`PyType_Slot`:"
 
 #: ../Doc/c-api/type.rst:553
 msgid ""
@@ -895,23 +928,21 @@ msgstr ""
 "ref:`documentación PyMemberDef <pymemberdef-offsets>` para detalles."
 
 #: ../Doc/c-api/type.rst:567
-#, fuzzy
 msgid ""
 "The following internal fields cannot be set at all when creating a heap type:"
 msgstr ""
-"Los siguientes campos no se pueden configurar en absoluto al crear un tipo "
-"heap:"
+"Los siguientes campos internos no se pueden configurar en absoluto al crear "
+"un tipo heap:"
 
 #: ../Doc/c-api/type.rst:570
-#, fuzzy
 msgid ""
 ":c:member:`~PyTypeObject.tp_dict`, :c:member:`~PyTypeObject.tp_mro`, :c:"
 "member:`~PyTypeObject.tp_cache`, :c:member:`~PyTypeObject.tp_subclasses`, "
 "and :c:member:`~PyTypeObject.tp_weaklist`."
 msgstr ""
-"Campos internos: :c:member:`~PyTypeObject.tp_dict`, :c:member:`~PyTypeObject."
-"tp_mro`, :c:member:`~PyTypeObject.tp_cache`, :c:member:`~PyTypeObject."
-"tp_subclasses`, y :c:member:`~PyTypeObject.tp_weaklist`."
+":c:member:`~PyTypeObject.tp_dict`, :c:member:`~PyTypeObject.tp_mro`, :c:"
+"member:`~PyTypeObject.tp_cache`, :c:member:`~PyTypeObject.tp_subclasses`, "
+"y :c:member:`~PyTypeObject.tp_weaklist`."
 
 #: ../Doc/c-api/type.rst:576
 msgid ""
@@ -944,6 +975,9 @@ msgid ""
 "The field :c:member:`~PyTypeObject.tp_vectorcall` can now set using "
 "``Py_tp_vectorcall``.  See the field's documentation for details."
 msgstr ""
+"El campo :c:member:`~PyTypeObject.tp_vectorcall` ahora puede ser configurado "
+"usando ``Py_tp_vectorcall``. Consulta la documentación del campo para más "
+"detalles."
 
 #: ../Doc/c-api/type.rst:596
 msgid ""
@@ -956,68 +990,91 @@ msgstr ""
 #: ../Doc/c-api/type.rst:599
 msgid "*pfunc* values may not be ``NULL``, except for the following slots:"
 msgstr ""
+"Los valores de *pfunc* no pueden ser ``NULL``, excepto para las siguientes "
+"ranuras:"
 
 #: ../Doc/c-api/type.rst:601
 msgid "``Py_tp_doc``"
-msgstr ""
+msgstr "``Py_tp_doc``"
 
 #: ../Doc/c-api/type.rst:602
 msgid ""
 ":c:data:`Py_tp_token` (for clarity, prefer :c:data:`Py_TP_USE_SPEC` rather "
 "than ``NULL``)"
 msgstr ""
+":c:data:`Py_tp_token` (para claridad, prefiere :c:data:`Py_TP_USE_SPEC` en "
+"lugar de ``NULL``)"
 
 #: ../Doc/c-api/type.rst:607
 msgid ""
 "A :c:member:`~PyType_Slot.slot` that records a static memory layout ID for a "
 "class."
 msgstr ""
+"Una :c:member:`~PyType_Slot.slot` que registra una ID de distribución de "
+"memoria estática para una clase."
 
 #: ../Doc/c-api/type.rst:610
 msgid ""
 "If the :c:type:`PyType_Spec` of the class is statically allocated, the token "
 "can be set to the spec using the special value :c:data:`Py_TP_USE_SPEC`:"
 msgstr ""
+"Si el :c:type:`PyType_Spec` de la clase se asigna estáticamente, el token "
+"puede establecerse en el spec usando el valor especial :c:data:`Py_TP_USE_SPEC`:"
 
 #: ../Doc/c-api/type.rst:614
 msgid ""
 "static PyType_Slot foo_slots[] = {\n"
 "   {Py_tp_token, Py_TP_USE_SPEC},"
 msgstr ""
+"static PyType_Slot foo_slots[] = {\n"
+"   {Py_tp_token, Py_TP_USE_SPEC},"
 
 #: ../Doc/c-api/type.rst:619
 msgid "It can also be set to an arbitrary pointer, but you must ensure that:"
 msgstr ""
+"También se puede establecer en un puntero arbitrario, pero debes asegurarte "
+"de que:"
 
 #: ../Doc/c-api/type.rst:621
 msgid ""
 "The pointer outlives the class, so it's not reused for something else while "
 "the class exists."
 msgstr ""
+"El puntero sobrevive a la clase, por lo que no se reutiliza para otra cosa "
+"mientras la clase exista."
 
 #: ../Doc/c-api/type.rst:623
 msgid ""
 "It \"belongs\" to the extension module where the class lives, so it will not "
 "clash with other extensions."
 msgstr ""
+"\"Pertenece\" al módulo de extensión donde vive la clase, por lo que no "
+"entrará en conflicto con otras extensiones."
 
 #: ../Doc/c-api/type.rst:626
 msgid ""
 "Use :c:func:`PyType_GetBaseByToken` to check if a class's superclass has a "
 "given token -- that is, check whether the memory layout is compatible."
 msgstr ""
+"Usa :c:func:`PyType_GetBaseByToken` para verificar si la superclase de una "
+"clase tiene un token dado -- es decir, verificar si la distribución de "
+"memoria es compatible."
 
 #: ../Doc/c-api/type.rst:629
 msgid ""
 "To get the token for a given class (without considering superclasses), use :"
 "c:func:`PyType_GetSlot` with ``Py_tp_token``."
 msgstr ""
+"Para obtener el token de una clase dada (sin considerar las superclases), "
+"usa :c:func:`PyType_GetSlot` con ``Py_tp_token``."
 
 #: ../Doc/c-api/type.rst:638
 msgid ""
 "Used as a value with :c:data:`Py_tp_token` to set the token to the class's :"
 "c:type:`PyType_Spec`. Expands to ``NULL``."
 msgstr ""
+"Se usa como un valor con :c:data:`Py_tp_token` para establecer el token en :"
+"c:type:`PyType_Spec` de la clase. Se expande a ``NULL``."
 
 #: ../Doc/c-api/type.rst:8
 msgid "object"
