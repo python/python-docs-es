@@ -172,6 +172,10 @@ msgid ""
 "case of error (e.g. no more watcher IDs available), return ``-1`` and set an "
 "exception."
 msgstr ""
+"Registra *callback* como un vigilante (*watcher*) de objetos de contexto "
+"para el intérprete actual. Retorna un ID que puede pasarse a "
+":c:func:`PyContext_ClearWatcher`. En caso de error (por ejemplo, si no hay "
+"más ID de vigilante disponibles), retorna ``-1`` y establece una excepción."
 
 #: ../Doc/c-api/contextvars.rst:115
 msgid ""
@@ -180,10 +184,16 @@ msgid ""
 "or ``-1`` and set an exception on error (e.g. if the given *watcher_id* was "
 "never registered.)"
 msgstr ""
+"Elimina el vigilante identificado por *watcher_id* devuelto previamente por "
+":c:func:`PyContext_AddWatcher` para el intérprete actual. Retorna ``0`` si "
+"tiene éxito, o ``-1`` y establece una excepción en caso de error (por "
+"ejemplo, si el *watcher_id* indicado nunca se registró)."
 
 #: ../Doc/c-api/contextvars.rst:124
 msgid "Enumeration of possible context object watcher events:"
 msgstr ""
+
+"Enumeración de los posibles eventos de vigilante de objetos de contexto:"
 
 #: ../Doc/c-api/contextvars.rst:126
 msgid ""
@@ -192,12 +202,19 @@ msgid ""
 "current :class:`contextvars.Context` object, or None if no context is "
 "current."
 msgstr ""
+"``Py_CONTEXT_SWITCHED``: el :term:`contexto actual <current context>` ha "
+"cambiado a un contexto diferente. El objeto que se pasa a la retrollamada "
+"del vigilante es el objeto :class:`contextvars.Context` actual en ese "
+"momento, o None si no hay ningún contexto actual."
 
 #: ../Doc/c-api/contextvars.rst:135
 msgid ""
 "Context object watcher callback function.  The object passed to the callback "
 "is event-specific; see :c:type:`PyContextEvent` for details."
 msgstr ""
+"Función de retrollamada (*callback*) del vigilante de objetos de contexto. "
+"El objeto que se pasa a la retrollamada depende del evento; consulta "
+":c:type:`PyContextEvent` para obtener más detalles."
 
 #: ../Doc/c-api/contextvars.rst:138
 msgid ""
@@ -205,6 +222,10 @@ msgid ""
 "exception will be printed as an unraisable exception using :c:func:"
 "`PyErr_FormatUnraisable`. Otherwise it should return ``0``."
 msgstr ""
+"Si la retrollamada retorna con una excepción establecida, debe retornar "
+"``-1``; esta excepción se imprimirá como una excepción no lanzable "
+"(*unraisable*) usando :c:func:`PyErr_FormatUnraisable`. En caso contrario, "
+"debería retornar ``0``."
 
 #: ../Doc/c-api/contextvars.rst:142
 msgid ""
@@ -214,6 +235,12 @@ msgid ""
 "exception unless it saves and clears the exception state first, and restores "
 "it before returning."
 msgstr ""
+"Puede que ya haya una excepción pendiente establecida al entrar en la "
+"retrollamada. En este caso, la retrollamada debe retornar ``0`` con la misma "
+"excepción aún establecida. Esto significa que la retrollamada no puede "
+"llamar a ninguna otra API que pueda establecer una excepción, a menos que "
+"primero guarde y borre el estado de la excepción, y lo restaure antes de "
+"retornar."
 
 #: ../Doc/c-api/contextvars.rst:151
 msgid "Context variable functions:"
