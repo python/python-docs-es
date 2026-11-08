@@ -22,37 +22,41 @@ msgstr ""
 
 #: ../Doc/howto/argparse-optparse.rst:8
 msgid "Migrating ``optparse`` code to ``argparse``"
-msgstr ""
+msgstr "Migrar código de ``optparse`` a ``argparse``"
 
 #: ../Doc/howto/argparse-optparse.rst:10
 msgid ""
 "The :mod:`argparse` module offers several higher level features not natively "
 "provided by the :mod:`optparse` module, including:"
 msgstr ""
+"El módulo :mod:`argparse` ofrece varias funcionalidades de más alto nivel "
+"que el módulo :mod:`optparse` no proporciona de forma nativa, entre ellas:"
 
 #: ../Doc/howto/argparse-optparse.rst:13
 msgid "Handling positional arguments."
-msgstr ""
+msgstr "Manejar argumentos posicionales."
 
 #: ../Doc/howto/argparse-optparse.rst:14
 msgid "Supporting subcommands."
-msgstr ""
+msgstr "Admitir subcomandos."
 
 #: ../Doc/howto/argparse-optparse.rst:15
 msgid "Allowing alternative option prefixes like ``+`` and ``/``."
-msgstr ""
+msgstr "Permitir prefijos de opción alternativos como ``+`` y ``/``."
 
 #: ../Doc/howto/argparse-optparse.rst:16
 msgid "Handling zero-or-more and one-or-more style arguments."
-msgstr ""
+msgstr "Manejar argumentos de tipo cero o más y uno o más."
 
 #: ../Doc/howto/argparse-optparse.rst:17
 msgid "Producing more informative usage messages."
-msgstr ""
+msgstr "Generar mensajes de uso más informativos."
 
 #: ../Doc/howto/argparse-optparse.rst:18
 msgid "Providing a much simpler interface for custom ``type`` and ``action``."
 msgstr ""
+"Proporcionar una interfaz mucho más sencilla para ``type`` y ``action`` "
+"personalizados."
 
 #: ../Doc/howto/argparse-optparse.rst:20
 msgid ""
@@ -63,6 +67,13 @@ msgid ""
 "named options and positional arguments in the declarative interface mean "
 "that the API has diverged from that of ``optparse`` over time."
 msgstr ""
+"Al principio, el módulo :mod:`argparse` intentó mantener la compatibilidad "
+"con :mod:`optparse`. Sin embargo, las diferencias fundamentales de diseño "
+"entre admitir el procesamiento declarativo de las opciones de la línea de "
+"comandos (dejando el procesamiento de los argumentos posicionales al código "
+"de la aplicación) y admitir tanto opciones con nombre como argumentos "
+"posicionales en la interfaz declarativa han hecho que, con el tiempo, su API "
+"se haya ido alejando de la de ``optparse``."
 
 #: ../Doc/howto/argparse-optparse.rst:27
 msgid ""
@@ -70,6 +81,9 @@ msgid ""
 "currently using :mod:`optparse` and are happy with the way it works can just "
 "continue to use ``optparse``."
 msgstr ""
+"Como se describe en :ref:`choosing-an-argument-parser`, las aplicaciones que "
+"ya usan :mod:`optparse` y están contentas con cómo funciona pueden "
+"simplemente seguir usando ``optparse``."
 
 #: ../Doc/howto/argparse-optparse.rst:31
 msgid ""
@@ -77,18 +91,25 @@ msgid ""
 "list of intrinsic behavioural differences described in that section before "
 "deciding whether or not migration is desirable."
 msgstr ""
+"Los desarrolladores que estén pensando en migrar también deberían revisar la "
+"lista de diferencias de comportamiento propias de cada módulo que se "
+"describe en esa sección antes de decidir si les conviene o no migrar."
 
 #: ../Doc/howto/argparse-optparse.rst:35
 msgid ""
 "For applications that do choose to migrate from :mod:`optparse` to :mod:"
 "`argparse`, the following suggestions should be helpful:"
 msgstr ""
+"Para las aplicaciones que sí decidan migrar de :mod:`optparse` a :mod:"
+"`argparse`, las siguientes sugerencias deberían ser de ayuda:"
 
 #: ../Doc/howto/argparse-optparse.rst:38
 msgid ""
 "Replace all :meth:`optparse.OptionParser.add_option` calls with :meth:"
 "`ArgumentParser.add_argument` calls."
 msgstr ""
+"Reemplazar todas las llamadas a :meth:`optparse.OptionParser.add_option` por "
+"llamadas a :meth:`ArgumentParser.add_argument`."
 
 #: ../Doc/howto/argparse-optparse.rst:41
 msgid ""
@@ -97,6 +118,11 @@ msgid ""
 "for the positional arguments. Keep in mind that what was previously called "
 "``options``, now in the :mod:`argparse` context is called ``args``."
 msgstr ""
+"Reemplazar ``(options, args) = parser.parse_args()`` por ``args = parser."
+"parse_args()`` y añadir más llamadas a :meth:`ArgumentParser.add_argument` "
+"para los argumentos posicionales. Hay que tener en cuenta que lo que antes "
+"se llamaba ``options`` ahora, en el contexto de :mod:`argparse`, se llama "
+"``args``."
 
 #: ../Doc/howto/argparse-optparse.rst:46
 msgid ""
@@ -104,24 +130,34 @@ msgid ""
 "meth:`~ArgumentParser.parse_intermixed_args` instead of :meth:"
 "`~ArgumentParser.parse_args`."
 msgstr ""
+"Reemplazar :meth:`optparse.OptionParser.disable_interspersed_args` usando :"
+"meth:`~ArgumentParser.parse_intermixed_args` en lugar de :meth:"
+"`~ArgumentParser.parse_args`."
 
 #: ../Doc/howto/argparse-optparse.rst:50
 msgid ""
 "Replace callback actions and the ``callback_*`` keyword arguments with "
 "``type`` or ``action`` arguments."
 msgstr ""
+"Reemplazar las acciones *callback* y los argumentos por palabra clave "
+"``callback_*`` por argumentos ``type`` o ``action``."
 
 #: ../Doc/howto/argparse-optparse.rst:53
 msgid ""
 "Replace string names for ``type`` keyword arguments with the corresponding "
 "type objects (e.g. int, float, complex, etc)."
 msgstr ""
+"Reemplazar los nombres en forma de cadena del argumento por palabra clave "
+"``type`` por los objetos de tipo correspondientes (por ejemplo, int, float, "
+"complex, etc.)."
 
 #: ../Doc/howto/argparse-optparse.rst:56
 msgid ""
 "Replace :class:`optparse.Values` with :class:`Namespace` and :exc:`optparse."
 "OptionError` and :exc:`optparse.OptionValueError` with :exc:`ArgumentError`."
 msgstr ""
+"Reemplazar :class:`optparse.Values` por :class:`Namespace`, y :exc:`optparse."
+"OptionError` y :exc:`optparse.OptionValueError` por :exc:`ArgumentError`."
 
 #: ../Doc/howto/argparse-optparse.rst:60
 #, python-format
@@ -130,6 +166,9 @@ msgid ""
 "with the standard Python syntax to use dictionaries to format strings, that "
 "is, ``%(default)s`` and ``%(prog)s``."
 msgstr ""
+"Reemplazar las cadenas con argumentos implícitos como ``%default`` o "
+"``%prog`` por la sintaxis estándar de Python que usa diccionarios para dar "
+"formato a cadenas, es decir, ``%(default)s`` y ``%(prog)s``."
 
 #: ../Doc/howto/argparse-optparse.rst:64
 msgid ""
@@ -137,3 +176,6 @@ msgid ""
 "``parser.add_argument('--version', action='version', version='<the "
 "version>')``."
 msgstr ""
+"Reemplazar el argumento ``version`` del constructor de OptionParser por una "
+"llamada a ``parser.add_argument('--version', action='version', version='<the "
+"version>')``."
