@@ -1,68 +1,55 @@
 name: Agrega comentario a PR
 
 on:
-  pull_request_target:
+  workflow_run:
+    workflows: ["TODO"]
+    types: [completed]
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
-  define-comment:
-    name: Entradas sin traducción
-    runs-on: ubuntu-22.04
-    outputs:
-      any_changed: ${{ steps.changed-files.outputs.any_changed }}
-      comment: ${{ steps.create-pr-comment.outputs.comment }}
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          persist-credentials: false
-      - name: Preparar Python v3.13
-        uses: actions/setup-python@v7
-        with:
-          python-version: "3.13"
-          cache: "pip"
-      # checkout these files from the base branch to guarantee they haven't been
-      # modified by the PR
-      - uses: actions/checkout@v6
-        with:
-          path: base-branch
-          sparse-checkout-cone-mode: false
-          sparse-checkout: |
-            requirements-own.txt
-            scripts/list_missing_entries.py
-      - name: Instalar dependencias
-        run: |
-          python -m pip install -r base-branch/requirements-own.txt
-      - name: Obtiene lista de archivos con cambios
-        id: changed-files
-        uses: tj-actions/changed-files@v47
-        with:
-          files: |
-            **/*.po
-      - name: Calcular entradas faltantes
-        if: steps.changed-files.outputs.any_changed == 'true'
-        id: create-pr-comment
-        env:
-          CHANGED_PO_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
-        run: |
-          {
-            echo 'comment<<EOF'
-            python base-branch/scripts/list_missing_entries.py --github $CHANGED_PO_FILES
-            echo EOF
-          } >> "$GITHUB_OUTPUT"
-
   write-comment:
     runs-on: ubuntu-22.04
-    needs: [define-comment]
-    if: needs.define-comment.outputs.any_changed == 'true'
+    if: >-
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.conclusion == 'success'
     permissions:
-      issues: write
+      actions: read
       pull-requests: write
     steps:
+      - uses: actions/download-artifact@v5
+        continue-on-error: true
+        with:
+          name: missing-entries
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ github.token }}
+
+      - name: TODO
+        id: pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          if [[ ! -f pr-number ]]; then
+            echo 'TODO'
+            exit 0
+          fi
+          pr="$(head -n1 pr-number)"
+          if [[ ! "$pr" =~ ^[0-9]+$ ]]; then
+            echo 'TODO'
+            exit 1
+          fi
+          actual_sha="$(gh api "repos/$GITHUB_REPOSITORY/pulls/$pr" --jq .head.sha)"
+          if [[ "actual_sha" != "$HEAD_SHA" ]]; then
+            echo 'TODO'
+            exit 0
+          fi
+          echo "pr=$pr" >> "$GITHUB_OUTPUT"
+
       - name: Agregar comentario con entradas faltantes
+        if: steps.pr.outputs.pr != ''
         uses: thollander/actions-comment-pull-request@v3
         with:
-          message: ${{ needs.define-comment.outputs.comment }}
+          file-path: comment.md
+          pr-number: ${{ steps.pr.outputs.pr }}
           comment-tag: missing-entries
