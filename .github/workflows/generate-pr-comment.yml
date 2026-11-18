@@ -1,0 +1,45 @@
+name: TODO
+
+on:
+  pull_request:
+    paths:
+      - "**/*.po"
+
+permissions:
+  contents: read
+
+jobs:
+  generate-pr-comment:
+    name: TODO
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: TODO
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: "pip"
+      - name: Instalar dependencias
+        run: python -m pip install -r requirements-own.txt
+      - name: TODO
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          mkdir -p out
+          git diff -z --name-only --diff-filter=ACMR HEAD^1 HEAD -- '*.po' > out/changed.txt
+          if [[ ! -s out/changed.txt ]]; then
+            exit 0
+          fi
+          echo "$PR_NUMBER" > out/pr-number
+          xargs -0 python scripts/list_missing_entries.py --github < out/changed.txt > out/comment.md
+      - uses: actions/upload-artifact@v5
+        with:
+          name: missing-entries
+          path: |
+            out/pr-number
+            out/comment.md
+          if-no-files-found: ignore
+          retention-days: 1
